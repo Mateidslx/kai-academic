@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#55784E">
+    <title>R1.09 • Ch. 4 : Guide Pratique d'Éco-conception Logicielle pour Développeurs — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #55784E;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #55784E;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+        }
+        .course-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.09.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.09
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 4</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.09.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #EFF4ED; color: #55784E; border: 1px solid #C8DAC3;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25005
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #55784E;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #EFF4ED; color: #55784E; border: 1px solid #C8DAC3;">
+                        R1.09 • CHAPITRE 4
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Guide Pratique d'Éco-conception Logicielle pour Développeurs</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>Mme Fernandes</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Techniques opérationnelles de sobriété algorithmique, allègement du DOM, optimisation des requêtes réseau, choix des formats d'images (WebP/AVIF), et métrologie de la consommation (Scaphandre, PowerAPI).
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Les Enjeux Environnementaux du Numérique</h2>
+<p>
+Le secteur du numérique représente aujourd'hui environ <strong>4% des émissions mondiales de gaz à effet de serre (GES)</strong>, soit davantage que le transport aérien civil mondial, avec une trajectoire estimée à 8% d'ici 2030 si aucune mesure de sobriété n'est adoptée.
+<br>Contrairement à une idée reçue, l'impact environnemental majeur ne provient pas de l'énergie consommée par les datacenters lors de l'exécution, mais de la <strong>fabrication des terminaux utilisateurs</strong> (smartphones, ordinateurs portables, écrans) qui concentre entre 70% et 80% de l'empreinte carbone globale du numérique en France (ADEME / Arcom).
+</p>
+
+<h2>2. Les 3 Principes Fondamentaux de l'Éco-Conception Logicielle</h2>
+<ol class="space-y-3 my-4">
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>1. Sobriété Fonctionnelle & Allègement (Anti-Bloatware) :</strong>
+        <br>Plus de 45% des fonctionnalités des applications d'entreprise ne sont jamais ou presque jamais utilisées. Concevoir sobrement, c'est identifier le besoin métier réel (méthode MoSCoW) et refuser d'implémenter des fonctionnalités gadgets qui alourdissent le code et les serveurs.
+    </li>
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>2. Allongement de la Durée de Vie des Terminaux :</strong>
+        <br>C'est le levier le plus puissant de décarbonation. Les développeurs doivent concevoir des applications fluides et légères capables de tourner sur des ordinateurs ou smartphones âgés de 5 à 8 ans, évitant ainsi le renouvellement prématuré du matériel imposé par des applications trop gourmandes en CPU/RAM.
+    </li>
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>3. Économie de Ressources Machine & Réseau :</strong>
+        <br>Optimiser les requêtes HTTP, réduire la taille du bundle JavaScript, mettre en cache les données statiques et privilégier des algorithmes de complexité temporelle et spatiale optimale.
+    </li>
+</ol>
+
+<h2>3. Bonnes Pratiques d'Ingénierie Web & Logicielle</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Domaine</th>
+            <th>Mauvaise Pratique Courante</th>
+            <th>Bonne Pratique Éco-Conçue</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Images</strong></td>
+            <td>PNG/JPEG bruts non compressés de 5 Mo</td>
+            <td>Formats modernes <code>WebP</code> ou <code>AVIF</code> avec compression adaptée et attributs <code>loading="lazy"</code>.</td>
+        </tr>
+        <tr>
+            <td><strong>DOM HTML</strong></td>
+            <td>Arbres DOM profonds avec plus de 3000 nœuds imbriqués</td>
+            <td>DOM épuré (moins de 1200 nœuds, profondeur &le; 32) pour soulager le processeur mobile.</td>
+        </tr>
+        <tr>
+            <td><strong>Bibliothèques JS</strong></td>
+            <td>Importer toute la suite Lodash (500 Ko) pour une seule fonction</td>
+            <td>Utiliser les méthodes ECMAScript natives (<code>map</code>, <code>filter</code>, <code>reduce</code>) et activer le Tree-shaking.</td>
+        </tr>
+        <tr>
+            <td><strong>Cache HTTP</strong></td>
+            <td>Recharger les assets statiques à chaque requête</td>
+            <td>En-têtes <code>Cache-Control: public, max-age=31536000, immutable</code> sur les polices, logos et scripts.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>4. Métrologie Énergétique : Outils et Mesures Réelles</h2>
+<p>
+On ne peut optimiser que ce que l'on sait mesurer. En BUT Informatique, plusieurs outils de pointe sont mobilisés :
+</p>
+<ul>
+    <li><strong>Scaphandre :</strong> Sonde système open-source développée par Hubblo qui lit directement les compteurs matériels Intel/AMD RAPL (Running Average Power Limit) sous Linux pour mesurer la consommation électrique réelle (en Watts et Joules) d'un processus ou d'un conteneur Docker.</li>
+    <li><strong>PowerAPI :</strong> Framework de recherche logicielle permettant de modéliser la consommation énergétique fine par composant logiciel.</li>
+    <li><strong>GreenIT-Analysis :</strong> Extension navigateur calculant l'Éco-index d'une page Web (score de 0 à 100, échelonné de A à G) en combinant nombre de requêtes HTTP, taille de la page et complexité du DOM.</li>
+</ul>
+
+<h2>5. Conformité au Référentiel Général d'Écoconception de Services Numériques (RGESN)</h2>
+<p>
+Le <strong>RGESN</strong>, élaboré conjointement par la DINUM, l'ADEME, l'Arcom et l'INRIA, est le guide de référence en France. Il comprend 78 critères vérifiables répartis en 8 thématiques (Stratégie, Spécifications, Architecture, Contenus, Front-end, Back-end, Hébergement, Hébergement). Les étudiants de BUT Informatique apprennent à intégrer ces critères dès la phase de conception des SAÉ.
+</p>
+
+            </div>
+        </div>
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap3_analyse_cycle_vie_iso14040.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 3 : Méthodologie de l'Analyse du Cycle de Vie (ACV - ISO 14040)</span></a>
+            </div>
+            <a href="../R1.09.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.09</span>
+            </a>
+            <div>
+                
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#287271">
+    <title>R1.01 • Ch. 1 : Introduction à l'Algorithmique & Présentation du Module (Amphi) — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #287271;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #287271;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+        }
+        .course-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.01.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.01
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 1</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25021
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #287271;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        R1.01 • CHAPITRE 1
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Introduction à l'Algorithmique & Présentation du Module (Amphi)</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Les slides officielles de l'amphi d'ouverture : qu'est-ce qu'un algorithme (Al-Khwarizmi), les 4 définitions, les 4 vidéos explicatives, pseudo-code vs langage graphique, et le principe 'Concevoir avant de coder'.
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Les Slides Officielles de l'Amphi d'Introduction (Support M. Etcheverry)</h2>
+<p>
+Retrouvez ci-dessous le support interactif exact projeté en amphithéâtre par <strong>M. Patrick Etcheverry</strong> (IUT de Bayonne et du Pays Basque — Campus d'Anglet) :
+</p>
+<div class="my-6 rounded-2xl overflow-hidden border border-slate-300 shadow-lg bg-slate-900" style="height: 520px;">
+    <iframe src="https://patrick-etcheverry.github.io/r1.01-initiation-au-dev/Cours/00-introduction" class="w-full h-full border-0" allowfullscreen></iframe>
+</div>
+<p class="text-xs text-slate-500 font-semibold mb-6 flex items-center gap-1.5">
+    <span>💡 <em>Astuce : Vous pouvez naviguer directement dans les 44 slides ci-dessus avec les flèches du clavier ou en plein écran.</em></span>
+</p>
+
+<h2>2. Les 4 Vidéos Officielles du Module sur Elearn UPPA</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200">Vidéo 1 • Présentation</span>
+            <h3 class="font-extrabold text-slate-900 text-sm mt-2">Présentation du module R1.01</h3>
+            <p class="text-xs text-slate-600 mt-1">Organisation pédagogique, découpage des séances de TD/TP et objectifs d'apprentissage du BUT 1 Informatique.</p>
+        </div>
+        <a href="https://elearn.univ-pau.fr/course/section.php?id=287097" target="_blank" class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800">
+            <span>Visionner sur Elearn UPPA</span> &rarr;
+        </a>
+    </div>
+    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Vidéo 2 • Concept</span>
+            <h3 class="font-extrabold text-slate-900 text-sm mt-2">Qu'est-ce qu'un algorithme ?</h3>
+            <p class="text-xs text-slate-600 mt-1">Origine historique du terme (Al-Khwarizmi, Bagdad IXe siècle), distinction entre algorithme, programme et processus.</p>
+        </div>
+        <a href="https://elearn.univ-pau.fr/course/section.php?id=287097" target="_blank" class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-emerald-600 hover:text-emerald-800">
+            <span>Visionner sur Elearn UPPA</span> &rarr;
+        </a>
+    </div>
+    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">Vidéo 3 • Exemples</span>
+            <h3 class="font-extrabold text-slate-900 text-sm mt-2">Exemples d'algorithmes</h3>
+            <p class="text-xs text-slate-600 mt-1">Comparaison entre algorithmes du quotidien (recette de cuisine, guider un touriste perdu) et algorithmes informatiques (tri, division).</p>
+        </div>
+        <a href="https://elearn.univ-pau.fr/course/section.php?id=287097" target="_blank" class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-amber-600 hover:text-amber-800">
+            <span>Visionner sur Elearn UPPA</span> &rarr;
+        </a>
+    </div>
+    <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-50 text-purple-700 border border-purple-200">Vidéo 4 • Enjeux</span>
+            <h3 class="font-extrabold text-slate-900 text-sm mt-2">Pourquoi étudier l'algorithmique ?</h3>
+            <p class="text-xs text-slate-600 mt-1">Pourquoi la programmation découle de la conception et pourquoi un bon programmeur conçoit sur papier avant de coder.</p>
+        </div>
+        <a href="https://elearn.univ-pau.fr/course/section.php?id=287097" target="_blank" class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-purple-600 hover:text-purple-800">
+            <span>Visionner sur Elearn UPPA</span> &rarr;
+        </a>
+    </div>
+</div>
+
+<h2>3. Les 4 Définitions Clés d'un Algorithme (Diapos 9 à 17)</h2>
+<p>
+Dans son cours magistral, M. Etcheverry présente 4 définitions pour forger l'esprit de l'étudiant :
+</p>
+<ol class="space-y-3 my-4">
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm">
+        <strong>Définition 1 (Scientifique) :</strong> <em>« Un algorithme est la spécification d’un schéma de calcul, sous forme d’une suite [finie] d’opérations élémentaires obéissant à un enchaînement déterminé. »</em>
+    </li>
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm">
+        <strong>Définition 2 (Orientée Problème) :</strong> <em>« Un algorithme est un ensemble de règles opératoires rigoureuses et sans ambiguïté prescrivant la suite d’opérations à effectuer pour résoudre un problème donné. »</em>
+    </li>
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm">
+        <strong>Définition 3 (Orientée Machine) :</strong> <em>« Un algorithme est une suite ordonnée et finie d’instructions exécutables par une machine sans qu’elle ait besoin d’en comprendre le sens global. »</em>
+    </li>
+    <li class="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-950 text-sm font-semibold">
+        <strong>Définition Retenue dans ce Cours (M. Etcheverry, Slide 17) :</strong><br>
+        <em>« Un algorithme est la <strong>description</strong> d'une suite <strong>finie</strong> et <strong>non ambiguë</strong> d'actions appliquant un traitement sur des informations en vue d'atteindre un but précis. »</em>
+    </li>
+</ol>
+
+<h2>4. Pourquoi les Langages Naturels sont Inadaptés (Diapo 27-28)</h2>
+<p>
+Lorsque votre grand-mère rédige une recette de cuisine : <em>« Ajouter une pincée de sel, laisser mijoter à feu doux jusqu'à ce que ce soit doré »</em>, l'humain compense le manque de précision par son intuition et son expérience.
+</p>
+<blockquote>
+<strong>🚨 RÈGLE DE L'ORDINATEUR :</strong><br>
+Un ordinateur ne possède <strong>aucune intuition</strong>. Il exécute les instructions au pied de la lettre. Aucune imprécision, ambiguïté ou sous-entendu ne peut être toléré dans un algorithme. C'est pourquoi nous devons utiliser des <strong>formalismes rigoureux</strong> : soit du pseudo-code formel, soit des <strong>arbres de décomposition structurée</strong>.
+</blockquote>
+
+<h2>5. Conclusion de l'Amphi (Slide 37-43)</h2>
+<blockquote>
+<strong>« Il ne reste plus qu'à rentrer dans le vif du sujet... »</strong><br>
+<em>« A good programmer can get through without knowing algorithms, but a great programmer masters the art of design before writing a single line of code. »</em>
+</blockquote>
+
+            </div>
+        </div>
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                
+            </div>
+            <a href="../R1.01.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.01</span>
+            </a>
+            <div>
+                <a href="chap2_specifications_analyse.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #287271;"><span>Ch. 2 : Analyser & Spécifier un Problème Algorithmique (01-specifs)</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#6E4970">
+    <title>R1.05 • Ch. 3 : Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #6E4970;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #6E4970;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+        }
+        .course-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.05.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.05
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 3</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.05.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F2EDF3; color: #6E4970; border: 1px solid #D4C4D6;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #19539
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #6E4970;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F2EDF3; color: #6E4970; border: 1px solid #D4C4D6;">
+                        R1.05 • CHAPITRE 3
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Christophe Marquesuzaà / M. Yon Dourisboure</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Dépendances fonctionnelles (DF), élimination rigoureuse des anomalies d'insertion, mise à jour et suppression, 1ère, 2ème, 3ème formes normales et forme normale de Boyce-Codd.
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Le Rôle Critique de la Normalisation</h2>
+<p>
+La normalisation permet de valider mathématiquement qu'un modèle relationnel ne présente aucune redondance inutile. Une base mal normalisée est exposée à trois anomalies graves :
+</p>
+<ul>
+    <li><strong>Anomalie de mise à jour :</strong> Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente.</li>
+    <li><strong>Anomalie d'insertion :</strong> Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.</li>
+    <li><strong>Anomalie de suppression :</strong> Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même !</li>
+</ul>
+
+<h2>2. Dépendances Fonctionnelles (DF)</h2>
+<p>
+Soit une relation $R$. On dit que l'attribut $B$ <strong>dépend fonctionnellement</strong> de $A$ (noté $A \to B$) si à chaque valeur de $A$ correspond au maximum une seule valeur de $B$.
+</p>
+<ul>
+    <li><strong>DF Élémentaire :</strong> $A \to B$ est élémentaire si aucune sous-partie de $A$ ne détermine $B$.</li>
+    <li><strong>DF Directe :</strong> $A \to B$ est directe s'il n'existe aucun attribut intermédiaire $C$ tel que $A \to C$ et $C \to B$ (absence de transitivité).</li>
+</ul>
+
+<h2>3. Les Formes Normales Expliquées Pas-à-Pas</h2>
+
+<h3>1ère Forme Normale (1FN) : Atomicité</h3>
+<p>
+Une relation est en 1FN si et seulement si tous ses attributs sont <strong>atomiques</strong> (indivisibles, mono-valués) et qu'elle possède une clé primaire identifiant chaque tuple.
+<br><em>Contre-exemple :</em> Une colonne <code>telephones</code> contenant <code>"0612345678, 0559010203"</code> viole la 1FN.
+</p>
+
+<h3>2ème Forme Normale (2FN) : Dépendance Totale par rapport à la Clé</h3>
+<p>
+Une relation est en 2FN si elle est en 1FN et que tout attribut non-clé dépend de la <strong>totalité de la clé primaire</strong> (et non pas d'une partie stricte de celle-ci).
+<br><em>Cas immédiat :</em> Toute relation dont la clé primaire est constituée d'un seul attribut et qui est en 1FN est <strong>automatiquement en 2FN</strong> !
+</p>
+
+<h3>3ème Forme Normale (3FN) : Pas de Dépendance Transitive</h3>
+<p>
+Une relation est en 3FN si elle est en 2FN et que tout attribut non-clé dépend <strong>directement</strong> de la clé primaire, sans dépendre d'un autre attribut non-clé ($A \to B \to C$ interdit pour $C$ non-clé).
+<br><em>Exemple classique :</em> <code>COMMANDE(<u>idCmd</u>, dateCmd, idClient, nomClient, villeClient)</code>.
+<br>Ici, <code>idCmd \to idClient</code> et <code>idClient \to nomClient</code>. <code>nomClient</code> dépend de la clé primaire par transitivité à travers <code>idClient</code> $\implies$ VIOLATION DE LA 3FN.
+<br><strong>Solution :</strong> Décomposer en deux relations <code>COMMANDE(<u>idCmd</u>, dateCmd, #idClient)</code> et <code>CLIENT(<u>idClient</u>, nomClient, villeClient)</code>.
+</p>
+
+<h3>Forme Normale de Boyce-Codd (BCNF / FNBC)</h3>
+<p>
+Une relation est en BCNF si pour toute dépendance fonctionnelle non triviale $X \to Y$, $X$ est obligatoirement une super-clé (contient une clé candidate).
+</p>
+
+            </div>
+        </div>
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap2_derivation_mld.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 2 : Dérivation Rigoureuse du MCD vers le MLD Relationnel</span></a>
+            </div>
+            <a href="../R1.05.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.05</span>
+            </a>
+            <div>
+                <a href="chap4_sql_ddl_dml.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #6E4970;"><span>Ch. 4 : Implémentation SQL DDL & DML sous Oracle / PostgreSQL</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

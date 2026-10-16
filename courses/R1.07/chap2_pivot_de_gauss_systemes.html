@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#C25444">
+    <title>R1.07 • Ch. 2 : Méthode du Pivot de Gauss & Systèmes Linéaires — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #C25444;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #C25444;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+        }
+        .course-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.07.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.07
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 2</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.07.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F7ECE9; color: #C25444; border: 1px solid #ECC2BC;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #24995
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #C25444;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F7ECE9; color: #C25444; border: 1px solid #ECC2BC;">
+                        R1.07 • CHAPITRE 2
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Méthode du Pivot de Gauss & Systèmes Linéaires</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Écriture matricielle AX = B, matrice augmentée (A | B), opérations élémentaires sur les lignes, algorithme d'échelonnement, rang et discussion des solutions.
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Formulation Matricielle d'un Système Linéaire</h2>
+<p>
+Considérons un système de $n$ équations linéaires à $p$ inconnues $x_1, x_2, \dots, x_p$ :
+</p>
+$$\begin{cases}
+a_{1,1} x_1 + a_{1,2} x_2 + \dots + a_{1,p} x_p = b_1 \\
+a_{2,1} x_1 + a_{2,2} x_2 + \dots + a_{2,p} x_p = b_2 \\
+\vdots \\
+a_{n,1} x_1 + a_{n,2} x_2 + \dots + a_{n,p} x_p = b_n
+\end{cases}$$
+<p>Ce système est équivalent à l'équation matricielle compacte :</p>
+$$A \cdot X = B$$
+<p>Où $A \in \mathcal{M}_{n, p}$ est la matrice des coefficients, $X \in \mathcal{M}_{p, 1}$ est le vecteur colonne des inconnues, et $B \in \mathcal{M}_{n, 1}$ est le vecteur colonne du second membre.</p>
+
+<h2>2. Les Trois Opérations Élémentaires sur les Lignes</h2>
+<p>
+Pour résoudre le système sans modifier l'ensemble de ses solutions, on effectue des opérations élémentaires sur les lignes de la <strong>matrice augmentée $(A \mid B)$</strong> :
+</p>
+<ol>
+    <li><strong>Combinaison linéaire :</strong> $L_i \leftarrow L_i - \alpha L_j$ (avec $j \neq i$) pour éliminer un coefficient sous un pivot.</li>
+    <li><strong>Multiplication par un scalaire non nul :</strong> $L_i \leftarrow k \cdot L_i$ avec $k \in \mathbb{R}^*$.</li>
+    <li><strong>Permutation de deux lignes :</strong> $L_i \leftrightarrow L_j$ pour positionner un pivot non nul.</li>
+</ol>
+
+<h2>3. L'Algorithme d'Échelonnement de Gauss Pas-à-Pas</h2>
+<p>
+<strong>Exemple d'application résolu (support officiel IUT) :</strong> Résoudre dans $\mathbb{R}^3$ le système suivant :
+</p>
+$$\begin{cases}
+2x + y - z = 1 \\
+4x + 3y + z = 11 \\
+-2x + 2y + 4z = 8
+\end{cases}$$
+
+<h3>Étape 1 : Construction de la matrice augmentée initiale</h3>
+$$(A \mid B) = \begin{pmatrix}
+2 & 1 & -1 & \mid & 1 \\
+4 & 3 & 1 & \mid & 11 \\
+-2 & 2 & 4 & \mid & 8
+\end{pmatrix}$$
+<p>Le premier pivot est le coefficient $a_{1,1} = 2 \neq 0$.</p>
+
+<h3>Étape 2 : Élimination de la première colonne</h3>
+<p>On applique :
+<br>$L_2 \leftarrow L_2 - 2 L_1$
+<br>$L_3 \leftarrow L_3 + L_1$
+</p>
+$$\begin{pmatrix}
+2 & 1 & -1 & \mid & 1 \\
+0 & 1 & 3 & \mid & 9 \\
+0 & 3 & 3 & \mid & 9
+\end{pmatrix}$$
+
+<h3>Étape 3 : Élimination de la deuxième colonne</h3>
+<p>Le deuxième pivot est $a_{2,2} = 1$. On applique :
+<br>$L_3 \leftarrow L_3 - 3 L_2$
+</p>
+$$\begin{pmatrix}
+2 & 1 & -1 & \mid & 1 \\
+0 & 1 & 3 & \mid & 9 \\
+0 & 0 & -6 & \mid & -18
+\end{pmatrix}$$
+
+<h3>Étape 4 : Remontée triangulaire (Résolution)</h3>
+<p>Le système échelonné triangulaire supérieur équivalent s'écrit :</p>
+$$\begin{cases}
+2x + y - z = 1 \\
+y + 3z = 9 \\
+-6z = -18 \implies z = 3
+\end{cases}$$
+<ul>
+    <li>De la 3ème équation : $z = \frac{-18}{-6} = 3$.</li>
+    <li>De la 2ème équation : $y = 9 - 3z = 9 - 9 = 0$.</li>
+    <li>De la 1ère équation : $2x = 1 - y + z = 1 - 0 + 3 = 4 \implies x = 2$.</li>
+</ul>
+<p><strong>Conclusion :</strong> Le système admet une <strong>solution unique</strong> : $\mathcal{S} = \{(2, 0, 3)\}$.</p>
+
+            </div>
+        </div>
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap1_calcul_matriciel_fondamental.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 1 : Calcul Matriciel Fondamental & Opérations Algébriques</span></a>
+            </div>
+            <a href="../R1.07.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.07</span>
+            </a>
+            <div>
+                <a href="chap3_inversion_gauss_jordan.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #C25444;"><span>Ch. 3 : Algorithme de Gauss-Jordan & Inversion Matricielle</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

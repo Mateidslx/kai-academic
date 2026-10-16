@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#C25444">
+    <title>R1.07 • Ch. 1 : Calcul Matriciel Fondamental & Opérations Algébriques — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #C25444;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #C25444;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+        }
+        .course-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.07.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.07
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 1</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.07.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F7ECE9; color: #C25444; border: 1px solid #ECC2BC;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #24995
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #C25444;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F7ECE9; color: #C25444; border: 1px solid #ECC2BC;">
+                        R1.07 • CHAPITRE 1
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Calcul Matriciel Fondamental & Opérations Algébriques</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Définition des matrices dans M_n,p(R), addition, multiplication par un scalaire, produit matriciel ligne par colonne, non-commutativité, matrice transposée et matrices particulières.
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Définition et Vocabulaire des Matrices</h2>
+<p>
+Une <strong>matrice</strong> $A$ à coefficients réels de dimension $n \times p$ (notée $A \in \mathcal{M}_{n, p}(\mathbb{R})$) est un tableau rectangulaire comprenant $n$ lignes et $p$ colonnes :
+</p>
+$$A = \begin{pmatrix} 
+a_{1,1} & a_{1,2} & \dots & a_{1,p} \\ 
+a_{2,1} & a_{2,2} & \dots & a_{2,p} \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+a_{n,1} & a_{n,2} & \dots & a_{n,p} 
+\end{pmatrix} = (a_{i,j})_{\substack{1 \le i \le n \\ 1 \le j \le p}}$$
+<p>
+L'indice $i$ désigne le numéro de la ligne ($1 \le i \le n$) et l'indice $j$ désigne le numéro de la colonne ($1 \le j \le p$).
+</p>
+
+<h3>Matrices Particulières Remarquables</h3>
+<ul>
+    <li><strong>Matrice Carrée :</strong> Possède autant de lignes que de colonnes ($n = p$). L'ensemble est noté $\mathcal{M}_n(\mathbb{R})$.</li>
+    <li><strong>Matrice Ligne :</strong> Matrice de dimension $1 \times p$ (vecteur ligne).</li>
+    <li><strong>Matrice Colonne :</strong> Matrice de dimension $n \times 1$ (vecteur colonne).</li>
+    <li><strong>Matrice Diagonale :</strong> Matrice carrée dont tous les coefficients hors de la diagonale principale sont nuls : $a_{i,j} = 0$ pour tout $i \neq j$.</li>
+    <li><strong>Matrice Identité $I_n$ :</strong> Matrice carrée diagonale où tous les termes diagonaux valent $1$ et tous les autres valent $0$ :
+    $$I_n = \begin{pmatrix} 1 & 0 & \dots & 0 \\ 0 & 1 & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & 1 \end{pmatrix}$$
+    Elle joue le rôle d'élément neutre pour la multiplication : pour toute matrice $A \in \mathcal{M}_{n, p}$, $I_n \times A = A$ et $A \times I_p = A$.</li>
+    <li><strong>Matrice Nulle $0_{n, p}$ :</strong> Tous ses coefficients sont nuls.</li>
+</ul>
+
+<h2>2. Opérations Algébriques Fondamentales</h2>
+
+<h3>A. Addition et Multiplication par un Scalaire</h3>
+<p>
+L'addition de deux matrices n'est possible que si elles ont <strong>exactement les mêmes dimensions</strong> $n \times p$. Elle s'effectue composante par composante : $(A + B)_{i,j} = a_{i,j} + b_{i,j}$.
+<br>La multiplication par un scalaire $\lambda \in \mathbb{R}$ multiplie chaque coefficient : $(\lambda A)_{i,j} = \lambda \cdot a_{i,j}$.
+</p>
+
+<h3>B. Produit Matriciel (Ligne par Colonne)</h3>
+<p>
+Soit $A \in \mathcal{M}_{n, p}(\mathbb{R})$ et $B \in \mathcal{M}_{p, m}(\mathbb{R})$. Le produit $C = A \times B$ est une matrice de dimension $n \times m$.
+</p>
+<div class="p-4 rounded-xl bg-slate-100 border border-slate-300 text-center text-sm">
+    $$c_{i,j} = \sum_{k=1}^{p} a_{i,k} \cdot b_{k,j} = a_{i,1}b_{1,j} + a_{i,2}b_{2,j} + \dots + a_{i,p}b_{p,j}$$
+</div>
+
+<blockquote>
+<strong>🚨 LES DEUX PIÈGES CRITIQUES DU CALCUL MATRICIEL (EXAMEN IUT) :</strong>
+<ol>
+    <li><strong>Non-Commutativité :</strong> En général, $A \times B \neq B \times A$. L'ordre des facteurs est capital ! Inverser l'ordre des matrices peut conduire à un résultat complètement différent, voire impossible à calculer.</li>
+    <li><strong>Diviseurs de Zéro :</strong> En algèbre matricielle, $A \times B = 0$ <em>n'implique absolument pas</em> que $A = 0$ ou $B = 0$ ! Deux matrices non nulles peuvent avoir un produit strictement nul.</li>
+</ol>
+</blockquote>
+
+<h2>3. La Transposition</h2>
+<p>
+La <strong>transposée</strong> d'une matrice $A \in \mathcal{M}_{n, p}$, notée $A^T$ ou $^{t}A$, est la matrice de dimension $p \times n$ obtenue en échangeant ses lignes et ses colonnes : $(A^T)_{j,i} = a_{i,j}$.
+</p>
+<ul>
+    <li>$(A^T)^T = A$</li>
+    <li>$(A + B)^T = A^T + B^T$</li>
+    <li>$(\lambda A)^T = \lambda A^T$</li>
+    <li><strong>Propriété fondamentale du produit :</strong> $(A \times B)^T = B^T \times A^T$ (inversion de l'ordre !).</li>
+    <li>Une matrice carrée est dite <strong>symétrique</strong> si $A^T = A$, et <strong>antisymétrique</strong> si $A^T = -A$.</li>
+</ul>
+
+            </div>
+        </div>
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                
+            </div>
+            <a href="../R1.07.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.07</span>
+            </a>
+            <div>
+                <a href="chap2_pivot_de_gauss_systemes.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #C25444;"><span>Ch. 2 : Méthode du Pivot de Gauss & Systèmes Linéaires</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

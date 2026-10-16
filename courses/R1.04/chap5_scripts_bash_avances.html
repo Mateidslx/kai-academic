@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#454E75">
+    <title>R1.04 • Ch. 5 : Programmation Shell Bash Avancée & Automatisation — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #454E75;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #454E75;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+        }
+        .course-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.04.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.04
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 5</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.04.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #ECEEF5; color: #454E75; border: 1px solid #C2C7DC;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25015
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #454E75;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #ECEEF5; color: #454E75; border: 1px solid #C2C7DC;">
+                        R1.04 • CHAPITRE 5
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Programmation Shell Bash Avancée & Automatisation</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Philippe Roose / Équipe Systèmes</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Le Shebang, variables spéciales ($0, $1..$9, $#, $@, $?, $$), structures de test ([ ] vs [[ ]]), boucles for/while, fonctions avec portée locale et gestion professionnelle des erreurs.
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Le Canevas d'un Script Bash Robuste et Professionnel</h2>
+<p>
+À l'IUT d'Anglet, un script Shell doit respecter des conventions strictes de clarté, de gestion des erreurs et de modularité :
+</p>
+<pre><code>#!/bin/bash
+# ==============================================================================
+# Nom        : surveillance_disque.sh
+# Rôle       : Vérifie l'occupation disque et alerte si le seuil dépasse 90%
+# Auteur     : Matéi de Saint Leger (BUT 1 Informatique Anglet)
+# ==============================================================================
+set -euo pipefail # Arrêt immédiat si une commande échoue ou variable non définie
+IFS=$'
+	'       # Délimiteur de champ sécurisé pour éviter le word splitting
+
+SEUIL_MAX=90
+
+# Fonction d'affichage d'aide
+usage() {
+    echo "Usage : $0 [seuil_en_pourcentage]" >&2
+    exit 1
+}
+
+if [ "$#" -ge 1 ]; then
+    SEUIL_MAX="$1"
+fi
+
+echo "[INFO] Démarrage de la surveillance avec seuil = ${SEUIL_MAX}%"
+# Suite du traitement...</code></pre>
+
+<h2>2. Les Variables Spéciales Fondamentales en Bash</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Variable</th>
+            <th>Contenu Sémantique Strict</th>
+            <th>Exemple Typique d'Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>$0</code></td>
+            <td>Nom ou chemin sous lequel le script a été invoqué.</td>
+            <td>Messages d'aide <code>echo "Usage : $0 &lt;fichier&gt;"</code></td>
+        </tr>
+        <tr>
+            <td><code>$1, $2, ... $9</code></td>
+            <td>Les paramètres positionnels passés au script.</td>
+            <td><code>SOURCE="$1"</code></td>
+        </tr>
+        <tr>
+            <td><code>${10}, ${11}</code></td>
+            <td>Paramètres au-delà du 9ème (accolades obligatoires !).</td>
+            <td>Accès aux arguments multiples</td>
+        </tr>
+        <tr>
+            <td><code>$#</code></td>
+            <td>Nombre exact d'arguments passés au script.</td>
+            <td><code>if [ "$#" -ne 2 ]; then usage; fi</code></td>
+        </tr>
+        <tr>
+            <td><code>$?</code></td>
+            <td>Code de retour (exit status) de la dernière commande exécutée ($0$ = succès, $
+eq 0$ = erreur).</td>
+            <td>Vérification post-exécution</td>
+        </tr>
+        <tr>
+            <td><code>$@</code></td>
+            <td>Liste de tous les arguments sous forme de mots séparés <code>"$1" "$2" ...</code>.</td>
+            <td>Boucle <code>for arg in "$@"; do</code></td>
+        </tr>
+        <tr>
+            <td><code>$$</code></td>
+            <td>Numéro de processus (PID) du script en cours d'exécution.</td>
+            <td>Fichiers temporaires uniques <code>/tmp/temp_$$</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>3. Tests Conditionnels : Les Opérateurs Cruciaux</h2>
+<p>
+La syntaxe standard <code>[ condition ]</code> (équivalente à la commande <code>test</code>) exige des espaces obligatoires après <code>[</code> et avant <code>]</code> :
+</p>
+<ul>
+    <li><strong>Tests sur Fichiers :</strong>
+        <ul>
+            <li><code>[ -e "$f" ]</code> : Le fichier ou dossier existe.</li>
+            <li><code>[ -f "$f" ]</code> : C'est un fichier ordinaire régulier.</li>
+            <li><code>[ -d "$f" ]</code> : C'est un répertoire.</li>
+            <li><code>[ -r "$f" ]</code>, <code>[ -w "$f" ]</code>, <code>[ -x "$f" ]</code> : Droit en lecture, écriture ou exécution.</li>
+            <li><code>[ -s "$f" ]</code> : Le fichier existe et sa taille est strictement supérieure à 0 octet.</li>
+        </ul>
+    </li>
+    <li><strong>Comparaisons Numériques :</strong>
+        <br><code>-eq</code> (égal), <code>-ne</code> (différent), <code>-lt</code> (inférieur strict), <code>-le</code> (inférieur ou égal), <code>-gt</code> (supérieur strict), <code>-ge</code> (supérieur ou égal).
+    </li>
+    <li><strong>Comparaisons de Chaînes :</strong>
+        <br><code>[ "$chaine1" = "$chaine2" ]</code> (égalité), <code>[ -z "$str" ]</code> (chaîne vide de longueur nulle), <code>[ -n "$str" ]</code> (chaîne non vide).
+    </li>
+</ul>
+
+<h2>4. Boucles et Fonctions Structurées</h2>
+<pre><code># Parcours de tous les fichiers .c du dossier courant
+for fichier in *.c; do
+    if [ -f "$fichier" ]; then
+        echo "Compilation de $fichier..."
+        gcc -Wall -Wextra -Werror -g "$fichier" -o "${fichier%.c}.bin"
+    fi
+done
+
+# Déclaration d'une fonction avec variables locales
+calculer_somme() {
+    local a="$1"
+    local b="$2"
+    local resultat=$(( a + b ))
+    echo "$resultat"
+}
+
+TOTAL=$(calculer_somme 15 27)
+echo "Total calculé : $TOTAL"</code></pre>
+
+            </div>
+        </div>
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap4_ordonnancement_memoire_virtuelle_inodes.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 4 : Ordonnancement CPU, Mémoire Virtuelle & Structure des Inodes</span></a>
+            </div>
+            <a href="../R1.04.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.04</span>
+            </a>
+            <div>
+                
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
