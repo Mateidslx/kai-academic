@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" data-theme="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#367357"/>
+    <title>Chapitre 1 : L'action collective et la coordination — R1.08 Gestion des organisations — KAI Academic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            color-scheme: light;
+            --r108-accent: #367357;
+            --r108-bg-soft: #EAEDE6;
+            --r108-border: #36735730;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.65;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-dyslexic {
+            font-family: 'Lexend', system-ui, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            word-spacing: 0.08em !important;
+            line-height: 1.85 !important;
+            background-color: #faf8f2 !important;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .concept-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background-color: var(--r108-bg-soft);
+            color: var(--r108-accent);
+            border: 1px solid var(--r108-border);
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            border-bottom: 2px solid #cbd5e1;
+        }
+        td {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+        .callout-def {
+            background-color: #f0fdf4;
+            border-left: 4px solid #367357;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+        .callout-exam {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+    <!-- Top Breadcrumb & Controls -->
+    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
+        <nav class="flex items-center gap-2 text-xs text-slate-500">
+            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
+                <i class="w-3.5 h-3.5" data-lucide="home"></i>
+                <span>Hub</span>
+            </a>
+            <span>/</span>
+            <a class="hover:text-slate-900 font-medium" href="../R1.08.html">R1.08 Gestion des organisations</a>
+            <span>/</span>
+            <span class="font-bold text-slate-900">Chapitre 1 : L'action collective et la coordination</span>
+        </nav>
+        <div class="flex items-center gap-2">
+            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
+                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
+                <span>Mode Confort / Dys</span>
+            </button>
+            <a href="fiche_partiel_a4_autorisee.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #367357;">
+                <i class="w-3.5 h-3.5" data-lucide="file-text"></i>
+                <span>Fiche A4 Examen</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #367357;">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="concept-badge">Synthèse 1 · C1</span>
+            <span class="text-xs text-slate-500 font-mono">Archive Officielle M. Moulin 2026</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 1 : L'action collective et la coordination</h1>
+        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Définition de l'organisation, division du travail, les 5 mécanismes de coordination de Mintzberg et la typologie des 4 grandes formes d'organisations.</p>
+    </section>
+
+    <!-- Chapter Content -->
+    <main class="space-y-6">
+        
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="users"></i>
+        <span>I. Qu'est-ce qu'une organisation ?</span>
+    </h2>
+    <div class="callout-def">
+        <p class="font-bold text-slate-900 text-sm">Définition fondamentale de l'organisation :</p>
+        <p class="text-sm text-slate-700 mt-1">
+            Une <strong>organisation</strong> est un ensemble d’individus regroupés au sein d’une structure formelle, ayant un but commun, mobilisant des ressources et soumis à des contraintes juridiques, temporelles et financières pour réaliser une action collective durable.
+        </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 mb-2">Les 4 familles de ressources :</h3>
+            <ul class="space-y-1.5 text-slate-700 text-xs">
+                <li>• <strong>Ressources Humaines :</strong> Salariés, fonctionnaires, bénévoles, dirigeants, compétences.</li>
+                <li>• <strong>Ressources Financières :</strong> Capital social, chiffre d'affaires, subventions, dons, emprunts.</li>
+                <li>• <strong>Ressources Matérielles :</strong> Terrains, usines, locaux, serveurs, machines, stocks.</li>
+                <li>• <strong>Ressources Immatérielles :</strong> Marques, brevets, logiciels, réputation, savoir-faire.</li>
+            </ul>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 mb-2">Les 4 types de contraintes :</h3>
+            <ul class="space-y-1.5 text-slate-700 text-xs">
+                <li>• <strong>Contraintes Juridiques :</strong> Respect du droit du travail, normes environnementales, RGPD.</li>
+                <li>• <strong>Contraintes de Ressources :</strong> Budget limité, rareté des talents qualifiés.</li>
+                <li>• <strong>Contraintes de Temps :</strong> Délais de livraison, dates de partiels, réactivité concurrentielle.</li>
+                <li>• <strong>Contraintes de Résultat :</strong> Rentabilité exigée, obligations de service public, équilibre budgétaire.</li>
+            </ul>
+        </div>
+    </div>
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="git-merge"></i>
+        <span>II. La division du travail et les 5 mécanismes de coordination (Mintzberg)</span>
+    </h2>
+    <p class="text-sm text-slate-700 leading-relaxed">
+        Dès qu'une action collective dépasse une seule personne, il est nécessaire de <strong>diviser le travail</strong> (spécialisation), puis de <strong>coordonner les tâches</strong> pour maintenir la cohérence de l'ensemble. Henry Mintzberg identifie 5 mécanismes clés indispensables à connaître par cœur pour l'examen :
+    </p>
+    <div class="space-y-3">
+        <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50">
+            <h4 class="font-bold text-emerald-950 text-sm">1. Ajustement mutuel</h4>
+            <p class="text-xs text-slate-700 mt-1">La coordination se fait par simple communication informelle directe entre opérationnels de même niveau. <em>Exemple : Deux développeurs qui discutent de vive voix pour accorder leurs endpoints d'API.</em></p>
+        </div>
+        <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50">
+            <h4 class="font-bold text-blue-950 text-sm">2. Supervision directe</h4>
+            <p class="text-xs text-slate-700 mt-1">Une personne est investie de l'autorité formelle ; elle donne des instructions de travail à plusieurs subordonnés et contrôle leur exécution. <em>Exemple : Un chef de cuisine qui ordonne les plats pendant le service du soir, ou un tech lead qui assigne les tickets Jira.</em></p>
+        </div>
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/50">
+            <h4 class="font-bold text-amber-950 text-sm">3. Standardisation des procédés de travail</h4>
+            <p class="text-xs text-slate-700 mt-1">Le contenu du travail est spécifié et programmé à l'avance sous forme de protocoles ou modes opératoires. <em>Exemple : Une chaîne d'assemblage automobile ou une check-list de déploiement en production (CI/CD pipeline).</em></p>
+        </div>
+        <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/50">
+            <h4 class="font-bold text-purple-950 text-sm">4. Standardisation des résultats</h4>
+            <p class="text-xs text-slate-700 mt-1">On spécifie les performances ou les objectifs chiffrés à atteindre, en laissant la liberté des moyens à l'opérationnel. <em>Exemple : Un commercial qui a pour objectif de réaliser 200 000 € de ventes par an, ou livrer une suite de tests à 100% sans imposer le langage.</em></p>
+        </div>
+        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/50">
+            <h4 class="font-bold text-rose-950 text-sm">5. Standardisation des qualifications</h4>
+            <p class="text-xs text-slate-700 mt-1">La coordination est intériorisée grâce aux connaissances et compétences acquises lors de la formation préalable ou diplômante. <em>Exemple : Des chirurgiens au bloc opératoire qui savent exactement quoi faire sans se parler, ou des ingénieurs diplômés d'État.</em></p>
+        </div>
+    </div>
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="layers"></i>
+        <span>III. Les 4 grands types d'organisations</span>
+    </h2>
+    <div class="overflow-x-auto">
+        <table>
+            <thead>
+                <tr>
+                    <th>Type d'organisation</th>
+                    <th>Statut de propriété</th>
+                    <th>But principal</th>
+                    <th>Ressources principales</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Entreprise privée</strong></td>
+                    <td>Propriétaires privés (actionnaires, associés)</td>
+                    <td>Lucratif (créer du profit et de la richesse)</td>
+                    <td>Prix des ventes (CA), capitaux propres, emprunts</td>
+                </tr>
+                <tr>
+                    <td><strong>Entreprise publique</strong></td>
+                    <td>État ou collectivité territoriale majoritaire</td>
+                    <td>Lucratif ou équilibre avec mission d'intérêt général</td>
+                    <td>Prix payé par l'usager/client + subventions publiques</td>
+                </tr>
+                <tr>
+                    <td><strong>Administration publique</strong></td>
+                    <td>État, collectivités, sécurité sociale</td>
+                    <td>Non lucratif (service public, intérêt général)</td>
+                    <td>Impôts, taxes locales, cotisations sociales obligatoires</td>
+                </tr>
+                <tr>
+                    <td><strong>OBNL (Association, ONG)</strong></td>
+                    <td>Personnes privées physiques ou morales</td>
+                    <td>Non lucratif (satisfaction des membres, cause sociétale)</td>
+                    <td>Cotisations, dons, mécénat, subventions, bénévolat</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</article>
+
+    </main>
+    
+    <!-- Footer Navigation -->
+    <footer class="glass-card rounded-2xl p-6 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 text-xs text-slate-500">
+        <div class="flex items-center gap-2">
+            <span class="concept-badge">R1.08</span>
+            <span>Enseignant : <strong>M. Moulin</strong> · IUT d'Anglet</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="../R1.08.html" class="hover:text-slate-900 font-semibold flex items-center gap-1">
+                <i class="w-4 h-4" data-lucide="arrow-left"></i>
+                <span>Sommaire du cours</span>
+            </a>
+            <a href="../../revision/R1.08.html" class="hover:text-slate-900 font-semibold flex items-center gap-1">
+                <i class="w-4 h-4" data-lucide="sparkles"></i>
+                <span>Mode Révision</span>
+            </a>
+        </div>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

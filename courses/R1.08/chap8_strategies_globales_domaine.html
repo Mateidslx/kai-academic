@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" data-theme="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#367357"/>
+    <title>Chapitre 8 : Les stratégies d'entreprise — Globales et de domaine — R1.08 Gestion des organisations — KAI Academic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            color-scheme: light;
+            --r108-accent: #367357;
+            --r108-bg-soft: #EAEDE6;
+            --r108-border: #36735730;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.65;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-dyslexic {
+            font-family: 'Lexend', system-ui, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            word-spacing: 0.08em !important;
+            line-height: 1.85 !important;
+            background-color: #faf8f2 !important;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .concept-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background-color: var(--r108-bg-soft);
+            color: var(--r108-accent);
+            border: 1px solid var(--r108-border);
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            border-bottom: 2px solid #cbd5e1;
+        }
+        td {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+        .callout-def {
+            background-color: #f0fdf4;
+            border-left: 4px solid #367357;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+        .callout-exam {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+    <!-- Top Breadcrumb & Controls -->
+    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
+        <nav class="flex items-center gap-2 text-xs text-slate-500">
+            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
+                <i class="w-3.5 h-3.5" data-lucide="home"></i>
+                <span>Hub</span>
+            </a>
+            <span>/</span>
+            <a class="hover:text-slate-900 font-medium" href="../R1.08.html">R1.08 Gestion des organisations</a>
+            <span>/</span>
+            <span class="font-bold text-slate-900">Chapitre 8 : Les stratégies d'entreprise — Globales et de domaine</span>
+        </nav>
+        <div class="flex items-center gap-2">
+            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
+                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
+                <span>Mode Confort / Dys</span>
+            </button>
+            <a href="fiche_partiel_a4_autorisee.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #367357;">
+                <i class="w-3.5 h-3.5" data-lucide="file-text"></i>
+                <span>Fiche A4 Examen</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #367357;">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="concept-badge">Cours 8 · C3</span>
+            <span class="text-xs text-slate-500 font-mono">Archive Officielle M. Moulin 2026</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 8 : Les stratégies d'entreprise — Globales et de domaine</h1>
+        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Stratégies corporate (spécialisation, diversification, intégration, externalisation) et stratégies génériques de Porter (coûts, différenciation, focalisation).</p>
+    </section>
+
+    <!-- Chapter Content -->
+    <main class="space-y-6">
+        
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="compass"></i>
+        <span>I. Les Stratégies Globales (Corporate Strategy)</span>
+    </h2>
+    <div class="space-y-4 text-xs">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1">1. La Spécialisation</h3>
+            <p class="text-slate-700">L'entreprise concentre l'intégralité de ses ressources et compétences sur un seul métier. 3 voies possibles :</p>
+            <p class="text-slate-700">• <strong>Pénétration de marché :</strong> Augmenter les ventes des produits actuels sur les marchés actuels (publicité, promotions).</p>
+            <p class="text-slate-700">• <strong>Développement de marché :</strong> Vendre les produits actuels sur de nouveaux marchés (export international, nouveaux canaux web).</p>
+            <p class="text-slate-700">• <strong>Développement de produit :</strong> Proposer des produits nouveaux aux clients actuels.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1">2. La Diversification</h3>
+            <p class="text-slate-700">L'entreprise s'engage sur de nouveaux métiers et de nouveaux marchés :</p>
+            <p class="text-slate-700">• <strong>Liée :</strong> Nouveaux métiers partageant des synergies techniques, marketing ou logistiques avec le métier d'origine.</p>
+            <p class="text-slate-700">• <strong>Non liée (conglomérat) :</strong> Métiers totalement indépendants, guidée par une pure logique de rentabilité financière.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1">3. L'Intégration Verticale vs Externalisation</h3>
+            <p class="text-slate-700">• <strong>Intégration Amont :</strong> L'entreprise prend en charge l'activité de ses fournisseurs pour sécuriser ses approvisionnements.</p>
+            <p class="text-slate-700">• <strong>Intégration Aval :</strong> L'entreprise prend en charge la distribution et les boutiques pour contrôler ses prix et son image.</p>
+            <p class="text-slate-700">• <strong>Externalisation (Outsourcing) :</strong> Confier des activités non stratégiques à des spécialistes tiers (infogérance informatique, nettoyage, comptabilité).</p>
+        </div>
+    </div>
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="target"></i>
+        <span>II. Les Stratégies de Domaine (Business Strategies de Michael Porter)</span>
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1.5">1. Domination par les Coûts</h3>
+            <p class="text-slate-700">• Proposer une offre comparable aux concurrents mais à un <strong>prix nettement inférieur</strong>.</p>
+            <p class="text-slate-700">• Obtenu grâce aux économies d'échelle, à l'effet d'expérience et à la compression stricte des coûts de fonctionnement.</p>
+            <p class="text-slate-500 italic">Exemple : Dacia, Ryanair, Leclerc.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1.5">2. Différenciation</h3>
+            <p class="text-slate-700">• Donner à l'offre des caractéristiques uniques valorisées par le client qui justifient un <strong>prix supérieur</strong>.</p>
+            <p class="text-slate-700">• <strong>Par sophistication (haut de gamme) :</strong> Qualité supérieure, design, prestige (ex: Apple, Puyricard).</p>
+            <p class="text-slate-700">• <strong>Par épuration (low-cost) :</strong> Supprimer les services superflus pour baisser le prix (ex: Ikea).</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1.5">3. Focalisation (Niche)</h3>
+            <p class="text-slate-700">• Cibler un <strong>segment très étroit de clientèle</strong> délaissé par les généralistes.</p>
+            <p class="text-slate-700">• Proposer une offre parfaitement sur-mesure (par coût ou par différenciation).</p>
+            <p class="text-slate-500 italic">Exemple : Telerad (radiocommunications aéronautiques militaires), Ferrari.</p>
+        </div>
+    </div>
+</article>
+
+    </main>
+    
+    <!-- Footer Navigation -->
+    <footer class="glass-card rounded-2xl p-6 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 text-xs text-slate-500">
+        <div class="flex items-center gap-2">
+            <span class="concept-badge">R1.08</span>
+            <span>Enseignant : <strong>M. Moulin</strong> · IUT d'Anglet</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="../R1.08.html" class="hover:text-slate-900 font-semibold flex items-center gap-1">
+                <i class="w-4 h-4" data-lucide="arrow-left"></i>
+                <span>Sommaire du cours</span>
+            </a>
+            <a href="../../revision/R1.08.html" class="hover:text-slate-900 font-semibold flex items-center gap-1">
+                <i class="w-4 h-4" data-lucide="sparkles"></i>
+                <span>Mode Révision</span>
+            </a>
+        </div>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

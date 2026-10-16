@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" data-theme="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Annales & Corrigés Types — R1.08 Gestion des organisations — KAI Academic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Lexend', system-ui, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+        }
+        .badge-r108 {
+            background-color: #EAEDE6;
+            color: #367357;
+            border: 1px solid #36735740;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem 0.8rem;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f1f5f9;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .no-print { display: none !important; }
+            .print-card { box-shadow: none !important; border: 1px solid #cbd5e1 !important; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+
+    <!-- Top Navigation -->
+    <div class="no-print flex items-center justify-between flex-wrap gap-3">
+        <nav class="flex items-center gap-2 text-xs text-slate-500">
+            <a href="../../index.html" class="hover:text-slate-900 flex items-center gap-1">
+                <i class="w-3.5 h-3.5" data-lucide="home"></i>
+                <span>Hub</span>
+            </a>
+            <span>/</span>
+            <a href="../R1.08.html" class="hover:text-slate-900 font-mono">R1.08</a>
+            <span>/</span>
+            <span class="font-bold text-slate-900">Annales & Corrigés</span>
+        </nav>
+        <div class="flex items-center gap-2">
+            <a href="fiche_partiel_a4_autorisee.html" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 bg-white border-slate-200 text-slate-700 hover:bg-slate-50 shadow-2xs">
+                <i class="w-3.5 h-3.5" data-lucide="file-text" style="color: #367357;"></i>
+                <span>Feuille A4 Autorisée</span>
+            </a>
+            <button onclick="window.print()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-2xs hover:brightness-95 transition" style="background-color: #367357;">
+                <i class="w-3.5 h-3.5" data-lucide="printer"></i>
+                <span>Imprimer les corrigés</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header Banner -->
+    <header class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm print-card" style="border-left: 6px solid #367357;">
+        <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono" style="background-color: #367357;">
+                R1.08 · ANNALES
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold badge-r108">
+                Sessions 2023-2024 & 2024-2025
+            </span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3">
+            Annales Officielles & Corrigés Types Détaillés
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
+            Corrigés fidèles aux attentes de <strong>M. Moulin</strong> (IUT d'Anglet). Analyse des barèmes, formulations clés exigées et pièges à éviter lors de l'épreuve écrite.
+        </p>
+
+        <!-- Exam modalities memo -->
+        <div class="mt-4 p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs text-amber-900 flex items-start gap-3">
+            <i class="w-5 h-5 text-amber-700 shrink-0 mt-0.5" data-lucide="alert-circle"></i>
+            <div>
+                <strong>Modalités officielles de l'épreuve :</strong> Durée 1h30 (2h tiers-temps). 
+                <strong>Documents autorisés :</strong> Calculatrice de poche + <strong>1 feuille de notes A4 recto-verso</strong> manuscrite ou dactylographiée.
+                Toute définition manquante dans le tableau de caractérisation entraîne la perte automatique de la moitié des points.
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation jump -->
+    <div class="no-print flex items-center gap-2 text-xs">
+        <a href="#telerad" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 font-semibold hover:border-slate-300 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full" style="background-color: #367357;"></span>
+            Partiel 2024-2025 : Cas Telerad
+        </a>
+        <a href="#puyricard" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 font-semibold hover:border-slate-300 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full" style="background-color: #367357;"></span>
+            Partiel 2023-2024 : Cas Puyricard
+        </a>
+        <a href="#methodo" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 font-semibold hover:border-slate-300 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            Conseils Méthodologiques
+        </a>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- ÉVALUATION 1 : PARTIEL 2024-2025 (CAS TELERAD) -->
+    <!-- ========================================================================= -->
+    <section id="telerad" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm print-card space-y-6">
+        <div class="border-b border-slate-200 pb-4 flex items-center justify-between flex-wrap gap-2">
+            <div>
+                <span class="text-xs font-mono font-bold uppercase text-emerald-800">Partiel Écrit 2024-2025</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">Cas Telerad (Anglet)</h2>
+            </div>
+            <span class="px-3 py-1 rounded-xl text-xs font-bold bg-slate-100 text-slate-700">Barème : /20</span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed">
+            <strong>Contexte du sujet :</strong> Telerad est une société française d'ingénierie et d'électronique basée à Anglet (Pays Basque). Elle conçoit et fabrique des systèmes de radiocommunication aéronautique et maritime pour le contrôle aérien civil et militaire dans le monde entier.
+        </div>
+
+        <!-- Question 1 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">Q1</span>
+                    <span>Caractérisation complète de l'organisation Telerad</span>
+                </h3>
+                <span class="text-xs font-bold text-emerald-800">10 points</span>
+            </div>
+            <p class="text-xs text-slate-500 italic">
+                Consigne impérative : Le tableau doit obligatoirement comporter la définition officielle de chaque caractéristique ainsi que sa justification concrète pour Telerad.
+            </p>
+
+            <div class="overflow-x-auto">
+                <table class="text-xs">
+                    <thead>
+                        <tr>
+                            <th class="w-1/5">Caractéristique</th>
+                            <th class="w-2/5">Définition Officielle Attendue</th>
+                            <th class="w-2/5">Valeurs & Justifications pour Telerad</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr>
+                            <td class="font-bold text-slate-900">Nature</td>
+                            <td>Classification des organisations en fonction de leur but (lucratif / non lucratif) et de leur propriétaire (privé / public).</td>
+                            <td><strong>Entreprise privée :</strong> Propriété de capitaux privés et but lucratif (recherche du bénéfice pour pérenniser l'activité).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Finalité</td>
+                            <td>Raison d'être fondamentale pour laquelle l'organisation a été créée.</td>
+                            <td>
+                                • <strong>Économique :</strong> Réaliser des profits, assurer la pérennité financière et rémunérer le capital.<br>
+                                • <strong>Sociale :</strong> Maintien de l'emploi (85 collaborateurs hautement qualifiés), formation aux technologies radio.<br>
+                                • <strong>Sociétale :</strong> Sécurité du transport aérien mondial, respect des normes environnementales aéronautiques.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Type de production</td>
+                            <td>Nature des extrants générés par l'activité productive (biens ou services).</td>
+                            <td>
+                                <strong>Biens matériels et services associés :</strong><br>
+                                • Biens : Émetteurs/récepteurs radio VHF/UHF, baies de communication (matériels, stockables).<br>
+                                • Services : Installation, maintenance sur site et support technique (immatériels).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Activité & Secteur</td>
+                            <td>Métier exercé et secteur économique de rattachement selon l'INSEE.</td>
+                            <td>
+                                • <strong>Activité :</strong> Industrielle de haute technologie (ingénierie et fabrication d'équipements radioélectriques).<br>
+                                • <strong>Secteur :</strong> <strong>Secondaire</strong> (secteur industriel de transformation).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Taille / Effectif</td>
+                            <td>Dimension de l'organisation mesurée en effectif et chiffre d'affaires selon les critères de l'Union Européenne.</td>
+                            <td>
+                                <strong>PME (Petite et Moyenne Entreprise) :</strong><br>
+                                85 salariés (compris entre 10 et 249 salariés) et CA d'environ 15 millions d'euros (&lt; 50 M€).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Statut juridique</td>
+                            <td>Forme légale régissant les droits, la responsabilité des associés et les règles de gouvernance.</td>
+                            <td>
+                                <strong>Société Anonyme (SA) ou SAS :</strong> Société de capitaux. La responsabilité des actionnaires est limitée au montant de leurs apports.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Ressources</td>
+                            <td>Ensemble des moyens humains, financiers, matériels et immatériels mobilisés par l'organisation.</td>
+                            <td>
+                                • <strong>Humaines :</strong> 85 salariés (ingénieurs R&D, techniciens, commerciaux export).<br>
+                                • <strong>Financières :</strong> Capital social, chiffre d'affaires (15 M€), capacité d'autofinancement.<br>
+                                • <strong>Matérielles :</strong> Usine et laboratoires à Anglet, bancs de test et mesure haute fréquence.<br>
+                                • <strong>Immatérielles :</strong> Brevets déposés, certifications OACI, notoriété internationale.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Champ géographique</td>
+                            <td>Zone territoriale sur laquelle l'organisation déploie son offre et ses ventes.</td>
+                            <td>
+                                <strong>International :</strong> Présence mondiale, plus de 70% du chiffre d'affaires réalisé à l'exportation dans plus de 80 pays.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Organe de direction</td>
+                            <td>Personne physique ou collège détenant le pouvoir formel de direction et de décision.</td>
+                            <td>
+                                <strong>Président-Directeur Général (PDG)</strong> assisté du Comité de direction / Conseil d'administration.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="space-y-3 pt-4 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">Q2</span>
+                    <span>Calcul du taux de variation du résultat net</span>
+                </h3>
+                <span class="text-xs font-bold text-emerald-800">4 points</span>
+            </div>
+            <p class="text-xs text-slate-600">
+                <strong>Données de l'énoncé :</strong> Résultat net 2022 = 820 000 € ; Résultat net 2023 = 1 066 000 €.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                    <span class="font-bold text-slate-900 block mb-1">1. Formule littérale (1 pt)</span>
+                    <div class="py-1">
+                        $$\text{Taux de variation} = \frac{V_f - V_i}{V_i} \times 100$$
+                    </div>
+                    <span class="text-[11px] text-slate-500">Toujours citer la formule littérale avant le calcul.</span>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                    <span class="font-bold text-slate-900 block mb-1">2. Calcul posé (2 pts)</span>
+                    <div class="py-1">
+                        $$\frac{1\,066\,000 - 820\,000}{820\,000} \times 100 = \mathbf{+30{,}00\%}$$
+                    </div>
+                    <span class="text-[11px] text-slate-500">$$\frac{246\,000}{820\,000} \times 100 = +30\%$$</span>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                    <span class="font-bold text-emerald-950 block mb-1">3. Phrase de conclusion (1 pt)</span>
+                    <p class="text-emerald-900 leading-relaxed text-[11px]">
+                        « Le résultat net de l'entreprise Telerad a progressé de <strong>+30,00 %</strong> entre 2022 et 2023, traduisant une dynamique commerciale favorable et une excellente maîtrise des coûts opérationnels. »
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- ÉVALUATION 2 : PARTIEL 2023-2024 (CAS CHOCOLATERIE DE PUYRICARD) -->
+    <!-- ========================================================================= -->
+    <section id="puyricard" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm print-card space-y-6">
+        <div class="border-b border-slate-200 pb-4 flex items-center justify-between flex-wrap gap-2">
+            <div>
+                <span class="text-xs font-mono font-bold uppercase text-emerald-800">Partiel Écrit 2023-2024</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">Cas Chocolaterie de Puyricard</h2>
+            </div>
+            <span class="px-3 py-1 rounded-xl text-xs font-bold bg-slate-100 text-slate-700">Barème : /20</span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed">
+            <strong>Contexte du sujet :</strong> La Chocolaterie de Puyricard est une maison familiale artisanale provençale fondée en 1968. Elle fabrique des chocolats fins haut de gamme et des calissons frais, sans conservateurs ni surgélation, distribués via un réseau de boutiques exclusives et en ligne.
+        </div>
+
+        <!-- Question 1 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">Q1</span>
+                    <span>Caractérisation de la Chocolaterie de Puyricard</span>
+                </h3>
+                <span class="text-xs font-bold text-emerald-800">8 points</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="text-xs">
+                    <thead>
+                        <tr>
+                            <th class="w-1/4">Caractéristique</th>
+                            <th class="w-3/4">Valeurs & Justifications pour Puyricard</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr>
+                            <td class="font-bold text-slate-900">Nature</td>
+                            <td><strong>Entreprise privée</strong> à but lucratif, détenue par un actionnariat familial.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Finalité</td>
+                            <td>
+                                • <strong>Économique :</strong> Réaliser des bénéfices, assurer l'indépendance financière de la famille.<br>
+                                • <strong>Sociale :</strong> Préservation du savoir-faire artisanal des maîtres chocolatiers, formation d'apprentis.<br>
+                                • <strong>Sociétale :</strong> Fèves de cacao issues du commerce équitable, zéro huile de palme, produits ultra-frais sans conservateurs chimiques.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Type de production</td>
+                            <td><strong>Biens matériels consommables :</strong> Chocolats artisanaux fins, calissons, tablettes (produits périssables sous 3 semaines, stockables sous conditions de température contrôlée).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Activité & Secteur</td>
+                            <td>• <strong>Activité :</strong> Agroalimentaire artisanale et vente au détail.<br>• <strong>Secteur :</strong> <strong>Secondaire</strong> (transformation) avec extension <strong>Tertiaire</strong> (boutiques propres).</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Taille / Effectif</td>
+                            <td><strong>PME :</strong> ~100 salariés permanents (jusqu'à 150 lors des fêtes de fin d'année et Pâques), CA d'environ 10 M€.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Statut juridique</td>
+                            <td><strong>Société par Actions Simplifiée (SAS)</strong> à capital familial.</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-900">Champ géographique</td>
+                            <td><strong>Régional et National</strong> (boutiques en Provence et à Paris) + International via site web e-commerce.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="space-y-3 pt-4 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">Q2</span>
+                    <span>Diagnostic Stratégique Externe (PESTEL & Porter)</span>
+                </h3>
+                <span class="text-xs font-bold text-emerald-800">6 points</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-1.5 text-emerald-950">
+                        <i class="w-4 h-4 text-emerald-700" data-lucide="globe"></i>
+                        <span>Macro-environnement (PESTEL)</span>
+                    </h4>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• <strong>Économique :</strong> Flambée du cours mondial du cacao brut (menace sur les marges) ; arbitrage budgétaire des ménages face à l'inflation.</li>
+                        <li>• <strong>Socioculturel :</strong> Demande croissante de produits sains, artisanaux, locaux et sans conservateurs (opportunité majeure).</li>
+                        <li>• <strong>Environnemental :</strong> Règlementations européennes contre la déforestation importée imposant la traçabilité des parcelles de cacao.</li>
+                    </ul>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-1.5 text-emerald-950">
+                        <i class="w-4 h-4 text-emerald-700" data-lucide="shield-alert"></i>
+                        <span>Micro-environnement (5 Forces de Porter)</span>
+                    </h4>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• <strong>Rivalité concurrentielle :</strong> Faible à modérée sur le segment artisanal ultra-frais ; forte face aux géants industriels (Lindt).</li>
+                        <li>• <strong>Pouvoir des clients :</strong> Faible (clientèle fidèle, attachée à la marque et acceptant un prix premium).</li>
+                        <li>• <strong>Pouvoir des fournisseurs :</strong> Élevé (rareté des fèves pures de haute qualité et récoltes contraintes).</li>
+                        <li>• <strong>Produits de substitution :</strong> Pâtisseries de luxe, macarons, coffrets cadeaux gourmands.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="space-y-3 pt-4 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">Q3</span>
+                    <span>Analyse des Stratégies Retenues</span>
+                </h3>
+                <span class="text-xs font-bold text-emerald-800">6 points</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                    <strong class="text-emerald-950 block mb-1">Stratégie de Domaine (Porter) :</strong>
+                    <span class="font-bold text-emerald-900">Différenciation par sophistication (haut de gamme)</span>
+                    <p class="text-emerald-800 mt-1 leading-relaxed">
+                        L'entreprise propose un produit unique d'excellence (ultra-frais, pur beurre de cacao, travail manuel) justifiant un prix élevé. Elle refuse catégoriquement la grande distribution pour protéger son image de marque prestigieuse.
+                    </p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <strong class="text-slate-950 block mb-1">Stratégie Globale (Corporate) :</strong>
+                    <span class="font-bold text-slate-900">Spécialisation & Intégration Verticale Aval</span>
+                    <p class="text-slate-700 mt-1 leading-relaxed">
+                        • <strong>Spécialisation :</strong> Focalisation exclusive sur le métier de confiseur-chocolatier haut de gamme.<br>
+                        • <strong>Intégration verticale aval :</strong> Puyricard gère son propre réseau de distribution physique (boutiques exclusives) pour capter la marge finale et maîtriser la relation client.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- CONSEILS MÉTHODOLOGIQUES POUR LE PARTIEL -->
+    <!-- ========================================================================= -->
+    <section id="methodo" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm print-card space-y-4">
+        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <i class="w-5 h-5 text-amber-600" data-lucide="award"></i>
+            <span>Les 5 Commandements pour Réussir le Partiel de M. Moulin</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                <span class="font-bold text-slate-900 block mb-1">1. Structure du Tableau de Caractérisation</span>
+                <p class="text-slate-600">Tracez toujours 3 colonnes : Caractéristique | Définition formelle | Justification du cas. Si la consigne demande les définitions, ne pas les mettre coûte 50% de la note.</p>
+            </div>
+            <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                <span class="font-bold text-slate-900 block mb-1">2. La Tripartition pour Tous les Calculs</span>
+                <p class="text-slate-600">Formule littérale $ightarrow$ Calcul numérique $ightarrow$ Phrase de conclusion interprétative. Ne donnez jamais un chiffre brut sans unité ni commentaire.</p>
+            </div>
+            <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                <span class="font-bold text-slate-900 block mb-1">3. Distinction Corporate vs Domaine</span>
+                <p class="text-slate-600">Ne confondez pas la stratégie globale (Spécialisation/Diversification) avec la stratégie de domaine de Porter (Domination par les coûts / Différenciation / Focalisation).</p>
+            </div>
+            <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                <span class="font-bold text-slate-900 block mb-1">4. Attention au statut SAS vs SA</span>
+                <p class="text-slate-600">Vérifiez dans le texte si c'est une SAS (souplesse statutaire, président) ou une SA (Conseil d'administration, min 37 000 € de capital social).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="no-print pt-6 text-center text-xs text-slate-400">
+        KAI Academic · BUT 1 Informatique · IUT de Bayonne et du Pays Basque · UPPA
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

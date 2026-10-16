@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" data-theme="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#367357"/>
+    <title>Chapitre 5 : Les fonctions de l'entreprise et la chaîne de valeur — R1.08 Gestion des organisations — KAI Academic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            color-scheme: light;
+            --r108-accent: #367357;
+            --r108-bg-soft: #EAEDE6;
+            --r108-border: #36735730;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.65;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-dyslexic {
+            font-family: 'Lexend', system-ui, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            word-spacing: 0.08em !important;
+            line-height: 1.85 !important;
+            background-color: #faf8f2 !important;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .concept-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background-color: var(--r108-bg-soft);
+            color: var(--r108-accent);
+            border: 1px solid var(--r108-border);
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            border-bottom: 2px solid #cbd5e1;
+        }
+        td {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+        .callout-def {
+            background-color: #f0fdf4;
+            border-left: 4px solid #367357;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+        .callout-exam {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+    <!-- Top Breadcrumb & Controls -->
+    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
+        <nav class="flex items-center gap-2 text-xs text-slate-500">
+            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
+                <i class="w-3.5 h-3.5" data-lucide="home"></i>
+                <span>Hub</span>
+            </a>
+            <span>/</span>
+            <a class="hover:text-slate-900 font-medium" href="../R1.08.html">R1.08 Gestion des organisations</a>
+            <span>/</span>
+            <span class="font-bold text-slate-900">Chapitre 5 : Les fonctions de l'entreprise et la chaîne de valeur</span>
+        </nav>
+        <div class="flex items-center gap-2">
+            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
+                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
+                <span>Mode Confort / Dys</span>
+            </button>
+            <a href="fiche_partiel_a4_autorisee.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #367357;">
+                <i class="w-3.5 h-3.5" data-lucide="file-text"></i>
+                <span>Fiche A4 Examen</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #367357;">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="concept-badge">Synthèse 5 · C1</span>
+            <span class="text-xs text-slate-500 font-mono">Archive Officielle M. Moulin 2026</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 5 : Les fonctions de l'entreprise et la chaîne de valeur</h1>
+        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Les 3 rôles du dirigeant selon Mintzberg, la chaîne de valeur de Michael Porter (activités principales vs soutien) et le rôle stratégique de la fonction GSI.</p>
+    </section>
+
+    <!-- Chapter Content -->
+    <main class="space-y-6">
+        
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="crown"></i>
+        <span>I. Le rôle de la Direction Générale (Henry Mintzberg)</span>
+    </h2>
+    <p class="text-sm text-slate-700 leading-relaxed">
+        Mintzberg a démontré que le travail d'un dirigeant ne se résume pas à planifier, mais s'articule autour de <strong>3 grands rôles managériaux</strong> :
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1.5">1. Rôles Interpersonnels</h3>
+            <p>• <strong>Symbole :</strong> Représentation légale et protocolaire de l'entreprise.</p>
+            <p>• <strong>Leader :</strong> Motivation, encadrement et formation des équipes.</p>
+            <p>• <strong>Liaison :</strong> Réseau de contacts externes avec l'environnement.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1.5">2. Rôles Informationnels</h3>
+            <p>• <strong>Observateur actif :</strong> Veille stratégique et collecte d'informations.</p>
+            <p>• <strong>Diffuseur :</strong> Partage des informations cruciales en interne.</p>
+            <p>• <strong>Porte-parole :</strong> Communication officielle vers l'extérieur (presse, actionnaires).</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h3 class="font-bold text-slate-900 text-sm mb-1.5">3. Rôles Décisionnels</h3>
+            <p>• <strong>Entrepreneur :</strong> Lancement de projets innovants.</p>
+            <p>• <strong>Régulateur :</strong> Résolution des conflits et crises imprévues.</p>
+            <p>• <strong>Répartiteur :</strong> Allocation des budgets et ressources.</p>
+            <p>• <strong>Négociateur :</strong> Grands contrats stratégiques.</p>
+        </div>
+    </div>
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="cpu"></i>
+        <span>II. La Chaîne de Valeur de Michael Porter</span>
+    </h2>
+    <div class="overflow-x-auto">
+        <table>
+            <thead>
+                <tr>
+                    <th>Catégorie de fonction</th>
+                    <th>Fonctions correspondantes</th>
+                    <th>Rôle dans la création de valeur</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Activités Principales (Opérationnelles)</strong></td>
+                    <td>
+                        • Logistique interne (réception stocks)<br>
+                        • Production (transformation)<br>
+                        • Logistique externe (distribution)<br>
+                        • Commercialisation / Marketing (ventes)<br>
+                        • Services (SAV, maintenance)
+                    </td>
+                    <td>Directement impliquées dans la création physique du bien ou la prestation de service et son acheminement vers le client.</td>
+                </tr>
+                <tr>
+                    <td><strong>Activités de Soutien (Support)</strong></td>
+                    <td>
+                        • Infrastructure de la firme<br>
+                        • <strong>Gestion des Systèmes d'Information (GSI)</strong><br>
+                        • Gestion des Ressources Humaines (GRH)<br>
+                        • Recherche et Développement (R&D)<br>
+                        • Approvisionnements (achats)
+                    </td>
+                    <td>Apportent l'appui logistique, technologique, humain et financier indispensable au bon fonctionnement des activités principales.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+        <i class="w-5 h-5 text-emerald-700" data-lucide="server"></i>
+        <span>III. Focus spécial BUT Informatique : La fonction Gestion des Systèmes d'Information (GSI)</span>
+    </h2>
+    <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 space-y-2 text-xs">
+        <p class="font-bold text-emerald-950 text-sm">Pourquoi la GSI est stratégique pour l'organisation ?</p>
+        <p>• <strong>Alignement stratégique :</strong> Le SI n'est pas seulement un outil technique, il permet la différenciation concurrentielle et l'agilité organisationnelle.</p>
+        <p>• <strong>Intégration d'applications (ERP / PGI) :</strong> Unifier la base de données de toute l'entreprise (comptabilité, stocks, ventes, RH) pour éviter les doublons et les silos d'information.</p>
+        <p>• <strong>Cybersécurité et conformité RGPD :</strong> Protection des actifs informationnels, continuité d'activité (PCA/PRA) et sauvegarde des données clients.</p>
+    </div>
+</article>
+
+    </main>
+    
+    <!-- Footer Navigation -->
+    <footer class="glass-card rounded-2xl p-6 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 text-xs text-slate-500">
+        <div class="flex items-center gap-2">
+            <span class="concept-badge">R1.08</span>
+            <span>Enseignant : <strong>M. Moulin</strong> · IUT d'Anglet</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="../R1.08.html" class="hover:text-slate-900 font-semibold flex items-center gap-1">
+                <i class="w-4 h-4" data-lucide="arrow-left"></i>
+                <span>Sommaire du cours</span>
+            </a>
+            <a href="../../revision/R1.08.html" class="hover:text-slate-900 font-semibold flex items-center gap-1">
+                <i class="w-4 h-4" data-lucide="sparkles"></i>
+                <span>Mode Révision</span>
+            </a>
+        </div>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

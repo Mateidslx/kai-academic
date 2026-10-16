@@ -1,596 +1,617 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<html lang="fr" class="light" data-theme="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="theme-color" content="#367357">
-    <title>R1.08 — Gestion des Organisations — KAI Academic</title>
-    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#367357"/>
+    <title>R1.08 — Introduction à la gestion des organisations — KAI Academic</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <style>
         :root {
             color-scheme: light;
             --accent-color: #367357;
-            --scotopic-bg: #FAF8F5;
-            --scotopic-card: #FFFFFF;
-            --scotopic-text: #0F172A;
-            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: var(--scotopic-bg);
-            color: var(--scotopic-text);
-            line-height: 1.85;
-            letter-spacing: 0.03em;
-            word-spacing: 0.08em;
+            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            color: #0f172a;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            min-height: 100vh;
+        }
+        .font-dyslexic {
+            font-family: 'Lexend', system-ui, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            word-spacing: 0.09em !important;
+            line-height: 1.85 !important;
+            background-color: #faf8f2 !important;
+            background-image: none !important;
         }
         .glass-card {
-            background: var(--scotopic-card);
-            border: 1px solid var(--scotopic-border);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
-            transition: all 180ms ease-out;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 150ms ease-out;
+        }
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.2rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.6875rem;
+            font-weight: 600;
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
 
-    
-    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
-    <div class="border-b border-slate-200 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
-                    <i data-lucide="home" class="w-4 h-4"></i>
-                    <span>Hub</span>
-                </a>
-                <span class="text-slate-300">/</span>
-                <a href="index.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
-                    R1.08
-                </a>
-                
-            </div>
-            <div class="flex items-center gap-2">
-                <a href="../revision/R1.08.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>Fiche Révision</span>
-                </a>
-                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                    Moodle #25000
-                </span>
-            </div>
-        </div>
-    </div>
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-slate-500">
+        <a class="hover:text-slate-900 flex items-center gap-1" href="../index.html">
+            <i class="w-3.5 h-3.5" data-lucide="home"></i>
+            <span>Hub Académique</span>
+        </a>
+        <span>/</span>
+        <a class="hover:text-slate-900" href="index.html">Matières</a>
+        <span>/</span>
+        <span class="font-bold text-slate-900 font-mono">R1.08</span>
+    </nav>
 
-    <!-- Bannière Officielle Matière / Chapitre -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
-        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #367357;">
-            <div class="flex items-start justify-between flex-wrap gap-4">
-                <div>
-                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">
-                        R1.08 
-                    </span>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">R1.08 — Gestion des Organisations</h1>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
-                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
-                        <span>Enseignant Référent : <strong>M. Yves Coustillas / M. Larretche / M. Moulin</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
-                    </p>
-                </div>
-            </div>
-            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
-                Compréhension économique, juridique et stratégique des organisations : Typologie des entreprises (statuts juridiques SARL, SAS, SA, gouvernance, ESS), théorie des organisations et configurations structurelles de Henry Mintzberg, fiscalité appliquée et mécanismes de la TVA (collectée, déductible, à décaisser), analyse financière et documents comptables (bilan, compte de résultat, soldes intermédiaires de gestion SIG) et diagnostic stratégique d'entreprise (PESTEL, 5 forces de Porter, chaîne de valeur, SWOT).
-            </div>
-        </div>
-    </div>
-    
-
-    <!-- Main Content Area -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
-
+    <!-- Header Banner -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 bg-white relative overflow-hidden shadow-xs" style="border-left: 6px solid #367357;">
         <div class="flex items-center justify-between flex-wrap gap-4">
-            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
-                <i data-lucide="book-open" class="w-5 h-5" style="color: #367357;"></i>
-                <span>Programme & Chapitres d'Apprentissage (5 chapitres)</span>
-            </h2>
-            <div class="flex items-center gap-2">
-                <a href="R1.08/chap1_typologie_formes_juridiques.html" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-2xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #367357;">
-                    <i data-lucide="play" class="w-4 h-4"></i>
-                    <span>Démarrer le Chapitre 1</span>
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono shadow-2xs" style="background-color: #367357;">
+                        R1.08
+                    </span>
+                    <span class="badge-pill font-mono text-[10px] font-bold" style="background-color: #EAEDE6; color: #367357; border: 1px solid #36735730;">
+                        Moodle UPPA #17477
+                    </span>
+                    <span class="badge-pill font-mono text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                        8 Chapitres Complets
+                    </span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Introduction à la gestion des organisations</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
+                    <i class="w-4 h-4 text-slate-400" data-lucide="user-check"></i>
+                    <span>Enseignant Référent : <strong>M. Moulin</strong> · BUT 1 Informatique Anglet</span>
+                </p>
+                <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
+                    Action collective, mécanismes de coordination de Mintzberg, typologies d'organisations, calculs de gestion (TVA, CA, VA, taux de variation), structures, démarche stratégique (PESTEL, Porter, SWOT).
+                </p>
+            </div>
+
+            <div class="flex items-center flex-wrap gap-2">
+                <a class="min-h-[44px] px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-2xs hover:brightness-95 transition flex items-center gap-2" href="R1.08/chap1_action_collective.html" style="background-color: #367357;">
+                    <i class="w-4 h-4" data-lucide="play"></i>
+                    <span>Démarrer le cours</span>
                 </a>
-                <a href="../revision/R1.08.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-2 shadow-2xs transition">
-                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
-                    <span>Fiche Révision (3 niveaux)</span>
+                <a class="min-h-[44px] px-4 py-2.5 rounded-2xl text-xs font-semibold border flex items-center gap-2 shadow-2xs hover:brightness-95 transition" href="../revision/R1.08.html" style="border-color: #36735740; color: #367357; background-color: #EAEDE6;">
+                    <i class="w-4 h-4" data-lucide="sparkles"></i>
+                    <span>Fiches de Révision</span>
                 </a>
             </div>
         </div>
 
-        <!-- Grille des Chapitres -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">
-                        CHAPITRE 1
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Typologie des Organisations & Formes Juridiques
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    L'action collective organisée, classification par taille (TPE, PME, ETI, GE), secteurs d'activité, formes juridiques de droit français (SARL, SAS, SA, EURL) et économie sociale et solidaire (ESS).
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Organisation</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Formes juridiques</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SARL</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SAS</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Statuts</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Gouvernance</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">ESS</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.08/chap1_typologie_formes_juridiques.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #367357;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
         
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">
-                        CHAPITRE 2
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
+        <!-- BANNIÈRE PRINCIPALE : 312 QUESTIONS FLASH INTERACTIVES (v2026) -->
+        <div class="mt-6 pt-5 border-t border-slate-100">
+            <a href="R1.08/questions_flash_interactives.html" class="p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group shadow-2xs" style="background-color: #EAF2ED; border-color: #367357;">
+                <div class="flex items-start gap-3.5">
+                    <div class="w-11 h-11 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5 font-black text-lg" style="background-color: #367357;">
+                        ⚡
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-sm sm:text-base font-extrabold text-slate-900">Entraîneur Interactif — 312 Questions Flash Officielles Corrigées (v2026)</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-black text-white uppercase" style="background-color: #367357;">SYNTHÈSES 1 À 5 COMPLÈTES</span>
+                        </div>
+                        <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+                            Révisez les 312 questions de début de séance de M. Moulin (Synthèse 1 : 44 Q · Synthèse 2 : 81 Q · Synthèse 3 : 60 Q · Synthèse 4 : 45 Q · Synthèse 5 : 82 Q) + Simulateur Impôt 2026, TVA, VA & Taux de variation.
+                        </p>
+                    </div>
                 </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Théorie des Organisations & Configurations de Mintzberg
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Les 5 composantes de l'organisation selon Henry Mintzberg, les 5 mécanismes de coordination, les structures classiques (fonctionnelle, divisionnelle, matricielle) et les 5 configurations organisationnelles.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Mintzberg</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Structures</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Coordination</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Organigramme</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Gouvernance</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.08/chap2_structures_et_mintzberg.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #367357;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">
-                        CHAPITRE 3
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Fiscalité Appliquée & Mécanismes de la TVA
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Fonctionnement économique de la Taxe sur la Valeur Ajoutée (TVA), neutralité pour l'entreprise assujettie, taux en vigueur, calculs HT/TTC, TVA collectée, TVA déductible et calcul de la TVA à décaisser.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">TVA</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Fiscalité</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">TVA collectée</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">TVA déductible</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">À décaisser</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Calculs</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.08/chap3_fiscalite_et_mecanismes_tva.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #367357;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">
-                        CHAPITRE 4
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">50 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Documents Comptables : Bilan, Compte de Résultat & SIG
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Le bilan patrimonial (Actif = Passif, immobilisé vs circulant, capitaux propres vs dettes), compte de résultat (Charges vs Produits) et Soldes Intermédiaires de Gestion (Marge commerciale, Valeur Ajoutée, EBE, Résultat Net).
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Comptabilité</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Bilan</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Compte de résultat</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SIG</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">EBE</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Valeur Ajoutée</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.08/chap4_analyse_financiere_bilan_sig.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #367357;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">
-                        CHAPITRE 5
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Analyse macro-économique avec la méthode PESTEL, les 5(+1) forces concurrentielles de Michael Porter, la chaîne de valeur, la matrice SWOT croisée et les stratégies génériques.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Stratégie</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">PESTEL</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Porter</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Forces concurrentielles</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SWOT</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Chaîne de valeur</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.08/chap5_diagnostic_strategique_pestel_porter.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #367357;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        </div>
-
-        
-        <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white shadow-xs">
-            <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
-                <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
-                    <i data-lucide="folder-down" class="w-5 h-5 text-blue-600"></i>
-                    <span>Documents & Supports Enseignants (17 fichiers vérifiés)</span>
-                </h2>
-                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono">
-                    Supports Officiels Moodle & IUT
+                <span class="px-4 py-2.5 rounded-xl text-xs font-bold text-white shrink-0 flex items-center gap-1.5 group-hover:brightness-95" style="background-color: #367357;">
+                    <span>S'entraîner (312 Q/R)</span>
+                    <i class="w-4 h-4" data-lucide="arrow-right"></i>
                 </span>
-            </div>
-            
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #367357;"></span>
-                        <span>Cours & Diaporamas</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(3 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.08/coursmanagementinfov2026.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="coursmanagementinfov2026">coursmanagementinfov2026</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">157.1 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/coursmanagementinfov2026.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="coursmanagementinfov2026">coursmanagementinfov2026</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">811.5 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/r108-cours-05-fonction.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="r108-cours-05-fonction">r108-cours-05-fonction</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">739.0 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #367357;"></span>
-                        <span>Travaux Dirigés (TD)</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(4 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.08/C1TD1CORRIGE2021.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="C1TD1CORRIGE2021">C1TD1CORRIGE2021</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">311.2 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/C2TD21STRUCTURESCULTUREPOUVOIR2021.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="C2TD21STRUCTURESCULTUREPOUVOIR2021">C2TD21STRUCTURESCULTUREPOUVOIR2021</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">1.35 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/C2TD22STRUCTURESCULTUREPOUVOIR2021.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="C2TD22STRUCTURESCULTUREPOUVOIR2021">C2TD22STRUCTURESCULTUREPOUVOIR2021</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">1.16 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/TDStrategie.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="TDStrategie">TDStrategie</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">897.3 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #367357;"></span>
-                        <span>Évaluations, Annales & Corrigés</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(10 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.08/synthese1questionsflash.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese1questionsflash">synthese1questionsflash</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">18.9 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese1questionsflashreponse.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese1questionsflashreponse">synthese1questionsflashreponse</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">21.8 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese2questionsflash.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese2questionsflash">synthese2questionsflash</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">18.9 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese2questionsflashreponse.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese2questionsflashreponse">synthese2questionsflashreponse</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">24.0 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese3questionsflash.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese3questionsflash">synthese3questionsflash</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">17.0 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese3questionsflashreponse.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese3questionsflashreponse">synthese3questionsflashreponse</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">22.2 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese4questionsflash.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese4questionsflash">synthese4questionsflash</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">19.0 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese4questionsflashreponse.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese4questionsflashreponse">synthese4questionsflashreponse</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">22.0 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese5questionsflash.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese5questionsflash">synthese5questionsflash</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">18.3 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.08/synthese5questionsflashreponse.docx" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-type" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="synthese5questionsflashreponse">synthese5questionsflashreponse</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">DOCX</span>
-                                <span>•</span>
-                                <span class="font-mono">25.4 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
+            </a>
         </div>
-        
 
-    </main>
+        <!-- SPECIAL EXAM TOOLS BOX (FICHE A4 + ANNALES) -->
+        <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <a href="R1.08/fiche_partiel_a4_autorisee.html" class="p-4 rounded-2xl border-2 border-emerald-600/30 bg-emerald-50/40 hover:bg-emerald-50/70 transition flex items-start justify-between group">
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5" style="background-color: #367357;">
+                        <i class="w-5 h-5" data-lucide="file-check"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-900 group-hover:text-emerald-900 transition">Feuille A4 Recto-Verso Autorisée</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold text-emerald-800 bg-emerald-100">AUTORISÉ AU PARTIEL</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Fiche d'examen recto-verso condensée : définitions formelles du tableau de caractérisation, formules de calcul, Mintzberg, PESTEL, Porter. Prête à imprimer.
+                        </p>
+                    </div>
+                </div>
+                <i class="w-5 h-5 text-emerald-700 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
+            </a>
+
+            <a href="R1.08/annales_partiels_corriges.html" class="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-slate-100/70 transition flex items-start justify-between group">
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white shrink-0 mt-0.5">
+                        <i class="w-5 h-5" data-lucide="award"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Annales & Corrigés Officiels</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 bg-slate-200">2023 à 2025</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Cas réels traités en amphi : Telerad (2024-2025, Anglet) et Chocolaterie de Puyricard (2023-2024). Barèmes détaillés et corrigés types.
+                        </p>
+                    </div>
+                </div>
+                <i class="w-5 h-5 text-slate-500 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- PROGRAMME OFFICIEL EN 3 PARTIES (8 CHAPITRES) -->
+    <!-- ========================================================================= -->
+    <section class="space-y-6">
+
+        <!-- PARTIE 1 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #367357;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 1 : Les Différentes Organisations (Chapitres 1 à 5)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Fondements & Caractérisation</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Chapitre 1 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 1</span>
+                            <span class="text-slate-400 font-mono text-[11px]">20 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            L'Action Collective & la Coordination
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Définition d'une organisation, 5 mécanismes de coordination de Mintzberg, les 4 grandes catégories d'organisations.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Mintzberg</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Coordination</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">4 Types</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap1_action_collective.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 2 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 2</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les Caractéristiques de l'Entreprise
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Tableau de caractérisation officiel, finalités (économique, sociale, sociétale), formes juridiques (EI, SARL, SAS, SA), tailles UE.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Caractérisation</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Statuts SARL/SAS</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tailles PME</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap2_caracteristiques_entreprise.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 3 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 3</span>
+                            <span class="text-slate-400 font-mono text-[11px]">20 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les Administrations Publiques
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Admin centrales, collectivités territoriales, sécurité sociale. 3 principes de Rolland (égalité, continuité, mutabilité). Calculs de TVA.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Service Public</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Rolland</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">TVA Décaissée</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap3_administrations_publiques.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 4 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 4</span>
+                            <span class="text-slate-400 font-mono text-[11px]">20 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les OBNL & Associations (Loi 1901)
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Organisations à but non lucratif, associations déclarées vs de fait, ONG, mutuelles, fondations et ressources bénévoles/subventions.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Loi 1901</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">OBNL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Bénévolat</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap4_obnl_associations.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 5 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 5</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Fonctions & Chaîne de Valeur
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Les 3 rôles de Mintzberg, la Chaîne de valeur de Porter (activités principales vs de soutien), focus sur la fonction GSI (Systèmes d'Information).
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Chaîne de Valeur</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">GSI (Informatique)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">3 Rôles</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap5_fonctions_chaine_valeur.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTIE 2 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #367357;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 2 : L'Organisation, Structure, Culture et Pouvoir (Chapitre 6)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Fonctionnement Interne</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Chapitre 6 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 6</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Structures, Culture & Pouvoir
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Structures classique (Taylor/Fayol), Staff and Line, divisionnelle, matricielle. Culture d'entreprise et relations de pouvoir.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Staff & Line</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Matricielle</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Culture</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap6_structures_culture_pouvoir.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTIE 3 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #367357;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 3 : La Démarche Stratégique (Chapitres 7 & 8)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Diagnostic & Choix Stratégiques</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Chapitre 7 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 7</span>
+                            <span class="text-slate-400 font-mono text-[11px]">30 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Le Diagnostic Stratégique
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Modèle PESTEL (macro), 5 forces de Porter (micro), diagnostic interne (ressources/compétences distinctives) et matrice SWOT.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">PESTEL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">5 Forces Porter</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SWOT</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap7_diagnostic_strategique.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 8 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 8</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les Stratégies d'Entreprise
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Stratégies globales Corporate (spécialisation, diversification, intégration, externalisation) et stratégies de domaine de Porter (coûts, différenciation, niche).
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Domaine (Porter)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Corporate</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Différenciation</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap8_strategies_globales_domaine.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- TD / TP / EXERCICES PRATIQUES SECTION -->
+    <section class="glass-card rounded-3xl p-6 border border-slate-200 bg-white shadow-xs my-6" id="exercices">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i class="w-4 h-4" data-lucide="dumbbell" style="color: #367357;"></i>
+                <span>Travaux Dirigés & Cas Pratiques Officiels (M. Moulin)</span>
+            </h2>
+            <span class="text-xs font-mono text-slate-400">Cas réels d'amphi & TD</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between text-xs transition">
+                <div class="flex items-center gap-2.5">
+                    <i class="w-4 h-4 text-emerald-700" data-lucide="file-check"></i>
+                    <div>
+                        <strong class="text-slate-900">TD1 : Savonnerie de l'Atlantique</strong>
+                        <span class="text-slate-500 text-[11px] block">Caractérisation, calculs de TVA, CA, VA et marges.</span>
+                    </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] font-semibold">TD 1</span>
+            </div>
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between text-xs transition">
+                <div class="flex items-center gap-2.5">
+                    <i class="w-4 h-4 text-emerald-700" data-lucide="file-check"></i>
+                    <div>
+                        <strong class="text-slate-900">TD2 : Gestion de l'Eau</strong>
+                        <span class="text-slate-500 text-[11px] block">Service public, régie directe vs délégation de service public.</span>
+                    </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] font-semibold">TD 2</span>
+            </div>
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between text-xs transition">
+                <div class="flex items-center gap-2.5">
+                    <i class="w-4 h-4 text-emerald-700" data-lucide="file-check"></i>
+                    <div>
+                        <strong class="text-slate-900">TD3 : Diagnostic Stratégique</strong>
+                        <span class="text-slate-500 text-[11px] block">Matrices PESTEL, Porter et SWOT appliquées à un cas d'entreprise.</span>
+                    </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] font-semibold">TD 3</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENTS SOURCES AUTHENTIFIÉS -->
+    <section class="glass-card rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xs" id="sources">
+        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i class="w-4 h-4" data-lucide="folder-check" style="color: #367357;"></i>
+                <span>Documents Sources Authentifiés (Archive OneDrive 10/10/2026 M. Moulin)</span>
+            </h2>
+            <span class="text-xs text-slate-400 font-mono">12 documents vérifiés SHA-256</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="bg-slate-50/80 text-[10px] font-bold text-slate-500 uppercase border-b border-slate-200">
+                        <th class="p-3.5">Fichier Original</th>
+                        <th class="p-3.5">Format</th>
+                        <th class="p-3.5">Taille</th>
+                        <th class="p-3.5">Empreinte SHA-256</th>
+                        <th class="p-3.5 text-right">Certification</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <a href="../supports/R1.08/cours_management_info_v2026.docx" download class="underline hover:text-[#367357] font-bold">cours_management_info_v2026.docx</a>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">POLYCOPIÉ</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">157.1 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">b3bc860c9d7b...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <a href="../supports/R1.08/synthese1_questions_flash_reponse.docx" download class="underline hover:text-[#367357] font-bold">synthese1_questions_flash_reponse.docx</a>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">21.8 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">e143150c2324...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <a href="../supports/R1.08/synthese2_questions_flash_reponse.docx" download class="underline hover:text-[#367357] font-bold">synthese2_questions_flash_reponse.docx</a>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">24.0 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">0ed37a972af6...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <a href="../supports/R1.08/synthese3_questions_flash_reponse.docx" download class="underline hover:text-[#367357] font-bold">synthese3_questions_flash_reponse.docx</a>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">22.2 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">1bb1ac1a2db8...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <a href="../supports/R1.08/synthese4_questions_flash_reponse.docx" download class="underline hover:text-[#367357] font-bold">synthese4_questions_flash_reponse.docx</a>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">22.0 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">d07a0f009e8b...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <a href="../supports/R1.08/synthese5_questions_flash_reponse.docx" download class="underline hover:text-[#367357] font-bold">synthese5_questions_flash_reponse.docx</a>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">25.4 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">c42c81d2f104...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Upcoming Deadlines Section -->
+    <section class="glass-card rounded-3xl p-6 border border-slate-200 bg-white shadow-xs my-6">
+        <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2 mb-3">
+            <i class="w-4 h-4" data-lucide="calendar" style="color: #367357;"></i>
+            <span>Échéances & Évaluation Partiel R1.08</span>
+        </h2>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between flex-wrap gap-3 text-xs mb-2">
+            <div>
+                <p class="font-bold text-slate-900">Partiel Écrit R1.08 Gestion des organisations</p>
+                <p class="text-slate-500 text-[11px] mt-0.5">Durée 1h30 (2h tiers-temps). <strong>Autorisé : Calculatrice + 1 feuille A4 recto-verso</strong>.</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="font-mono text-slate-500 text-[11px]">Semestre 1</span>
+                <span class="px-2.5 py-0.5 rounded-full font-mono font-bold text-[10px] bg-emerald-100 text-emerald-800">COEFF IMPORTANT</span>
+            </div>
+        </div>
+    </section>
 
     <script>
         lucide.createIcons();
