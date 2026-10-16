@@ -1,0 +1,2194 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Concevoir des sous-programmes <br/> - Partie 1 : les procédures -</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 10px; margin-bottom: -90px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%; margin-top: -40px;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Introduction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">03</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Définitions
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">06</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Procédures
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">10</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Passage de paramètres
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">16</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Passage de paramètres par valeur
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">19</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Passage de paramètres par référence
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">30</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Passage de paramètres par référence constante
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">40</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Cas des tableaux en paramètre
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">46</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Variables locales à un sous-programme
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">53</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Bonnes pratiques
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">56</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Introduction">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Introduction" data-transition="convex">
+        <h1>Introduction</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Notion de programmation modulaire</h4>
+
+        <div style="font-size: 67%;">
+            <p>
+                Les programmes répondant à des problèmes complexes sont souvent
+                composés de plusieurs milliers de lignes...
+            </p>
+            <p>
+                Ce type de programme ne peut pas être écrit d’un seul tenant. La plupart du temps,
+                le programmeur :
+            </p>
+            <ul>
+                <li>décompose le programme en plusieurs parties plus petites,</li>
+                <li style="margin-top: -7px;">donne un nom à chacune de ces parties, </li>
+                <li style="margin-top: -7px;">assemble ces différentes parties pour former le programme final.</li>
+            </ul>
+
+            <p>
+                Cette approche nommée <strong class="text-primary">programmation modulaire</strong> repose sur
+                l’écriture
+                de <strong class="text-primary">sous-programmes</strong>.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Intérêts des sous-programmes</h4>
+
+        <div style="font-size: 70%;">
+           <ul>
+               <li>Ils permettent de traiter les opérations répétitives en factorisant le
+                code et en évitant ainsi les duplications de code<sup>[1]</sup>;</li>
+                <li>
+                    Ils favorisent la construction de programmes de manière modulaire ;
+                </li>
+                <li>
+                    De par leur indépendance vis-à-vis du programme principal, ils
+                    peuvent être réutilisés dans d’autres programmes et accélèrent donc
+                    le développement de ces derniers. 
+                </li>
+           </ul>
+        </div>
+        <div style="font-size: 40%; margin-top: 60px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> lorsqu'aucune solution algorithmique ne permet d'éviter cette duplication.         
+        </div>
+
+        
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Définitions">
+    <!--
+      l'attribut "id" de section implante les liens du menu du haut
+      l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+      -->
+
+    <section data-menu-title="Définitions" data-transition="convex">
+        <h1>Définitions</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Qu'est-ce qu'un sous-programme ?</h4>
+
+        <div style="font-size: 70%;">
+            <div class="card bg-light border-primary mb-3" style="margin-top: 15px;">
+                <div class="card-header text-primary">
+                    <i class="fas fa-book-reader"></i>
+                    Définition
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Un sous-programme est une portion de programme <strong>réutilisable</strong>
+                        qui peut être exécutée de manière <strong>indépendante</strong> par rapport à un
+                        programme dit principal.
+                    </p>
+                    <p>
+                        A l'instar de n'importe quel traitement, un sous-programme a un
+                        nom et peut :
+                    </p>
+                    <ul>
+                        <li style="margin-top: -10px;">avoir des <strong>données</strong> ;</li>
+                        <li style="margin-top: -7px;">avoir des <strong>résultats</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Qu'est-ce qu'un paramètre ?</h4>
+
+        <div style="font-size: 65%;">
+            <div class="card bg-light border-primary mb-3" style="margin-top: 15px;">
+                <div class="card-header text-primary">
+                    <i class="fas fa-book-reader"></i>
+                    Définition
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Les paramètres<sup>[1]</sup> d'un sous-programme désignent les données et les
+                        résultats du sous-programme. On distingue :
+                    </p>
+                    <ul>
+                        <li style="margin-top: -10px;">Les paramètres <strong class="text-primary">formels</strong> :
+                            ils désignent les noms des données et
+                            des résultats lors de la <strong>déclaration</strong> et de la <strong>définition</strong>
+                            du
+                            sous-programme ;
+                        </li>
+                        <li style="margin-top: -7px;">Les paramètres <strong class="text-primary">effectifs</strong> :
+                            ils désignent les noms des données
+                            et des résultats lors de l'<strong>appel</strong> du sous programme.</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="fragment fade-right">
+                Les paramètres d'un sous-programme s'intègrent au dictionnaire des
+                variables du sous-programme : il est donc <strong>inutile de les re-déclarer</strong> à
+                l'intérieur du sous-programme.
+            </p>
+        </div>
+        <div style="font-size: 40%; margin-top: -10px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> appelés aussi <strong>arguments</strong>.
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Déclaration, définition et appel</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                On distingue trois phases distinctes pour construire et utiliser un
+                sous-programme :
+            </p>
+            <ul>
+                <li style="margin-top: -15px;">La <strong class="text-primary">déclaration</strong> du sous-programme : Cette étape, facultative mais
+                    <strong>fortement conseillée</strong>, vise à spécifier le ”mode d'emploi” du
+                    sous-programme en précisant son nom, ses données, ses résultats et
+                    son but ;
+                </li>
+                <li style="margin-top: -4px;" class="fragment fade-right">La <strong class="text-primary">définition</strong> du sous-programme : Cette étape consiste à écrire le
+                    corps du sous-programme, à savoir l'ensemble des instructions qui le
+                    composent ;
+                </li>
+                <li style="margin-top: -4px;" class="fragment fade-right">L'<strong class="text-primary">appel</strong> du sous-programme : Cette étape consiste à déclencher
+                    l'exécution du sous-programme.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section>
+<section name="Procédures">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Les procédures" data-transition="convex">
+        <h1>Les procédures</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Qu'est-ce qu'une procédure ?</h4>
+
+        <div style="font-size: 65%;">
+            <div class="card bg-light border-primary mb-3" style="margin-top: 15px;">
+                <div class="card-header text-primary">
+                    <i class="fas fa-book-reader"></i>
+                    Définition
+                </div>
+                <div class="card-body" style="margin-bottom: -15px;">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Une procédure est un sous-programme qui peut avoir :
+                    </p>
+                    <ul>
+                        <li style="margin-top: -15px;">de 0 à N données;</li>
+                        <li style="margin-top: -7px;">de 0 à N résultats.</li>
+                    </ul>
+                    <p style="margin-top: -7px;">
+                        Une procédure est homogène à une instruction : Son appel s'écrit comme une instruction.
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                <i class="far fa-hand-point-right"></i>
+                A noter : Contrairement à une fonction,<sup>[1]</sup> une procédure ne renvoie pas de valeur.
+            </p>
+            <div style="font-size: 80%; margin-top: -10px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> cette famille de sous-programmes sera étudiée lors du prochain
+                cours.
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Déclarer une procédure (1/2)</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Etant donné qu'une procédure est un sous-programme, sa déclaration est
+                    constituée d'une <strong>entête</strong> et d'un <strong>but</strong>.
+                </li>
+                <li>
+                    L'<strong>entête</strong> de la procédure spécifie le nom de la procédure ainsi que le nom et
+                    type de chaque paramètre <strong>formel</strong>.
+                </li>
+                <li>
+                    Le <strong>but</strong> prend la forme d'un commentaire qui décrit le service rendu par la procédure
+                    ainsi que le rôle de chacun de ses paramètres.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Déclarer une procédure (2/2)</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Dans la <strong>déclaration</strong>, le nom des paramètres formels est facultatif mais
+                fortement conseillé : le fait de nommer chaque paramètre permet ensuite de
+                spécifier le rôle de chacun des paramètres dans le but de la procédure.
+            </p>
+
+            <div class="text-center" style="margin-top: -15px;">
+                <img src="presentation/images/fig1.png" width="80%">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Déclaration, définition, appel : vue d'ensemble</h4>
+
+        <div style="font-size: 70%;">
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                #include &lt;iostream&gt; 
+                using namespace std;
+
+                <mark>// Déclaration des sous-programmes</mark>
+                <mark>void afficherSomme (double nb1, double nb2);</mark>
+                <mark>// But : Affiche à l'écran la somme des nombres nb1 et nb2</mark>
+
+                int main (void) // Programme principal
+                {
+                  // VARIABLES du programme principal
+                  double valeur1 ; // Nombre à additionner avec valeur2
+                  double valeur2 ; // Nombre à additionner avec valeur1
+                
+                  // (clavier) >> saisir les nombres à additionner >> valeur1, valeur2
+                  cout << " Entrez un nombre : "; cin >> valeur1 ;
+                  cout << " Entrez un autre nombre : "; cin >> valeur2 ;
+
+                  // Appel du sous-programme afficherSomme
+                <mark>afficherSomme (valeur1, valeur2);</mark>
+                  return 0 ;
+                }
+
+               <mark>// Définition des sous-programmes</mark>
+               <mark>void afficherSomme (double nb1, double nb2)</mark>
+               <mark>{</mark>
+                  <mark>cout << (nb1 + nb2) << endl;</mark>
+               <mark>}</mark>
+             </code></pre>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+    <section>
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+    
+            <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT14/0" 
+               role="button" target="_blank">
+               <i class="fas fa-mobile"></i> &nbsp;
+               Sortez vos smartphones
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </a>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+</section>
+<section name="Paramètres">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Passage de paramètres" data-transition="convex">
+        <h1>Passage de paramètres</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Mise en correspondance des paramètres formels et effectifs</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                La mise en correspondance des paramètres formels et des paramètres
+                effectifs est réalisée en fonction de la <strong class="text-warning">position</strong>
+                qu'occupe chaque
+                paramètre dans la déclaration et l'appel du sous-programme :
+            </p>
+
+            <div class="text-center" style="margin-top: -15px;">
+                <img src="presentation/images/fig4.png" width="85%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Modes de transmission des paramètres</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Le mode de transmission définit le mécanisme qui sera utilisé pour transmettre le contenu du paramètre
+                sera au sous-programme.
+            </p>
+            <p>
+                Selon que le paramètre soit une <strong>donnée</strong>, un <strong>résultat</strong> et selon la <strong>taille</strong>
+                occupée en mémoire par le paramètre, on choisira, en C++, l'un des
+                modes suivants<sup>[1]</sup>:
+            </p>
+            <ul>
+                <li style="margin-top: -10px;">passage de paramètre par <strong class="text-primary">valeur</strong> ;</li>
+                <li style="margin-top: -7px;">passage de paramètre par <strong class="text-primary">référence</strong> ;</li>
+                <li style="margin-top: -7px;">passage de paramètre par <strong class="text-primary">référence constante</strong>.</li>
+            </ul>
+
+            <div style="font-size: 70%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> Programmation - Principes et pratiques en C++, Bjarne Stroustrup, 2010.
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Passage par valeur">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Passage par valeur" data-transition="convex">
+        <h1>Passage de paramètres par valeur</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Principe du passage par valeur</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Par défaut, un paramètre est transmis par valeur. Dans ce mode, le
+                sous-programme reçoit une copie du paramètre et non le paramètre lui-même :
+            </p>
+            <div class="row">
+                <div class="col-md-5" style="font-size: 100%;">
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        cout << "Entrez un nombre : "; 
+                        cin >> valeur1;
+                        cout << "Entrez un autre nombre : "; 
+                        cin >> valeur2;
+                        
+                        afficherSomme (valeur1, valeur2);
+                     </code></pre>
+                    <p>
+                        Remarques :
+                    </p>
+                    <ul>
+                        <li>lorsque le sous-programme a terminé de s'exécuter, les copies des
+                            paramètres sont <strong class="text-danger">effacées</strong> de la mémoire.
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-7">
+                    <div class="text-center" style="margin-top: -15px;">
+                        <img class="" src="presentation/images/fig5.png" width="400px">
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        un paramètre transmis par valeur <strong>ne peut pas être modifié</strong> → La valeur
+                        du paramètre est donc <strong class="text-success">protégée</strong>.
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Les étapes du passage par valeur via un exemple</h4>
+
+        <div style="font-size: 60%;">
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                #include &lt;iostream&gt; 
+                using namespace std;
+                    
+                // Déclaration des sous-programmes
+                void incrementer (int valIncrement, int valAIncrementer);
+                // But : Incrémente valAIncrementer d'une valeur égale à valIncrement
+                    
+                int main (void) // Programme principal
+                {
+                    // VARIABLES
+                    int nombre; // Nombre à incrementer
+                    
+                    // TRAITEMENTS  
+                    cout << "Entrez un nombre : "; cin >> nombre;
+                    
+                    incrementer (2, nombre);
+                    
+                    cout << "Apres increment, nombre = " << nombre << endl;
+                    return 0;
+                }
+                    
+                // Définition des sous-programmes
+                void incrementer (int valIncrement, int valAIncrementer)
+                {
+                    valAIncrementer = valAIncrementer + valIncrement;
+                }
+                 </code></pre>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 1 : Création de la copie</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        void incrementer (int valIncrement, int valAIncrementer) 
+                        {
+                            valAIncrementer = valAIncrementer + valIncrement;
+                        }
+                     </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Considérons l'appel suivant :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        incrementer (2 , nombre) ;
+                     </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 1</strong> : Lors de l'appel à la procedure <span
+                    class="text-info">incrementer()</span> une <strong>copie</strong> du
+                paramètre <span class="text-info">nombre</span> est créée en mémoire centrale : </p>
+            <div class="text-center" style="margin-top: -30px;">
+                <img class="" src="presentation/images/passageParValeur1.png" width="430px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 2 : Envoi de la copie à la procédure</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Rappel du code de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        void incrementer (int valIncrement, int valAIncrementer) 
+                        {
+                            valAIncrementer = valAIncrementer + valIncrement;
+                        }
+                     </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        incrementer (2 , nombre) ;
+                     </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 2</strong> : La <strong>copie</strong> du paramètre <span
+                    class="text-info">nombre</span> est envoyée à la procédure et vient remplacer le
+                paramètre formel <span class="text-info">valAIncrementer</span> : </p>
+            <div class="text-center" style="margin-top: -30px;">
+                <img class="" src="presentation/images/passageParValeur2.png" width="450px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 3 : Exécution du code de la procédure</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Rappel du code de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        void incrementer (int valIncrement, int valAIncrementer) 
+                        {
+                            valAIncrementer = valAIncrementer + valIncrement;
+                        }
+                     </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        incrementer (2 , nombre) ;
+                     </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 3</strong> : La procédure effectue le calcul avec la
+                <strong>copie</strong> du paramètre <span class="text-info">nombre</span> :
+            </p>
+            <div class="text-center" style="margin-top: -20px;">
+                <img class="" src="presentation/images/passageParValeur3.png" width="470px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Etape 4 : Stockage du résultat du calcul...</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Rappel du code de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        void incrementer (int valIncrement, int valAIncrementer) 
+                        {
+                            valAIncrementer = valAIncrementer + valIncrement;
+                        }
+                     </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        incrementer (2 , nombre) ;
+                     </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 4</strong> : Le résultat du calcul est affecté à la <strong
+                    class="text-danger">copie</strong> du paramètre <span class="text-info">nombre</span> : </p>
+            <div class="text-center" style="margin-top: -20px;">
+                <img class="" src="presentation/images/passageParValeur4.png" width="470px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 5 : Suppression de la copie en mémoire</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Rappel du code de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        void incrementer (int valIncrement, int valAIncrementer) 
+                        {
+                            valAIncrementer = valAIncrementer + valIncrement;
+                        }
+                     </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        incrementer (2 , nombre) ;
+                     </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 5</strong> : La procédure a terminé de s'exécuter → la copie du
+                paramètre
+                <span class="text-info">nombre</span> est effacée de la mémoire centrale :
+            </p>
+            <div class="text-center" style="margin-top: -30px;">
+                <img class="" src="presentation/images/passageParValeur5.png" width="450px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Résultat final...</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>Le programme principal reprend son exécution :</p>
+
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                cout << "Apres increment, nombre = " << nombre << endl;
+             </code></pre>
+
+            <p>... et affiche à l'écran la valeur de la variable nombre... qui n'a pas changé :</p>
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img class="" src="presentation/images/passageParValeur6.png" width="600px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Passage par valeur - démonstration</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe
+                    src="//mediakiosque.univ-pau.fr/video_priv/11504/871adb098bf34a4ac8878140c3b9e7b7336d183074a1ca0f60c94df2b74c30bc/?is_iframe=true&size=720"
+                    style="padding: 0; margin: 0; border:0" allowfullscreen="" width="1280" height="720"></iframe>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Passage par valeur - conclusion</h4>
+
+        <div style="font-size: 70%;">
+
+            <ul>
+                <li>Un paramètre transmis par valeur est <strong class="text-success">protégé</strong> : il ne peut être
+                    modifié étant donné que le sous-programme travaille sur une <strong>copie</strong> de ce paramètre ;
+                </li>
+                <li>
+                    Si une procédure doit modifier un paramètre car ce paramètre est un
+                    résultat, il faut être en mesure de modifier sa valeur ;
+                </li>
+                <li>
+                    Dans ce cas de figure, on s'orientera vers un passage de paramètre
+                    par <strong class="text-primary">référence</strong>.
+                </li>
+            </ul>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+</section>
+<section name="Par référence">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Passage par référence" data-transition="convex">
+        <h1>Passage de paramètres par référence</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Principe du passage par référence</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Dans ce mode, le sous-programme reçoit <strong class="text-danger">directement</strong> le paramètre
+                    et non une copie.
+                </li>
+                <li>
+                    Pour préciser qu'un paramètre doit être transmis par référence, on
+                    utilise le symbole <strong class="text-info">&</strong> après le type du paramètre
+                    qui doit être passé par référence.
+                </li>
+                <li>
+                    <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> Attention</span> : l'ajout du
+                    symbole <strong class="text-info">&</strong> est réalisé au niveau de la
+                    <strong>déclaration</strong> et de la <strong>définition</strong> du sous-programme mais pas au
+                    niveau de l'appel !
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Le passage par référence via un exemple</h4>
+
+        <div style="font-size: 60%;">
+
+            <p>Reprenons le cas de la procédure <span class="text-info">incrementer()</span> en utilisant cette fois-ci
+                un
+                passage <strong class="text-primary">par référence</strong> :</p>
+
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                #include &lt;iostream&gt; 
+                using namespace std;
+                    
+                // Déclaration des sous-programmes
+                void incrementer (int valIncrement, int& valAIncrementer);
+                // But : Incrémente valAIncrementer d'une valeur égale à valIncrement
+                    
+                int main (void) // Programme principal
+                {
+                   // VARIABLES
+                    int nombre; // Nombre à incrementer
+                    
+                    // TRAITEMENTS  
+                    cout << "Entrez un nombre : "; cin >> nombre;
+                    
+                    incrementer (2, nombre);
+                    
+                    cout << "Apres increment, nombre = " << nombre << endl;
+                    return 0;
+                }
+                    
+                // Définition des sous-programmes
+                void incrementer (int valIncrement, int& valAIncrementer)
+                {
+                   valAIncrementer = valAIncrementer + valIncrement;
+                }
+                 </code></pre>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 1 : Transmission directe du paramètre</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Rappel du code de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        void incrementer (int valIncrement, int& valAIncrementer) 
+                        {
+                            valAIncrementer = valAIncrementer + valIncrement;
+                        }
+                     </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                        incrementer (2 , nombre) ;
+                     </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 1</strong> : L'esperluète (<strong class="text-info">&</strong>)
+                devant le paramètre <span class="text-info">valAIncrementer</span> indique que
+                ce paramètre doit être transmis <strong>directement</strong> à la procédure. </p>
+
+
+            <div class="row">
+                <div class="col-md-6" style="font-size: 100%; margin-top: -15px;">
+                    <p> Lors de l'appel de la procédure <span class="text-info">incrementer()</span>,
+                        le paramètre <span class="text-info">nombre</span> est transmis <strong>directement</strong>
+                        (pas de copie en mémoire) à la procédure. </p>
+                    <p> Le paramètre formel <span class="text-info">valAIncrementer</span> est alors remplacé par la
+                        valeur de <span class="text-info">nombre</span>. </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center" style="margin-top: -30px;">
+                        <img class="" src="presentation/images/passageParReference1.png" width="430px">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 2 : Exécution du code de la procédure</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Rappel du code de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                            void incrementer (int valIncrement, int& valAIncrementer) 
+                            {
+                                valAIncrementer = valAIncrementer + valIncrement;
+                            }
+                         </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                            incrementer (2 , nombre) ;
+                         </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 2</strong> : La procédure effectue le calcul en utilisant
+                <strong>directement</strong> la valeur du paramètre <span class="text-info">nombre</span> :
+            </p>
+            <div class="text-center" style="margin-top: -20px;">
+                <img class="" src="presentation/images/passageParReference2.png" width="470px">
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 3 : Stockage du résultat du calcul...</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p> Rappel du code de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                            void incrementer (int valIncrement, int& valAIncrementer) 
+                            {
+                                valAIncrementer = valAIncrementer + valIncrement;
+                            }
+                         </code></pre>
+                </div>
+                <div class="col-md-5">
+                    <p> Appel de la procédure :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                            incrementer (2 , nombre) ;
+                         </code></pre>
+                </div>
+            </div>
+
+            <p> <strong class="text-primary">Étape 3</strong> : Le résultat du calcul est affecté directement à <span
+                    class="text-info">nombre</span> :
+            </p>
+            <div class="text-center" style="margin-top: -20px;">
+                <img class="" src="presentation/images/passageParReference3.png" width="470px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Résultat final...</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>Le programme principal reprend son exécution :</p>
+
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                cout << "Apres increment, nombre = " << nombre << endl;
+             </code></pre>
+
+            <p>... et affiche à l'écran la valeur de la variable <span class="text-info">nombre</span>... qui a été
+                modifiée par la procédure puisqu'elle
+                a travaillé <strong>directement</strong> dessus :</p>
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img class="" src="presentation/images/passageParReference4.png" width="620px">
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Passage par référence - démonstration</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe
+                    src="//mediakiosque.univ-pau.fr/video_priv/11505/18d925bbfba8593eca95da878d04031c8b070ed56e3bfbda5cf0f3a68d67b8fe/?is_iframe=true&size=720"
+                    style="padding: 0; margin: 0; border:0" allowfullscreen="" width="1280" height="720"></iframe>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Passage par référence vs passage par valeur (1/1)</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Lorsqu'un paramètre est transmis par <strong class="text-primary">valeur</strong>, la valeur du paramètre est
+                    <strong>protégée</strong> de toute erreur de programmation car le sous-programme
+                    travaille sur une copie.
+                </li>
+                <li>
+                    A l'inverse, lorsqu'un paramètre est transmis par <strong class="text-primary">référence</strong>, le
+                    programmeur doit rester vigilant aux opérations qu'il applique sur le
+                    paramètre car toute modification remonte ensuite au niveau du
+                    programme appelant !
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Passage par référence vs passage par valeur (2/2)</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Le passage de paramètre par <strong class="text-primary">valeur</strong> protège les valeurs transmises au
+                    sous-programme mais nécessite au préalable de déclencher une opération
+                    de copie des paramètres. Cette opération de copie peut, lorsque les
+                    paramètres sont "volumineux",<sup>[1]</sup> ralentir l'exécution du programme et/ou
+                    provoquer une consommation de mémoire excessive.
+                </li>
+                <li>
+                    Dans ce dernier cas de figure, on s'orientera vers un passage de
+                    paramètres par <strong class="text-primary">référence constante</strong>.
+                </li>
+            </ul>
+            <div style="font-size: 70%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> Des tableaux ou des enregistrements complexes par exemple.
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Par référence constante">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Passage par référence constante" data-transition="convex">
+        <h1>Passage de paramètres par référence constante</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Principe du passage par référence constante</h4>
+
+        <div style="font-size: 65%;">
+            <ul>
+                <li>
+                    Le passage par <strong>référence constante</strong> est similaire au passage de
+                    paramètre par référence, si ce n'est que le paramètre transmis
+                    <strong class="text-primary">n'est pas modifiable</strong> par le sous-programme.
+                </li>
+                <li style="margin-top: -5px;" class="fragment fade-right" data-fragment-index="2">
+                    Comme pour le passage par référence, on utilisera le symbole <strong class="text-info">&</strong>
+                    pour
+                    préciser que le paramètre est transmis <strong>directement sans copie</strong>.
+                </li>
+                <li style="margin-top: -5px;" class="fragment fade-right" data-fragment-index="3">
+                    Pour bloquer la modification sur le paramètre transmis, on précisera à
+                    l'aide du mot clé <strong class="text-info">const</strong><sup>[1]</sup>
+                    que le paramètre concerné ne peut donc être modifié.
+                </li>
+                <li style="margin-top: -5px;" class="fragment fade-right" data-fragment-index="4">
+                    Dans ce mode, le paramètre est donc passé <strong>directement</strong> au
+                    sous-programme (pas de copie), mais sa valeur <strong>ne peut être modifiée</strong>
+                    par le sous-programme.
+                </li>
+            </ul>
+            <div style="font-size: 70%; margin-top: -10px; text-align: left;" class="fragment fade-right"
+                data-fragment-index="3">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> A la déclaration et à la définition du sous-programme, mais pas
+                à l'appel.
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Le passage par référence constante via un exemple</h4>
+
+        <div style="font-size: 60%;">
+
+            <p>Reprenons le cas de la procédure <span class="text-info">incrementer()</span> en utilisant cette fois-ci
+                un passage <strong class="text-primary">par référence constante</strong> :</p>
+
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                #include &lt;iostream&gt; 
+                using namespace std;
+                    
+                // Déclaration des sous-programmes
+                void incrementer (int valIncrement, const int& valAIncrementer);
+                // But : Incrémente valAIncrementer d'une valeur égale à valIncrement
+                    
+                int main (void) // Programme principal
+                {
+                   // VARIABLES
+                    int nombre; // Nombre à incrementer
+                    
+                    // TRAITEMENTS  
+                    cout << "Entrez un nombre : "; cin >> nombre;
+                    
+                    incrementer (2, nombre);
+                    
+                    cout << "Apres increment, nombre = " << nombre << endl;
+                    return 0;
+                }
+                    
+                // Définition des sous-programmes
+                void incrementer (int valIncrement, const int& valAIncrementer)
+                {
+                   valAIncrementer = valAIncrementer + valIncrement;
+                }
+                 </code></pre>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Protection du paramètre effective dès la compilation</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>
+                Dès la phase de compilation, une erreur apparaı̂t mettant en évidence
+                l’incohérence du code : impossible de modifier un paramètre transmis par référence constante !
+            </p>
+            <div class="text-center" style="margin-top: -10px;">
+                <img class="" src="presentation/images/passageParRefConstante.png" width="600px">
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Passage par référence constante - démonstration</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe 
+                    src="//mediakiosque.univ-pau.fr/video_priv/11506/36dfa3ae1bbe9717c22e9019ba24a5aacd29048b7e48e19d65ec05a39b882770/?is_iframe=true&size=720"
+                    style="padding: 0; margin: 0; border:0" allowfullscreen="" width="1280" height="720"></iframe>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Choisir la manière de passer un paramètre</h4>
+
+        <div style="font-size: 62%;">
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                style="font-size: 100%; margin-top: -20px;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left"
+                        data-src="presentation/images/bjarne_stroustrup.jpg" width="100" style="padding-right: 10px;">
+                <ul style="padding-left: 100px;">
+                    <li>
+                        Utiliser le passage par <strong>valeur</strong> pour les très ”petits” objets.<sup>[1]</sup>
+                    </li>
+                    <li style="margin-top: -10px;">
+                        Utiliser le passage par <strong>référence constante</strong> pour les
+                        objets ”volumineux” <sup>[2]</sup> qui n’ont pas besoin d’être modifiés.
+                    </li>
+                    <li style="margin-top: -10px; margin-bottom: -20px;">Utiliser le passage par
+                        <strong>référence</strong> uniquement quand
+                        on y est obligé.</li>
+                </ul>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -40px; font-size: 65%">
+                    Bjarne Stroustrup -
+                    <cite title="Source Title">Programmation : Principes et pratiques en C++ - Pearson 2010.</cite>
+                </footer>
+            </blockquote>
+            <div style="font-size: 60%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> moins de 16 octets selon B. Stroustrup. <br />
+                <span style="color: #35a3e5">[2]</span> plus de 16 octets selon B. Stroustrup. <br />
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Tableaux">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Tableaux en paramètre" data-transition="convex">
+        <h1>Cas des tableaux en paramètre</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Particularité des tableaux en paramètre</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Le langage C++ a été conçu en privilégiant d'abord des critères
+                    d'efficacité.
+                </li>
+                <li>
+                    Les tableaux étant considérés comme des objets ”volumineux”,<sup>[1]</sup> ils sont
+                    <strong>par défaut</strong> passés par <strong class="text-primary">référence</strong> et non par
+                    valeur afin <u>d'éviter la recopie</u>
+                    en mémoire de tous les éléments du tableau.
+                </li>
+
+                <li>
+                    <i class="far fa-sticky-note"></i> A retenir : Lorsqu'un tableau est transmis en paramètre d'un
+                    sous-programme, il pourra être passé par <strong>référence</strong> ou par <strong>référence
+                        constante uniquement</strong>.
+                </li>
+            </ul>
+            <div style="font-size: 60%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> au sens de B. Stroustrup
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableau par référence : exemple (1/3)</h4>
+
+        <div style="font-size: 70%;">
+            <pre class="cpp" style="font-size: 80%; line-height: 1.5;"><code data-trim data-noescape data-line-numbers>
+                void incrTab (int tab[], unsigned short int nbCases);
+                /* But : Incrémente de 1 toutes les valeurs du tableau tab
+                   de taille nbCases*/
+                 </code></pre>
+
+            <p>Dans le sous-programme ci-dessus :</p>
+            <ul>
+                <li>Le paramètre <span class="text-info">tab</span> est transmis par <strong>référence</strong> car
+                    c'est un tableau
+                    (et de ce fait, il n'est pas nécessaire d'utiliser <strong class="text-info">&</strong>).
+                    Ces valeurs pourront donc être modifiées ;</li>
+                <li>
+                    le paramètre <span class="text-info">tailleTab</span> est transmis par <strong>valeur</strong>
+                    (conformément aux
+                    règles vues précédemment).
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableau par référence : exemple (2/3)</h4>
+
+        <div style="font-size: 67%; margin-top: -18px;">
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                    #include &lt;iostream&gt; 
+
+                    using namespace std;
+                    
+                    // Déclaration des sous-programmes
+                    void incrTab (int tab[], unsigned int tailleTab);
+                    // But : Incrémente de 1 toutes les valeurs du tableau tab de taille tailleTab
+                    
+                    int main (void) // Corps du programme principal
+                    {
+                      // VARIABLES
+                      const unsigned int NB_CASES = 5; // Taille du tableau
+                      int notes[NB_CASES] = {13, 9, 15, 13, 5}; // Tableau de notes à incrémenter
+                    
+                      // TRAITEMENTS  
+                      incrTab (notes, NB_CASES);
+                      // notes, NB_CASES >> afficher le tableau après incrémentation >> (écran)
+                      for (unsigned int i = 0 ; i < NB_CASES ; i++)
+                      {
+                        cout << notes[i] << "  "; 
+                      }
+                      return 0;
+                    }
+                    // Définition des sous-programmes
+                    void incrTab (int tab[], unsigned int tailleTab)
+                    {
+                      for (unsigned int i = 0 ; i < tailleTab ; i++)
+                      {
+                        tab[i]++;
+                      }
+                    }
+                 </code></pre>
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableau par référence : exemple (3/3)</h4>
+
+        <div style="font-size: 70%;">
+            <p>Résultat de l'exécution du programme précédent :</p>
+
+            <div style="font-size: 70%;">
+                <div class="text-center" style="margin-top: -30px;">
+                    <img class="" src="presentation/images/tabParReference.png" width="700px">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Tableau par référence constante</h4>
+
+        <div style="font-size: 65%; margin-top: -7px;">
+
+            <p> Lorsque le sous-programme n'a pas besoin de modifier le tableau, on procédera
+                à un passage de paramètre par <strong>référence constante</strong> : </p>
+
+            <pre class="cpp" style="font-size: 63%; line-height: 1.5; margin-top: ;"><code data-trim data-noescape data-line-numbers>
+            void recherche (const int tab[], int valATrouver, unsigned short int& pos, bool& trouve);
+            /* But : Recherche la valeur valATrouver dans le tableau tab.
+              - si la recherche aboutie, trouve prend la valeur vraie et pos indique la 
+                position où l'élément a été trouvé
+              - si la recherche n'aboutie pas, trouve prend la valeur faux et pos ne 
+                contient aucune valeur pertinente. */
+                 </code></pre>
+
+            <ul>
+                <li style="margin-top: 7px;">Ci-dessus, le tableau <span class="text-info">tab</span> est passé par
+                    <strong>référence constante</strong> car le
+                    programme effectue uniquement une recherche et cette recherche ne doit
+                    pas modifier les éléments du tableau ;
+                </li>
+                <li style="margin-top: -7px;">
+                    l'entier <span class="text-info">valATrouver</span> est passé par <strong>valeur</strong> car sa
+                    valeur ne doit pas être
+                    modifiée par la recherche et car sa taille est plus petite que 16 octets ;
+                </li>
+                <li style="margin-top: -7px;">
+                    le booléen <span class="text-info">trouve</span> et l'entier <span class="text-info">pos</span> sont
+                    passés
+                    par <strong>référence</strong> car ce sont des
+                    résultats et que le sous-programme a besoin de leur attribuer une valeur.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+    <section>
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+    
+            <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT15/0" 
+               role="button" target="_blank">
+               <i class="fas fa-mobile"></i> &nbsp;
+               Sortez vos smartphones
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </a>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+</section><section name="Variables locales">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Variables locales" data-transition="convex">
+        <h1>Variables locales à un sous-programme</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Variables locales à un sous-programme</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Un sous-programme peut avoir son propre dictionnaire de variables ;
+                </li>
+                <li>
+                    Ces variables ne sont alors accessibles <strong>qu'au sein du
+                    sous-programme</strong> ;
+                </li>
+
+                <li>
+                    Ces variables existent le temps de l'exécution du sous-programme →
+                    Elles ne peuvent donc pas être manipulées dans le programme
+                    appelant.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+    <section>
+
+        <h4>Variables locales - exemple</h4>
+
+        <div style="font-size: 68%; margin-top: -20px">
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                #include &lt;iostream&gt; 
+                using namespace std;
+
+                // Déclaration des sous-programmes
+                void afficherPerimetre (double ray);
+                // But : Affiche à l'écran le périmètre du cercle de rayon ray
+                
+                int main (void) // Corps du programme principal
+                {
+                  // Variable du programme principal
+                  double rayonCercle; // Le rayon du cercle dont on veut calculer le perimetre
+                
+                  // TRAITEMENTS du programme principal
+                  cout << "Entrez le rayon du cercle : "; cin >> rayonCercle;
+                  afficherPerimetre(rayonCercle);
+                  cout << perimetre << endl; // INTERDIT !
+                  return 0;
+                }
+                
+                // Définition des sous-programmes
+                void afficherPerimetre (double ray)
+                {
+                  // VARIABLES LOCALES au sous-programme afficherPerimetre
+                  double perimetre; // Perimètre du cercle de rayon ray
+                  const float PI = 3.14; // valeur de pi utlisée pour calculer le périmètre
+                
+                  // TRAITEMENTS du sous-programme afficherPerimetre
+                  perimetre = 2 * PI * ray;    
+                  cout << "Le perimetre du cercle est egal a " << perimetre << endl;
+                }
+                 </code></pre>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+
+</section><section name="Bonnes pratiques">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Bonnes pratiques" data-transition="convex">
+        <h1>Bonnes pratiques</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Bonnes pratiques<sup>[1]</sup> (1/4)</h4>
+
+        <div style="font-size: 67%;">
+            <ol>
+                <li>
+                    <p>Rangez les paramètres dans l'ordre données, données/résultats,
+                        résultats plutôt que de ranger vos paramètres aux hasard ou par ordre
+                        alphabétique.</p>
+
+                    <pre class="cpp" style="font-size: 67%; line-height: 1.5;"><code data-trim data-noescape data-line-numbers>
+                        void recherche (const int tab[], unsigned int nbCases, int valATrouver, 
+                                        bool & trouve, unsigned short int& pos );
+                     </code></pre>
+
+                    <p>
+                        <i class="far fa-sticky-note"></i> Exception à cette règle : Si le sous-programme prend en
+                        paramètre un
+                        tableau et sa taille, on aura tendance à placer le tableau en premier, suivi de sa
+                        taille, même si le tableau est un résultat et que sa taille est une donnée :
+                    </p>
+                    <pre class="cpp" style="font-size: 67%; line-height: 1.5;"><code data-trim data-noescape data-line-numbers>
+                        void inverserValeurs (double& tab[] , unsigned int nbCases);
+                     </code></pre>
+                </li>
+            </ol>
+            <div style="font-size: 60%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> McConnell, S. - Tout sur le code - Pour concevoir du logiciel de
+                qualité, 2e édition - Dunod 2005
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+    <section>
+
+        <h4>Bonnes pratiques<sup>[1]</sup> (2/4)</h4>
+
+        <div style="font-size: 67%;">
+            <ol start="2">
+                <li>
+                    <p>Placez les paramètres d'état ou d'erreur en dernier :</p>
+
+                    <pre class="cpp" style="font-size: 67%; line-height: 1.5;"><code data-trim data-noescape data-line-numbers>
+                        void diviser (double dividende, double diviseur , 
+                                      double& resultat, bool& divParZero) ;
+                     </code></pre>
+                </li>
+                <li style="margin-top: 40px;" class="fragment fade-right">
+                    <p>Utilisez <u>tous</u> les paramètres d'un sous-programme : Si vous passez un
+                        paramètre à un sous-programme, utilisez-le. Si vous ne l'utilisez pas, retirez le
+                        de l'entête du sous-programme.</p>
+                </li>
+                <li style="margin-top: 40px;" class="fragment fade-right">
+                    <p>N'employez pas de paramètres de sous-programme comme variable de
+                        travail : Employez des variables locales au sous-programme.</p>
+                </li>
+            </ol>
+            <div style="font-size: 60%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> McConnell, S. - Tout sur le code - Pour concevoir du logiciel de
+                qualité, 2e édition - Dunod 2005
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Bonnes pratiques (3/4)</h4>
+
+        <div style="font-size: 67%;">
+
+            <ol start="5">
+                <li>Limitez le nombre de paramètres d'un sous-programme :</li>
+            </ol>
+
+            <div class="row">
+                <div class="col-md-6" style="font-size: 100%;">
+                    <p class="text-center" style="font-size: 80%;">à <strong class="text-primary">7</strong> selon S.
+                        McConnell :</p>
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 72%; margin-top: -20px;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded-circle float-left"
+                                data-src="presentation/images/steve_McConnell.jpg" width="100"
+                                style="padding-right: 10px;">
+                        <p>
+                            Des recherches psychologiques ont montré que la
+                            plupart des gens ne peuvent pas garder en tête plus
+                            de 7 éléments d'information à la fois.
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top"
+                            style="margin-bottom: -40px; font-size: 70%">
+                            Steve McConnell -
+                            <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité - Dunod
+                                2005.</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="text-center" style="font-size: 80%;">à <strong class="text-primary">3</strong> selon R.C.
+                        Martin ("oncle Bob") :</p>
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 72%; margin-top: -20px;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded-circle float-left"
+                                data-src="presentation/images/robert_cecil_martin.jpg" width="100"
+                                style="padding-right: 10px;">
+                        <p>
+                            Lorsqu'il y a plus de trois arguments, vous devez vous
+                            interroger sur leur raison d'être et faire en sorte d'éviter
+                            cette situation.
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top"
+                            style="margin-bottom: -40px; font-size: 70%">
+                            Robert Cecil Martin -
+                            <cite title="Source Title">Coder proprement - Pearson 2009.</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+    <section>
+
+        <h4>Bonnes pratiques<sup>[1]</sup> (4/4)</h4>
+
+        <div style="font-size: 67%;">
+            <ol start="6">
+                <li>
+                    <p>Documentez vos sous-programmes en précisant, selon la situation :</p>
+                </li>
+            </ol>
+            <ul>
+                <li>Quels sont les paramètres en entrée, les paramètres modifiés et le
+                    paramètres de sortie ;
+                </li>
+                <li style="margin-top: -2px;">
+                    Les unités des paramètres numériques (cm, mètres...) ;
+                </li>
+                <li style="margin-top: -2px;">
+                    La signification des codes d'état ou des valeurs d'erreurs si vous
+                    n'employez pas d'énumérations ;
+                </li>
+                <li style="margin-top: -2px;">
+                    Les plages de validité des valeurs attendues ; 
+                </li>
+                <li style="margin-top: -2px;">
+                    Les valeurs particulières qui ne doivent jamais apparaı̂tre.
+                </li>
+            </ul>
+            <div style="font-size: 60%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> McConnell, S. - Tout sur le code - Pour concevoir du logiciel de
+                qualité, 2e édition - Dunod 2005
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

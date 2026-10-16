@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaine 1 - TP 1 - Activités de programmation Página — R1.01</title>
+    <link rel="stylesheet" href="../../css/academic_theme.css">
+    <style>
+        body { font-family: 'Lexend', sans-serif; line-height: 1.6; padding: 2rem; background: #0b0f19; color: #e2e8f0; }
+        .header { border-bottom: 2px solid #3b82f6; padding-bottom: 1rem; margin-bottom: 2rem; }
+        h1 { color: #60a5fa; }
+        .content { background: #1e293b; padding: 2rem; border-radius: 8px; border: 1px solid #334155; }
+        a { color: #38bdf8; }
+        code, pre { background: #0f172a; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>R1.01 • Semaine 1 - TP 1 - Activités de programmation Página</h1>
+        <p>Source officielle : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692207">https://elearn.univ-pau.fr/mod/page/view.php?id=692207</a></p>
+    </div>
+    <div class="content">
+        <div role="main">
+ <div class="box py-3 generalbox center clearfix">
+  <div class="no-overflow">
+   <div id="r101-tp1" style="max-width: 930px; margin: 0 auto; padding: 16px 20px 40px; box-sizing: border-box; color: #17233c; font-family: inherit; font-size: 18px; line-height: 1.68;">
+    <!-- =========================================================
+       EN-TÊTE DU TP
+       ========================================================= -->
+    <div style="display: flex; align-items: center; gap: 16px; margin: 0 0 30px; padding: 17px 22px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 5px solid #66aee0; border-radius: 13px; background: #f1f8fd; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+     <div style="flex: 0 0 auto; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e3f1fb; color: #2f86c7; font-size: 18px; font-weight: 800; line-height: 1; box-shadow: 0 2px 7px rgba(15, 23, 42, .08);">
+      TP1
+     </div>
+     <div style="min-width: 0;">
+      <div style="margin: 0 0 4px; color: #2f86c7; font-size: 24px; font-weight: 800; line-height: 1.25;">
+       Mise en place et découverte de l'environnement de travail
+      </div>
+      <div style="color: #66758a; font-size: 15px; font-weight: 600; line-height: 1.4;">
+       R1.01 - Initiation au développement
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+       INTRODUCTION
+       ========================================================= -->
+    <p style="margin: 0;">
+     Pour traiter les exercices de programmation sur lesquels nous travaillerons tout au long du module R1.01 - Initiation au développement, nous utiliserons l'environnement de programmation
+     <a href="https://code.visualstudio.com/" rel="noopener" style="color: #2f86c7; font-weight: bold; text-decoration: underline;" target="_blank">
+      Visual Studio Code
+     </a>
+     et nous programmerons en C++.
+    </p>
+    <!-- =========================================================
+       PARTIE 1
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 4px solid #66aee0; border-radius: 11px; background: #f1f8fd; color: #2f86c7; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      1. Configuration de Visual Studio Code
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0;">
+       Avec l'aide de votre enseignant, suivez les directives données dans le tutoriel
+       <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692259" style="color: #2f86c7; font-weight: bold; text-decoration: underline;">
+        Paramétrer Visual Studio Code à l'IUT
+       </a>
+       . Une fois que votre environnement de travail a été configuré et testé revenez sur ce sujet de TP pour passer à l'étape suivante.
+      </p>
+     </div>
+    </div>
+    <!-- =========================================================
+       PARTIE 2
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 4px solid #66aee0; border-radius: 11px; background: #f1f8fd; color: #2f86c7; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      2. Appréhender le mécanisme de la compilation
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       Après avoir testé le paramétrage de Visual studio code en compilant et en exécutant le programme
+       <em>
+        Hello world
+       </em>
+       , vérifiez que vous avez un fichier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        main.exe
+       </strong>
+       dans le dossier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        hello-world
+       </strong>
+       . Utilisez éventuellement le bouton d'actualisation pour rafraichir la liste des fichiers dans Visual studio code :
+      </p>
+      <!-- CAPTURE 1 -->
+      <div style="margin: 22px 0 26px;">
+       <img alt="Visual Studio Code" class="img-fluid" data-zoom-image="1" role="button" src="https://patrick-etcheverry.github.io/r1.01-initiation-au-developpement/travaux-pratiques/tp1/images/image1.jpg" style="display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; border: 1px solid #d8e2e6; border-radius: 12px; box-shadow: 0 5px 14px rgba(15, 23, 42, .08); cursor: zoom-in;" tabindex="0"/>
+      </div>
+      <ul style="margin: 0; padding-left: 29px;">
+       <li style="margin: 0 0 14px; padding-left: 3px;">
+        Essayez d'ouvrir le fichier
+        <strong style="color: #2f86c7; font-family: monospace;">
+         main.exe
+        </strong>
+        avec Visual studio code et observez ce qui se passe ;
+       </li>
+       <li style="margin: 0 0 14px; padding-left: 3px;">
+        Supprimez le fichier
+        <strong style="color: #2f86c7; font-family: monospace;">
+         main.exe
+        </strong>
+        , ouvrez à nouveau le fichier
+        <strong style="color: #2f86c7; font-family: monospace;">
+         main.cpp
+        </strong>
+        du dossier
+        <strong style="color: #2f86c7; font-family: monospace;">
+         hello-world
+        </strong>
+        et lancez une compilation avec le raccourci
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         Ctrl
+        </code>
+        +
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         Maj
+        </code>
+        +
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         B
+        </code>
+       </li>
+       <li style="margin: 0 0 14px; padding-left: 3px;">
+        Actualisez la liste des fichiers et vérifiez que le fichier
+        <strong style="color: #2f86c7; font-family: monospace;">
+         main.exe
+        </strong>
+        est à nouveau présent ;
+       </li>
+       <li style="margin: 0 0 14px; padding-left: 3px;">
+        Supprimez à nouveau le fichier
+        <strong style="color: #2f86c7; font-family: monospace;">
+         main.exe
+        </strong>
+        puis introduisez une erreur dans le code en supprimant le point-virgule qui se trouve à la fin de la ligne commençant par
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         cout
+        </code>
+        ;
+       </li>
+       <li style="margin: 0; padding-left: 3px;">
+        Relancez une compilation (
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         Ctrl
+        </code>
+        +
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         Maj
+        </code>
+        +
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         B
+        </code>
+        ) et vérifiez cette fois-ci que le fichier
+        <strong style="color: #2f86c7; font-family: monospace;">
+         main.exe
+        </strong>
+        n'est pas re-créé :
+       </li>
+      </ul>
+      <!-- CAPTURE 2 -->
+      <div style="margin: 24px 0 0;">
+       <img alt="Erreur de compilation dans Visual Studio Code" class="img-fluid" data-zoom-image="1" role="button" src="https://patrick-etcheverry.github.io/r1.01-initiation-au-developpement/travaux-pratiques/tp1/images/image2.jpg" style="display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; border: 1px solid #d8e2e6; border-radius: 12px; box-shadow: 0 5px 14px rgba(15, 23, 42, .08); cursor: zoom-in;" tabindex="0"/>
+      </div>
+      <!-- QUESTION DE RÉFLEXION -->
+      <div style="margin: 32px 0 0; padding: 17px 20px; border: 1px solid #ded2f5; border-left: 4px solid #8061d6; border-radius: 11px; background: #faf6fe; color: #27344d; box-shadow: 0 4px 12px rgba(15, 23, 42, .04);">
+       <strong>
+        A partir des manipulations que vous venez de faire et des connaissances que vous avez en programmation, essayez d'expliquer à votre enseignant ce qu'est une opération de compilation.
+       </strong>
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+       PARTIE 3
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 4px solid #66aee0; border-radius: 11px; background: #f1f8fd; color: #2f86c7; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      3. Analyse et prise en main d'un code simple
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       Corrigez l'erreur introduite dans le fichier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        main.cpp
+       </strong>
+       puis recompilez-le (
+       <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+        Ctrl
+       </code>
+       +
+       <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+        Maj
+       </code>
+       +
+       <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+        B
+       </code>
+       ) afin de revenir à un programme fonctionnel. Fermez ensuite ce fichier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        main.cpp
+       </strong>
+       puis ouvrez le fichier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        main.cpp
+       </strong>
+       qui se trouve dans le dossier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        conversion-euros-dollars
+       </strong>
+       .
+      </p>
+      <p style="margin: 0 0 19px;">
+       Ouvrez maintenant le fichier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        main.cpp
+       </strong>
+       qui se trouve dans le dossier
+       <strong style="color: #2f86c7; font-family: monospace;">
+        conversion-euros-dollars
+       </strong>
+       .
+      </p>
+      <p style="margin: 0 0 28px;">
+       Ce programme permet de convertir une somme saisie en euros vers une somme équivalente en dollars. Compilez ce programme (
+       <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+        Ctrl
+       </code>
+       +
+       <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+        Maj
+       </code>
+       +
+       <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+        B
+       </code>
+       ) puis exécutez le (bouton
+       <i class="fas fa-caret-square-right">
+       </i>
+       ) pour tester son fonctionnement. Analysez ensuite le code de ce programme, puis, avec les connaissances dont vous disposez et avec l'aide de votre enseignant répondez aux questions qui suivent.
+      </p>
+      <!-- =====================================================
+           QUESTION 1
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         1.
+        </strong>
+        Expliquez à quoi sert le symbole
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         //
+        </code>
+        utilisé par exemple juste avant le mot VARIABLES :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-1" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-1" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #586579; font-style: italic;">// VARIABLES</span></pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 2
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0;">
+        <strong style="color: #2f86c7;">
+         2.
+        </strong>
+        Expliquez à quoi servent les symboles
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         /*
+        </code>
+        et
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         */
+        </code>
+        utilisés en début de fichier ;
+       </p>
+      </div>
+      <!-- =====================================================
+           QUESTION 3
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         3.
+        </strong>
+        Dans la ligne ci-dessous expliquez ce que représente
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         sommeEuros
+        </code>
+        :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-3" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-3" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #a13e57; font-weight: bold;">double</span> sommeEuros; <span style="color: #586579; font-style: italic;">// La somme en euros qui doit être convertie en dollars.</span></pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 4
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         4.
+        </strong>
+        Dans la ligne ci-dessous expliquez ce que représente
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         double
+        </code>
+        :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-4" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-4" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #a13e57; font-weight: bold;">double</span> sommeEuros; <span style="color: #586579; font-style: italic;">// La somme en euros qui doit être convertie en dollars.</span></pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 5
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         5.
+        </strong>
+        Dans la ligne ci-dessous expliquez ce que représente
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         La
+            somme en euros qui doit être convertie en dollars
+        </code>
+        :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-5" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-5" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #a13e57; font-weight: bold;">double</span> sommeEuros; <span style="color: #586579; font-style: italic;">// La somme en euros qui doit être convertie en dollars.</span></pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 6
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         6.
+        </strong>
+        Dans la ligne ci-dessous expliquez ce que représente
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         const
+        </code>
+        :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-6" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-6" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #6b3fa0; font-weight: bold;">const</span> <span style="color: #a13e57; font-weight: bold;">double</span> TAUX_EUROS_VERS_DOLLARS = <span style="color: #5d4cb0; font-weight: 600;">1.3383</span>; <span style="color: #586579; font-style: italic;">// Le taux de conversion utilisé pour convertir des euros en dollars.</span></pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 7
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         7.
+        </strong>
+        Dans la ligne ci-dessous expliquez ce que représente
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         1.3383
+        </code>
+        :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-7" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-7" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #6b3fa0; font-weight: bold;">const</span> <span style="color: #a13e57; font-weight: bold;">double</span> TAUX_EUROS_VERS_DOLLARS = <span style="color: #5d4cb0; font-weight: 600;">1.3383</span>; <span style="color: #586579; font-style: italic;">// Le taux de conversion utilisé pour convertir des euros en dollars.</span></pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 8
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         8.
+        </strong>
+        Dans la ligne ci-dessous expliquez quel est le rôle de l'instruction
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         cout
+        </code>
+        ainsi que son mode de fonctionnement :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-8" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-8" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;">cout &lt;&lt; <span style="color: #a23b55; font-weight: 500;">"Entrez la somme en euros a convertir en dollars : "</span>;</pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 9
+           ===================================================== -->
+      <div style="margin: 0 0 30px;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         9.
+        </strong>
+        Indiquez quelle différence d'usage y a t'il entre l'instruction
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         cout
+        </code>
+        précédente et celle ci-dessous :
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-9" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-9" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;">cout &lt;&lt; <span style="color: #a23b55; font-weight: 500;">"La somme convertie est egale a "</span> &lt;&lt; sommeDollars &lt;&lt; <span style="color: #a23b55; font-weight: 500;">" $"</span> &lt;&lt; endl;</pre>
+       </div>
+      </div>
+      <!-- =====================================================
+           QUESTION 10
+           ===================================================== -->
+      <div style="margin: 0;">
+       <p style="margin: 0 0 12px;">
+        <strong style="color: #2f86c7;">
+         10.
+        </strong>
+        Indiquez ce que fait l'instruction ci-dessous et précisez quel est le rôle de l'opérateur
+        <code style="padding: 2px 6px; border: 1px solid #dfe4ea; border-radius: 5px; background: #f4f6f8;">
+         =
+        </code>
+       </p>
+       <div style="width: 100%; margin: 0; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+        <div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+         <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;">
+          </span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;">
+          </span>
+         </div>
+         <button data-copy="#tp1-code-10" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button">
+          Copier
+         </button>
+        </div>
+        <pre id="tp1-code-10" style="margin: 0; padding: 17px 19px; overflow-x: auto; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;">sommeDollars = sommeEuros * TAUX_EUROS_VERS_DOLLARS;</pre>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+       PARTIE 4
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 4px solid #66aee0; border-radius: 11px; background: #f1f8fd; color: #2f86c7; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      4. Travail à faire d'ici la séance de TP de la semaine prochaine
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 16px;">
+       Rendez-vous dans la section
+       <a href="https://elearn.univ-pau.fr/course/section.php?id=287114" style="color: #2f86c7; font-weight: bold; text-decoration: underline;">
+        Tutoriels vidéos
+       </a>
+       de ce cours puis étudiez les notions de programmation présentées dans les vidéos suivantes :
+      </p>
+      <ul style="margin: 0; padding-left: 29px;">
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        Compiler et exécuter un code avec Visual Studio Code (révision de notions abordées dans ce TP) ;
+       </li>
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        Le programme Hello World de C++ (révision de notions abordées dans ce TP) ;
+       </li>
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        Les conventions de nommage (nouvelle compétence à acquérir)
+       </li>
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        Déclarer ses variables correctement (nouvelle compétence à acquérir)
+       </li>
+       <li style="margin: 0; padding-left: 3px;">
+        Méthodologie d'écriture d'un code (nouvelle compétence à acquérir)
+       </li>
+      </ul>
+      <!-- ATTENTION -->
+      <div style="margin: 26px 0 22px; padding: 18px 20px; box-sizing: border-box; border: 1px solid #f4d1d7; border-left: 4px solid #ef6178; border-radius: 12px; background: #fff5f7; box-shadow: 0 4px 12px rgba(15, 23, 42, .04);">
+       <p style="margin: 0 0 12px; color: #c94960; font-weight: 800;">
+        ⚠️ Attention
+        <span style="color: #374151; font-weight: 400;">
+         : Les notions abordées dans ces vidéos :
+        </span>
+       </p>
+       <ul style="margin: 0; padding-left: 29px;">
+        <li style="margin: 0 0 10px; padding-left: 3px;">
+         pourront faire l'objet de questions lors du prochain examen écrit ;
+        </li>
+        <li style="margin: 0; padding-left: 3px;">
+         seront évaluées lors de l'épreuve de programmation du module.
+        </li>
+       </ul>
+      </div>
+      <p style="margin: 0 0 22px;">
+       Si vous avez des questions sur les points abordés dans ces vidéos,
+       <span style="color: #ef6178; font-weight: bold;">
+        sollicitez vos enseignants !
+       </span>
+      </p>
+      <p style="margin: 0 0 16px;">
+       <strong>
+        S'il vous reste du temps
+       </strong>
+       , nous vous recommandons également d'aller plus loin et de consolider vos connaissances en étudiant les notions abordées dans les tutoriels suivants :
+      </p>
+      <ul style="margin: 0; padding-left: 29px;">
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        Qu'est-ce qu'un IDE ?
+       </li>
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        Langages compilés et interprétés ;
+       </li>
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        Notions d'entrées-sorties ;
+       </li>
+       <li style="margin: 0; padding-left: 3px;">
+        Les espaces de noms.
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+   <!-- ===========================================================
+     AGRANDISSEMENT DES CAPTURES
+     =========================================================== -->
+   <div aria-hidden="true" id="tp1-image-lightbox" style="display: none; position: fixed; inset: 0; z-index: 99999; padding: 24px; box-sizing: border-box; align-items: center; justify-content: center; background: rgba(15, 23, 42, .90); cursor: zoom-out;">
+    <img alt="" class="img-fluid" id="tp1-image-lightbox-img" style="display: block; width: auto; height: auto; max-width: 95vw; max-height: 95vh; object-fit: contain; border-radius: 10px; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); cursor: default;"/>
+    <button aria-label="Fermer l’image agrandie" id="tp1-image-lightbox-close" style="position: fixed; top: 16px; right: 18px; width: 42px; height: 42px; padding: 0; border: 1px solid rgba(255, 255, 255, .45); border-radius: 50%; background: rgba(15, 23, 42, .72); color: #ffffff; font-family: Arial, sans-serif; font-size: 28px; font-weight: 400; line-height: 38px; text-align: center; cursor: pointer;" type="button">
+     ×
+    </button>
+   </div>
+   <!-- ===========================================================
+     JAVASCRIPT : BOUTONS COPIER
+     =========================================================== -->
+   <p>
+    <script>
+     (function() {
+
+      var root = document.getElementById("r101-tp1");
+
+      if (!root) {
+        return;
+      }
+
+      root
+        .querySelectorAll("button[data-copy]")
+        .forEach(function(btn) {
+
+          if (btn.dataset.copyReady === "1") {
+            return;
+          }
+
+          btn.dataset.copyReady = "1";
+
+          btn.addEventListener("click", function() {
+
+            var selector =
+              btn.getAttribute("data-copy");
+
+            var target =
+              root.querySelector(selector);
+
+            if (!target) {
+              return;
+            }
+
+            var texte =
+              target.textContent
+              .replace(/\u00a0/g, " ")
+              .trim();
+
+            var ancienTexte =
+              btn.textContent;
+
+            function terminer(ok) {
+
+              btn.textContent =
+                ok ?
+                "Copié !" :
+                "Sélectionné ✔";
+
+              btn.disabled = true;
+
+              setTimeout(function() {
+
+                btn.textContent =
+                  ancienTexte;
+
+                btn.disabled = false;
+
+              }, 1200);
+            }
+
+            function copieSecours() {
+
+              var zone =
+                document.createElement(
+                  "textarea"
+                );
+
+              zone.value = texte;
+
+              zone.setAttribute(
+                "readonly",
+                ""
+              );
+
+              zone.style.position =
+                "fixed";
+
+              zone.style.left =
+                "-9999px";
+
+              zone.style.top =
+                "0";
+
+              document.body
+                .appendChild(zone);
+
+              zone.focus();
+              zone.select();
+
+              var ok = false;
+
+              try {
+
+                ok =
+                  document.execCommand(
+                    "copy"
+                  );
+
+              } catch (e) {
+
+                ok = false;
+              }
+
+              document.body
+                .removeChild(zone);
+
+              terminer(ok);
+            }
+
+            if (
+              navigator.clipboard &&
+              window.isSecureContext
+            ) {
+
+              navigator.clipboard
+                .writeText(texte)
+                .then(function() {
+
+                  terminer(true);
+
+                })
+                .catch(function() {
+
+                  copieSecours();
+
+                });
+
+            } else {
+
+              copieSecours();
+            }
+
+          });
+
+        });
+
+    })();
+    </script>
+   </p>
+   <!-- ===========================================================
+     JAVASCRIPT : AGRANDISSEMENT DES CAPTURES
+     =========================================================== -->
+   <p>
+    <script>
+     (function() {
+
+      var root = document.getElementById("r101-tp1");
+      var lightbox = document.getElementById("tp1-image-lightbox");
+      var lightboxImage = document.getElementById("tp1-image-lightbox-img");
+      var closeButton = document.getElementById("tp1-image-lightbox-close");
+
+      if (!root || !lightbox || !lightboxImage || !closeButton) {
+        return;
+      }
+
+      var ancienOverflow = "";
+
+      function ouvrirImage(image) {
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt || "";
+
+        ancienOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        lightbox.style.display = "flex";
+        lightbox.setAttribute("aria-hidden", "false");
+
+        closeButton.focus();
+      }
+
+      function fermerImage() {
+
+        lightbox.style.display = "none";
+        lightbox.setAttribute("aria-hidden", "true");
+
+        lightboxImage.src = "";
+        lightboxImage.alt = "";
+
+        document.body.style.overflow = ancienOverflow;
+      }
+
+      root
+        .querySelectorAll("img[data-zoom-image]")
+        .forEach(function(image) {
+
+          image.addEventListener("click", function() {
+            ouvrirImage(image);
+          });
+
+          image.addEventListener("keydown", function(ev) {
+
+            if (ev.key === "Enter" || ev.key === " ") {
+              ev.preventDefault();
+              ouvrirImage(image);
+            }
+
+          });
+
+        });
+
+      closeButton.addEventListener("click", function(ev) {
+        ev.stopPropagation();
+        fermerImage();
+      });
+
+      lightbox.addEventListener("click", function(ev) {
+
+        if (ev.target === lightbox) {
+          fermerImage();
+        }
+
+      });
+
+      lightboxImage.addEventListener("click", function(ev) {
+        ev.stopPropagation();
+      });
+
+      document.addEventListener("keydown", function(ev) {
+
+        if (
+          ev.key === "Escape" &&
+          lightbox.getAttribute("aria-hidden") === "false"
+        ) {
+          fermerImage();
+        }
+
+      });
+
+    })();
+    </script>
+   </p>
+  </div>
+ </div>
+</div>
+
+    </div>
+</body>
+</html>

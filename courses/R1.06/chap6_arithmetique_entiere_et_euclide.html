@@ -342,6 +342,43 @@ L'inverse modulaire de $a$ modulo $n$ est donc simplement le coefficient de Béz
 <em>Application à notre exemple :</em> L'inverse de $23$ modulo $120$ est $47$, car $23 \times 47 = 1081 = 120 \times 9 + 1 \equiv 1 \pmod{120}$. C'est le principe central du déchiffrement asymétrique RSA !
 </p>
 
+            
+<h2>6. Valuation $p$-adique & Nombre de Diviseurs (<code>Doc3</code>)</h2>
+<p>
+Tout entier $n \ge 2$ se décompose de manière unique en produit de facteurs premiers :
+$$n = p_1^{k_1} p_2^{k_2} \cdots p_r^{k_r}$$
+</p>
+<ul>
+    <li><strong>Valuation $p$-adique $v_p(n)$ :</strong> C'est l'exposant $k_i$ du nombre premier $p_i$ dans la décomposition de $n$ (et $0$ si $p \nmid n$).</li>
+    <li><strong>Nombre de diviseurs positifs de $n$ :</strong> Tout diviseur de $n$ s'écrit $p_1^{a_1} \cdots p_r^{a_r}$ avec $0 \le a_i \le k_i$. Le nombre total de diviseurs positifs est donc :
+    $$\text{NbDiv}(n) = \prod_{i=1}^r (k_i + 1)$$
+    <em>Exemple officiel (<code>Doc3</code>) :</em> $600 = 2^3 \times 3^1 \times 5^2$ possède $(3+1)(1+1)(2+1) = 4 \times 2 \times 3 = 24$ diviseurs positifs.</li>
+</ul>
+
+<h2>7. Tableau Récurrent d'Euclide Étendu & Théorème de Gauss (<code>Doc4</code>)</h2>
+<p>
+Dans le cours de Mme Bruyère (<code>Doc4-Euclideetendu.pdf</code>), on calcule les coefficients de Bézout $u_n, v_n$ tels que $a u_n + b v_n = r_n$ par la relation de récurrence :
+$$u_0 = 1, \; u_1 = 0, \quad u_n = u_{n-2} - q_n u_{n-1} \qquad \text{et} \qquad v_0 = 0, \; v_1 = 1, \quad v_n = v_{n-2} - q_n v_{n-1}$$
+</p>
+<blockquote>
+    <strong>Théorème de Gauss (<code>Doc4</code>) :</strong>
+    Soient $a, b, c \in \mathbb{Z}^*$. Si $a$ divise le produit $bc$ et si $a$ est premier avec $b$ ($\text{pgcd}(a, b) = 1$), alors $a$ divise $c$.
+</blockquote>
+
+<h2>8. Indicatrice d'Euler $\varphi(n)$ & Résolution de $ax \equiv b \pmod n$ (<code>Doc5</code>)</h2>
+<ul>
+    <li><strong>Indicatrice d'Euler $\varphi(n)$ :</strong> Nombre d'éléments inversibles dans $\mathbb{Z}/n\mathbb{Z}$ (c'est-à-dire le nombre d'entiers $k \in \{1, \dots, n\}$ tels que $\text{pgcd}(k, n) = 1$).
+    $$\text{Si } n = \prod_{i=1}^r p_i^{k_i}, \quad \text{alors } \varphi(n) = \prod_{i=1}^r (p_i - 1) p_i^{k_i - 1}$$
+    <em>Exemples (<code>Doc5</code>) :</em> $\varphi(25) = \varphi(5^2) = (5-1)\times 5^1 = 20$ ; $\varphi(600) = (2-1)2^2 \times (3-1)3^0 \times (5-1)5^1 = 4 \times 2 \times 20 = 160$.</li>
+    <li><strong>Équation modulaire $ax \equiv b \pmod n$ :</strong>
+    On calcule $d = \text{pgcd}(a, n)$.
+    <br>1. Si $d \nmid b$, l'équation n'admet <strong>aucune solution</strong> ($S = \emptyset$).
+    <br>2. Si $d \mid b$, on divise toute l'équation <strong>ainsi que le module $n$</strong> par $d$ :
+    $$\frac{a}{d} x \equiv \frac{b}{d} \pmod{\frac{n}{d}}$$
+    Puisque $\text{pgcd}(a/d, n/d) = 1$, on multiplie les deux membres par l'inverse modulaire de $(a/d)$ modulo $(n/d)$.
+    <br><em>Exemple officiel (<code>Doc5</code>) :</em> $15x \equiv 10 \pmod{35}$. Ici $\text{pgcd}(15, 35) = 5$ et $5 \mid 10$. On divise tout par $5$ : $3x \equiv 2 \pmod 7$. L'inverse de $3$ mod $7$ est $5$ ($3 \times 5 = 15 \equiv 1 \pmod 7$), d'où $x \equiv 5 \times 2 = 10 \equiv 3 \pmod 7$.</li>
+</ul>
+
             </div>
         </div>
 

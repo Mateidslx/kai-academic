@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaine 1 - TD 1 - Activités d'analyse : Spécifications externes et interne Página — R1.01</title>
+    <link rel="stylesheet" href="../../css/academic_theme.css">
+    <style>
+        body { font-family: 'Lexend', sans-serif; line-height: 1.6; padding: 2rem; background: #0b0f19; color: #e2e8f0; }
+        .header { border-bottom: 2px solid #3b82f6; padding-bottom: 1rem; margin-bottom: 2rem; }
+        h1 { color: #60a5fa; }
+        .content { background: #1e293b; padding: 2rem; border-radius: 8px; border: 1px solid #334155; }
+        a { color: #38bdf8; }
+        code, pre { background: #0f172a; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>R1.01 • Semaine 1 - TD 1 - Activités d'analyse : Spécifications externes et interne Página</h1>
+        <p>Source officielle : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692206">https://elearn.univ-pau.fr/mod/page/view.php?id=692206</a></p>
+    </div>
+    <div class="content">
+        <div role="main">
+ <div class="box py-3 generalbox center clearfix">
+  <div class="no-overflow">
+   <div style="max-width: 930px; margin: 0 auto; padding: 16px 20px 40px; box-sizing: border-box; color: #17233c; font-family: inherit; font-size: 18px; line-height: 1.68;">
+    <!-- =========================================================
+         EN-TÊTE DU TD
+         ========================================================= -->
+    <div style="display: flex; align-items: center; gap: 16px; margin: 0 0 30px; padding: 17px 22px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 5px solid #6e9fe6; border-radius: 13px; background: #f5f8fd; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+     <div style="flex: 0 0 auto; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e3edfc; color: #3673c5; font-size: 18px; font-weight: 800; line-height: 1; box-shadow: 0 2px 7px rgba(15, 23, 42, .08);">
+      TD1
+     </div>
+     <div style="min-width: 0;">
+      <div style="margin: 0 0 4px; color: #356fae; font-size: 24px; font-weight: 800; line-height: 1.25;">
+       Analyse et spécification d’un problème algorithmique
+      </div>
+      <div style="color: #66758a; font-size: 15px; font-weight: 600; line-height: 1.4;">
+       R1.01 - Initiation au développement
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+         À NOTER
+         ========================================================= -->
+    <div style="margin: 0; padding: 19px 22px; box-sizing: border-box; border: 1px solid #f1dfac; border-left: 4px solid #e2a82d; border-radius: 12px; background: #fffaf0; box-shadow: 0 4px 12px rgba(15, 23, 42, .05);">
+     <div style="margin: 0 0 14px;">
+      <span style="display: inline-block; padding: 4px 11px; border: 1.4px solid #d79800; border-radius: 999px; background: #fff8dc; color: #b77d00; font-size: 14px; font-weight: 800; line-height: 1.1;">
+       À noter
+      </span>
+     </div>
+     <p style="margin: 0 0 15px;">
+      Tous les exercices de ce TD ne seront pas abordés pendant la séance. Ils sont volontairement plus nombreux que le temps imparti, afin de vous offrir un panel d’activités variées à travailler en autonomie ou, encore mieux, en groupe.
+     </p>
+     <p style="margin: 0 0 15px;">
+      Aucune correction écrite ne sera distribuée, mais vous pouvez demander un retour oral de votre travail à un enseignant du module.
+     </p>
+     <p style="margin: 0; font-weight: 800; color: #29364c;">
+      Un exercice de cette feuille ou des suivantes sera dans le sujet du premier contrôle.
+     </p>
+    </div>
+    <!-- =========================================================
+         EXERCICE 1
+         ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 1 : Combien pour la course ?
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       Une compagnie de taxis souhaite disposer d’un petit outil qu’elle pourra mettre à disposition de ses chauffeurs pour les aider à calculer automatiquement le prix à faire payer à un client en fonction du trajet effectué.
+      </p>
+      <p style="margin: 0 0 19px;">
+       Sachant que le tarif se compose d’un forfait de prise en charge, auquel s’ajoute un montant proportionnel à la distance parcourue, le programme devra permettre de calculer et d’afficher le prix à faire payer au client.
+      </p>
+      <p style="margin: 0 0 12px;">
+       <strong>
+        Par exemple
+       </strong>
+       si le forfait de prise en charge est de 3 € et que le prix au kilomètre est de 1,50 €, un trajet de 7 km coûtera :
+      </p>
+      <div style="width: fit-content; max-width: 100%; margin: 14px auto 21px; padding: 10px 20px; box-sizing: border-box; border: 1px solid #f3d7bf; border-radius: 9px; background: #fff7ef; color: #ed6d22; font-family: monospace; font-size: 19px; font-weight: bold; line-height: 1.4; text-align: center;">
+       3 + 7 × 1,50 = 13,50 €
+      </div>
+      <div style="margin: 20px 0 0; padding: 16px 18px; box-sizing: border-box; border: 1px solid #dfd2f4; border-left: 4px solid #8061d6; border-radius: 10px; background: #faf6fe;">
+       <div style="margin: 0 0 7px; color: #6848bd; font-size: 17px; font-weight: 800; line-height: 1.4;">
+        Travail à faire :
+       </div>
+       <p style="margin: 0;">
+        Analysez les caractéristiques de ce problème en établissant successivement les spécifications externes puis internes.
+       </p>
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+         EXERCICE 2
+         ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 2 : L’IMC ou l’art de résumer un corps en un nombre
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       L’Indice de Masse Corporelle (IMC) est un indicateur reconnu par l’Organisation Mondiale de la Santé (OMS) pour évaluer la “corpulence” d’un individu.
+      </p>
+      <p style="margin: 0 0 19px;">
+       Sa formule est simple et redoutable :
+      </p>
+      <div style="margin: 23px auto 25px; text-align: center; color: #29364c; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; line-height: 1.25;">
+       IMC =
+       <span style="display: inline-flex; flex-direction: column; vertical-align: middle; margin-left: 5px; text-align: center; line-height: 1.15;">
+        <span style="padding: 0 8px 3px; border-bottom: 1px solid #29364c;">
+         poids
+        </span>
+        <span style="padding: 3px 8px 0;">
+         taille × taille
+        </span>
+       </span>
+      </div>
+      <p style="margin: 0 0 19px;">
+       Selon le résultat obtenu, chacun hérite d’une étiquette de corpulence allant de « maigreur » à « obésité sévère », la « normalité » statistique étant arbitrairement fixée entre 18,5 et 24,9 selon les standards de l’OMS.
+      </p>
+      <p style="margin: 0 0 19px;">
+       Cet indicateur, bien que simple à calculer, est aussi largement critiqué. Il ne prend pas en compte de nombreux facteurs essentiels comme la masse musculaire, le sexe de la personne, l’âge ou encore la morphologie globale. Autrement dit, selon l’IMC, un sportif musclé et un amateur de raclette peuvent parfois partager la même “corpulence”...
+      </p>
+      <p style="margin: 0 0 19px;">
+       Pour constater les limites de cette formule, on souhaite élaborer un programme permettant de calculer et d’afficher l’IMC d’une personne selon la formule fournie ci-dessus.
+      </p>
+      <div style="margin: 20px 0 0; padding: 16px 18px; box-sizing: border-box; border: 1px solid #dfd2f4; border-left: 4px solid #8061d6; border-radius: 10px; background: #faf6fe;">
+       <div style="margin: 0 0 7px; color: #6848bd; font-size: 17px; font-weight: 800; line-height: 1.4;">
+        Travail à faire :
+       </div>
+       <p style="margin: 0;">
+        Analysez les caractéristiques de ce problème en établissant successivement les spécifications externes, puis internes.
+        <em>
+         A noter :
+        </em>
+        Pour cet exercice on considérera que l’utilisateur saisit sa taille en centimètres.
+       </p>
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+         EXERCICE 3
+         ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 3 : Évaluez votre génie grâce à la méthode Hatan
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       On souhaite élaborer un programme permettant de tester une formule sur plusieurs sujets. En effet, le Professeur HATAN Charles affirme avoir mis au point une équation
+       <em>
+        “parfaitement scientifique”
+       </em>
+       pour estimer le QI d’un étudiant à partir de deux facteurs qu’il juge essentiels : la caféine et le sommeil.
+      </p>
+      <p style="margin: 0 0 19px;">
+       Selon lui, le QI peut être estimé à l’aide de la formule suivante :
+      </p>
+      <div style="margin: 23px auto 25px; text-align: center; color: #29364c; font-family: Georgia, 'Times New Roman', serif; font-size: 23px; font-style: italic; line-height: 1.4;">
+       QI = (nombre de cafés bus la veille × 12,5) + (temps de sommeil × 8)
+      </div>
+      <div style="margin: 20px 0 0; padding: 16px 18px; box-sizing: border-box; border: 1px solid #dfd2f4; border-left: 4px solid #8061d6; border-radius: 10px; background: #faf6fe;">
+       <div style="margin: 0 0 7px; color: #6848bd; font-size: 17px; font-weight: 800; line-height: 1.4;">
+        Travail à faire :
+       </div>
+       <p style="margin: 0;">
+        Analysez les caractéristiques de ce problème en établissant successivement les spécifications externes puis internes.
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+    </div>
+</body>
+</html>

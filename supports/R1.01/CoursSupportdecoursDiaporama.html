@@ -1,0 +1,1753 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Décomposition alternative d'un problème algorithmique</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 30px; margin-bottom: -80px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Principe de la décomposition alternative
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">3</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Formalisme de la décomposition alternative
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">5</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Exemples généraux
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">8</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Exemples concrets
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">13</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Cas du switch
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">20</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Codage
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">29</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Principe">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Alternative : principe" data-transition="convex">
+        <h1>Principe de la décomposition alternative</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition alternative - Définition</h4>
+
+        <div style="font-size: 75%;">
+            <p>
+                Une décomposition alternative<sup>[1]</sup> exprime le fait que la résolution d'un
+                problème <strong>P</strong> de nature complexe équivaut à résoudre 
+                <strong class="text-primary">selon les cas</strong> le sous-problème P1 ou bien le
+                sous-problème P2 ou bien... le sous-problème Pn.
+            </p>
+
+            <p style="margin-top: 40px;">
+                Les décompositions alternatives permettent de décrire des solutions 
+                algorithmiques du type <span class="font-italic">"faire ça si on est 
+                    dans tel cas, faire ceci si on est dans tel autre cas
+                    ... faire cela dans tous les autres cas."</span>
+            </p>
+        </div>
+        <div style="font-size: 50%; padding-top: 40px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> nommée aussi décomposition conditionnelle. <br />
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Formalisme">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Alternative : formalisme" data-transition="convex">
+        <h1>Formalisme de la décomposition alternative </h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Formalisme général (1/2)</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center" style="margin-top: -14px;">
+                <img src="presentation/images/alternative-1.svg" width="45%">
+            </div>
+
+            <p>
+                Signification : Le problème <strong>P</strong> se résout
+                en solutionnant <strong>selon les cas</strong> :
+            </p>
+            <ul>
+                <li style="margin-top: -17px;">le sous-problème <strong>P1</strong> si la condition <strong>A</strong> est vraie ou bien,</li>
+                <li style="margin-top: -4px;">le sous-problème <strong>P2</strong> si la condition <strong>B</strong> est vraie ou bien,</li>
+                <li style="margin-top: -4px;">... puis</li>
+                <li style="margin-top: -4px;">le sous-problème <strong>Pn</strong> si la condition <strong>N</strong> est vraie.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Formalisme général (2/2)</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img src="presentation/images/alternative-1.svg" width="45%">
+            </div>
+            <p style="margin-top: -5px;">
+                De ce fait, la résolution du problème <strong>P</strong> consistera à résoudre :
+            </p>
+            <ul style="margin-top: -14px;">
+                <li> le sous-problème dont la condition de traitement est vérifiée ou bien,</li>
+                <li style="margin-top: -4px;">aucun des sous-problèmes si aucune des conditions n'est vérifiée.</li>
+            </ul>
+            <p>
+                On retiendra que les conditions doivent être exprimées de sorte à ce qu'elles
+                soient <strong>exclusives les unes des autres</strong> (il ne peut y avoir deux conditions vraies
+                en même temps) et ceci quelque soit l'ordre de lecture des conditions.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section>
+<section name="Exemples généraux">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Exemples généraux" data-transition="convex">
+        <h1>Exemples généraux</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition Si</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/alternative-2.svg" width="22%">
+            </div>
+
+            <p style="margin-top: -25px;">
+                Signification :
+            </p>
+            <ul>
+                <li>Le problème <strong>P</strong> se résout en solutionnant le sous-problème <strong>P1</strong> si la
+                    condition <strong>A</strong> est
+                    vérifiée.</li>
+                <li style="margin-top: -4px;">Si la condition <strong>A</strong> n'est pas vérifiée, il n'y a rien à
+                    faire, le
+                    problème <strong>P</strong> est considéré résolu.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition Si - Sinon</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/alternative-3.svg" width="25%">
+            </div>
+
+            <p>
+                Signification : le problème <strong>P</strong> se résout en solutionnant le
+                sous-problème <strong>P1</strong> si la condition <strong>A</strong> est
+                vérifiée ou bien le problème <strong>P2</strong> dans tous les autres cas
+                (condition A non vérifiée).
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition Si - Si</h4>
+
+        <div style="font-size: 70%;" style="margin-top: -20px;">
+
+            <div class="text-center">
+                <img src="presentation/images/alternative-4.svg" width="27%">
+            </div>
+
+            <p style="margin-top: -20px;">
+                Signification : Le problème <strong>P</strong> :
+            </p>
+            <ul>
+                <li style="margin-top: -17px;">se résout en solutionnant le sous-problème <strong>P1</strong> si la condition <strong>A</strong>
+                    est
+                    vérifiée ou bien,</li>
+                <li style="margin-top: -7px;">se résout en solutionnant le sous-problème <strong>P2</strong> si la
+                    condition <strong>B</strong> est
+                    vérifiée ou bien,</li>
+                <li style="margin-top: -7px;">est considéré résolu dans tous les autres cas (condition
+                    <strong>A</strong> et
+                    condition <strong>B</strong> non vérifiées).</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition Si - Si - Sinon</h4>
+
+        <div style="font-size: 70%;" style="margin-top: -20px;">
+
+            <div class="text-center">
+                <img src="presentation/images/alternative-5.svg" width="35%">
+            </div>
+
+            <p style="margin-top: -0px;">
+                Signification : Le problème <strong>P</strong> se résout en solutionnant :
+            </p>
+            <ul>
+                <li style="margin-top: -17px;">le sous-problème <strong>P1</strong> si la condition <strong>A</strong>
+                    est vérifiée ou bien,</li>
+                <li style="margin-top: -7px;">le sous-problème <strong>P2</strong> si la
+                    condition <strong>B</strong> est vérifiée ou bien,</li>
+                <li style="margin-top: -7px;">le sous-problème <strong>P3</strong> dans tous les autres cas 
+                    (condition <strong>A</strong> et condition <strong>B</strong> non vérifiées).</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section>
+<section name="Exemples concrets">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Exemples concrets" data-transition="convex">
+        <h1>Exemples concrets</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Division de deux nombres (1/2)</h4>
+
+        <div style="font-size: 70%;">
+            <p>Considérant deux nombres <strong>nbre1</strong> et <strong>nbre2</strong>, cet algorithme affiche le
+                résultat de la division de <strong>nbre1</strong> par <strong>nbre2</strong>, à condition que le
+                diviseur
+                <strong>nbre2</strong> ne soit pas nul.
+            </p>
+
+            <div class="text-center" style="margin-top: -20px;">
+                <img src="presentation/images/alternative-6.svg" width="50%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Division de deux nombres (2/2)</h4>
+
+        <div style="font-size: 70%;">
+            <p>On notera que ces deux algorithmes ont des comportements
+                équivalents :
+            </p>
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img src="presentation/images/alternative-7.svg" width="90%">
+            </div>
+
+            <p>
+                <i class="fas fa-exclamation-triangle text-danger"></i>
+                ... mais le code résultant sera différent !
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Afficher la mention obtenue</h4>
+
+        <div style="font-size: 70%;">
+            <p>Considérant la moyenne d'un étudiant, cet algorithme indique si
+                l'étudiant a obtenu une mention et si oui laquelle.
+            </p>
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img src="presentation/images/alternative-8.svg" width="70%">
+            </div>
+
+            <p>
+                <i class="far fa-thumbs-up text-success"></i>
+                On notera que dans cet algorithme, l'exclusivité des conditions a été
+                respectée : Étant donnée une moyenne, une seule condition peut être
+                vraie à la fois.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exclusion mutuelle des conditions</h4>
+
+        <div style="font-size: 70%;">
+            <p>Le fait de rendre les conditions exclusives les unes des autres permet
+                d'éviter des cas d'erreur, de renforcer la robustesse de l'algorithme mais
+                aussi sa flexibilité : les conditions peuvent être évaluées dans n'importe
+                quel ordre, ce qui permet de réaménager la structure de l'algorithme sans
+                conséquences néfastes :
+            </p>
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img src="presentation/images/alternative-9.svg" width="70%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Structure plus simple... mais moins flexible </h4>
+
+        <div style="font-size: 70%;">
+
+            <p> <strong>L'exclusion mutuelle des conditions n'est pas respectée</strong>, le bon fonctionnement de
+                l'algorithme est dépendant de l'ordre d'évaluation des conditions...
+                <i class="far fa-thumbs-down text-danger"></i>
+            </p>
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img src="presentation/images/alternative-10.svg" width="70%">
+            </div>
+
+            <p>Des conditions non exclusives rendent le code sensible à l’ordre d’évaluation. Toute modification de cet
+                ordre peut alors changer le comportement du programme, ce qui le rend <strong>plus fragile</strong> et <strong>moins flexible</strong>.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+
+
+        <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT7/0" role="button"
+            target="_blank">
+            Sortez vos smartphones
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Cas du switch">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Cas du switch" data-transition="convex">
+        <h1>Cas du switch</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Contexte d'usage</h4>
+
+
+        <div style="font-size: 65%;">
+
+            <p>
+                De nombreux problèmes ont des solutions dont la mise en œuvre dépend
+                de la <strong>valeur</strong> d'une information.
+            </p>
+            <div class="row fragment fade-right" style="margin-top: -10px;">
+                <div class="col-md-7">
+                    <p>
+                        <span class="text-primary">Exemple</span> : Proposer un algorithme qui affiche en toutes
+                        lettres un <strong>chiffre</strong> dont la valeur est saisie au clavier.
+                        Comportement attendu <i class="fas fa-long-arrow-alt-right"></i>
+                    </p>
+
+                </div>
+                <div class="col-md-5">
+                    <div class="text-center">
+                        <img src="presentation/images/alternative-11.svg" width="75%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="fragment fade-right" style="margin-top: -30px;">
+                <p>
+                    <span class="text-primary">Solution possible</span> : Étudier la valeur du chiffre saisi et agir en
+                    conséquence :
+                </p>
+                <ul style="margin-top: -20px;">
+                    <li style="margin-top: -15px;"> Si la valeur <strong class="text-warning">égale</strong> 0, afficher
+                        "zéro" ; </li>
+                    <li style="margin-top: -15px;"> Si la valeur <strong class="text-warning">égale</strong> 1, afficher
+                        "un" ; </li>
+                    <li style="margin-top: -15px;"> ... </li>
+                    <li style="margin-top: -15px;"> Si la valeur <strong class="text-warning">égale</strong> 9, afficher
+                        "neuf" ; </li>
+                    <li style="margin-top: -15px;"> Dans tous les autres cas afficher "erreur". </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Prise en compte de ces cas de figure en programmation</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Les situations qui nécessitent d'étudier la valeur d'une information sont
+                tellement fréquentes que la plupart des langages de programmation
+                proposent une structure conditionnelle spécialisée pour gérer ce type de
+                situation.
+            </p>
+            <p>
+                Selon les langages de programmation, elle se nommera <strong class="text-info">switch</strong> (C++,
+                Java ou Php par exemple) ou encore <strong class="text-info">case</strong> (Ada).
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Représentation algorithmique du switch</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center" style="margin-top: -20px;">
+                <img src="presentation/images/alternative-12.svg" width="35%">
+            </div>
+
+            <p style="margin-top: -5px;">
+                Signification : La résolution du problème <strong>P</strong> consiste à solutionner,
+                <strong class="text-primary">selon la valeur d'expression</strong> :
+            </p>
+            <ul>
+                <li style="margin-top: -10px;">
+                    Le problème <strong>P1</strong> si la
+                    <strong class="text-primary">valeur</strong> d'expression <strong
+                        class="text-primary">égale</strong>
+                    <em>valeur1</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    Le problème <strong>P2</strong> si la
+                    <strong class="text-primary">valeur</strong> d'expression <strong
+                        class="text-primary">égale</strong>
+                    <em>valeur2</em> ;
+                </li>
+                <li style="margin-top: -10px;">...</li>
+                <li style="margin-top: -10px;">
+                    Le problème <strong>Pn</strong> si la
+                    <strong class="text-primary">valeur</strong> d'expression <strong
+                        class="text-primary">égale</strong>
+                    <em>valeurN</em> ;
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exemple de décomposition avec un switch</h4>
+
+        <div class="text-center" style="margin-top: -20px;">
+            <img src="presentation/images/alternative-13.svg" width="70%">
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Rappel sur la notion d'expression</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img src="presentation/images/alternative-12.svg" width="40%">
+            </div>
+
+            <p style="margin-top: -5px;">
+                Une expression peut être :
+            </p>
+            <ul style="margin-top: -15px;">
+                <li style="margin-top: -10px;">une simple variable ;</li>
+                <li style="margin-top: -10px;">un appel de fonction ;</li>
+                <li style="margin-top: -10px;">un calcul combinant des valeurs, des variables et/ou des appels de
+                    fonctions.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Switch avec une variable</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row">
+                <div class="col-md-6" style="font-size: 100%;">
+                    <p style="margin-top: 80px;">
+                        Signification : La résolution du problème <em>Traiter la valeur du dé</em>
+                        consiste à solutionner, selon la valeur stockée dans <em class="text-info">valeurDe</em> :
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center" style="margin-top: -10px;">
+                        <img src="presentation/images/alternative-14.svg" width="75%">
+                    </div>
+                </div>
+            </div>
+
+            <ul style="margin-top: -5px;">
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Relancer le dé</em> si
+                    <em class="text-info">valeurDe</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">1</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Passer son tour</em> si
+                    <em class="text-info">valeurDe</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">2</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Changer de sens</em> si
+                    <em class="text-info">valeurDe</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">3</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Diviser le score par 2</em> si
+                    <em class="text-info">valeurDe</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">4</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Donner un gage</em> si
+                    <em class="text-info">valeurDe</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">5</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Faire appel</em> si
+                    <em class="text-info">valeurDe</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">6</em>.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Switch avec un calcul</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row">
+                <div class="col-md-6" style="font-size: 100%;">
+                    <p style="margin-top: 80px;">
+                        Signification : La résolution du problème <em>Traiter la valeur du dé avec bonus</em>
+                        consiste à solutionner, selon la valeur résultant du calcul de <em class="text-info">valeurDe +
+                            bonus</em> :
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center" style="margin-top: -10px;">
+                        <img src="presentation/images/alternative-15.svg" width="75%">
+                    </div>
+                </div>
+            </div>
+
+            <ul style="margin-top: -5px;">
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Donner un gage</em> si
+                    <em class="text-info">valeurDe + bonus</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">5</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Faire appel</em> si
+                    <em class="text-info">valeurDe + bonus</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">6</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Donner joker</em> si
+                    <em class="text-info">valeurDe + bonus</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">7</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Doubler le score</em> si
+                    <em class="text-info">valeurDe + bonus</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">8</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Relancer 2 fois le dé</em> si
+                    <em class="text-info">valeurDe + bonus</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">9</em> ;
+                </li>
+                <li style="margin-top: -10px;">
+                    le sous-problème <em>Déclarer la victoire</em> si
+                    <em class="text-info">valeurDe + bonus</em> <strong class="text-primary">égale</strong>
+                    <em class="text-info">10</em>.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Du bon usage du switch</h4>
+
+        <div style="font-size: 65%;">
+            <p style="margin-top: -5px;">
+                La décomposition alternative de type switch est à utiliser lorsque :
+            </p>
+            <ul style="margin-top: -15px;">
+                <li style="margin-top: -10px;">la résolution d'un problème consiste à déterminer si la valeur 
+                    d'une expression est <strong class="text-primary">égale</strong> à des valeurs particulières en nombre fini ;</li>
+                <li style="margin-top: -10px;">le nombre de cas à étudier est supérieur à 2 (sinon un <em>Si-Sinon</em> suffit).</li>
+            </ul>
+
+            <p class="row fragment fade-left" data-fragment-index="1">
+                S'il n'y a qu'un ou deux cas à étudier et que le nombre de cas n'est pas censé
+                évoluer, on privilégiera une structure Si-Sinon :
+            </p>
+
+
+            <div class="row fragment fade-right" data-fragment-index="1" style="margin-top: -10px;">
+                <div class="col-md-9">
+                    <div class="text-center" style="margin-top: -10px;">
+                        <img src="presentation/images/alternative-16.svg" width="75%">
+                    </div>
+                </div>
+                <div class="col-md-3" style="margin-left: -90px; margin-top: -20px; padding: -50px;">
+                    <p class="fragment fade-right" data-fragment-index="2" style="font-size: 88%;">
+                        <span class="text-primary">
+                            <i class="far fa-hand-point-right"></i>
+                        A retenir :</span> 
+                        pour un automate avec un nombre d'états qui peut évoluer, 
+                        on privilégiera l'usage d'un switch.<sup>[1]</sup></p>
+                </div>
+            </div>
+
+            <div style="font-size: 50%; margin-top: -30px; text-align: left;" class="fragment fade-right" data-fragment-index="2">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> Ce point sera abordé ultérieurement en R1.01 puis R2.02<br />
+            </div>
+
+
+
+
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section><section name="Codage">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Codage" data-transition="convex">
+        <h1>Codage de la décomposition alternative</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Syntaxe</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                En C++, le codage de la décomposition alternative est réalisé au moyen des
+                instructions <strong class="text-info">if</strong>,
+                <strong class="text-info">else</strong> et <strong class="text-info">switch</strong>.
+                Leur syntaxe est la suivante :
+            </p>
+            <div style="font-size: 95%;">
+                <div class="row" style="margin-top: -3px;">
+                    <div class="col-md-6">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ if (condition)
+ {
+     Liste des instructions à déclencher 
+     si la condition est vérifiée
+ }
+                         </code></pre>
+                        <p></p>
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ if (condition)
+ {
+    Liste des instructions à déclencher 
+    si la condition est vérifiée
+ }
+ else
+ {
+     Liste des instructions à déclencher 
+     si la condition n'est pas vérifiée
+ }
+                     </code></pre>
+                    </div>
+                    <div class="col-md-6">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ switch (expression)
+ {
+   case valeur1 :
+   Liste des instructions à déclencher 
+   si expression = valeur1
+   break;
+
+   case valeur2 :
+   Liste des instructions à déclencher 
+   si expression = valeur2
+   break;
+
+   ...
+
+    case valeurN :
+    Liste des instructions à déclencher 
+    si expression = valeurN
+    break;
+
+    default :
+    Liste des instructions à déclencher
+    dans tous les autres cas
+    break;
+ }
+                     </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Accolades dans les structures if-else (1/2)</h4>
+
+        <div style="font-size: 65%;">
+            <p style="margin-top: -5px;">
+                Même si cette pratique <strong class="text-danger">n'est pas recommandée</strong> il est possible, pour
+                les instructions
+                <strong class="text-info">if-else</strong>, de supprimer les accolades lorsqu'il n'y a
+                qu'une seule instruction à déclencher :
+            </p>
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ if (condition)
+   Instruction unique à déclencher si la condition est vérifiée
+ else
+ {
+   Liste des instructions à déclencher 
+   si la condition n'est pas vérifiée
+ }
+             </code></pre>
+            <p></p>
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ if (condition)
+{
+   Liste des instructions à déclencher 
+   si la condition est vérifiée
+ }
+ else
+   Instruction unique à déclencher si la condition n'est pas vérifiée
+             </code></pre>
+            <p></p>
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ if (condition)
+   Instruction unique à déclencher si la condition est vérifiée
+ else
+   Instruction unique à déclencher si la condition n'est pas vérifiée
+             </code></pre>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Accolades dans les structures if-else (2/2)</h4>
+
+        <div style="font-size: 65%;">
+            <p style="margin-top: -5px;">
+                Le fait de placer des accolades sur les blocs d'instructions à déclencher permet :
+            </p>
+            <ul>
+                <li style="margin-top: -1px;">d'améliorer la lisibilité du code en mettant en évidence l'ensemble
+                    des instructions exécutées selon que la condition est vérifiée ou pas ;</li>
+                <li style="margin-top: -1px;" class="fragment fade-right">
+                    de faciliter la maintenance du code : que l'on doive ajouter ou
+                    supprimer des instructions, peu importe, la structure complète du
+                    if-else est déjà en place ;
+                </li>
+                <li style="margin-top: -1px;" class="fragment fade-right">
+                    d'éviter des erreurs difficiles à déceler, même lorsqu'on a un bon
+                    niveau en programmation.
+                    <a class="btn btn-outline-danger text-danger btn-sm"
+                        href="./presentation/faille-accolade-apple/index.html" role="button" target="_blank">Exemple <i
+                            class="fas fa-caret-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Paroles d'experts...</h4>
+
+        <div style="font-size: 65%; margin-top: -10px">
+
+            <div class="card border-dark mb-3">
+                <div class="card-header" style="font-size: 80%;">
+                    <i class="far fa-thumbs-up"></i>
+                    Bonne pratique
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="font-size: 80%; margin-top: -10px; margin-bottom: -10px;">
+                        Quel que soit le nombre d'instructions placées dans une structure de contrôle,
+                        ces instructions doivent toujours être délimitées par des accolades, même lorsqu'il
+                        n'y a qu'une seule instruction.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row fragment fade-right" style="margin-top: -20px">
+            <div class="col-md-6" style="font-size: 65%;">
+                <!-- colonne de gauche -->
+
+                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                    <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i>
+                    </div>
+                    <p class="mb-0 mt-2 font-italic text-center" style="font-size: 90%;">
+                        <img class="img-fluid rounded-circle float-left"
+                            data-src="presentation/images/steve_mc_connell.jpg" width="100"
+                            style="padding-right: 10px;">
+                        "Dans les structures de contrôle, employez des accolades pour
+                        créer des blocs, que le bloc contienne 20 lignes ou 1 seule."
+                    </p>
+                    <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -55px">
+                        <span style="font-size: 90%;">Steve Mc Connell</span>
+                        <cite title="Source Title" style="font-size: 90%;">Tout sur le code - Pour concevoir du logiciel
+                            de qualité, dans tous les langages, 2005, page 471.</cite>
+                    </footer>
+                </blockquote>
+            </div>
+            <div class="col-md-6" style="font-size: 65%;">
+                <!-- colonne de droite -->
+
+                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                    <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i>
+                    </div>
+                    <p class="mb-0 mt-2 font-italic" style="font-size: 90%;">
+                        <img class="img-fluid rounded-circle float-left" data-src="presentation/images/erik_nyquist.jpg"
+                            width="90" style="padding-right: 10px;">
+                        "All flow control primitives (if, else, while, for, do, switch and
+                        case) should be followed by a block, even if it is empty."
+                    </p>
+                    <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -20px">
+                        <span style="font-size: 90%;">Erik Nyquist,</span>
+                        <cite title="Source Title" style="font-size: 90%;">Industrial Strength C++, Pentice Hall,
+                            1997</cite>
+                    </footer>
+                </blockquote>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Clauses break et default dans le switch</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Pour l'instruction switch, la clause <strong class="text-info">default</strong> peut être supprimée si
+                on est certain que <strong class="text-info">expression</strong> aura une des valeurs listées dans les
+                clauses
+                <strong class="text-info">case</strong>.
+            </p>
+            <div style="font-size: 95%;">
+                <div class="row" style="margin-top: -3px;">
+                    <div class="col-md-6">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ switch (expression)
+ {
+   case valeur1 :
+   Liste des instructions à déclencher 
+   si expression = valeur1
+   break;
+    
+   case valeur2 :
+   Liste des instructions à déclencher 
+   si expression = valeur2
+   break;
+    
+   ...
+    
+   case valeurN :
+   Liste des instructions à déclencher 
+   si expression = valeurN
+   break;
+     
+   default :
+   Liste des instructions à déclencher
+   dans tous les autres cas
+   break;
+ }
+                         </code></pre>
+                    </div>
+                    <div class="col-md-6 fragment fade-left">
+                        <p>
+                            <i class="fas fa-exclamation-triangle text-danger"></i>
+                            Attention : il est important de ne pas oublier l'instruction <strong
+                                class="text-info">break</strong> qui permet de sortir de
+                            la
+                            structure conditionnelle dès lors que la valeur associée à expression a été traitée.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition Si déclenchant une instruction</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="text-center" style="margin-top: -20px;">
+                            <img src="presentation/images/alternative-17.svg" width="50%">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ // nbre >> Indiquer si le nombre est positif >> (écran)
+ if (nbre > 0)
+ {
+   cout << "Afficher le nombre est positif";
+ }
+                         </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition Si déclenchant plusieurs instructions</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+                <div class="row" style="margin-top: -3px;">
+                    <div class="col-md-5">
+                        <div class="text-center" style="margin-top: -20px;">
+                            <img src="presentation/images/alternative-18.svg" width="50%">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ // score >> Diminuer le score >> (écran)
+ if (score > 0)
+ {
+   score = score - 1;
+   cout << score;
+ }
+                         </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition Si-Sinon</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+                <div class="row" style="margin-top: -3px;">
+                    <div class="col-md-5">
+                        <div class="text-center" style="margin-top: -20px;">
+                            <img src="presentation/images/alternative-19.svg" width="80%">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ // note >> Indiquer si l'étudiant a la moyenne >> (écran)
+ if (note >= 10)
+ {
+   cout << "Vous avez la moyenne";
+ }
+ else
+ {
+   cout << "Vous n'avez pas la moyenne";                
+ }
+                         </code></pre>
+                    </div>
+                </div>
+
+                <div class="fragment fade-left">
+                    <p>Variante :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 110%;">
+ // note >> Indiquer si l'étudiant a la moyenne >> (écran)
+ cout << (note >= 10 ? "Vous avez la moyenne" : "Vous n'avez pas la moyenne");
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition Si-Si</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+
+                <div class="text-center" style="margin-top: -50px;">
+                    <img src="presentation/images/alternative-20.svg" width="75%">
+                </div>
+
+                <pre class="cpp" style="margin-top: -15px;"><code data-trim data-noescape data-line-numbers style="font-size: 100%;">
+ // note >> Indiquer si l'étudiant a la moyenne >> (écran)
+ if (note >= 10)
+ {
+   cout << "Vous avez la moyenne";
+ }
+ else
+ {
+   if (note < 10)
+   {
+     cout << "Vous n'avez pas la moyenne";
+   }
+ }
+                 </code></pre>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition Si-Si : Attention</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+
+                <div class="text-center" style="margin-top: -50px;">
+                    <img src="presentation/images/alternative-21.svg" width="72%">
+                </div>
+
+                <p style="margin-top: -5px; padding-bottom: 15px;">
+                    <i class="fas fa-exclamation-triangle text-danger"></i>
+                    Le codage ci-dessous est incorrect : Si la 1ère condition est
+                    vérifiée, la machine évaluera quand même la seconde condition...
+                    <i class="far fa-thumbs-down"></i>
+                </p>
+
+                <pre class="cpp" style="margin-top: -15px;"><code data-trim data-noescape data-line-numbers style="font-size: 100%;">
+ // note >> Indiquer si l'étudiant a la moyenne >> (écran)
+ if (note >= 10)
+ {
+   cout << "Vous avez la moyenne";
+ }
+
+ if (note < 10)
+ {
+   cout << "Vous n'avez pas la moyenne";
+ }
+                 </code></pre>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition Si-Si-Sinon</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+
+                <div class="text-center" style="margin-top: -50px;">
+                    <img src="presentation/images/alternative-22.svg" width="74%">
+                </div>
+
+                <pre class="cpp" style="margin-top: -15px;"><code data-trim data-noescape data-line-numbers style="font-size: 100%;">
+ // note >> Indiquer si l'étudiant a la moyenne >> (écran)
+ if (note < 10)
+ {
+   cout << "Vous n'avez pas la moyenne";
+ }
+ else if (note == 10)
+ {
+   cout << "Vous avez juste la moyenne";
+ }
+ else
+ {
+   cout << "Vous avez au dessus de la moyenne";
+ }
+                 </code></pre>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Conditions multiples</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+
+                <div class="text-center" style="margin-top: -50px;">
+                    <img src="presentation/images/alternative-23.svg" width="74%">
+                </div>
+
+                <pre class="cpp" style="margin-top: -15px;"><code data-trim data-noescape data-line-numbers style="font-size: 100%;">
+ // note >> Indiquer si l'étudiant a la moyenne >> (écran)
+ if (note < 10)
+ {
+   cout << "Vous n'avez pas la moyenne";
+ }
+ else if (note == 10)
+ {
+   cout << "Vous avez juste la moyenne";
+ }
+ else if (note > 10)
+ {
+   cout << "Vous avez au dessus de la moyenne";
+ }
+                 </code></pre>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Codage du switch : Exemple (1/2)</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+
+                <p>Codage de l'algorithme qui affiche en toutes lettres un chiffre
+                    à partir de sa valeur numérique :</p>
+                <div class="text-center" style="margin-top: -25px;">
+                    <img src="presentation/images/alternative-13.svg" width="60%">
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Codage du switch : Exemple (2/2)</h4>
+
+        <div style="font-size: 70%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+
+                <pre class="cpp" style="margin-top: -15px;"><code data-trim data-noescape data-line-numbers style="font-size: 110%;">
+ // Afficher chiffre sous forme alphabétique >> (écran)
+
+ // (clavier) >> Saisir un chiffre >> chiffre
+ cout << "Entrez un chiffre :";
+ cin >> chiffre;
+
+ // chiffre >> Afficher le chiffre en toutes lettres
+ switch (chiffre)
+ {
+   case 0  : cout << "zéro";   break;
+   case 1  : cout << "un";     break;
+   case 2  : cout << "deux";   break;
+   case 3  : cout << "trois";  break;
+   case 4  : cout << "quatre"; break;
+   case 5  : cout << "cinq";   break;
+   case 6  : cout << "six";    break;
+   case 7  : cout << "sept";   break;
+   case 8  : cout << "huit";   break;
+   case 9  : cout << "neuf";   break;
+   default : cout << "erreur"; break;
+ }
+                 </code></pre>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Du bon usage du switch : Rappel</h4>
+
+        <div style="font-size: 65%; margin-top: 40px;">
+            <div style="font-size: 95%;">
+
+                <p style="margin-top: -25px;">
+                    S'il n'y a qu'un ou deux cas à étudier et que le nombre de cas n'est pas censé
+                    évoluer, on utilisera de préférence une structure de
+                    type <strong class="text-info">if-else</strong> :
+                </p>
+
+                <div class="text-center" style="margin-top: -25px;">
+                    <img src="presentation/images/alternative-16.svg" width="55%">
+                </div>
+
+                <div class="row" style="margin-top: -3px;">
+                    <div class="col-md-6">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ /* trouve >> Analyser le résultat de la 
+    recherche >> (écran) */
+ switch (trouve)
+ {
+   case true :
+   cout << "recherche fructueuse"; 
+   break;
+    
+   case false :
+   cout << "recherche infructueuse"; 
+   break;
+ }
+                         </code></pre>
+                    </div>
+                    <div class="col-md-6">
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ /* trouve >> Analyser le résultat de la 
+    recherche >> (écran) */
+ if (trouve == true)
+ {
+   cout << "recherche fructueuse";
+ }
+ else
+ {
+   cout << "recherche fructueuse";
+ }
+                         </code></pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+
+
+        <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT8/0" role="button"
+            target="_blank">
+            Sortez vos smartphones
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

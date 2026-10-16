@@ -1,0 +1,575 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/MediaObject">
+<head>
+  <meta charset="utf-8">
+
+  <title>Mediakiosque - Prog-026 - Déboguer un code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <script src="/static/jquery/dist/jquery.min.js"></script>
+
+  
+    
+
+<link href="/static/video.js/dist/video-js.min.css?ver=3.8.2" rel="stylesheet">
+<script id="videojs_script_id" src="/static/video.js/dist/video.min.js?ver=3.8.2"></script>
+  
+    <script src="/static/video.js/dist/lang/fr.js?ver=3.8.2"></script>
+  
+
+<!-- seek button -->
+<link href="/static/videojs-seek-buttons/dist/videojs-seek-buttons.css?ver=3.8.2" rel="stylesheet">
+<script src="/static/videojs-seek-buttons/dist/videojs-seek-buttons.min.js?ver=3.8.2"></script>
+
+
+
+<!-- cut video -->
+<link rel="stylesheet" href="/static/css/video_cut.css?ver=3.8.2">
+
+
+<!-- quality selector -->
+<!-- NOTE: hls-quality-selector doesn't seem to work on Safari. -->
+<link href="/static/videojs-hls-quality-selector/dist/videojs-hls-quality-selector.css?ver=3.8.2" rel="stylesheet">
+<script src="/static/videojs-contrib-quality-levels/dist/videojs-contrib-quality-levels.min.js?ver=3.8.2"></script>
+<script src="/static/videojs-hls-quality-selector/dist/videojs-hls-quality-selector.min.js?ver=3.8.2"></script>
+<!-- mp4 quality selector -->
+<script src="/static/%40silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js?ver=3.8.2"></script>
+<!--
+<link href="/static/css/quality-selector.css?ver=3.8.2" rel="stylesheet">
+-->
+<!-- notes -->
+<link href="/static/css/video_notes.css?ver=3.8.2" rel="stylesheet">
+<script src="/static/js/video_notes.js?ver=3.8.2"></script>
+<!-- Playlist / favorites -->
+
+  <script src="/static/playlist/js/utils-playlist.js?ver=3.8.2"></script>
+  <script src="/static/playlist/js/video-header-favorites.js?ver=3.8.2"></script>
+
+<!-- logo -->
+<link href="/static/css/videojs-controlbar.css?ver=3.8.2" rel="stylesheet">
+<script src="/static/js/videojs-logo-controlbar.js?ver=3.8.2"></script>
+<!-- chapitre : depuis videojs7, plus besoin de plugin js https://docs.videojs.com/tutorial-text-tracks.html -->
+<link href="/static/css/videojs-chapters.css?ver=3.8.2" rel="stylesheet">
+<script src="/static/js/videojs-chapters.js?ver=3.8.2"></script>
+
+
+  <link id="overview_style_id" href="/static/videojs-vtt-thumbnails/dist/videojs-vtt-thumbnails.css?ver=3.8.2" rel="stylesheet">
+  <script id="overview_script_id" src="/static/videojs-vtt-thumbnails/dist/videojs-vtt-thumbnails.min.js?ver=3.8.2"></script>
+
+
+
+
+
+
+
+
+  
+
+  <script src="/static/js/videojs-info-controlbar.js?ver=3.8.2"></script>
+
+  <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css?ver=3.8.2" crossorigin="anonymous">
+  <script src="/static/bootstrap/dist/js/bootstrap.bundle.min.js?ver=3.8.2"></script>
+  <script id="jsi18n" src="/webpush/jsi18n/?ver=3.8.2"></script>
+
+  <link rel="stylesheet" href="/static/css/video-iframe.css?ver=3.8.2">
+
+  
+    <link rel="stylesheet" href="/static/custom/theme-uppa.css?ver=3.8.2" media="screen">
+  
+
+  <meta itemprop="duration" content="1712">
+  <meta itemprop="thumbnailUrl" content="/media/cache/c9/8a/c98adfd89527140c82803e938282fcbe.jpg">
+  <meta itemprop="contentURL" content="https: //mediakiosque.univ-pau.fr/video/11279-prog-026-deboguer-un-code/">
+  <meta itemprop="embedURL" content="https: //mediakiosque.univ-pau.fr/video/11279-prog-026-deboguer-un-code/?is_iframe=true">
+
+</head>
+<body class="iframe">
+
+<div class="overlay" id="div-video-wrapper">
+
+  
+    
+<video id="podvideoplayer" class="video-js vjs-default-skin  vjs-big-play-centered vjs-show-big-play-button-on-pause" preload="none" 
+poster="/media/cache/c9/8a/c98adfd89527140c82803e938282fcbe.jpg" controls
+>
+  <!-- <source src="/media/videos/d9f6d3902c60d18b2525227c2188c3046a8ec44d63d94251ddc5716f637d5f91/11279/livestream.m3u8" type="application/x-mpegURL"> -->
+  <p class="vjs-no-js">
+    Pour visionner cette vidéo, veuillez activer JavaScript et envisager de passer à un navigateur Web qui <a href="https://videojs.com/html5-video-support/" target="_blank"> prend en charge la vidéo HTML5</a>
+  </p>
+   
+  
+</video>
+<form method="post" action="/video/count/11279/" id="video_count_form" aria-hidden="true">
+  <input type="hidden" name="csrfmiddlewaretoken" value="iTPoVxUvdGEHNIpacQ2uHzuyq28ukDm0hocGkDq1wWs7IVlbYDtztSrUkQ7bj2xQ">
+</form>
+
+<div id="chapter-for-playlist">
+  
+</div>
+
+  
+
+  <div id="info-video-wrapper" class="pod-inner">
+    <div class="iframe-header bg-dark text-white">
+      <h2 class="video-title">prog-026 - Déboguer un code</h2>
+      <button type="button" class="close" aria-label="Fermer">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div id="info-video" class="pod-info-video">
+    
+
+
+
+
+
+
+
+
+<div class="video-info_duration-view-share">
+  <div class="video-info__duration">
+    <i class="bi bi-clock" aria-hidden="true"></i>
+    <span class="visually-hidden">Durée :</span>
+    00:28:32
+  </div>
+  <div class="pod-info-video__view">
+    <i class="bi bi-eye" aria-hidden="true"></i> Nombre de vues
+    
+      94
+    
+  </div>
+  
+    <div class="pod-info-video__playlists">
+      <i class="bi bi-list-ul" aria-hidden="true"></i> Nombre d’ajouts dans une liste de lecture
+      
+        <span id="addition_playlists_count">0</span>
+      
+    </div>
+  
+  
+    <div class="pod-info-video__favorites">
+      <i class="bi bi-stars" aria-hidden="true"></i> Nombre de favoris
+      
+        <span id="favorites_count">0</span>
+      
+    </div>
+  
+  <div class="pod-info-video__buttons">
+    
+    
+    
+  </div>
+</div>
+
+
+
+<div id="video-meta">
+  <div id="info" class="pod-info-video__info">
+    <h2 class="tab-title visually-hidden"><i class=" bi bi-info-circle"></i>&nbsp;Informations</h2>
+    <ul class="list-inline d-flex flex-wrap">
+      <li class="col-6 col-md-4">
+        <span class="pod-meta-title">Ajouté par :</span>
+        
+          
+          Patrick Etcheverry (etchever)
+        
+      </li>
+      
+
+      
+      
+
+      <li class="col-6 col-md-4">
+        <span class="pod-meta-title">Mis à jour le :</span>
+        10 août 2021 00:00
+      </li>
+
+      
+
+      <li class="col-6 col-md-4">
+        <span class="pod-meta-title">Type :</span>
+        <a href="/videos/?type=tutoriel"
+          target="_blank" 
+          class="btn btn-link btn-sm px-0"
+          title="Afficher la liste des vidéos de type « Tutoriel »" data-bs-toggle="tooltip" data-bs-placement="bottom">
+          Tutoriel
+        </a>
+      </li>
+
+      <li class="col-6 col-md-4">
+        <span class="pod-meta-title">Langue principale :</span>
+        Français
+      </li>
+
+      
+        <li class="col-6 col-md-4">
+          <span class="pod-meta-title">Public :</span>
+          Licence
+        </li>
+      
+
+      
+        <li class="col-6 col-md-4">
+          <span class="pod-meta-title">Discipline(s) :</span>
+          <div>
+            <ul>
+              
+                <li><a href="/videos/?discipline=informatique" target="_blank"  title="Afficher la liste des vidéos de la discipline « Informatique »" data-bs-toggle="tooltip" data-bs-placement="right">Informatique</a></li>
+              
+            </ul>
+          </div>
+        </li>
+      
+
+      
+    </ul>
+  </div>
+
+  <div class="modal fade" id="downloads" tabindex="-1" aria-labelledby="downloadsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h3" id="downloadsLabel"><i class="bi bi-download" aria-hidden="true"></i>&nbsp;Téléchargements</h2>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+
+        <div class="modal-body">
+          
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Share modal -->
+
+
+  </div>
+  </div>
+
+</div>
+
+  
+    
+
+
+
+
+<script id="id_video_script">
+  // Check subtitle track
+  // /!\ the following query will work only before player initialisation
+  const seektime = 10
+      , subtitles = document.querySelectorAll('video#podvideoplayer > track[kind="subtitles"]')
+      , subtitles_count = subtitles.length;
+  if(subtitles_count > 0 && localStorage.getItem('autoshowsubtitles')) {
+    let subtitle_current_lang = false;
+    for(let i=0; i<subtitles_count; i++) {
+      if(subtitles[i].getAttribute('srclang') === '') {
+        subtitles[i].setAttribute('default',null);
+        subtitle_current_lang = true;
+        break;
+      }
+    }
+    if(!subtitle_current_lang) {
+      subtitles[0].setAttribute('default',null);
+    }
+  }
+
+  /** @global */
+  var options = {}
+    , player;
+
+  /**
+   * Set the video player options
+   * Initialize the player with those configured options
+   * Add listeners for the video player events.
+   */
+  const initialized_player = function() {
+    /** Set the video player options **/
+    options = {
+      notSupportedMessage: "Utilisez un navigateur compatible (Mozilla Firefox, Google Chrome, Safari, Microsoft Edge)",
+      //language: "fr", //en or nl
+    
+      fluid: false,
+    
+      responsive: true,
+      playbackRates: [0.5, 1, 1.5, 2],
+      userActions: {
+        hotkeys: function(event) {
+          // `this` is the player in this context
+          if (event.code === 'Space') {
+            event.preventDefault();
+            if(!this.paused()) this.pause();
+            else this.play();
+          }
+          if (event.key === 'm') {
+            event.preventDefault();
+            this.muted(!this.muted());
+          }
+          if (event.key === 'f') {
+            event.preventDefault();
+            this.requestFullscreen();
+          }
+          if (event.code === 'ArrowLeft') {
+            event.preventDefault();
+            this.currentTime(Math.floor(this.currentTime())-seektime);
+          }
+          if (event.code === 'ArrowRight') {
+            event.preventDefault();
+            this.currentTime(Math.floor(this.currentTime())+seektime);
+          }
+          if( event.code === "ArrowUp" ) {
+            event.preventDefault();
+            this.volume(this.volume()+0.1);
+          }
+          if( event.code === "ArrowDown" ) {
+            event.preventDefault();
+            this.volume(this.volume()-0.1);
+          }
+        }
+      },
+      plugins: {
+    
+        seekButtons: {
+          forward: seektime,
+          back: seektime
+        }
+    
+    
+    }
+  }
+  /** Initialize the player with the configured options. **/
+  player = videojs('podvideoplayer', options, function(){});
+
+  /** Add listeners for the video player events. **/
+  window.onmessage = function(event) {
+    const evt = event || window.event;
+    
+      if(evt.data.type === 'player:play') {
+        player.play();
+        evt.source.postMessage({paused: player.paused(), data: {}}, evt.origin);
+      }
+      if(evt.data.type === 'player:pause') {
+        player.pause();
+        evt.source.postMessage({paused: player.paused(), data: {}}, evt.origin);
+      }
+      if(evt.data.type === 'player:mute') {
+        player.muted(true);
+        evt.source.postMessage({muted: player.muted(), data: {}}, evt.origin);
+      }
+      if(evt.data.type === 'player:unmute') {
+        player.muted(false);
+        evt.source.postMessage({muted: player.muted(), data: {}}, evt.origin);
+      }
+  };
+
+  // Increase the video counter on first play
+  player.on('firstplay', function(){
+
+    let formElement = document.getElementById("video_count_form");
+    let formData = new FormData(formElement);
+    let data_form = [];
+
+    formData.forEach(function(value, key) {
+      data_form.push({ name: key, value: value });
+    });
+
+    jqxhr = $.post(
+      formElement.getAttribute("action"),
+      data_form
+    );
+  });
+
+  
+    const marker_url = "/video/marker/11279/0/";
+    let last_timeupdate = 0;
+    player.on('timeupdate', function(){
+      // Get the current time (in seconds)
+      let currentTime = parseInt(player.currentTime(), 10);
+      if(currentTime % 5 === 0 && currentTime !== last_timeupdate ) {
+        last_timeupdate = currentTime;
+        fetch(marker_url.replace("/0/", "/"+currentTime+"/"), {}); //.then(response => console.log(response));
+      }
+    });
+  
+
+  
+    // get all mp4 format
+    const mp4_sources = [{'id': 30171, 'type': 'video/mp4', 'src': '/media/videos/d9f6d3902c60d18b2525227c2188c3046a8ec44d63d94251ddc5716f637d5f91/11279/360p.mp4', 'height': 360, 'extension': '.mp4', 'label': '360p'}, {'id': 30172, 'type': 'video/mp4', 'src': '/media/videos/d9f6d3902c60d18b2525227c2188c3046a8ec44d63d94251ddc5716f637d5f91/11279/720p.mp4', 'height': 720, 'extension': '.mp4', 'label': '720p'}];
+
+    
+      const srcOptions = {
+        src: '/media/videos/d9f6d3902c60d18b2525227c2188c3046a8ec44d63d94251ddc5716f637d5f91/11279/livestream.m3u8',
+        type: 'application/x-mpegURL',
+      };
+      player.on('loadedmetadata', function() {
+        
+          
+        
+      });
+      // Add source to player
+      player.src(srcOptions);
+      // Add quality selector to player
+      player.hlsQualitySelector({
+          displayCurrentQuality: true,
+      });
+      player.on("error", function(e) {
+        e.stopImmediatePropagation();
+        const error = player.error();
+        if(error.code === 3 || error.code === 4) {
+          if(player.src() === "" || player.src().indexOf("m3u8") !== -1){
+            player.controlBar.addChild('QualitySelector');
+            player.play();
+          }
+        }
+      });
+    
+    
+      // Add overview
+      player.vttThumbnails({
+        src: 'https://mediakiosque.univ-pau.fr/media/videos/d9f6d3902c60d18b2525227c2188c3046a8ec44d63d94251ddc5716f637d5f91/11279/overview.vtt?date=1709722139,6864905'
+      });
+      player.vttThumbnails({
+        src: 'https://mediakiosque.univ-pau.fr/media/videos/d9f6d3902c60d18b2525227c2188c3046a8ec44d63d94251ddc5716f637d5f91/11279/overview.vtt?date=1709722139,6864905'
+      });
+    
+
+    
+
+    
+    // Add logo to the player
+    player.videoJsLogo({
+      imgsrc: '/static/img/logoPod.svg',
+      linktitle: 'Mediakiosque - Accueil - Nouvelle fenêtre',
+      link: 'https://mediakiosque.univ-pau.fr'
+    });
+  
+
+  
+
+  
+
+  /* --- PLAYLIST --- */
+  
+
+  
+}
+initialized_player()
+</script>
+<script src="/static/js/video-show.js?ver=3.8.2"></script>
+
+    <script>
+
+      (function () {
+
+        player.videoJsInfo();
+
+        
+          // Append overlay-footer to video-wrapper
+          let overlay = document.createElement("div");
+          overlay.id="overlay-footer";
+          document.getElementById("div-video-wrapper").appendChild(overlay);
+
+          player.ready(function() {
+            const btinfo = document.querySelector(".vjs-info-button");
+            const clonedInfo = btinfo.cloneNode(true);
+            overlay.appendChild(clonedInfo);
+            clonedInfo.addEventListener("click", showInfoVideo);
+          })
+        
+
+        document.querySelector("#info-video-wrapper .close").addEventListener("click", showInfoVideo);
+
+        player.on('play',function() {
+          isPlaying = true;
+          document.getElementById("div-video-wrapper").className = '';
+        });
+        player.on('pause',function() { isPlaying = false; });
+        resizeVideoJs(); // Initialize the function right now
+        window.onresize = resizeVideoJs; // Call the function on resize
+
+      })();
+      </script>
+  
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://web-stats.univ-pau.fr/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '125']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+<!-- tickets_id 710 -->
+<script>
+async function load_all_videos_and_order_by_name() { await infinite.getData(infinite.url, infinite.next_page_number, infinite.nextPage).then((data) => {
+      if (data !== null && data !== undefined) {
+        const html = new DOMParser().parseFromString(data, "text/html");
+        if (html.getElementById("videos_list").dataset.nextpage !== "True") {
+          infinite.nextPage = false;
+        }
+        infinite.nextPage = html.getElementById("videos_list").dataset.nextpage;
+        let element = infinite.videos_list;
+
+        element.innerHTML += html.getElementById("videos_list").innerHTML;
+        infinite.next_page_number += 1;
+        const favoritesButtons =document.getElementsByClassName("favorite-btn-link");
+        for (let btn of favoritesButtons) {
+          preventRefreshButton(btn, true);
+        }
+      }
+      infinite.callBackAfterLoad();
+      /* Refresh Bootstrap tooltips after load */
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"], [data-pod-tooltip="true"]',);
+      [...tooltipTriggerList].map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),);
+    });
+   if(infinite.nextPage=="true"){
+       load_all_videos_and_order_by_name();
+   }
+   else{
+        let Videos = [...document.querySelectorAll(".infinite-item")];
+        Videos.sort(function(a, b) {
+            return a.querySelector('span.video-title > a').innerText.localeCompare(b.querySelector('span.video-title > a').innerText);
+        });
+        Videos.forEach(function(div, index) {
+            div.style.order = index + 1;
+        });
+    }
+  
+};
+
+if(document.querySelector('.page_title') && document.querySelector('.page_title').innerText.trim() == 'Archives audiovisuelles du GRT  Vidéo  Audio'){
+    load_all_videos_and_order_by_name();
+}
+
+if(document.querySelector("#video_form"))
+{
+    document.querySelector("#id_type").querySelector('option[value="1"]').disabled="disabled";
+
+    if(document.querySelector("#id_type").querySelector('option[value="1"]').selected){
+        document.querySelector("#id_type").querySelectorAll('option')[0].selected="selected";
+    }
+}
+
+</script>
+
+
+</body>
+</html>
