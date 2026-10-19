@@ -163,83 +163,318 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>1. Les Fondements Théoriques de la Conception</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="layers" style="color: #6E4970;"></i>
+        <span>1. Contexte & Architecture ANSI/SPARC à 3 Niveaux</span>
+    </h2>
     
-<p>
-Comme l'enseigne rigoureusement M. Marquesuzaà à l'IUT d'Anglet, la conception d'un système d'information repose sur deux distinctions épistémologiques capitales :
-</p>
-<ul>
-    <li><strong>Donnée vs Information :</strong> Une <em>donnée</em> est un fait brut non interprété (ex: <code>14</code>). Une <em>information</em> est une donnée contextualisée porteuse de sens pour la décision humaine (ex: <code>14/20 obtenu par Matéi au partiel de R1.05</code>).</li>
-    <li><strong>L'Architecture ANSI/SPARC à 3 Niveaux :</strong>
-        <ol>
-            <li><strong>Niveau Conceptuel (MCD) :</strong> Représente la sémantique métier du monde réel (<em>QUOI</em>), indépendamment de toute considération informatique, logicielle ou matérielle.</li>
-            <li><strong>Niveau Logique (MLD) :</strong> Adapte la structure aux contraintes du modèle de données cible (<em>QUI FAIT QUOI</em>, modèle relationnel en tables, colonnes et clés).</li>
-            <li><strong>Niveau Physique (MPD / SQL) :</strong> Décrit le stockage physique sur les supports magnétiques/SSD (<em>COMMENT</em>, fichiers disques, index B-Tree, tablespaces sous Oracle/PostgreSQL).</li>
-        </ol>
-    </li>
-</ul>
-
-
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Avant l'avènement des Systèmes de Gestion de Bases de Données (SGBD) relationnels, les applications informatiques stockaient leurs données dans des fichiers plats séquentiels ou indexés. Cette approche présentait des faiblesses critiques : redondance massive de l'information, incohérences en cascade lors des mises à jour, dépendance totale entre la structure physique des fichiers et le code des programmes, et absence de sécurité multi-utilisateurs.
+            </p>
+            <p class="text-sm text-slate-700 leading-relaxed mt-3">
+                Pour résoudre cette crise, le groupe d'étude ANSI/X3/SPARC a normalisé en 1975 une architecture fondamentale en <strong>3 niveaux d'abstraction</strong>, adoptée par la méthode française Merise créée en 1978 :
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4 text-xs">
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="brain"></i>1. Niveau Conceptuel (MCD)</span>
+                    <p class="text-slate-600">Répond à la question : <strong>QUOI ?</strong></p>
+                    <p class="text-slate-700 leading-relaxed">Représente la sémantique pure des données du métier, sans aucune contrainte informatique, matérielle ou logicielle. Compréhensible par les utilisateurs finaux.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="database"></i>2. Niveau Logique (MLD)</span>
+                    <p class="text-slate-600">Répond à la question : <strong>QUI FAIT QUOI ?</strong></p>
+                    <p class="text-slate-700 leading-relaxed">Adapte les concepts au modèle cible (relationnel). Traduit les entités en tables, définit les clés primaires et fait migrer les clés étrangères (#).</p>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="hard-drive"></i>3. Niveau Physique (MPD)</span>
+                    <p class="text-slate-600">Répond à la question : <strong>COMMENT ?</strong></p>
+                    <p class="text-slate-700 leading-relaxed">Implémentation concrète sous un SGBD particulier (PostgreSQL, Oracle) : allocation d'espaces disques (tablespaces), index B-Tree, types binaires réels et triggers.</p>
+                </div>
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>2. Le Dictionnaire des Données Épuré</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="file-text" style="color: #6E4970;"></i>
+        <span>2. Le Dictionnaire des Données Épuré & Règles Fondamentales</span>
+    </h2>
     
-<p>
-Avant d'esquisser la moindre boîte de modèle, le concepteur doit dresser le <strong>Dictionnaire des Données</strong> recensant toutes les propriétés élémentaires manipulées par le système.
-</p>
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
-<strong>RÈGLE D'OR DE MARQUESUZAÀ — INTERDICTION DES DONNÉES CALCULÉES :</strong>
-<br>Aucune donnée calculée ou déductible ne doit figurer dans le dictionnaire des données ou dans le MCD !
-<br>❌ <code>age</code> est proscrit $\implies$ stocker uniquement <code>dateNaissance</code> (l'âge se calcule par requête SQL à l'instant $t$).
-<br>❌ <code>montantTTC</code> ou <code>totalFacture</code> est proscrit $\implies$ stocker <code>prixUnitaireHT</code> et <code>tauxTVA</code>.
-<br>❌ <code>moyenneGenerale</code> est proscrite $\implies$ calculée dynamiquement par <code>AVG(note)</code>.
-</div></div>
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Le <strong>Dictionnaire des Données (DD)</strong> est la liste exhaustive et formalisée de toutes les propriétés élémentaires manipulées par le système d'information. Chaque propriété doit être rigoureusement documentée :
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Propriété</th>
+                        <th>Désignation Sémantique</th>
+                        <th>Type Conceptuel</th>
+                        <th>Domaine / Règle de Gestion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>numClient</code></td>
+                        <td>Identifiant unique attribué au client</td>
+                        <td>Entier &gt; 0</td>
+                        <td>Numéro séquentiel strict</td>
+                    </tr>
+                    <tr>
+                        <td><code>nomClient</code></td>
+                        <td>Nom de famille officiel du client</td>
+                        <td>Chaîne (50)</td>
+                        <td>En majuscules non vide</td>
+                    </tr>
+                    <tr>
+                        <td><code>dateNaissance</code></td>
+                        <td>Date de naissance de l'individu</td>
+                        <td>Date</td>
+                        <td>Passée : <code>dateNaissance &lt; CURRENT_DATE</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>prixUnitaireHT</code></td>
+                        <td>Prix unitaire hors taxe du produit</td>
+                        <td>Monétaire Réel</td>
+                        <td>Strictement positif (&gt; 0.00 €)</td>
+                    </tr>
+                </tbody>
+            </table>
 
-
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="shield-alert"></i>RÈGLE D'OR DE M. MARQUESUZAÀ : INTERDICTION ABSOLUE DES DONNÉES CALCULÉES</p>
+                <div class="text-sm text-slate-700 mt-2 space-y-1.5">
+                    <p>Aucune donnée calculable ou déductible à partir d'autres propriétés ne doit figurer dans le Dictionnaire des Données ou dans le MCD !</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs">
+                        <li>❌ <strong>Proscrit :</strong> <code>age</code> $\implies$ Stocker uniquement <code>dateNaissance</code> (l'âge se calcule dynamiquement par rapport à la date du jour).</li>
+                        <li>❌ <strong>Proscrit :</strong> <code>montantTTC</code> $\implies$ Se déduit immédiatement de <code>montantHT * (1 + tauxTVA)</code>.</li>
+                        <li>❌ <strong>Proscrit :</strong> <code>montantTotalFacture</code> $\implies$ Se calcule par la somme des lignes de facturation (<code>SUM(quantite * prixUnitaire)</code>).</li>
+                        <li>❌ <strong>Proscrit :</strong> <code>moyenneGenerale</code> $\implies$ Calculée à la volée par <code>AVG(note)</code>.</li>
+                    </ul>
+                </div>
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>3. Les Composants du Modèle Conceptuel de Données (MCD)</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="box" style="color: #6E4970;"></i>
+        <span>3. Composants du MCD : Entités, Propriétés & Identifiants</span>
+    </h2>
     
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Le <strong>Modèle Conceptuel de Données</strong> modélise la réalité sous forme d'un graphe composé d'entités-types et d'associations-types :
+            </p>
+            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-3 my-3">
+                <h3 class="font-bold text-slate-900 text-sm">A. L'Entité-Type (Individu)</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    Une entité-type représente une population homogène d'objets ou de concepts ayant une existence matérielle ou immatérielle autonome dans le domaine d'étude (ex : <code>CLIENT</code>, <code>PRODUIT</code>, <code>SALARIE</code>).
+                </p>
+                <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                    <li><strong>Nom de l'entité :</strong> Toujours écrit en lettres <strong>MAJUSCULES</strong> et au <strong>SINGULIER</strong>.</li>
+                    <li><strong>Identifiant (Clé Conceptuelle) :</strong> Propriété obligatoire, unique et pérenne dont la valeur permet d'identifier sans aucune équivoque chaque occurrence de l'entité. <em>Convention stricte : l'identifiant est obligatoirement SOULIGNÉ dans la boîte conceptuelle</em> (ex : <u>idClient</u>).</li>
+                    <li><strong>Propriétés (Attributs) :</strong> Informations atomiques caractérisant l'entité. Une propriété ne peut appartenir qu'à une seule entité (règle de non-redondance).</li>
+                </ul>
+            </div>
 
-<h3>A. L'Entité-Type (ou Individu)</h3>
-<p>
-Une <strong>entité</strong> représente une population d'objets du monde réel ayant une existence autonome et partageant les mêmes propriétés.
-</p>
-<ul>
-    <li><strong>Nom :</strong> Substantif au singulier écrit en MAJUSCULES (ex: <code>ETUDIANT</code>, <code>MODULE</code>, <code>ENSEIGNANT</code>).</li>
-    <li><strong>Identifiant :</strong> Propriété unique, discriminante, non nulle et pérenne dont la valeur permet de distinguer à coup sûr deux occurrences. <strong>Dans le MCD, l'identifiant est obligatoirement SOULIGNÉ</strong> (ex: <u>idEtudiant</u>).</li>
-    <li><strong>Propriétés (Attributs) :</strong> Caractéristiques atomiques (non divisibles) décrivant l'entité.</li>
-</ul>
+            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-3 my-3">
+                <h3 class="font-bold text-slate-900 text-sm">B. L'Association-Type (Relation)</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    Une association-type traduit un lien sémantique perçu entre deux ou plusieurs entités.
+                </p>
+                <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                    <li><strong>Nom de l'association :</strong> Le plus souvent un <strong>verbe à l'infinitif</strong> (ex : <code>COMMANDER</code>, <code>APPARTENIR</code>, <code>ENSEIGNER</code>).</li>
+                    <li><strong>Dimension de l'association :</strong> Le nombre d'entités reliées (binaire = 2 entités, ternaire = 3 entités, réflexive = boucle reliant une entité à elle-même).</li>
+                    <li><strong>Association porteuse de données :</strong> Une association peut contenir des propriétés propres <em>uniquement si ces propriétés dépendent simultanément de toutes les entités connectées</em> (ex : la <code>quantiteCommandee</code> dépend à la fois de la <code>COMMANDE</code> et du <code>PRODUIT</code>).</li>
+                </ul>
+            </div>
+            
+</article>
 
-<h3>B. L'Association-Type (ou Relation)</h3>
-<p>
-Une association traduit un lien sémantique reliant deux ou plusieurs entités. Son nom est généralement un verbe à l'infinitif (ex: <code>INSCRIRE</code>, <code>ENSEIGNER</code>, <code>APPARTENIR</code>).
-<br>Une association peut être <strong>porteuse de données</strong> si une propriété dépend simultanément de toutes les entités connectées (ex: la <code>note</code> dépend à la fois de l'<code>ETUDIANT</code> et de l'<code>EVALUATION</code>).
-</p>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="git-commit" style="color: #6E4970;"></i>
+        <span>4. La Règle d'Or de la Double Lecture des Cardinalités</span>
+    </h2>
+    
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Les <strong>cardinalités</strong> expriment le nombre minimum et maximum de fois où une occurrence d'une entité peut participer aux occurrences d'une association.
+            </p>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-sm">PROTOCOLE FORMEL DE QUESTIONNEMENT (M. MARQUESUZAÀ) :</p>
+                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+                    Pour déterminer les cardinalités de la patte reliant l'entité $E$ à l'association $A$, on pose obligatoirement la double question suivante :<br/>
+                    <em>« Pour UNE occurrence donnée de l'entité $E$, à combien d'occurrences de l'association $A$ participe-t-elle AU MINIMUM, et AU MAXIMUM ? »</em>
+                </p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Couple</th>
+                        <th>Signification Sémantique</th>
+                        <th>Interprétation Métier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>0,1</code></td>
+                        <td>Minimum 0, Maximum 1</td>
+                        <td>Participation facultative, au plus une seule fois.</td>
+                    </tr>
+                    <tr>
+                        <td><code>1,1</code></td>
+                        <td>Minimum 1, Maximum 1</td>
+                        <td>Participation obligatoire et unique (existence dépendante).</td>
+                    </tr>
+                    <tr>
+                        <td><code>0,n</code></td>
+                        <td>Minimum 0, Maximum plusieurs ($n$)</td>
+                        <td>Participation facultative, peut se répéter indéfiniment.</td>
+                    </tr>
+                    <tr>
+                        <td><code>1,n</code></td>
+                        <td>Minimum 1, Maximum plusieurs ($n$)</td>
+                        <td>Participation obligatoire, au moins une fois et potentiellement plusieurs.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+</article>
 
-<h3>C. La Règle de la Double Lecture des Cardinalités</h3>
-<p>
-Pour chaque patte reliant une entité $E$ à une association $A$, on définit un couple de cardinalités <code>(min, max)</code> :
-</p>
-<div class="p-4 rounded-xl bg-slate-50 border border-slate-300 text-xs space-y-1">
-    <p><strong>Question rituelle de Marquesuzaà :</strong></p>
-    <p>« Pour UNE occurrence donnée de l'entité $E$, à combien d'occurrences de l'association $A$ peut-elle participer AU MINIMUM et AU MAXIMUM ? »</p>
-</div>
-<ul>
-    <li><code>0,1</code> : Au minimum 0 fois (facultatif), au maximum 1 seule fois.</li>
-    <li><code>1,1</code> : Au minimum 1 fois (obligatoire), au maximum 1 seule fois.</li>
-    <li><code>0,n</code> : Au minimum 0 fois, au maximum plusieurs fois ($n$).</li>
-    <li><code>1,n</code> : Au minimum 1 fois (au moins une), au maximum plusieurs fois ($n$).</li>
-</ul>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="alert-triangle" style="color: #ca8a04;"></i>
+        <span>5. Les 5 Pièges Critiques & Fautes Éliminatoires aux Partiels d'Anglet</span>
+    </h2>
+    
+            <div class="callout-exam">
+                <p class="font-bold text-amber-900 text-sm">🚨 BARÈME DE CORRECTION DE M. MARQUESUZAÀ — SANCTIONS DIRECTES :</p>
+                <div class="text-xs text-amber-800 mt-2 space-y-2">
+                    <p><strong>1. FAUTE ÉLIMINATOIRE SUPRÊME : CLÉ ÉTRANGÈRE DANS UNE ENTITÉ DU MCD</strong><br/>
+                    Il est STRICTEMENT INTERDIT d'écrire un attribut comme <code>numClient</code> ou <code>codeGroupe</code> dans l'entité <code>COMMANDE</code> ou <code>ETUDIANT</code>. Au niveau conceptuel, les liaisons sont uniquement assurées par les associations graphiques. Tout attribut étranger présent dans une boîte d'entité en MCD vaut <strong>0 point immédiat à la question</strong> !</p>
 
-<div class="callout-exam">
-    <strong>🚨 FAUTE ÉLIMINATOIRE AU PARTIEL DE R1.05 :</strong><br>
-    <strong>JAMAIS DE CLÉ ÉTRANGÈRE DANS UN MCD !</strong><br>
-    Ne jamais inscrire d'attribut comme <code>idFormation</code> ou <code>codeGroupe</code> dans l'entité <code>ETUDIANT</code>. Les liens entre entités se matérialisent EXCLUSIVEMENT par les associations graphiques. Tout attribut étranger présent dans une boîte d'entité en MCD est sanctionné par zéro à la question !
-</div>
+                    <p><strong>2. Inversion des cardinalités min et max</strong><br/>
+                    Écrire <code>(1,0)</code> ou <code>(n,1)</code> démontre une incompréhension de la chronologie des bornes. La borne minimale est toujours à gauche, la borne maximale à droite : <code>(min, max)</code>.</p>
+
+                    <p><strong>3. Attribut mal placé dans une association</strong><br/>
+                    Placer un attribut dans une association binaire de cardinalité maximale 1 (ex : patte <code>(1,1)</code>) est une faute conceptuelle grave. Si une patte a pour cardinalité max 1, l'attribut dépend uniquement de cette entité et doit migrer directement dans l'entité !</p>
+
+                    <p><strong>4. Données calculées ou redondantes</strong><br/>
+                    Inscrire <code>age</code>, <code>totalTTC</code> ou <code>prixTotal</code> pénalise lourdement la note globale du dictionnaire des données.</p>
+
+                    <p><strong>5. Nommage incorrect</strong><br/>
+                    Entités au pluriel (<code>CLIENTS</code> au lieu de <code>CLIENT</code>) ou verbes conjugués dans les associations (<code>COMMANDE</code> au lieu de <code>COMMANDER</code>).</p>
+                </div>
+            </div>
+            
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="graduation-cap" style="color: #6E4970;"></i>
+        <span>6. Étude de Cas Complète Résolue : Clinique Vétérinaire</span>
+    </h2>
+    
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Voici un sujet type des partiels de BUT 1 Informatique de l'IUT d'Anglet, résolu selon la rigueur méthodologique exigée.
+            </p>
+            <div class="p-4 rounded-xl border border-slate-300 bg-slate-50 text-xs space-y-2 my-3">
+                <p class="font-bold text-slate-900">Énoncé du sujet :</p>
+                <p class="text-slate-700 italic leading-relaxed">
+                    « Une clinique vétérinaire souhaite informatiser le suivi des animaux et des consultations. Chaque client est identifié par un numéro, un nom, un prénom, un téléphone et une adresse email. Un client peut posséder un ou plusieurs animaux, mais chaque animal appartient obligatoirement à un et un seul client. Pour chaque animal, on enregistre son numéro de puce (identifiant unique), son nom, son espèce (chien, chat, furet...), sa race et sa date de naissance.
+                    Les consultations sont assurées par les vétérinaires de la clinique (identifiés par un matricule, leur nom et leur spécialité). Une consultation a lieu à une date et heure précises, donne lieu à un diagnostic écrit et un montant facturé. Une consultation concerne exactement un seul animal et est effectuée par exactement un seul vétérinaire. Lors d'une consultation, le vétérinaire peut prescrire un ou plusieurs médicaments en précisant la posologie (ex : "2 comprimés par jour pendant 5 jours"). Un médicament est identifié par son code CIP, sa dénomination et son prix unitaire indicatif. »
+                </p>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-sm mt-4 mb-2">A. Dictionnaire des Données Épuré :</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Propriété</th>
+                        <th>Signification</th>
+                        <th>Type Conceptuel</th>
+                        <th>Nature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>numClient</code></td><td>Identifiant unique du propriétaire</td><td>Entier</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>nomClient</code></td><td>Nom de famille du propriétaire</td><td>Texte(50)</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>prenomClient</code></td><td>Prénom du propriétaire</td><td>Texte(50)</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>numPuce</code></td><td>Identifiant puce électronique de l'animal</td><td>Chaîne(15)</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>nomAnimal</code></td><td>Nom usuel de l'animal</td><td>Texte(30)</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>dateNaissance</code></td><td>Date de naissance de l'animal</td><td>Date</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>numConsultation</code></td><td>Numéro séquentiel de la consultation</td><td>Entier</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>dateHeureConsult</code></td><td>Horodatage du rendez-vous médical</td><td>DateTime</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>diagnostic</code></td><td>Compte-rendu clinique du praticien</td><td>Texte</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>codeCIP</code></td><td>Code identifiant de présentation pharmaceutique</td><td>Chaîne(13)</td><td>Donnée élémentaire</td></tr>
+                    <tr><td><code>posologie</code></td><td>Modalité d'administration prescrite</td><td>Texte(100)</td><td>Donnée (Association PRESCRIRE)</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="font-bold text-slate-900 text-sm mt-6 mb-2">B. Schéma Textuel du Modèle Conceptuel (MCD) :</h3>
+            <pre>
++---------------------+                      +---------------------+
+|       CLIENT        |                      |       ANIMAL        |
++---------------------+                      +---------------------+
+| *numClient*         | (1,n)          (1,1) | *numPuce*           |
+| nomClient           |--------POSSEDER------| nomAnimal           |
+| prenomClient        |                      | espece              |
+| telephone           |                      | race                |
+| email               |                      | dateNaissance       |
++---------------------+                      +---------------------+
+                                                        |
+                                                      (1,n)
+                                                        |
+                                                    CONCERNER
+                                                        |
+                                                      (1,1)
++---------------------+                      +---------------------+
+|     VETERINAIRE     |                      |    CONSULTATION     |
++---------------------+                      +---------------------+
+| *matriculeVet*      | (0,n)          (1,1) | *numConsultation*   |
+| nomVet              |-------EFFECTUER------| dateHeureConsult    |
+| specialite          |                      | diagnostic          |
++---------------------+                      | tarifFacture        |
+                                             +---------------------+
+                                                        |
+                                                      (0,n)
+                                                        |
+                                                    PRESCRIRE [posologie]
+                                                        |
+                                                      (0,n)
+                                             +---------------------+
+                                             |     MEDICAMENT      |
+                                             +---------------------+
+                                             | *codeCIP*           |
+                                             | denomination        |
+                                             | prixUnitaire        |
+                                             +---------------------+
+            </pre>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-xs">Explication des choix sémantiques clés :</p>
+                <p class="text-xs text-slate-700 mt-1">
+                    • <code>POSSEDER</code> : Un client possède au moins un animal (1,n) selon l'énoncé. Un animal appartient à un et un seul client (1,1).<br/>
+                    • <code>PRESCRIRE</code> est une association porteuse contenant la propriété <code>posologie</code>, car celle-ci dépend conjointement de la consultation et du médicament prescrit.
+                </p>
+            </div>
+            
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="check-circle-2" style="color: #6E4970;"></i>
+        <span>7. Synthèse Mémorielle & Checklist Avant le Partiel</span>
+    </h2>
+    
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
+                <p class="font-bold text-slate-900 text-sm">Les 5 Réflexes Absolus sur Votre Copie :</p>
+                <p class="text-slate-700">✅ <strong>Souligner impérativement</strong> l'identifiant dans chaque boîte d'entité.</p>
+                <p class="text-slate-700">✅ <strong>Vérifier deux fois</strong> qu'aucune clé étrangère ne s'est glissée dans une boîte d'entité.</p>
+                <p class="text-slate-700">✅ <strong>Relire les cardinalités</strong> à voix basse selon la formule : <em>« Pour UNE occurrence... au minimum ? au maximum ? »</em>.</p>
+                <p class="text-slate-700">✅ <strong>Chasser les données calculées</strong> : pas d'âge, pas de totaux, pas de moyennes dans le MCD.</p>
+                <p class="text-slate-700">✅ <strong>Valider les associations porteuses</strong> : s'assurer qu'aucune patte de l'association n'a un maximum de 1.</p>
+            </div>
+            
 </article>
     </main>
 

@@ -166,6 +166,9 @@
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>1. Les Descripteurs de Fichiers Standards</span></h2>
     
+    
+    
+    
 <p>
 Chaque processus exécuté sous UNIX reçoit automatiquement à sa naissance une table de descripteurs de fichiers comportant trois canaux ouverts :
 </p>
@@ -176,10 +179,25 @@ Chaque processus exécuté sous UNIX reçoit automatiquement à sa naissance une
 </ul>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>2. Tableau Récapitulatif des Redirections</span></h2>
+    
+    
+    
     
 <table>
     <thead>
@@ -224,10 +242,25 @@ Chaque processus exécuté sous UNIX reçoit automatiquement à sa naissance une
 </table>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>3. Les Tubes (Pipes <code>|</code>) & La Philosophie UNIX</span></h2>
+    
+    
+    
     
 <p>
 Le tube <code>|</code> connecte directement la sortie standard (stdout) du programme de gauche à l'entrée standard (stdin) du programme de droite <strong>en mémoire vive</strong>. Les deux processus s'exécutent en parallèle, synchronisés par le tampon du noyau.
@@ -236,10 +269,25 @@ Le tube <code>|</code> connecte directement la sortie standard (stdout) du progr
 ps -eo user | sort | uniq -c | sort -nr | head -n 5</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>4. Les Filtres Indispensables de la Boîte à Outils UNIX</span></h2>
+    
+    
+    
     
 <ul>
     <li><code>grep "motif" fichier</code> : Filtre et extrait les lignes contenant le motif (<code>-v</code> inverse, <code>-i</code> insensible à la casse, <code>-E</code> regex étendue).</li>
@@ -249,6 +297,9 @@ ps -eo user | sort | uniq -c | sort -nr | head -n 5</code></pre>
     <li><code>wc -l</code> : Compte le nombre de lignes (<code>-w</code> pour les mots, <code>-c</code> pour les octets).</li>
     <li><code>tr 'a-z' 'A-Z'</code> : Translitère les caractères (ex: passage en majuscules).</li>
 </ul>
+
+
+
 </article>
     </main>
 

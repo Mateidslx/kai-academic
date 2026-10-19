@@ -166,6 +166,9 @@
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>1. Le Modèle de Sécurité POSIX Standard</span></h2>
     
+    
+    
+    
 <p>
 Chaque fichier ou répertoire sous Linux possède un propriétaire utilisateur (<code>u</code>) et un groupe propriétaire (<code>g</code>).
 <br>Les permissions sont définies par une matrice de 9 bits, regroupés par triplets pour trois populations :
@@ -177,10 +180,25 @@ Chaque fichier ou répertoire sous Linux possède un propriétaire utilisateur (
 </ul>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>2. Sémantique Précise des Droits sur Fichier vs Répertoire</span></h2>
+    
+    
+    
     
 <table>
     <thead>
@@ -219,10 +237,25 @@ Pour pouvoir lire un fichier <code>/home/matei/notes/algo.txt</code>, il ne suff
 </div></div>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>3. Commandes <code>chmod</code>, <code>chown</code> et Masque <code>umask</code></span></h2>
+    
+    
+    
     
 <ul>
     <li><strong>Modification en mode octal :</strong>
@@ -243,16 +276,34 @@ Pour pouvoir lire un fichier <code>/home/matei/notes/algo.txt</code>, il ne suff
 </ul>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #454E75;"></i><span>4. Les Trois Bits Spéciaux</span></h2>
+    
+    
+    
     
 <ul>
     <li><strong>SUID (Set User ID - poids octal 4000) :</strong> Appliqué à un exécutable, le programme s'exécute temporairement avec les privilèges de son <em>propriétaire</em> et non de l'utilisateur qui l'a lancé (ex: <code>/usr/bin/passwd</code> possède le SUID root pour modifier <code>/etc/shadow</code>).</li>
     <li><strong>SGID (Set Group ID - poids octal 2000) :</strong> Sur un répertoire, tout nouveau fichier créé hérite automatiquement du groupe propriétaire du dossier parent (idéal pour le travail collaboratif de groupe).</li>
     <li><strong>Sticky Bit (Poids octal 1000 - affiché 't') :</strong> Sur un répertoire public (comme <code>/tmp</code>), seul le propriétaire d'un fichier peut le supprimer ou le renommer, empêchant un utilisateur d'effacer les fichiers d'un autre.</li>
 </ul>
+
+
+
 </article>
     </main>
 

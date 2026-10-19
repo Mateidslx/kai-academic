@@ -163,55 +163,165 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>1. Le Modèle Relationnel d'Edgar F. Codd</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="binary" style="color: #6E4970;"></i>
+        <span>1. Les Fondements du Modèle Relationnel d'Edgar F. Codd (1970)</span>
+    </h2>
     
-<p>
-Le Modèle Logique de Données (MLD) relationnel structure l'information sous forme de <strong>relations</strong> (tables). Chaque relation est caractérisée par :
-</p>
-<ul>
-    <li>Un nom de table en majuscules (ex: <code>ETUDIANT</code>) ;</li>
-    <li>Une <strong>Clé Primaire (Primary Key - PK)</strong> : ensemble minimal d'attributs dont la valeur identifie de manière unique chaque tuple (ligne), soulignée dans l'écriture formelle : <u>idEtudiant</u> ;</li>
-    <li>Des <strong>Clés Étrangères (Foreign Keys - FK)</strong> : attributs faisant référence à la clé primaire d'une autre relation, obligatoirement préfixés par un dièse <code>#</code> dans l'écriture académique de l'IUT : <code>#idGroupe</code>.</li>
-</ul>
-
-
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Inventé par Edgar F. Codd chez IBM en 1970, le modèle relationnel repose sur la théorie mathématique des relations et de la théorie des ensembles. Une base de données relationnelle est un ensemble de <strong>relations</strong> (terme mathématique pour désigner les tables).
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs">
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+                    <span class="font-bold text-slate-900 text-sm">Vocabulaire Théorique (Codd) :</span>
+                    <ul class="space-y-1 text-slate-700">
+                        <li>• <strong>Relation</strong> : Ensemble de n-uplets (tuples).</li>
+                        <li>• <strong>Tuple (ou n-uplet)</strong> : Une ligne dans une table (occurrence).</li>
+                        <li>• <strong>Attribut</strong> : Une colonne (propriété élémentaire).</li>
+                        <li>• <strong>Domaine</strong> : L'ensemble des valeurs admissibles pour un attribut.</li>
+                        <li>• <strong>Degré</strong> : Nombre d'attributs de la relation.</li>
+                        <li>• <strong>Cardinalité</strong> : Nombre de tuples dans la relation à l'instant $t$.</li>
+                    </ul>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+                    <span class="font-bold text-slate-900 text-sm">Vocabulaire Usuel SGBD / SQL :</span>
+                    <ul class="space-y-1 text-slate-700">
+                        <li>• <strong>Table</strong> : Représentation visuelle d'une relation.</li>
+                        <li>• <strong>Ligne (Enregistrement)</strong> : Un n-uplet de données.</li>
+                        <li>• <strong>Colonne (Champ)</strong> : Un attribut typé.</li>
+                        <li>• <strong>Clé Primaire (Primary Key)</strong> : Attribut ou groupe d'attributs minimal identifiant chaque ligne.</li>
+                        <li>• <strong>Clé Étrangère (Foreign Key)</strong> : Attribut faisant référence à la clé primaire d'une autre table.</li>
+                    </ul>
+                </div>
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>2. Les 4 Règles Algorithmiques de Dérivation MCD $\to$ MLD</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="arrow-right-left" style="color: #6E4970;"></i>
+        <span>2. Les 4 Règles Formelles de Dérivation MCD -> MLD</span>
+    </h2>
     
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Le passage du MCD au MLD relationnel est un processus algorithmique strict ne laissant place à aucune interprétation subjective :
+            </p>
 
-<h3>Règle 1 : Transformation des Entités</h3>
-<p>
-Toute entité du MCD devient une relation (table) dans le MLD. L'identifiant de l'entité devient la clé primaire de la table.
-</p>
+            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2 my-3">
+                <h3 class="font-bold text-slate-900 text-sm">RÈGLE 1 : TRADUCTION DES ENTITÉS</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    Toute entité du MCD devient une <strong>relation (table)</strong> dans le MLD.<br/>
+                    • Son identifiant devient la <strong>clé primaire</strong> de la relation (soulignée en continu).<br/>
+                    • Ses autres propriétés deviennent les <strong>attributs</strong> (colonnes) de la table.
+                </p>
+                <div class="p-2.5 rounded-lg bg-slate-100 font-mono text-xs">
+                    ETUDIANT (<ins>numEtudiant</ins>, nom, prenom, email, dateNaissance)
+                </div>
+            </div>
 
-<h3>Règle 2 : Association Binaire avec Cardinalité $(0,1)$ ou $(1,1)$ d'un côté (Relation 1..N)</h3>
-<p>
-L'association disparaît en tant que table. La clé primaire de l'entité située du côté $(0,n)$ ou $(1,n)$ <strong>migre comme clé étrangère</strong> dans la table de l'entité ayant la cardinalité $(0,1)$ ou $(1,1)$. Les éventuelles propriétés portées par l'association migrent également dans cette table d'accueil.
-</p>
-<pre><code>-- MCD : ETUDIANT (1,1) ------ APPARTENIR ------ (0,n) GROUPE_TD
--- MLD résultant :
-GROUPE_TD (<u>idGroupe</u>, libelleGroupe)
-ETUDIANT (<u>idEtudiant</u>, nom, prenom, #idGroupe)</code></pre>
+            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2 my-3">
+                <h3 class="font-bold text-slate-900 text-sm">RÈGLE 2 : ASSOCIATION BINAIRE DE TYPE (x,1) - (x,n) [1 à n]</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    Pour toute association binaire reliant une entité à cardinalité maximale 1 (côté <code>0,1</code> ou <code>1,1</code>) à une entité à cardinalité maximale n (côté <code>0,n</code> ou <code>1,n</code>) :<br/>
+                    • La clé primaire de l'entité côté $(x,n)$ migre dans la table côté $(x,1)$ en tant que <strong>clé étrangère</strong> (notée avec un <code>#</code> ou soulignée en pointillés).<br/>
+                    • Si l'association possédait des attributs propres, ils migrent également dans la table côté $(x,1)$.
+                </p>
+                <div class="p-2.5 rounded-lg bg-slate-100 font-mono text-xs space-y-1">
+                    <p>PROMOTION (<ins>idPromo</ins>, libelle, anneeScolaire)</p>
+                    <p>ETUDIANT (<ins>numEtudiant</ins>, nom, prenom, #idPromo)</p>
+                </div>
+            </div>
 
-<h3>Règle 3 : Association Binaire $(0,n)/(1,n) \longleftrightarrow (0,n)/(1,n)$ (Relation N..M)</h3>
-<p>
-L'association devient une <strong>table d'association (table de jonction)</strong> à part entière.
-<br>Sa clé primaire est la concaténation composite des clés primaires des entités reliées (qui sont simultanément des clés étrangères).
-</p>
-<pre><code>-- MCD : ETUDIANT (0,n) ------ EVALUER (note) ------ (0,n) CONTROLE
--- MLD résultant :
-ETUDIANT (<u>idEtudiant</u>, nom, prenom)
-CONTROLE (<u>idControle</u>, titre, coefficient)
-NOTE (<u>#idEtudiant</u>, <u>#idControle</u>, valeurNote)</code></pre>
+            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2 my-3">
+                <h3 class="font-bold text-slate-900 text-sm">RÈGLE 3 : ASSOCIATION (x,n) - (x,n) [Plusieurs à Plusieurs] & ASSOCIATIONS N-AIRES</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    Toute association binaire $(x,n) \leftrightarrow (x,n)$ ou toute association de dimension $\ge 3$ (ternaire, ...) devient une <strong>nouvelle relation (table d'association)</strong> :<br/>
+                    • Sa clé primaire est la <strong>concaténation composite</strong> des identifiants de toutes les entités connectées.<br/>
+                    • Chacun de ces attributs est simultanément une clé étrangère faisant référence à sa table respective.<br/>
+                    • Les attributs propres de l'association deviennent les colonnes normales de cette nouvelle table.
+                </p>
+                <div class="p-2.5 rounded-lg bg-slate-100 font-mono text-xs space-y-1">
+                    <p>ETUDIANT (<ins>numEtudiant</ins>, nom, prenom)</p>
+                    <p>MATIERE (<ins>codeMatiere</ins>, intitule, creditsECTS)</p>
+                    <p>NOTER (<ins>#numEtudiant, #codeMatiere</ins>, note, dateEvaluation)</p>
+                </div>
+            </div>
 
-<h3>Règle 4 : Associations N-aires (Ternaires, Quaternaires) & Contrainte d'Intégrité Fonctionnelle (CIF)</h3>
-<p>
-Pour une association ternaire générale (toutes pattes à cardinalité max $n$), l'association devient une table dont la clé primaire est composée des 3 identifiants : <code>TABLE(<u>#idA</u>, <u>#idB</u>, <u>#idC</u>, attributs)</code>.
-<br>Cependant, si l'une des pattes a une cardinalité max égale à $1$ (ex: <code>1,1</code>), il existe une <strong>Contrainte d'Intégrité Fonctionnelle (CIF)</strong> : la clé de la table d'association est réduite aux clés des autres entités !
-</p>
+            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2 my-3">
+                <h3 class="font-bold text-slate-900 text-sm">RÈGLE 4 : CAS PARTICULIER DES ASSOCIATIONS (0,1) - (1,1)</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    La clé de l'entité côté <code>(0,1)</code> migre dans la table côté <code>(1,1)</code> avec une contrainte d'unicité (<code>UNIQUE</code>), OU inversement selon la logique métier prédominante (privilégier l'entité qui a le cycle de vie le plus dépendant pour éviter les valeurs nulles).
+                </p>
+            </div>
+            
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="shield-check" style="color: #6E4970;"></i>
+        <span>3. Intégrité Référentielle & Politiques ON DELETE</span>
+    </h2>
+    
+            <p class="text-sm text-slate-700 leading-relaxed">
+                L'<strong>intégrité référentielle</strong> garantit qu'une clé étrangère ne peut jamais pointer vers un enregistrement parent qui n'existe pas. Que se passe-t-il lors de la suppression d'un enregistrement parent ?
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Clause SQL</th>
+                        <th>Comportement du SGBD</th>
+                        <th>Cas d'Usage Recommandé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>ON DELETE RESTRICT</code> (ou <code>NO ACTION</code>)</td>
+                        <td>Le SGBD bloque et refuse la suppression du parent s'il existe au moins une ligne enfant dépendante.</td>
+                        <td>Comportement par défaut le plus sécuritaire (ex : interdire de supprimer un client s'il a des factures enregistrées).</td>
+                    </tr>
+                    <tr>
+                        <td><code>ON DELETE CASCADE</code></td>
+                        <td>La suppression de la ligne parente entraîne automatiquement la suppression en cascade de toutes les lignes filles.</td>
+                        <td>Lignes filles n'ayant aucun sens sans le parent (ex : supprimer une commande supprime automatiquement ses lignes d'articles).</td>
+                    </tr>
+                    <tr>
+                        <td><code>ON DELETE SET NULL</code></td>
+                        <td>La clé étrangère dans la table fille est positionnée à <code>NULL</code> (requiert que la colonne accepte les nulls).</td>
+                        <td>Optionnel : un salarié dont le département est supprimé passe temporairement en statut « non affecté ».</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="file-code-2" style="color: #6E4970;"></i>
+        <span>4. Exercice Type d'Examen Résolu : Dérivation MLD Complète</span>
+    </h2>
+    
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Reprenons le cas de la Clinique Vétérinaire du Chapitre 1 pour appliquer rigoureusement les 4 règles de dérivation vers le MLD textuel formel.
+            </p>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-900 text-emerald-400 font-mono text-xs space-y-2">
+                <p class="text-slate-400">// --- MODÈLE LOGIQUE DE DONNÉES (MLD) OFFICIEL ---</p>
+                <p>CLIENT (<ins>numClient</ins>, nomClient, prenomClient, telephone, email)</p>
+                <p>VETERINAIRE (<ins>matriculeVet</ins>, nomVet, specialite)</p>
+                <p>ANIMAL (<ins>numPuce</ins>, nomAnimal, espece, race, dateNaissance, #numClient)</p>
+                <p>CONSULTATION (<ins>numConsultation</ins>, dateHeureConsult, diagnostic, tarifFacture, #numPuce, #matriculeVet)</p>
+                <p>MEDICAMENT (<ins>codeCIP</ins>, denomination, prixUnitaire)</p>
+                <p>PRESCRIRE (<ins>#numConsultation, #codeCIP</ins>, posologie)</p>
+            </div>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-xs">Analyse des dérivations :</p>
+                <ul class="list-disc pl-4 space-y-1 text-xs text-slate-700 mt-1">
+                    <li><code>ANIMAL</code> hérite de <code>#numClient</code> car l'association <code>POSSEDER</code> a pour cardinalité (1,1) côté animal et (1,n) côté client (Règle 2).</li>
+                    <li><code>CONSULTATION</code> hérite à la fois de <code>#numPuce</code> (concerne 1 animal) et de <code>#matriculeVet</code> (effectuée par 1 vétérinaire) (Règle 2 appliquée deux fois).</li>
+                    <li><code>PRESCRIRE</code> est une association (0,n)-(0,n) : elle devient une table propre dont la clé primaire composite est <code>(numConsultation, codeCIP)</code> et porte l'attribut <code>posologie</code> (Règle 3).</li>
+                </ul>
+            </div>
+            
 </article>
     </main>
 

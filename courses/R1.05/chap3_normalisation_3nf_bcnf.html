@@ -163,63 +163,149 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>1. Le Rôle Critique de la Normalisation</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="zap" style="color: #6E4970;"></i>
+        <span>1. Motivation : Pourquoi Normaliser une Base de Données ?</span>
+    </h2>
     
-<p>
-La normalisation permet de valider mathématiquement qu'un modèle relationnel ne présente aucune redondance inutile. Une base mal normalisée est exposée à trois anomalies graves :
-</p>
-<ul>
-    <li><strong>Anomalie de mise à jour :</strong> Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente.</li>
-    <li><strong>Anomalie d'insertion :</strong> Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.</li>
-    <li><strong>Anomalie de suppression :</strong> Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même !</li>
-</ul>
-
-
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Une base de données mal conçue souffre de trois anomalies graves qui corrompent les données en production :
+            </p>
+            <ul class="text-xs text-slate-700 space-y-1.5 pl-4 list-disc my-3">
+                <li><strong>Anomalie de Redondance :</strong> La même information est dupliquée des dizaines de fois (ex: le nom et l'adresse d'un client répétés sur chaque ligne de commande). Gaspillage d'espace et risque immédiat de désynchronisation.</li>
+                <li><strong>Anomalie de Mise à Jour :</strong> Si le client change d'adresse, il faut modifier des centaines de lignes. Si une seule ligne est oubliée, la base devient contradictoire.</li>
+                <li><strong>Anomalie d'Insertion et de Suppression :</strong> Impossible d'enregistrer un produit en stock tant qu'il n'a pas été commandé par un client, ou supprimer la dernière commande d'un client supprime par mégarde toutes les informations sur ce client !</li>
+            </ul>
+            <p class="text-sm text-slate-700 leading-relaxed">
+                La <strong>normalisation</strong> est une démarche formelle mathématique permettant de décomposer une relation en plusieurs relations plus petites sans perte d'information, éliminant ces anomalies.
+            </p>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>2. Dépendances Fonctionnelles (DF)</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="git-branch" style="color: #6E4970;"></i>
+        <span>2. Dépendances Fonctionnelles (DF) & Axiomes d'Armstrong</span>
+    </h2>
     
-<p>
-Soit une relation $R$. On dit que l'attribut $B$ <strong>dépend fonctionnellement</strong> de $A$ (noté $A \to B$) si à chaque valeur de $A$ correspond au maximum une seule valeur de $B$.
-</p>
-<ul>
-    <li><strong>DF Élémentaire :</strong> $A \to B$ est élémentaire si aucune sous-partie de $A$ ne détermine $B$.</li>
-    <li><strong>DF Directe :</strong> $A \to B$ est directe s'il n'existe aucun attribut intermédiaire $C$ tel que $A \to C$ et $C \to B$ (absence de transitivité).</li>
-</ul>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-sm">DÉFINITION FORMELLE D'UNE DÉPENDANCE FONCTIONNELLE :</p>
+                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+                    Soit une relation $R$ et deux sous-ensembles d'attributs $X$ et $Y$ de $R$.<br/>
+                    On dit que $X$ détermine fonctionnellement $Y$, noté <strong>$$X 	o Y$$</strong>, si et seulement si pour toute paire de tuples $t_1, t_2 \in R$ :
+                    $$t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y]$$
+                    <em>En clair : la connaissance de la valeur de $X$ détermine de manière UNIQUE la valeur de $Y$.</em>
+                </p>
+            </div>
 
-
+            <h3 class="font-bold text-slate-900 text-sm mt-4 mb-2">Les 3 Axiomes d'Armstrong (Complets et Sains) :</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <p class="font-bold text-slate-900">1. Réflexivité</p>
+                    <p class="text-slate-600 mt-1">Si $Y \subseteq X$, alors $$X 	o Y$$</p>
+                    <p class="text-slate-500 text-[11px] mt-1">(ex : <code>(numEtudiant, nom) -> nom</code>)</p>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <p class="font-bold text-slate-900">2. Augmentation</p>
+                    <p class="text-slate-600 mt-1">Si $X 	o Y$, alors pour tout $Z$ : $$XZ 	o YZ$$</p>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <p class="font-bold text-slate-900">3. Transitivité</p>
+                    <p class="text-slate-600 mt-1">Si $X 	o Y$ et $Y 	o Z$, alors $$X 	o Z$$</p>
+                </div>
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>3. Les Formes Normales Expliquées Pas-à-Pas</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="sliders-horizontal" style="color: #6E4970;"></i>
+        <span>3. Les Formes Normales : 1FN, 2FN, 3FN et BCNF</span>
+    </h2>
     
+            <table>
+                <thead>
+                    <tr>
+                        <th>Forme Normale</th>
+                        <th>Condition Formelle Mathématique</th>
+                        <th>Règle Pratique & Contre-Exemple Éliminé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1FN</strong> (Première FN)</td>
+                        <td>Tous les attributs sont atomiques (indivisibles).</td>
+                        <td>❌ Une colonne contenant une liste <code>"0612345678, 0559010203"</code> ou un champ composite <code>"64600 Anglet"</code> viole la 1FN.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2FN</strong> (Deuxième FN)</td>
+                        <td>1FN vérifiée ET tout attribut non-clé dépend <em>pleinement</em> de la totalité de la clé primaire (pas de sous-dépendance partielle).</td>
+                        <td>Concerne les relations dont la clé est <strong>composite</strong> (plusieurs attributs). Si un attribut dépend d'une seule partie de la clé (ex: <code>(numFacture, refProduit) -> nomProduit</code>), alors <code>nomProduit</code> viole la 2FN car il dépend uniquement de <code>refProduit</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3FN</strong> (Troisième FN)</td>
+                        <td>2FN vérifiée ET aucun attribut non-clé ne dépend d'un autre attribut non-clé (pas de dépendance transitive).</td>
+                        <td>Pour toute DF $X 	o A$, soit $X$ est une super-clé, soit $A$ est un attribut premier (clé).<br/>❌ <code>numCommande -> codePostal -> ville</code> viole la 3FN car <code>ville</code> dépend de <code>codePostal</code> qui n'est pas clé.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BCNF</strong> (Boyce-Codd)</td>
+                        <td>Pour toute DF non-triviale $X 	o Y$, <strong>$X$ est obligatoirement une clé candidate</strong>.</td>
+                        <td>Forme la plus stricte. Élimine les anomalies résiduelles lorsque plusieurs clés candidates composites se chevauchent.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+</article>
 
-<h3>1ère Forme Normale (1FN) : Atomicité</h3>
-<p>
-Une relation est en 1FN si et seulement si tous ses attributs sont <strong>atomiques</strong> (indivisibles, mono-valués) et qu'elle possède une clé primaire identifiant chaque tuple.
-<br><em>Contre-exemple :</em> Une colonne <code>telephones</code> contenant <code>"0612345678, 0559010203"</code> viole la 1FN.
-</p>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="check-square" style="color: #6E4970;"></i>
+        <span>4. Exercice Type d'Examen Résolu : Décomposition sans Perte</span>
+    </h2>
+    
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Voici un exercice classique posé aux examens de R1.05 à l'IUT d'Anglet :
+            </p>
+            <div class="p-4 rounded-xl border border-slate-300 bg-slate-50 text-xs space-y-1.5 my-3">
+                <p class="font-bold text-slate-900">Énoncé :</p>
+                <p class="text-slate-700">Soit la relation non normalisée $R(idEtudiant, nom, idStage, raisonSociale, villeEntreprise, noteSoutenance)$.</p>
+                <p class="text-slate-700">On donne les Dépendances Fonctionnelles suivantes :</p>
+                <ul class="list-disc pl-5 font-mono text-[11px] text-slate-800 space-y-0.5">
+                    <li>DF1 : idEtudiant -> nom, idStage, noteSoutenance</li>
+                    <li>DF2 : idStage -> raisonSociale, villeEntreprise</li>
+                    <li>DF3 : idEtudiant, idStage -> noteSoutenance</li>
+                </ul>
+                <p class="text-slate-900 font-semibold mt-2">Questions :</p>
+                <ol class="list-decimal pl-5 space-y-0.5 text-slate-700">
+                    <li>Quelle est la clé primaire de $R$ ?</li>
+                    <li>En quelle forme normale se trouve $R$ ? Justifier rigoureusement.</li>
+                    <li>Décomposer $R$ en relations conformes à la 3FN sans perte d'information.</li>
+                </ol>
+            </div>
 
-<h3>2ème Forme Normale (2FN) : Dépendance Totale par rapport à la Clé</h3>
-<p>
-Une relation est en 2FN si elle est en 1FN et que tout attribut non-clé dépend de la <strong>totalité de la clé primaire</strong> (et non pas d'une partie stricte de celle-ci).
-<br><em>Cas immédiat :</em> Toute relation dont la clé primaire est constituée d'un seul attribut et qui est en 1FN est <strong>automatiquement en 2FN</strong> !
-</p>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-xs">Solution Modèle :</p>
+                <div class="text-xs text-slate-700 mt-1 space-y-2">
+                    <p><strong>1. Clé primaire :</strong> Calculons la fermeture de <code>idEtudiant</code> :<br/>
+                    $$idEtudiant^+ = \{idEtudiant, nom, idStage, noteSoutenance\} \cup \{raisonSociale, villeEntreprise\} = R$$
+                    La clé primaire minimale de $R$ est donc <code>idEtudiant</code>.</p>
 
-<h3>3ème Forme Normale (3FN) : Pas de Dépendance Transitive</h3>
-<p>
-Une relation est en 3FN si elle est en 2FN et que tout attribut non-clé dépend <strong>directement</strong> de la clé primaire, sans dépendre d'un autre attribut non-clé ($A \to B \to C$ interdit pour $C$ non-clé).
-<br><em>Exemple classique :</em> <code>COMMANDE(<u>idCmd</u>, dateCmd, idClient, nomClient, villeClient)</code>.
-<br>Ici, <code>idCmd \to idClient</code> et <code>idClient \to nomClient</code>. <code>nomClient</code> dépend de la clé primaire par transitivité à travers <code>idClient</code> $\implies$ VIOLATION DE LA 3FN.
-<br><strong>Solution :</strong> Décomposer en deux relations <code>COMMANDE(<u>idCmd</u>, dateCmd, #idClient)</code> et <code>CLIENT(<u>idClient</u>, nomClient, villeClient)</code>.
-</p>
+                    <p><strong>2. Forme normale :</strong><br/>
+                    • $R$ est en 1FN (attributs atomiques).<br/>
+                    • $R$ est en 2FN car la clé primaire est simple (1 seul attribut <code>idEtudiant</code>), donc aucune sous-clé ne peut exister.<br/>
+                    • $R$ <strong>n'est PAS en 3FN</strong> car il existe une dépendance transitive entre attributs non-clés :
+                    $$idEtudiant 	o idStage \quad 	ext{et} \quad idStage 	o raisonSociale, villeEntreprise$$
+                    Or <code>idStage</code> n'est pas une clé de $R$.</p>
 
-<h3>Forme Normale de Boyce-Codd (BCNF / FNBC)</h3>
-<p>
-Une relation est en BCNF si pour toute dépendance fonctionnelle non triviale $X \to Y$, $X$ est obligatoirement une super-clé (contient une clé candidate).
-</p>
+                    <p><strong>3. Décomposition 3FN sans perte :</strong><br/>
+                    On isole la DF transitive dans une table dédiée :<br/>
+                    • <code>ENTREPRISE_STAGE (<ins>idStage</ins>, raisonSociale, villeEntreprise)</code><br/>
+                    • <code>ETUDIANT (<ins>idEtudiant</ins>, nom, noteSoutenance, #idStage)</code><br/>
+                    Les deux tables obtenues sont en 3FN et en BCNF.</p>
+                </div>
+            </div>
+            
 </article>
     </main>
 

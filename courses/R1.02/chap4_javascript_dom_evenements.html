@@ -166,6 +166,9 @@
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #366687;"></i><span>1. Le Modèle Objet du Document (DOM) & Sélection Moderne</span></h2>
     
+    
+    
+    
 <p>
 Le navigateur parse le code HTML brut et produit un arbre d'objets en mémoire : le <strong>DOM</strong> (<em>Document Object Model</em>). En JavaScript moderne, on bannit les anciennes méthodes comme <code>document.getElementById</code> ou <code>document.getElementsByClassName</code> au profit des sélecteurs CSS normalisés :
 </p>
@@ -179,10 +182,25 @@ cards.forEach(card =&gt; {
 });</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #366687;"></i><span>2. Événements, Phase de Capture & Bouillonnement (Bubbling)</span></h2>
+    
+    
+    
     
 <p>
 Lors d'un clic utilisateur, l'événement traverse d'abord le DOM du sommet vers la cible (phase de capture), puis remonte de la cible vers la racine (phase de bouillonnement ou <em>bubbling</em>).
@@ -206,10 +224,25 @@ form.addEventListener('submit', (event) =&gt; {
 });</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #366687;"></i><span>3. Programmation Asynchrone : De Callback Hell à Async/Await</span></h2>
+    
+    
+    
     
 <p>
 JavaScript s'exécute dans un unique thread d'exécution cadencé par une boucle d'événements (<strong>Event Loop</strong>). Pour ne jamais geler l'interface graphique lors d'appels réseau, toutes les opérations I/O sont asynchrones.
@@ -244,6 +277,9 @@ async function fetchCourseData(courseCode) {
         throw error; // Propage l'erreur pour le gestionnaire d'interface
     }
 }</code></pre>
+
+
+
 </article>
     </main>
 

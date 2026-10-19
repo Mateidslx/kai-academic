@@ -163,150 +163,89 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>1. Les Slides Officielles du Cours (01-specifs - 74 Diapos)</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="box" style="color: #287271;"></i>
+        <span>1. Les Spécifications Externes : La Boîte Noire</span>
+    </h2>
     
-<div class="my-6 rounded-2xl overflow-hidden border border-slate-300 shadow-lg bg-slate-900" style="height: 520px;">
-    <iframe src="https://patrick-etcheverry.github.io/r1.01-initiation-au-dev/Cours/01-specifs" class="w-full h-full border-0" allowfullscreen></iframe>
-</div>
-
-
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Les <strong>spécifications externes</strong> décrivent le comportement attendu du système du point de vue exclusif de l'utilisateur final. Le programme est considéré comme une <em>boîte noire hermétique</em>.
+            </p>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-sm">LES 3 SCÉNARIOS DE TEST OBLIGATOIRES EN PARTIEL :</p>
+                <div class="text-xs text-slate-700 mt-1 space-y-1">
+                    <p>1. <strong>Scénario Nominal :</strong> Le cas d'usage le plus représentatif où toutes les entrées sont parfaitement valides et dans la moyenne.</p>
+                    <p>2. <strong>Scénario Alternatif / Limite :</strong> Les valeurs aux frontières du domaine (ex: valeur zéro, borne maximale admissible, tableau vide).</p>
+                    <p>3. <strong>Scénario d'Exception :</strong> Valeurs invalides ou interdites (ex: division par zéro, montant négatif, chaîne trop longue). Le programme ne doit pas planter mais afficher un message d'erreur contrôlé.</p>
+                </div>
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>2. De l'Importance de la Phase d'Analyse (Slide 6-8)</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="file-spreadsheet" style="color: #287271;"></i>
+        <span>2. Le Dictionnaire des Données & les 4 Natures Formelles</span>
+    </h2>
     
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
-<strong>« Si j'avais une heure pour résoudre un problème, je prendrais 55 minutes à réfléchir au problème et 5 minutes à penser aux solutions. »</strong> — Albert Einstein (cité par M. Etcheverry, Slide 7).
-</div></div>
-<p>
-Les problèmes traités en algorithmique sont ciblés. Pour analyser et spécifier les caractéristiques d'un problème, nous utilisons deux points de vue complémentaires :
-</p>
-<ul>
-    <li><strong>Les Spécifications Externes</strong> : Le point de vue de l'utilisateur (la boîte noire étanche).</li>
-    <li><strong>Les Spécifications Internes</strong> : Le point de vue du concepteur (la boîte blanche détaillée).</li>
-</ul>
-
-
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Dans la méthode d'Etcheverry, chaque variable manipulée au sein de l'algorithme possède une <strong>Nature Formelle</strong> rigoureusement assignée :
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nature</th>
+                        <th>Symbole</th>
+                        <th>Rôle Sémantique</th>
+                        <th>Origine & Destination</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Donnée</strong></td>
+                        <td><code>D</code></td>
+                        <td>Information fournie au programme sans laquelle il ne peut commencer son calcul.</td>
+                        <td>Entrée clavier, paramètre en entrée (valeur).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Résultat</strong></td>
+                        <td><code>R</code></td>
+                        <td>Information calculée par le programme destinée à être transmise à l'utilisateur.</td>
+                        <td>Sortie écran, valeur retournée par une fonction.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Donnée / Résultat</strong></td>
+                        <td><code>D/R</code></td>
+                        <td>Information existante qui est modifiée/mise à jour sur place pendant le traitement.</td>
+                        <td>Variable passée par adresse/référence qui change d'état.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermédiaire</strong></td>
+                        <td><code>INT</code></td>
+                        <td>Variable temporaire locale servant uniquement aux calculs partiels ou aux compteurs de boucle.</td>
+                        <td>Variable locale temporaire non exportée.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>3. Les Spécifications Externes : Les 2 Étapes Obligatoires (Slide 13-23)</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="check-circle" style="color: #287271;"></i>
+        <span>3. Spécification d'un Traitement : Le But à l'Infinitif</span>
+    </h2>
     
-<p>
-Les spécifications externes définissent <strong>ce que le programme doit faire</strong> sans s'intéresser à la manière dont il est programmé :
-</p>
-<h3>Étape 1 : Identifier les 3 Catégories de Scénarios Possibles</h3>
-<ul>
-    <li><strong>Scénario Nominal</strong> : Le comportement le plus fréquent et idéal (ex. : l'utilisateur saisit un montant valide en euros, le programme affiche la conversion en dollars).</li>
-    <li><strong>Scénario Alternatif</strong> : Comportements moins fréquents ou cas particuliers (ex. : conversion d'un montant de 0 €, montant avec centimes).</li>
-    <li><strong>Scénario d'Exception</strong> : Comportement du programme en cas d'erreur ou de saisie hors domaine (ex. : montant négatif, saisie de lettres au lieu d'un nombre).</li>
-</ul>
-
-<h3>Étape 2 : Élaborer un Jeu d'Essai Complet</h3>
-<p>
-Pour chaque scénario identifié, on élabore un jeu d'essai formalisant ce que l'utilisateur voit, ce qu'il saisit au clavier et ce que le programme restitue à l'écran :
-</p>
-<table>
-    <thead>
-        <tr>
-            <th>N° Test</th>
-            <th>Scénario Visé</th>
-            <th>Données Saisies (Clavier)</th>
-            <th>Résultat Attendu (Écran)</th>
-            <th>Justification Mathématique</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>T1</td>
-            <td>Nominal</td>
-            <td><code>montantEuros = 100.0</code>, <code>taux = 1.10</code></td>
-            <td><code>110.00 $</code></td>
-            <td>Cas standard positif : $100 \times 1.10 = 110$</td>
-        </tr>
-        <tr>
-            <td>T2</td>
-            <td>Alternatif (Borne)</td>
-            <td><code>montantEuros = 0.0</code>, <code>taux = 1.10</code></td>
-            <td><code>0.00 $</code></td>
-            <td>Cas de la valeur nulle : $0 \times 1.10 = 0$</td>
-        </tr>
-        <tr>
-            <td>T3</td>
-            <td>Exception (Invalide)</td>
-            <td><code>montantEuros = -50.0</code></td>
-            <td>Message : <em>« Erreur : Montant positif requis ! »</em></td>
-            <td>Garde de domaine : montant négatif interdit</td>
-        </tr>
-    </tbody>
-</table>
-
-
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>4. Les Spécifications Internes : Informations & Traitements (Slide 24-58)</span></h2>
-    
-<p>
-Tout programme informatique est l'assemblage de deux composants fondamentaux :
-</p>
-<div class="p-4 rounded-xl bg-slate-100 border border-slate-300 text-center font-bold text-slate-800 text-base my-3">
-    Programme Informatique = INFORMATIONS (Données) + TRAITEMENTS (Actions)
-</div>
-
-<h3>4.1 Spécifier une Information (Slide 42-49)</h3>
-<p>
-Pour chaque information manipulée, on doit obligatoirement renseigner 5 propriétés dans le <strong>Dictionnaire des Données</strong> :
-</p>
-<ol>
-    <li><strong>Nom</strong> : Identifiant significatif en notation camelCase, sans accents ni espaces (ex. : <code>prixUnitaireHT</code>).</li>
-    <li><strong>Signification</strong> : Texte court décrivant sans ambiguïté le rôle précis de l'information.</li>
-    <li><strong>Type</strong> : Type conceptuel formel (<code>Entier</code>, <code>Réel</code>, <code>Caractère</code>, <code>Booléen</code>, <code>Chaîne</code>).</li>
-    <li><strong>Mode d'initialisation</strong> : Origine de la première valeur (Saisie utilisateur au clavier, Calcul interne, Constante, Valeur par défaut).</li>
-    <li><strong>Statut d'exportation</strong> : Précise si l'information doit être affichée à l'écran (Exportée = Oui) ou reste interne (Exportée = Non).</li>
-</ol>
-
-<h3>4.2 Les 4 Natures Canoniques d'Informations</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Nature Formelle</th>
-            <th>Définition Rigoureuse</th>
-            <th>Exemple Concret</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Donnée (D)</strong></td>
-            <td>Information fournie de l'extérieur (clavier, fichier) nécessaire à l'exécution du traitement.</td>
-            <td><code>rayon</code> d'un cercle saisi par l'utilisateur</td>
-        </tr>
-        <tr>
-            <td><strong>Résultat (R)</strong></td>
-            <td>Information calculée ou produite par le traitement et destinée à être exportée à l'utilisateur.</td>
-            <td><code>perimetre</code> affiché à l'écran</td>
-        </tr>
-        <tr>
-            <td><strong>Intermédiaire (I)</strong></td>
-            <td>Information créée temporairement pour stocker un calcul partiel ou un état interne.</td>
-            <td><code>sommePartielle</code>, variable de swap <code>temp</code></td>
-        </tr>
-        <tr>
-            <td><strong>Constante (C)</strong></td>
-            <td>Information dont la valeur est fixée dès la conception et ne varie jamais.</td>
-            <td><code>PI = 3.14159</code>, <code>TAUX_TVA = 0.20</code></td>
-        </tr>
-    </tbody>
-</table>
-
-<h3>4.3 Spécifier un Traitement (Slide 51-57)</h3>
-<ul>
-    <li><strong>Nom</strong> : Identifiant du traitement.</li>
-    <li><strong>But</strong> : Phrase unique commençant impérativement par un <strong>verbe à l'infinitif</strong> (ex. : <em>« Calculer le périmètre d'un cercle »</em>).</li>
-    <li><strong>Données nécessaires</strong> : Liste des informations en entrée nécessaires au calcul.</li>
-    <li><strong>Résultats produits</strong> : Liste des informations calculées en sortie.</li>
-</ul>
+            <div class="callout-exam">
+                <p class="font-bold text-amber-900 text-sm">🚨 RÈGLE FORMELLE DE FORMULATION DU BUT (IUT D'ANGLET) :</p>
+                <p class="text-xs text-amber-800 mt-1 leading-relaxed">
+                    Le <strong>But</strong> d'une action commence obligatoirement par un <strong>VERBE À L'INFINITIF</strong> suivi d'un complément d'objet précis, sans jamais mentionner les détails internes de programmation !<br/>
+                    • ✅ <em>« Calculer la moyenne des notes des étudiants admis »</em><br/>
+                    • ❌ Rejeté : <em>« On fait une boucle pour sommer les notes et diviser »</em> (ceci est un traitement, pas un but).
+                </p>
+            </div>
+            
 </article>
     </main>
 

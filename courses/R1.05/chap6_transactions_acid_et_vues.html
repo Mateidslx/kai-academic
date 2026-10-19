@@ -163,80 +163,78 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>1. Les Propriétés ACID des Transactions</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="shield" style="color: #6E4970;"></i>
+        <span>1. Les 4 Propriétés ACID d'une Transaction</span>
+    </h2>
     
-<p>
-Une <strong>transaction</strong> est une unité logique de traitement composée d'une suite d'opérations SQL qui doivent s'exécuter de manière atomique.
-</p>
-<table>
-    <thead>
-        <tr>
-            <th>Propriété</th>
-            <th>Signification Sémantique</th>
-            <th>Mécanisme SGBD</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>A - Atomicité</strong></td>
-            <td>Tout ou rien. Si une opération échoue au milieu, la transaction est intégralement annulée.</td>
-            <td>Journal des transactions (Redo/Undo logs), commande <code>ROLLBACK</code>.</td>
-        </tr>
-        <tr>
-            <td><strong>C - Cohérence</strong></td>
-            <td>La transaction fait passer la base d'un état intègre à un autre état intègre, en respectant toutes les contraintes.</td>
-            <td>Validation des clés primaires, étrangères et des contraintes <code>CHECK</code>.</td>
-        </tr>
-        <tr>
-            <td><strong>I - Isolation</strong></td>
-            <td>Deux transactions exécutées simultanément ne doivent pas produire d'interférences (lecture sale, lecture non répétable).</td>
-            <td>Verrous (locks) et niveaux d'isolation (Read Committed, Serializable).</td>
-        </tr>
-        <tr>
-            <td><strong>D - Durabilité</strong></td>
-            <td>Dès que la transaction est validée (<code>COMMIT</code>), ses effets sont persistants et garantis contre toute panne matérielle.</td>
-            <td>Écriture synchrone des journaux sur disque non-volatile.</td>
-        </tr>
-    </tbody>
-</table>
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Une <strong>transaction</strong> est une suite d'opérations SQL exécutées comme une unité de travail logique indivisible. Pour garantir l'intégrité de la base de données, tout SGBD transactionnel doit respecter les 4 propriétés fondamentales <strong>ACID</strong> :
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs">
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="zap"></i>A - Atomicité (All or Nothing)</span>
+                    <p class="text-slate-700 leading-relaxed">La transaction s'exécute entièrement ou pas du tout. Si une panne ou une erreur survient au milieu, toutes les modifications déjà effectuées sont annulées (<code>ROLLBACK</code>).</p>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="check-circle"></i>C - Cohérence (Consistency)</span>
+                    <p class="text-slate-700 leading-relaxed">La transaction fait passer la base d'un état valide à un autre état valide, en respectant scrupuleusement toutes les contraintes d'intégrité (CHECK, clés étrangères, unicité).</p>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="eye-off"></i>I - Isolation</span>
+                    <p class="text-slate-700 leading-relaxed">Deux transactions exécutées simultanément ne doivent pas interférer. Les modifications d'une transaction en cours restent invisibles aux autres transactions tant qu'elle n'est pas validée.</p>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="hard-drive"></i>D - Durabilité</span>
+                    <p class="text-slate-700 leading-relaxed">Dès qu'une transaction est validée (<code>COMMIT</code>), ses effets sont gravés de manière définitive sur disque (via le journal des transactions WAL) et survivront à tout crash serveur ou coupure de courant.</p>
+                </div>
+            </div>
 
+            <pre>
+-- Exemple de virement bancaire sécurisé
+BEGIN TRANSACTION;
 
-</article>
+UPDATE COMPTE SET solde = solde - 200.00 WHERE numCompte = 1001;
+UPDATE COMPTE SET solde = solde + 200.00 WHERE numCompte = 2002;
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>2. Commandes de Contrôle des Transactions</span></h2>
-    
-<pre><code>-- Début d'un virement bancaire entre deux comptes
-UPDATE Compte SET solde = solde - 100 WHERE idCompte = 1;
-SAVEPOINT apres_debit;
-
-UPDATE Compte SET solde = solde + 100 WHERE idCompte = 2;
-
--- Si tout s'est bien déroulé : validation définitive
+-- Si les deux updates réussissent sans violation de contrainte (ex: solde >= 0)
 COMMIT;
-
--- Si une erreur survient : retour à l'état initial
--- ROLLBACK;</code></pre>
-
-
+-- En cas d'erreur
+-- ROLLBACK;
+            </pre>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>3. Vues Relationnelles (CREATE VIEW)</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="eye" style="color: #6E4970;"></i>
+        <span>2. Les Vues SQL (CREATE VIEW) & Intérêts de Sécurité</span>
+    </h2>
     
-<p>
-Une <strong>vue</strong> est une table virtuelle définie par une requête SQL stockée. Elle ne stocke aucune donnée elle-même, mais calcule dynamiquement ses lignes à chaque consultation.
-</p>
-<pre><code>-- Création d'une vue sécurisée masquant les données confidentielles
-CREATE OR REPLACE VIEW VueEtudiantsReussite AS
-SELECT e.idEtudiant, e.nom, e.prenom, g.codeGroupe,
-       ROUND(AVG(n.valeurNote), 2) AS moyenne
-FROM Etudiant e
-JOIN GroupeTD g ON e.idGroupe = g.idGroupe
-JOIN Note n ON e.idEtudiant = n.idEtudiant
-GROUP BY e.idEtudiant, e.nom, e.prenom, g.codeGroupe
-HAVING AVG(n.valeurNote) >= 10.0;</code></pre>
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Une <strong>vue</strong> est une table virtuelle dont le contenu est défini dynamiquement par le résultat d'une requête <code>SELECT</code> mémorisée dans le catalogue du SGBD.
+            </p>
+            <ul class="text-xs text-slate-700 space-y-1.5 pl-4 list-disc my-3">
+                <li><strong>Simplification des Requêtes :</strong> Permet d'encapsuler des jointures complexes de 5 tables dans un objet simple réutilisable.</li>
+                <li><strong>Sécurité & Confidentialité des Données :</strong> Permet de donner accès à un utilisateur à certaines colonnes ou certaines lignes sans lui donner accès à la table sous-jacente (ex: masquer le salaire ou le numéro de sécurité sociale).</li>
+                <li><strong>Indépendance Logique :</strong> Si le schéma physique change, on peut réécrire la vue pour que les applications clientes continuent de fonctionner sans modifier leur code source.</li>
+            </ul>
+            <pre>
+-- Création d'une vue sécurisée pour l'administration des notes
+CREATE OR REPLACE VIEW V_MOYENNES_ETUDIANTS AS
+SELECT e.numEtudiant, e.nom, e.prenom, p.libelle AS promotion,
+       ROUND(AVG(n.note), 2) AS moyenne_generale,
+       COUNT(n.codeModule) AS nb_epreuves_passees
+FROM ETUDIANT e
+JOIN PROMOTION p ON e.idPromo = p.idPromo
+LEFT JOIN NOTER n ON e.numEtudiant = n.numEtudiant
+GROUP BY e.numEtudiant, e.nom, e.prenom, p.libelle;
+
+-- Interrogation immédiate de la vue comme une table normale
+SELECT * FROM V_MOYENNES_ETUDIANTS WHERE moyenne_generale >= 10.0;
+            </pre>
+            
 </article>
     </main>
 

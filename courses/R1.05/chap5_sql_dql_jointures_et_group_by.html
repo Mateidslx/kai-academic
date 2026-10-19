@@ -163,83 +163,122 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>1. L'Ordre d'Évaluation Sémantique d'une Requête SQL</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="list-ordered" style="color: #6E4970;"></i>
+        <span>1. L'Ordre d'Évaluation Logique d'une Requête SQL</span>
+    </h2>
     
-<p>
-Pour ne jamais se tromper dans la rédaction d'une requête, il faut connaître l'ordre dans lequel le moteur SQL évalue les clauses :
-</p>
-<ol>
-    <li><code>FROM</code> & <code>JOIN</code> : Construction du produit cartésien et filtrage des jointures.</li>
-    <li><code>WHERE</code> : Filtrage ligne par ligne (tuples individuels). <em>Les fonctions d'agrégat y sont interdites !</em></li>
-    <li><code>GROUP BY</code> : Partitionnement des tuples en groupes disjoints.</li>
-    <li><code>HAVING</code> : Filtrage global appliqué aux <strong>groupes</strong> après agrégation.</li>
-    <li><code>SELECT</code> : Projection des colonnes et calcul des expressions demandées.</li>
-    <li><code>ORDER BY</code> : Tri final des résultats projetés.</li>
-</ol>
-
-
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Le SGBD n'exécute pas une requête SQL dans l'ordre où elle est écrite ! Comprendre l'ordre logique d'exécution est indispensable pour écrire des requêtes complexes sans erreur :
+            </p>
+            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-2 text-xs font-mono my-3">
+                <p class="text-slate-900 font-bold">Ordre d'écriture :</p>
+                <p class="text-slate-600">SELECT &gt; FROM &gt; JOIN &gt; WHERE &gt; GROUP BY &gt; HAVING &gt; ORDER BY &gt; LIMIT</p>
+                <div class="border-t border-slate-200 pt-2"></div>
+                <p class="text-[#6E4970] font-bold">Ordre logique d'évaluation interne par le SGBD :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-slate-800">
+                    <li><code>FROM &amp; JOIN</code> : Construction du produit cartésien et application des jointures.</li>
+                    <li><code>WHERE</code> : Filtrage ligne à ligne selon les prédicats de base (avant tout regroupement).</li>
+                    <li><code>GROUP BY</code> : Partitionnement des lignes restantes en sous-groupes selon les attributs de groupement.</li>
+                    <li><code>HAVING</code> : Filtrage des groupes selon des conditions sur fonctions d'agrégation.</li>
+                    <li><code>SELECT</code> : Projection des colonnes demandées et calcul des expressions.</li>
+                    <li><code>DISTINCT</code> : Élimination des doublons de lignes dans le résultat.</li>
+                    <li><code>ORDER BY</code> : Tri final des résultats (utilise les alias du SELECT).</li>
+                    <li><code>LIMIT / OFFSET</code> : Pagination et restriction du nombre de lignes retournées.</li>
+                </ol>
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>2. Les Différents Types de Jointures</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="git-merge" style="color: #6E4970;"></i>
+        <span>2. Maîtrise Complète des Jointures Internes & Externes</span>
+    </h2>
     
-<ul>
-    <li><strong>Jointure Interne (<code>INNER JOIN</code>) :</strong> Ne conserve que les couples de lignes vérifiant la condition de jointure. Si un étudiant n'a pas de note, il n'apparaît pas.
-    <pre><code>SELECT e.nom, e.prenom, n.valeurNote
-FROM Etudiant e
-INNER JOIN Note n ON e.idEtudiant = n.idEtudiant;</code></pre></li>
-    <li><strong>Jointure Externe Gauche (<code>LEFT OUTER JOIN</code>) :</strong> Conserve <em>toutes</em> les lignes de la table de gauche (ici <code>Etudiant</code>), même si elles n'ont aucune correspondance à droite (les colonnes de droite sont alors remplies de <code>NULL</code>).
-    <pre><code>-- Affiche TOUS les étudiants, y compris ceux qui n'ont AUCUNE note
-SELECT e.nom, e.prenom, NVL(TO_CHAR(n.valeurNote), 'Non noté') AS note
-FROM Etudiant e
-LEFT JOIN Note n ON e.idEtudiant = n.idEtudiant;</code></pre></li>
-</ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type de Jointure</th>
+                        <th>Syntaxe SQL Standard</th>
+                        <th>Comportement & Lignes Retenues</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>INNER JOIN</strong> (Jointure Interne)</td>
+                        <td><code>FROM T1 INNER JOIN T2 ON T1.id = T2.id_t1</code></td>
+                        <td>Ne retient <strong>que les lignes ayant une correspondance stricte</strong> dans les deux tables. Les lignes orphelines sont ignorées.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LEFT OUTER JOIN</strong> (Jointure Gauche)</td>
+                        <td><code>FROM T1 LEFT JOIN T2 ON T1.id = T2.id_t1</code></td>
+                        <td>Conserve <strong>toutes les lignes de la table de gauche (T1)</strong>. Si aucune correspondance n'existe dans T2, les colonnes de T2 sont remplies de <code>NULL</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RIGHT OUTER JOIN</strong> (Jointure Droite)</td>
+                        <td><code>FROM T1 RIGHT JOIN T2 ON T1.id = T2.id_t1</code></td>
+                        <td>Symétrique : conserve toutes les lignes de la table de droite (T2), complétées par des <code>NULL</code> si pas de T1.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FULL OUTER JOIN</strong> (Jointure Totale)</td>
+                        <td><code>FROM T1 FULL JOIN T2 ON T1.id = T2.id_t1</code></td>
+                        <td>Conserve toutes les lignes des deux tables, avec des <code>NULL</code> de part et d'autre en l'absence de correspondance.</td>
+                    </tr>
+                </tbody>
+            </table>
 
-
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-xs">Exemple classique de partiel : Trouver les clients qui n'ont JAMAIS commandé</p>
+                <pre class="mt-2 text-xs">
+SELECT c.numClient, c.nomClient, c.prenomClient
+FROM CLIENT c
+LEFT JOIN COMMANDE cmd ON c.numClient = cmd.numClient
+WHERE cmd.numCommande IS NULL;
+                </pre>
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>3. Agrégation : La Règle d'Or du GROUP BY</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="pie-chart" style="color: #6E4970;"></i>
+        <span>3. La Règle d'Or du GROUP BY et HAVING</span>
+    </h2>
     
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
-<strong>RÈGLE D'OR DE MARQUESUZAÀ :</strong><br>
-Dès qu'une requête comporte une clause <code>GROUP BY</code>, <strong>TOUTE colonne mentionnée dans le <code>SELECT</code> qui n'est pas emballée dans une fonction d'agrégation (COUNT, SUM, AVG, MIN, MAX) DOIT OBLIGATOIREMENT figurer dans la liste du <code>GROUP BY</code> !</strong>
-</div></div>
+            <div class="callout-exam">
+                <p class="font-bold text-amber-900 text-sm">🚨 LA RÈGLE D'OR ABSOLUE DU GROUP BY :</p>
+                <p class="text-xs text-amber-800 mt-1 leading-relaxed">
+                    Dès qu'une requête comporte une clause <code>GROUP BY</code>, <strong>TOUT attribut présent dans la clause SELECT qui n'est pas enveloppé dans une fonction d'agrégation (COUNT, SUM, AVG, MIN, MAX) DOIT OBLIGATOIREMENT FIGURER DANS LA CLAUSE GROUP BY</strong> !<br/>
+                    Toute violation de cette règle provoque une erreur SQL immédiate du SGBD (<code>ERROR: column must appear in the GROUP BY clause</code>).
+                </p>
+            </div>
 
-<pre><code>-- Moyenne des notes par groupe TD pour les groupes ayant une moyenne >= 10
-SELECT g.codeGroupe, 
-       COUNT(DISTINCT e.idEtudiant) AS nbEtudiants,
-       ROUND(AVG(n.valeurNote), 2) AS moyenneGroupe
-FROM GroupeTD g
-JOIN Etudiant e ON g.idGroupe = e.idGroupe
-JOIN Note n ON e.idEtudiant = n.idEtudiant
-GROUP BY g.idGroupe, g.codeGroupe
-HAVING AVG(n.valeurNote) >= 10.0
-ORDER BY moyenneGroupe DESC;</code></pre>
+            <h3 class="font-bold text-slate-900 text-sm mt-4 mb-2">Différence Fondamentale entre WHERE et HAVING :</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <p class="font-bold text-slate-900">WHERE (Filtre Ligne)</p>
+                    <p class="text-slate-600 mt-1">S'applique <em>avant</em> le regroupement, ligne par ligne. Ne peut <strong>JAMAIS</strong> contenir de fonction d'agrégation (ex: <code>WHERE AVG(note) >= 10</code> est une aberration syntaxique !).</p>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <p class="font-bold text-slate-900">HAVING (Filtre Groupe)</p>
+                    <p class="text-slate-600 mt-1">S'applique <em>après</em> le regroupement sur les groupes calculés. S'utilise exclusivement pour filtrer sur le résultat d'agrégats (ex: <code>HAVING AVG(note) >= 10.0</code>).</p>
+                </div>
+            </div>
 
-
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>4. Analyse des Pièges et Erreurs Fréquentes aux Examens de R1.05</span></h2>
-    
-<div class="space-y-3">
-    <div class="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-950">
-        <strong>❌ Piège 1 : Mettre une fonction d'agrégation dans le WHERE</strong><br>
-        <code>SELECT nom FROM Note WHERE AVG(valeurNote) > 10; -- ERREUR SQL ORA-00934: group function is not allowed here</code><br>
-        <strong>Correction :</strong> Utiliser la clause <code>HAVING AVG(valeurNote) > 10</code> après un <code>GROUP BY</code>.
-    </div>
-    <div class="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-950">
-        <strong>❌ Piège 2 : Confondre COUNT(*) et COUNT(colonne)</strong><br>
-        <code>COUNT(*)</code> compte le nombre total de lignes (même si des colonnes valent NULL).
-        <br><code>COUNT(colonne)</code> ne compte que les lignes où <code>colonne IS NOT NULL</code> !
-    </div>
-    <div class="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-950">
-        <strong>❌ Piège 3 : Les comparaisons avec la valeur NULL</strong><br>
-        En SQL, <code>colonne = NULL</code> ne renvoie JAMAIS vrai car NULL représente l'inconnu ! Il faut obligatoirement écrire <code>colonne IS NULL</code> ou <code>colonne IS NOT NULL</code>.
-    </div>
-</div>
+            <pre class="mt-4">
+-- Lister les promotions ayant au moins 15 étudiants avec une moyenne générale supérieure à 12
+SELECT p.libelle, COUNT(e.numEtudiant) AS nb_etudiants, ROUND(AVG(n.note), 2) AS moyenne_promo
+FROM PROMOTION p
+JOIN ETUDIANT e ON p.idPromo = e.idPromo
+JOIN NOTER n ON e.numEtudiant = n.numEtudiant
+GROUP BY p.idPromo, p.libelle
+HAVING COUNT(DISTINCT e.numEtudiant) >= 15
+   AND AVG(n.note) >= 12.0
+ORDER BY moyenne_promo DESC;
+            </pre>
+            
 </article>
     </main>
 

@@ -166,6 +166,9 @@
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>1. Pourquoi Utiliser NumPy pour le Calcul Matriciel en BUT ?</span></h2>
     
+    
+    
+    
 <p>
 En Python standard, manipuler des matrices avec des listes imbriquées (<code>[[1, 2], [3, 4]]</code>) pose deux problèmes majeurs :
 </p>
@@ -178,10 +181,25 @@ La bibliothèque <strong>NumPy</strong> résout cela en allouant des blocs conti
 </p>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>2. Déclaration et Inspection de Matrices ndarray</span></h2>
+    
+    
+    
     
 <pre><code class="language-python">import numpy as np
 
@@ -202,10 +220,25 @@ print("Transposée de A :
 ", A.T)</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>3. Piège Fondamental : Produit de Hadamard vs Produit Matriciel</span></h2>
+    
+    
+    
     
 <div class="p-4 rounded-xl bg-rose-50 border border-rose-300 text-rose-950 text-xs my-4">
     <strong>🚨 ERREUR COMMISE PAR 80% DES ÉTUDIANTS EN TP :</strong><br>
@@ -222,10 +255,25 @@ print("Résultat du vrai produit matriciel A @ A :
 ", produit_matriciel)</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>4. Module numpy.linalg : Déterminant, Inverse et Résolution de Systèmes</span></h2>
+    
+    
+    
     
 <p>
 Le sous-module <code>numpy.linalg</code> regroupe les fonctions de base de l'algèbre linéaire numérique :
@@ -253,10 +301,25 @@ else:
     print("Matrice singulière : impossible d'inverser.")</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>5. Application en Traitement d'Images : Filtre de Convolution $3 	imes 3$</span></h2>
+    
+    
+    
     
 <p>
 Une image en niveaux de gris est une matrice 2D de pixels où chaque valeur est comprise entre 0 et 255. Un filtre de détection de contours (opérateur laplacien) s'applique par un produit de convolution local :
@@ -271,6 +334,9 @@ noyau_laplacien = np.array([
 print("Noyau de convolution (somme nulle = conservation luminance) :")
 print(noyau_laplacien)
 print("Somme du noyau :", np.sum(noyau_laplacien))  # 0</code></pre>
+
+
+
 </article>
     </main>
 

@@ -166,6 +166,9 @@
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>1. Les Entiers Signés en Complément à Deux ($C_2$)</span></h2>
     
+    
+    
+    
 <p>
 Pour représenter les nombres négatifs dans l'UAL sans avoir à fabriquer des soustracteurs matériels séparés et sans avoir de double zéro ($+0$ et $-0$), tous les processeurs utilisent le <strong>complément à deux</strong> sur $N$ bits.
 </p>
@@ -223,10 +226,25 @@ $$[-2^{N-1} ; +2^{N-1} - 1]$$
 ==> (-45)_10 codé en C2 sur 8 bits est (11010011)_2 = (D3)_16</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>2. Détection du Dépassement de Capacité (OVERFLOW)</span></h2>
+    
+    
+    
     
 <p>
 Lors d'une addition de deux nombres signés dans l'UAL, un dépassement de capacité (overflow) se produit si et seulement si :
@@ -243,10 +261,25 @@ Si $V = 1$, il y a dépassement arithmétique !
 </div></div>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>3. Nombres Réels à Virgule Flottante (Norme IEEE 754)</span></h2>
+    
+    
+    
     
 <p>
 La norme IEEE 754 code les nombres réels sous forme scientifique binaire normalisée :
@@ -267,6 +300,9 @@ $$V = (-1)^s \times (1.m) \times 2^{e - \text{biais}}$$
     <li>Si $e = 0$ et $m = 0$ : représente le zéro ($+0$ ou $-0$).</li>
     <li>Si $e = 0$ et $m \neq 0$ : nombres dénormalisés (permettent la dégradation gracieuse vers zéro).</li>
 </ul>
+
+
+
 </article>
     </main>
 

@@ -163,79 +163,140 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>1. Définition et Vocabulaire des Matrices</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="grid" style="color: #C25444;"></i>
+        <span>1. Définition Formelle d'une Matrice & Notations</span>
+    </h2>
     
-<p>
-Une <strong>matrice</strong> $A$ à coefficients réels de dimension $n \times p$ (notée $A \in \mathcal{M}_{n, p}(\mathbb{R})$) est un tableau rectangulaire comprenant $n$ lignes et $p$ colonnes :
-</p>
-$$A = \begin{pmatrix} 
-a_{1,1} & a_{1,2} & \dots & a_{1,p} \\ 
-a_{2,1} & a_{2,2} & \dots & a_{2,p} \\ 
-\vdots & \vdots & \ddots & \vdots \\ 
-a_{n,1} & a_{n,2} & \dots & a_{n,p} 
-\end{pmatrix} = (a_{i,j})_{\substack{1 \le i \le n \\ 1 \le j \le p}}$$
-<p>
-L'indice $i$ désigne le numéro de la ligne ($1 \le i \le n$) et l'indice $j$ désigne le numéro de la colonne ($1 \le j \le p$).
-</p>
-
-<h3>Matrices Particulières Remarquables</h3>
-<ul>
-    <li><strong>Matrice Carrée :</strong> Possède autant de lignes que de colonnes ($n = p$). L'ensemble est noté $\mathcal{M}_n(\mathbb{R})$.</li>
-    <li><strong>Matrice Ligne :</strong> Matrice de dimension $1 \times p$ (vecteur ligne).</li>
-    <li><strong>Matrice Colonne :</strong> Matrice de dimension $n \times 1$ (vecteur colonne).</li>
-    <li><strong>Matrice Diagonale :</strong> Matrice carrée dont tous les coefficients hors de la diagonale principale sont nuls : $a_{i,j} = 0$ pour tout $i \neq j$.</li>
-    <li><strong>Matrice Identité $I_n$ :</strong> Matrice carrée diagonale où tous les termes diagonaux valent $1$ et tous les autres valent $0$ :
-    $$I_n = \begin{pmatrix} 1 & 0 & \dots & 0 \\ 0 & 1 & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & 1 \end{pmatrix}$$
-    Elle joue le rôle d'élément neutre pour la multiplication : pour toute matrice $A \in \mathcal{M}_{n, p}$, $I_n \times A = A$ et $A \times I_p = A$.</li>
-    <li><strong>Matrice Nulle $0_{n, p}$ :</strong> Tous ses coefficients sont nuls.</li>
-</ul>
-
-
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Une <strong>matrice</strong> est un tableau rectangulaire de nombres réels ou complexes ordonnés en lignes et en colonnes. En informatique, les matrices sont au cœur des transformations graphiques 3D, du traitement d'images, des réseaux de neurones (Deep Learning), des moteurs de recherche (algorithme PageRank de Google) et de la théorie des graphes.
+            </p>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-sm">DÉFINITION RIGOUROUSE :</p>
+                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+                    Soient $n, p \in \mathbb{N}^*$. Une matrice $A$ de dimension $n \times p$ à coefficients dans $\mathbb{R}$, notée $A \in \mathcal{M}_{n, p}(\mathbb{R})$, est une famille d'éléments $(a_{i,j})$ avec $1 \le i \le n$ (indice de ligne) et $1 \le j \le p$ (indice de colonne) :
+                </p>
+                $$A = \begin{pmatrix} 
+                a_{1,1} & a_{1,2} & \dots & a_{1,p} \\ 
+                a_{2,1} & a_{2,2} & \dots & a_{2,p} \\ 
+                \vdots & \vdots & \ddots & \vdots \\ 
+                a_{n,1} & a_{n,2} & \dots & a_{n,p} 
+                \end{pmatrix}$$
+            </div>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>2. Opérations Algébriques Fondamentales</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="box" style="color: #C25444;"></i>
+        <span>2. Typologie des Matrices Particulières Remarquables</span>
+    </h2>
     
-
-<h3>A. Addition et Multiplication par un Scalaire</h3>
-<p>
-L'addition de deux matrices n'est possible que si elles ont <strong>exactement les mêmes dimensions</strong> $n \times p$. Elle s'effectue composante par composante : $(A + B)_{i,j} = a_{i,j} + b_{i,j}$.
-<br>La multiplication par un scalaire $\lambda \in \mathbb{R}$ multiplie chaque coefficient : $(\lambda A)_{i,j} = \lambda \cdot a_{i,j}$.
-</p>
-
-<h3>B. Produit Matriciel (Ligne par Colonne)</h3>
-<p>
-Soit $A \in \mathcal{M}_{n, p}(\mathbb{R})$ et $B \in \mathcal{M}_{p, m}(\mathbb{R})$. Le produit $C = A \times B$ est une matrice de dimension $n \times m$.
-</p>
-<div class="p-4 rounded-xl bg-slate-100 border border-slate-300 text-center text-sm">
-    $$c_{i,j} = \sum_{k=1}^{p} a_{i,k} \cdot b_{k,j} = a_{i,1}b_{1,j} + a_{i,2}b_{2,j} + \dots + a_{i,p}b_{p,j}$$
-</div>
-
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
-<strong>🚨 LES DEUX PIÈGES CRITIQUES DU CALCUL MATRICIEL (EXAMEN IUT) :</strong>
-<ol>
-    <li><strong>Non-Commutativité :</strong> En général, $A \times B \neq B \times A$. L'ordre des facteurs est capital ! Inverser l'ordre des matrices peut conduire à un résultat complètement différent, voire impossible à calculer.</li>
-    <li><strong>Diviseurs de Zéro :</strong> En algèbre matricielle, $A \times B = 0$ <em>n'implique absolument pas</em> que $A = 0$ ou $B = 0$ ! Deux matrices non nulles peuvent avoir un produit strictement nul.</li>
-</ol>
-</div></div>
-
-
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type de Matrice</th>
+                        <th>Condition Mathématique Formelle</th>
+                        <th>Exemple Typique</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Matrice Carrée</strong></td>
+                        <td>$n = p$ (autant de lignes que de colonnes). Notée $\mathcal{M}_n(\mathbb{R})$.</td>
+                        <td>$$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \in \mathcal{M}_2(\mathbb{R})$$</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Matrice Diagonale</strong></td>
+                        <td>Carrée et $a_{i,j} = 0$ pour tout $i \neq j$.</td>
+                        <td>$$\text{diag}(3, -1, 5) = \begin{pmatrix} 3 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 5 \end{pmatrix}$$</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Matrice Identité $I_n$</strong></td>
+                        <td>Diagonale avec $a_{i,i} = 1$ pour tout $i$.</td>
+                        <td>$$I_3 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$$</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Triangulaire Supérieure</strong></td>
+                        <td>Carrée avec $a_{i,j} = 0$ pour tout $i > j$ (zéros sous la diagonale).</td>
+                        <td>$$\begin{pmatrix} 2 & 4 & 1 \\ 0 & 5 & -3 \\ 0 & 0 & 7 \end{pmatrix}$$</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Triangulaire Inférieure</strong></td>
+                        <td>Carrée avec $a_{i,j} = 0$ pour tout $i < j$ (zéros au-dessus de la diagonale).</td>
+                        <td>$$\begin{pmatrix} 1 & 0 & 0 \\ 4 & 2 & 0 \\ -1 & 3 & 6 \end{pmatrix}$$</td>
+                    </tr>
+                </tbody>
+            </table>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #C25444;"></i><span>3. La Transposition</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="layers" style="color: #C25444;"></i>
+        <span>3. Le Produit Matriciel : Formule, Algorithme & Cas Concret</span>
+    </h2>
     
-<p>
-La <strong>transposée</strong> d'une matrice $A \in \mathcal{M}_{n, p}$, notée $A^T$ ou $^{t}A$, est la matrice de dimension $p \times n$ obtenue en échangeant ses lignes et ses colonnes : $(A^T)_{j,i} = a_{i,j}$.
-</p>
-<ul>
-    <li>$(A^T)^T = A$</li>
-    <li>$(A + B)^T = A^T + B^T$</li>
-    <li>$(\lambda A)^T = \lambda A^T$</li>
-    <li><strong>Propriété fondamentale du produit :</strong> $(A \times B)^T = B^T \times A^T$ (inversion de l'ordre !).</li>
-    <li>Une matrice carrée est dite <strong>symétrique</strong> si $A^T = A$, et <strong>antisymétrique</strong> si $A^T = -A$.</li>
-</ul>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-sm">CONDITION D'ALIGNEMENT DES DIMENSIONS (OBLIGATOIRE) :</p>
+                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+                    Le produit $A \times B$ n'est possible <strong>que si le nombre de colonnes de $A$ est strictement égal au nombre de lignes de $B$</strong> :
+                    $$(n \times \mathbf{p}) \times (\mathbf{p} \times m) \implies (n \times m)$$
+                    Chaque coefficient $c_{i,j}$ de la matrice produit $C$ est la somme des produits des termes de la ligne $i$ de $A$ par la colonne $j$ de $B$ :
+                    $$c_{i,j} = \sum_{k=1}^{p} a_{i,k} \cdot b_{k,j} = a_{i,1}b_{1,j} + a_{i,2}b_{2,j} + \dots + a_{i,p}b_{p,j}$$
+                </p>
+            </div>
+
+            <h3 class="font-bold text-slate-900 text-sm mt-4 mb-2">Calcul d'un Exemple Complet Pas-à-Pas :</h3>
+            <p class="text-xs text-slate-700">Soient $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ et $B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$ :</p>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono space-y-1.5 my-2">
+                <p>c_11 = (1 * 5) + (2 * 7) = 5 + 14 = 19</p>
+                <p>c_12 = (1 * 6) + (2 * 8) = 6 + 16 = 22</p>
+                <p>c_21 = (3 * 5) + (4 * 7) = 15 + 28 = 43</p>
+                <p>c_22 = (3 * 6) + (4 * 8) = 18 + 32 = 50</p>
+            </div>
+            $$C = A \times B = \begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}$$
+
+            <div class="callout-exam">
+                <p class="font-bold text-amber-900 text-sm">🚨 LES DEUX PIÈGES MAJEURS DE PARTIEL :</p>
+                <div class="text-xs text-amber-800 mt-1 space-y-1">
+                    <p>1. <strong>NON-COMMUTATIVITÉ :</strong> En général, $$A \times B \neq B \times A$$. Dans notre exemple, $B \times A = \begin{pmatrix} 23 & 34 \\ 31 & 46 \end{pmatrix} \neq A \times B$. Inverser l'ordre des matrices est sanctionné par zéro.</p>
+                    <p>2. <strong>DIVISEURS DE ZÉRO :</strong> $A \times B = 0$ n'implique absolument pas que $A = 0$ ou $B = 0$ ! Deux matrices non nulles peuvent avoir un produit strictement nul.</p>
+                </div>
+            </div>
+            
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="terminal" style="color: #C25444;"></i>
+        <span>4. Vérification Numérique en Python (NumPy)</span>
+    </h2>
+    
+            <pre>
+import numpy as np
+
+# Définition des deux matrices
+A = np.array([[1, 2],
+              [3, 4]], dtype=float)
+
+B = np.array([[5, 6],
+              [7, 8]], dtype=float)
+
+# 1. Produit matriciel (Opérateur @ ou np.dot)
+C = A @ B
+print("Produit A @ B :\n", C)
+
+# 2. Vérification de la non-commutativité
+BA = B @ A
+print("Produit B @ A :\n", BA)
+print("Sont-ils égaux ?", np.array_equal(C, BA)) # Affiche: False
+
+# 3. Transposée et propriété (A @ B).T == B.T @ A.T
+print("(A @ B).T == B.T @ A.T :", np.allclose((A @ B).T, B.T @ A.T)) # Affiche: True
+            </pre>
+            
 </article>
     </main>
 

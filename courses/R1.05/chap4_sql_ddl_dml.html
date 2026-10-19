@@ -163,88 +163,106 @@
 
     <!-- Chapter Masterclass Content -->
     <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>1. Création de Schéma Conforme aux Standards IUT (DDL)</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="terminal" style="color: #6E4970;"></i>
+        <span>1. Le Langage SQL DDL (Data Definition Language)</span>
+    </h2>
     
-<p>
-Voici le script complet inspiré des TP et partiels de M. Marquesuzaà (base de données sportive / restaurant) :
-</p>
-<pre><code>-- Suppression sécurisée préalable dans l'ordre inverse des dépendances
-DROP TABLE Note CASCADE CONSTRAINTS;
-DROP TABLE Controle CASCADE CONSTRAINTS;
-DROP TABLE Etudiant CASCADE CONSTRAINTS;
-DROP TABLE GroupeTD CASCADE CONSTRAINTS;
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Le LDD (Langage de Définition de Données) permet de créer, modifier et supprimer les objets d'une base de données relationnelle sous un SGBD (PostgreSQL, Oracle, MySQL).
+            </p>
+            <div class="callout-def">
+                <p class="font-bold text-slate-900 text-sm">SYNTAXE FORMELLE DE CREATE TABLE AVEC CONTRAINTES NOMMÉES :</p>
+                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+                    M. Marquesuzaà exige que <strong>toutes les contraintes soient explicitement nommées</strong> avec le mot-clé <code>CONSTRAINT</code> selon la nomenclature officielle :<br/>
+                    • <code>pk_nomtable</code> pour la clé primaire.<br/>
+                    • <code>fk_nomtable_tablecible</code> pour la clé étrangère.<br/>
+                    • <code>ck_nomtable_nomattribut</code> pour les contraintes de domaine CHECK.<br/>
+                    • <code>uq_nomtable_nomattribut</code> pour l'unicité UNIQUE.
+                </p>
+            </div>
+            <pre>
+-- Ordre de suppression inverse des dépendances (pour éviter les erreurs de clés étrangères)
+DROP TABLE IF EXISTS NOTER CASCADE;
+DROP TABLE IF EXISTS ETUDIANT CASCADE;
+DROP TABLE IF EXISTS PROMOTION CASCADE;
 
--- 1. Table GroupeTD (Entité indépendante)
-CREATE TABLE GroupeTD (
-    idGroupe NUMBER(4) CONSTRAINT pk_groupetd PRIMARY KEY,
-    codeGroupe VARCHAR2(10) CONSTRAINT uq_code_groupe UNIQUE NOT NULL,
-    effectifMax NUMBER(2) DEFAULT 28 CONSTRAINT ck_effectif CHECK (effectifMax BETWEEN 10 AND 35)
+-- 1. Table parente PROMOTION
+CREATE TABLE PROMOTION (
+    idPromo       INT GENERATED ALWAYS AS IDENTITY,
+    libelle       VARCHAR(50) NOT NULL,
+    anneeScolaire CHAR(9) NOT NULL,
+    CONSTRAINT pk_promotion PRIMARY KEY (idPromo),
+    CONSTRAINT uq_promotion_libelle UNIQUE (libelle),
+    CONSTRAINT ck_promotion_annee CHECK (anneeScolaire LIKE '____-____')
 );
 
--- 2. Table Etudiant (Clé étrangère vers GroupeTD)
-CREATE TABLE Etudiant (
-    idEtudiant NUMBER(8) CONSTRAINT pk_etudiant PRIMARY KEY,
-    nom VARCHAR2(50) NOT NULL,
-    prenom VARCHAR2(50) NOT NULL,
-    email VARCHAR2(100) CONSTRAINT uq_etudiant_email UNIQUE NOT NULL,
+-- 2. Table fille ETUDIANT
+CREATE TABLE ETUDIANT (
+    numEtudiant   INT GENERATED ALWAYS AS IDENTITY,
+    nom           VARCHAR(50) NOT NULL,
+    prenom        VARCHAR(50) NOT NULL,
+    email         VARCHAR(120) NOT NULL,
     dateNaissance DATE NOT NULL,
-    idGroupe NUMBER(4) NOT NULL,
-    CONSTRAINT fk_etudiant_groupe FOREIGN KEY (idGroupe) 
-        REFERENCES GroupeTD(idGroupe)
+    idPromo       INT NOT NULL,
+    CONSTRAINT pk_etudiant PRIMARY KEY (numEtudiant),
+    CONSTRAINT uq_etudiant_email UNIQUE (email),
+    CONSTRAINT ck_etudiant_email CHECK (email LIKE '%@%.%'),
+    CONSTRAINT ck_etudiant_naissance CHECK (dateNaissance < CURRENT_DATE),
+    CONSTRAINT fk_etudiant_promotion FOREIGN KEY (idPromo)
+        REFERENCES PROMOTION(idPromo)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
-
--- 3. Table Controle
-CREATE TABLE Controle (
-    idControle NUMBER(6) CONSTRAINT pk_controle PRIMARY KEY,
-    titreControle VARCHAR2(80) NOT NULL,
-    dateControle DATE DEFAULT SYSDATE NOT NULL,
-    coefficient NUMBER(3,1) DEFAULT 1.0 CONSTRAINT ck_coef CHECK (coefficient > 0)
-);
-
--- 4. Table associative Note (Clé primaire composite & doubles clés étrangères)
-CREATE TABLE Note (
-    idEtudiant NUMBER(8),
-    idControle NUMBER(6),
-    valeurNote NUMBER(4,2) NOT NULL,
-    CONSTRAINT pk_note PRIMARY KEY (idEtudiant, idControle),
-    CONSTRAINT fk_note_etudiant FOREIGN KEY (idEtudiant) 
-        REFERENCES Etudiant(idEtudiant) ON DELETE CASCADE,
-    CONSTRAINT fk_note_controle FOREIGN KEY (idControle) 
-        REFERENCES Controle(idControle) ON DELETE CASCADE,
-    CONSTRAINT ck_valeur_note CHECK (valeurNote BETWEEN 0.0 AND 20.0)
-);</code></pre>
-
-
+            </pre>
+            
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>2. Les Actions Référentielles sur les Clés Étrangères</span></h2>
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-5 h-5 shrink-0" data-lucide="edit-3" style="color: #6E4970;"></i>
+        <span>2. Le Langage SQL DML (Data Manipulation Language)</span>
+    </h2>
     
-<ul>
-    <li><code>ON DELETE CASCADE</code> : Si un étudiant est supprimé, toutes ses notes associées sont automatiquement détruites pour préserver l'intégrité.</li>
-    <li><code>ON DELETE SET NULL</code> : La clé étrangère prend la valeur NULL si l'enregistrement parent est supprimé (exige que la colonne autorise les NULL).</li>
-    <li><code>ON DELETE RESTRICT</code> (ou comportement par défaut sans clause) : Empêche formellement la suppression d'un parent s'il possède encore des enfants référents.</li>
-</ul>
+            <p class="text-sm text-slate-700 leading-relaxed">
+                Le LMD permet de manipuler les données contenues dans les relations : insertion, mise à jour et suppression.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-3 text-xs">
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+                    <p class="font-bold text-slate-900">1. INSERT INTO</p>
+                    <p class="text-slate-600">Insère un ou plusieurs n-uplets :</p>
+                    <pre class="text-[11px] p-2">
+INSERT INTO PROMOTION (libelle, anneeScolaire)
+VALUES ('BUT1-INFO-G1', '2026-2027');
+                    </pre>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+                    <p class="font-bold text-slate-900">2. UPDATE ... SET</p>
+                    <p class="text-slate-600">Modifie des n-uplets existants :</p>
+                    <pre class="text-[11px] p-2">
+UPDATE ETUDIANT
+SET email = 'matei.new@univ-pau.fr'
+WHERE numEtudiant = 42;
+                    </pre>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+                    <p class="font-bold text-slate-900">3. DELETE FROM</p>
+                    <p class="text-slate-600">Supprime des n-uplets selon prédicat :</p>
+                    <pre class="text-[11px] p-2">
+DELETE FROM ETUDIANT
+WHERE numEtudiant = 42;
+                    </pre>
+                </div>
+            </div>
 
-
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #6E4970;"></i><span>3. Ordres de Manipulation de Données (DML)</span></h2>
-    
-<pre><code>-- Insertion de données valides
-INSERT INTO GroupeTD (idGroupe, codeGroupe, effectifMax) VALUES (1, 'TD2', 26);
-INSERT INTO Etudiant (idEtudiant, nom, prenom, email, dateNaissance, idGroupe) 
-VALUES (20260001, 'DE SAINT LEGER', 'Matei', 'matei@univ-pau.fr', TO_DATE('2005-08-15', 'YYYY-MM-DD'), 1);
-
--- Modification sécurisée avec WHERE
-UPDATE Etudiant 
-SET email = 'matei.desaintleger@univ-pau.fr'
-WHERE idEtudiant = 20260001;
-
--- Suppression ciblée
-DELETE FROM Note WHERE valeurNote < 5.0;</code></pre>
+            <div class="callout-exam">
+                <p class="font-bold text-amber-900 text-sm">🚨 LE PIÈGE MORTEL DE L'OUBLI DE LA CLAUSE WHERE :</p>
+                <p class="text-xs text-amber-800 mt-1 leading-relaxed">
+                    Exécuter <code>DELETE FROM ETUDIANT;</code> ou <code>UPDATE ETUDIANT SET idPromo = 1;</code> sans clause <code>WHERE</code> affecte <strong>l'intégralité des enregistrements de la table</strong> ! En production d'entreprise, cette erreur entraîne une perte massive de données irrécupérable sans restauration de sauvegarde.
+                </p>
+            </div>
+            
 </article>
     </main>
 

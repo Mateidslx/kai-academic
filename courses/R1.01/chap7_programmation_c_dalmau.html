@@ -166,6 +166,9 @@
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>1. Le Rôle de la Programmation Machine à l'IUT d'Anglet</span></h2>
     
+    
+    
+    
 <p>
 Après la conception formelle sur table avec <strong>M. Patrick Etcheverry</strong> (spécifications externes, dictionnaire des données, arbres de décomposition et schémas de flot de données), la mise en œuvre pratique en C / C++ est encadrée par <strong>M. Sébastien Dalmau</strong>.
 </p>
@@ -174,10 +177,25 @@ En programmation système et en langage C (norme ANSI / ISO C99), la machine n'o
 </p>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>2. Modèle Mémoire d'un Processus en Langage C</span></h2>
+    
+    
+    
     
 <p>
 Lorsqu'un exécutable compilé est chargé en mémoire vive par le système d'exploitation (Linux), son espace d'adressage virtuel est partitionné en quatre segments distincts :
@@ -207,10 +225,25 @@ Lorsqu'un exécutable compilé est chargé en mémoire vive par le système d'ex
 </ul>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>3. Types Primitifs C99 &amp; Tailles Mémoire (sizeof)</span></h2>
+    
+    
+    
     
 <table>
     <thead>
@@ -268,10 +301,25 @@ Lorsqu'un exécutable compilé est chargé en mémoire vive par le système d'ex
 </table>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>4. Adresses Mémoire, Opérateurs de Pointeurs &amp; Typage Fort</span></h2>
+    
+    
+    
     
 <p>
 Un <strong>pointeur</strong> est une variable contenant l'adresse mémoire d'une autre variable en RAM.
@@ -302,10 +350,25 @@ int main(void)
 }</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>5. Passage par Adresse aux Fonctions (Simulation de la Référence)</span></h2>
+    
+    
+    
     
 <p>
 En langage C ANSI, <strong>tous les paramètres sont obligatoirement transmis par valeur</strong> (par copie). Pour qu'une fonction puisse modifier une variable appartenant à la fonction appelante, on lui transmet l'adresse de la variable :
@@ -338,10 +401,25 @@ int main(void)
 }</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>6. Arithmétique des Pointeurs &amp; Équivalence avec les Tableaux</span></h2>
+    
+    
+    
     
 <p>
 En C, le nom d'un tableau se convertit implicitement en un pointeur constant vers son premier élément : <code>tab == &amp;tab[0]</code>.
@@ -360,10 +438,25 @@ int *p = tab; // p pointe sur tab[0]
 printf("Element indice 2 : %d\n", *(p + 2));</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>7. Allocation Dynamique dans le Tas : malloc, calloc, realloc &amp; free</span></h2>
+    
+    
+    
     
 <p>
 Lorsque la dimension des données n'est pas connue à la compilation, on alloue dynamiquement la mémoire sur le tas via <code>&lt;stdlib.h&gt;</code> :
@@ -383,10 +476,25 @@ Lorsque la dimension des données n'est pas connue à la compilation, on alloue 
 </div>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>8. Les 5 Pièges Mortels de la Mémoire en C</span></h2>
+    
+    
+    
     
 <ol class="space-y-3 my-4">
     <li class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-950 text-xs">
@@ -412,10 +520,25 @@ Lorsque la dimension des données n'est pas connue à la compilation, on alloue 
 </ol>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>9. L'Audit Mémoire avec Valgrind (Exigence Stricte M. Dalmau)</span></h2>
+    
+    
+    
     
 <p>
 À l'IUT d'Anglet, aucun code ne peut être validé sans avoir subi un audit dynamique rigoureux avec <strong>Valgrind</strong>.
@@ -446,10 +569,25 @@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./tp_etudia
 </ul>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>10. Programme Complet de Référence : Tableau Dynamique &amp; Métrologie</span></h2>
+    
+    
+    
     
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -497,6 +635,9 @@ int main(void)
 
     return EXIT_SUCCESS;
 }</code></pre>
+
+
+
 </article>
     </main>
 

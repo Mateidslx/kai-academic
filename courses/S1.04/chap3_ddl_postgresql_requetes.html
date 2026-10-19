@@ -166,6 +166,9 @@
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #684E7A;"></i><span>1. Création Physique de la Base PostgreSQL : Script DDL</span></h2>
     
+    
+    
+    
 <p>
 Le Data Definition Language (DDL) permet de matérialiser le MLD validé au sein du SGBD relationnel PostgreSQL avec toutes ses contraintes d'intégrité :
 </p>
@@ -219,10 +222,25 @@ CREATE TABLE reservation (
 );</code></pre>
 
 
+
+
+
+    
+
+
+
+    
+
+
+
+    
 </article>
 
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
     <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #684E7A;"></i><span>2. Requêtes d'Analyse Métier Avancées (Jointures & Agrégations)</span></h2>
+    
+    
+    
     
 <p>
 Une fois les données insérées, les gestionnaires de la plateforme Ongi Etorri interrogent la base pour extraire des indicateurs de gestion :
@@ -241,6 +259,9 @@ WHERE r.statut_paiement = 'PAYE'
 GROUP BY p.id_prestataire, p.raison_sociale, p.commune
 HAVING SUM(r.nb_participants) >= 5
 ORDER BY chiffre_affaires_ttc DESC;</code></pre>
+
+
+
 </article>
     </main>
 
