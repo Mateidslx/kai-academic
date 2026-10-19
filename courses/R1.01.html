@@ -1,840 +1,393 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<html lang="fr" class="light" data-theme="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="theme-color" content="#287271">
-    <title>R1.01 — Initiation au Développement (Algorithmique Formelle & Programmation) — KAI Academic</title>
-    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#287271"/>
+    <title>R1.01 — Initiation au Développement (C++) — KAI Academic</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <style>
         :root {
             color-scheme: light;
             --accent-color: #287271;
-            --scotopic-bg: #FAF8F5;
-            --scotopic-card: #FFFFFF;
-            --scotopic-text: #0F172A;
-            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: var(--scotopic-bg);
-            color: var(--scotopic-text);
-            line-height: 1.85;
-            letter-spacing: 0.03em;
-            word-spacing: 0.08em;
+            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            color: #0f172a;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            min-height: 100vh;
+        }
+        .font-dyslexic {
+            font-family: 'Lexend', system-ui, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            word-spacing: 0.09em !important;
+            line-height: 1.85 !important;
+            background-color: #faf8f2 !important;
+            background-image: none !important;
         }
         .glass-card {
-            background: var(--scotopic-card);
-            border: 1px solid var(--scotopic-border);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
-            transition: all 180ms ease-out;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 150ms ease-out;
+        }
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.2rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.6875rem;
+            font-weight: 600;
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
 
-    
-    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
-    <div class="border-b border-slate-200 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
-                    <i data-lucide="home" class="w-4 h-4"></i>
-                    <span>Hub</span>
-                </a>
-                <span class="text-slate-300">/</span>
-                <a href="index.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
-                    R1.01
-                </a>
-                
-            </div>
-            <div class="flex items-center gap-2">
-                <a href="../revision/R1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>Fiche Révision</span>
-                </a>
-                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                    Moodle #25021
-                </span>
-            </div>
+    <!-- Top Breadcrumb & Controls -->
+    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
+        <nav class="flex items-center gap-2 text-xs text-slate-500">
+            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../index.html">
+                <i class="w-3.5 h-3.5" data-lucide="home"></i>
+                <span>Hub Académique</span>
+            </a>
+            <span>/</span>
+            <a class="hover:text-slate-900 font-medium" href="index.html">Matières</a>
+            <span>/</span>
+            <span class="font-bold text-slate-900 font-mono">R1.01</span>
+        </nav>
+        <div class="flex items-center gap-2">
+            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
+                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
+                <span>Mode Confort / Dys</span>
+            </button>
         </div>
-    </div>
+    </header>
 
-    <!-- Bannière Officielle Matière / Chapitre -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
-        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #287271;">
-            <div class="flex items-start justify-between flex-wrap gap-4">
-                <div>
-                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        R1.01 
-                    </span>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">R1.01 — Initiation au Développement (Algorithmique Formelle & Programmation)</h1>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
-                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
-                        <span>Enseignant Référent : <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
-                    </p>
-                </div>
-            </div>
-            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
-                Méthode formelle de conception algorithmique de M. Patrick Etcheverry : spécifications externes (but à l'infinitif, entrées, sorties, 3 scénarios de tests), spécifications internes (dictionnaire des données, les 4 natures d'informations), décompositions structurées (séquentielles, alternatives avec exclusion mutuelle, itératives avec arbre décisionnel officiel), sous-programmes (procédures et fonctions, transmission par valeur/référence) et programmation impérative en C / C++ (M. Sébastien Dalmau : pointeurs, allocations dynamiques et Valgrind).
-            </div>
-        </div>
-    </div>
-    
-
-    <!-- Main Content Area -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
-
+    <!-- Header Banner -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 bg-white relative overflow-hidden shadow-xs" style="border-left: 6px solid #287271;">
         <div class="flex items-center justify-between flex-wrap gap-4">
-            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
-                <i data-lucide="book-open" class="w-5 h-5" style="color: #287271;"></i>
-                <span>Programme & Chapitres d'Apprentissage (7 chapitres)</span>
-            </h2>
-            <div class="flex items-center gap-2">
-                <a href="R1.01/chap1_introduction_amphi.html" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-2xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #287271;">
-                    <i data-lucide="play" class="w-4 h-4"></i>
-                    <span>Démarrer le Chapitre 1</span>
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono shadow-2xs" style="background-color: #287271;">
+                        R1.01
+                    </span>
+                    <span class="badge-pill font-mono text-[10px] font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        Moodle UPPA #25021
+                    </span>
+                    <span class="badge-pill font-mono text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                        7 Chapitres Complets
+                    </span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Initiation au Développement (C++)</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
+                    <i class="w-4 h-4 text-slate-400" data-lucide="user-check"></i>
+                    <span>Enseignant Référent : <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> · BUT 1 Informatique Anglet</span>
+                </p>
+                <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
+                    Méthode formelle de conception algorithmique de M. Patrick Etcheverry (spécifications externes à l'infinitif, flots { E } et { S }, cas de tests, dictionnaire des données et natures D/R/INT, décompositions séquentielles, alternatives et itératives) et programmation impérative en C de M. Sébastien Dalmau (pointeurs, arithmétique de pointeurs, allocations dynamiques malloc/free, prévention des fuites mémoire et Valgrind).
+                </p>
+            </div>
+
+            <div class="flex items-center flex-wrap gap-2">
+                <a class="min-h-[44px] px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-2xs hover:brightness-95 transition flex items-center gap-2" href="R1.01/chap1_introduction_amphi.html" style="background-color: #287271;">
+                    <i class="w-4 h-4" data-lucide="play"></i>
+                    <span>Démarrer le cours</span>
                 </a>
-                <a href="../revision/R1.01.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-2 shadow-2xs transition">
-                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
-                    <span>Fiche Révision (3 niveaux)</span>
+                <a class="min-h-[44px] px-4 py-2.5 rounded-2xl text-xs font-semibold border flex items-center gap-2 shadow-2xs hover:brightness-95 transition" href="../revision/R1.01.html" style="border-color: #28727140; color: #287271; background-color: #E9F2F1;">
+                    <i class="w-4 h-4" data-lucide="sparkles"></i>
+                    <span>Fiches de Révision</span>
                 </a>
             </div>
         </div>
 
-        <!-- Grille des Chapitres -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        CHAPITRE 1
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">30 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Introduction à l'Algorithmique & Présentation du Module (Amphi)
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Les slides officielles de l'amphi d'ouverture : qu'est-ce qu'un algorithme (Al-Khwarizmi), les 4 définitions, les 4 vidéos explicatives, pseudo-code vs langage graphique, et le principe 'Concevoir avant de coder'.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Amphi</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Al-Khwarizmi</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Définitions</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Vidéos</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Formalismes</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.01/chap1_introduction_amphi.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
         
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        CHAPITRE 2
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+        <!-- BANNIÈRE OUTIL SPÉCIAL : Studio de Conception & Simulateur d'Algorithmes — AlgoForge Pro (IUT R1.01) -->
+        <div class="mt-6 pt-5 border-t border-slate-100">
+            <a href="../algoforge_desktop/index.html" class="p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group shadow-2xs" style="background-color: #E9F2F1; border-color: #287271;">
+                <div class="flex items-start gap-3.5">
+                    <div class="w-11 h-11 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5 font-black text-lg" style="background-color: #287271;">
+                        <i class="w-5 h-5" data-lucide="code-2"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-sm sm:text-base font-extrabold text-slate-900">Studio de Conception & Simulateur d'Algorithmes — AlgoForge Pro (IUT R1.01)</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-black text-white uppercase" style="background-color: #287271;">APPLICATION DE BUREAU & SIMULATEUR PAS-À-PAS</span>
+                        </div>
+                        <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+                            Concevez vos arbres d'actions conformes à M. Etcheverry, tracez la mémoire en direct, détectez les cycles infinis et transpilez automatiquement vers du code C Allman strict sans warning.
+                        </p>
+                    </div>
                 </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Analyser & Spécifier un Problème Algorithmique (01-specifs)
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Support officiel 01-specifs : Spécifications externes (but à l'infinitif, entrées, sorties, scénarios nominal/alternatif/exception, jeux d'essais) et spécifications internes (dictionnaire des données, les 4 natures D/R/I/C).
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Spécifications externes</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Spécifications internes</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Dictionnaire</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Jeux d'essais</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.01/chap2_specifications_analyse.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        CHAPITRE 3
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Décomposition Séquentielle & Schéma de Flot de Données (02-sequence)
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Support officiel 02-sequence : Principe de l'approche descendante, formalisme à double barre ||, flèche de séquence horizontale, affectation <-, et Schéma de Flot de Données (SFD) avec cartouches >>.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Décomposition séquentielle</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Approche descendante</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Flot de données</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SFD</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Affectation</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.01/chap3_decompositions_sequentielles.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        CHAPITRE 4
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Décomposition Alternative & Structures de Choix (03-alternative)
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Support officiel 03-alternative : Formalisme des alternatives, les 4 formes (Si, Si-Sinon, Si-Si, Si-SinonSi-Sinon, Switch), la règle d'or de l'exclusion mutuelle absolue, piège des mentions du Bac et codage C++.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Décomposition alternative</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Exclusion mutuelle</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Si-Sinon</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Switch</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Mentions Bac</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.01/chap4_decompositions_alternatives.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        CHAPITRE 5
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Décomposition Itérative & Choix d'une Structure Répétitive (04-iterations)
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Support officiel 04-iterations & Affiche officielle Moodle : L'Arbre Méthodologique de choix d'une structure répétitive, répétitions connues (for, formule N = B - A + 1, interdiction de modifier l'indice), répétitions inconnues (while, do..while, for(;;)), et C++ Core Guidelines ES.77.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Décomposition itérative</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Arbre méthodologique</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Boucle for</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">While</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">C++ Core Guidelines</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.01/chap5_decompositions_iteratives.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        CHAPITRE 6
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Supports officiels 08-procedures & 09-fonctions & Fiche pratique Elearn : Rôle des sous-programmes, distinction Procédure (action sans retour) vs Fonction (calcul atomique avec retour), arbre de décision du mode de transmission des paramètres (in, out, inout), passage par valeur vs référence &, et C++ Core Guidelines F.16/F.17.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Sous-programmes</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Procédures</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Fonctions</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Passage par référence</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">C++ Core Guidelines</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.01/chap6_sous_programmes_procedures_fonctions.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        CHAPITRE 7
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Programmation C ANSI, Pointeurs & Valgrind (M. Dalmau)
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Volet programmation machine (M. Sébastien Dalmau) : Types primitifs C99, opérateurs, gestion fine de la mémoire, pointeurs, allocations dynamiques malloc/free et validation sans fuite avec Valgrind.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">C ANSI</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pointeurs</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Mémoire</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Valgrind</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">M. Dalmau</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="R1.01/chap7_programmation_c_dalmau.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        </div>
-
-        
-        <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white shadow-xs">
-            <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
-                <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
-                    <i data-lucide="folder-down" class="w-5 h-5 text-blue-600"></i>
-                    <span>Documents & Supports Enseignants (27 fichiers vérifiés)</span>
-                </h2>
-                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono">
-                    Supports Officiels Moodle & IUT
+                <span class="px-4 py-2.5 rounded-xl text-xs font-bold text-white shrink-0 flex items-center gap-1.5 group-hover:brightness-95" style="background-color: #287271;">
+                    <span>Ouvrir AlgoForge Pro</span>
+                    <i class="w-4 h-4" data-lucide="arrow-right"></i>
                 </span>
-            </div>
-            
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #287271;"></span>
-                        <span>Cours & Diaporamas</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(5 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.01/CoursNombresmagiquesDiaporama.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="CoursNombresmagiquesDiaporama">CoursNombresmagiquesDiaporama</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">28.3 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/CoursSupportdecoursDiaporama.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="CoursSupportdecoursDiaporama">CoursSupportdecoursDiaporama</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">62.1 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/R1.01CoursSupportdecours.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="R1.01CoursSupportdecours">R1.01CoursSupportdecours</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">4.9 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/Semaine1-Cours-Analyseretsp%C3%A9cifierunprobl%C3%A8mealgorithmiqueP%C3%A1ginaDiaporama.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="Semaine1-Cours-AnalyseretspécifierunproblèmealgorithmiquePáginaDiaporama">Semaine1-Cours-AnalyseretspécifierunproblèmealgorithmiquePáginaDiaporama</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">98.8 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/Vid%C3%A9oD%C3%A9bogueruncodeDiaporama.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="VidéoDébogueruncodeDiaporama">VidéoDébogueruncodeDiaporama</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">17.8 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #287271;"></span>
-                        <span>Travaux Dirigés (TD)</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(2 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.01/R1.01Semaine1-TD1-Activit%C3%A9sd%27analyseSp%C3%A9cificationsexternesetinterneP%C3%A1gina.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="R1.01Semaine1-TD1-Activitésd'analyseSpécificationsexternesetinternePágina">R1.01Semaine1-TD1-Activitésd'analyseSpécificationsexternesetinternePágina</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">11.2 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/R1.01TDActivit%C3%A9sdeconception.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="R1.01TDActivitésdeconception">R1.01TDActivitésdeconception</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">20.2 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #287271;"></span>
-                        <span>Travaux Pratiques (TP)</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(2 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.01/R1.01Semaine1-TP1-Activit%C3%A9sdeprogrammationP%C3%A1gina.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="R1.01Semaine1-TP1-ActivitésdeprogrammationPágina">R1.01Semaine1-TP1-ActivitésdeprogrammationPágina</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">43.8 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/R1.01TPActivit%C3%A9sdeprogrammation.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="R1.01TPActivitésdeprogrammation">R1.01TPActivitésdeprogrammation</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">7.6 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #287271;"></span>
-                        <span>Podcasts & Audios Pédagogiques</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(7 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.01/R1.01Semaine1-Podcast-Analyseretsp%C3%A9cifierunprobl%C3%A8mealgorithmiqueP%C3%A1gina.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="R1.01Semaine1-Podcast-AnalyseretspécifierunproblèmealgorithmiquePágina">R1.01Semaine1-Podcast-AnalyseretspécifierunproblèmealgorithmiquePágina</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">18.5 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/lesnombresmagiques.mp3" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="lesnombresmagiques">lesnombresmagiques</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">MP3</span>
-                                <span>•</span>
-                                <span class="font-mono">6.01 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/modelesdalgorithmes.mp3" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="modelesdalgorithmes">modelesdalgorithmes</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">MP3</span>
-                                <span>•</span>
-                                <span class="font-mono">5.45 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/podcast.mp3" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="podcast">podcast</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">MP3</span>
-                                <span>•</span>
-                                <span class="font-mono">4.98 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/podcastdecompositionalternative.mp3" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="podcastdecompositionalternative">podcastdecompositionalternative</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">MP3</span>
-                                <span>•</span>
-                                <span class="font-mono">5.97 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/podcastdecompositioniterative.mp3" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="podcastdecompositioniterative">podcastdecompositioniterative</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">MP3</span>
-                                <span>•</span>
-                                <span class="font-mono">6.14 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/tableauxtypesenumeresetenregistrements.mp3" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="tableauxtypesenumeresetenregistrements">tableauxtypesenumeresetenregistrements</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">MP3</span>
-                                <span>•</span>
-                                <span class="font-mono">5.45 Mo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #287271;"></span>
-                        <span>Supports & Ressources Officielles</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(11 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/R1.01/00-introduction.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="00-introduction">00-introduction</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">79.5 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/01-specifs.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="01-specifs">01-specifs</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">98.8 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/02-sequence.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="02-sequence">02-sequence</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">76.0 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/03-alternative.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="03-alternative">03-alternative</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">62.1 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/04-iterations.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="04-iterations">04-iterations</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">71.8 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/08-procedures.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="08-procedures">08-procedures</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">83.2 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/09-fonctions.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="09-fonctions">09-fonctions</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">72.4 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/choisirmodetransmissionparametre.jpg" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="image" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="choisirmodetransmissionparametre">choisirmodetransmissionparametre</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">JPG</span>
-                                <span>•</span>
-                                <span class="font-mono">160.3 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/methodoChoixStructRepetitive.jpg" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="image" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="methodoChoixStructRepetitive">methodoChoixStructRepetitive</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">JPG</span>
-                                <span>•</span>
-                                <span class="font-mono">573.1 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/patricketcheverry.jpg" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="image" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="patricketcheverry">patricketcheverry</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">JPG</span>
-                                <span>•</span>
-                                <span class="font-mono">354.9 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/rene-descartes.jpg" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="image" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="rene-descartes">rene-descartes</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">JPG</span>
-                                <span>•</span>
-                                <span class="font-mono">68.6 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                    </div>
-                </div>
-                
+            </a>
         </div>
         
+        
+        <!-- SPECIAL EXAM TOOLS BOX (FICHE A4 + ANNALES) -->
+        <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <a href="R1.01/fiche_partiel_a4_c.html" class="p-4 rounded-2xl border-2 hover:bg-slate-50 transition flex items-start justify-between group" style="border-color: #28727140; background-color: #E9F2F140;">
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5" style="background-color: #287271;">
+                        <i class="w-5 h-5" data-lucide="file-check"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Fiche Examen A4 : Pointeurs & Algorithmique C</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold" style="background-color: #E9F2F1; color: #287271;">AUTORISÉ AU PARTIEL</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Synthèse recto-verso : opérateurs & et *, allocation dynamique malloc/free, arithmétique des adresses, prototypes et signatures de fonctions.
+                        </p>
+                    </div>
+                </div>
+                <i class="w-5 h-5 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right" style="color: #287271;"></i>
+            </a>
 
-    </main>
+            <a href="R1.01/annales_partiels_corriges.html" class="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-slate-100/70 transition flex items-start justify-between group">
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white shrink-0 mt-0.5">
+                        <i class="w-5 h-5" data-lucide="award"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Annales & Corrigés d'Amphi (2023 à 2025)</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 bg-slate-200">CORRIGÉS OFFICIELS</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Exercices types traités en amphi : recherche de minimum, inversion de tableau, tri par sélection et gestion de listes chaînées simples.
+                        </p>
+                    </div>
+                </div>
+                <i class="w-5 h-5 text-slate-500 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
+            </a>
+        </div>
+        
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- PROGRAMME OFFICIEL EN PARTIES (7 CHAPITRES) -->
+    <!-- ========================================================================= -->
+    <section class="space-y-6">
+<!-- Partie 1 : Conception Algorithmique Formelle (M. Etcheverry) -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #287271;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 1 : Conception Algorithmique Formelle (M. Etcheverry)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Spécifications & Arbres d'Actions</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Chapitre 1 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271;">CHAPITRE 1</span>
+                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Introduction à l'Algorithmique & Démarche de Conception
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Définition formelle d'un algorithme (Al-Khwarizmi), principe 'Concevoir avant de coder', architecture de von Neumann et comparaison langage naturel vs pseudo-code vs ordinogramme.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Amphi</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Al-Khwarizmi</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Conception</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Spécifications</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.01/chap1_introduction_amphi.html" style="background-color: #287271;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+<!-- Chapitre 2 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271;">CHAPITRE 2</span>
+                            <span class="text-slate-400 font-mono text-[11px]">50 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Spécifications Externes, Internes & Dictionnaire des Données
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            But à l'infinitif + complément, flots d'entrées { E } et de sorties { S }, dictionnaire des 4 natures (Donnée D, Résultat R, Donnée/Résultat D/R, Intermédiaire INT) et les 3 scénarios de tests.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Dictionnaire</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Flots E/S</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tests</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Natures D/R/INT</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.01/chap2_specifications_analyse.html" style="background-color: #287271;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+<!-- Chapitre 3 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271;">CHAPITRE 3</span>
+                            <span class="text-slate-400 font-mono text-[11px]">40 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Décompositions Séquentielles & Arbres d'Actions
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Règles d'enchaînement chronologique de gauche à droite, décomposition descendante, boîtes d'actions élémentaires vs composées et traçabilité des flots.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Séquence</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Arbre d'actions</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Descendance</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Élémentaire</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.01/chap3_decompositions_sequentielles.html" style="background-color: #287271;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+<!-- Chapitre 4 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271;">CHAPITRE 4</span>
+                            <span class="text-slate-400 font-mono text-[11px]">55 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Décompositions Alternatives (Si ... Alors ... Sinon)
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Structure alternative à deux branches, hexagone à pans coupés, condition booléenne stricte, principe d'exclusion mutuelle, couverture exhaustive et piège du Sinon vide.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Alternative</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Exclusion mutuelle</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Booléen</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Hexagone</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.01/chap4_decompositions_alternatives.html" style="background-color: #287271;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+<!-- Chapitre 5 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271;">CHAPITRE 5</span>
+                            <span class="text-slate-400 font-mono text-[11px]">60 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Décompositions Itératives & Arbre Décisionnel des Boucles
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            L'arbre décisionnel officiel d'Etcheverry pour choisir entre Pour (borné), Tant Que (condition préalable) et Répéter (arrêt a posteriori). Invariants de boucle et terminaison.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Boucles</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pour</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tant que</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Répéter</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Arbre décisionnel</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.01/chap5_decompositions_iteratives.html" style="background-color: #287271;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+<!-- Chapitre 6 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271;">CHAPITRE 6</span>
+                            <span class="text-slate-400 font-mono text-[11px]">50 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Sous-Programmes : Procédures, Fonctions & Paramètres
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Modularité, procédures vs fonctions pures avec return unique, transmission par valeur (copie locale) vs transmission par adresse/référence (modification effective).
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Sous-programmes</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Procédures</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Fonctions</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Passage par valeur/adresse</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.01/chap6_sous_programmes_procedures_fonctions.html" style="background-color: #287271;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Partie 2 : Programmation Impérative en Langage C (M. Dalmau) -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #287271;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 2 : Programmation Impérative en Langage C (M. Dalmau)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Pointeurs, Mémoire & Valgrind</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Chapitre 7 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271;">CHAPITRE 7</span>
+                            <span class="text-slate-400 font-mono text-[11px]">75 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Langage C, Pointeurs & Allocation Dynamique de Mémoire
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Compilation GCC avec flags stricts (-Wall -Wextra -Werror), syntaxe Allman, déréférencement (*), adresse (&), arithmétique des pointeurs, malloc, calloc, free, et diagnostic Valgrind.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Langage C</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pointeurs</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Malloc/Free</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Valgrind</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Allman</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.01/chap7_programmation_c_dalmau.html" style="background-color: #287271;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
         lucide.createIcons();

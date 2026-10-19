@@ -1,226 +1,171 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<html lang="fr" class="light" data-theme="light">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="theme-color" content="#287271">
-    <title>R1.01 • Ch. 7 : Programmation C ANSI, Pointeurs & Valgrind (M. Dalmau) — KAI Academic</title>
-    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#287271"/>
+    <title>Chapitre 7 : Langage C, Pointeurs & Allocation Dynamique de Mémoire — R1.01 Initiation au Développement (C++) — KAI Academic</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
-
-    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    
-    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <style>
         :root {
             color-scheme: light;
             --accent-color: #287271;
-            --scotopic-bg: #FAF8F5;
-            --scotopic-card: #FFFFFF;
-            --scotopic-text: #0F172A;
-            --scotopic-border: #E2E8F0;
+            --bg-soft: #E9F2F1;
+            --border-soft: #B8D8D6;
         }
         body {
-            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: var(--scotopic-bg);
-            color: var(--scotopic-text);
-            line-height: 1.85;
-            letter-spacing: 0.03em;
-            word-spacing: 0.08em;
+            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            color: #0f172a;
+            line-height: 1.65;
             -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            min-height: 100vh;
+        }
+        .font-dyslexic {
+            font-family: 'Lexend', system-ui, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            word-spacing: 0.08em !important;
+            line-height: 1.85 !important;
+            background-color: #faf8f2 !important;
+            background-image: none !important;
         }
         .glass-card {
-            background: var(--scotopic-card);
-            border: 1px solid var(--scotopic-border);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
-            transition: all 180ms ease-out;
-        }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        .course-prose {
-            font-size: 0.95rem;
-            line-height: 1.85;
-            color: #1e293b;
-        }
-        .course-prose h2 {
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin-top: 2rem;
-            margin-bottom: 0.85rem;
-            padding-bottom: 0.45rem;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .course-prose h3 {
-            font-size: 1.12rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-top: 1.5rem;
-            margin-bottom: 0.65rem;
-        }
-        .course-prose p {
-            margin-bottom: 1.1rem;
-            color: #334155;
-        }
-        .course-prose ul, .course-prose ol {
-            padding-left: 1.6rem;
-            margin-bottom: 1.2rem;
-        }
-        .course-prose li {
-            margin-bottom: 0.45rem;
-            color: #334155;
-        }
-        .course-prose blockquote {
-            border-left: 5px solid #287271;
             background: #ffffff;
-            padding: 1rem 1.4rem;
-            border-radius: 0 0.85rem 0.85rem 0;
-            margin: 1.25rem 0;
-            color: #1e293b;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-            border-top: 1px solid #f1f5f9;
-            border-right: 1px solid #f1f5f9;
-            border-bottom: 1px solid #f1f5f9;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
         }
-        .course-prose code:not(pre code) {
+        .concept-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background-color: var(--bg-soft);
+            color: var(--accent-color);
+            border: 1px solid var(--border-soft);
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            margin: 1rem 0;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            border-bottom: 2px solid #cbd5e1;
+        }
+        td {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+        .callout-def {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-exam {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1.25rem 0;
+        }
+        pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 0.85rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        code:not(pre code) {
             background: #f1f5f9;
             color: #0f172a;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
-            padding: 0.2rem 0.45rem;
-            border-radius: 0.4rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.35rem;
             border: 1px solid #e2e8f0;
-        }
-        .course-prose pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.1rem 1.4rem;
-            border-radius: 1rem;
-            overflow-x: auto;
-            margin: 1.4rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.65;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-        }
-        .course-prose table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin: 1.5rem 0;
-            border-radius: 0.85rem;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            font-size: 0.88rem;
-        }
-        .course-prose th {
-            background: #f8fafc;
-            color: #0f172a;
-            font-weight: 700;
-            text-align: left;
-            padding: 0.75rem 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        .course-prose td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #f1f5f9;
-            color: #334155;
-        }
-        .course-prose tr:last-child td {
-            border-bottom: none;
-        }
-        .mermaid-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 1.25rem;
-            padding: 1.25rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        }
-        .mermaid svg {
-            max-width: 100% !important;
-            height: auto !important;
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
 
-    
-    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
-    <div class="border-b border-slate-200 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
-                    <i data-lucide="home" class="w-4 h-4"></i>
-                    <span>Hub</span>
-                </a>
-                <span class="text-slate-300">/</span>
-                <a href="../R1.01.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
-                    R1.01
-                </a>
-                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 7</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <a href="../../revision/R1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>Fiche Révision</span>
-                </a>
-                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                    Moodle #25021
-                </span>
-            </div>
+    <!-- Top Breadcrumb & Controls -->
+    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
+        <nav class="flex items-center gap-2 text-xs text-slate-500">
+            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
+                <i class="w-3.5 h-3.5" data-lucide="home"></i>
+                <span>Hub</span>
+            </a>
+            <span>/</span>
+            <a class="hover:text-slate-900 font-medium" href="../R1.01.html">R1.01 Dév C++</a>
+            <span>/</span>
+            <span class="font-bold text-slate-900">Chapitre 7</span>
+        </nav>
+        <div class="flex items-center gap-2">
+            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
+                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
+                <span>Mode Confort / Dys</span>
+            </button>
+            <a href="../R1.01.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #287271;">
+                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
+                <span>Sommaire R1.01</span>
+            </a>
         </div>
-    </div>
+    </header>
 
-    <!-- Bannière Officielle Matière / Chapitre -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
-        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #287271;">
-            <div class="flex items-start justify-between flex-wrap gap-4">
-                <div>
-                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
-                        R1.01 • CHAPITRE 7
-                    </span>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Programmation C ANSI, Pointeurs & Valgrind (M. Dalmau)</h1>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
-                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
-                        <span>Enseignant Référent : <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
-                    </p>
-                </div>
-            </div>
-            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
-                Volet programmation machine (M. Sébastien Dalmau) : Types primitifs C99, opérateurs, gestion fine de la mémoire, pointeurs, allocations dynamiques malloc/free et validation sans fuite avec Valgrind.
-            </div>
+    <!-- Chapter Header Banner -->
+    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #287271;">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="concept-badge">Partie 2 · Chapitre 7</span>
+            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Patrick Etcheverry / M. Sébastien Dalmau</span>
         </div>
-    </div>
-    
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 7 : Langage C, Pointeurs & Allocation Dynamique de Mémoire</h1>
+        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Compilation GCC avec flags stricts (-Wall -Wextra -Werror), syntaxe Allman, déréférencement (*), adresse (&), arithmétique des pointeurs, malloc, calloc, free, et diagnostic Valgrind.</p>
+    </section>
 
-    <!-- Main Content Area -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
-        
-        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
-            <div class="course-prose">
-                
-<h2>1. Le Rôle de la Programmation Machine à l'IUT d'Anglet</h2>
+    <!-- Chapter Masterclass Content -->
+    <main class="space-y-6">
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>1. Le Rôle de la Programmation Machine à l'IUT d'Anglet</span></h2>
+    
 <p>
 Après la conception formelle sur table avec <strong>M. Patrick Etcheverry</strong> (spécifications externes, dictionnaire des données, arbres de décomposition et schémas de flot de données), la mise en œuvre pratique en C / C++ est encadrée par <strong>M. Sébastien Dalmau</strong>.
 </p>
@@ -228,7 +173,12 @@ Après la conception formelle sur table avec <strong>M. Patrick Etcheverry</stro
 En programmation système et en langage C (norme ANSI / ISO C99), la machine n'offre aucun filet de sécurité : il n'y a ni machine virtuelle, ni ramasse-miettes (garbage collector), ni vérification des débordements d'indices de tableaux. Le développeur pilote directement l'adressage mémoire physique et les registres du processeur.
 </p>
 
-<h2>2. Modèle Mémoire d'un Processus en Langage C</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>2. Modèle Mémoire d'un Processus en Langage C</span></h2>
+    
 <p>
 Lorsqu'un exécutable compilé est chargé en mémoire vive par le système d'exploitation (Linux), son espace d'adressage virtuel est partitionné en quatre segments distincts :
 </p>
@@ -256,7 +206,12 @@ Lorsqu'un exécutable compilé est chargé en mémoire vive par le système d'ex
     <li><strong>Le Tas (Heap) :</strong> Espace de mémoire dynamique où le programmeur réserve manuellement des blocs au moment de l'exécution via <code>malloc()</code>. Les données persistent tant qu'elles ne sont pas explicitement libérées avec <code>free()</code>.</li>
 </ul>
 
-<h2>3. Types Primitifs C99 &amp; Tailles Mémoire (sizeof)</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>3. Types Primitifs C99 &amp; Tailles Mémoire (sizeof)</span></h2>
+    
 <table>
     <thead>
         <tr>
@@ -312,7 +267,12 @@ Lorsqu'un exécutable compilé est chargé en mémoire vive par le système d'ex
     </tbody>
 </table>
 
-<h2>4. Adresses Mémoire, Opérateurs de Pointeurs &amp; Typage Fort</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>4. Adresses Mémoire, Opérateurs de Pointeurs &amp; Typage Fort</span></h2>
+    
 <p>
 Un <strong>pointeur</strong> est une variable contenant l'adresse mémoire d'une autre variable en RAM.
 </p>
@@ -341,7 +301,12 @@ int main(void)
     return 0;
 }</code></pre>
 
-<h2>5. Passage par Adresse aux Fonctions (Simulation de la Référence)</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>5. Passage par Adresse aux Fonctions (Simulation de la Référence)</span></h2>
+    
 <p>
 En langage C ANSI, <strong>tous les paramètres sont obligatoirement transmis par valeur</strong> (par copie). Pour qu'une fonction puisse modifier une variable appartenant à la fonction appelante, on lui transmet l'adresse de la variable :
 </p>
@@ -372,7 +337,12 @@ int main(void)
     return 0;
 }</code></pre>
 
-<h2>6. Arithmétique des Pointeurs &amp; Équivalence avec les Tableaux</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>6. Arithmétique des Pointeurs &amp; Équivalence avec les Tableaux</span></h2>
+    
 <p>
 En C, le nom d'un tableau se convertit implicitement en un pointeur constant vers son premier élément : <code>tab == &amp;tab[0]</code>.
 </p>
@@ -389,7 +359,12 @@ int *p = tab; // p pointe sur tab[0]
 // L'adresse memoire avance de 2 * sizeof(int) = 8 octets
 printf("Element indice 2 : %d\n", *(p + 2));</code></pre>
 
-<h2>7. Allocation Dynamique dans le Tas : malloc, calloc, realloc &amp; free</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>7. Allocation Dynamique dans le Tas : malloc, calloc, realloc &amp; free</span></h2>
+    
 <p>
 Lorsque la dimension des données n'est pas connue à la compilation, on alloue dynamiquement la mémoire sur le tas via <code>&lt;stdlib.h&gt;</code> :
 </p>
@@ -407,7 +382,12 @@ Lorsque la dimension des données n'est pas connue à la compilation, on alloue 
     <code>if (pointeur == NULL) { fprintf(stderr, "Erreur memoire\n"); exit(EXIT_FAILURE); }</code>
 </div>
 
-<h2>8. Les 5 Pièges Mortels de la Mémoire en C</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>8. Les 5 Pièges Mortels de la Mémoire en C</span></h2>
+    
 <ol class="space-y-3 my-4">
     <li class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-950 text-xs">
         <strong>1. Segmentation Fault (Déréférencement de NULL ou hors-borne) :</strong><br>
@@ -431,7 +411,12 @@ Lorsque la dimension des données n'est pas connue à la compilation, on alloue 
     </li>
 </ol>
 
-<h2>9. L'Audit Mémoire avec Valgrind (Exigence Stricte M. Dalmau)</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>9. L'Audit Mémoire avec Valgrind (Exigence Stricte M. Dalmau)</span></h2>
+    
 <p>
 À l'IUT d'Anglet, aucun code ne peut être validé sans avoir subi un audit dynamique rigoureux avec <strong>Valgrind</strong>.
 </p>
@@ -460,7 +445,12 @@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./tp_etudia
     <li><code>still reachable</code> : Mémoire encore accessible à la sortie du <code>main()</code> mais non libérée explicitement par <code>free()</code>.</li>
 </ul>
 
-<h2>10. Programme Complet de Référence : Tableau Dynamique &amp; Métrologie</h2>
+
+</article>
+
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #287271;"></i><span>10. Programme Complet de Référence : Tableau Dynamique &amp; Métrologie</span></h2>
+    
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
@@ -507,44 +497,30 @@ int main(void)
 
     return EXIT_SUCCESS;
 }</code></pre>
-
-            </div>
-        </div>
-
-        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
-        <div class="flex items-center justify-between gap-4 pt-2">
-            <div>
-                <a href="chap6_sous_programmes_procedures_fonctions.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 6 : Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)</span></a>
-            </div>
-            <a href="../R1.01.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
-                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
-                <span>Sommaire du Cours R1.01</span>
-            </a>
-            <div>
-                
-            </div>
-        </div>
-
+</article>
     </main>
+
+    <!-- Bottom Navigation -->
+    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
+        <div>
+            
+        <a href="chap6_sous_programmes_procedures_fonctions.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
+            <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
+            <span>Ch. 6 : Sous-Programmes : Procédures, Fo...</span>
+        </a>
+        
+        </div>
+        <a href="../R1.01.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
+            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
+            <span>Sommaire du Module</span>
+        </a>
+        <div>
+            
+        </div>
+    </footer>
 
     <script>
         lucide.createIcons();
-        if (typeof mermaid !== 'undefined') {
-            mermaid.initialize({
-                startOnLoad: true,
-                securityLevel: 'loose',
-                theme: 'neutral',
-                flowchart: { curve: 'basis', htmlLabels: true }
-            });
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: '$$', right: '$$', display: true},
-                    {left: '$', right: '$', display: false}
-                ]
-            });
-        });
     </script>
 </body>
 </html>
