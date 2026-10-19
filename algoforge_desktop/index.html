@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoForge Pro — Studio d'Algorithmique & Carnet de TD (IUT R1.01)</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Polices neuro-ergonomiques et confort visuel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. BARRE DE NAVIGATION MINIMALISTE -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="btn-toggle-sidebar" id="btn-toggle-sidebar" title="Carnet de TD & TP (Ctrl+\)">
+                ☰
+            </button>
+
+            <div class="brand" id="btn-brand" title="AlgoForge — Studio IUT R1.01">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 9V7H15V4L13 2H9L7 4V7H3V9L6 10V14C6 14.55 6.45 15 7 15H9V19L11 21H13L15 19V15H17C17.55 15 18 14.55 18 14V10L21 9M13 13H11V8H13V13Z"/>
+                </svg>
+                <span class="brand-title">ALGOFORGE</span>
+            </div>
+
+            <div class="topbar-divider"></div>
+
+            <!-- Titre éditable directement en ligne -->
+            <input type="text" id="algo-title-input" class="algo-title-input" value="Saisie contrôlée d'une note" placeholder="Nom de l'exercice..." title="Cliquer pour renommer l'exercice" />
+            <span class="algo-tag-badge" id="algo-tag-badge">TD</span>
+        </div>
+
+        <div class="topbar-right">
+            <!-- Voyant silencieux de synchronisation locale & cloud -->
+            <span class="cloud-dot online" id="cloud-dot" title="Sauvegarde locale automatique active (%APPDATA%)"></span>
+
+            <button class="action-btn action-btn-secondary" id="btn-top-autolayout" title="Recentrer et aligner l'arbre algorithmique (Ctrl+L)">
+                <span>🪄</span> Centrer
+            </button>
+            <button class="action-btn action-btn-primary" id="btn-top-code" title="Afficher le Code C Allman et le Pseudo-code">
+                <span>💻</span> Code C
+            </button>
+            <button class="action-btn action-btn-sim" id="btn-top-sim" title="Tester pas-à-pas avec le simulateur">
+                <span>▶</span> Simuler
+            </button>
+            <button class="action-btn action-btn-drawer" id="btn-toggle-drawer" title="Panneau d'outils (Dictionnaire, Audit, Cas de tests)">
+                <span>⚙️</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. LAYOUT GLOBAL DE L'APPLICATION (SIDEBAR PAGES + VIEWPORT) -->
+    <div class="app-container">
+        
+        <!-- BARRE LATÉRALE GAUCHE : CARNET DE TD & MULTI-PAGES -->
+        <aside class="notebook-sidebar" id="notebook-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title-row">
+                    <span class="sidebar-heading">CARNET DE TD & TP</span>
+                    <button class="btn-add-page-icon" id="btn-sidebar-add-page" title="Ajouter un nouvel exercice (Ctrl+N)">+</button>
+                </div>
+                <div class="sidebar-search-box">
+                    <span style="font-size: 13px; color: var(--text-muted);">🔍</span>
+                    <input type="text" id="sidebar-search-input" placeholder="Rechercher un exercice..." />
+                </div>
+            </div>
+
+            <!-- Liste des pages d'exercices -->
+            <div class="notebook-pages-list" id="notebook-pages-list">
+                <!-- Rempli dynamiquement -->
+            </div>
+
+            <!-- Pied de la barre latérale -->
+            <div class="sidebar-footer">
+                <button class="btn-sidebar-action" id="btn-sidebar-new-ex">
+                    <span>+</span> Nouvel Exercice
+                </button>
+            </div>
+        </aside>
+
+        <!-- ZONE DE TRAVAIL PRINCIPALE (CANVAS + DOCK + TIROIR) -->
+        <div class="workspace-area">
+            <!-- MAIN VIEWPORT : CANVAS SVG & TIROIR LATÉRAL -->
+            <main class="main-viewport">
+                <!-- BARRE D'INSPECTION & ÉDITION RAPIDE D'ACTION (Accessible immédiatement dès qu'un nœud est sélectionné) -->
+                <div class="action-inspector-bar" id="action-inspector-bar" style="display: none;">
+                    <div class="inspector-group">
+                        <span class="inspector-badge">Action</span>
+                        <input type="text" id="inspector-node-title" class="inspector-input inspector-input-title" placeholder="Libellé de l'action..." title="Modifier directement le libellé de l'action" />
+                    </div>
+
+                    <div class="inspector-sep"></div>
+
+                    <div class="inspector-group">
+                        <label class="inspector-label" for="inspector-node-type">Type</label>
+                        <select id="inspector-node-type" class="inspector-select" title="Forme géométrique et sémantique IUT">
+                            <option value="simple">Simple (Traitement)</option>
+                            <option value="composed">Composée (Sous-programme)</option>
+                            <option value="condition">Alternative (Si...Alors...Sinon)</option>
+                            <option value="loop_while">Tant Que (Boucle)</option>
+                            <option value="loop_repeat">Répéter...Jusqu'à</option>
+                            <option value="loop_for">Pour (Bornée)</option>
+                        </select>
+                    </div>
+
+                    <div class="inspector-sep"></div>
+
+                    <div class="inspector-group">
+                        <span class="inspector-flow-tag flow-tag-in">{ E }</span>
+                        <input type="text" id="inspector-node-inputs" class="inspector-input inspector-input-flow" placeholder="Entrées (ex: note, prix)" title="Variables d'entrée { E } séparées par des virgules" />
+                    </div>
+
+                    <div class="inspector-group">
+                        <span class="inspector-flow-tag flow-tag-out">{ S }</span>
+                        <input type="text" id="inspector-node-outputs" class="inspector-input inspector-input-flow" placeholder="Sorties (ex: total, valide)" title="Variables de sortie { S } séparées par des virgules" />
+                    </div>
+
+                    <div class="inspector-group" id="inspector-cond-group" style="display: none;">
+                        <span class="inspector-label">Cond.</span>
+                        <input type="text" id="inspector-node-cond" class="inspector-input inspector-input-cond" placeholder="ex: note >= 0" title="Condition de boucle ou d'alternative" />
+                    </div>
+
+                    <div class="inspector-sep"></div>
+
+                    <div class="inspector-actions">
+                        <button type="button" class="inspector-btn inspector-btn-primary" id="inspector-btn-add-child" title="Ajouter une sous-action sous ce nœud (Touche Tab)">
+                            <span>+</span> Sous-action
+                        </button>
+                        <button type="button" class="inspector-btn inspector-btn-del" id="inspector-btn-delete" title="Supprimer ce nœud (Touche Suppr)">
+                            ✕
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Canvas SVG vectoriel -->
+                <svg id="tree-canvas"></svg>
+
+                <!-- Calque d'édition de texte directement sur le canvas -->
+                <div id="canvas-overlay" class="canvas-overlay"></div>
+
+                <!-- Panneau latéral escamotable (Tiroir multifonctions) -->
+                <aside class="side-drawer" id="side-drawer">
+                    <div class="drawer-header">
+                        <div class="drawer-tabs">
+                            <button class="drawer-tab active" data-tab="tab-code">💻 Code C</button>
+                            <button class="drawer-tab" data-tab="tab-sim">⚡ Simulation</button>
+                            <button class="drawer-tab" data-tab="tab-copilot">📋 Tests & Règles IUT</button>
+                            <button class="drawer-tab" data-tab="tab-dict">📜 Dictionnaire</button>
+                            <button class="drawer-tab" data-tab="tab-audit">⚠️ Audit</button>
+                            <button class="drawer-tab" data-tab="tab-node">⚙️ Nœud</button>
+                        </div>
+                        <button class="btn-close-drawer" id="btn-close-drawer" title="Fermer le tiroir">✕</button>
+                    </div>
+
+                    <div class="drawer-content">
+                        <!-- ONGLET 1 : GÉNÉRATION DU CODE -->
+                        <div class="tab-pane active" id="tab-code">
+                            <div class="code-subnav">
+                                <div class="code-tabs">
+                                    <button class="code-tab-btn active" data-lang="c">Langage C (Allman)</button>
+                                    <button class="code-tab-btn" data-lang="pseudo">Pseudo-code IUT</button>
+                                    <button class="code-tab-btn" data-lang="python">Python 3</button>
+                                </div>
+                                <button class="action-btn action-btn-secondary" id="btn-copy-code" style="padding: 4px 8px; font-size: 11px;">📋 Copier</button>
+                            </div>
+                            <pre class="code-container" id="code-output">// Génération en cours...</pre>
+                        </div>
+
+                        <!-- ONGLET 2 : SIMULATEUR D'EXÉCUTION -->
+                        <div class="tab-pane" id="tab-sim">
+                            <div class="sim-controls">
+                                <button class="sim-btn sim-btn-play" id="btn-sim-play"><span>▶</span> Lancer</button>
+                                <button class="sim-btn" id="btn-sim-step"><span>⏭</span> Pas à pas</button>
+                                <button class="sim-btn" id="btn-sim-reset"><span>🔄</span> Réinitialiser</button>
+                            </div>
+
+                            <div style="font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;">
+                                📊 TRACE MÉMOIRE DES VARIABLES (EN DIRECT)
+                            </div>
+                            <div class="memory-trace-box" id="memory-trace-container">
+                                <!-- Rempli dynamiquement -->
+                            </div>
+
+                            <div style="font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;">
+                                📢 CONSOLE DES CALCULS & AFFICHAGES
+                            </div>
+                            <div class="console-box" id="console-output">
+                                Simulateur prêt. Cliquez sur "Lancer" ou "Pas à pas".
+                            </div>
+                        </div>
+
+                        <!-- ONGLET 3 : ASSISTANT PÉDAGOGIQUE DE TD (COPILOT) -->
+                        <div class="tab-pane" id="tab-copilot">
+                            <div style="font-size: 12.5px; font-weight: 700; color: var(--text-secondary); margin-bottom: 10px;">
+                                🎯 CAS DE TESTS AUX LIMITES RECOMMANDÉS
+                            </div>
+                            <div id="test-cases-container" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                                <!-- Rempli dynamiquement -->
+                            </div>
+
+                            <div style="font-size: 12.5px; font-weight: 700; color: var(--text-secondary); margin-bottom: 10px;">
+                                📖 CONSEILS MÉTHODOLOGIQUES DU PROFESSEUR
+                            </div>
+                            <div id="method-advice-container" style="display: flex; flex-direction: column; gap: 8px;">
+                                <!-- Rempli dynamiquement -->
+                            </div>
+                        </div>
+
+                        <!-- ONGLET 4 : DICTIONNAIRE DES VARIABLES -->
+                        <div class="tab-pane" id="tab-dict">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 12.5px; font-weight: 700; color: var(--text-secondary);">DICTIONNAIRE DES DONNÉES (IUT)</span>
+                                <button class="action-btn action-btn-primary" id="btn-add-var" style="padding: 4px 10px; font-size: 11.5px;">+ Nouvelle Variable</button>
+                            </div>
+                            <table class="dict-table" id="dict-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Type</th>
+                                        <th>Nature</th>
+                                        <th>Rôle / Signification</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dict-tbody">
+                                    <!-- Rempli dynamiquement -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- ONGLET 5 : AUDIT SÉMANTIQUE & LINTER -->
+                        <div class="tab-pane" id="tab-audit">
+                            <div id="audit-results-container">
+                                <!-- Rempli dynamiquement -->
+                            </div>
+                        </div>
+
+                        <!-- ONGLET 6 : PROPRIÉTÉS DU NŒUD SÉLECTIONNÉ -->
+                        <div class="tab-pane" id="tab-node">
+                            <div id="node-props-container">
+                                <div class="form-group">
+                                    <label class="form-label">Libellé de l'action (Verbe à l'infinitif + complément)</label>
+                                    <input type="text" id="prop-node-title" class="form-input" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Type de structure algorithmique</label>
+                                    <select id="prop-node-type" class="form-select">
+                                        <option value="simple">Action élémentaire (Traitement simple)</option>
+                                        <option value="composed">Action composée (Sous-programme IUT)</option>
+                                        <option value="condition">Structure Alternative (Si ... Alors ... Sinon)</option>
+                                        <option value="loop_for">Boucle Pour (Itération bornée)</option>
+                                        <option value="loop_while">Boucle Tant Que</option>
+                                        <option value="loop_repeat">Boucle Répéter ... Jusqu'à</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Flot Entrant { E } (séparés par des virgules)</label>
+                                    <input type="text" id="prop-node-inputs" class="form-input" placeholder="ex: prix, reduc" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Flot Sortant { S } (séparés par des virgules)</label>
+                                    <input type="text" id="prop-node-outputs" class="form-input" placeholder="ex: prixReduit" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Formule / Expression de calcul ou condition</label>
+                                    <textarea id="prop-node-expr" class="form-textarea" placeholder="ex: prixReduit = prix * (1 - reduc / 100);"></textarea>
+                                </div>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="action-btn action-btn-primary" id="btn-save-props">Enregistrer modifications</button>
+                                    <button class="action-btn action-btn-secondary" id="btn-delete-node" style="color: var(--accent-terracotta);">Supprimer ce nœud</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- 4. DOCK FLOTTANT INFÉRIEUR (TOOLBAR FIDÈLE À LA CAPTURE) -->
+                <!-- 4. DOCK FLOTTANT MINIMALISTE -->
+                <div class="floating-dock">
+                    <div class="dock-pill">
+                        <button class="dock-btn active" id="tool-select" data-tool="select" title="Mode Sélection & Déplacement (V)">
+                            <span style="font-size: 16px; font-weight: 700;">↖</span>
+                        </button>
+                        <button class="dock-btn" id="tool-simple" data-tool="simple" title="Ajouter une Action Élémentaire (Rectangle simple)">
+                            <span style="font-size: 15px;">□</span>
+                        </button>
+                        <button class="dock-btn" id="tool-condition" data-tool="condition" title="Ajouter une Alternative Si...Alors...Sinon (Pans coupés)">
+                            <span style="font-size: 15px;">⬡</span>
+                        </button>
+                        <button class="dock-btn" id="tool-loop-while" data-tool="loop_while" title="Ajouter une Boucle Tant Que / Répéter">
+                            <span style="font-size: 14px; font-weight: 700;">↻</span>
+                        </button>
+
+                        <div class="dock-sep"></div>
+
+                        <button class="dock-btn" id="btn-dock-undo" title="Annuler (Ctrl+Z)">↶</button>
+                        <button class="dock-btn" id="btn-dock-redo" title="Rétablir (Ctrl+Y)">↷</button>
+
+                        <div class="dock-sep"></div>
+
+                        <button class="dock-btn" id="btn-dock-zoom-out" title="Dézoomer">-</button>
+                        <span class="dock-zoom-label" id="label-zoom" title="Cliquer pour recentrer la vue à 100%">100%</span>
+                        <button class="dock-btn" id="btn-dock-zoom-in" title="Zoomer">+</button>
+
+                        <div class="dock-sep"></div>
+
+                        <button class="dock-btn" id="btn-dock-dict" title="Dictionnaire des variables (Lexique IUT)">
+                            📜
+                        </button>
+                        <div class="dock-badge-audit" id="btn-dock-audit" title="Audit sémantique IUT (Flots et Variables)">
+                            <span id="badge-audit-icon" style="font-size: 12px;">✓</span>
+                            <span id="badge-audit-count">0 erreur</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 5. MODALE AJOUT / ÉDITION DE VARIABLE -->
+    <div class="modal-overlay" id="modal-variable">
+        <div class="modal-card">
+            <h3 class="modal-title">Nouvelle Variable (Dictionnaire IUT)</h3>
+            <div class="form-group">
+                <label class="form-label">Nom de la variable</label>
+                <input type="text" id="modal-var-name" class="form-input" placeholder="ex: prix, reduc, taux" />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Type IUT</label>
+                <select id="modal-var-type" class="form-select">
+                    <option value="reel">Réel (float)</option>
+                    <option value="entier">Entier (int)</option>
+                    <option value="booleen">Booléen (bool / drapeau)</option>
+                    <option value="caractere">Caractère (char)</option>
+                    <option value="chaine">Chaîne de caractères (string)</option>
+                    <option value="tableau">Tableau (array)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nature IUT</label>
+                <select id="modal-var-nature" class="form-select">
+                    <option value="D">Donnée d'entrée (D)</option>
+                    <option value="R">Résultat de sortie (R)</option>
+                    <option value="D/R">Donnée / Résultat modifié (D/R)</option>
+                    <option value="INT">Variable intermédiaire (INT)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Rôle & Signification</label>
+                <input type="text" id="modal-var-role" class="form-input" placeholder="ex: Prix d'origine en euros" />
+            </div>
+            <div class="modal-actions">
+                <button class="action-btn action-btn-secondary" id="btn-cancel-modal-var">Annuler</button>
+                <button class="action-btn action-btn-primary" id="btn-confirm-modal-var">Ajouter au dictionnaire</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de l'application -->
+    <script src="js/models.js"></script>
+    <script src="js/linter.js"></script>
+    <script src="js/transpiler.js"></script>
+    <script src="js/simulator.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/ai_naming.js"></script>
+    <script src="js/pages_manager.js"></script>
+    <script src="js/cloud_sync.js"></script>
+    <script src="js/assistant_td.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
