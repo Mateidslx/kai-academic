@@ -31,27 +31,36 @@
             background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
             background-size: 28px 28px;
             color: #0f172a;
-            line-height: 1.65;
+            line-height: 1.7;
             -webkit-tap-highlight-color: transparent;
         }
         .font-dyslexic {
             font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
+            letter-spacing: 0.035em !important;
+            word-spacing: 0.09em !important;
+            line-height: 1.9 !important;
             background-color: #faf8f2 !important;
             background-image: none !important;
+        }
+        .font-dyslexic p, .font-dyslexic li, .font-dyslexic td {
+            font-size: 1.02rem !important;
+            line-height: 1.9 !important;
         }
         .glass-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+        .glass-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         }
         .concept-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 9999px;
             font-size: 0.72rem;
             font-weight: 700;
@@ -66,7 +75,7 @@
             border-radius: 0.75rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            margin: 1.25rem 0;
         }
         th {
             background-color: #f1f5f9;
@@ -74,7 +83,7 @@
             font-weight: 700;
             padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             border-bottom: 2px solid #cbd5e1;
         }
         td {
@@ -92,36 +101,70 @@
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         pre {
             background: #0f172a;
             color: #f8fafc;
-            padding: 1.1rem 1.4rem;
+            padding: 1.25rem 1.5rem;
             border-radius: 0.85rem;
             overflow-x: auto;
             margin: 1.25rem 0;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
         }
         code:not(pre code) {
             background: #f1f5f9;
             color: #0f172a;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
+            font-size: 0.84rem;
+            padding: 0.2rem 0.45rem;
             border-radius: 0.35rem;
             border: 1px solid #e2e8f0;
+        }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
         }
     </style>
 </head>
@@ -129,13 +172,13 @@
 
     <!-- Top Breadcrumb & Controls -->
     <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
+        <nav class="flex items-center gap-2 text-xs text-slate-500 font-mono">
             <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
                 <i class="w-3.5 h-3.5" data-lucide="home"></i>
                 <span>Hub</span>
             </a>
             <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.01.html">R1.01 Dév C++</a>
+            <a class="hover:text-slate-900 font-medium" href="../R1.01.html">R1.01</a>
             <span>/</span>
             <span class="font-bold text-slate-900">Chapitre 1</span>
         </nav>
@@ -154,110 +197,776 @@
     <!-- Chapter Header Banner -->
     <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #287271;">
         <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 1 · Chapitre 1</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Patrick Etcheverry / M. Sébastien Dalmau</span>
+            <span class="concept-badge">R1.01 · Masterclass Chapitre 1</span>
+            <span class="text-xs text-slate-500 font-mono">IUT d'Anglet · Enseignants référents : M. Patrick Etcheverry / M. Sébastien Dalmau</span>
         </div>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 1 : Introduction à l'Algorithmique & Démarche de Conception</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Définition formelle d'un algorithme (Al-Khwarizmi), principe 'Concevoir avant de coder', architecture de von Neumann et comparaison langage naturel vs pseudo-code vs ordinogramme.</p>
+        <p class="text-slate-600 text-sm sm:text-base mt-2.5 max-w-3xl leading-relaxed">Définition formelle d'un algorithme (Al-Khwarizmi), architecture matérielle de von Neumann, cycle complet de compilation C++, anatomie détaillée du premier programme et le dogme méthodologique d'Etcheverry : 'Concevoir avant de coder'.</p>
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500">
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-emerald-600" data-lucide="check-circle-2"></i> Cours Complet Exhaustif</span>
+            <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-amber-600" data-lucide="alert-triangle"></i> Pièges d'Examen Partiel</span>
+            <span class="px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-teal-600" data-lucide="code"></i> Allman C/C++ Strict</span>
+            <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 border border-blue-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-blue-600" data-lucide="cpu"></i> Trace Mémoire RAM</span>
+        </div>
     </section>
 
     <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
+    <main class="space-y-8">
+
+<!-- SECTION 1 : GENÈSE ET DÉFINITION FORMELLE -->
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="compass" style="color: #287271;"></i>
-        <span>1. Genèse & Définition Formelle d'un Algorithme</span>
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="compass" style="color: #287271;"></i>
+        <span>1. Genèse Historique & Définition Formelle d'un Algorithme</span>
     </h2>
-    
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Le mot <em>algorithme</em> provient de la transcription phonétique latinisée du nom du célèbre mathématicien persan <strong>Muhammad ibn Musa al-Khwarizmi</strong> (vers 820), auteur du traité fondateur sur le système de numération décimale et la résolution d'équations.
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Le mot <strong>algorithme</strong> tire son étymologie de la latinisation du nom du savant et mathématicien persan <strong>Muhammad ibn Mūsā al-Khwārizmī</strong> (vers 820 ap. J.-C., Maison de la Sagesse de Bagdad). Dans son traité pionnier <em>Kitāb al-mukhtaṣar fī ḥisāb al-jabr wal-muqābala</em> (qui donna également naissance au mot « algèbre »), al-Khwārizmī formalisa des méthodes systématiques, rigoureuses et reproductibles pour résoudre des équations linéaires et quadratiques sans dépendre de l'intuition d'un individu.
+    </p>
+
+    <div class="callout-def">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+            <i class="w-4 h-4 text-emerald-700" data-lucide="shield-check"></i>
+            <span>DÉFINITION ACADÉMIQUE FORMELLE (M. ETCHEVERRY — IUT D'ANGLET)</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-800 mt-2 leading-relaxed font-medium">
+            Un <strong>algorithme</strong> est une suite <em>finie</em>, <em>ordonnée</em> et <em>univoque</em> d'instructions élémentaires exécutables sans ambiguïté par un opérateur (humain ou machine), opérant sur un ensemble déterminé de <strong>données d'entrée</strong> pour produire, en un <strong>temps fini</strong>, un ensemble de <strong>résultats de sortie</strong> conformes aux spécifications.
+        </p>
+    </div>
+
+    <p class="text-sm text-slate-700 leading-relaxed">
+        Pour qu'une suite d'instructions soit qualifiée d'algorithme valide au sens académique et industriel, elle doit impérativement respecter <strong>quatre propriétés cardinales</strong> :
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center gap-2 font-bold text-slate-900">
+                <span class="w-6 h-6 rounded-lg bg-teal-100 text-teal-800 flex items-center justify-center font-mono">1</span>
+                <span>Finitude (Arrêt garanti)</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                L'exécution doit obligatoirement s'achever après un nombre fini d'opérations élémentaires, quelle que soit la combinaison d'entrées choisie. Un programme qui boucle indéfiniment est défaillant : il ne constitue pas un algorithme.
             </p>
-            <div class="callout-def">
-                <p class="font-bold text-slate-900 text-sm">DÉFINITION ACADÉMIQUE FORMELLE (M. ETCHEVERRY) :</p>
-                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
-                    Un <strong>algorithme</strong> est une suite finie, univoque et ordonnée d'instructions élémentaires exécutables sans ambiguïté par une machine ou un être humain, prenant en entrée un ensemble de données et produisant en sortie un résultat déterminé en un temps fini.
-                </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center gap-2 font-bold text-slate-900">
+                <span class="w-6 h-6 rounded-lg bg-teal-100 text-teal-800 flex items-center justify-center font-mono">2</span>
+                <span>Univocité (Déterminisme strict)</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-3 text-xs">
-                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
-                    <p class="font-bold text-slate-900">1. Finitude</p>
-                    <p class="text-slate-600">Un algorithme doit obligatoirement s'arrêter après un nombre fini d'étapes. Une boucle infinie n'est pas un algorithme valide.</p>
-                </div>
-                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
-                    <p class="font-bold text-slate-900">2. Non-Ambiguïté</p>
-                    <p class="text-slate-600">Chaque étape doit être définie avec une précision mathématique totale ne laissant aucune place à l'interprétation subjective.</p>
-                </div>
-                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
-                    <p class="font-bold text-slate-900">3. Efficacité</p>
-                    <p class="text-slate-600">Chaque opération doit être suffisamment basique pour pouvoir être exécutée exactement en une durée finie.</p>
-                </div>
+            <p class="text-slate-600 leading-relaxed">
+                À chaque étape de l'algorithme, l'action suivante est déterminée de manière unique, mathématique et sans la moindre ambiguïté. Deux exécutions avec des données d'entrée identiques produiront rigoureusement la même trajectoire et le même résultat.
+            </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center gap-2 font-bold text-slate-900">
+                <span class="w-6 h-6 rounded-lg bg-teal-100 text-teal-800 flex items-center justify-center font-mono">3</span>
+                <span>Calculabilité / Efficacité</span>
             </div>
-            
+            <p class="text-slate-600 leading-relaxed">
+                Toute opération élémentaire spécifiée doit pouvoir être exécutée concrètement par l'agent d'exécution (la machine ou le processeur) avec des ressources matérielles réelles et dans un intervalle de temps physiquement délimité.
+            </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center gap-2 font-bold text-slate-900">
+                <span class="w-6 h-6 rounded-lg bg-teal-100 text-teal-800 flex items-center justify-center font-mono">4</span>
+                <span>Contrat d'Interface (Entrées / Sorties)</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                Un algorithme possède un domaine de définition formel : il consomme zéro ou plusieurs valeurs d'entrée bien typées ($\{E\}$) et génère une ou plusieurs valeurs de sortie ($\{S\}$) répondant à un but mesurable.
+            </p>
+        </div>
+    </div>
+
+    <div class="callout-info">
+        <h4 class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2">
+            <i class="w-4 h-4 text-sky-600" data-lucide="info"></i>
+            <span>Distinguer Algorithme, Programme et Heuristique</span>
+        </h4>
+        <div class="text-xs text-sky-900 mt-2 space-y-1.5 leading-relaxed">
+            <p>• <strong>Algorithme :</strong> Concept abstrait universel, indépendant de tout langage de programmation et de tout système d'exploitation (ex: algorithme du tri par sélection).</p>
+            <p>• <strong>Programme :</strong> Traduction concrète d'un algorithme dans un langage informatique particulier (ex: C++, C, Python) compilé ou interprété sur une machine matérielle.</p>
+            <p>• <strong>Heuristique :</strong> Méthode de calcul rapide fournissant une solution approchée ou probable sans garantie mathématique d'optimalité ni certitude d'arrêt dans tous les cas de figure.</p>
+        </div>
+    </div>
 </article>
 
+<!-- SECTION 2 : ARCHITECTURE DE VON NEUMANN -->
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="brain" style="color: #287271;"></i>
-        <span>2. Le Dogme Fondateur : « Concevoir avant de Coder »</span>
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="cpu" style="color: #287271;"></i>
+        <span>2. L'Architecture de von Neumann : Modèle Matériel de la Machine</span>
     </h2>
-    
-            <p class="text-sm text-slate-700 leading-relaxed">
-                L'erreur la plus dévastatrice chez l'étudiant débutant consiste à se précipiter sur son clavier pour taper du code en C/C++ sans réflexion préalable. Cette approche conduit inévitablement au syndrome du « code spaghetti » : bugs obscurs, logique bancale et incapacité à prouver la correction de son programme.
-            </p>
-            <div class="callout-exam">
-                <p class="font-bold text-amber-900 text-sm">🚨 LA MÉTHODOLOGIE EN 3 PHASES DE M. ETCHEVERRY :</p>
-                <div class="text-xs text-amber-800 mt-1 space-y-1.5">
-                    <p><strong>Phase 1 : Analyse & Spécifications</strong> (Quoi ? Comprendre le problème, définir les flots d'entrées { E }, de sorties { S }, le but à l'infinitif et dresser le jeu d'essai exhaustif).</p>
-                    <p><strong>Phase 2 : Conception Algorithmique Formelle</strong> (Comment ? Construire l'arbre d'actions descendant avec les boîtes séquentielles, alternatives et itératives).</p>
-                    <p><strong>Phase 3 : Traduction & Implémentation</strong> (Coder en C Allman strict, compiler sans warnings avec <code>-Wall -Wextra -Werror</code> et vérifier l'absence de fuite mémoire avec Valgrind).</p>
-                </div>
-            </div>
-            
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Tout algorithme implémenté sur un ordinateur moderne repose sur le modèle unifié proposé par le mathématicien et physicien <strong>John von Neumann</strong> en 1945. Contrairement aux calculateurs électromécaniques primitifs dont le câblage physique devait être reconfiguré pour chaque calcul, l'ordinateur von Neumann repose sur le principe fondamental du <strong>programme enregistré</strong> : les instructions de code et les données manipulées partagent la même mémoire centrale.
+    </p>
+
+    <div class="p-5 rounded-2xl bg-slate-900 text-slate-200 font-mono text-xs sm:text-sm space-y-3 shadow-inner">
+        <p class="text-teal-400 font-bold border-b border-slate-700 pb-2">■ SCHÉMA FONCTIONNEL D'UNE MACHINE DE VON NEUMANN :</p>
+        <pre class="bg-transparent p-0 m-0 text-slate-200 border-0 text-xs leading-relaxed">
+┌────────────────────────────────────────────────────────────────────────┐
+│               UNITÉ CENTRALE DE TRAITEMENT (CPU / PROCESSEUR)          │
+│                                                                        │
+│  ┌───────────────────────────────┐   ┌──────────────────────────────┐  │
+│  │     UNITÉ DE CONTRÔLE (UC)    │   │  UNITÉ ARITHMÉTIQUE &        │  │
+│  │                               │   │  LOGIQUE (UAL / ALU)         │  │
+│  │ - Pointeur d'Instruction (IP) │   │ - Addition, soustraction     │  │
+│  │ - Registre d'Instruction (IR) │   │ - Multiplications, divisions │  │
+│  │ - Séquenceur d'étapes         │   │ - Tests booléens (ET, OU, <) │  │
+│  └───────────────┬───────────────┘   └──────────────▲───────────────┘  │
+│                  │                                  │                  │
+│                  ▼                                  │                  │
+│  ┌──────────────────────────────────────────────────┴───────────────┐  │
+│  │            REGISTRES INTERNES ULTRA-RAPIDES (ACC, RAX...)        │  │
+│  └──────────────────────────────────┬───────────────────────────────┘  │
+└─────────────────────────────────────┼──────────────────────────────────┘
+                                      │  Bus Système (Adresses, Données, Contrôle)
+                                      ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                        MÉMOIRE CENTRALE (RAM)                          │
+│  - Adresses linéaires contiguës (0x00000000 à 0xFFFFFFFF...)           │
+│  - Stockage binaire homogène : INSTRUCTIONS de code + DONNÉES réelles │
+└─────────────────────────────────────▲──────────────────────────────────┘
+                                      │
+                                      ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                    ORGANES D'ENTRÉE / SORTIE (I/O)                    │
+│  - Entrées : Clavier (cin), Fichier disque, Carte réseau               │
+│  - Sorties : Écran / Terminal (cout), Imprimante, Bus vidéo            │
+└────────────────────────────────────────────────────────────────────────┘
+        </pre>
+    </div>
+
+    <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-4">Le Cycle Universel d'Exécution du Processeur (Fetch-Decode-Execute)</h3>
+    <p class="text-sm text-slate-700 leading-relaxed">
+        À chaque impulsion de l'horloge système (rythmée à plusieurs milliards de cycles par seconde, soit en GHz), le processeur répète inlassablement ce cycle en 4 phases :
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs sm:text-sm">
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-white shadow-2xs space-y-1.5">
+            <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold font-mono">Phase 1</span>
+            <p class="font-bold text-slate-900">Fetch (Recherche)</p>
+            <p class="text-slate-600 text-xs">Le processeur charge l'instruction pointée par le registre <code>IP</code> (Instruction Pointer) depuis la mémoire RAM vers le registre <code>IR</code>.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-white shadow-2xs space-y-1.5">
+            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold font-mono">Phase 2</span>
+            <p class="font-bold text-slate-900">Decode (Décodage)</p>
+            <p class="text-slate-600 text-xs">L'Unité de Contrôle analyse l'opcode binaire pour identifier l'opération à effectuer (ex: additionner, sauter à une adresse) et ses opérandes.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-white shadow-2xs space-y-1.5">
+            <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono">Phase 3</span>
+            <p class="font-bold text-slate-900">Execute (Exécution)</p>
+            <p class="text-slate-600 text-xs">L'Unité Arithmétique et Logique réalise le calcul physique ou le test booléen sur les transistors des registres internes.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-white shadow-2xs space-y-1.5">
+            <span class="px-2 py-0.5 rounded bg-violet-100 text-violet-800 font-bold font-mono">Phase 4</span>
+            <p class="font-bold text-slate-900">Store / Increment</p>
+            <p class="text-slate-600 text-xs">Le résultat est écrit dans un registre ou renvoyé en RAM, et le pointeur d'instruction <code>IP</code> avance vers l'instruction suivante.</p>
+        </div>
+    </div>
 </article>
 
+<!-- SECTION 3 : LE CYCLE DE COMPILATION C++ -->
 <article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="cpu" style="color: #287271;"></i>
-        <span>3. L'Architecture de von Neumann & Modèle de la Machine</span>
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="layers" style="color: #287271;"></i>
+        <span>3. De la Source au Binaire : Le Cycle de Compilation C++</span>
     </h2>
-    
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Tout algorithme s'exécute sur une machine dont le modèle canonique a été établi par John von Neumann en 1945 :
-            </p>
-            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono my-3 space-y-2">
-                <p class="text-slate-900 font-bold">Composants de la Machine de von Neumann :</p>
-                <p class="text-slate-700">1. <strong>Unité Centrale de Traitement (CPU) :</strong><br/>
-                   - Unité Arithmétique et Logique (UAL / ALU) : réalise les calculs (+, -, *, /) et comparaisons booléennes.<br/>
-                   - Unité de Contrôle (UC) : séquence la recherche, le décodage et l'exécution des instructions.<br/>
-                   - Registres internes : mémoire ultra-rapide temporaire (Accumulateur, Pointeur d'instruction IP/PC).</p>
-                <p class="text-slate-700">2. <strong>Mémoire Centrale (RAM) :</strong> Stocke à la fois les données et les programmes sous forme d'adresses linéaires octet par octet.</p>
-                <p class="text-slate-700">3. <strong>Unités d'Entrée / Sortie :</strong> Clavier, écran, disque dur, réseau.</p>
-            </div>
-            
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Le processeur est totalement incapable de lire du code C++ directement. Il ne comprend qu'une suite de 0 et de 1 (le <strong>langage machine</strong>). Le passage du fichier texte source <code>main.cpp</code> jusqu'au fichier binaire exécutable <code>main.exe</code> (Windows) ou <code>main</code> (Linux) mobilise une <strong>chaîne d'outils</strong> (<em>toolchain</em>) rigoureusement séquencée en 4 étapes majeures :
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Étape</th>
+                <th>Outil GCC / Clang</th>
+                <th>Fichier d'Entrée</th>
+                <th>Fichier Produit</th>
+                <th>Rôle Exact & Opérations Effectuées</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1. Préprocesseur</strong></td>
+                <td><code>cpp</code></td>
+                <td><code>main.cpp</code></td>
+                <td><code>main.i</code> (temporaire)</td>
+                <td>Traite toutes les directives commençant par <code>#</code>. Il copie-colle textuellement le contenu des bibliothèques en-tête (ex: <code>#include &lt;iostream&gt;</code>), remplace les macros (<code>#define</code>) et supprime l'intégralité des commentaires.</td>
+            </tr>
+            <tr>
+                <td><strong>2. Compilation</strong></td>
+                <td><code>g++ -S</code></td>
+                <td><code>main.i</code></td>
+                <td><code>main.s</code> (texte assembleur)</td>
+                <td>Analyse lexicale, syntaxique et sémantique. Traduit le code C++ validé en instructions assembleur spécifiques à l'architecture du processeur (x86_64 ou ARM64). C'est ici que sont détectées les fautes de syntaxe (point-virgule manquant, types incompatibles).</td>
+            </tr>
+            <tr>
+                <td><strong>3. Assemblage</strong></td>
+                <td><code>as</code></td>
+                <td><code>main.s</code></td>
+                <td><code>main.o</code> ou <code>main.obj</code></td>
+                <td>Convertit le texte assembleur en <strong>code objet binaire</strong> relogeable. Le code machine est généré, mais les adresses des fonctions externes (comme <code>cout</code> ou les sous-programmes situés dans d'autres fichiers) restent encore non résolues.</td>
+            </tr>
+            <tr>
+                <td><strong>4. Édition de Liens</strong></td>
+                <td><code>ld</code> / <code>collect2</code></td>
+                <td><code>main.o</code> + <code>libstdc++.a</code></td>
+                <td><code>main.exe</code> (Exécutable)</td>
+                <td>Lie le fichier objet avec les bibliothèques standard du système d'exploitation. Résout toutes les adresses mémoire des symboles externes et produit le binaire autonome exécutable directement par le système d'exploitation.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout-exam">
+        <h4 class="font-bold text-amber-950 text-xs sm:text-sm flex items-center gap-2">
+            <i class="w-4 h-4 text-amber-600" data-lucide="terminal"></i>
+            <span>COMMANDE DE COMPILATION OFFICIELLE ENSEIGNÉE À L'IUT D'ANGLET :</span>
+        </h4>
+        <pre class="mt-2 text-xs">g++ -Wall -Wextra -Werror -pedantic -std=c++17 main.cpp -o main.exe</pre>
+        <div class="text-xs text-amber-900 mt-2 space-y-1">
+            <p>• <code>-Wall</code> : Active l'ensemble des avertissements essentiels du compilateur (<em>Warnings: All</em>).</p>
+            <p>• <code>-Wextra</code> : Active les vérifications supplémentaires approfondies (variables inutilisées, comparaisons signées/non-signées).</p>
+            <p>• <code>-Werror</code> : <strong>Règle d'or d'amphi :</strong> convertit chaque avertissement en erreur bloquante. La compilation échoue tant que le code n'est pas irréprochable.</p>
+            <p>• <code>-std=c++17</code> : Impose la conformité stricte au standard C++ moderne ISO 2017.</p>
+        </div>
+    </div>
 </article>
+
+<!-- SECTION 4 : ANATOMIE D'UN PREMIER PROGRAMME C++ -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="code-2" style="color: #287271;"></i>
+        <span>4. Anatomie Complète d'un Programme C++ (Ligne par Ligne)</span>
+    </h2>
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        À l'IUT d'Anglet, chaque programme rendu en travaux pratiques ou en partiel machine doit respecter la <strong>tripartition stricte</strong> et l'<strong>indentation Allman</strong> (accolades ouvrantes et fermantes seules sur leur propre ligne, alignées verticalement).
+    </p>
+
+    <pre><code>/*
+ * Programme : ConversionMonetaire
+ * But : Calculer et afficher la contre-valeur en Dollars US d'une somme saisie en Euros.
+ * Date de modification : 19/10/2026
+ * Auteur : Matéi de Saint Leger (Groupe TD2 / TP4)
+ * Remarques : Taux fixe conventionnel 1 EUR = 1.0850 USD
+ */
+
+#include &lt;iostream&gt;  // Bibliothèque officielle des flux d'entrée/sortie (cin / cout)
+#include &lt;iomanip&gt;   // Manipulateurs de flux pour formater l'affichage monétaire
+
+using namespace std; // Évite d'écrire systématiquement std:: devant chaque mot-clé
+
+int main (void)
+{
+    // =========================================================================
+    // 1. DÉCLARATION DES CONSTANTES & TYPES
+    // =========================================================================
+    const double TAUX_CONVERSION = 1.0850; // Constante symbolique en majuscules
+
+    // =========================================================================
+    // 2. DÉCLARATION DU DICTIONNAIRE DES VARIABLES LOCALES
+    // =========================================================================
+    double montantEuros;   // Montant saisi par l'utilisateur en Euros (Nature : D)
+    double montantDollars; // Montant calculé en Dollars US (Nature : R)
+
+    // =========================================================================
+    // 3. SÉQUENCE DES TRAITEMENTS EXÉCUTABLES
+    // =========================================================================
+    // Inviter l'utilisateur et récupérer la donnée d'entrée
+    cout &lt;&lt; "Veuillez saisir un montant en Euros : ";
+    cin &gt;&gt; montantEuros;
+
+    // Calcul de transformation arithmétique
+    montantDollars = montantEuros * TAUX_CONVERSION;
+
+    // Restitution formatée du résultat à l'écran
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; montantEuros &lt;&lt; " EUR équivaut exactement à " 
+         &lt;&lt; montantDollars &lt;&lt; " USD." &lt;&lt; endl;
+
+    // Code de retour système (0 = fin d'exécution normale sans anomalie)
+    return 0;
+}</code></pre>
+
+    <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-4">Décryptage Minutieux des Éléments Clés :</h3>
+    <div class="space-y-3 text-xs sm:text-sm">
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <span class="font-bold text-slate-900 font-mono">1. #include &lt;iostream&gt;</span>
+            <p class="text-slate-600">Demande au préprocesseur d'importer le fichier d'en-tête déclarant les objets globaux de flux <code>cin</code> (<em>character input</em>) et <code>cout</code> (<em>character output</em>). Sans cette ligne, le compilateur rejette toute tentative de lecture clavier ou d'affichage console.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <span class="font-bold text-slate-900 font-mono">2. using namespace std;</span>
+            <p class="text-slate-600">Définit l'espace de nommage par défaut. Tous les identificateurs de la bibliothèque standard C++ sont encapsulés dans le namespace <code>std</code>. Cette directive évite de devoir préfixer chaque appel : <code>std::cout</code> devient simplement <code>cout</code>.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <span class="font-bold text-slate-900 font-mono">3. int main (void)</span>
+            <p class="text-slate-600">Point d'entrée universel et unique du programme exécuté par le chargeur du système d'exploitation. Le mot-clé <code>int</code> spécifie que la fonction renvoie un code d'état entier au système. Le mot-clé <code>void</code> indique que la fonction ne prend aucun argument depuis la ligne de commande.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <span class="font-bold text-slate-900 font-mono">4. Les flux cin &gt;&gt; et cout &lt;&lt;</span>
+            <p class="text-slate-600">L'opérateur <code>&lt;&lt;</code> (« chevron vers la gauche ») insère des données dans le tube de sortie écran. L'opérateur <code>&gt;&gt;</code> (« chevron vers la droite ») extrait les octets tapés au clavier depuis le tampon système pour les ranger dans la case mémoire de la variable cible.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
+            <span class="font-bold text-slate-900 font-mono">5. return 0;</span>
+            <p class="text-slate-600">Indique au système d'exploitation hôte que le programme s'est achevé avec plein succès (valeur conventionnelle POSIX <code>EXIT_SUCCESS</code> = 0). Une valeur non nulle (1, -1) indique un code d'erreur.</p>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 5 : SYSTÈME DE TYPES PRIMITIFS -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="binary" style="color: #287271;"></i>
+        <span>5. Représentation Mémoire & Système de Types Primitifs</span>
+    </h2>
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Le C++ est un langage <strong>compilé, statiquement et fortement typé</strong>. Chaque variable déclarée réserve un bloc d'octets contigus en mémoire RAM dont la taille physique et l'interprétation binaire sont figées définitivement dès la phase de compilation.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Type C++</th>
+                <th>Taille (Octets)</th>
+                <th>Nombre de Bits</th>
+                <th>Plage de Valeurs Valides</th>
+                <th>Usage & Sémantique Métier</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>bool</code></td>
+                <td>1 octet</td>
+                <td>8 bits</td>
+                <td><code>true</code> (1) ou <code>false</code> (0)</td>
+                <td>Indicateurs logiques, drapeaux, résultats de comparaisons booléennes.</td>
+            </tr>
+            <tr>
+                <td><code>char</code></td>
+                <td>1 octet</td>
+                <td>8 bits</td>
+                <td>-128 à +127 (ou 0 à 255 si <code>unsigned</code>)</td>
+                <td>Caractère unique représenté selon la table ASCII standard (ex: <code>'A'</code> = 65, <code>'0'</code> = 48).</td>
+            </tr>
+            <tr>
+                <td><code>short</code></td>
+                <td>2 octets</td>
+                <td>16 bits</td>
+                <td>-32 768 à +32 767</td>
+                <td>Petits entiers signés, économie d'espace en mémoire.</td>
+            </tr>
+            <tr>
+                <td><code>int</code></td>
+                <td>4 octets</td>
+                <td>32 bits</td>
+                <td>-2 147 483 648 à +2 147 483 647</td>
+                <td>Type entier standard universel pour compteurs, indices et calculs arithmétiques.</td>
+            </tr>
+            <tr>
+                <td><code>unsigned int</code></td>
+                <td>4 octets</td>
+                <td>32 bits</td>
+                <td>0 à 4 294 967 295</td>
+                <td>Entiers strictement positifs (tailles de tableaux, indices, identifiants).</td>
+            </tr>
+            <tr>
+                <td><code>long long</code></td>
+                <td>8 octets</td>
+                <td>64 bits</td>
+                <td>$-9.22 	imes 10^{18}$ à $+9.22 	imes 10^{18}$</td>
+                <td>Très grands entiers, horodatages Unix en millisecondes, cryptographie.</td>
+            </tr>
+            <tr>
+                <td><code>float</code></td>
+                <td>4 octets</td>
+                <td>32 bits</td>
+                <td>$\pm 1.18 	imes 10^{-38}$ à $\pm 3.40 	imes 10^{38}$ (7 chiffres signif.)</td>
+                <td>Nombres à virgule flottante simple précision (Norme IEEE 754).</td>
+            </tr>
+            <tr>
+                <td><code>double</code></td>
+                <td>8 octets</td>
+                <td>64 bits</td>
+                <td>$\pm 2.23 	imes 10^{-308}$ à $\pm 1.79 	imes 10^{308}$ (15 chiffres signif.)</td>
+                <td>Virgule flottante double précision standard en BUT Informatique (précision maximale).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout-def">
+        <h4 class="font-bold text-slate-900 text-xs sm:text-sm">L'OPÉRATEUR sizeof(type) :</h4>
+        <p class="text-xs sm:text-sm text-slate-700 mt-1 leading-relaxed">
+            L'opérateur C++ <code>sizeof(...)</code> est évalué à la compilation. Il renvoie la taille exacte en octets occupée par un type ou une variable sur la machine hôte. Exemple : <code>sizeof(int)</code> retourne <code>4</code> sur architecture standard x86_64.
+        </p>
+    </div>
+</article>
+
+<!-- SECTION 6 : LE DOGME D'ETCHEVERRY -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="brain" style="color: #287271;"></i>
+        <span>6. Le Dogme Fondateur d'Etcheverry : « Concevoir avant de Coder »</span>
+    </h2>
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        L'erreur la plus dévastatrice chez l'étudiant débutant consiste à ouvrir son éditeur de code et à taper des lignes au hasard dès la lecture du sujet. Cette attitude mène directement à des programmes bogués, incohérents et impossibles à débugger. À l'IUT d'Anglet, une démarche formelle rigoureuse en <strong>trois phases disjointes</strong> est exigée :
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl border-2 border-teal-200 bg-teal-50/40 space-y-2">
+            <div class="flex items-center gap-2 font-extrabold text-teal-900 text-sm">
+                <span class="w-7 h-7 rounded-lg bg-teal-600 text-white flex items-center justify-center font-mono">1</span>
+                <span>Phase 1 : Analyse</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed font-semibold">« Quoi faire ? » (Boîte Noire)</p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Comprendre le problème sans penser au code. Définir le But formel à l'infinitif, identifier l'ensemble des données d'entrée $\{E\}$, l'ensemble des résultats $\{S\}$, les contraintes mathématiques $\{P\}$, et dresser un jeu de test exhaustif à 3 scénarios.
+            </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border-2 border-indigo-200 bg-indigo-50/40 space-y-2">
+            <div class="flex items-center gap-2 font-extrabold text-indigo-900 text-sm">
+                <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-mono">2</span>
+                <span>Phase 2 : Conception</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed font-semibold">« Comment faire ? » (Arbre d'Actions)</p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Décomposer le problème général de manière descendante en sous-problèmes élémentaires grâce aux 3 structures de base : séquence ($||$), alternative (losange/hexagone) et itération (boucle). Rédiger le Dictionnaire des Données ($D, R, D/R, INT$).
+            </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center gap-2 font-extrabold text-slate-900 text-sm">
+                <span class="w-7 h-7 rounded-lg bg-slate-800 text-white flex items-center justify-center font-mono">3</span>
+                <span>Phase 3 : Traduction</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed font-semibold">« Traduction mécanique C++ »</p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Le codage n'est que la transcription directe de l'arbre d'actions validé. On applique le style Allman strict, on compile avec <code>-Werror</code>, on vérifie l'absence de fuite mémoire avec Valgrind et on valide le comportement avec le jeu de tests.
+            </p>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 7 : ATELIER PIÈGES D'EXAMEN -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="alert-octagon" style="color: #e11d48;"></i>
+        <span>7. Atelier Pièges d'Examen : Les Fautes Éliminatoires aux Partiels</span>
+    </h2>
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Voici les erreurs récurrentes sanctionnées par les enseignants lors des partiels écrits et machines de R1.01 :
+    </p>
+
+    <div class="space-y-4">
+        <!-- PIÈGE 1 -->
+        <div class="p-4 sm:p-5 rounded-2xl border border-rose-200 bg-rose-50/30 space-y-3">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-rose-900 text-xs sm:text-sm flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-rose-200 text-rose-900 font-mono text-xs">PIÈGE 1</span>
+                    La Division Entière Silencieuse (70% d'échecs au premier contrôle)
+                </span>
+                <span class="text-[11px] font-bold text-rose-700 uppercase bg-rose-100 px-2 py-0.5 rounded">Grave</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 bg-white rounded-xl border border-rose-200 space-y-1">
+                    <p class="font-bold text-rose-700">❌ Code Erroné de l'Étudiant</p>
+                    <code class="text-xs block bg-slate-100 p-2 rounded">double moyenne = 15 / 2;</code>
+                    <p class="text-slate-600 mt-1">L'étudiant s'attend à ce que <code>moyenne</code> vaille <code>7.5</code> car elle est déclarée en <code>double</code>.</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-1">
+                    <p class="font-bold text-amber-800">⚠️ Mécanisme du Bug</p>
+                    <p class="text-slate-700">Les deux constantes <code>15</code> et <code>2</code> sont des entiers stricts (<code>int</code>). En C++, la division de deux entiers produit un entier tronqué : <code>15 / 2</code> vaut <code>7</code>. Ce résultat 7 est ensuite converti en <code>7.0</code>.</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl border border-emerald-200 space-y-1">
+                    <p class="font-bold text-emerald-800">✅ Solution 20/20 Conforme</p>
+                    <code class="text-xs block bg-slate-100 p-2 rounded">double moyenne = 15.0 / 2; // ou static_cast&lt;double&gt;(a) / b</code>
+                    <p class="text-slate-700 mt-1">Forcer au moins un des deux opérandes en virgule flottante pour que le compilateur effectue une division réelle.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIÈGE 2 -->
+        <div class="p-4 sm:p-5 rounded-2xl border border-rose-200 bg-rose-50/30 space-y-3">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-rose-900 text-xs sm:text-sm flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-rose-200 text-rose-900 font-mono text-xs">PIÈGE 2</span>
+                    Variable Non Initialisée (Valeurs « Poubelles » en RAM)
+                </span>
+                <span class="text-[11px] font-bold text-rose-700 uppercase bg-rose-100 px-2 py-0.5 rounded">Critique</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 bg-white rounded-xl border border-rose-200 space-y-1">
+                    <p class="font-bold text-rose-700">❌ Code Erroné de l'Étudiant</p>
+                    <code class="text-xs block bg-slate-100 p-2 rounded">int compteur;<br>compteur = compteur + 1;</code>
+                    <p class="text-slate-600 mt-1">L'étudiant suppose que la mémoire allouée à <code>compteur</code> est automatiquement à zéro.</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-1">
+                    <p class="font-bold text-amber-800">⚠️ Mécanisme du Bug</p>
+                    <p class="text-slate-700">En C++, la déclaration d'une variable locale ne nettoie pas la mémoire. La variable hérite des bits résiduels qui traînaient dans la case RAM (ex: -858993460). Votre calcul part d'une valeur absurde.</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl border border-emerald-200 space-y-1">
+                    <p class="font-bold text-emerald-800">✅ Solution 20/20 Conforme</p>
+                    <code class="text-xs block bg-slate-100 p-2 rounded">int compteur = 0;<br>// Toujours initialiser toute variable dès sa création !</code>
+                    <p class="text-slate-700 mt-1">Initialiser explicitement toute variable dès sa déclaration.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIÈGE 3 -->
+        <div class="p-4 sm:p-5 rounded-2xl border border-rose-200 bg-rose-50/30 space-y-3">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-rose-900 text-xs sm:text-sm flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-rose-200 text-rose-900 font-mono text-xs">PIÈGE 3</span>
+                    Le Point-Virgule Traître après une Condition if
+                </span>
+                <span class="text-[11px] font-bold text-rose-700 uppercase bg-rose-100 px-2 py-0.5 rounded">Vicelard</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 bg-white rounded-xl border border-rose-200 space-y-1">
+                    <p class="font-bold text-rose-700">❌ Code Erroné de l'Étudiant</p>
+                    <code class="text-xs block bg-slate-100 p-2 rounded">if (note &gt;= 10);<br>{<br>    cout &lt;&lt; "Admis";<br>}</code>
+                    <p class="text-slate-600 mt-1">Un point-virgule machinal a été ajouté après la parenthèse du <code>if</code>.</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-1">
+                    <p class="font-bold text-amber-800">⚠️ Mécanisme du Bug</p>
+                    <p class="text-slate-700">Le point-virgule termine immédiatement l'instruction conditionnelle comme une instruction vide. Le bloc <code>{ cout &lt;&lt; "Admis"; }</code> devient un bloc isolé indépendant qui sera <strong>toujours exécuté</strong>, même si <code>note</code> vaut 2 !</p>
+                </div>
+                <div class="p-3 bg-white rounded-xl border border-emerald-200 space-y-1">
+                    <p class="font-bold text-emerald-800">✅ Solution 20/20 Conforme</p>
+                    <code class="text-xs block bg-slate-100 p-2 rounded">if (note &gt;= 10)<br>{<br>    cout &lt;&lt; "Admis";<br>}</code>
+                    <p class="text-slate-700 mt-1">Zéro point-virgule après la parenthèse de test.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 8 : EXERCICE GUIDÉ COMPLET & TABLEAU DE TRACE -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="check-square" style="color: #287271;"></i>
+        <span>8. Exercice Guidé Intégral : Conversion Monétaire & Trace Mémoire</span>
+    </h2>
+
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Cet exercice correspond au premier TP officiel de découverte (TP1). Suivons la méthodologie complète en 3 étapes :
+    </p>
+
+    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs sm:text-sm">
+        <p class="font-bold text-slate-900">ÉNONCÉ :</p>
+        <p class="text-slate-700 leading-relaxed">
+            Écrire un programme qui demande à un voyageur de saisir une somme en Euros, puis calcule et affiche la somme équivalente en Dollars Américains (taux fixe : $1	ext{ EUR} = 1.0850	ext{ USD}$). Le programme doit être spécifié, modélisé puis implémenté avec une trace d'exécution détaillée.
+        </p>
+    </div>
+
+    <h3 class="text-base font-bold text-slate-900">Étape 1 : Spécification Externe (Boîte Noire)</h3>
+    <div class="callout-def text-xs sm:text-sm space-y-1">
+        <p><strong>But :</strong> Calculer et afficher la contre-valeur en Dollars d'une somme saisie en Euros.</p>
+        <p><strong>Données d'Entrée $\{E\}$ :</strong> <code>sommeEuros</code> (réel $\ge 0$).</p>
+        <p><strong>Sorties Attendues $\{S\}$ :</strong> Affichage console de la somme convertie <code>sommeDollars</code>.</p>
+        <p><strong>Préconditions $\{P\}$ :</strong> La somme saisie doit être positive ou nulle ($	ext{sommeEuros} \ge 0$).</p>
+    </div>
+
+    <h3 class="text-base font-bold text-slate-900">Étape 2 : Dictionnaire des Données</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Identificateur</th>
+                <th>Type C++</th>
+                <th>Nature Formelle</th>
+                <th>Description Sémantique</th>
+                <th>Domaine de Valeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>TAUX</code></td>
+                <td><code>const double</code></td>
+                <td>Constante</td>
+                <td>Taux de change fixe (1 EUR = 1.0850 USD)</td>
+                <td>Valeur = 1.0850</td>
+            </tr>
+            <tr>
+                <td><code>sommeEuros</code></td>
+                <td><code>double</code></td>
+                <td>Donnée (D)</td>
+                <td>Montant fourni par l'utilisateur au clavier</td>
+                <td>$\mathbb{R}^+$</td>
+            </tr>
+            <tr>
+                <td><code>sommeDollars</code></td>
+                <td><code>double</code></td>
+                <td>Résultat (R)</td>
+                <td>Montant calculé converti pour l'écran</td>
+                <td>$\mathbb{R}^+$</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="text-base font-bold text-slate-900">Étape 3 : Tableau de Trace Mémoire Pas-à-Pas (Valeur de test : 50.00 EUR)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>N° Ligne Exécutée</th>
+                <th>Instruction Exacte</th>
+                <th>Case RAM <code>sommeEuros</code></th>
+                <th>Case RAM <code>sommeDollars</code></th>
+                <th>État de la Console Écran</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ligne 17</td>
+                <td><code>double sommeEuros;</code></td>
+                <td><em>Indéterminé (poubelle)</em></td>
+                <td><em>Non alloué</em></td>
+                <td>(vide)</td>
+            </tr>
+            <tr>
+                <td>Ligne 18</td>
+                <td><code>double sommeDollars;</code></td>
+                <td><em>Indéterminé</em></td>
+                <td><em>Indéterminé</em></td>
+                <td>(vide)</td>
+            </tr>
+            <tr>
+                <td>Ligne 21</td>
+                <td><code>cout &lt;&lt; "Saisir : ";</code></td>
+                <td><em>Indéterminé</em></td>
+                <td><em>Indéterminé</em></td>
+                <td><code>Saisir : </code></td>
+            </tr>
+            <tr>
+                <td>Ligne 22</td>
+                <td><code>cin &gt;&gt; sommeEuros;</code> (tape 50)</td>
+                <td><strong>50.0</strong></td>
+                <td><em>Indéterminé</em></td>
+                <td><code>Saisir : 50</code></td>
+            </tr>
+            <tr>
+                <td>Ligne 25</td>
+                <td><code>sommeDollars = sommeEuros * TAUX;</code></td>
+                <td>50.0</td>
+                <td><strong>54.25</strong></td>
+                <td>(inchangé)</td>
+            </tr>
+            <tr>
+                <td>Ligne 27</td>
+                <td><code>cout &lt;&lt; sommeDollars;</code></td>
+                <td>50.0</td>
+                <td>54.25</td>
+                <td><code>50 EUR équivaut à 54.25 USD</code></td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+
+<!-- SECTION 9 : QCM D'AUTO-ÉVALUATION INTERACTIF -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 quiz-container">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="help-circle" style="color: #287271;"></i>
+        <span>9. Auto-Évaluation Interactive : Validez Vos Connaissances (5 Questions)</span>
+    </h2>
+
+    <p class="text-sm text-slate-600">Sélectionnez la réponse exacte pour chaque question de partiel ci-dessous :</p>
+
+    <!-- QUESTION 1 -->
+    <div class="space-y-3 pt-2">
+        <p class="text-xs sm:text-sm font-bold text-slate-900">Question 1 : Que vaut l'expression <code>double x = 7 / 2;</code> en C++ ?</p>
+        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+            <button onclick="answerQuiz(this, false, 'q1-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">A. 3.5 car la variable est de type double</button>
+            <button onclick="answerQuiz(this, true, 'q1-exp')" data-correct="true" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">B. 3.0 car 7 et 2 sont des entiers, produisant d'abord un quotient entier tronqué (3) converti ensuite en double</button>
+            <button onclick="answerQuiz(this, false, 'q1-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">C. 4.0 par arrondi statistique au pair le plus proche</button>
+            <button onclick="answerQuiz(this, false, 'q1-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">D. Erreur de compilation : types incompatibles</button>
+        </div>
+        <div id="q1-exp" class="hidden p-3.5 rounded-xl bg-slate-100 text-xs text-slate-800 leading-relaxed">
+            <strong>Explication :</strong> En C++, le type de l'opération arithmétique dépend exclusivement des opérandes. Les constantes <code>7</code> et <code>2</code> sont des <code>int</code>, donc la division entière produit <code>3</code>. Ce n'est qu'après que ce 3 entier est affecté au <code>double x</code>, devenant <code>3.0</code>.
+        </div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="space-y-3 pt-4 border-t border-slate-100">
+        <p class="text-xs sm:text-sm font-bold text-slate-900">Question 2 : Dans la machine de von Neumann, quel composant assure le séquençage et le décodage des instructions ?</p>
+        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+            <button onclick="answerQuiz(this, false, 'q2-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">A. L'Unité Arithmétique et Logique (ALU)</button>
+            <button onclick="answerQuiz(this, true, 'q2-exp')" data-correct="true" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">B. L'Unité de Contrôle (UC / Control Unit)</button>
+            <button onclick="answerQuiz(this, false, 'q2-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">C. Le bus de données système</button>
+            <button onclick="answerQuiz(this, false, 'q2-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">D. La mémoire morte (ROM)</button>
+        </div>
+        <div id="q2-exp" class="hidden p-3.5 rounded-xl bg-slate-100 text-xs text-slate-800 leading-relaxed">
+            <strong>Explication :</strong> L'Unité de Contrôle (UC) est le chef d'orchestre du CPU : elle gère le pointeur d'instruction, lit l'instruction en RAM, la décode et ordonne à l'ALU de réaliser les calculs.
+        </div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="space-y-3 pt-4 border-t border-slate-100">
+        <p class="text-xs sm:text-sm font-bold text-slate-900">Question 3 : Quelle étape de la chaîne de compilation remplace les directives <code>#include</code> par le texte réel des en-têtes ?</p>
+        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+            <button onclick="answerQuiz(this, true, 'q3-exp')" data-correct="true" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">A. Le Préprocesseur (cpp)</button>
+            <button onclick="answerQuiz(this, false, 'q3-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">B. Le Compilateur C++ proprement dit (g++)</button>
+            <button onclick="answerQuiz(this, false, 'q3-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">C. L'Assembleur (as)</button>
+            <button onclick="answerQuiz(this, false, 'q3-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">D. L'Éditeur de liens (ld)</button>
+        </div>
+        <div id="q3-exp" class="hidden p-3.5 rounded-xl bg-slate-100 text-xs text-slate-800 leading-relaxed">
+            <strong>Explication :</strong> Le préprocesseur est un outil de traitement purement textuel qui s'exécute en toute première étape avant la moindre vérification grammaticale C++.
+        </div>
+    </div>
+</article>
+
     </main>
 
     <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
+    <footer class="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200">
         <div>
-            
+            <div></div>
         </div>
         <a href="../R1.01.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
             <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
+            <span>Sommaire du Module R1.01</span>
         </a>
         <div>
-            
-        <a href="chap2_specifications_analyse.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #287271;">
-            <span>Ch. 2 : Spécifications Externes, Interne...</span>
+            <a href="chap2_specifications_analyse.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #287271;">
+            <span>Ch. 2 : Spécifications & Dictionnaire</span>
             <i class="w-4 h-4" data-lucide="arrow-right"></i>
         </a>
-        
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
