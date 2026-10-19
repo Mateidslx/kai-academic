@@ -1,0 +1,622 @@
+{
+  "module": "R1.02",
+  "titre": "Développement d'Interfaces Web",
+  "professeur": "Mme Sophie Voisin / M. Dalmau",
+  "couleur": "#366687",
+  "description": "Architecture client-serveur, protocole HTTP (stateless, méthodes GET/POST, codes statut 200/404/500), HTML5 sémantique, accessibilité (WCAG, label for, tap targets 48px), Box Model (border-box), CSS Flexbox et Grid, DOM, événements et Fetch async",
+  "count": 25,
+  "questions": [
+    {
+      "id": "r102_q01",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "1. Architecture Client-Serveur & Protocole HTTP",
+      "question": "Que signifie le fait que le protocole HTTP soit fondamentalement « sans état » (Stateless) ?",
+      "options": [
+        "Le protocole HTTP ne fonctionne que sur les ordinateurs éteints",
+        "Chaque requête envoyée par le client est traitée de manière totalement indépendante par le serveur, qui ne conserve en mémoire aucune information sur les requêtes précédentes effectuées par ce même client",
+        "Le protocole n'a pas de pays d'origine",
+        "Le serveur répond immédiatement sans lire la requête"
+      ],
+      "correct_index": 1,
+      "explication": "Par conception originelle (Tim Berners-Lee), HTTP ne mémorise rien entre deux échanges. Pour gérer des sessions utilisateurs (paniers d'achat, authentification connectée), le web a dû inventer des mécanismes complémentaires : les Cookies HTTP, les sessions côté serveur et les tokens JWT.",
+      "pieges": [
+        "Ne pas confondre 'sans connexion' et 'sans état'. HTTP/1.1 utilise des connexions TCP persistantes (Keep-Alive), mais le protocole applicatif reste formellement sans état."
+      ],
+      "tags": [
+        "HTTP",
+        "Stateless",
+        "Sans état",
+        "Cookies",
+        "Sessions"
+      ]
+    },
+    {
+      "id": "r102_q02",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "1. Architecture Client-Serveur & Protocole HTTP",
+      "question": "Quelle est la différence sémantique fondamentale entre les méthodes HTTP GET et POST ?",
+      "options": [
+        "GET sert à récupérer une ressource sans modifier l'état du serveur (méthode sûre et idempotente, paramètres dans l'URL) ; POST sert à transmettre des données pour créer ou traiter une ressource sur le serveur (données dans le corps de requête)",
+        "GET ne fonctionne que pour les images, POST pour le texte",
+        "POST est limité à 256 caractères, GET est illimité",
+        "GET crypte les données avec SSL, POST les laisse en clair"
+      ],
+      "correct_index": 0,
+      "explication": "Règle universelle de l'architecture REST : GET doit être idempotent (l'exécuter 10 fois a exactement le même résultat que l'exécuter 1 fois) et sûr. POST modifie l'état côté serveur et ne doit jamais être utilisé pour une simple consultation de page.",
+      "pieges": [
+        "Envoyer des mots de passe ou des données confidentielles dans une requête GET est une faille grave car les paramètres de l'URL restent visibles dans l'historique du navigateur et les logs du serveur !"
+      ],
+      "tags": [
+        "HTTP GET",
+        "HTTP POST",
+        "Idempotence",
+        "REST",
+        "Sécurité"
+      ]
+    },
+    {
+      "id": "r102_q03",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "1. Architecture Client-Serveur & Protocole HTTP",
+      "question": "À quelle catégorie appartiennent respectivement les codes de statut HTTP 200, 301, 404 et 500 ?",
+      "options": [
+        "200: Succès | 301: Redirection permanente | 404: Erreur client (Ressource introuvable) | 500: Erreur interne du serveur",
+        "200: Erreur | 301: Attente | 404: Succès | 500: Redirection",
+        "Tous ces codes indiquent que le site est piraté",
+        "Ce sont les numéros des ports réseau"
+      ],
+      "correct_index": 0,
+      "explication": "Standard HTTP : 1xx Information, 2xx Succès, 3xx Redirection (ex: 301 Moved Permanently), 4xx Erreurs imputables au Client (ex: 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found), 5xx Erreurs imputables au Serveur (ex: 500 Internal Server Error, 502 Bad Gateway).",
+      "pieges": [
+        "Un code 404 signifie que l'URL demandée n'existe pas sur le serveur. Ce n'est PAS un bug du serveur mais une erreur client !"
+      ],
+      "tags": [
+        "Codes HTTP",
+        "200 OK",
+        "301 Redirect",
+        "404 Not Found",
+        "500 Error"
+      ]
+    },
+    {
+      "id": "r102_q04",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "2. HTML5 Sémantique & Accessibilité (a11y)",
+      "question": "Pourquoi l'utilisation des balises sémantiques HTML5 (<header>, <nav>, <main>, <article>, <section>, <footer>) est-elle strictement exigée plutôt que d'utiliser des balises génériques <div> partout (« divite ») ?",
+      "options": [
+        "Pour que le site s'affiche automatiquement en mode sombre",
+        "Pour structurer le document de façon intelligible pour les lecteurs d'écran des personnes malvoyantes (accessibilité WCAG/RGAA), améliorer le référencement naturel (SEO) et clarifier la hiérarchie du contenu",
+        "Parce que les balises div sont interdites par la loi",
+        "Pour accélérer la vitesse de téléchargement de 50%"
+      ],
+      "correct_index": 1,
+      "explication": "Une <div> n'a aucune valeur sémantique pour les outils d'accessibilité. Les balises sémantiques permettent à un non-voyant de sauter directement au contenu principal avec <main>, de naviguer dans les menus avec <nav> ou d'isoler un contenu autonome réutilisable avec <article>.",
+      "pieges": [
+        "Piège d'examen à l'IUT d'Anglet : faire un site composé uniquement de <div class=\"header\">, <div class=\"menu\">... C'est la garantie d'une note très basse en R1.02 !"
+      ],
+      "tags": [
+        "HTML5 sémantique",
+        "Accessibilité",
+        "WCAG",
+        "RGAA",
+        "divite"
+      ]
+    },
+    {
+      "id": "r102_q05",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "2. HTML5 Sémantique & Accessibilité (a11y)",
+      "question": "Quelle est la bonne pratique absolue d'accessibilité concernant les formulaires HTML5 pour associer un champ de saisie à son texte explicatif ?",
+      "options": [
+        "Mettre le texte dans l'attribut placeholder=\"...\"",
+        "Utiliser une balise <label for=\"id_du_champ\">Texte</label> dont l'attribut 'for' correspond exactement à l'attribut 'id' du <input id=\"id_du_champ\">",
+        "Écrire le texte juste à côté de l'input sans balise",
+        "Mettre le texte dans un commentaire HTML"
+      ],
+      "correct_index": 1,
+      "explication": "La balise <label> liée par son for/id permet deux choses cruciales : 1. Le lecteur d'écran vocalise l'intitulé dès que le curseur entre dans le champ ; 2. L'utilisateur peut cliquer directement sur le texte du label pour donner le focus au champ ou cocher une case à cocher (zone tactile agrandie pour les mobiles).",
+      "pieges": [
+        "Le placeholder disparaît dès que l'utilisateur commence à taper et ne remplace JAMAIS un véritable label d'accessibilité !"
+      ],
+      "tags": [
+        "label for",
+        "Formulaires HTML5",
+        "Accessibilité",
+        "Zone tactile"
+      ]
+    },
+    {
+      "id": "r102_q06",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "3. Modèle de Boîte CSS (Box Model)",
+      "question": "De l'intérieur vers l'extérieur, dans quel ordre exact s'organisent les composants du Modèle de Boîte (Box Model) CSS ?",
+      "options": [
+        "Margin -> Border -> Padding -> Content",
+        "Content (Contenu) -> Padding (Marge intérieure) -> Border (Bordure) -> Margin (Marge extérieure)",
+        "Border -> Content -> Margin -> Padding",
+        "Padding -> Content -> Border -> Margin"
+      ],
+      "correct_index": 1,
+      "explication": "Cœur absolu du rendu CSS : 1. Content (la zone de texte/image), 2. Padding (l'espace interne entourant le contenu, coloré avec le fond de l'élément), 3. Border (la bordure visible ou invisible), 4. Margin (l'espace externe transparent repoussant les éléments voisins).",
+      "pieges": [
+        "La couleur d'arrière-plan (background-color) s'étend sous le Content et le Padding, mais s'arrête net au début de la Margin !"
+      ],
+      "tags": [
+        "Box Model",
+        "Modèle de boîte",
+        "Content Padding Border Margin",
+        "CSS"
+      ]
+    },
+    {
+      "id": "r102_q07",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "3. Modèle de Boîte CSS (Box Model)",
+      "question": "Pourquoi la règle universelle « * { box-sizing: border-box; } » est-elle systématiquement appliquée dans les feuilles de style professionnelles modernes ?",
+      "options": [
+        "Pour afficher des bordures noires sur toutes les images",
+        "Pour que la largeur déclarée (width) et la hauteur (height) d'un élément incluent d'office le padding et la bordure, évitant ainsi que l'ajout d'un padding n'agrandisse la boîte et ne brise la mise en page",
+        "Pour supprimer toutes les marges de la page",
+        "Pour rendre le site compatible avec Internet Explorer 6"
+      ],
+      "correct_index": 1,
+      "explication": "Par défaut (content-box), un élément de width: 200px auquel on ajoute padding: 20px et border: 2px mesure en réalité 244px de large ! Avec 'box-sizing: border-box', la boîte mesure exactement 200px au total, le padding et la bordure étant absorbés à l'intérieur.",
+      "pieges": [
+        "C'est la règle d'or qui simplifie tout le dimensionnement responsive en CSS moderne."
+      ],
+      "tags": [
+        "box-sizing: border-box",
+        "content-box",
+        "Dimensionnement",
+        "CSS moderne"
+      ]
+    },
+    {
+      "id": "r102_q08",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "4. Spécificité & Cascade CSS",
+      "question": "Entre un sélecteur d'ID (#mon-titre), un sélecteur de classe (.mon-titre) et un sélecteur d'élément (h1), lequel a la priorité maximale dans la cascade CSS ?",
+      "options": [
+        "Le sélecteur d'élément (h1)",
+        "Le sélecteur d'ID (#mon-titre, poids 100)",
+        "Le sélecteur de classe (.mon-titre, poids 10)",
+        "Le dernier écrit dans le fichier indépendamment du type de sélecteur"
+      ],
+      "correct_index": 1,
+      "explication": "Règle de spécificité (poids des sélecteurs) : ID (100) > Classe / Pseudo-classe / Attribut (10) > Élément / Pseudo-élément (1). Un sélecteur d'ID l'emportera toujours sur 9 sélecteurs de classes cumulés.",
+      "pieges": [
+        "Seul le style en ligne (attribut style=\"...\") et la directive '!important' peuvent surpasser un sélecteur d'ID, mais l'utilisation abusive de !important est considérée comme une très mauvaise pratique."
+      ],
+      "tags": [
+        "Spécificité CSS",
+        "ID vs Classe",
+        "Cascade",
+        "Poids des sélecteurs"
+      ]
+    },
+    {
+      "id": "r102_q09",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "5. Mise en Page CSS : Flexbox",
+      "question": "Dans un conteneur configuré avec « display: flex; », quelle propriété permet d'aligner les éléments le long de l'Axe Principal (Main Axis) ?",
+      "options": [
+        "align-items",
+        "justify-content (ex: center, space-between, flex-start, flex-end)",
+        "flex-direction",
+        "margin-align"
+      ],
+      "correct_index": 1,
+      "explication": "Règle mnémotechnique Flexbox : 'justify-content' contrôle toujours l'axe principal (défini par flex-direction : horizontal par défaut avec row). 'align-items' contrôle quant à lui l'axe secondaire transversal (Cross Axis).",
+      "pieges": [
+        "Si l'on définit 'flex-direction: column;', l'axe principal devient vertical ! 'justify-content' aligne alors verticalement et 'align-items' aligne horizontalement."
+      ],
+      "tags": [
+        "Flexbox",
+        "justify-content",
+        "align-items",
+        "Axe principal",
+        "Axe secondaire"
+      ]
+    },
+    {
+      "id": "r102_q10",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "5. Mise en Page CSS : Flexbox",
+      "question": "Quelle combinaison de propriétés CSS Flexbox permet de centrer parfaitement un élément à la fois horizontalement et verticalement dans son conteneur parent ?",
+      "options": [
+        "display: block; margin: auto;",
+        "display: flex; justify-content: center; align-items: center;",
+        "display: inline; text-align: center;",
+        "float: center; position: center;"
+      ],
+      "correct_index": 1,
+      "explication": "Le 'Saint Graal' historique du centrage CSS : 3 lignes suffisent avec Flexbox : display: flex ; justify-content: center (centre sur l'axe horizontal) ; align-items: center (centre sur l'axe vertical).",
+      "pieges": [
+        "Pour que le centrage vertical soit visible, le conteneur parent doit évidemment posséder une hauteur définie (ex: min-height: 100vh ou height: 400px)."
+      ],
+      "tags": [
+        "Centrage parfait",
+        "Flexbox",
+        "justify-content: center",
+        "align-items: center"
+      ]
+    },
+    {
+      "id": "r102_q11",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "6. Mise en Page CSS : Grid",
+      "question": "Quelle est la différence conceptuelle majeure entre CSS Flexbox et CSS Grid ?",
+      "options": [
+        "Flexbox est payant, CSS Grid est open-source",
+        "Flexbox est conçu pour une disposition unidimensionnelle (en ligne OU en colonne) ; CSS Grid est conçu pour une disposition bidimensionnelle globale (lignes ET colonnes simultanées)",
+        "Flexbox ne fonctionne que sur Google Chrome",
+        "CSS Grid ne s'applique qu'aux tableaux de chiffres"
+      ],
+      "correct_index": 1,
+      "explication": "Flexbox gère le flux le long d'un seul axe (idéal pour les barres de navigation, boutons alignés, listes). CSS Grid découpe l'espace en une grille globale en 2 dimensions (idéal pour la mise en page d'une page complète avec header, sidebar, zone principale et footer).",
+      "pieges": [
+        "Flexbox et Grid ne sont pas rivaux : on utilise souvent Grid pour structurer les grandes zones de la page, et Flexbox à l'intérieur de chaque composant pour aligner ses éléments."
+      ],
+      "tags": [
+        "CSS Grid vs Flexbox",
+        "1D vs 2D",
+        "Lignes et colonnes",
+        "Mise en page"
+      ]
+    },
+    {
+      "id": "r102_q12",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "6. Mise en Page CSS : Grid",
+      "question": "Que réalise la déclaration CSS « grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); » ?",
+      "options": [
+        "Elle crée une colonne fixe de 280 pixels",
+        "Elle crée une grille responsive automatique qui génère autant de colonnes que l'espace disponible le permet (avec un minimum de 280px par colonne et partage équitable du reste 1fr), sans avoir besoin d'écrire la moindre Media Query !",
+        "Elle masque toutes les colonnes sur petit écran",
+        "Elle affiche une bordure de 280px autour de chaque cellule"
+      ],
+      "correct_index": 1,
+      "explication": "C'est l'un des patterns les plus puissants du CSS moderne enseigné à l'IUT d'Anglet : sur un écran large de PC, il affichera 4 ou 5 colonnes ; sur un écran de smartphone, il basculera automatiquement sur 1 seule colonne dès que la largeur passe sous 280px.",
+      "pieges": [
+        "L'unité fractionnaire 'fr' représente une part de l'espace disponible restant dans le conteneur de grille."
+      ],
+      "tags": [
+        "CSS Grid",
+        "minmax",
+        "auto-fit",
+        "Grille responsive",
+        "1fr"
+      ]
+    },
+    {
+      "id": "r102_q13",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "7. Responsive Web Design & Viewport",
+      "question": "Pourquoi la balise « <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> » est-elle obligatoire dans le <head> de toute page web responsive ?",
+      "options": [
+        "Pour télécharger la version mobile du site",
+        "Pour ordonner aux navigateurs pour smartphones d'adapter la largeur de la fenêtre de rendu (viewport) à la largeur physique réelle de l'écran du mobile (au lieu de simuler un écran d'ordinateur de 980px avec un zoom arrière dégradé)",
+        "Pour bloquer la rotation de l'écran",
+        "Pour accélérer la connexion 4G/5G"
+      ],
+      "correct_index": 1,
+      "explication": "Sans cette balise meta viewport, un smartphone simule l'affichage d'un écran d'ordinateur de bureau de 980 pixels de large et dézoome la page pour qu'elle tienne sur l'écran, rendant le texte microscopique et illisible. Cette balise active le véritable rendu responsive 1:1.",
+      "pieges": [
+        "Oublier cette balise dans un projet web rend toutes les Media Queries inefficaces sur un véritable téléphone mobile."
+      ],
+      "tags": [
+        "meta viewport",
+        "width=device-width",
+        "Responsive",
+        "Mobile-first"
+      ]
+    },
+    {
+      "id": "r102_q14",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "7. Responsive Web Design & Viewport",
+      "question": "En approche de conception « Mobile-First », comment organise-t-on les Media Queries en CSS ?",
+      "options": [
+        "On écrit d'abord le style pour ordinateur et on utilise @media (max-width: ...) pour réduire les éléments",
+        "On écrit les styles par défaut pour le mobile (sans media query), puis on ajoute des Media Queries avec « @media (min-width: ...) » pour enrichir progressivement la mise en page au fur et à mesure que l'écran s'élargit (tablette, desktop)",
+        "On écrit un fichier CSS différent pour chaque marque de smartphone",
+        "On interdit aux utilisateurs de se connecter sur mobile"
+      ],
+      "correct_index": 1,
+      "explication": "Philosophie Mobile-First : on conçoit d'abord pour l'écran le plus contraint (mobile, écran étroit, réseau lent). Le code CSS est plus léger, plus robuste, et la montée en charge vers les grands écrans se fait par amélioration progressive avec 'min-width'.",
+      "pieges": [
+        "L'ancienne méthode Desktop-First basée sur 'max-width' obligeait à surcharger et annuler des styles lourds pour les petits écrans."
+      ],
+      "tags": [
+        "Mobile-First",
+        "min-width",
+        "Amélioration progressive",
+        "Media Queries"
+      ]
+    },
+    {
+      "id": "r102_q15",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "8. Le DOM (Document Object Model) & JavaScript",
+      "question": "Qu'est-ce que le DOM (Document Object Model) dans un navigateur web ?",
+      "options": [
+        "Le nom de domaine du site web (ex: .fr, .com)",
+        "La représentation arborescente en mémoire vive (sous forme d'objets JavaScript) de l'ensemble des éléments, balises et attributs HTML de la page, permettant au code d'en modifier dynamiquement le contenu, la structure et le style",
+        "Le disque dur du serveur web",
+        "Un format de fichier d'image vectorielle"
+      ],
+      "correct_index": 1,
+      "explication": "Le navigateur analyse le code HTML et construit un arbre d'objets (arbre DOM). L'objet racine 'document' permet à JavaScript d'interagir avec chaque nœud (ajouter un paragraphe, changer une couleur, écouter un clic).",
+      "pieges": [
+        "Le DOM n'est pas le code source HTML brut : le DOM peut être modifié en direct par JavaScript alors que le code source téléchargé reste inchangé."
+      ],
+      "tags": [
+        "DOM",
+        "Document Object Model",
+        "Arbre d'objets",
+        "document"
+      ]
+    },
+    {
+      "id": "r102_q16",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "8. Le DOM (Document Object Model) & JavaScript",
+      "question": "Pourquoi doit-on impérativement privilégier « element.textContent » plutôt que « element.innerHTML » pour insérer du texte provenant d'un utilisateur ?",
+      "options": [
+        "Parce que textContent s'affiche en gras",
+        "Pour prévenir les failles critiques d'injection de script (XSS - Cross-Site Scripting) : textContent traite le texte comme une chaîne littérale inoffensive, alors que innerHTML interprète et exécute les balises <script> ou <img onerror=...> injectées",
+        "Parce que innerHTML est plus lent de 10 secondes",
+        "Parce que textContent traduit automatiquement en français"
+      ],
+      "correct_index": 1,
+      "explication": "Si un attaquant saisit '<script>volerCookies()</script>' dans un champ et que vous faites 'div.innerHTML = saisie', le script s'exécute dans le navigateur de toutes les victimes ! Avec 'div.textContent = saisie', les balises sont automatiquement échappées et affichées comme du simple texte inoffensif.",
+      "pieges": [
+        "Règle de sécurité fondamentale en web : ne JAMAIS insérer de données non fiables avec innerHTML !"
+      ],
+      "tags": [
+        "XSS",
+        "textContent",
+        "innerHTML",
+        "Sécurité web",
+        "Injections"
+      ]
+    },
+    {
+      "id": "r102_q17",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "9. Gestion des Événements & Propagation",
+      "question": "En JavaScript moderne, quelle est la méthode recommandée pour écouter un événement (comme un clic de souris) sur un bouton ?",
+      "options": [
+        "button.onclick_run = maFonction;",
+        "button.addEventListener('click', (event) => { ... });",
+        "button.listenClick(maFonction);",
+        "Écrire onclick=\"maFonction()\" directement dans la balise HTML"
+      ],
+      "correct_index": 1,
+      "explication": "addEventListener est la méthode standard du W3C : elle permet d'attacher plusieurs écouteurs indépendants sur le même événement sans écraser les précédents, et offre un contrôle complet sur la phase de propagation (capture/bubbling).",
+      "pieges": [
+        "Utiliser l'attribut HTML inline 'onclick=\"...\"' mélange la structure et le comportement, et empêche d'attacher plus d'une fonction."
+      ],
+      "tags": [
+        "addEventListener",
+        "Événements",
+        "click",
+        "Standards W3C"
+      ]
+    },
+    {
+      "id": "r102_q18",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "9. Gestion des Événements & Propagation",
+      "question": "Que réalise la méthode « event.preventDefault() » appelée dans un gestionnaire d'événement de soumission de formulaire ('submit') ?",
+      "options": [
+        "Elle supprime tous les champs du formulaire",
+        "Elle empêche le rechargement complet de la page par défaut provoqué par la soumission du navigateur, permettant de traiter les données en JavaScript et de les envoyer de manière fluide en arrière-plan via fetch() (Single Page App / AJAX)",
+        "Elle déconnecte l'utilisateur de sa session",
+        "Elle valide automatiquement le mot de passe"
+      ],
+      "correct_index": 1,
+      "explication": "Par défaut, soumettre un formulaire déclenche une requête HTTP synchrone qui recharge toute la page. 'event.preventDefault()' annule ce comportement par défaut, permettant une interface réactive et moderne.",
+      "pieges": [
+        "Elle s'utilise également sur les liens <a href=\"...\"> pour intercepter le clic et gérer la navigation côté client."
+      ],
+      "tags": [
+        "preventDefault()",
+        "Formulaires",
+        "submit",
+        "AJAX",
+        "SPA"
+      ]
+    },
+    {
+      "id": "r102_q19",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "9. Gestion des Événements & Propagation",
+      "question": "Qu'est-ce que le phénomène de « Bouillonnement » (Event Bubbling) dans la propagation des événements DOM ?",
+      "options": [
+        "L'eau qui bout dans la tasse de café du développeur",
+        "Lorsqu'un événement se produit sur un élément enfant (ex: un bouton), il se propage successivement vers le haut à tous ses éléments parents dans l'arbre DOM jusqu'à la racine document",
+        "Une répétition infinie d'événements qui bloque le navigateur",
+        "Un événement qui ne se produit que toutes les 5 secondes"
+      ],
+      "correct_index": 1,
+      "explication": "Si on clique sur <span> à l'intérieur d'un <button>, l'événement se déclenche d'abord sur le span, puis remonte au button, puis à la div parente, puis au body. La méthode 'event.stopPropagation()' permet d'arrêter cette remontée si souhaité.",
+      "pieges": [
+        "Le bubbling est à la base du pattern de 'Délégation d'événements' (Event Delegation), qui permet d'attacher un seul écouteur sur une liste <ul> pour gérer les clics sur tous ses <li> enfants !"
+      ],
+      "tags": [
+        "Event Bubbling",
+        "Bouillonnement",
+        "Propagation DOM",
+        "Délégation"
+      ]
+    },
+    {
+      "id": "r102_q20",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "10. Requêtes Asynchrones avec Fetch API",
+      "question": "Que retourne l'appel à la fonction « fetch(url) » en JavaScript moderne ?",
+      "options": [
+        "Directement la chaîne de caractères HTML de la page",
+        "Une Promesse (Promise) qui se résout avec un objet Response dès que les en-têtes HTTP de la réponse sont reçus du serveur",
+        "Un tableau de données JSON",
+        "Un booléen true ou false"
+      ],
+      "correct_index": 1,
+      "explication": "L'API Fetch est entièrement asynchrone basée sur les Promesses. Pour récupérer le corps JSON décodé, il faut chaîner un second appel : fetch(url).then(res => res.json()).then(data => { ... }) ou utiliser 'const res = await fetch(url); const data = await res.json();'.",
+      "pieges": [
+        "Attention : 'fetch(url)' ne renvoie pas directement les données métier ! L'appel à '.json()' ou '.text()' retourne lui-même une seconde Promesse."
+      ],
+      "tags": [
+        "Fetch API",
+        "Promises",
+        "async/await",
+        "Response"
+      ]
+    },
+    {
+      "id": "r102_q21",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "10. Requêtes Asynchrones avec Fetch API",
+      "question": "Comment l'API Fetch gère-t-elle une réponse d'erreur HTTP provenant du serveur, comme un code 404 (Not Found) ou 500 (Server Error) ?",
+      "options": [
+        "La Promesse est immédiatement rejetée et déclenche le bloc .catch()",
+        "La Promesse est RÉSOLUE normalement avec succès (le bloc .then() s'exécute), mais la propriété 'response.ok' vaut false et 'response.status' contient 404 ou 500",
+        "Le navigateur affiche une alerte pop-up d'erreur",
+        "L'ordinateur coupe la connexion Wi-Fi"
+      ],
+      "correct_index": 1,
+      "explication": "Piège universel de l'API Fetch : une Promesse fetch() n'est rejetée (.catch()) qu'en cas de panne réseau matérielle ou de problème DNS. Si le serveur répond avec un code 404 ou 500, la communication a bien eu lieu, donc la promesse est résolue ! Il faut toujours vérifier 'if (!response.ok) throw new Error(...)'.",
+      "pieges": [
+        "Ne jamais croire que le bloc catch() va intercepter une erreur 404 ou 500 avec Fetch !"
+      ],
+      "tags": [
+        "Fetch",
+        "response.ok",
+        "404",
+        "Gestion des erreurs",
+        "Piège majeur"
+      ]
+    },
+    {
+      "id": "r102_q22",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "11. Stockage Local dans le Navigateur",
+      "question": "Quelle est la différence fondamentale entre « localStorage » et « sessionStorage » dans les API Web Storage ?",
+      "options": [
+        "localStorage est limité à 100 octets alors que sessionStorage est illimité",
+        "localStorage persiste indéfiniment même après la fermeture et la réouverture du navigateur (ou le redémarrage de l'ordinateur) ; sessionStorage est automatiquement effacé dès que l'onglet ou la fenêtre du navigateur est fermée",
+        "sessionStorage ne fonctionne qu'avec des nombres entiers",
+        "localStorage envoie automatiquement toutes les données sur les serveurs de Google"
+      ],
+      "correct_index": 1,
+      "explication": "Web Storage offre entre 5 et 10 Mo de stockage clé/valeur synchrone côté client. localStorage est idéal pour stocker les préférences utilisateur, le thème sombre ou les scores de quiz hors-ligne. sessionStorage est réservé aux données éphémères d'une seule session.",
+      "pieges": [
+        "localStorage ne stocke que des chaînes de caractères (strings). Pour stocker un objet ou un tableau JavaScript, il faut obligatoirement faire JSON.stringify(obj) à l'enregistrement et JSON.parse(str) à la lecture !"
+      ],
+      "tags": [
+        "localStorage",
+        "sessionStorage",
+        "Persistance",
+        "JSON.stringify",
+        "Offline"
+      ]
+    },
+    {
+      "id": "r102_q23",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "4. Spécificité & Cascade CSS",
+      "question": "Quelle est la différence entre les unités relatives « rem » et « em » en CSS ?",
+      "options": [
+        "rem est relatif à la taille de police de la racine du document (html, Root em) ; em est relatif à la taille de police de l'élément parent direct (effet de cascade multiplicative)",
+        "rem s'utilise pour les images, em pour le texte",
+        "1 rem est égal à 1 centimètre",
+        "em est l'abréviation de e-mail"
+      ],
+      "correct_index": 0,
+      "explication": "L'unité 'rem' garantit une échelle typographique cohérente et prévisible dans tout le site (par exemple 1rem = 16px si la racine est à 16px). L'unité 'em' peut provoquer des dérives exponentielles si des éléments s'imbriquent les uns dans les autres (ex: 1.2em dans 1.2em dans 1.2em).",
+      "pieges": [
+        "L'unité 'rem' respecte scrupuleusement les préférences de zoom et d'accessibilité configurées par l'utilisateur dans son navigateur."
+      ],
+      "tags": [
+        "rem vs em",
+        "Typographie relative",
+        "Root em",
+        "Accessibilité"
+      ]
+    },
+    {
+      "id": "r102_q24",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "2. HTML5 Sémantique & Accessibilité (a11y)",
+      "question": "Quelle est la taille minimale recommandée par le W3C pour une zone de contact tactile (Tap Target) sur un écran de smartphone pour garantir une bonne ergonomie mobile ?",
+      "options": [
+        "10 x 10 pixels",
+        "Au moins 48 x 48 pixels (ou 44 x 44 px selon Apple) avec un espacement suffisant entre boutons adjacents",
+        "200 x 200 pixels",
+        "1 pixel suffit"
+      ],
+      "correct_index": 1,
+      "explication": "Critère WCAG 2.1 (Target Size) : le doigt humain moyen a une empreinte d'environ 9 à 10 mm. Une zone tactile de 48px évite les clics erronés sur les boutons voisins (très utile pour réviser sur son téléphone entre deux cours !).",
+      "pieges": [
+        "Des boutons trop petits obligent l'utilisateur à zoomer et créent une immense frustration d'utilisation sur mobile."
+      ],
+      "tags": [
+        "Tap Target",
+        "48px",
+        "Ergonomie mobile",
+        "WCAG",
+        "Tactile"
+      ]
+    },
+    {
+      "id": "r102_q25",
+      "module": "R1.02",
+      "prof": "Mme Sophie Voisin / M. Dalmau",
+      "chapitre": "1. Architecture Client-Serveur & Protocole HTTP",
+      "question": "En synthèse des enseignements de R1.02, quelle est la règle d'or pour concevoir une application web moderne de haute qualité ?",
+      "options": [
+        "Mettre le plus d'animations clignotantes possibles",
+        "Séparer rigoureusement les responsabilités (HTML pour le sens et la sémantique, CSS pour le rendu visuel et la mise en page responsive, JavaScript pour les interactions dynamiques) tout en plaçant l'accessibilité universelle et l'ergonomie mobile au centre de la démarche",
+        "Ne tester le site que sur un seul ordinateur avec un grand écran 4K",
+        "Mettre tout le code dans un seul gros fichier sans indentation"
+      ],
+      "correct_index": 1,
+      "explication": "C'est la leçon fondatrice dispensée par Mme Voisin et M. Dalmau : le web n'est ni du bricolage visuel ni une simple couche cosmétique, mais un système distribué élégant reposant sur des standards ouverts conçus pour être accessibles à tous les êtres humains, sur n'importe quel appareil.",
+      "pieges": [
+        "Un site visuellement beau mais inaccessible aux claviers et lecteurs d'écran est considéré comme un échec technique à l'IUT d'Anglet."
+      ],
+      "tags": [
+        "Synthèse",
+        "Mme Voisin",
+        "M. Dalmau",
+        "Séparation des responsabilités",
+        "Standards web"
+      ]
+    }
+  ]
+}

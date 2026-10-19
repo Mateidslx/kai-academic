@@ -1,0 +1,600 @@
+{
+  "module": "R1.07",
+  "titre": "Outils Mathématiques Fondamentaux",
+  "professeur": "M. Roegel",
+  "couleur": "#A64D47",
+  "description": "Calcul matriciel (produit, transposée, non-commutativité), déterminants (2x2, Sarrus 3x3), matrice inverse, systèmes d'équations linéaires, méthode du pivot de Gauss, Gauss-Jordan, rang et Rouché-Fontené",
+  "count": 25,
+  "questions": [
+    {
+      "id": "r107_q01",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "Quelle est la condition obligatoire pour que le produit matriciel A * B de deux matrices A et B soit défini ?",
+      "options": [
+        "A et B doivent avoir exactement la même taille",
+        "Le nombre de colonnes de la matrice A doit être strictement égal au nombre de lignes de la matrice B",
+        "Les deux matrices doivent être carrées",
+        "Les coefficients de B doivent tous être positifs"
+      ],
+      "correct_index": 1,
+      "explication": "Règle de dimension fondamentale : si A est de dimension (n x p), B doit obligatoirement être de dimension (p x m). La matrice résultat C = A * B sera de dimension (n x m). Le coefficient c_ij s'obtient en faisant le produit scalaire de la i-ème ligne de A par la j-ème colonne de B.",
+      "pieges": [
+        "Piège d'examen de M. Roegel : vouloir additionner deux matrices (qui exige des dimensions identiques) vs les multiplier (qui exige colonnes(A) = lignes(B))."
+      ],
+      "tags": [
+        "Produit matriciel",
+        "Dimensions",
+        "Compatibilité",
+        "Lignes et colonnes"
+      ]
+    },
+    {
+      "id": "r107_q02",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "Le produit matriciel est-il commutatif (a-t-on toujours A * B = B * A) ?",
+      "options": [
+        "Oui, la multiplication est toujours commutative en mathématiques",
+        "NON, en général A * B ≠ B * A (et B * A peut même ne pas être calculable si les dimensions ne concordent pas)",
+        "Oui, mais uniquement pour les matrices contenant des nombres entiers",
+        "Oui, si le déterminant est nul"
+      ],
+      "correct_index": 1,
+      "explication": "Le produit matriciel est NON commutatif. Même lorsque A et B sont deux matrices carrées de même taille n x n (où AB et BA existent tous les deux), on a presque toujours AB ≠ BA. L'ordre des facteurs est capital en algèbre linéaire et en infographie 3D !",
+      "pieges": [
+        "Conséquence directe : (A + B)^2 ≠ A^2 + 2AB + B^2, mais (A + B)^2 = A^2 + AB + BA + B^2 !"
+      ],
+      "tags": [
+        "Non-commutativité",
+        "Produit matriciel",
+        "Algèbre linéaire"
+      ]
+    },
+    {
+      "id": "r107_q03",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "Qu'appelle-t-on la matrice transposée A^T (ou tA) d'une matrice A de taille (n x p) ?",
+      "options": [
+        "La matrice obtenue en inversant le signe de tous ses éléments",
+        "La matrice de dimension (p x n) obtenue en échangeant les lignes et les colonnes (l'élément à la ligne i et colonne j devient l'élément à la ligne j et colonne i)",
+        "Une matrice dont tous les coefficients diagonaux sont nuls",
+        "La matrice inverse A^-1"
+      ],
+      "correct_index": 1,
+      "explication": "La transposition transforme les lignes en colonnes : (A^T)_ij = A_ji. Propriété essentielle démontrée en cours : (A * B)^T = B^T * A^T (l'ordre des facteurs s'inverse !).",
+      "pieges": [
+        "Ne pas confondre la transposée A^T avec l'opposée -A ou l'inverse A^-1."
+      ],
+      "tags": [
+        "Transposée",
+        "A^T",
+        "Inversion d'ordre",
+        "Lignes et colonnes"
+      ]
+    },
+    {
+      "id": "r107_q04",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "Quelle est la définition d'une matrice symétrique ?",
+      "options": [
+        "Une matrice dont les éléments de la première ligne sont égaux à ceux de la dernière",
+        "Une matrice carrée égale à sa propre transposée : A = A^T (c'est-à-dire A_ij = A_ji pour tous i et j)",
+        "Une matrice qui ne contient que des zéros et des uns",
+        "Une matrice dont la somme des coefficients vaut zéro"
+      ],
+      "correct_index": 1,
+      "explication": "Une matrice symétrique est symétrique par rapport à sa diagonale principale. Elle est nécessairement carrée. Si A = -A^T, elle est dite antisymétrique (sa diagonale est alors obligatoirement nulle).",
+      "pieges": [
+        "Toute matrice non carrée ne peut JAMAIS être symétrique car sa transposée n'a même pas la même dimension !"
+      ],
+      "tags": [
+        "Matrice symétrique",
+        "A = A^T",
+        "Diagonale principale"
+      ]
+    },
+    {
+      "id": "r107_q05",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "2. Déterminants & Propriétés",
+      "question": "Quelle est la formule du déterminant d'une matrice carrée 2x2 : A = [[a, b], [c, d]] ?",
+      "options": [
+        "det(A) = a * d - b * c",
+        "det(A) = a * b - c * d",
+        "det(A) = a + d - b - c",
+        "det(A) = (a * d) / (b * c)"
+      ],
+      "correct_index": 0,
+      "explication": "Produit des éléments de la diagonale principale moins produit des éléments de l'antidiagonale : ad - bc. Si det(A) = 0, les vecteurs colonnes sont colinéaires et la matrice n'est pas inversible.",
+      "pieges": [
+        "Attention au signe moins : c'est bien - bc et non + bc."
+      ],
+      "tags": [
+        "Déterminant 2x2",
+        "ad - bc",
+        "Formule fondamentale"
+      ]
+    },
+    {
+      "id": "r107_q06",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "2. Déterminants & Propriétés",
+      "question": "À quel type de matrices la règle de Sarrus pour le calcul de déterminant s'applique-t-elle exclusivement ?",
+      "options": [
+        "À toutes les matrices carrées sans exception",
+        "EXCLUSIVEMENT aux matrices carrées d'ordre 3 (3x3)",
+        "Aux matrices 2x2 et 4x4",
+        "Aux matrices triangulaires uniquement"
+      ],
+      "correct_index": 1,
+      "explication": "Avertissement capital répété en rouge par M. Roegel : la règle de Sarrus (recopier les deux premières colonnes à droite pour sommer les diagonales descendantes et soustraire les montantes) est une astuce qui ne fonctionne QUE pour n=3. Pour n >= 4, elle est totalement fausse (une matrice 4x4 a 24 termes, Sarrus n'en donnerait que 8) !",
+      "pieges": [
+        "Erreur fatale en examen : appliquer la règle de Sarrus sur une matrice 4x4."
+      ],
+      "tags": [
+        "Règle de Sarrus",
+        "Ordre 3x3",
+        "Avertissement",
+        "Déterminant"
+      ]
+    },
+    {
+      "id": "r107_q07",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "2. Déterminants & Propriétés",
+      "question": "Si A est une matrice carrée d'ordre n et k un scalaire réel, que vaut det(k * A) ?",
+      "options": [
+        "k * det(A)",
+        "k^n * det(A)",
+        "n * k * det(A)",
+        "det(A) / k"
+      ],
+      "correct_index": 1,
+      "explication": "Multipliez une matrice par k revient à multiplier chacune de ses n lignes par k. Par n-linéarité du déterminant par rapport aux lignes, chaque ligne fait sortir un facteur k, d'où det(k * A) = k^n * det(A).",
+      "pieges": [
+        "Piège d'examen classique : oublier la puissance n ! Pour une matrice 3x3, det(2A) = 2^3 * det(A) = 8 * det(A), et non 2 * det(A) !"
+      ],
+      "tags": [
+        "Déterminant",
+        "Multiplication scalaire",
+        "k^n",
+        "n-linéarité"
+      ]
+    },
+    {
+      "id": "r107_q08",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "2. Déterminants & Propriétés",
+      "question": "Quelle est la condition nécessaire et suffisante pour qu'une matrice carrée A soit inversible ?",
+      "options": [
+        "Tous ses éléments doivent être différents de zéro",
+        "Son déterminant doit être strictement non nul : det(A) ≠ 0",
+        "Elle doit être symétrique",
+        "Sa trace doit être égale à 1"
+      ],
+      "correct_index": 1,
+      "explication": "Théorème fondamental de l'inversibilité : A est inversible (il existe A^-1 telle que A * A^-1 = I) si et seulement si det(A) ≠ 0. Si det(A) = 0, la matrice est dite singulière (non inversible), son rang est inférieur à n, et le système associé a 0 ou une infinité de solutions.",
+      "pieges": [
+        "Une matrice peut avoir des zéros sur sa diagonale et être parfaitement inversible !"
+      ],
+      "tags": [
+        "Inversibilité",
+        "det(A) ≠ 0",
+        "Matrice singulière",
+        "Théorème fondamental"
+      ]
+    },
+    {
+      "id": "r107_q09",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "3. Inverse d'une Matrice",
+      "question": "Quelle est la formule explicite de l'inverse d'une matrice 2x2 inversible A = [[a, b], [c, d]] ?",
+      "options": [
+        "A^-1 = 1/(ad - bc) * [[d, -b], [-c, a]]",
+        "A^-1 = 1/(ad - bc) * [[a, c], [b, d]]",
+        "A^-1 = [[1/a, 1/b], [1/c, 1/d]]",
+        "A^-1 = -A"
+      ],
+      "correct_index": 0,
+      "explication": "Pour inverser une matrice 2x2 : 1. On divise par le déterminant (ad - bc) ; 2. On échange les éléments de la diagonale principale (a et d échangent de place) ; 3. On change le signe des éléments de l'antidiagonale (-b et -c).",
+      "pieges": [
+        "Piège classique : inverser chaque nombre individuellement (1/a, 1/b...). L'inverse d'une matrice n'a rien à voir avec l'inverse de ses coefficients !"
+      ],
+      "tags": [
+        "Matrice inverse 2x2",
+        "Formule directe",
+        "Échange diagonale"
+      ]
+    },
+    {
+      "id": "r107_q10",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "3. Inverse d'une Matrice",
+      "question": "Si A et B sont deux matrices carrées inversibles de même taille, que vaut l'inverse du produit (A * B)^-1 ?",
+      "options": [
+        "A^-1 * B^-1",
+        "B^-1 * A^-1 (l'ordre des facteurs s'inverse)",
+        "-(A * B)",
+        "1 / (A * B)"
+      ],
+      "correct_index": 1,
+      "explication": "Comme pour enfiler ses chaussettes puis ses chaussures : pour défaire l'opération, on doit d'abord retirer les chaussures puis les chaussettes. Vérification formelle : (AB) * (B^-1 A^-1) = A (B B^-1) A^-1 = A I A^-1 = A A^-1 = I.",
+      "pieges": [
+        "Erreur très fréquente en contrôle : écrire (AB)^-1 = A^-1 B^-1. Comme les matrices ne commutent pas, c'est faux !"
+      ],
+      "tags": [
+        "Inverse d'un produit",
+        "B^-1 A^-1",
+        "Inversion d'ordre"
+      ]
+    },
+    {
+      "id": "r107_q11",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "4. Méthode du Pivot de Gauss & Systèmes Linéaires",
+      "question": "Quelles sont les trois opérations élémentaires autorisées sur les lignes d'une matrice dans l'algorithme du pivot de Gauss sans changer l'ensemble des solutions ?",
+      "options": [
+        "Échanger deux lignes (L_i <-> L_j), multiplier une ligne par un scalaire non nul (L_i <- k*L_i, k≠0), ajouter à une ligne un multiple d'une autre (L_i <- L_i + k*L_j)",
+        "Multiplier une ligne par zéro, supprimer une colonne, ajouter 10 à tous les nombres",
+        "Élever les lignes au carré, prendre la racine carrée, arrondir à l'entier",
+        "Trier les colonnes par ordre alphabétique"
+      ],
+      "correct_index": 0,
+      "explication": "Ces trois opérations élémentaires correspondent exactement aux manipulations licites sur un système d'équations (échanger deux équations, multiplier une équation par un nombre non nul, combiner deux équations). Elles conservent strictement le sous-espace des solutions.",
+      "pieges": [
+        "Attention : multiplier une ligne par k = 0 est strictement interdit car cela détruirait l'information de l'équation (0 = 0) !"
+      ],
+      "tags": [
+        "Pivot de Gauss",
+        "Opérations élémentaires",
+        "Conservation des solutions"
+      ]
+    },
+    {
+      "id": "r107_q12",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "4. Méthode du Pivot de Gauss & Systèmes Linéaires",
+      "question": "Quel est l'objectif géométrique et algébrique de la première phase de l'algorithme du pivot de Gauss (la descente) ?",
+      "options": [
+        "Calculer la moyenne des nombres",
+        "Transformer la matrice du système en une matrice triangulaire supérieure (ou échelonnée en lignes) en éliminant progressivement les coefficients sous la diagonale",
+        "Remplacer toutes les inconnues par des zéros",
+        "Créer une matrice symétrique"
+      ],
+      "correct_index": 1,
+      "explication": "Une fois le système sous forme triangulaire échelonnée, la dernière équation ne contient plus qu'une seule inconnue. On trouve sa valeur immédiatement, puis on remonte par substitution récursive pour trouver toutes les autres.",
+      "pieges": [
+        "Le pivot choisi doit être strictement non nul. Si le coefficient diagonal est nul, il faut d'abord échanger la ligne avec une ligne inférieure (pivotage)."
+      ],
+      "tags": [
+        "Pivot de Gauss",
+        "Triangulation",
+        "Échelonnement",
+        "Descente"
+      ]
+    },
+    {
+      "id": "r107_q13",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "4. Méthode du Pivot de Gauss & Systèmes Linéaires",
+      "question": "En quoi consiste la méthode de Gauss-Jordan comparée au pivot de Gauss classique ?",
+      "options": [
+        "Elle élimine les coefficients à la fois sous ET au-dessus de la diagonale pour transformer directement la matrice en matrice identité I",
+        "Elle utilise deux fois plus d'équations",
+        "Elle ne s'applique qu'aux nombres complexes",
+        "C'est un algorithme probabiliste"
+      ],
+      "correct_index": 0,
+      "explication": "Gauss-Jordan poursuit l'élimination vers le haut pour isoler directement les inconnues (diagonale de 1, tout le reste à 0). Appliquée à la matrice augmentée [A | I], la méthode de Gauss-Jordan transforme [A | I] en [I | A^-1], fournissant un moyen universel de calculer l'inverse d'une matrice.",
+      "pieges": [
+        "Bien que plus élégante pour trouver l'inverse, Gauss-Jordan demande environ 50% de calculs en plus que la simple remontée par substitution pour résoudre un système linéaire unique."
+      ],
+      "tags": [
+        "Gauss-Jordan",
+        "Matrice identité",
+        "Calcul d'inverse",
+        "Matrice augmentée"
+      ]
+    },
+    {
+      "id": "r107_q14",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "5. Rang d'une Matrice & Résolution de Systèmes",
+      "question": "Qu'est-ce que le « rang » d'une matrice A (noté rg(A)) selon le cours de M. Roegel ?",
+      "options": [
+        "Le nombre d'octets qu'elle occupe en mémoire RAM",
+        "Le nombre de lignes ou colonnes linéairement indépendantes de la matrice (qui correspond au nombre de pivots non nuls après échelonnement de Gauss)",
+        "La somme de tous ses coefficients",
+        "Le numéro de la ligne qui contient le plus grand nombre"
+      ],
+      "correct_index": 1,
+      "explication": "Le rang mesure la dimension de l'image de l'application linéaire associée. C'est le nombre de pivots non nuls après échelonnement complet. Pour une matrice (n x p), le rang vérifie toujours rg(A) ≤ min(n, p).",
+      "pieges": [
+        "Une matrice carrée n x n est inversible si et seulement si son rang est maximal (rg(A) = n)."
+      ],
+      "tags": [
+        "Rang",
+        "Pivots non nuls",
+        "Indépendance linéaire",
+        "Échelonnement"
+      ]
+    },
+    {
+      "id": "r107_q15",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "5. Rang d'une Matrice & Résolution de Systèmes",
+      "question": "Dans la résolution d'un système linéaire AX = B, quand dit-on que le système est « incompatible » (ou impossible) ?",
+      "options": [
+        "Quand il a une infinité de solutions",
+        "Quand lors de l'échelonnement, une ligne de la forme 0*x1 + 0*x2 + ... + 0*xn = b apparaît avec b ≠ 0 (ce qui signale l'absence totale de solution)",
+        "Quand le déterminant est égal à 1",
+        "Quand toutes les inconnues valent 0"
+      ],
+      "correct_index": 1,
+      "explication": "Une équation 0 = b (avec b non nul, ex: 0 = 5) est une contradiction mathématique insoluble. L'ensemble des solutions est alors l'ensemble vide S = ∅. Cela arrive lorsque le rang de la matrice des coefficients est inférieur au rang de la matrice augmentée.",
+      "pieges": [
+        "Ne pas confondre avec 0 = 0, qui est une équation toujours vérifiée et indique au contraire la présence de variables libres (infinité de solutions)."
+      ],
+      "tags": [
+        "Système incompatible",
+        "Aucune solution",
+        "Contradiction 0 = b"
+      ]
+    },
+    {
+      "id": "r107_q16",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "5. Rang d'une Matrice & Résolution de Systèmes",
+      "question": "Que stipule le Théorème de Rouché-Fontené concernant l'existence de solutions à un système AX = B ?",
+      "options": [
+        "Le système admet au moins une solution si et seulement si le rang de la matrice A est égal au rang de la matrice augmentée [A | B]",
+        "Le système a toujours exactement 2 solutions",
+        "Le système n'a de solution que si B est nul",
+        "Il faut que la matrice soit symétrique"
+      ],
+      "correct_index": 0,
+      "explication": "Théorème fondamental de Rouché-Fontené : si rg(A) = rg([A|B]) = r, le système est compatible. Si de plus r = n (nombre d'inconnues), la solution est UNIQUE (système de Cramer). Si r < n, il y a une INFINITÉ de solutions dépendant de (n - r) paramètres libres.",
+      "pieges": [
+        "Le nombre (n - r) est la dimension de l'espace des solutions, appelée degré de liberté ou nullité."
+      ],
+      "tags": [
+        "Rouché-Fontené",
+        "Compatibilité",
+        "Solution unique vs infinité"
+      ]
+    },
+    {
+      "id": "r107_q17",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "En algèbre matricielle, existe-t-il des « diviseurs de zéro » (peut-on avoir A * B = 0 avec A ≠ 0 et B ≠ 0) ?",
+      "options": [
+        "Non, comme avec les nombres réels, si un produit est nul, l'un des deux facteurs est obligatoirement nul",
+        "OUI ! Deux matrices non nulles peuvent avoir un produit égal à la matrice nulle (l'anneau des matrices n'est pas intègre)",
+        "Oui, mais uniquement pour les matrices 1x1",
+        "Non, c'est interdit par la définition de la multiplication"
+      ],
+      "correct_index": 1,
+      "explication": "Exemple célèbre vu en TD : A = [[0, 1], [0, 0]] et B = [[1, 0], [0, 0]]. A ≠ 0 et B ≠ 0, pourtant A * B = [[0, 0], [0, 0]] ! On ne peut donc PAS simplifier par A dans une équation AC = AB même si A ≠ 0 (il faut que A soit inversible).",
+      "pieges": [
+        "Piège colossal d'algèbre : croire que AB = 0 implique A = 0 ou B = 0. C'est vrai pour les nombres réels, mais FAUX pour les matrices !"
+      ],
+      "tags": [
+        "Diviseurs de zéro",
+        "Anneau non intègre",
+        "AB = 0"
+      ]
+    },
+    {
+      "id": "r107_q18",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "2. Déterminants & Propriétés",
+      "question": "Que vaut le déterminant d'une matrice triangulaire (supérieure ou inférieure) ou diagonale ?",
+      "options": [
+        "Il vaut toujours zéro",
+        "Il est égal au produit simple des éléments situés sur sa diagonale principale",
+        "Il vaut toujours 1",
+        "Il est égal à la somme des éléments de la première ligne"
+      ],
+      "correct_index": 1,
+      "explication": "Propriété majeure exploitée par le pivot de Gauss : pour toute matrice triangulaire, det(A) = a_11 * a_22 * ... * a_nn. C'est pourquoi trianguler une matrice par Gauss permet de calculer son déterminant en temps O(n^3) au lieu de O(n!).",
+      "pieges": [
+        "Lors de l'échelonnement de Gauss pour calculer le déterminant, n'oubliez pas que chaque échange de deux lignes multiplie le déterminant par -1 !"
+      ],
+      "tags": [
+        "Matrice triangulaire",
+        "Produit diagonal",
+        "Calcul déterminant"
+      ]
+    },
+    {
+      "id": "r107_q19",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "Qu'est-ce que la matrice identité I_n d'ordre n ?",
+      "options": [
+        "Une matrice dont tous les coefficients valent 1",
+        "Une matrice carrée n x n dont tous les éléments de la diagonale principale valent 1 et tous les autres valent 0, constituant l'élément neutre de la multiplication matricielle",
+        "Une matrice qui stocke l'identifiant de l'étudiant",
+        "La matrice inverse de zéro"
+      ],
+      "correct_index": 1,
+      "explication": "Pour toute matrice carrée A d'ordre n : A * I_n = I_n * A = A. Elle joue pour les matrices le même rôle que le nombre 1 pour la multiplication des nombres réels.",
+      "pieges": [
+        "Ne pas confondre la matrice identité avec la matrice de uns (J) dont tous les coefficients valent 1."
+      ],
+      "tags": [
+        "Matrice identité",
+        "I_n",
+        "Élément neutre",
+        "Diagonale de 1"
+      ]
+    },
+    {
+      "id": "r107_q20",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "2. Déterminants & Propriétés",
+      "question": "Que peut-on affirmer immédiatement sur le déterminant d'une matrice qui possède deux lignes (ou deux colonnes) identiques ?",
+      "options": [
+        "Son déterminant est obligatoirement égal à ZÉRO",
+        "Son déterminant vaut 1",
+        "Son déterminant est égal au carré de la ligne",
+        "On ne peut rien en déduire sans calcul"
+      ],
+      "correct_index": 0,
+      "explication": "Si deux lignes sont identiques, les vecteurs lignes sont liés (non libres). Par alternance du déterminant (échanger les deux lignes identiques change le signe du déterminant det = -det ⇒ 2*det = 0 ⇒ det = 0). La matrice n'est donc pas inversible.",
+      "pieges": [
+        "De même, si une ligne est combinaison linéaire des autres ou si une ligne est entièrement nulle, le déterminant vaut instantanément zéro."
+      ],
+      "tags": [
+        "Lignes identiques",
+        "Déterminant nul",
+        "det = 0",
+        "Dépendance linéaire"
+      ]
+    },
+    {
+      "id": "r107_q21",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "3. Inverse d'une Matrice",
+      "question": "Si A est une matrice inversible, que vaut le déterminant de son inverse det(A^-1) ?",
+      "options": [
+        "-det(A)",
+        "1 / det(A)",
+        "det(A)^2",
+        "0"
+      ],
+      "correct_index": 1,
+      "explication": "Comme A * A^-1 = I et que det(AB) = det(A) * det(B), on a det(A) * det(A^-1) = det(I) = 1. Comme det(A) ≠ 0, on en déduit directement det(A^-1) = 1 / det(A).",
+      "pieges": [
+        "Une conséquence directe : une matrice de déterminant zéro ne pourrait jamais avoir d'inverse car 1/0 n'existe pas."
+      ],
+      "tags": [
+        "det(A^-1)",
+        "1 / det(A)",
+        "Déterminant inverse"
+      ]
+    },
+    {
+      "id": "r107_q22",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "4. Méthode du Pivot de Gauss & Systèmes Linéaires",
+      "question": "Pourquoi la stratégie du « pivot partiel » (choisir pour pivot le coefficient de valeur absolue maximale sur la colonne) est-elle recommandée en calcul numérique sur ordinateur ?",
+      "options": [
+        "Pour que le programme consomme moins de mémoire",
+        "Pour minimiser les erreurs d'arrondi et éviter les instabilités numériques catastrophiques provoquées par des divisions par des nombres très proches de zéro",
+        "Parce que les processeurs n'aiment pas les nombres négatifs",
+        "Pour trier les équations par ordre croissant"
+      ],
+      "correct_index": 1,
+      "explication": "En virgule flottante (IEEE 754), diviser par un pivot minuscule (ex: 10^-15) amplifie de façon exponentielle les erreurs d'arrondi sur les autres coefficients. Le pivot partiel stabilise l'algorithme.",
+      "pieges": [
+        "Même si un pivot n'est pas exactement nul mathématiquement, s'il est très petit, le calcul numérique sans pivotage partiel donne un résultat complètement faux !"
+      ],
+      "tags": [
+        "Pivot partiel",
+        "Stabilité numérique",
+        "Erreurs d'arrondi",
+        "Flottants"
+      ]
+    },
+    {
+      "id": "r107_q23",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "Quelle est la trace d'une matrice carrée A d'ordre n, notée Tr(A) ?",
+      "options": [
+        "Le déterminant de la matrice",
+        "La somme de tous les éléments situés sur sa diagonale principale : Tr(A) = a_11 + a_22 + ... + a_nn",
+        "Le produit de tous les éléments de la matrice",
+        "La plus grande valeur propre"
+      ],
+      "correct_index": 1,
+      "explication": "La trace est une forme linéaire remarquable. Propriété fondamentale : Tr(A + B) = Tr(A) + Tr(B) et Tr(A * B) = Tr(B * A) (invariance cyclique), même si AB ≠ BA !",
+      "pieges": [
+        "Bien que AB ≠ BA en général, la trace de AB est TOUJOURS rigoureusement égale à la trace de BA !"
+      ],
+      "tags": [
+        "Trace",
+        "Tr(A)",
+        "Diagonale principale",
+        "Invariance cyclique"
+      ]
+    },
+    {
+      "id": "r107_q24",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "5. Rang d'une Matrice & Résolution de Systèmes",
+      "question": "Que représente géométriquement la résolution d'un système linéaire de 3 équations à 3 inconnues ?",
+      "options": [
+        "La recherche de l'intersection de trois plans dans l'espace à trois dimensions ℝ^3",
+        "Le tracé de trois cercles concentriques",
+        "Le calcul du volume d'une sphère",
+        "Une rotation autour de l'axe des temps"
+      ],
+      "correct_index": 0,
+      "explication": "Chaque équation ax + by + cz = d définit un plan dans ℝ^3. Solution unique = les trois plans se coupent en un point unique. Infinité de solutions = ils se coupent selon une droite ou sont confondus. Incompatible = au moins deux plans sont parallèles ou forment un prisme sans point commun aux trois.",
+      "pieges": [
+        "Cette vision géométrique permet de comprendre intuitivement les notions d'incompatibilité et d'infinité de solutions."
+      ],
+      "tags": [
+        "Interprétation géométrique",
+        "Intersection de plans",
+        "Espace ℝ^3"
+      ]
+    },
+    {
+      "id": "r107_q25",
+      "module": "R1.07",
+      "prof": "M. Roegel",
+      "chapitre": "1. Définition des Matrices & Opérations de Base",
+      "question": "En synthèse du cours de M. Roegel, où les matrices et l'algèbre linéaire sont-elles massivement appliquées en informatique pratique ?",
+      "options": [
+        "Uniquement pour faire des sudokus",
+        "Dans les moteurs graphiques 3D (rotations, translations, projections via matrices homogènes 4x4), le traitement d'images, l'apprentissage automatique / réseaux de neurones (Deep Learning), et les algorithmes de classement du Web (Google PageRank)",
+        "Uniquement pour formater les disques durs",
+        "Dans le traitement de texte Word pour aligner les paragraphes"
+      ],
+      "correct_index": 1,
+      "explication": "L'algèbre linéaire est le véritable moteur mathématique de l'informatique moderne : un réseau de neurones n'est rien d'autre qu'une cascade de multiplications matricielles accélérées par GPU, et chaque jeu vidéo 3D calcule des millions de produits de matrices 4x4 par seconde.",
+      "pieges": [
+        "Les GPU (cartes Nvidia/AMD) ont été spécialement gravés pour exécuter le produit matriciel de M. Roegel à la vitesse de la lumière !"
+      ],
+      "tags": [
+        "Synthèse",
+        "M. Roegel",
+        "Applications informatiques",
+        "3D",
+        "Deep Learning",
+        "PageRank"
+      ]
+    }
+  ]
+}

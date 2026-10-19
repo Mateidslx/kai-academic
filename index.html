@@ -486,7 +486,7 @@
     .block-trap {
       background: #FEF2F2;
       border: 1px solid #FECACA;
-      border-left: 6px solid #EF4444;
+      border-left: 6px solid #B85042;
     }
     .block-example {
       background: #F0FDF4;
@@ -564,7 +564,7 @@
     }
     .quiz-option-btn.wrong {
       background: #FEE2E2 !important;
-      border-color: #EF4444 !important;
+      border-color: #B85042 !important;
       color: #7F1D1D !important;
     }
 
@@ -667,6 +667,12 @@
         <button id="nav-btn-bibliotheque" onclick="navigate('bibliotheque')" class="nav-tab-btn px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 text-slate-700 hover:bg-slate-100 hover:text-emerald-600 transition-colors cursor-pointer">
           <i data-lucide="library" class="w-3.5 h-3.5 text-emerald-600"></i> Bibliothèque & PDFs
         </button>
+        <a id="nav-btn-scanner" href="/security-scanner" target="_blank" class="nav-tab-btn px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 hover:text-emerald-800 border border-emerald-200 transition-colors cursor-pointer" title="Scanner de Sécurité Web OWASP en Direct">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> Scanner Web (Live)
+        </a>
+        <a id="nav-btn-quiz" href="quiz/" class="nav-tab-btn px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 font-extrabold transition-colors cursor-pointer shadow-2xs" title="QCM Express Tactile (210 Questions — Priorité M. Moulin)">
+          <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-700"></i> 🎯 QCM Express
+        </a>
       </nav>
 
       <!-- RIGHT CONTROLS -->
@@ -913,67 +919,6 @@
               <div class="font-extrabold text-slate-900 text-xs">Moodle UPPA</div>
               <div class="text-[11px] text-slate-500" id="moodleStatusKpi">Synchronisé</div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================================================================== -->
-      <!-- FOCUS PRIORITAIRE : PARTIEL R1.06 MATHS DISCRÈTES & R1.08 GESTION v2026 -->
-      <!-- ================================================================== -->
-      <div class="mb-8 grid grid-cols-1 lg:grid-cols-2 gap-5">
-        <!-- Carte Priorité #1 : Partiel R1.06 Maths Discrètes (Rouge Garance Feutré #B85042) -->
-        <div class="p-6 rounded-3xl border-2 shadow-xs flex flex-col justify-between" style="background-color: #FAF8F5; border-color: #E6BFB8; border-left: 7px solid #B85042;">
-          <div>
-            <div class="flex items-center justify-between flex-wrap gap-2 mb-2.5">
-              <div class="flex items-center gap-2">
-                <span class="px-2.5 py-1 rounded-lg text-xs font-black text-white font-mono" style="background-color: #B85042;">R1.06 · PRIORITÉ PARTIEL</span>
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">Mme Marie Bruyère · 11 PDF Officiels</span>
-              </div>
-              <span class="text-xs font-extrabold text-[#B85042]">Semaine Prochaine</span>
-            </div>
-            <h2 class="text-lg sm:text-xl font-black text-slate-900">Préparation Intensive — Partiel Mathématiques Discrètes</h2>
-            <p class="text-xs sm:text-sm text-slate-700 mt-1.5 leading-relaxed">
-              <strong>3 Parties au programme :</strong> Ensembles ($\mathcal{P}(E)$, produit cartésien, Crible de Poincaré) · Logique & Prédicats (tables de vérité, négation $\forall/\exists$, contraposée) · Arithmétique dans $\mathbb{Z}$ (division négative $0 \le r < |b|$, Tableau d'Euclide Étendu $u_n = u_{n-2} - q_n u_{n-1}$, Gauss, $\varphi(n)$, équations dans $\mathbb{Z}/n\mathbb{Z}$).
-            </p>
-          </div>
-          <div class="mt-4 pt-4 border-t border-[#E6BFB8]/60 flex flex-wrap items-center gap-2.5">
-            <a href="courses/R1.06/simulateur_partiel_r106.html" class="px-4 py-2.5 rounded-xl text-xs font-extrabold text-white shadow-xs hover:brightness-95 transition flex items-center gap-1.5" style="background-color: #B85042;">
-              <span>🎯 Simulateur Partiel (30 Q + Euclide + $\mathbb{Z}/n\mathbb{Z}$)</span>
-            </a>
-            <a href="revision/R1.06.html" class="px-3.5 py-2.5 rounded-xl text-xs font-bold border transition hover:brightness-95" style="background-color: #F5EBE4; color: #B85042; border-color: #E6BFB8;">
-              <span>📘 Fiche Révision R1.06</span>
-            </a>
-            <a href="courses/R1.06.html" class="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition">
-              <span>📂 6 Chapitres & 11 PDF</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Carte Priorité #2 : R1.08 Gestion des Organisations v2026 (Sauge Feutrée #367357) -->
-        <div class="p-6 rounded-3xl border-2 shadow-xs flex flex-col justify-between" style="background-color: #FAF8F5; border-color: #B5D6C5; border-left: 7px solid #367357;">
-          <div>
-            <div class="flex items-center justify-between flex-wrap gap-2 mb-2.5">
-              <div class="flex items-center gap-2">
-                <span class="px-2.5 py-1 rounded-lg text-xs font-black text-white font-mono" style="background-color: #367357;">R1.08 · PACK v2026 INTÉGRÉ</span>
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold" style="background-color: #EAF2ED; color: #367357; border: 1px solid #B5D6C5;">M. Moulin · 11 Fichiers .docx 2026</span>
-              </div>
-              <span class="text-xs font-extrabold text-[#367357]">312 Questions Flash</span>
-            </div>
-            <h2 class="text-lg sm:text-xl font-black text-slate-900">Gestion des Organisations — Synthèses 1 à 5 & Cours v2026</h2>
-            <p class="text-xs sm:text-sm text-slate-700 mt-1.5 leading-relaxed">
-              Intégralité des <strong>312 Questions Flash officielles corrigées</strong> (Synthèse 1 : Action collective · Synthèse 2 : Entreprise · Synthèse 3 : Admin. publiques & Impôt 2026 · Synthèse 4 : OBNL · Synthèse 5 : Fonctions, Porter, SI/ERP & Parcours BUT) + Feuille A4 autorisée.
-            </p>
-          </div>
-          <div class="mt-4 pt-4 border-t border-[#B5D6C5]/60 flex flex-wrap items-center gap-2.5">
-            <a href="courses/R1.08/questions_flash_interactives.html" class="px-4 py-2.5 rounded-xl text-xs font-extrabold text-white shadow-xs hover:brightness-95 transition flex items-center gap-1.5" style="background-color: #367357;">
-              <span>⚡ Entraîneur 312 Questions Flash + IR 2026</span>
-            </a>
-            <a href="courses/R1.08/fiche_partiel_a4_autorisee.html" class="px-3.5 py-2.5 rounded-xl text-xs font-bold border transition hover:brightness-95" style="background-color: #EAF2ED; color: #367357; border-color: #B5D6C5;">
-              <span>📄 Feuille A4 Autorisée</span>
-            </a>
-            <a href="revision/R1.08.html" class="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition">
-              <span>📗 Fiche Révision R1.08</span>
-            </a>
           </div>
         </div>
       </div>
@@ -1286,6 +1231,11 @@
       <i data-lucide="zap" class="w-5 h-5"></i>
       <span class="text-[10px] font-semibold mt-0.5">Révisions</span>
     </button>
+    <!-- QCM Express Mobile -->
+    <a href="quiz/" class="flex flex-col items-center justify-center p-1 text-xs text-amber-800 hover:text-amber-900 active:scale-95 transition min-w-[50px] min-h-[44px] cursor-pointer" title="QCM Express Tactile">
+      <i data-lucide="check-circle-2" class="w-5 h-5 text-amber-600"></i>
+      <span class="text-[10px] font-bold mt-0.5">QCM</span>
+    </a>
     <!-- Projets -->
     <button onclick="navigate('projets')" class="flex flex-col items-center justify-center p-1 text-xs text-indigo-600 hover:text-indigo-700 active:scale-95 transition min-w-[50px] min-h-[44px] cursor-pointer">
       <i data-lucide="folder-kanban" class="w-5 h-5"></i>
@@ -2533,25 +2483,27 @@
         id: "prod-sec-sentinel",
         code: "SEC-HEADERS",
         type: "product",
-        categorie: "Outil Interne (Audit d'En-têtes HTTP de Sécurité)",
-        titre: "sec-headers-sentinel v1.0.0",
+        categorie: "Service Web Public & Lead Magnet B2B (Audit OWASP)",
+        titre: "SecHeaders Sentinel • Audit Web & Sécurité HTTP en Direct",
         responsable: "Matéi de Saint Leger",
-        etatReel: "OUTIL INTERNE • 5 TESTS UNITAIRES VALIDÉS",
-        dateVerif: "10/10/2026",
-        statutClass: "bg-emerald-50 text-emerald-800 border-emerald-300",
+        etatReel: "SERVICE EN DIRECT (VPS) • NOTE OWASP A+ À F",
+        dateVerif: "18/10/2026",
+        statutClass: "bg-emerald-500/10 text-emerald-800 border-emerald-400",
         pulseClass: "bg-emerald-600",
-        objectif: "Inspecter les en-têtes HTTP de sécurité standards (HSTS, X-Content-Type-Options, CSP) et générer des gabarits durcis pour serveurs Nginx, Caddy et FastAPI.",
-        dernierTravail: "Module d'inspection développé, générateur de snippets testé, 5 tests pytest réussis (100%), package vérifié par empreinte SHA-256.",
-        preuve: "Suite pytest tests : 5/5 tests verts. Archive vérifiée sec-headers-sentinel-1.0.0.tar.gz (SHA-256: 59a2387ed84d...).",
-        livrables: "CLI Python, générateur de snippets serveurs, rapport d'audit Markdown.",
-        testsEtLimites: "5/5 tests unitaires passés (100%). Limitations : configurations génériques nécessitant une adaptation manuelle au domaine cible.",
-        blocageEtAction: "Outil opérationnel en local. Prochaine action : support des profils CSP avancés.",
-        finances: "Dépenses réelles : 0,00 € • Recettes perçues : 0,00 € (Usage interne et pédagogique)",
-        tags: ["Outil Interne", "Tests Unitaires : 5/5", "DevSecOps", "Accès Authentifié", "SHA-256 Validé"],
+        objectif: "Audit instantané d'en-têtes HTTP de sécurité, cookies (Secure, HttpOnly, SameSite), fuites d'empreintes serveur, détection de programmes Bug Bounty certifiés (YesWeHack / HackerOne) et génération de correctifs multi-serveurs.",
+        dernierTravail: "Déploiement de l'interface interactive publique en Tailwind/Lucide sur le port 8765, API REST /api/security/scan, générateur de correctifs Nginx/Apache/Caddy/Cloudflare et export PDF marque blanche.",
+        preuve: "Déployé et opérationnel sur http://88.96.47.180:8765/security-scanner. 9/9 tests automatisés validés.",
+        livrables: "Interface Web en direct, API REST JSON, modules CLI, générateur de snippets Nginx/Apache/Caddy/Cloudflare, rapport PDF.",
+        testsEtLimites: "9/9 tests unitaires et intégration passés (100%). Respect strict des règles OWASP et Mozilla Web Security Guidelines.",
+        blocageEtAction: "En production. Accès direct en 1 clic sans authentification requise.",
+        finances: "Dépenses d'inférence : 0,00 € (Groq / Gemini Free) • Modèle B2B : Lead magnet gratuit + Rapports PDF marque blanche facturables aux agences",
+        tags: ["Service Web en Ligne", "OWASP A+ à F", "Lead Magnet B2B", "YesWeHack & HackerOne", "Export PDF Client"],
+        liveService: true,
+        actionUrl: "/security-scanner",
         downloadUrl: "/downloads/sec-headers-sentinel-1.0.0.tar.gz",
         downloadZipUrl: "/downloads/sec-headers-sentinel-1.0.0.zip",
-        actionText: "Télécharger le livrable",
-        actionRoute: "download-sec-headers-sentinel"
+        actionText: "Lancer l'audit en direct (Gratuit)",
+        actionRoute: "open-security-scanner"
       },
       {
         id: "prod-sec-guard",
@@ -2744,7 +2696,7 @@
         pulseClass: "bg-emerald-500",
         objectif: "Fournir un environnement de révision et d'apprentissage ergonomique, accessible (dyslexie/scotopique) et autonome pour le BUT 1 Informatique.",
         dernierTravail: "Harmonisation complète de la navigation SPA, intégration du confort de lecture scotopique (Lexend, palette apaisée) sur toutes les sections et les 20 fiches de révision, correction de l'attribution des matières (C vs C++, Archi R1.03 vs Systèmes R1.04).",
-        preuve: "Plateforme en ligne sur VPS (https://mateidslx.github.io/kai-academic/), code source versionné dans scripts/ et core/.",
+        preuve: "Plateforme en ligne sur VPS (http://88.96.47.180:8765), code source versionné dans scripts/ et core/.",
         livrables: "Application web SPA in-memory, 20 fiches de synthèse pédagogique, visionneuse PDF de supports officiels.",
         testsEtLimites: "138 tests pytest passés (100%), navigation validée sur mobile (320px, 390px) et desktop (1280px, 1440px). Limite : hébergement HTTP sans certificat TLS public.",
         blocageEtAction: "Poursuivre la synchronisation automatique des échéances Moodle UPPA.",
@@ -2954,7 +2906,20 @@
             </div>
 
             <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between flex-wrap gap-2">
-              ${p.type === 'product' ? `
+              ${p.liveService ? `
+                <div class="flex items-center gap-2">
+                  <a href="${escapeHtml(p.actionUrl)}" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white flex items-center gap-2 shadow-md shadow-indigo-600/20 transition cursor-pointer">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-300"></i>
+                    <span>${escapeHtml(p.actionText)}</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5 ml-0.5"></i>
+                  </a>
+                  <a href="${escapeHtml(p.downloadUrl)}" download class="download-pkg-link px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Télécharger le package tar.gz" data-pkg="${escapeHtml(p.downloadUrl)}">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
+                    <span>CLI (.tar.gz)</span>
+                  </a>
+                </div>
+                <span class="text-[11px] text-emerald-600 font-bold flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Service Web Actif</span>
+              ` : p.type === 'product' ? `
                 <div class="flex items-center gap-2">
                   <a href="${escapeHtml(p.downloadUrl)}" download class="download-pkg-link px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 flex items-center gap-1.5 transition cursor-pointer" title="Télécharger le package tar.gz vérifié" data-pkg="${escapeHtml(p.downloadUrl)}">
                     <i data-lucide="download" class="w-3.5 h-3.5 text-indigo-600"></i>
