@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>🔐 Connexion Espace Études & Projets — Kai Academic</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-app: #FAF8F5;
+      --bg-card: #FFFFFF;
+      --text-main: #2D3142;
+      --text-muted: #5C677D;
+      --border-color: #E6DFD5;
+      --accent: #2563EB;
+      --accent-hover: #1D4ED8;
+      --font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+
+    .brand-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .brand-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #EFF6FF;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      border: 1.5px solid #DBEAFE;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .feedback-box {
+      display: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .feedback-box.error {
+      display: block;
+      background: #FEF2F2;
+      color: #991B1B;
+      border: 1px solid #FECACA;
+    }
+    .feedback-box.success {
+      display: block;
+      background: #ECFDF5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-app);
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--accent);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+
+    .toggle-pwd {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      padding: 4px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      height: 48px;
+      background: var(--accent);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+      transition: all 0.15s;
+      margin-top: 24px;
+    }
+    .btn-submit:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 18px;
+      padding: 8px;
+      transition: color 0.15s;
+    }
+    .btn-back:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    
+    <div class="brand-header">
+      <div class="brand-icon">🛡️</div>
+      <h1 class="brand-title">Espace Études Matéi</h1>
+      <p class="brand-subtitle">Authentification requise pour les livrables</p>
+    </div>
+
+    <div id="feedback" class="feedback-box"></div>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="form-group">
+        <label for="username" class="form-label">Identifiant</label>
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            class="form-input" 
+            placeholder="Mateidslx" 
+            required 
+            autofocus 
+            autocomplete="username"
+            value="Mateidslx"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Mot de passe</label>
+        <div class="input-wrapper">
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-input" 
+            placeholder="••••••••••••" 
+            required 
+            autocomplete="current-password"
+          >
+          <button type="button" class="toggle-pwd" id="btnTogglePwd" title="Afficher/Masquer">👁️</button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <span>Se connecter</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+
+      <a href="index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Retour au portail académique</span>
+      </a>
+    </form>
+
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const feedback = document.getElementById('feedback');
+    const btnTogglePwd = document.getElementById('btnTogglePwd');
+    const pwdInput = document.getElementById('password');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    // Basculer visibilité mot de passe
+    btnTogglePwd.addEventListener('click', () => {
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        btnTogglePwd.textContent = '🔒';
+      } else {
+        pwdInput.type = 'password';
+        btnTogglePwd.textContent = '👁️';
+      }
+    });
+
+    // Paramètres URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectUrl = urlParams.get('redirect') || urlParams.get('next') || 'index.html';
+    const action = urlParams.get('action');
+
+    // Déconnexion
+    if (action === 'logout') {
+      localStorage.removeItem('kai_user');
+      localStorage.removeItem('kai_session_active');
+      document.cookie = 'kai_session=; Path=/; Max-Age=0';
+      feedback.className = 'feedback-box success';
+      feedback.textContent = 'Vous avez été déconnecté avec succès.';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      feedback.className = 'feedback-box';
+      feedback.style.display = 'none';
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = '<span>Vérification...</span>';
+
+      const u = document.getElementById('username').value.trim();
+      const p = pwdInput.value.trim();
+
+      // Vérification immédiate client-side pour Matéi
+      const isMateiLocal = (u.toLowerCase() === 'mateidslx' && p === 'Mateidslx64');
+
+      try {
+        // Tenter l'appel API serveur si disponible (VPS ou local)
+        let serverOk = false;
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: u, password: p })
+          });
+          if (res.ok) {
+            serverOk = true;
+          }
+        } catch (netErr) {
+          // Si sur GitHub Pages (statique), pas de backend local
+        }
+
+        if (serverOk || isMateiLocal) {
+          // Enregistrer la session
+          localStorage.setItem('kai_user', u);
+          localStorage.setItem('kai_session_active', '1');
+
+          feedback.className = 'feedback-box success';
+          feedback.textContent = 'Connexion réussie ! Redirection en cours...';
+
+          setTimeout(() => {
+            window.location.href = redirectUrl;
+          }, 400);
+        } else {
+          feedback.className = 'feedback-box error';
+          feedback.textContent = 'Identifiant ou mot de passe incorrect.';
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = '<span>Se connecter</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        }
+      } catch (err) {
+        feedback.className = 'feedback-box error';
+        feedback.textContent = 'Erreur lors de la tentative de connexion.';
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = '<span>Se connecter</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+      }
+    });
+  </script>
+
+</body>
+</html>

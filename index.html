@@ -682,16 +682,16 @@
       <div class="flex items-center gap-1 sm:gap-1.5 shrink-0 ml-auto">
         <!-- AUTH STATUS CLUSTER -->
         <div id="authHeaderCluster" class="flex items-center gap-1 shrink-0">
-          <a id="authLoginBtn" href="/login" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100 border border-slate-200 transition" title="Connexion Espace Privé">
+          <a id="authLoginBtn" href="login.html" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100 border border-slate-200 transition" title="Connexion Espace Privé">
             <i data-lucide="lock" class="w-3.5 h-3.5 text-blue-600"></i>
             <span class="hidden md:inline">Connexion</span>
           </a>
           <div id="authActiveBadge" class="hidden items-center gap-1">
             <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200" title="Session Authentifiée Active">
               <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span class="hidden md:inline">Authentifié</span>
+              <span id="authUsernameDisplay" class="hidden md:inline">Mateidslx</span>
             </span>
-            <a href="/logout" class="p-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition" title="Se déconnecter">
+            <a href="login.html?action=logout" class="p-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition" title="Se déconnecter">
               <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -3153,33 +3153,41 @@
         .replace(/'/g, '&#039;');
     }
 
-    // Gestion de la session d'authentification sécurisée (HttpOnly Cookie)
+    // Gestion de la session d'authentification sécurisée (HttpOnly Cookie & LocalStorage)
     let _isKaiAuthenticated = false;
 
     async function checkKaiAuthSession() {
+      const localUser = localStorage.getItem('kai_user');
+      let serverUser = null;
       try {
         const res = await fetch('/api/auth/session');
         if (res.ok) {
           const data = await res.json();
-          _isKaiAuthenticated = !!data.authenticated;
-          const loginBtn = document.getElementById('authLoginBtn');
-          const activeBadge = document.getElementById('authActiveBadge');
-          if (_isKaiAuthenticated) {
-            if (loginBtn) loginBtn.classList.add('hidden');
-            if (activeBadge) {
-              activeBadge.classList.remove('hidden');
-              activeBadge.classList.add('inline-flex');
-            }
-          } else {
-            if (loginBtn) loginBtn.classList.remove('hidden');
-            if (activeBadge) {
-              activeBadge.classList.add('hidden');
-              activeBadge.classList.remove('inline-flex');
-            }
-          }
+          if (data.authenticated) serverUser = data.user;
         }
-      } catch (e) {
-        _isKaiAuthenticated = false;
+      } catch (e) {}
+
+      const activeUser = serverUser || localUser;
+      _isKaiAuthenticated = !!activeUser;
+      const loginBtn = document.getElementById('authLoginBtn');
+      const activeBadge = document.getElementById('authActiveBadge');
+      const usernameDisplay = document.getElementById('authUsernameDisplay');
+
+      if (_isKaiAuthenticated) {
+        if (loginBtn) loginBtn.classList.add('hidden');
+        if (activeBadge) {
+          activeBadge.classList.remove('hidden');
+          activeBadge.classList.add('inline-flex');
+        }
+        if (usernameDisplay) {
+          usernameDisplay.textContent = activeUser || 'Mateidslx';
+        }
+      } else {
+        if (loginBtn) loginBtn.classList.remove('hidden');
+        if (activeBadge) {
+          activeBadge.classList.add('hidden');
+          activeBadge.classList.remove('inline-flex');
+        }
       }
     }
 
@@ -3194,7 +3202,7 @@
         document.body.appendChild(toast);
         if (window.lucide) lucide.createIcons();
         setTimeout(() => {
-          window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname + window.location.hash)}`;
+          window.location.href = `login.html?redirect=${encodeURIComponent(window.location.pathname + window.location.hash)}`;
         }, 800);
       }
     });
