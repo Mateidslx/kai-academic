@@ -728,6 +728,9 @@
 
     // Chargement initial du manifest
     async function initApp() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetMod = urlParams.get('mod') || urlParams.get('module') || "R1.03";
+
       try {
         let manifestRes;
         try {
@@ -738,11 +741,12 @@
         const manifest = await manifestRes.json();
         state.modules = manifest.modules;
         renderModuleTabs();
-        await switchModule("R1.03");
+        await switchModule(targetMod);
       } catch (err) {
         console.error("Erreur chargement manifest:", err);
         // Fallback local direct si manifest introuvable
-        await switchModule("R1.03");
+        renderModuleTabs();
+        await switchModule(targetMod);
       }
     }
 
@@ -757,6 +761,7 @@
         { code: "R1.06", nom: "Fernandes (Maths)", count: 25, col: "#B85042" },
         { code: "R1.07", nom: "Roegel (Matrices)", count: 25, col: "#A64D47" },
         { code: "R1.08", nom: "Alzieu (Gestion)", count: 25, col: "#7A5C58" },
+        { code: "R1.09", nom: "Économie & Durable", count: 25, col: "#4E7055" },
         { code: "R1.01", nom: "Etcheverry (Algo/C)", count: 25, col: "#287271" },
         { code: "R1.02", nom: "Web (Dalmau)", count: 25, col: "#366687" }
       ];
@@ -802,6 +807,7 @@
         "R1.06": "r106_fernandes_maths_discretes.json",
         "R1.07": "r107_roegel_matrices.json",
         "R1.08": "r108_alzieu_gestion.json",
+        "R1.09": "r109_economie_durable.json",
         "R1.01": "r101_etcheverry_dalmau_algo.json",
         "R1.02": "r102_dalmau_web.json"
       };
