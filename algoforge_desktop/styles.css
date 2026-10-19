@@ -1031,7 +1031,55 @@ body {
     color: #0369a1;
 }
 
-/* Badge Erreur/Warning Minimaliste */
+/* Badge Erreur/Warning Minimaliste Topbar & Dock */
+.topbar-audit-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #fed7aa;
+    background: #fffbeb;
+    color: #92400e;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.topbar-audit-pill:hover {
+    filter: brightness(0.96);
+    transform: translateY(-1px);
+}
+
+.topbar-audit-pill.clean {
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+/* Badges de branches pour Selon que... Cas... / Switch et Si */
+.case-badge-group, .cond-branch-badge {
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.case-badge-group rect {
+    filter: drop-shadow(0 1px 3px rgba(37, 99, 235, 0.18));
+    transition: stroke 0.15s ease, fill 0.15s ease;
+}
+
+.case-badge-group:hover rect {
+    fill: #eff6ff;
+    stroke: #1d4ed8;
+}
+
+.node-switch-header {
+    letter-spacing: 0.5px;
+    user-select: none;
+}
+
 .dock-badge-audit {
     display: flex;
     align-items: center;

@@ -29,13 +29,19 @@
             <div class="topbar-divider"></div>
 
             <!-- Titre éditable directement en ligne -->
-            <input type="text" id="algo-title-input" class="algo-title-input" value="Saisie contrôlée d'une note" placeholder="Nom de l'exercice..." title="Cliquer pour renommer l'exercice" />
+            <input type="text" id="algo-title-input" class="algo-title-input" value="Calcul du Prix Réduit" placeholder="Nom de l'exercice..." title="Cliquer pour renommer l'exercice" />
             <span class="algo-tag-badge" id="algo-tag-badge">TD</span>
         </div>
 
         <div class="topbar-right">
             <!-- Voyant silencieux de synchronisation locale & cloud -->
             <span class="cloud-dot online" id="cloud-dot" title="Sauvegarde locale automatique active (%APPDATA%)"></span>
+
+            <!-- Badge d'audit IUT intégré à la topbar -->
+            <div class="topbar-audit-pill clean" id="btn-topbar-audit" title="Audit sémantique IUT (Flots et Variables)">
+                <span id="badge-audit-icon">✓</span>
+                <span id="badge-audit-count">Conforme</span>
+            </div>
 
             <button class="action-btn action-btn-secondary" id="btn-top-autolayout" title="Recentrer et aligner l'arbre algorithmique (Ctrl+L)">
                 <span>🪄</span> Centrer
@@ -100,6 +106,7 @@
                             <option value="simple">Simple (Traitement)</option>
                             <option value="composed">Composée (Sous-programme)</option>
                             <option value="condition">Alternative (Si...Alors...Sinon)</option>
+                            <option value="choice">Choix multiple (Selon que... / Switch)</option>
                             <option value="loop_while">Tant Que (Boucle)</option>
                             <option value="loop_repeat">Répéter...Jusqu'à</option>
                             <option value="loop_for">Pour (Bornée)</option>
@@ -118,9 +125,22 @@
                         <input type="text" id="inspector-node-outputs" class="inspector-input inspector-input-flow" placeholder="Sorties (ex: total, valide)" title="Variables de sortie { S } séparées par des virgules" />
                     </div>
 
+                    <!-- Groupe spécifique pour condition Si ou boucle -->
                     <div class="inspector-group" id="inspector-cond-group" style="display: none;">
                         <span class="inspector-label">Cond.</span>
                         <input type="text" id="inspector-node-cond" class="inspector-input inspector-input-cond" placeholder="ex: note >= 0" title="Condition de boucle ou d'alternative" />
+                    </div>
+
+                    <!-- Groupe spécifique pour Choix multiple Selon que... (Switch) -->
+                    <div class="inspector-group" id="inspector-choice-group" style="display: none;">
+                        <span class="inspector-label">Selon</span>
+                        <input type="text" id="inspector-node-switch" class="inspector-input inspector-input-cond" placeholder="ex: choix, code" title="Variable ou expression évaluée par le Selon" />
+                    </div>
+
+                    <!-- Groupe spécifique pour valeur du Cas de la branche enfant -->
+                    <div class="inspector-group" id="inspector-case-group" style="display: none;">
+                        <span class="inspector-label">Cas</span>
+                        <input type="text" id="inspector-node-case" class="inspector-input inspector-input-cond" placeholder="ex: 1, 2, Autrement" title="Valeur du cas pour cette branche" />
                     </div>
 
                     <div class="inspector-sep"></div>
@@ -250,6 +270,7 @@
                                         <option value="simple">Action élémentaire (Traitement simple)</option>
                                         <option value="composed">Action composée (Sous-programme IUT)</option>
                                         <option value="condition">Structure Alternative (Si ... Alors ... Sinon)</option>
+                                        <option value="choice">Choix Multiple (Selon que... Cas... / Switch)</option>
                                         <option value="loop_for">Boucle Pour (Itération bornée)</option>
                                         <option value="loop_while">Boucle Tant Que</option>
                                         <option value="loop_repeat">Boucle Répéter ... Jusqu'à</option>
@@ -264,7 +285,7 @@
                                     <input type="text" id="prop-node-outputs" class="form-input" placeholder="ex: prixReduit" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Formule / Expression de calcul ou condition</label>
+                                    <label class="form-label">Formule / Expression de calcul, condition ou Selon</label>
                                     <textarea id="prop-node-expr" class="form-textarea" placeholder="ex: prixReduit = prix * (1 - reduc / 100);"></textarea>
                                 </div>
                                 <div style="display: flex; gap: 8px;">
@@ -276,8 +297,7 @@
                     </div>
                 </aside>
 
-                <!-- 4. DOCK FLOTTANT INFÉRIEUR (TOOLBAR FIDÈLE À LA CAPTURE) -->
-                <!-- 4. DOCK FLOTTANT MINIMALISTE -->
+                <!-- 4. DOCK FLOTTANT ÉPURÉ & COMPLET (OUTILS DE MODÉLISATION + SWITCH + ZOOM) -->
                 <div class="floating-dock">
                     <div class="dock-pill">
                         <button class="dock-btn active" id="tool-select" data-tool="select" title="Mode Sélection & Déplacement (V)">
@@ -286,8 +306,14 @@
                         <button class="dock-btn" id="tool-simple" data-tool="simple" title="Ajouter une Action Élémentaire (Rectangle simple)">
                             <span style="font-size: 15px;">□</span>
                         </button>
+                        <button class="dock-btn" id="tool-composed" data-tool="composed" title="Ajouter une Action Composée (Sous-programme à double bordure)">
+                            <span style="font-size: 15px;">⧉</span>
+                        </button>
                         <button class="dock-btn" id="tool-condition" data-tool="condition" title="Ajouter une Alternative Si...Alors...Sinon (Pans coupés)">
                             <span style="font-size: 15px;">⬡</span>
+                        </button>
+                        <button class="dock-btn" id="tool-choice" data-tool="choice" title="Ajouter un Choix Multiple (Selon que... Cas... / Switch)">
+                            <span style="font-size: 15px; font-weight: 700;">⑂</span>
                         </button>
                         <button class="dock-btn" id="tool-loop-while" data-tool="loop_while" title="Ajouter une Boucle Tant Que / Répéter">
                             <span style="font-size: 14px; font-weight: 700;">↻</span>
@@ -306,13 +332,9 @@
 
                         <div class="dock-sep"></div>
 
-                        <button class="dock-btn" id="btn-dock-dict" title="Dictionnaire des variables (Lexique IUT)">
-                            📜
+                        <button class="dock-btn" id="btn-dock-autolayout" title="Réorganiser et centrer l'arbre (Ctrl+L)">
+                            <span>🪄</span>
                         </button>
-                        <div class="dock-badge-audit" id="btn-dock-audit" title="Audit sémantique IUT (Flots et Variables)">
-                            <span id="badge-audit-icon" style="font-size: 12px;">✓</span>
-                            <span id="badge-audit-count">0 erreur</span>
-                        </div>
                     </div>
                 </div>
             </main>

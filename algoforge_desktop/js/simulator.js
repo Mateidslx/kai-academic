@@ -87,6 +87,17 @@ class AlgorithmicSimulator {
             });
             // Pour simplifier la pré-construction, on inclut la branche then si elle existe
             if (node.children[0]) this.buildExecutionSequence(node.children[0]);
+        } else if (node.type === "choice") {
+            const swVar = node.switchExpr || node.condition || "choix";
+            this.executionQueue.push({
+                nodeId: node.id,
+                action: "evaluate_choice",
+                description: `Évaluation du choix : Selon (${swVar})`
+            });
+            // Exécuter les enfants du choix
+            for (const cid of (node.children || [])) {
+                this.buildExecutionSequence(cid);
+            }
         } else if (node.type.startsWith("loop")) {
             this.executionQueue.push({
                 nodeId: node.id,

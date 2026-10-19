@@ -104,6 +104,30 @@ class AlgorithmicLinter {
                 }
             }
 
+            if (node.type === "choice") {
+                const expr = node.switchExpr || node.condition;
+                if (!expr || expr.trim() === "") {
+                    errors.push({
+                        id: `err_empty_switch_${id}`,
+                        nodeId: id,
+                        severity: "error",
+                        title: "Variable de choix Selon manquante",
+                        description: `La structure de choix multiple '${node.title}' nécessite une variable ou expression à évaluer (ex: choix, code, note).`,
+                        fixAction: "editCondition"
+                    });
+                }
+                if (!node.children || node.children.length < 2) {
+                    warnings.push({
+                        id: `warn_few_cases_${id}`,
+                        nodeId: id,
+                        severity: "warning",
+                        title: "Choix multiple incomplet",
+                        description: `Une structure Selon (${node.title}) doit comporter au moins 2 branches/cas pour avoir une utilité algorithmique.`,
+                        fixAction: "addChild"
+                    });
+                }
+            }
+
             if (node.type === "loop_while" || node.type === "loop_repeat") {
                 if (!node.condition || node.condition.trim() === "") {
                     errors.push({

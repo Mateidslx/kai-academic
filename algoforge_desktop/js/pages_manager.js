@@ -26,6 +26,18 @@ class PagesManager {
                 const parsed = JSON.parse(saved);
                 if (Array.isArray(parsed.pages) && parsed.pages.length > 0) {
                     this.pages = parsed.pages;
+                    if (!this.pages.find(p => p.id === "page_menu_choix") && typeof ALGORITHMIC_TEMPLATES !== "undefined" && ALGORITHMIC_TEMPLATES["menu_choix"]) {
+                        this.pages.push({
+                            id: "page_menu_choix",
+                            title: "Menu et Choix Multiple",
+                            createdAt: Date.now() - 450000,
+                            updatedAt: Date.now(),
+                            tags: ["TD 2", "Selon"],
+                            notes: "Aiguillage multiple selon la variable choix (Cas 1, 2, 3 et Autrement).",
+                            treeData: ALGORITHMIC_TEMPLATES["menu_choix"].tree
+                        });
+                        this.save();
+                    }
                     this.activePageId = parsed.activePageId || this.pages[0].id;
                     this.loadActivePageIntoTree();
                     return;
@@ -35,7 +47,7 @@ class PagesManager {
             }
         }
 
-        // Première initialisation avec 3 pages de TD réelles
+        // Première initialisation avec 4 pages de TD réelles
         this.pages = [
             {
                 id: "page_prix_reduit",
@@ -63,6 +75,15 @@ class PagesManager {
                 tags: ["TD 2", "Boucles"],
                 notes: "Validation stricte de la note entre 0.0 et 20.0.",
                 treeData: ALGORITHMIC_TEMPLATES["saisie_controlee"].tree
+            },
+            {
+                id: "page_menu_choix",
+                title: "Menu et Choix Multiple",
+                createdAt: Date.now() - 450000,
+                updatedAt: Date.now(),
+                tags: ["TD 2", "Selon"],
+                notes: "Aiguillage multiple selon la variable choix (Cas 1, 2, 3 et Autrement).",
+                treeData: ALGORITHMIC_TEMPLATES["menu_choix"].tree
             }
         ];
 

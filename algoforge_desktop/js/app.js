@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalVar = document.getElementById("modal-variable");
     const badgeAuditCount = document.getElementById("badge-audit-count");
     const btnDockAudit = document.getElementById("btn-dock-audit");
+    const btnTopbarAudit = document.getElementById("btn-topbar-audit");
     const auditContainer = document.getElementById("audit-results-container");
     const labelZoom = document.getElementById("label-zoom");
 
@@ -48,6 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const insOutputs = document.getElementById("inspector-node-outputs");
     const insCondGroup = document.getElementById("inspector-cond-group");
     const insCond = document.getElementById("inspector-node-cond");
+    const insChoiceGroup = document.getElementById("inspector-choice-group");
+    const insSwitch = document.getElementById("inspector-node-switch");
+    const insCaseGroup = document.getElementById("inspector-case-group");
+    const insCase = document.getElementById("inspector-node-case");
     const insBtnAdd = document.getElementById("inspector-btn-add-child");
     const insBtnDel = document.getElementById("inspector-btn-delete");
 
@@ -149,6 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (titleInput) titleInput.value = activePage.title || tree.title;
         if (tagElem) tagElem.textContent = (activePage.tags && activePage.tags[0]) || "TD";
 
+        renderer.selectedNodeId = tree.rootId;
+        onNodeSelected(tree.getRoot());
         renderer.centerAndFitTree(1.0);
         updateAllPanels();
         renderPagesList(searchInput ? searchInput.value : "");
@@ -185,12 +192,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Premier affichage propre centré
+    const initialPage = pagesManager.getActivePage();
+    if (initialPage) {
+        if (titleInput) titleInput.value = initialPage.title || tree.title;
+        if (tagElem) tagElem.textContent = (initialPage.tags && initialPage.tags[0]) || "TD";
+    }
+
     setTimeout(() => {
         renderer.centerAndFitTree(1.0);
     }, 50);
     renderPagesList();
     updateAllPanels();
     onNodeSelected(tree.getRoot());
+
+    window.__algoPagesManager = pagesManager;
+    window.__algoTree = tree;
+    window.__algoRenderer = renderer;
+    window.__algoTranspiler = transpiler;
+    window.__algoOnNodeSelected = onNodeSelected;
+    window.__algoUpdateAllPanels = updateAllPanels;
 
     // =========================================================================
     // 3. BARRE LATÉRALE : GESTION DES EXERCICES
@@ -301,27 +321,57 @@ document.addEventListener("DOMContentLoaded", () => {
         let inputs = [];
         let outputs = [];
         let condition = "";
+        let switchExpr = "";
 
         if (toolType === "simple") title = "Action elementaire";
         else if (toolType === "composed") title = "Sous programme";
         else if (toolType === "condition") { title = "Si condition"; condition = "valeur > 0"; }
+        else if (toolType === "choice") { title = "Aiguiller choix"; switchExpr = "choix"; type = "choice"; }
         else if (toolType === "loop_for") title = "Pour chaque element";
         else if (toolType === "loop_while") { title = "Tant que condition"; condition = "continuer == 1"; }
 
         const childCount = (parent.children || []).length;
-        const newX = parent.x + (childCount * 120) - 40;
+        const newX = parent.x + (childCount * 140) - 40;
         const newY = parent.y + 190;
+
+        let caseVal = "";
+        if (parent.type === "choice") {
+            caseVal = childCount === 0 ? "1" : (childCount === 1 ? "2" : (childCount === 2 ? "3" : "Autrement"));
+            title = `Action cas ${caseVal}`;
+        }
 
         const newNode = tree.addNode({
             title: title,
             type: type,
             parentId: parent.id,
+            caseValue: caseVal,
             inputs: inputs,
             outputs: outputs,
             condition: condition,
+            switchExpr: switchExpr,
             x: newX,
             y: newY
         });
+
+        // Si on crée un Choix Multiple (Selon que... / Switch), générer immédiatement deux cas (Cas 1 et Autrement)
+        if (type === "choice") {
+            tree.addNode({
+                title: "Traiter cas 1",
+                type: "simple",
+                parentId: newNode.id,
+                caseValue: "1",
+                x: newNode.x - 70,
+                y: newNode.y + 190
+            });
+            tree.addNode({
+                title: "Traiter defaut",
+                type: "simple",
+                parentId: newNode.id,
+                caseValue: "Autrement",
+                x: newNode.x + 130,
+                y: newNode.y + 190
+            });
+        }
 
         renderer.selectedNodeId = newNode.id;
         renderer.render();
@@ -406,9 +456,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Dock gauche
     const btnDockDict = document.getElementById("btn-dock-dict");
     const btnDockVars = document.getElementById("btn-dock-vars");
+    const btnDockAuto = document.getElementById("btn-dock-autolayout");
     if (btnDockAudit) btnDockAudit.addEventListener("click", () => { openDrawer("tab-audit"); });
+    if (btnTopbarAudit) btnTopbarAudit.addEventListener("click", () => { openDrawer("tab-audit"); });
     if (btnDockDict) btnDockDict.addEventListener("click", () => { openDrawer("tab-dict"); });
     if (btnDockVars) btnDockVars.addEventListener("click", () => { openDrawer("tab-dict"); });
+    if (btnDockAuto) {
+        btnDockAuto.addEventListener("click", () => {
+            tree.autoLayout();
+            renderer.centerAndFitTree(1.0);
+            pagesManager.save();
+        });
+    }
 
     // Dock droit
     const btnUndo = document.getElementById("btn-dock-undo");
@@ -631,6 +690,10 @@ document.addEventListener("DOMContentLoaded", () => {
             badgeAuditCount.textContent = audit.isClean ? "Conforme" : `${audit.errors.length + audit.warnings.length} anomalie${audit.errors.length + audit.warnings.length > 1 ? 's' : ''}`;
         }
         if (btnDockAudit) btnDockAudit.classList.toggle("clean", audit.isClean);
+        if (btnTopbarAudit) {
+            btnTopbarAudit.classList.toggle("clean", audit.isClean);
+            btnTopbarAudit.title = audit.isClean ? "Audit IUT : Arbre 100% conforme" : `Audit IUT : ${audit.errors.length} anomalie(s)`;
+        }
 
         if (!auditContainer) return;
         if (audit.isClean) {
@@ -686,6 +749,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (insCond && document.activeElement !== insCond) insCond.value = node.condition || "";
             }
 
+            // Affichage spécifique Choix Multiple (Selon que... / Switch)
+            const isChoice = node.type === "choice";
+            if (insChoiceGroup) {
+                insChoiceGroup.style.display = isChoice ? "flex" : "none";
+                if (insSwitch && document.activeElement !== insSwitch) insSwitch.value = node.switchExpr || node.condition || "choix";
+            }
+
+            // Affichage spécifique Cas (si le parent est un Choix Multiple)
+            const parent = node.parentId ? tree.nodes[node.parentId] : null;
+            const isChildOfChoice = parent && parent.type === "choice";
+            if (insCaseGroup) {
+                insCaseGroup.style.display = isChildOfChoice ? "flex" : "none";
+                if (insCase && document.activeElement !== insCase) insCase.value = node.caseValue || "1";
+            }
+
             if (insBtnDel) {
                 insBtnDel.style.display = (node.id === tree.rootId) ? "none" : "flex";
             }
@@ -702,7 +780,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (pType) pType.value = node.type || "simple";
         if (pIn && document.activeElement !== pIn) pIn.value = (node.inputs || []).join(", ");
         if (pOut && document.activeElement !== pOut) pOut.value = (node.outputs || []).join(", ");
-        if (pExpr && document.activeElement !== pExpr) pExpr.value = node.codeExpression || node.condition || "";
+        if (pExpr && document.activeElement !== pExpr) pExpr.value = node.codeExpression || node.switchExpr || node.condition || "";
     }
 
     // Événements de saisie directe sur la barre contextuelle
@@ -734,6 +812,7 @@ document.addEventListener("DOMContentLoaded", () => {
             node.type = e.target.value;
             const isCondOrLoop = node.type === "condition" || node.type.startsWith("loop");
             if (insCondGroup) insCondGroup.style.display = isCondOrLoop ? "flex" : "none";
+            if (insChoiceGroup) insChoiceGroup.style.display = (node.type === "choice") ? "flex" : "none";
             const pType = document.getElementById("prop-node-type");
             if (pType) pType.value = node.type;
             renderer.render();
@@ -786,6 +865,34 @@ document.addEventListener("DOMContentLoaded", () => {
             pagesManager.save();
             const pExpr = document.getElementById("prop-node-expr");
             if (pExpr) pExpr.value = node.condition;
+            updateCodeGenerator();
+        });
+    }
+
+    if (insSwitch) {
+        insSwitch.addEventListener("input", (e) => {
+            const id = renderer.selectedNodeId;
+            const node = tree.nodes[id];
+            if (!node) return;
+            node.switchExpr = e.target.value;
+            node.condition = e.target.value;
+            tree.autoSyncVariables(node);
+            renderer.render();
+            pagesManager.save();
+            const pExpr = document.getElementById("prop-node-expr");
+            if (pExpr) pExpr.value = node.switchExpr;
+            updateCodeGenerator();
+        });
+    }
+
+    if (insCase) {
+        insCase.addEventListener("input", (e) => {
+            const id = renderer.selectedNodeId;
+            const node = tree.nodes[id];
+            if (!node) return;
+            node.caseValue = e.target.value;
+            renderer.render();
+            pagesManager.save();
             updateCodeGenerator();
         });
     }

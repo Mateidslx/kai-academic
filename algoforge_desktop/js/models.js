@@ -196,6 +196,9 @@ class AlgorithmicTree {
     // Synchronisation automatique des variables dans le dictionnaire
     autoSyncVariables(node) {
         const allVars = [...(node.inputs || []), ...(node.outputs || [])];
+        if (node.type === "choice" && node.switchExpr) {
+            allVars.push(node.switchExpr);
+        }
         for (const v of allVars) {
             const cleanVar = v.trim();
             if (cleanVar && !this.dictionary[cleanVar]) {
@@ -308,9 +311,11 @@ class ActionNode {
         this.inputs = Array.isArray(data.inputs) ? [...data.inputs] : [];   // { E }
         this.outputs = Array.isArray(data.outputs) ? [...data.outputs] : []; // { S }
 
-        // Détails conditionnels ou itératifs
+        // Détails conditionnels, choix multiple (switch) ou itératifs
         this.condition = data.condition || "";
         this.conditionBranch = data.conditionBranch || null; // 'then' | 'else' | null
+        this.switchExpr = data.switchExpr || (data.type === "choice" ? (data.condition || "choix") : ""); // Variable ou expression de switch
+        this.caseValue = data.caseValue || ""; // Valeur de branche ('1', '2', 'Autrement'...)
         this.loopVar = data.loopVar || "i";
         this.loopStart = data.loopStart || "1";
         this.loopEnd = data.loopEnd || "n";

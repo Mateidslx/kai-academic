@@ -237,6 +237,98 @@ const ALGORITHMIC_TEMPLATES = {
                 }
             }
         }
+    },
+
+    // 5. Choix Multiple (Selon que... Cas... / Switch)
+    "menu_choix": {
+        id: "menu_choix",
+        name: "🔀 Choix Multiple (Selon que... Cas... / Switch)",
+        description: "Aiguillage à branches multiples selon la valeur discrète d'une variable de choix.",
+        tree: {
+            title: "Aiguiller selon le choix",
+            description: "Exécute une action spécifique selon le code menu saisi par l'utilisateur",
+            dictionary: {
+                "choix": { type: "entier", role: "Code action choisi (1, 2, 3 ou autre)", nature: "D" },
+                "resultat": { type: "chaine", role: "Message ou statut de l'opération", nature: "R" }
+            },
+            rootId: "root",
+            nodes: {
+                "root": {
+                    id: "root",
+                    title: "Traiter choix menu",
+                    type: "composed",
+                    inputs: ["choix"],
+                    outputs: ["resultat"],
+                    x: 480,
+                    y: 90,
+                    children: ["selon_choix"]
+                },
+                "selon_choix": {
+                    id: "selon_choix",
+                    parentId: "root",
+                    title: "Aiguiller action",
+                    type: "choice",
+                    switchExpr: "choix",
+                    inputs: ["choix"],
+                    outputs: ["resultat"],
+                    x: 480,
+                    y: 280,
+                    children: ["cas_ajouter", "cas_modifier", "cas_supprimer", "cas_autrement"]
+                },
+                "cas_ajouter": {
+                    id: "cas_ajouter",
+                    parentId: "selon_choix",
+                    title: "Ajouter element",
+                    type: "simple",
+                    caseValue: "1",
+                    inputs: [],
+                    outputs: ["resultat"],
+                    codeExpression: 'resultat = "Element ajoute avec succes";',
+                    x: 120,
+                    y: 470,
+                    children: []
+                },
+                "cas_modifier": {
+                    id: "cas_modifier",
+                    parentId: "selon_choix",
+                    title: "Modifier element",
+                    type: "simple",
+                    caseValue: "2",
+                    inputs: [],
+                    outputs: ["resultat"],
+                    codeExpression: 'resultat = "Element modifie";',
+                    x: 360,
+                    y: 470,
+                    children: []
+                },
+                "cas_supprimer": {
+                    id: "cas_supprimer",
+                    parentId: "selon_choix",
+                    title: "Supprimer element",
+                    type: "simple",
+                    caseValue: "3",
+                    inputs: [],
+                    outputs: ["resultat"],
+                    codeExpression: 'resultat = "Element supprime";',
+                    x: 600,
+                    y: 470,
+                    children: []
+                },
+                "cas_autrement": {
+                    id: "cas_autrement",
+                    parentId: "selon_choix",
+                    title: "Gerer choix invalide",
+                    type: "simple",
+                    caseValue: "Autrement",
+                    inputs: [],
+                    outputs: ["resultat"],
+                    codeExpression: 'resultat = "Erreur: choix non reconnu";',
+                    x: 840,
+                    y: 470,
+                    children: []
+                }
+            }
+        }
     }
 };
 

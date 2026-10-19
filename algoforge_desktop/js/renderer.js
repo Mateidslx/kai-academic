@@ -91,11 +91,11 @@ class AlgorithmicRenderer {
 
             const parentCenterX = node.x + (node.width / 2);
             const parentBottomY = node.y + node.height;
-            const connectorSquareY = parentBottomY + 12;
+            const connectorSquareY = parentBottomY + 10;
 
             // Petit connecteur carré sous la boîte parente
             html += `
-                <rect x="${parentCenterX - 5}" y="${parentBottomY}" width="10" height="12"
+                <rect x="${parentCenterX - 5}" y="${parentBottomY}" width="10" height="10"
                       fill="#ffffff" stroke="#2c4f64" stroke-width="1.5" />
             `;
 
@@ -103,32 +103,67 @@ class AlgorithmicRenderer {
             if (validChildren.length === 0) continue;
 
             const childCenters = validChildren.map(c => c.x + (c.width / 2));
-            const minChildX = Math.min(...childCenters);
-            const maxChildX = Math.max(...childCenters);
             const busBarY = connectorSquareY + 28;
 
-            // Ligne verticale descendante
+            // Ligne verticale descendante du parent
             html += `
                 <line x1="${parentCenterX}" y1="${connectorSquareY}" x2="${parentCenterX}" y2="${busBarY}"
                       stroke="#2c4f64" stroke-width="1.6" />
             `;
 
-            // Barre horizontale de distribution
-            if (validChildren.length > 1 || minChildX !== parentCenterX) {
+            // Barre horizontale de distribution : couvre TOUS les centres (parent et enfants) pour éliminer tout décrochage
+            const allX = [parentCenterX, ...childCenters];
+            const busMinX = Math.min(...allX);
+            const busMaxX = Math.max(...allX);
+            if (busMinX !== busMaxX) {
                 html += `
-                    <line x1="${minChildX}" y1="${busBarY}" x2="${maxChildX}" y2="${busBarY}"
+                    <line x1="${busMinX}" y1="${busBarY}" x2="${busMaxX}" y2="${busBarY}"
                           stroke="#2c4f64" stroke-width="1.6" />
                 `;
             }
 
-            // Lignes vers chaque enfant
-            for (const child of validChildren) {
+            // Lignes vers chaque enfant + Badges de cas pour Choix Multiple (Selon que / Switch) et Alternative (Si)
+            validChildren.forEach((child, idx) => {
                 const childCenterX = child.x + (child.width / 2);
                 html += `
                     <line x1="${childCenterX}" y1="${busBarY}" x2="${childCenterX}" y2="${child.y}"
                           stroke="#2c4f64" stroke-width="1.6" />
                 `;
-            }
+
+                // Badge de cas pour Choix Multiple (Selon que... Cas...)
+                if (node.type === "choice") {
+                    const defaultLabel = (idx === validChildren.length - 1 && validChildren.length > 2) ? "Autrement" : `Cas ${idx + 1}`;
+                    const caseText = child.caseValue || defaultLabel;
+                    const badgeW = Math.max(54, caseText.length * 7.5 + 16);
+                    const badgeY = busBarY + 6;
+                    html += `
+                        <g class="case-badge-group" data-child-id="${child.id}" data-parent-id="${node.id}" style="cursor: pointer;" title="Cliquer pour modifier la valeur de ce cas">
+                            <rect x="${childCenterX - (badgeW / 2)}" y="${badgeY}" width="${badgeW}" height="20" rx="4"
+                                  fill="#ffffff" stroke="#2563eb" stroke-width="1.4" />
+                            <text x="${childCenterX}" y="${badgeY + 14}" text-anchor="middle"
+                                  font-family="'Source Code Pro', monospace" font-size="11" font-weight="700" fill="#1e40af">
+                                ${caseText}
+                            </text>
+                        </g>
+                    `;
+                } else if (node.type === "condition" && validChildren.length > 0) {
+                    const branchText = idx === 0 ? "Alors" : "Sinon";
+                    const badgeW = 44;
+                    const badgeY = busBarY + 6;
+                    const color = idx === 0 ? "#10b981" : "#f59e0b";
+                    const textCol = idx === 0 ? "#047857" : "#b45309";
+                    html += `
+                        <g class="cond-branch-badge">
+                            <rect x="${childCenterX - (badgeW / 2)}" y="${badgeY}" width="${badgeW}" height="18" rx="4"
+                                  fill="#ffffff" stroke="${color}" stroke-width="1.2" />
+                            <text x="${childCenterX}" y="${badgeY + 13}" text-anchor="middle"
+                                  font-family="'Inter', sans-serif" font-size="10.5" font-weight="700" fill="${textCol}">
+                                ${branchText}
+                            </text>
+                        </g>
+                    `;
+                }
+            });
         }
 
         this.linksGroup.innerHTML = html;
@@ -146,37 +181,33 @@ class AlgorithmicRenderer {
             const strokeWidth = isSimActive ? "2.8" : (isSelected ? "2.2" : "1.6");
             const filterAttr = isSimActive ? 'filter="url(#glow-sim)"' : (isSelected ? 'filter="url(#glow-select)"' : '');
 
-            // 1. Accolades d'entrées { E } à gauche (cliquable pour édition en ligne)
+            // 1. Accolades d'entrées { E } à gauche (uniquement affichées si non vides pour éviter le fouillis visuel)
             const inputsStr = (node.inputs || []).join(", ");
             let inputsSvg = "";
-            if (inputsStr.length > 0 || isSelected) {
-                const label = inputsStr.length > 0 ? inputsStr : "ajouter E";
-                const isPlaceholder = inputsStr.length === 0;
+            if (inputsStr.length > 0) {
                 inputsSvg = `
                     <g class="flow-group flow-input" data-node-id="${id}" data-flow="input" title="Cliquer pour modifier les entrées { E }" style="cursor: pointer;">
-                        <text x="${node.x - 14}" y="${node.y + (node.height / 2) + 6}"
-                              text-anchor="end" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="${isPlaceholder ? '#94a3b8' : '#2c4f64'}">
-                            <tspan font-family="'Source Code Pro', monospace" font-size="16" fill="#1e3a8a">{</tspan>
-                            <tspan dx="3">${label}</tspan>
-                            <tspan dx="3" font-family="'Source Code Pro', monospace" font-size="16" fill="#1e3a8a">}</tspan>
+                        <text x="${node.x - 12}" y="${node.y + (node.height / 2) + 5}"
+                              text-anchor="end" font-family="'Inter', sans-serif" font-size="12.5" font-weight="600" fill="#1e3a8a">
+                            <tspan font-family="'Source Code Pro', monospace" font-size="15" fill="#2563eb">{</tspan>
+                            <tspan dx="2">${inputsStr}</tspan>
+                            <tspan dx="2" font-family="'Source Code Pro', monospace" font-size="15" fill="#2563eb">}</tspan>
                         </text>
                     </g>
                 `;
             }
 
-            // 2. Accolades de sorties { S } à droite (cliquable pour édition en ligne)
+            // 2. Accolades de sorties { S } à droite (uniquement affichées si non vides)
             const outputsStr = (node.outputs || []).join(", ");
             let outputsSvg = "";
-            if (outputsStr.length > 0 || isSelected) {
-                const label = outputsStr.length > 0 ? outputsStr : "ajouter S";
-                const isPlaceholder = outputsStr.length === 0;
+            if (outputsStr.length > 0) {
                 outputsSvg = `
                     <g class="flow-group flow-output" data-node-id="${id}" data-flow="output" title="Cliquer pour modifier les sorties { S }" style="cursor: pointer;">
-                        <text x="${node.x + node.width + 14}" y="${node.y + (node.height / 2) + 6}"
-                              text-anchor="start" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="${isPlaceholder ? '#94a3b8' : '#2c4f64'}">
-                            <tspan font-family="'Source Code Pro', monospace" font-size="16" fill="#1e3a8a">{</tspan>
-                            <tspan dx="3">${label}</tspan>
-                            <tspan dx="3" font-family="'Source Code Pro', monospace" font-size="16" fill="#1e3a8a">}</tspan>
+                        <text x="${node.x + node.width + 12}" y="${node.y + (node.height / 2) + 5}"
+                              text-anchor="start" font-family="'Inter', sans-serif" font-size="12.5" font-weight="600" fill="#166534">
+                            <tspan font-family="'Source Code Pro', monospace" font-size="15" fill="#10b981">{</tspan>
+                            <tspan dx="2">${outputsStr}</tspan>
+                            <tspan dx="2" font-family="'Source Code Pro', monospace" font-size="15" fill="#10b981">}</tspan>
                         </text>
                     </g>
                 `;
@@ -211,6 +242,25 @@ class AlgorithmicRenderer {
                 shapeSvg = `
                     <polygon points="${points}" fill="${fillBg}" stroke="${strokeColor}" stroke-width="${strokeWidth}" ${filterAttr} />
                 `;
+            } else if (node.type === "choice") {
+                // Choix Multiple (Selon que... Cas... / Switch) : Octogone élégant à coins biseautés
+                const bevel = 14;
+                const points = [
+                    `${node.x + bevel},${node.y}`,
+                    `${node.x + node.width - bevel},${node.y}`,
+                    `${node.x + node.width},${node.y + bevel}`,
+                    `${node.x + node.width},${node.y + node.height - bevel}`,
+                    `${node.x + node.width - bevel},${node.y + node.height}`,
+                    `${node.x + bevel},${node.y + node.height}`,
+                    `${node.x},${node.y + node.height - bevel}`,
+                    `${node.x},${node.y + bevel}`
+                ].join(" ");
+
+                shapeSvg = `
+                    <polygon points="${points}" fill="${fillBg}" stroke="${strokeColor}" stroke-width="${strokeWidth}" ${filterAttr} />
+                    <line x1="${node.x + bevel}" y1="${node.y + 20}" x2="${node.x + node.width - bevel}" y2="${node.y + 20}"
+                          stroke="${strokeColor}" stroke-width="0.9" opacity="0.4" />
+                `;
             } else if (node.type.startsWith("loop")) {
                 // Boucle IUT : rectangle avec badge de boucle clair
                 shapeSvg = `
@@ -239,7 +289,20 @@ class AlgorithmicRenderer {
             }
 
             let textSvg = "";
-            if (node.type.startsWith("loop") && node.condition) {
+            if (node.type === "choice") {
+                // Choix multiple avec affichage clair de l'expression Selon
+                const switchVar = node.switchExpr || node.condition || "choix";
+                textSvg = `
+                    <text class="node-switch-header" x="${node.x + (node.width / 2)}" y="${node.y + 14}"
+                          text-anchor="middle" font-family="'Source Code Pro', monospace" font-size="10" font-weight="700" fill="#2563eb">
+                        ⑂ SELON (${switchVar})
+                    </text>
+                    <text class="node-title-text" x="${node.x + (node.width / 2)}" y="${node.y + (node.height / 2) + 12}"
+                          text-anchor="middle" font-family="'Inter', sans-serif" font-size="12.5" font-weight="600" fill="#1e293b">
+                        ${line1}
+                    </text>
+                `;
+            } else if (node.type.startsWith("loop") && node.condition) {
                 // Boucle avec condition affichée
                 const condShort = node.condition.length > 22 ? node.condition.slice(0, 21) + "…" : node.condition;
                 textSvg = `
@@ -269,27 +332,15 @@ class AlgorithmicRenderer {
                 `;
             }
 
-            // Poignées rapides sur nœud sélectionné (+ Enfant, ✎ Éditer, ✕ Supprimer)
+            // Poignée rapide unique pour ajouter un enfant (+) sans boutons disgracieux sur les sommets
             let handlesSvg = "";
             if (isSelected) {
                 handlesSvg = `
-                    <g class="node-handle handle-add-child" data-parent-id="${id}" title="Ajouter une action sous cette étape (Tab)">
-                        <circle cx="${node.x + (node.width / 2)}" cy="${node.y + node.height + 14}" r="11" fill="#2563eb" />
-                        <text x="${node.x + (node.width / 2)}" y="${node.y + node.height + 19}" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="700">+</text>
-                    </g>
-                    <g class="node-handle handle-edit" data-node-id="${id}" title="Modifier le nom de l'action (Entrée ou Double-clic)">
-                        <circle cx="${node.x + node.width}" cy="${node.y}" r="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" />
-                        <text x="${node.x + node.width}" y="${node.y + 4}" text-anchor="middle" font-size="10" fill="#2563eb">✎</text>
+                    <g class="node-handle handle-add-child" data-parent-id="${id}" title="Ajouter une sous-action sous cette étape (Touche Tab)">
+                        <circle cx="${node.x + (node.width / 2)}" cy="${node.y + node.height + 12}" r="9.5" fill="#2563eb" />
+                        <text x="${node.x + (node.width / 2)}" y="${node.y + node.height + 16}" text-anchor="middle" font-size="13" fill="#ffffff" font-weight="700">+</text>
                     </g>
                 `;
-                if (id !== this.tree.rootId) {
-                    handlesSvg += `
-                        <g class="node-handle handle-delete" data-node-id="${id}" title="Supprimer cette action (Suppr)">
-                            <circle cx="${node.x}" cy="${node.y}" r="9" fill="#ffffff" stroke="#ef4444" stroke-width="1.5" />
-                            <text x="${node.x}" y="${node.y + 3}" text-anchor="middle" font-size="9" fill="#ef4444" font-weight="700">✕</text>
-                        </g>
-                    `;
-                }
             }
 
             html += `
@@ -345,6 +396,16 @@ class AlgorithmicRenderer {
                 const nodeId = flowGroup.getAttribute("data-node-id");
                 const flowType = flowGroup.getAttribute("data-flow");
                 this.startInlineFlowEdit(nodeId, flowType);
+                return;
+            }
+
+            // 4b. Clic sur badge de branche pour Choix Multiple (Selon que... Cas...)
+            const caseBadge = target.closest(".case-badge-group");
+            if (caseBadge) {
+                e.stopPropagation();
+                const childId = caseBadge.getAttribute("data-child-id");
+                const parentId = caseBadge.getAttribute("data-parent-id");
+                this.startInlineCaseEdit(childId, parentId);
                 return;
             }
 
@@ -668,6 +729,66 @@ class AlgorithmicRenderer {
         editor.select();
     }
 
+    startInlineCaseEdit(childId, parentId) {
+        const child = this.tree.nodes[childId];
+        const parent = this.tree.nodes[parentId];
+        if (!child || !parent) return;
+
+        const overlay = document.getElementById("canvas-overlay");
+        if (!overlay) return;
+        overlay.innerHTML = "";
+
+        const childCenterX = child.x + (child.width / 2);
+        const busBarY = parent.y + parent.height + 10 + 28;
+
+        const screenX = (childCenterX - 40) * this.zoom + this.panX;
+        const screenY = (busBarY + 4) * this.zoom + this.panY;
+
+        const editor = document.createElement("input");
+        editor.type = "text";
+        editor.className = "inline-flow-editor";
+        editor.value = child.caseValue || "Cas";
+        editor.placeholder = "ex: 1, 2, Autrement";
+        editor.style.left = `${Math.max(10, screenX)}px`;
+        editor.style.top = `${screenY}px`;
+        editor.style.width = "90px";
+        editor.style.fontSize = "11px";
+
+        let committed = false;
+        const commit = () => {
+            if (committed) return;
+            committed = true;
+            const val = editor.value.trim() || "Cas";
+            this.tree.saveState();
+            child.caseValue = val;
+            if (this.onNodeChange) this.onNodeChange(child);
+            overlay.innerHTML = "";
+            this.render();
+            if (typeof this.onNodeSelect === "function") {
+                this.onNodeSelect(child);
+            }
+        };
+
+        editor.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                commit();
+            } else if (e.key === "Escape") {
+                committed = true;
+                overlay.innerHTML = "";
+                this.render();
+            }
+        });
+
+        editor.addEventListener("blur", () => {
+            commit();
+        });
+
+        overlay.appendChild(editor);
+        editor.focus();
+        editor.select();
+    }
+
     addChildNode(parentId) {
         const parent = this.tree.nodes[parentId] || this.tree.getRoot();
         if (!parent) return;
@@ -677,10 +798,18 @@ class AlgorithmicRenderer {
         const newX = parent.x + (childCount * 220) - ((childCount > 0) ? 60 : 0);
         const newY = parent.y + 190;
 
+        let caseVal = "";
+        let childTitle = "Nouvelle action";
+        if (parent.type === "choice") {
+            caseVal = childCount === 0 ? "1" : (childCount === 1 ? "2" : (childCount === 2 ? "3" : "Autrement"));
+            childTitle = `Action cas ${caseVal}`;
+        }
+
         const newNode = this.tree.addNode({
-            title: "Nouvelle action",
+            title: childTitle,
             type: "simple",
             parentId: parent.id,
+            caseValue: caseVal,
             inputs: (parent.inputs || []).slice(0, 1),
             outputs: [],
             x: newX,

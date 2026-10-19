@@ -121,6 +121,22 @@ class AlgorithmicTranspiler {
                     generateNodeExecution(elseChild, indent + "    ");
                 }
                 lines.push(`${indent}FIN SI`);
+            } else if (node.type === "choice") {
+                const swExpr = node.switchExpr || node.condition || "choix";
+                lines.push(`${indent}SELON QUE (${swExpr}) FAIRE`);
+                for (let i = 0; i < (node.children || []).length; i++) {
+                    const cid = node.children[i];
+                    const childNode = this.tree.nodes[cid];
+                    const rawVal = childNode?.caseValue || `${i + 1}`;
+                    const isDefault = rawVal.toLowerCase().startsWith("autre") || rawVal.toLowerCase() === "default" || rawVal.toLowerCase() === "sinon";
+                    if (isDefault) {
+                        lines.push(`${indent}    AUTREMENT :`);
+                    } else {
+                        lines.push(`${indent}    CAS ${rawVal} :`);
+                    }
+                    generateNodeExecution(cid, indent + "        ");
+                }
+                lines.push(`${indent}FIN SELON`);
             } else if (node.type === "loop_for") {
                 lines.push(`${indent}POUR ${node.loopVar || "i"} DE ${node.loopStart || "1"} A ${node.loopEnd || "n"} FAIRE`);
                 for (const cid of node.children) {
@@ -263,6 +279,27 @@ class AlgorithmicTranspiler {
                     generateCNode(node.children[1], indent + "    ");
                     lines.push(`${indent}}`);
                 }
+            } else if (node.type === "choice") {
+                const swExpr = node.switchExpr || node.condition || "choix";
+                lines.push(`${indent}switch (${swExpr})`);
+                lines.push(`${indent}{`);
+                for (let i = 0; i < (node.children || []).length; i++) {
+                    const cid = node.children[i];
+                    const childNode = this.tree.nodes[cid];
+                    const rawVal = childNode?.caseValue || `${i + 1}`;
+                    const isDefault = rawVal.toLowerCase().startsWith("autre") || rawVal.toLowerCase() === "default" || rawVal.toLowerCase() === "sinon";
+                    if (isDefault) {
+                        lines.push(`${indent}    default:`);
+                    } else {
+                        const formattedVal = (isNaN(rawVal) && !rawVal.startsWith("'")) ? `'${rawVal}'` : rawVal;
+                        lines.push(`${indent}    case ${formattedVal}:`);
+                    }
+                    lines.push(`${indent}    {`);
+                    generateCNode(cid, indent + "        ");
+                    lines.push(`${indent}        break;`);
+                    lines.push(`${indent}    }`);
+                }
+                lines.push(`${indent}}`);
             } else if (node.type === "loop_for") {
                 const v = node.loopVar || "i";
                 lines.push(`${indent}for (${v} = ${node.loopStart || 1}; ${v} <= ${node.loopEnd || 10}; ${v}++)`);
@@ -357,6 +394,21 @@ class AlgorithmicTranspiler {
                 if (node.children[1]) {
                     lines.push(`${indent}else:`);
                     generatePyNode(node.children[1], indent + "    ");
+                }
+            } else if (node.type === "choice") {
+                const swExpr = node.switchExpr || node.condition || "choix";
+                lines.push(`${indent}match ${swExpr}:`);
+                for (let i = 0; i < (node.children || []).length; i++) {
+                    const cid = node.children[i];
+                    const childNode = this.tree.nodes[cid];
+                    const rawVal = childNode?.caseValue || `${i + 1}`;
+                    const isDefault = rawVal.toLowerCase().startsWith("autre") || rawVal.toLowerCase() === "default" || rawVal.toLowerCase() === "sinon";
+                    if (isDefault) {
+                        lines.push(`${indent}    case _:`);
+                    } else {
+                        lines.push(`${indent}    case ${rawVal}:`);
+                    }
+                    generatePyNode(cid, indent + "        ");
                 }
             } else if (node.type === "loop_for") {
                 lines.push(`${indent}for ${node.loopVar || "i"} in range(${node.loopStart || 1}, ${node.loopEnd || 10} + 1):`);
