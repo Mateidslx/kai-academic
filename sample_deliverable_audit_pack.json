@@ -1,0 +1,176 @@
+{
+  "report_id": "KAI-AUDIT-1792493624",
+  "generated_at": "2026-10-20 10:53 UTC",
+  "client_name": "Agence Côte Basque Digital (Démo Synthétique)",
+  "target_url": "https://vitrine-demo.agence-exemple.fr",
+  "is_synthetic_demo": true,
+  "scope_and_limits": "Audit technique passif et non-intrusif portant sur les en-têtes HTTP/HTTPS, les drapeaux de cookies, l'exposition de surface publique et l'arbre DOM HTML/WCAG 2.1 AA de la page cible. Ce diagnostic fournit des correctifs techniques directement exploitables mais ne constitue pas un test d'intrusion offensif (pentest) ni une certification administrative d'État.",
+  "scores": {
+    "global_score": 39,
+    "security_headers_score": 10,
+    "security_grade": "F",
+    "accessibility_wcag_score": 75,
+    "accessibility_grade": "A"
+  },
+  "external_origins_detected": [
+    "https://cdn.jsdelivr.net",
+    "https://fonts.googleapis.com"
+  ],
+  "security_headers": {
+    "score": 10,
+    "max_score": 100,
+    "grade": "F",
+    "is_secure": false,
+    "headers_checked": 6,
+    "headers_passed": 1,
+    "details": [
+      {
+        "header": "strict-transport-security",
+        "name": "HTTP Strict Transport Security (HSTS)",
+        "present": false,
+        "status": "MISSING",
+        "value": null,
+        "points": 0,
+        "recommendation": "max-age=31536000; includeSubDomains; preload",
+        "description": "Protège contre le déclassement SSL et l'interception de trafic (MITM)."
+      },
+      {
+        "header": "content-security-policy",
+        "name": "Content Security Policy (CSP)",
+        "present": false,
+        "status": "MISSING",
+        "value": null,
+        "points": 0,
+        "recommendation": "default-src 'self'; script-src 'self'; object-src 'none';",
+        "description": "Bloque l'exécution de scripts non autorisés et les attaques XSS."
+      },
+      {
+        "header": "x-frame-options",
+        "name": "X-Frame-Options (Clickjacking Protection)",
+        "present": false,
+        "status": "MISSING",
+        "value": null,
+        "points": 0,
+        "recommendation": "DENY",
+        "description": "Empêche l'inclusion du site dans des iframes malveillantes (Clickjacking)."
+      },
+      {
+        "header": "x-content-type-options",
+        "name": "X-Content-Type-Options (MIME Sniffing)",
+        "present": true,
+        "status": "PASS",
+        "value": "nosniff",
+        "points": 10,
+        "description": "Force le navigateur à respecter le type MIME déclaré (bloque les faux fichiers)."
+      },
+      {
+        "header": "referrer-policy",
+        "name": "Referrer-Policy (Privacy)",
+        "present": false,
+        "status": "MISSING",
+        "value": null,
+        "points": 0,
+        "recommendation": "strict-origin-when-cross-origin",
+        "description": "Limite la fuite d'URLs et de données sensibles lors de clics externes."
+      },
+      {
+        "header": "permissions-policy",
+        "name": "Permissions-Policy (Feature Control)",
+        "present": false,
+        "status": "MISSING",
+        "value": null,
+        "points": 0,
+        "recommendation": "camera=(), microphone=(), geolocation=()",
+        "description": "Désactive les fonctionnalités matérielles invasives (caméra, micro, géolocalisation)."
+      }
+    ],
+    "target_url": "https://vitrine-demo.agence-exemple.fr",
+    "effective_url": "https://vitrine-demo.agence-exemple.fr",
+    "is_https": true,
+    "cookies_audit": [
+      {
+        "cookie_name": "PHPSESSID",
+        "has_secure": false,
+        "has_httponly": false,
+        "samesite": null,
+        "is_secure": false
+      }
+    ],
+    "leak_audit": [
+      {
+        "header": "server",
+        "value": "nginx/1.18.0 (Ubuntu)",
+        "recommendation": "Supprimer ou masquer l'en-tête 'server' pour éviter la reconnaissance d'empreinte d'OS/serveur."
+      },
+      {
+        "header": "x-powered-by",
+        "value": "PHP/8.1.2",
+        "recommendation": "Supprimer ou masquer l'en-tête 'x-powered-by' pour éviter la reconnaissance d'empreinte d'OS/serveur."
+      }
+    ]
+  },
+  "surface_checks": [
+    {
+      "path": "/.well-known/security.txt",
+      "status": "ABSENT",
+      "severity": "LOW",
+      "recommendation": "Publier un fichier RFC 9116 /.well-known/security.txt avec un contact sécurité et une date d'expiration."
+    },
+    {
+      "path": "/.env",
+      "status": "PROTÉGÉ (404/403)",
+      "severity": "OK",
+      "recommendation": "Aucun fichier .env exposé publiquement."
+    },
+    {
+      "path": "/.git/HEAD",
+      "status": "PROTÉGÉ (404/403)",
+      "severity": "OK",
+      "recommendation": "Dépôt Git non exposé sur la racine web."
+    }
+  ],
+  "accessibility_wcag": {
+    "score": 75,
+    "grade": "A",
+    "total_rules": 7,
+    "passed_rules": 4,
+    "findings_count": 3,
+    "findings": [
+      {
+        "rule": "doc_lang",
+        "severity": "CRITICAL",
+        "message": "La balise <html> ne spécifie aucun attribut 'lang'.",
+        "recommendation": "Ajouter lang='fr' ou lang='en' sur la balise racine <html>."
+      },
+      {
+        "rule": "img_alt_tags",
+        "severity": "HIGH",
+        "message": "1 image(s) sans attribut 'alt' détectée(s).",
+        "recommendation": "Renseigner systématiquement un attribut alt explicite ou alt='' si décorative."
+      },
+      {
+        "rule": "links_accessible",
+        "severity": "MEDIUM",
+        "message": "1 lien(s) avec intitulé ambigu détecté(s) (ex: 'cliquez ici').",
+        "recommendation": "Donner aux liens un texte décrivant explicitement leur cible de destination."
+      }
+    ],
+    "compliant": false,
+    "scotopic": {
+      "scotopic_score": 100,
+      "ratio": 14.63,
+      "background": "#FFFFFF",
+      "text": "#1E293B",
+      "is_glare_risk": false,
+      "is_calming_tint": false,
+      "penalties": [],
+      "recommendations": [],
+      "rating": "OPTIMAL"
+    }
+  },
+  "remediation_patches": {
+    "nginx": "# === PACK CORRECTIF NGINX (PRÊT À COPIER DANS VOTRE BLOC server {}) ===\nserver_tokens off; # Masque la version exacte de Nginx\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\" always;\nadd_header Permissions-Policy \"camera=(), microphone=(), geolocation=()\" always;\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https:; frame-ancestors 'self'; object-src 'none';\" always;",
+    "apache": "# === PACK CORRECTIF APACHE (.htaccess) ===\n<IfModule mod_headers.c>\n  Header always unset X-Powered-By\n  Header always set Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\"\n  Header always set X-Content-Type-Options \"nosniff\"\n  Header always set X-Frame-Options \"SAMEORIGIN\"\n  Header always set Referrer-Policy \"strict-origin-when-cross-origin\"\n  Header always set Permissions-Policy \"camera=(), microphone=(), geolocation=()\"\n  Header always set Content-Security-Policy \"default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https:; frame-ancestors 'self'; object-src 'none';\"\n</IfModule>",
+    "vercel_json": "{\n  \"headers\": [\n    {\n      \"source\": \"/(.*)\",\n      \"headers\": [\n        {\n          \"key\": \"Strict-Transport-Security\",\n          \"value\": \"max-age=31536000; includeSubDomains; preload\"\n        },\n        {\n          \"key\": \"X-Content-Type-Options\",\n          \"value\": \"nosniff\"\n        },\n        {\n          \"key\": \"X-Frame-Options\",\n          \"value\": \"SAMEORIGIN\"\n        },\n        {\n          \"key\": \"Referrer-Policy\",\n          \"value\": \"strict-origin-when-cross-origin\"\n        },\n        {\n          \"key\": \"Permissions-Policy\",\n          \"value\": \"camera=(), microphone=(), geolocation=()\"\n        },\n        {\n          \"key\": \"Content-Security-Policy\",\n          \"value\": \"default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https:; frame-ancestors 'self'; object-src 'none';\"\n        }\n      ]\n    }\n  ]\n}"
+  }
+}

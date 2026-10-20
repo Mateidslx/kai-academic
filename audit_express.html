@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAI Security & Accessibility Studio — Audit Technique Pré-Production Web & Patchs Clé en Main (24h)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #0F172A; color: #F8FAFC; }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-md">
+                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="font-extrabold text-white text-sm tracking-tight">KAI Security & A11y Studio</div>
+                    <div class="text-[11px] text-slate-400">Audit Pré-Production Web • En-têtes HTTP/CSP • WCAG 2.1 AA / RGAA</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="security_scanner.html" class="text-xs font-semibold text-slate-300 hover:text-white transition">Scanner Gratuit</a>
+                <a href="sample_deliverable_audit_pack.html" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-300 border border-slate-700 transition">
+                    Voir un Exemple de Livrable
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-10 w-full space-y-12">
+
+        <!-- HERO OFFRE PRINCIPALE -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold">
+                    <span>Offre à Périmètre Fixe • Agences Web, Freelances & PME</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                    Livrez vos sites web avec une note A en Sécurité HTTP & un diagnostic WCAG 2.1 AA en moins de 24h.
+                </h1>
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                    Ne perdez plus 3 heures à déchiffrer les erreurs CSP, HSTS, cookies de session ou contrastes RGAA/WCAG avant une mise en production client.
+                    Vous fournissez l'URL autorisée : notre infrastructure génère le <strong>rapport exécutif prêt à remettre à votre client</strong> ainsi que les <strong>blocs de configuration prêts à copier-coller</strong> (Nginx, Apache, Caddy, Cloudflare, Next.js/Vercel).
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <a href="#commander" class="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-indigo-600/30 transition">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>Commander un Audit Express (29 € Lancement)</span>
+                    </a>
+                    <a href="sample_deliverable_audit_pack.html" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-sm border border-slate-700 flex items-center gap-2 transition">
+                        <i data-lucide="file-check-2" class="w-4 h-4 text-emerald-400"></i>
+                        <span>Consulter le Livrable Complet (Démo)</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARTE RÉCAPITULATIVE DU LIVRABLE -->
+            <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4 shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div>
+                        <div class="text-xs font-bold text-indigo-400 uppercase">Pack Pré-Production Web</div>
+                        <div class="text-lg font-extrabold text-white">Ce que vous recevez sous 24h</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-black text-emerald-400">29 €</div>
+                        <div class="text-[10px] text-slate-400 line-through">49 € tarif standard</div>
+                    </div>
+                </div>
+                <ul class="space-y-2.5 text-xs text-slate-300">
+                    <li class="flex items-start gap-2.5">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>Audit des 6 en-têtes HTTP OWASP & Cookies :</strong> HSTS, CSP (calibrée sur vos polices/scripts externes), X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>Contrôle d'exposition passive :</strong> Vérification non-intrusive de la non-exposition de <code>/.env</code>, <code>/.git/HEAD</code> et conformité <code>/.well-known/security.txt</code> (RFC 9116).</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>Diagnostic Accessibilité WCAG 2.1 AA / RGAA :</strong> Structure des titres, alternatives d'images, labels de formulaires, contrastes et correctifs HTML/ARIA.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span><strong>Patchs Serveur Clé en Main + Contre-visite :</strong> Snippets prêts à déployer (Nginx, Apache, Vercel/Next.js, Cloudflare) et second scan de validation après application.</span>
+                    </li>
+                </ul>
+                <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
+                    <strong>Périmètre & Limites :</strong> Analyse technique passive et non-intrusive sur une URL fournie par son propriétaire ou mandataire autorisé. Ne constitue pas un test d'intrusion offensif (pentest) ni une certification officielle d'État.
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULAIRE DE COMMANDE & COLLECTE D'INFORMATIONS -->
+        <section id="commander" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl font-extrabold text-white">1. Renseigner le Périmètre & Générer / Commander votre Audit</h2>
+                    <p class="text-xs text-slate-400 mt-1">Collecte des informations techniques indispensables au calibrage des règles CSP et serveur.</p>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+                    Isolation Test / Production Active
+                </span>
+            </div>
+
+            <form id="order-intake-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1.5">URL publique à auditer *</label>
+                    <input type="url" id="intake-url" required placeholder="https://votresite.fr" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-indigo-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1.5">Nom de l'entreprise ou agence *</label>
+                    <input type="text" id="intake-company" required placeholder="Ex: Studio Web Atlantique" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-indigo-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1.5">Email professionnel de livraison *</label>
+                    <input type="email" id="intake-email" required placeholder="contact@votreagence.fr" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-indigo-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1.5">Stack / Serveur cible *</label>
+                    <select id="intake-stack" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-indigo-500 focus:outline-none">
+                        <option value="nginx">Nginx (VPS / Debian / Ubuntu)</option>
+                        <option value="apache">Apache (.htaccess / Hébergement mutualisé)</option>
+                        <option value="vercel">Next.js / Vercel (vercel.json)</option>
+                        <option value="cloudflare">Cloudflare / Reverse Proxy</option>
+                        <option value="caddy">Caddy Server</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2 flex items-start gap-2.5 pt-1">
+                    <input type="checkbox" id="intake-auth" required class="mt-0.5 rounded bg-slate-950 border-slate-700">
+                    <label for="intake-auth" class="text-slate-300">
+                        Je confirme être le propriétaire ou le prestataire mandaté du domaine indiqué et j'autorise l'exécution d'une inspection HTTP/DOM passive non-intrusive.
+                    </label>
+                </div>
+
+                <div class="md:col-span-2 flex flex-wrap items-center gap-3 pt-2">
+                    <button type="submit" class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 cursor-pointer transition">
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                        <span>Générer un Aperçu Technique Instantané & Préparer la Commande</span>
+                    </button>
+                    <a id="direct-polar-btn" href="https://buy.polar.sh/polar_cl_EaMGfbm3lRiJCeYrYdApRFdre5b0sBVa1rA0q0dAM0k" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-2 transition">
+                        <i data-lucide="credit-card" class="w-4 h-4"></i>
+                        <span>Paiement Direct Sécurisé via Polar</span>
+                    </a>
+                </div>
+            </form>
+
+            <div id="intake-result" class="hidden p-5 rounded-xl bg-slate-950 border border-emerald-500/40 space-y-3 text-xs">
+                <!-- Résultat injecté par JS -->
+            </div>
+        </section>
+
+        <!-- PISTE DE REPLI : PACKAGES CLI AUTONOMES -->
+        <section class="space-y-4">
+            <div>
+                <h2 class="text-xl font-extrabold text-white">2. Outillage CLI Python & Packages DevSecOps Autonomes</h2>
+                <p class="text-xs text-slate-400 mt-1">Pour les équipes souhaitant exécuter nos moteurs localement ou dans leurs pipelines CI/CD GitHub Actions.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono font-bold">sec-headers-sentinel v1.0.0</span>
+                            <span class="text-base font-black text-white">19 €</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white">Inspecteur HTTP OWASP & Générateur Nginx/Caddy</h3>
+                        <p class="text-slate-400">Audit en ligne de commande, score pondéré 0-100 et génération de configurations serveur durcies.</p>
+                    </div>
+                    <a href="https://buy.polar.sh/polar_cl_AIa9P6msVQ5mttFlNHtnHTaIX8zqDhl6LNo3i39Jm69" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-indigo-600 text-center font-bold text-white transition block">
+                        Obtenir la licence CLI (19 €)
+                    </a>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold">secret-leak-sentinel v1.0.0</span>
+                            <span class="text-base font-black text-white">29 €</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white">Sentinelle Git Pre-Commit & Entropie de Shannon</h3>
+                        <p class="text-slate-400">Bloque les fuites de clés API (OpenAI, AWS, Stripe, GitHub, SSH) avant chaque commit avec rapport SARIF/HTML.</p>
+                    </div>
+                    <a href="https://buy.polar.sh/polar_cl_yAEPQsq4fx5JaUKGr8RS7Ql6TBelLXbvi5cVj3kjegr" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-emerald-600 text-center font-bold text-white transition block">
+                        Obtenir la licence CLI (29 €)
+                    </a>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono font-bold">a11y-audit-pro v1.0.0</span>
+                            <span class="text-base font-black text-white">39 €</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white">Auditeur Accessibilité WCAG 2.1 AAA & Scotopique</h3>
+                        <p class="text-slate-400">Analyse DOM & Playwright, ratios de contraste WCAG AA/AAA et génération de correctifs HTML/ARIA.</p>
+                    </div>
+                    <a href="https://buy.polar.sh/polar_cl_XLZKQEuPBj8CZlI1asrJDuwi7ZA6LYEP2i2MS0vyKR8" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-amber-600 text-center font-bold text-white transition block">
+                        Obtenir la licence CLI (39 €)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        document.getElementById('order-intake-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('intake-url').value.trim();
+            const company = document.getElementById('intake-company').value.trim();
+            const email = document.getElementById('intake-email').value.trim();
+            const stack = document.getElementById('intake-stack').value;
+            const resBox = document.getElementById('intake-result');
+
+            resBox.classList.remove('hidden');
+            resBox.innerHTML = '<div class="text-indigo-300 font-semibold">Analyse préliminaire en cours...</div>';
+
+            const polarBtn = document.getElementById('direct-polar-btn');
+            polarBtn.href = `https://buy.polar.sh/polar_cl_EaMGfbm3lRiJCeYrYdApRFdre5b0sBVa1rA0q0dAM0k?customer_email=${encodeURIComponent(email)}`;
+
+            try {
+                const resp = await fetch('/api/commerce/order_intake', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({url, company, email, stack})
+                });
+                if (!resp.ok) throw new Error('Mode statique GitHub Pages actif');
+                const data = await resp.json();
+                resBox.innerHTML = `
+                    <div class="font-bold text-emerald-400 text-sm">Demande qualifiée enregistrée (Réf : ${data.intake_id})</div>
+                    <div class="text-slate-300">Score Sécurité HTTP mesuré : <strong>${data.preview.security_headers_score}/100 (${data.preview.security_grade})</strong> • Score Accessibilité WCAG : <strong>${data.preview.accessibility_wcag_score}/100</strong></div>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="${polarBtn.href}" target="_blank" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold">Finaliser le paiement de 29 € pour recevoir le dossier complet</a>
+                        <a href="sample_deliverable_audit_pack.html" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-200 font-bold">Voir le format du rapport livré</a>
+                    </div>
+                `;
+            } catch (err) {
+                resBox.innerHTML = `
+                    <div class="font-bold text-emerald-400 text-sm">Périmètre validé pour ${company} (${url})</div>
+                    <div class="text-slate-300">Stack sélectionnée : <code>${stack}</code> • Email de livraison : <code>${email}</code></div>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="${polarBtn.href}" target="_blank" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold">Continuer vers le règlement sécurisé Polar</a>
+                        <a href="sample_deliverable_audit_pack.html" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-200 font-bold">Consulter le rapport de démonstration</a>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
