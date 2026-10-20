@@ -220,6 +220,185 @@ int main()
             <li><strong>Déterminer le résultat après la boucle :</strong> Tester <code>if (trouve)</code> pour exploiter <code>posCourante</code>, sinon afficher que l'élément est absent.</li>
         </ol>
     </div>
+
+    <h2>7. Guide de Survie Jour J — « Zéro Prérequis » (Même si on n'y connaît rien en informatique)</h2>
+    <p>
+        Ce guide est conçu pour qu'un débutant complet puisse résoudre n'importe quel exercice pendant l'<strong>Atelier de 3h sur machine (Semaine du 02/11/2026)</strong> ET rédiger sans faute son <strong>Défi Individuel sur papier (Semaine du 09/11/2026, 1h30)</strong>.
+    </p>
+
+    <h3>7.1. Étape 1 — Le Détecteur Automatique : Trouver le bon modèle en 10 secondes grâce aux mots en français</h3>
+    <p>Lisez l'énoncé de l'exercice et repérez les mots-clés en français dans le tableau ci-dessous :</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Mots-clés dans l'énoncé en français</th>
+                <th>Numéro &amp; Nom EXACT à copier dans le cartouche</th>
+                <th>Phrase de justification prête à recopier</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><em>« échanger », « permuter », « inverser deux valeurs / deux cases », « remettre dans l'ordre croissant »</em></td>
+                <td><strong>Modèle 1 :</strong><br><code>L'échange de deux valeurs</code></td>
+                <td><code>La permutation de deux variables sans perte d'information nécessite une troisième variable intermédiaire de sauvegarde.</code></td>
+            </tr>
+            <tr>
+                <td><em>« saisir une valeur entre A et B », « redemander tant que incorrect », « contrôler la saisie avec message d'erreur »</em></td>
+                <td><strong>Modèle 2 :</strong><br><code>La saisie-vérification d'une valeur</code></td>
+                <td><code>Le nombre de tentatives de saisie est inconnu a priori avec au moins une saisie obligatoire et un message d'erreur éventuel avant rebouclage (boucle for(;;) avec break).</code></td>
+            </tr>
+            <tr>
+                <td><em>« afficher tout le tableau », « calculer la somme / la moyenne », « ajouter X à toutes les cases », « afficher de la fin au début »</em></td>
+                <td><strong>Modèle 3 :</strong><br><code>Le parcours complet avec traitement systématique</code></td>
+                <td><code>Toutes les cases du tableau doivent être traitées de manière inconditionnelle de la première à la dernière case sans exception.</code></td>
+            </tr>
+            <tr>
+                <td><em>« compter combien de cases... », « afficher uniquement si... », « chercher le minimum ou le maximum », « remplacer tel caractère »</em></td>
+                <td><strong>Modèle 4 :</strong><br><code>Le parcours complet avec traitement conditionné</code></td>
+                <td><code>Tout le tableau doit être examiné car plusieurs éléments peuvent correspondre, mais le traitement n'est exécuté que si la condition (if) est vérifiée.</code></td>
+            </tr>
+            <tr>
+                <td><em>« savoir si le tableau contient... », « première (ou dernière) apparition / position », « vérifier si tout le tableau est trié / alterné / palindrome »</em></td>
+                <td><strong>Modèle 5 :</strong><br><code>La recherche de première occurrence</code></td>
+                <td><code>Le parcours est partiel et s'arrête immédiatement dès que la cible (ou la première anomalie invalidant la propriété) est rencontrée grâce au booléen trouve et à une boucle while.</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>7.2. Étape 2 — Comment compiler et tester dans VS Code le jour de l'Atelier (en 1 clic)</h3>
+    <ol>
+        <li>Dans VS Code, ouvrez le fichier <code>exercice1/main.cpp</code> (puis <code>exercice2/main.cpp</code>, etc.).</li>
+        <li>Ouvrez le terminal intégré de VS Code avec le raccourci clavier <code>Ctrl + ù</code> (ou menu <em>Terminal → Nouveau terminal</em>).</li>
+        <li>Tapez cette commande exacte pour compiler et lancer l'exercice 1 :
+            <pre><code>g++ -Wall -Wextra exercice1/main.cpp -o exo1 &amp;&amp; ./exo1</code></pre>
+        </li>
+        <li>S'il n'y a aucun message d'erreur et que l'affichage est bon, déposez <code>exercice1/main.cpp</code> sur Moodle pour débloquer l'exercice 2 !</li>
+    </ol>
+
+    <h3>7.3. Étape 3 — Les 5 Dictionnaires des Données &amp; Algorithmes Papier (Spécial Défi Individuel sur Feuille — Semaine du 09/11)</h3>
+    <div class="p-4 rounded-xl bg-amber-50 border-l-4 border-amber-600 text-xs sm:text-sm text-amber-950 space-y-2 my-4">
+        <div class="font-bold text-amber-900">📄 RAPPEL CRITIQUE POUR LE DÉFI INDIVIDUEL SUR PAPIER (1h30) :</div>
+        <p>
+            Sur votre copie papier, vous ne devez <strong>PAS</strong> écrire de C++ (pas de <code>#include</code>, pas de <code>cout</code>, pas de <code>int main()</code>), mais :
+            <strong>1) L'Algorithme en pseudo-code IUT</strong> (avec <code>&lt;-</code> pour l'affectation, <code>Afficher</code>, <code>Saisir</code>, <code>Pour</code>, <code>TantQue</code>, <code>Si...Alors...Sinon...FinSi</code>) et
+            <strong>2) Le Dictionnaire des Données complet à 4 colonnes</strong> !
+        </p>
+    </div>
+
+    <h4>Modèle Papier A — Parcours complet conditionné (Comptage / Filtrage / Min-Max — Niveaux 3 à 5)</h4>
+<pre><code>// ALGORITHME SUR PAPIER (Modèle 4 : Parcours complet avec traitement conditionné)
+// 1. Initialiser le compteur
+nbElementsValides &lt;- 0
+
+// 2. Parcourir tout le tableau pour compter les éléments vérifiant la condition
+Pour i allant de 0 à NB_CASES - 1 Faire
+    Si tabValeurs[i] &gt; 0 Alors
+        nbElementsValides &lt;- nbElementsValides + 1
+    FinSi
+FinPour
+
+// 3. Afficher le résultat
+Afficher "Nombre de valeurs positives : ", nbElementsValides</code></pre>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom de l'information</th>
+                <th>Type (Algorithmique / C++)</th>
+                <th>Signification précise</th>
+                <th>Rôle (D / R / I / C)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>NB_CASES</code></td>
+                <td>Entier naturel (<code>const unsigned short int</code>)</td>
+                <td>Nombre total de cases composant le tableau <code>tabValeurs</code></td>
+                <td><strong>Constante (C)</strong></td>
+            </tr>
+            <tr>
+                <td><code>tabValeurs</code></td>
+                <td>Tableau de <code>NB_CASES</code> Entiers relatifs (<code>short int[]</code>)</td>
+                <td>Tableau contenant les valeurs entières à analyser</td>
+                <td><strong>Donnée (D)</strong></td>
+            </tr>
+            <tr>
+                <td><code>nbElementsValides</code></td>
+                <td>Entier naturel (<code>unsigned short int</code>)</td>
+                <td>Compteur du nombre de valeurs strictement positives trouvées</td>
+                <td><strong>Résultat (R)</strong></td>
+            </tr>
+            <tr>
+                <td><code>i</code></td>
+                <td>Entier naturel (<code>unsigned short int</code>)</td>
+                <td>Indice de parcours courant du tableau <code>tabValeurs</code></td>
+                <td><strong>Intermédiaire (I)</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Modèle Papier B — Recherche de première occurrence (Cible ou Vérification de propriété — Niveaux 6 à 9)</h4>
+<pre><code>// ALGORITHME SUR PAPIER (Modèle 5 : Recherche de première occurrence)
+// 1. Initialiser la recherche sur la première case
+trouve &lt;- Faux
+posCourante &lt;- 0
+
+// 2. Rechercher la première occurrence tant que non trouvé et fin non atteinte
+TantQue (NON trouve) ET (posCourante &lt; NB_CASES) Faire
+    Si tabValeurs[posCourante] = valRecherchee Alors
+        trouve &lt;- Vrai
+    Sinon
+        posCourante &lt;- posCourante + 1
+    FinSi
+FinTantQue
+
+// 3. Déterminer et afficher le résultat de la recherche
+Si trouve Alors
+    Afficher "Valeur trouvée à la position : ", posCourante
+Sinon
+    Afficher "Valeur absente du tableau."
+FinSi</code></pre>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom de l'information</th>
+                <th>Type (Algorithmique / C++)</th>
+                <th>Signification précise</th>
+                <th>Rôle (D / R / I / C)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>NB_CASES</code></td>
+                <td>Entier naturel (<code>const unsigned short int</code>)</td>
+                <td>Nombre total d'éléments du tableau <code>tabValeurs</code></td>
+                <td><strong>Constante (C)</strong></td>
+            </tr>
+            <tr>
+                <td><code>tabValeurs</code></td>
+                <td>Tableau de <code>NB_CASES</code> Entiers (<code>int[]</code>)</td>
+                <td>Tableau dans lequel on effectue la recherche</td>
+                <td><strong>Donnée (D)</strong></td>
+            </tr>
+            <tr>
+                <td><code>valRecherchee</code></td>
+                <td>Entier (<code>int</code>)</td>
+                <td>Valeur cible recherchée dans le tableau</td>
+                <td><strong>Donnée (D)</strong></td>
+            </tr>
+            <tr>
+                <td><code>trouve</code></td>
+                <td>Booléen (<code>bool</code>)</td>
+                <td>Indique si la valeur recherchée a été localisée dans le tableau</td>
+                <td><strong>Intermédiaire / Résultat (I/R)</strong></td>
+            </tr>
+            <tr>
+                <td><code>posCourante</code></td>
+                <td>Entier naturel (<code>unsigned short int</code>)</td>
+                <td>Position courante d'inspection dans le tableau <code>tabValeurs</code></td>
+                <td><strong>Intermédiaire / Résultat (I/R)</strong></td>
+            </tr>
+        </tbody>
+    </table>
     
 
             <hr class="my-8 border-slate-200">
