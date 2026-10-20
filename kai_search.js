@@ -39,140 +39,140 @@
       title: 'Modélisation Conceptuelle Merise (MCD) & Règles Marquesuzaà',
       chapter: 'Ch. 1 • Modélisation Conceptuelle Merise (MCD)',
       snippet: 'Règle formelle absolue : <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">ZÉRO clé étrangère en MCD</mark>. Entités, associations et cardinalités (0,1), (1,1), (0,N), (1,N).',
-      url: '/courses/R1.05/chap1_merise_mcd.html#merise_rules'
+      url: 'courses/R1.05/chap1_merise_mcd.html'
     },
     {
       module_code: 'R1.05',
       title: 'Passage MCD vers MLD Relationnel (Cardinalités 1:N et N:M)',
       chapter: 'Ch. 2 • Modèle Logique de Données (MLD)',
       snippet: 'Dérivation systématique : la clé primaire de la table 1:1 migre comme <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">clé étrangère</mark> dans la table fille. Association N:M devient table de liaison.',
-      url: '/courses/R1.05/chap2_mld_relationnel.html#mld_derivation'
+      url: 'courses/R1.05/chap2_derivation_mld.html'
     },
     {
       module_code: 'R1.05',
       title: 'Normalisation Relationnelle et Troisième Forme Normale (3FN)',
       chapter: 'Ch. 3 • Normalisation & Formes Normales (3FN)',
       snippet: '1FN : valeurs atomiques. 2FN : dépendance totale de la clé. 3FN : <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">aucune dépendance transitive</mark> entre attributs non-clés.',
-      url: '/courses/R1.05/chap3_normalisation_3nf.html#nf_rules'
+      url: 'courses/R1.05/chap3_normalisation_3nf_bcnf.html'
     },
     {
       module_code: 'R1.05',
       title: 'Langage SQL DDL & DML : SELECT, JOIN, GROUP BY, Constraints',
       chapter: 'Ch. 4 • Langage & Requêtes SQL',
       snippet: 'Requêtes d\'interrogation, contraintes <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">FOREIGN KEY, CHECK, NOT NULL</mark>, jointures internes et externes.',
-      url: '/courses/R1.05/chap4_langage_sql.html#sql_syntax'
+      url: 'courses/R1.05/chap4_sql_ddl_dml.html'
     },
     {
       module_code: 'R1.01',
       title: 'Pointeurs, Adresses Mémoire et Passage par Référence (&)',
       chapter: 'Ch. 3 • Fonctions, Références & Pointeurs',
       snippet: 'Maîtrise de la pile (stack), de l\'opérateur d\'adresse & et du <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">déréférencement *ptr</mark>. Passage par référence sécurisé.',
-      url: '/courses/R1.01/chap3_fonctions_pointeurs.html#pointers'
+      url: 'courses/R1.01/chap6_sous_programmes_procedures_fonctions.html'
     },
     {
       module_code: 'R1.01',
       title: 'Structures de Données & Allocation Dynamique Zéro Fuite',
       chapter: 'Ch. 5 • Structures de Données & Mémoire Dynamique',
       snippet: 'Règle d\'Anglet : Un malloc = un free. Validation intégrale sous <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">Valgrind sans aucune perte mémoire</mark>.',
-      url: '/courses/R1.01/chap5_structures_memoire.html#heap'
+      url: 'courses/R1.01/chap7_programmation_c_dalmau.html'
     },
     {
       module_code: 'R1.06',
       title: 'Logique Propositionnelle, Prédicats et Tables de Vérité',
       chapter: 'Ch. 2 • Logique Propositionnelle & Prédicats',
       snippet: 'Connecteurs logiques ET, OU, NON, Implication =>, équivalences et <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">quantificateurs universel ∀ et existentiel ∃</mark>.',
-      url: '/courses/R1.06/chap2_logique_predicats.html#predicates'
+      url: 'courses/R1.06/chap4_logique_des_propositions.html'
     },
     {
       module_code: 'R1.06',
       title: 'Arithmétique Modulaire, Théorème de Bézout & Inverses',
       chapter: 'Ch. 3 • Arithmétique Modulaire & Bézout',
       snippet: 'Division euclidienne, algorithme d\'Euclide étendu, identité de <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">Bézout au + bv = PGCD(a,b)</mark> et inverse modulo n.',
-      url: '/courses/R1.06/chap3_arithmetique_modulaire.html#division'
+      url: 'courses/R1.06/chap6_arithmetique_entiere_et_euclide.html'
     },
     {
       module_code: 'R1.07',
       title: 'Algèbre Linéaire, Pivot de Gauss-Jordan & Systèmes Linéaires',
       chapter: 'Ch. 1 • Pivot de Gauss-Jordan & Systèmes',
       snippet: 'Échelonnement de matrices, résolution de systèmes AX=B par la méthode du <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">pivot de Gauss-Jordan</mark>.',
-      url: '/courses/R1.07/chap1_pivot_gauss_systemes.html#method'
+      url: 'courses/R1.07/chap2_pivot_de_gauss_systemes.html'
     },
     {
       module_code: 'R1.07',
       title: 'Calcul Matriciel, Inversion de Matrices et Notebooks Python',
       chapter: 'Ch. 2 • Calcul Matriciel & Inversion',
       snippet: 'Multiplication matricielle, déterminant, inverse de matrice A^-1 et implémentation sous <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">NumPy / Jupyter Notebooks</mark>.',
-      url: '/courses/R1.07/chap2_calcul_matriciel_inversion.html#operations'
+      url: 'courses/R1.07/chap3_inversion_gauss_jordan.html'
     },
     {
       module_code: 'R1.08',
       title: 'La TVA et les Mécanismes Fiscaux : Neutralité & Déductibilité',
       chapter: 'Ch. 2 • La TVA & Mécanismes Fiscaux',
       snippet: 'Principe fondamental : la TVA est indolore pour l\'entreprise. Calcul <mark class="bg-amber-200 text-slate-900 px-0.5 rounded font-semibold">TVA collectée - TVA déductible</mark> = TVA à décaisser.',
-      url: '/courses/R1.08/chap2_fiscalite_tva.html#tva_calc'
+      url: 'courses/R1.08/chap3_fiscalite_et_mecanismes_tva.html'
     },
     {
       module_code: 'R1.08',
       title: 'Formes Juridiques et Typologie des Entreprises (SARL, SAS, SA)',
       chapter: 'Ch. 1 • Typologie des Entreprises & Formes Juridiques',
       snippet: 'Critères de choix : responsabilité financière, gouvernance, régime social des dirigeants et statuts juridiques.',
-      url: '/courses/R1.08/chap1_entreprises_formes_juridiques.html#governance'
+      url: 'courses/R1.08/chap1_typologie_formes_juridiques.html'
     },
     {
       module_code: 'R1.08',
       title: 'Bilan Comptable, Actif, Passif & Compte de Résultat',
       chapter: 'Ch. 3 • Bilan Comptable & Compte de Résultat',
       snippet: 'Photographie du patrimoine : Actif = Passif. Produits et charges de l\'exercice comptable.',
-      url: '/courses/R1.08/chap3_bilan_compte_resultat.html#balance_sheet'
+      url: 'courses/R1.08/chap4_analyse_financiere_bilan_sig.html'
     },
     {
       module_code: 'R1.02',
       title: 'Architecture HTTP, Méthodes GET/POST, En-têtes et Sécurité Web',
       chapter: 'Cours R1.02',
       snippet: 'Architecture client-serveur, méthodes idempotentes, codes de statut HTTP 200 à 500, en-têtes CSP et HTTPS.',
-      url: '/courses/R1.02.html'
+      url: 'courses/R1.02.html'
     },
     {
       module_code: 'R1.03',
       title: 'Architecture des Ordinateurs, Binaire & Modèle de Von Neumann',
       chapter: 'Cours R1.03',
       snippet: 'Codage de l\'information en base 2, algèbre de Boole, registres processeur et bus mémoire.',
-      url: '/courses/R1.03.html'
+      url: 'courses/R1.03.html'
     },
     {
       module_code: 'R1.04',
       title: 'Systèmes Linux POSIX, Processus & Scripts Shell Bash',
       chapter: 'Cours R1.04',
       snippet: 'Commandes Unix fondamentales, gestion des droits chmod/chown, redirections pipes et signaux.',
-      url: '/courses/R1.04.html'
+      url: 'courses/R1.04.html'
     },
     {
       module_code: 'R1.09',
       title: 'Éco-conception Logicielle, RGESN et Cycle de Vie (ACV)',
       chapter: 'Cours R1.09',
       snippet: '79 critères du référentiel RGESN, sobriété numérique, effet rebond et analyse du cycle de vie.',
-      url: '/courses/R1.09.html'
+      url: 'courses/R1.09.html'
     },
     {
       module_code: 'S1.04',
       title: 'SAÉ 1.04 Ongi Etorri — Conception & Implémentation BDD',
       chapter: 'Cours S1.04',
       snippet: 'Projet réel : MCD de réservation touristique, dérivation relationnelle et scripts SQL sous Oracle/PostgreSQL.',
-      url: '/courses/S1.04.html'
+      url: 'courses/S1.04.html'
     },
     {
       module_code: 'S1.05',
       title: 'SAÉ 1.05 Recueil de Besoins — User Stories & Matrice MoSCoW',
       chapter: 'Cours S1.05',
       snippet: 'Interviews utilisateurs, formalisation User Stories, priorisation MoSCoW (Must, Should, Could, Won\'t).',
-      url: '/courses/S1.05.html'
+      url: 'courses/S1.05.html'
     },
     {
       module_code: 'P1.01',
       title: 'PPP Pitch Vidéo — Script & Grille d\'Évaluation Officielle',
       chapter: 'Cours P1.01',
       snippet: 'Présentation de projet en 120 secondes, articulation de la problématique et posture professionnelle.',
-      url: '/courses/P1.01.html'
+      url: 'courses/P1.01.html'
     }
   ];
 
@@ -260,19 +260,16 @@
 
   function resolveTargetUrl(rawUrl) {
     if (!rawUrl || rawUrl === '#') return '#';
-    if (window.location.protocol === 'file:' && rawUrl.startsWith('/')) {
-      const pathname = window.location.pathname.replace(/\\/g, '/');
-      const marker = '/data/web_library';
-      const markerIdx = pathname.indexOf(marker);
-      if (markerIdx !== -1) {
-        return pathname.substring(0, markerIdx + marker.length) + rawUrl;
-      }
-      if (pathname.includes('/courses/')) {
-        return '..' + rawUrl;
-      }
-      return '.' + rawUrl;
+    if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) return rawUrl;
+    const cleanRel = rawUrl.replace(/^\/+/, '');
+    const pathname = window.location.pathname.replace(/\/g, '/');
+    if (/\/courses\/[^/]+\/[^/]+\.html$/i.test(pathname)) {
+      return '../../' + cleanRel;
     }
-    return rawUrl;
+    if (/\/(courses|revision|mindmaps|quiz)\/[^/]*$/i.test(pathname)) {
+      return '../' + cleanRel;
+    }
+    return cleanRel;
   }
 
   // Render search results

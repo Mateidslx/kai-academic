@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAI Security Sentinel • Audit d'En-têtes HTTP & Conformité OWASP en Direct</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .grade-badge {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25rem;
+      font-weight: 900;
+      border-radius: 9999px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .grade-A { background: #059669; color: #ecfdf5; border: 4px solid #34d399; }
+    .grade-B { background: #2563eb; color: #eff6ff; border: 4px solid #60a5fa; }
+    .grade-C { background: #d97706; color: #fffbeb; border: 4px solid #fbbf24; }
+    .grade-D { background: #ea580c; color: #fff7ed; border: 4px solid #fb923c; }
+    .grade-F { background: #dc2626; color: #fef2f2; border: 4px solid #f87171; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- NAVIGATION -->
+  <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-md shadow-indigo-500/20">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="font-extrabold text-white text-sm tracking-tight leading-tight">SecHeaders Sentinel</div>
+          <div class="text-[10px] text-slate-400 font-semibold">Audit de Sécurité HTTP & Vulnérabilités Web</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-xs font-semibold text-slate-300 hover:text-white transition">← Accueil</a>
+        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Audit Temps Réel OWASP
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO & SCAN FORM -->
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 py-10 w-full">
+    <div class="text-center max-w-2xl mx-auto mb-8">
+      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">
+        Analysez la Sécurité HTTP de votre Site Web
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+        Vérifiez en 2 secondes vos en-têtes de sécurité (HSTS, CSP, X-Frame-Options), vos cookies de session et vos fuites d'empreintes serveur.
+      </p>
+    </div>
+
+    <!-- SCANNER INPUT BAR -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 sm:p-4 shadow-xl max-w-2xl mx-auto mb-10">
+      <form id="scan-form" class="flex flex-col sm:flex-row gap-3">
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+          </div>
+          <input
+            id="url-input"
+            type="text"
+            required
+            placeholder="https://example.com"
+            class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition"
+          />
+        </div>
+        <button
+          type="submit"
+          id="btn-scan"
+          class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition cursor-pointer shrink-0"
+        >
+          <i data-lucide="shield-search" class="w-4 h-4"></i>
+          <span>Lancer l'Audit</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- SPINNER -->
+    <div id="loading" class="hidden text-center py-12">
+      <div class="inline-block w-10 h-10 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin mb-4"></div>
+      <div class="text-sm font-semibold text-slate-300">Connexion et audit cryptographique des en-têtes...</div>
+      <div class="text-xs text-slate-500 mt-1">Inspection SSL/TLS, drapeaux cookies et directives OWASP</div>
+    </div>
+
+    <!-- RESULTS CONTAINER -->
+    <div id="results" class="hidden space-y-6">
+      
+      <!-- SCORECARD SUMMARY -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-5">
+          <div id="grade-circle" class="grade-badge grade-A">A+</div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 id="res-target" class="text-lg font-bold text-white break-all">https://example.com</h2>
+              <span id="badge-https" class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">HTTPS Sécurisé</span>
+            </div>
+            <p id="res-summary-text" class="text-xs text-slate-400 mt-1">Audit exécuté avec succès selon les standards OWASP.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 text-center">
+          <div class="bg-slate-950 px-4 py-2.5 rounded-xl border border-slate-800">
+            <div class="text-xs text-slate-400">Score Global</div>
+            <div id="res-score" class="text-2xl font-black text-indigo-400">90 / 100</div>
+          </div>
+          <div class="bg-slate-950 px-4 py-2.5 rounded-xl border border-slate-800">
+            <div class="text-xs text-slate-400">En-têtes Clés</div>
+            <div id="res-headers-count" class="text-2xl font-black text-emerald-400">5 / 6</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUG BOUNTY & RESPONSIBLE DISCLOSURE BANNER -->
+      <div id="bounty-banner" class="hidden p-5 rounded-2xl border transition-all">
+        <!-- Rempli en JS -->
+      </div>
+
+      <!-- HEADERS DETAILS -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <i data-lucide="list-checks" class="w-4 h-4 text-indigo-400"></i>
+          <span>Détail des En-têtes de Sécurité Analysés</span>
+        </h3>
+        <div id="headers-list" class="space-y-3">
+          <!-- Injecté par JS -->
+        </div>
+      </div>
+
+      <!-- COOKIES & INFORMATION DISCLOSURE -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Cookies -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <i data-lucide="cookie" class="w-4 h-4 text-amber-400"></i>
+            <span>Sécurité des Cookies de Session</span>
+          </h3>
+          <div id="cookies-content" class="text-xs text-slate-400 space-y-2">
+            <!-- Injecté par JS -->
+          </div>
+        </div>
+
+        <!-- Leaks -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-red-400"></i>
+            <span>Fuites d'Empreinte Serveur (Banners)</span>
+          </h3>
+          <div id="leaks-content" class="text-xs text-slate-400 space-y-2">
+            <!-- Injecté par JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 1-CLICK REMEDIATION TABS -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center justify-between flex-wrap gap-4 mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <i data-lucide="terminal" class="w-4 h-4 text-indigo-400"></i>
+              <span>Correctifs Immédiats Prêts à Copier-Coller</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Configuration durcie sur-mesure pour combler les failles détectées.</p>
+          </div>
+          <div class="flex gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+            <button onclick="setTab('nginx')" id="tab-nginx" class="px-3 py-1 rounded-lg font-bold bg-indigo-600 text-white">Nginx</button>
+            <button onclick="setTab('apache')" id="tab-apache" class="px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white">Apache</button>
+            <button onclick="setTab('caddy')" id="tab-caddy" class="px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white">Caddy</button>
+            <button onclick="setTab('cloudflare')" id="tab-cloudflare" class="px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white">Cloudflare</button>
+          </div>
+        </div>
+
+        <div class="relative">
+          <pre id="code-snippet" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-emerald-400 text-xs overflow-x-auto"></pre>
+          <button onclick="copySnippet()" class="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span id="copy-btn-text">Copier</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- VALUE-ADD & MONETIZATION CALLOUT -->
+      <div class="bg-gradient-to-r from-indigo-950/80 to-purple-950/80 border border-indigo-500/30 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h4 class="text-base font-bold text-white">Besoin d'un Rapport d'Audit Complet pour vos Clients ?</h4>
+          <p class="text-xs text-slate-300 mt-1">Exportez le dossier de conformité sécurité en PDF marque blanche prêt à facturer.</p>
+        </div>
+        <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition flex items-center gap-2 shrink-0">
+          <i data-lucide="file-text" class="w-4 h-4 text-indigo-600"></i>
+          <span>Imprimer / Exporter PDF</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    let currentAudit = null;
+    let currentServer = 'nginx';
+
+    document.getElementById('scan-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const rawUrl = document.getElementById('url-input').value.trim();
+      if (!rawUrl) return;
+
+      document.getElementById('loading').classList.remove('hidden');
+      document.getElementById('results').classList.add('hidden');
+
+      try {
+        const resp = await fetch(`/api/security/scan?url=${encodeURIComponent(rawUrl)}`);
+        if (!resp.ok) throw new Error(`Erreur serveur (${resp.status})`);
+        currentAudit = await resp.json();
+        renderResults(currentAudit);
+      } catch (err) {
+        alert("Erreur lors de l'audit : " + err.message);
+      } finally {
+        document.getElementById('loading').classList.add('hidden');
+      }
+    });
+
+    function renderResults(data) {
+      document.getElementById('results').classList.remove('hidden');
+      document.getElementById('res-target').textContent = data.target_url;
+      
+      const grade = data.grade || 'F';
+      const score = data.score || 0;
+      
+      const gradeCircle = document.getElementById('grade-circle');
+      gradeCircle.className = `grade-badge grade-${grade.charAt(0)}`;
+      gradeCircle.textContent = grade;
+
+      document.getElementById('res-score').textContent = `${score} / 100`;
+
+      // Bannière Bug Bounty & Divulgation Responsable
+      const bountyBanner = document.getElementById('bounty-banner');
+      if (data.bounty_program && data.bounty_program.eligible) {
+        bountyBanner.className = "p-5 rounded-2xl border bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border-indigo-500/40 shadow-lg text-xs space-y-2 block";
+        bountyBanner.innerHTML = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+              Programme Bug Bounty Certifié (${data.bounty_program.plateforme})
+            </span>
+            <span class="text-emerald-400 font-bold font-mono text-sm">Dotation jusqu'à ${data.bounty_program.recompense_max}</span>
+          </div>
+          <div class="text-sm font-black text-white">${data.bounty_program.programme} (${data.bounty_program.type || 'Périmètre Web & APIs'})</div>
+          <div class="text-slate-300">Ce domaine est officiellement <strong>in-scope</strong> avec des récompenses garanties par séquestre bancaire (${data.bounty_program.devise}).</div>
+          <div class="pt-2 flex items-center gap-3">
+            <a href="${data.bounty_program.url_programme}" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold flex items-center gap-1.5 transition">
+              <span>Voir le programme sur ${data.bounty_program.plateforme}</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        `;
+      } else if (data.security_txt && data.security_txt.trouve) {
+        bountyBanner.className = "p-4 rounded-2xl border bg-slate-900/80 border-slate-700 text-xs space-y-1.5 block";
+        bountyBanner.innerHTML = `
+          <div class="flex items-center gap-2 text-slate-200 font-bold">
+            <i data-lucide="shield-alert" class="w-4 h-4 text-emerald-400"></i>
+            <span>Politique de Divulgation Responsable (RFC 9116 security.txt)</span>
+          </div>
+          <div class="text-slate-400">Ce site dispose d'un fichier <code>security.txt</code> officiel avec des contacts de sécurité déclarés.</div>
+          ${data.security_txt.contacts && data.security_txt.contacts.length ? `<div class="text-emerald-400 font-mono text-[11px]">Contact : ${data.security_txt.contacts.join(', ')}</div>` : ''}
+        `;
+      } else {
+        bountyBanner.className = "hidden";
+      }
+
+      // Liste des en-têtes
+      const container = document.getElementById('headers-list');
+      container.innerHTML = '';
+
+      let presentCount = 0;
+      (data.details || []).forEach(h => {
+        if (h.status === 'present_secure') presentCount++;
+        const isOk = h.status === 'present_secure';
+        const isWarn = h.status === 'present_insecure';
+        
+        const card = document.createElement('div');
+        card.className = `p-3.5 rounded-xl border text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
+          isOk ? 'bg-emerald-950/20 border-emerald-500/30' : isWarn ? 'bg-amber-950/20 border-amber-500/30' : 'bg-red-950/20 border-red-500/30'
+        }`;
+        
+        card.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="p-1 rounded-full ${isOk ? 'bg-emerald-500 text-slate-950' : isWarn ? 'bg-amber-500 text-slate-950' : 'bg-red-500 text-white'}">
+              <i data-lucide="${isOk ? 'check' : isWarn ? 'alert-triangle' : 'x'}" class="w-3.5 h-3.5"></i>
+            </span>
+            <div>
+              <div class="font-bold text-white">${h.name}</div>
+              <div class="text-slate-400 text-[11px]">${h.description || ''}</div>
+              ${h.value ? `<div class="mt-1 text-emerald-400 font-mono text-[10px] break-all">${h.value}</div>` : ''}
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
+              isOk ? 'bg-emerald-500/20 text-emerald-400' : isWarn ? 'bg-amber-500/20 text-amber-400' : 'bg-red-500/20 text-red-400'
+            }">
+              ${isOk ? 'Conforme' : isWarn ? 'Mal configuré' : 'Manquant'}
+            </span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById('res-headers-count').textContent = `${presentCount} / ${(data.details || []).length}`;
+
+      // Cookies
+      const cookiesDiv = document.getElementById('cookies-content');
+      const cookies = data.cookies_audit || [];
+      if (cookies.length === 0) {
+        cookiesDiv.innerHTML = '<div class="text-slate-500">Aucun cookie de session déposé lors de la requête initiale.</div>';
+      } else {
+        cookiesDiv.innerHTML = cookies.map(c => `
+          <div class="p-2 rounded bg-slate-950 border border-slate-800">
+            <div class="font-bold text-white font-mono">${c.name || 'Cookie'}</div>
+            <div class="flex gap-2 mt-1">
+              <span class="badge ${c.is_secure ? 'text-emerald-400' : 'text-red-400'}">Secure: ${c.is_secure ? 'Oui' : 'Non'}</span>
+              <span class="badge ${c.is_httponly ? 'text-emerald-400' : 'text-red-400'}">HttpOnly: ${c.is_httponly ? 'Oui' : 'Non'}</span>
+              <span class="badge ${c.samesite ? 'text-emerald-400' : 'text-amber-400'}">SameSite: ${c.samesite || 'Non défini'}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Leaks
+      const leaksDiv = document.getElementById('leaks-content');
+      const leaks = data.leak_audit || [];
+      if (leaks.length === 0) {
+        leaksDiv.innerHTML = '<div class="text-emerald-400 flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4"></i> Aucune fuite d\'empreinte serveur détectée (Server/X-Powered-By masqués).</div>';
+      } else {
+        leaksDiv.innerHTML = leaks.map(l => `
+          <div class="p-2 rounded bg-red-950/30 border border-red-500/30 text-red-300">
+            <div class="font-bold font-mono">${l.header}: ${l.value}</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">${l.recommendation}</div>
+          </div>
+        `).join('');
+      }
+
+      updateSnippet();
+      lucide.createIcons();
+    }
+
+    function setTab(server) {
+      currentServer = server;
+      ['nginx', 'apache', 'caddy', 'cloudflare'].forEach(s => {
+        const btn = document.getElementById(`tab-${s}`);
+        if (s === server) {
+          btn.className = "px-3 py-1 rounded-lg font-bold bg-indigo-600 text-white";
+        } else {
+          btn.className = "px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white";
+        }
+      });
+      updateSnippet();
+    }
+
+    function updateSnippet() {
+      const codeEl = document.getElementById('code-snippet');
+      if (!currentAudit || !currentAudit.snippets) {
+        codeEl.textContent = "# Aucune recommandation disponible pour le moment.";
+        return;
+      }
+      codeEl.textContent = currentAudit.snippets[currentServer] || currentAudit.snippets['nginx'] || '# Conforme';
+    }
+
+    function copySnippet() {
+      const code = document.getElementById('code-snippet').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        document.getElementById('copy-btn-text').textContent = 'Copié !';
+        setTimeout(() => document.getElementById('copy-btn-text').textContent = 'Copier', 2000);
+      });
+    }
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
