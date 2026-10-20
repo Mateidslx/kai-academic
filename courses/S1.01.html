@@ -4,19 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="theme-color" content="#2B527A">
-    <title>S1.01 — Implémentation d'un Besoin Client — KAI Academic</title>
-    
-    <!-- Tailwind CSS CDN -->
+    <title>S1.01 — Implémentation d'un Besoin Client (Atelier de Katas — M. Patrick Etcheverry) — KAI Academic</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             color-scheme: light;
@@ -33,8 +26,6 @@
             line-height: 1.85;
             letter-spacing: 0.03em;
             word-spacing: 0.08em;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
             min-height: 100vh;
         }
         .glass-card {
@@ -43,14 +34,10 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
             transition: all 180ms ease-out;
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
-
-    
-    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <!-- Top Header -->
     <div class="border-b border-slate-200 bg-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -62,56 +49,70 @@
                 <a href="index.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
                     S1.01
                 </a>
-                
             </div>
             <div class="flex items-center gap-2">
                 <a href="../revision/S1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
                     <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
                     <span>Fiche Révision</span>
                 </a>
-                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                    Moodle #25040
-                </span>
+                <a href="https://elearn.univ-pau.fr/course/view.php?id=24184" target="_blank" class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition">
+                    Moodle #24184 ↗
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Bannière Officielle Matière / Chapitre -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+    <!-- Official Course Banner -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 w-full">
         <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #2B527A;">
             <div class="flex items-start justify-between flex-wrap gap-4">
                 <div>
-                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
-                        S1.01 
-                    </span>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">S1.01 — Implémentation d'un Besoin Client</h1>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
+                            S1.01 • MOODLE #24184
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono">
+                            Groupe 16 (TP4) — Les Flèches de la Précision (Matei, Nicolas, Jules)
+                        </span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">S1.01 — Implémentation d'un Besoin Client (Le Grand Tournoi de Maître Algoshi)</h1>
                     <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
                         <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
-                        <span>Enseignant Référent : <strong>Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique)</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                        <span>Enseignants Référents : <strong>M. Patrick Etcheverry, M. Thierry Chaterra, M. Constantin Katsis, M. Youssef Alj</strong> — IUT de Bayonne et du Pays Basque (Anglet)</span>
                     </p>
                 </div>
+                <a href="../supports/S1.01/workspace-atelier-katas-groupe16.zip" download class="px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #2B527A;">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Télécharger Workspace VS Code Groupe 16 (.zip)</span>
+                </a>
             </div>
-            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
-                Cycle complet de développement d'une application informatique en équipe : recueil des exigences client, conception algorithmique, programmation modulaire en C++ structuré, protocoles de tests unitaires avec assertions, audit mémoire avec Valgrind et soutenance orale finale.
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed space-y-2">
+                <p>
+                    <strong>Atelier de Katas d'Algorithmique &amp; Programmation C++ :</strong> Résolution en équipe de 9 exercices progressifs (de la Ceinture Blanche à la Ceinture Noire) mobilisant les <strong>5 modèles d'algorithmes fondamentaux</strong> sur structures à accès direct (échange de deux valeurs, saisie-vérification, parcours complet systématique, parcours complet conditionné, recherche de première occurrence), suivie d'une <strong>Défense Collective</strong>, d'une <strong>Évaluation Critique Croisée</strong> et d'un <strong>Défi Individuel</strong>.
+                </p>
+                <div class="text-xs font-mono text-slate-600 pt-1 border-t border-slate-200/80">
+                    ✅ <strong>Synchronisation Elearn #24184 &amp; GitHub <code>patrick-etcheverry</code> :</strong> Intègre les barèmes officiels (<code>student-algo-skills-analysis</code>), les règles AST C++ (<code>code-explorer</code>), les supports furtifs Semaine 7 (<code>07-modeles-algos-basiques</code>, <code>TD7</code>, <code>TP7</code>) et le Dojo complet des 9 exercices corrigés pour le <strong>Groupe 16</strong>.
+                </div>
             </div>
         </div>
     </div>
-    
 
-    <!-- Main Content Area -->
+    <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
-
         <div class="flex items-center justify-between flex-wrap gap-4">
             <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
                 <i data-lucide="book-open" class="w-5 h-5" style="color: #2B527A;"></i>
-                <span>Programme & Chapitres d'Apprentissage (3 chapitres)</span>
+                <span>Masterclass Officielle S1.01 &amp; Dojo d'Entraînement (3 chapitres)</span>
             </h2>
             <div class="flex items-center gap-2 flex-wrap">
                 <a href="S1.01/chap1_cadrage_cahier_charges.html" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-2xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #2B527A;">
                     <i data-lucide="play" class="w-4 h-4"></i>
                     <span>Démarrer le Chapitre 1</span>
                 </a>
-                
+                <a href="S1.01/chap3_tests_unitaires_soutenance.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center gap-2 shadow-2xs transition">
+                    <i data-lucide="code-2" class="w-4 h-4 text-blue-600"></i>
+                    <span>Ouvrir les 9 Katas Corrigés (Groupe 16)</span>
+                </a>
                 <a href="../revision/S1.01.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-2 shadow-2xs transition">
                     <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
                     <span>Fiche Révision (3 niveaux)</span>
@@ -119,273 +120,177 @@
             </div>
         </div>
 
-        <!-- Grille des Chapitres -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
-                        CHAPITRE 1
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+        <!-- Chapters Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
+                <div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">CHAPITRE 1</span>
+                        <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5">
+                        Le Grand Tournoi de Maître Algoshi : Règlement, Groupe 16 &amp; Barème Secret
+                    </h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Déroulement de l'atelier de 3h, diagnostic des sections Moodle (#24184), cartouche d'en-tête obligatoire (Note=0 si absent), pondération exacte sur 30 (student-algo-skills-analysis) et seuils de validation des ceintures.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-3">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Groupe 16</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Cartouche C++</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Barème /30</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Ceintures</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">code-explorer</span>
+                    </div>
                 </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Analyse de la demande client, formalisation des spécifications fonctionnelles, dictionnaire des données et planification prévisionnelle.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SAÉ 1.01</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Cadrage</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Spécifications</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Cahier des charges</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Client</span>
-                </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="S1.01/chap1_cadrage_cahier_charges.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
-                        CHAPITRE 2
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
-                </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Conception Modulaire C++, Conteneurs STL & Gestion Mémoire
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Séparation stricte interface/implémentation, protection contre les inclusions multiples, conteneurs STL et passage d'arguments par référence constante.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">C++</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Modularité</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">.hpp/.cpp</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">STL</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pointeurs</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Mémoire</span>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <a href="S1.01/chap1_cadrage_cahier_charges.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
+                        <span>Étudier ce chapitre</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
                 </div>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="S1.01/chap2_architecture_modulaire_cpp.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
-            <div>
-                <div class="flex items-center justify-between text-xs">
-                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
-                        CHAPITRE 3
-                    </span>
-                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+
+            <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
+                <div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">CHAPITRE 2</span>
+                        <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5">
+                        Les 5 Modèles d'Algorithmes Officiels sur Structures à Accès Direct
+                    </h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Support officiel 07-modeles-algos-basiques &amp; mainProf.cpp : Échange de 2 valeurs, Saisie-vérification (for(;;)+break), Parcours complet systématique, Parcours complet conditionné et Recherche de 1re occurrence.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-3">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Swap</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Saisie-vérif</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Parcours systématique</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Parcours conditionné</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">1re occurrence</span>
+                    </div>
                 </div>
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
-                    Protocoles de Tests Unitaires, Valgrind & Soutenance Finale
-                </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    Jeux d'essais exhaustifs aux limites (cas nominaux, cas d'erreur, cas limites), validation mémoire zéro fuite avec Valgrind et grille d'évaluation orale.
-                </p>
-                <div class="flex flex-wrap gap-1.5 mt-3">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tests unitaires</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Assertions</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Valgrind</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Soutenance</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Recette</span>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <a href="S1.01/chap2_architecture_modulaire_cpp.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
+                        <span>Étudier ce chapitre</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
                 </div>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="S1.01/chap3_tests_unitaires_soutenance.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
-                    <span>Étudier ce chapitre</span>
-                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                </a>
+
+            <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
+                <div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">CHAPITRE 3</span>
+                        <span class="text-slate-400 font-mono text-[11px] font-semibold">60 min</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5">
+                        Dojo d'Entraînement Intégral : Les 9 Exercices de Kata Résolus (Groupe 16)
+                    </h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Les 9 niveaux d'exercices (Ceinture Blanche à Ceinture Noire) résolus en C++ avec le cartouche pré-rempli pour le Groupe 16 (Les Flèches de la Précision), basés sur TD7/TP7 et code-explorer.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-3">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">9 Exercices C++</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Ceinture Noire</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">TD7 / TP7 Furtifs</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Palindrome</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tri Pair/Impair</span>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <a href="S1.01/chap3_tests_unitaires_soutenance.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
+                        <span>Ouvrir le Dojo (9 Katas)</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
             </div>
-        </div>
-        
         </div>
 
-        
+        <!-- Official Supports & GitHub Repos Section -->
         <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white shadow-xs">
             <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
                 <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
                     <i data-lucide="folder-down" class="w-5 h-5 text-blue-600"></i>
-                    <span>Documents & Supports Enseignants (8 fichiers vérifiés)</span>
+                    <span>Supports Officiels S1.01, Extraction OSINT Kata 2 &amp; Défi Individuel (10 fichiers)</span>
                 </h2>
                 <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono">
-                    Supports Officiels Moodle & IUT
+                    Moodle #24184 &amp; github.com/patrick-etcheverry
                 </span>
             </div>
-            
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #2B527A;"></span>
-                        <span>Cours & Diaporamas</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(2 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/S1.01/TD7-algorithmes-parcours-recherche.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="TD7-algorithmes-parcours-recherche">TD7-algorithmes-parcours-recherche</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">18.1 Ko</span>
-                            </div>
-                        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <a href="../supports/S1.01/workspace-atelier-katas-groupe16.zip" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">workspace-atelier-katas-groupe16.zip</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">ZIP • Kata 2 Réel (OSINT) + Défi Individuel + Dojo</p>
                     </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
                 </a>
-                
-                <a href="../supports/S1.01/TP7-algorithmes-parcours-recherche.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="TP7-algorithmes-parcours-recherche">TP7-algorithmes-parcours-recherche</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">30.4 Ko</span>
-                            </div>
-                        </div>
+                <a href="../supports/S1.01/defi_individuel_tri_pair_impair_etudiants.cpp" download class="p-3.5 rounded-xl border border-amber-300 bg-amber-50/40 hover:border-amber-500 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-amber-800">defi_individuel_tri_pair_impair_etudiants.cpp</h4>
+                        <p class="text-[10px] text-amber-900 font-mono mt-0.5">C++ • Défi Individuel Officiel (Sujets A &amp; B — essai.cpp)</p>
                     </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="download" class="w-4 h-4 text-amber-600 group-hover:text-amber-800 shrink-0"></i>
                 </a>
-                
+                <a href="../supports/S1.01/07-modeles-algos-basiques.html" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">07-modeles-algos-basiques.html</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">DIAPORAMA • Les 5 Modèles d'Algorithmes</p>
                     </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #2B527A;"></span>
-                        <span>Codes Sources, Notebooks & Scripts</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(3 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/S1.01/defi_individuel_tri_pair_impair_etudiants.cpp" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="code-2" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="defi individuel tri pair impair etudiants">defi individuel tri pair impair etudiants</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">CPP</span>
-                                <span>•</span>
-                                <span class="font-mono">6.1 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
                 </a>
-                
-                <a href="../supports/S1.01/mainProf_exemple_officiel.cpp" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="code-2" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="mainProf exemple officiel">mainProf exemple officiel</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">CPP</span>
-                                <span>•</span>
-                                <span class="font-mono">3.2 Ko</span>
-                            </div>
-                        </div>
+                <a href="../supports/S1.01/TD7-algorithmes-parcours-recherche.html" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">TD7 — Algorithmes de parcours et recherche</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">HTML FURTIF #692243 • 9 Exercices Modèles</p>
                     </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
                 </a>
-                
-                <a href="../supports/S1.01/modele-objet-code-explorer.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="modele-objet-code-explorer">modele-objet-code-explorer</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">28.8 Ko</span>
-                            </div>
-                        </div>
+                <a href="../supports/S1.01/TP7-algorithmes-parcours-recherche.html" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">TP7 — Tableaux &amp; Recherche C++</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">HTML FURTIF #692244 • Données C++ fournies</p>
                     </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
                 </a>
-                
+                <a href="../supports/S1.01/mainProf_exemple_officiel.cpp" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">mainProf_exemple_officiel.cpp</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">C++ • Code étalon M. Etcheverry (code-explorer)</p>
                     </div>
-                </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
-                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full" style="background-color: #2B527A;"></span>
-                        <span>Supports & Ressources Officielles</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(3 documents)</span>
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        
-                <a href="../supports/S1.01/07-modeles-algos-basiques.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="07-modeles-algos-basiques">07-modeles-algos-basiques</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">48.2 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
                 </a>
-                
-                <a href="../supports/S1.01/graphe-competences-algo-prog.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="graphe-competences-algo-prog">graphe-competences-algo-prog</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">PDF</span>
-                                <span>•</span>
-                                <span class="font-mono">80.2 Ko</span>
-                            </div>
-                        </div>
+                <a href="../supports/S1.01/grille_poids_defense_collective.csv" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">grille_poids_defense_collective.csv</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">CSV • Coefficients officiels Défense (/30)</p>
                     </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
                 </a>
-                
-                <a href="../supports/S1.01/workspace-atelier-katas-groupe16.zip" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="archive" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="workspace-atelier-katas-groupe16">workspace-atelier-katas-groupe16</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">ZIP</span>
-                                <span>•</span>
-                                <span class="font-mono">29.7 Ko</span>
-                            </div>
-                        </div>
+                <a href="../supports/S1.01/grille_seuils_ceintures_katas.csv" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">grille_seuils_ceintures_katas.csv</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">CSV • Seuils de validation des 9 Ceintures</p>
                     </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
                 </a>
-                
+                <a href="../supports/S1.01/graphe-competences-algo-prog.pdf" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">graphe-competences-algo-prog.pdf</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">PDF • Graphe officiel des compétences R1.01/S1.01</p>
                     </div>
-                </div>
-                
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
+                </a>
+                <a href="../supports/S1.01/modele-objet-code-explorer.pdf" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">modele-objet-code-explorer.pdf</h4>
+                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">PDF • Modèle d'inspection AST C++ Etcheverry</p>
+                    </div>
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
+                </a>
+            </div>
         </div>
-        
-
     </main>
 
     <script>
