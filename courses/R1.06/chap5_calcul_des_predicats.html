@@ -1,199 +1,280 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#B85042"/>
-    <title>Chapitre 5 : Calcul des Prédicats & Quantificateurs Universels/Existentiels — R1.06 Mathématiques Discrètes & Logique — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#B85042">
+    <title>R1.06 • Ch. 5 : Calcul des Prédicats & Quantificateurs — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #B85042;
-            --bg-soft: #F5EBE4;
-            --border-soft: #E6BFB8;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.65;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .concept-badge {
-            display: inline-flex;
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #B85042;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.1rem 1.4rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
         }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
         }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.06.html">R1.06 Maths Discrètes</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 5</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.06.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #B85042;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.06</span>
-            </a>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.06.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.06
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 5</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.06.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #24990
+                </span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #B85042;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 2 · Chapitre 5</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · Mme Bruyère / Mme Roegel</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #B85042;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                        R1.06 • CHAPITRE 5
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Calcul des Prédicats & Quantificateurs</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>Mme Marie Bruyère / Mme Roegel</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Prédicats à une et plusieurs variables, quantificateurs universel et existentiel, ordre des quantificateurs, règles de négation et traduction formelle.
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 5 : Calcul des Prédicats & Quantificateurs Universels/Existentiels</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Prédicats à une et plusieurs variables, quantificateurs universel (∀) et existentiel (∃), ordre des quantificateurs et négation de formules quantifiées.</p>
-    </section>
+    </div>
+    
 
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #B85042;"></i><span>1. Notions de Prédicat & Domaine d'Interprétation</span></h2>
-    
-    
-    
-    
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Notions de Prédicat & Domaine d'Interprétation</h2>
 <p>
 Un <strong>prédicat</strong> $P(x)$ est une fonction propositionnelle contenant une ou plusieurs variables $x$ appartenant à un ensemble $E$ (appelé domaine d'interprétation). Lorsque l'on remplace $x$ par une valeur concrète $a \in E$, $P(a)$ devient une proposition qui a une valeur de vérité (Vrai ou Faux).
 </p>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #B85042;"></i><span>2. Les Quantificateurs Fondamentaux</span></h2>
-    
-    
-    
-    
+<h2>2. Les Quantificateurs Fondamentaux</h2>
 <ul>
     <li><strong>Quantificateur Universel ($\forall$) : « Pour tout » ou « Quel que soit »</strong>
     <br>L'énoncé $\forall x \in E, P(x)$ signifie que $P(x)$ est vrai pour <em>tous</em> les éléments de $E$.
@@ -205,27 +286,7 @@ Un <strong>prédicat</strong> $P(x)$ est une fonction propositionnelle contenant
     <br>Il existe un élément et un seul vérifiant la propriété.</li>
 </ul>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #B85042;"></i><span>3. Négation des Quantificateurs (Lois de De Morgan Étendues)</span></h2>
-    
-    
-    
-    
+<h2>3. Négation des Quantificateurs (Lois de De Morgan Étendues)</h2>
 <p>
 Pour nier une expression quantifiée, on inverse le quantificateur et on nie le prédicat interne :
 </p>
@@ -234,57 +295,17 @@ Pour nier une expression quantifiée, on inverse le quantificateur et on nie le 
     <p>$$\neg (\exists x \in E, P(x)) \iff \forall x \in E, \neg P(x)$$</p>
 </div>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #B85042;"></i><span>4. Ordre des Quantificateurs Multiples</span></h2>
-    
-    
-    
-    
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
+<h2>4. Ordre des Quantificateurs Multiples</h2>
+<blockquote>
 <strong>Règle capitale : L'ordre des quantificateurs différents n'est PAS commutable !</strong>
 <ul>
     <li>$\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, x + y = 0$ : <strong>VRAI</strong> (pour chaque nombre $x$, on peut choisir son opposé $y = -x$).</li>
     <li>$\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, x + y = 0$ : <strong>FAUX</strong> (il n'existe pas de nombre $y$ universel qui annulerait simultanément tous les nombres réels).</li>
 </ul>
 <p>En revanche, deux quantificateurs identiques consécutifs commutent librement : $\forall x \forall y \iff \forall y \forall x$ et $\exists x \exists y \iff \exists y \exists x$.</p>
-</div></div>
+</blockquote>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #B85042;"></i><span>5. Exercice d'Entraînement : Traduction en Logique des Prédicats</span></h2>
-    
-    
-    
-    
+<h2>5. Exercice d'Entraînement : Traduction en Logique des Prédicats</h2>
 <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2 text-slate-800">
     <p><strong>Phrase 1 :</strong> <em>« Tout entier naturel est inférieur ou égal à son carré. »</em></p>
     <p class="text-blue-700 font-semibold">$$\forall n \in \mathbb{N}, \quad n \le n^2$$</p>
@@ -294,37 +315,411 @@ Pour nier une expression quantifiée, on inverse le quantificateur et on nie le 
     <p class="text-blue-700 font-semibold">$$\exists n \in \mathbb{N}, \quad n > n^2$$</p>
 </div>
 
+            </div>
+        </div>
 
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #B85042;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Calcul des Prédicats & Quantificateurs »</strong> constitue un pilier fondamental du module <strong>R1.06 — Mathématiques Discrètes</strong> enseigné par <strong>Mme Marie Bruyère / Mme Roegel</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Prédicats à une et plusieurs variables, quantificateurs universel et existentiel, ordre des quantificateurs, règles de négation et traduction formelle. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Prédicats, Quantificateurs, Pour tout, Il existe, Négation</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Calcul des Prédicats & Quantificateurs</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Prédicats, Quantificateurs, Pour tout, Il existe) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par Mme Marie Bruyère / Mme Roegel.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #B85042;">1</span>
+                <span>Étape 1 : Notions de Prédicat & Domaine d'Interprétation</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Prédicats</em> en partant de zéro. Quantificateur Universel ($\forall$) : « Pour tout » ou « Quel que soit » L'énoncé $\forall x \in E, P(x)$ signifie que $P(x)$ est vrai pour tous les éléments de $E$. Pour prouver qu'il est faux, il suffit de trouver un seul contre-exemple  Complétez systématiquement cette analyse par la vérification suivante : Quantificateur Existentiel ($\exists$) : « Il existe au moins un » L'énoncé $\exists x \in E, P(x)$ signifie qu'il existe au moins un élément de $E$ rendant $P(x)$ vrai. Pour prouver qu'il est vrai, il suffit d'exhiber u</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Prédicats) : [R1.06 • Prédicats] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #B85042;">2</span>
+                <span>Étape 2 : Les Quantificateurs Fondamentaux</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Quantificateurs</em> en partant de zéro. Quantificateur d'Unicité ($\exists!$) : « Il existe un unique » Il existe un élément et un seul vérifiant la propriété. Complétez systématiquement cette analyse par la vérification suivante : $\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, x + y = 0$ : VRAI (pour chaque nombre $x$, on peut choisir son opposé $y = -x$).</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Quantificateurs) : [R1.06 • Quantificateurs] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #B85042;">3</span>
+                <span>Étape 3 : Négation des Quantificateurs (Lois de De Morgan Étendues)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Pour tout</em> en partant de zéro. $\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, x + y = 0$ : FAUX (il n'existe pas de nombre $y$ universel qui annulerait simultanément tous les nombres réels). Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Formalisation » dans le cadre de Calcul des Prédicats & Quantificateurs : identifier l'hypothèse de départ, appliquer la règle formelle du cours de Mme Marie Bruyère / Mme Roegel et contrôler</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Pour tout) : [R1.06 • Pour tout] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #B85042;">4</span>
+                <span>Étape 4 : Ordre des Quantificateurs Multiples</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Il existe</em> en partant de zéro. Maîtrise opérationnelle de « Prédicats » dans le cadre de Calcul des Prédicats & Quantificateurs : identifier l'hypothèse de départ, appliquer la règle formelle du cours de Mme Marie Bruyère / Mme Roegel et contrôler la cohérence du résulta Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Quantificateurs » dans le cadre de Calcul des Prédicats & Quantificateurs : identifier l'hypothèse de départ, appliquer la règle formelle du cours de Mme Marie Bruyère / Mme Roegel et contrôl</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Il existe) : [R1.06 • Il existe] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        </div>
+    </article>
+    
 
-</article>
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #B85042;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Calcul des Prédicats & Quantificateurs</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (Mme Marie Bruyère / Mme Roegel)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Prédicats</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>1. Notions de Prédicat & Domaine d'Interprétation</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Quantificateur Universel ($\forall$) : « Pour tout » ou « Quel que soit » L'énoncé $\forall x \in E, P(x)$ signifie que $P(x)$ est vrai pour tous les éléments de $E$. Pour prouver qu'il est </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Quantificateurs</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>2. Les Quantificateurs Fondamentaux</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Quantificateur Existentiel ($\exists$) : « Il existe au moins un » L'énoncé $\exists x \in E, P(x)$ signifie qu'il existe au moins un élément de $E$ rendant $P(x)$ vrai. Pour prouver qu'il e</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Pour tout</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>3. Négation des Quantificateurs (Lois de De Morgan Étendues)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Quantificateur d'Unicité ($\exists!$) : « Il existe un unique » Il existe un élément et un seul vérifiant la propriété.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Il existe</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>4. Ordre des Quantificateurs Multiples</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">$\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, x + y = 0$ : VRAI (pour chaque nombre $x$, on peut choisir son opposé $y = -x$).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Négation</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>5. Exercice d'Entraînement : Traduction en Logique des Prédicats</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">$\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, x + y = 0$ : FAUX (il n'existe pas de nombre $y$ universel qui annulerait simultanément tous les nombres réels).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Formalisation</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>1. Notions de Prédicat & Domaine d'Interprétation</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Formalisation » dans le cadre de Calcul des Prédicats & Quantificateurs : identifier l'hypothèse de départ, appliquer la règle formelle du cours de Mme Marie Bru</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. Les Quantificateurs Fondamentaux</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>2. Les Quantificateurs Fondamentaux</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Prédicats » dans le cadre de Calcul des Prédicats & Quantificateurs : identifier l'hypothèse de départ, appliquer la règle formelle du cours de Mme Marie Bruyère</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>3. Négation des Quantificateurs (Lois de De M</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.06 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.06 / Ch.5</code><br><span class='text-[11px] text-slate-600'>3. Négation des Quantificateurs (Lois de De Morgan Étendues)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Quantificateurs » dans le cadre de Calcul des Prédicats & Quantificateurs : identifier l'hypothèse de départ, appliquer la règle formelle du cours de Mme Marie B</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Marie Bruyère / Mme Roegel : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Prédicats » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Prédicats</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Calcul des Prédicats & Quantificateurs</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.06</strong>, Mme Marie Bruyère / Mme Roegel insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Prédicats</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Quantificateurs »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Quantificateurs</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Mathématiques Discrètes), une part majeure des points est dédiée à la robustesse : Quantificateur Universel ($\forall$) : « Pour tout » ou « Quel que soit » L'énoncé $\forall x \in E, P(x)$ signifie que $P(x)$ est vrai pour tous les éléments de $E$. Pour prouver  Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Quantificateurs</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Pour tout »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Pour tout</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Mme Marie Bruyère / Mme Roegel rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.06</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Pour tout</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #B85042;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Notions de Prédicat & Domaine d'Interprétation</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.06 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.06 (Mathématiques Discrètes)</strong> supervisé par Mme Marie Bruyère / Mme Roegel, on vous demande d'analyser et de résoudre un problème portant sur <strong>Calcul des Prédicats & Quantificateurs</strong> en mobilisant explicitement les notions de <em>Prédicats, Quantificateurs, Pour tout</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Prédicats</em>. Rappel du cours : Quantificateur Universel ($\forall$) : « Pour tout » ou « Quel que soit » L'énoncé $\forall x \in E, P(x)$ signifie que $P(x)$ est vrai pour tous les éléments de $E$. Pour prouver qu'il est faux, il suffit de trouver un </li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Notions de Prédicat & Domaine d'Interprétation</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Les Quantificateurs Fondamentaux</em> : Quantificateur Existentiel ($\exists$) : « Il existe au moins un » L'énoncé $\exists x \in E, P(x)$ signifie qu'il existe au moins un élément de $E$ rendant $P(x)$ vrai. Pour prouver qu'il est vrai, il suffit d'exhiber u</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Quantificateurs</em> (Quantificateur d'Unicité ($\exists!$) : « Il existe un unique » Il existe un élément et un seul vérifiant la propriété.).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Prédicats à une et plusieurs variables, quantificateurs universel et existentiel, ordre des quantificateurs, règles de négation et traductio) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.06 — Ch.5 : Calcul des Prédicats & Quantificateurs) ===
+1. Entrées analysées : Prédicats, Quantificateurs, Pour tout, Il existe
+2. Étape A (1. Notions de Prédicat & Domaine d'Interprétation) : Validation des hypothèses -> OK
+3. Étape B (2. Les Quantificateurs Fondamentaux) : Application de la méthode officielle
+   -> Détail : Quantificateur Universel ($\forall$) : « Pour tout » ou « Quel que soit » L'énoncé $\forall x \in E, P(x)$ sig
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE MME MARIE BRUYÈRE / MME ROEGEL ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #B85042;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Négation des Quantificateurs (Lois de De Morgan Étendues)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • Mme Marie Bruyère / Mme Roegel</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.06</strong>, un exercice de synthèse combine <strong>Quantificateurs</strong> et <strong>Pour tout</strong> au sein du thème <em>« Calcul des Prédicats & Quantificateurs »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Quantificateurs</em> : $\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, x + y = 0$ : VRAI (pour chaque nombre $x$, on peut choisir son opposé $y = -x$).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par Mme Marie Bruyère / Mme Roegel dans la section <em>3. Négation des Quantificateurs (Lois de De Morgan Étendues)</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Pour tout</em>, on obtient la séquence exacte : $\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, x + y = 0$ : FAUX (il n'existe pas de nombre $y$ universel qui annulerait simultanément tous les nombres réels).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Prédicats, Quantificateurs, Pour tout, Il existe</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.06 — Quantificateurs) ===
+• Hypothèse initiale : Prédicats à une et plusieurs variables, quantificateurs universel et existentiel, ordre des quantifi...
+• Opération principale : Mise en œuvre de Prédicats combiné à Quantificateurs
+• Point clé vérifié : Quantificateur Existentiel ($\exists$) : « Il existe au moins un » L'énoncé $\exists x \in E, P(x)$ signifie q
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.06 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la négation formelle de la proposition universelle : ∀x ∈ E, P(x) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) ∀x ∈ E, ¬P(x)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_06_chap5_calcul_des_predicats_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) ∃x ∈ E, ¬P(x)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) NON(E) ⊆ P
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) ∃x ∉ E, P(x)
+            </button>
+            
+            </div>
+            <div id="qcm_R1_06_chap5_calcul_des_predicats_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Pour réfuter que TOUS les éléments satisfont une propriété, il suffit d'en trouver AU MOINS UN qui ne la satisfait pas (un contre-exemple). Par conséquent, la négation de ∀ est ∃ accompagné de la négation du prédicat.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.06 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Pourquoi les deux propositions (∀x, ∃y, P(x, y)) et (∃y, ∀x, P(x, y)) ne sont-elles PAS logiquement équivalentes ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_06_chap5_calcul_des_predicats_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) L'ordre des quantificateurs change fondamentalement le sens : dans la première y peut dépendre de chaque x ; dans la seconde il existe un même y universel valable pour tous les x
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Parce que x et y doivent être de même signe
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Elles sont parfaitement équivalentes, l'ordre ne change rien
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Parce que le quantificateur existentiel ne s'applique qu'au premier paramètre
+            </button>
+            
+            </div>
+            <div id="qcm_R1_06_chap5_calcul_des_predicats_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Exemple parlant : 'Pour tout humain x, il existe un humain y tel que y est la mère de x' (VRAI : chacun a sa propre mère) vs 'Il existe un humain y tel que pour tout humain x, y est la mère de x' (FAUX : il n'y a pas une unique mère universelle de l'humanité entière).
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.06 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelles sont les deux étapes indispensables d'une démonstration par récurrence simple sur les entiers naturels n ≥ n0 ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) L'hypothèse et la conclusion
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_06_chap5_calcul_des_predicats_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) L'Initialisation (vérifier la propriété au rang de base n0) et l'Hérédité (démontrer que pour tout n ≥ n0, si P(n) est vraie alors P(n+1) est vraie)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) L'addition et la soustraction
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Le calcul numérique et le tracé du graphique
+            </button>
+            
+            </div>
+            <div id="qcm_R1_06_chap5_calcul_des_predicats_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Principe des dominos : l'initialisation fait tomber le premier domino P(n0) ; l'hérédité garantit que chaque domino fait tomber le suivant P(n) ⇒ P(n+1). La propriété est alors vraie pour tout entier n ≥ n0.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.06 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Qu'est-ce qu'une relation d'ordre « total » comparée à un ordre « partiel » ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_06_chap5_calcul_des_predicats_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Dans un ordre total, deux éléments quelconques x et y sont TOUJOURS comparables (on a toujours x R y ou y R x) ; dans un ordre partiel, certains éléments peuvent n'avoir aucun lien de comparaison
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Un ordre total a une infinité d'éléments
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Un ordre partiel est obligatoirement faux
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_06_chap5_calcul_des_predicats_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) L'ordre total ne s'applique qu'aux lettres de l'alphabet
+            </button>
+            
+            </div>
+            <div id="qcm_R1_06_chap5_calcul_des_predicats_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Exemple d'ordre total : ≤ sur ℝ (pour n'importe quel couple de nombres, soit x ≤ y soit y ≤ x). Exemple d'ordre partiel : l'inclusion ⊆ sur P(E) : les ensembles {1} et {2} ne sont pas comparables ({1} n'est pas inclus dans {2} et {2} n'est pas inclus dans {1}).
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap4_logique_des_propositions.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 4 : Logique Propositionnelle & Tables de Vérité</span></a>
+            </div>
+            <a href="../R1.06.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.06</span>
+            </a>
+            <div>
+                <a href="chap6_arithmetique_entiere_et_euclide.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #B85042;"><span>Ch. 6 : Arithmétique Entière, Algorithme d'Euclide Étendu & Bézout</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
     </main>
-
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
-        <div>
-            
-        <a href="chap4_logique_des_propositions.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 4 : Logique des Propositions, Tables...</span>
-        </a>
-        
-        </div>
-        <a href="../R1.06.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
-        </a>
-        <div>
-            
-        <a href="chap6_arithmetique_entiere_et_euclide.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #B85042;">
-            <span>Ch. 6 : Arithmétique Entière, Algorithme...</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
-        
-        </div>
-    </footer>
 
     <script>
         lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>

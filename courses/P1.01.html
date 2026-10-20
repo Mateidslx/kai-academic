@@ -1,281 +1,214 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light" style="color-scheme: light;">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#8A5332"/>
-    <title>P1.01 — Portfolio & Démarche de Valorisation (Vidéo 2 min) — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#8C5E38">
+    <title>P1.01 — Démarche Portfolio & Pitch Vidéo — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- KaTeX CDN for Mathematics Rendering -->
-    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
-            --accent-color: #8A5332;
+            --accent-color: #8C5E38;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.09em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
-            transition: all 150ms ease-out;
-        }
-        .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.2rem 0.625rem;
-            border-radius: 9999px;
-            font-size: 0.6875rem;
-            font-weight: 600;
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub Académique</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="index.html">Matières</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900 font-mono">P1.01</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Header Banner -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 bg-white relative overflow-hidden shadow-xs" style="border-left: 6px solid #8A5332;">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <div class="flex items-center gap-2">
-                    <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono shadow-2xs" style="background-color: #8A5332;">
-                        P1.01
-                    </span>
-                    <span class="badge-pill font-mono text-[10px] font-bold" style="background-color: #F7EFE9; color: #8A5332; border: 1px solid #DEC4B3;">
-                        Moodle UPPA #19547
-                    </span>
-                    <span class="badge-pill font-mono text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                        3 Chapitres Complets
-                    </span>
-                </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Portfolio & Démarche de Valorisation (Vidéo 2 min)</h1>
-                <p class="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
-                    <i class="w-4 h-4 text-slate-400" data-lucide="user-check"></i>
-                    <span>Enseignant Référent : <strong>Responsables PPP</strong> · BUT 1 Informatique Anglet</span>
-                </p>
-                <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
-                    Portfolio de compétences et démarche réflexive selon le référentiel officiel du BUT 1 Informatique : Collecte méthodique des traces d'apprentissage et preuves matérielles (code source, schémas, maquettes, rapports), auto-évaluation argumentée sur les 5 compétences nationales, et réalisation d'une vidéo de pitch réflexive professionnelle de 120 secondes.
-                </p>
-            </div>
-
-            <div class="flex items-center flex-wrap gap-2">
-                <a class="min-h-[44px] px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-2xs hover:brightness-95 transition flex items-center gap-2" href="P1.01/chap1_script_tournage_pitch_120s.html" style="background-color: #8A5332;">
-                    <i class="w-4 h-4" data-lucide="play"></i>
-                    <span>Démarrer le cours</span>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
                 </a>
-                <a class="min-h-[44px] px-4 py-2.5 rounded-2xl text-xs font-semibold border flex items-center gap-2 shadow-2xs hover:brightness-95 transition" href="../revision/P1.01.html" style="border-color: #8A533240; color: #8A5332; background-color: #F7EFE9;">
-                    <i class="w-4 h-4" data-lucide="sparkles"></i>
-                    <span>Fiches de Révision</span>
+                <span class="text-slate-300">/</span>
+                <a href="index.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    P1.01
                 </a>
+                
             </div>
-        </div>
-
-        
-        <!-- BANNIÈRE OUTIL SPÉCIAL : Atelier de Gestion du Portfolio & Studio Vidéo Pitch (120s) -->
-        <div class="mt-6 pt-5 border-t border-slate-100">
-            <a href="P1.01/atelier_portfolio.html" class="p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group shadow-2xs" style="background-color: #F7EFE9; border-color: #8A5332;">
-                <div class="flex items-start gap-3.5">
-                    <div class="w-11 h-11 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5 font-black text-lg" style="background-color: #8A5332;">
-                        <i class="w-5 h-5" data-lucide="award"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <span class="text-sm sm:text-base font-extrabold text-slate-900">Atelier de Gestion du Portfolio & Studio Vidéo Pitch (120s)</span>
-                            <span class="px-2 py-0.5 rounded-md text-[10px] font-black text-white uppercase" style="background-color: #8A5332;">ESPACE RÉFLEXIF DU BUT</span>
-                        </div>
-                        <p class="text-xs text-slate-700 mt-1 leading-relaxed">
-                            Associez vos traces d'apprentissage à chaque niveau de compétence, rédigez vos fiches de situation professionnelle et répétez votre pitch vidéo avec chronomètre.
-                        </p>
-                    </div>
-                </div>
-                <span class="px-4 py-2.5 rounded-xl text-xs font-bold text-white shrink-0 flex items-center gap-1.5 group-hover:brightness-95" style="background-color: #8A5332;">
-                    <span>Accéder à l'Atelier Portfolio</span>
-                    <i class="w-4 h-4" data-lucide="arrow-right"></i>
+            <div class="flex items-center gap-2">
+                <a href="../revision/P1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F7F0EB; color: #8C5E38; border: 1px solid #DECAC0;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25075
                 </span>
-            </a>
+            </div>
         </div>
-        
-        
-        <!-- SPECIAL EXAM TOOLS BOX (FICHE A4 + ANNALES) -->
-        <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-3">
-            <a href="P1.01/fiche_traces_a4.html" class="p-4 rounded-2xl border-2 hover:bg-slate-50 transition flex items-start justify-between group" style="border-color: #8A533240; background-color: #F7EFE940;">
-                <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5" style="background-color: #8A5332;">
-                        <i class="w-5 h-5" data-lucide="file-check"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Fiche Traces A4 : Cartographie Preuves & Compétences</span>
-                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold" style="background-color: #F7EFE9; color: #8A5332;">MÉMENTO OFFICIEL</span>
-                        </div>
-                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            Tableau de correspondance entre les projets réels de S1 et les 5 compétences du BUT pour constituer un dossier de validation indiscutable.
-                        </p>
-                    </div>
-                </div>
-                <i class="w-5 h-5 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right" style="color: #8A5332;"></i>
-            </a>
-
-            <a href="P1.01/annales_partiels_corriges.html" class="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-slate-100/70 transition flex items-start justify-between group">
-                <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white shrink-0 mt-0.5">
-                        <i class="w-5 h-5" data-lucide="award"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Exemples de Vidéos de Pitch & Dossiers Validés</span>
-                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 bg-slate-200">DOSSIERS ÉTUDIANTS</span>
-                        </div>
-                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            Scripts types de pitch 120s notés A+, argumentaires d'auto-évaluation et retours d'expérience d'étudiants d'Anglet.
-                        </p>
-                    </div>
-                </div>
-                <i class="w-5 h-5 text-slate-500 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
-            </a>
-        </div>
-        
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- PROGRAMME OFFICIEL EN PARTIES (3 CHAPITRES) -->
-    <!-- ========================================================================= -->
-    <section class="space-y-6">
-<!-- Partie 1 : Démarche Réflexive & Constitution du Portfolio -->
-        <div class="space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5332;"></span>
-                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
-                        Partie 1 : Démarche Réflexive & Constitution du Portfolio
-                    </h2>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #8C5E38;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F7F0EB; color: #8C5E38; border: 1px solid #DECAC0;">
+                        P1.01 
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">P1.01 — Démarche Portfolio & Pitch Vidéo</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>Responsables PPP (Projet Professionnel et Personnel)</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
                 </div>
-                <span class="text-xs font-mono text-slate-400">Preuves d'Apprentissage & Auto-Évaluation</span>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-<!-- Chapitre 1 -->
-                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8A5332;">
-                    <div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7EFE9; color: #8A5332;">CHAPITRE 1</span>
-                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
-                            Script & Tournage du Pitch Vidéo Professionnel (120 secondes)
-                        </h3>
-                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                            Structure en 3 actes du pitch de compétences (accroche, démonstration par l'exemple, projection professionnelle), élocution et cadrage vidéo.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-3">
-                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pitch vidéo</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">120s</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Expression</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Communication</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="P1.01/chap1_script_tournage_pitch_120s.html" style="background-color: #8A5332;">
-                            <span>Étudier ce chapitre</span>
-                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-<!-- Chapitre 2 -->
-                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8A5332;">
-                    <div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7EFE9; color: #8A5332;">CHAPITRE 2</span>
-                            <span class="text-slate-400 font-mono text-[11px]">50 min</span>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
-                            Démarche Portfolio : Sélection des Traces & Preuves Matérielles
-                        </h3>
-                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                            Critères d'une trace d'apprentissage valide (pertinence, authenticité, représentativité), contextualisation et analyse critique des erreurs commises.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-3">
-                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Portfolio</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Traces</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Preuves</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Réflexivité</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="P1.01/chap2_demarche_portfolio_competences.html" style="background-color: #8A5332;">
-                            <span>Étudier ce chapitre</span>
-                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-<!-- Chapitre 3 -->
-                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8A5332;">
-                    <div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7EFE9; color: #8A5332;">CHAPITRE 3</span>
-                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
-                            Auto-Évaluation Argumentée sur les 5 Compétences du BUT
-                        </h3>
-                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                            Rédaction des bilans réflexifs pour chaque compétence (C1 à C5), mesure des progrès accomplis au cours du semestre et projection vers le S2.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-3">
-                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Compétences</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Auto-évaluation</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Bilan</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Progression</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="P1.01/chap3_cinq_competences_but.html" style="background-color: #8A5332;">
-                            <span>Étudier ce chapitre</span>
-                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Cadrage, écriture minutée mot-à-mot et réalisation du pitch vidéo de 2 minutes (120 secondes pile) pour valoriser un projet d'ingénierie logicielle en trinôme, et construction réflexive du portfolio de compétences BUT Informatique.
             </div>
         </div>
-    </section>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+
+        <div class="flex items-center justify-between flex-wrap gap-4">
+            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+                <i data-lucide="book-open" class="w-5 h-5" style="color: #8C5E38;"></i>
+                <span>Programme & Chapitres d'Apprentissage (3 chapitres)</span>
+            </h2>
+            <div class="flex items-center gap-2">
+                <a href="P1.01/chap1_script_tournage_pitch_120s.html" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-2xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #8C5E38;">
+                    <i data-lucide="play" class="w-4 h-4"></i>
+                    <span>Démarrer le Chapitre 1</span>
+                </a>
+                <a href="../revision/P1.01.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-2 shadow-2xs transition">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+                    <span>Fiche Révision (3 niveaux)</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Grille des Chapitres -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8C5E38;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7F0EB; color: #8C5E38; border: 1px solid #DECAC0;">
+                        CHAPITRE 1
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">30 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Le Script Mot-à-Mot Chronométré de 120s & Règles de Tournage
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Découpage chronométré des 120 secondes pile pour 3 personnes (accroche, architecture C++, qualité/Valgrind, bilan) et checklist Moodle.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">P1.01</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pitch vidéo</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">120 secondes</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tournage</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Moodle</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="P1.01/chap1_script_tournage_pitch_120s.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #8C5E38;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8C5E38;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7F0EB; color: #8C5E38; border: 1px solid #DECAC0;">
+                        CHAPITRE 2
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">30 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Construction Réflexive du Portfolio & Traces d'Apprentissage
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Sélection des traces et preuves d'apprentissage, argumentation réflexive et valorisation professionnelle des réalisations.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">P1.01</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Portfolio</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Traces</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Réflexivité</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Compétences</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="P1.01/chap2_demarche_portfolio_competences.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #8C5E38;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8C5E38;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7F0EB; color: #8C5E38; border: 1px solid #DECAC0;">
+                        CHAPITRE 3
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">30 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Les 5 Macro-Compétences Nationales du BUT Informatique
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Cartographie des compétences Développer, Optimiser, Administrer, Gérer et Conduire, et formulation de la démarche réflexive.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Compétences</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Référentiel</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">BUT Informatique</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Développer</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Optimiser</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="P1.01/chap3_cinq_competences_but.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #8C5E38;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        </div>
+
+        
+        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 text-xs text-slate-600 flex items-center gap-3">
+            <i data-lucide="info" class="w-4 h-4 text-slate-400 shrink-0"></i>
+            <span>Aucun document PDF déposé sur Moodle pour ce module cette année (cours magistraux et TD en présentiel).</span>
+        </div>
+        
+
+    </main>
 
     <script>
         lucide.createIcons();

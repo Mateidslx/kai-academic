@@ -1,199 +1,280 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#965670"/>
-    <title>Chapitre 2 : Esprit Critique, Biais Cognitifs & Fact-Checking — R1.11 Bases de la Communication & Expression — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#965670">
+    <title>R1.11 • Ch. 2 : Esprit Critique, Évaluation des Sources & Fact-Checking — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #965670;
-            --bg-soft: #F6EFF2;
-            --border-soft: #DEC6D0;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.65;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .concept-badge {
-            display: inline-flex;
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #965670;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.1rem 1.4rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
         }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
         }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.11.html">R1.11 Communication</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 2</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.11.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #965670;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.11</span>
-            </a>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.11.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.11
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 2</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.11.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F6EFF2; color: #965670; border: 1px solid #DEC6D0;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25030
+                </span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #965670;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 2 · Chapitre 2</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Au-Duong</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #965670;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F6EFF2; color: #965670; border: 1px solid #DEC6D0;">
+                        R1.11 • CHAPITRE 2
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Esprit Critique, Évaluation des Sources & Fact-Checking</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Au-Duong</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Posture intellectuelle de l'ingénieur, analyse de fiabilité des informations techniques, traçabilité des sources primaires, biais cognitifs majeurs et protocole de fact-checking.
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 2 : Esprit Critique, Biais Cognitifs & Fact-Checking</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Mécanismes de désinformation, biais de confirmation, effet de halo, vérification méthodique des sources d'information et démarche de fact-checking rigoureuse.</p>
-    </section>
+    </div>
+    
 
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #965670;"></i><span>1. Pourquoi Développer l'Esprit Critique en Informatique ?</span></h2>
-    
-    
-    
-    
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Pourquoi Développer l'Esprit Critique en Informatique ?</h2>
 <p>
 À l'ère de l'intelligence artificielle générative et de la surabondance informationnelle, l'informaticien ne peut plus se contenter d'être un exécutant technique. Il doit être capable de discriminer le vrai du faux, d'évaluer la fiabilité d'une documentation ou d'une réponse de LLM, et d'éviter les pièges des hallucinations algorithmiques et de la désinformation.
 </p>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #965670;"></i><span>2. La Grille d'Évaluation CRAAP (Norme Universitaire)</span></h2>
-    
-    
-    
-    
+<h2>2. La Grille d'Évaluation CRAAP (Norme Universitaire)</h2>
 <p>
 Développée par l'Université d'État de Californie, la méthode <strong>CRAAP</strong> est le standard académique pour évaluer une source documentaire ou un article technique :
 </p>
@@ -234,27 +315,7 @@ Développée par l'Université d'État de Californie, la méthode <strong>CRAAP<
     </tbody>
 </table>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #965670;"></i><span>3. Les 4 Biais Cognitifs Majeurs à Combattre</span></h2>
-    
-    
-    
-    
+<h2>3. Les 4 Biais Cognitifs Majeurs à Combattre</h2>
 <ul>
     <li><strong>Le Biais de Confirmation :</strong> Tendance naturelle à ne chercher et à ne retenir que les informations qui confirment nos hypothèses préalables (ex: ignorer un log d'erreur qui contredit notre conviction sur l'origine d'un bug).</li>
     <li><strong>L'Effet Dunning-Kruger :</strong> Biais par lequel les développeurs débutants surestiment largement leur maîtrise technique, tandis que les experts doutent davantage de leurs certitudes.</li>
@@ -262,64 +323,418 @@ Développée par l'Université d'État de Californie, la méthode <strong>CRAAP<
     <li><strong>L'Argument d'Autorité :</strong> Croire qu'une affirmation est nécessairement vraie simplement parce qu'elle émane d'une figure reconnue, sans vérifier les faits techniques sous-jacents.</li>
 </ul>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #965670;"></i><span>4. Méthodologie Pratique de Fact-Checking Numérique</span></h2>
-    
-    
-    
-    
+<h2>4. Méthodologie Pratique de Fact-Checking Numérique</h2>
 <ol class="space-y-2 text-sm mt-3">
     <li><strong>Recherche inversée d'images :</strong> Retrouver l'origine d'une capture d'écran via Google Lens ou TinEye pour vérifier sa date et son contexte réel.</li>
     <li><strong>Vérification des métadonnées (EXIF / Whois) :</strong> Analyser la date de création, l'auteur et l'hébergeur d'un document ou d'un nom de domaine.</li>
     <li><strong>Croisement triangulaire des sources :</strong> Ne jamais considérer une information technique comme acquise tant qu'elle n'a pas été confirmée par au moins deux sources indépendantes faisant autorité.</li>
 </ol>
 
+            </div>
+        </div>
 
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #965670;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Esprit Critique, Évaluation des Sources & Fact-Checking »</strong> constitue un pilier fondamental du module <strong>R1.11 — Bases de la Communication</strong> enseigné par <strong>M. Au-Duong</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Posture intellectuelle de l'ingénieur, analyse de fiabilité des informations techniques, traçabilité des sources primaires, biais cognitifs majeurs et protocole de fact-checking. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Fact-checking, Esprit critique, Sources, Biais cognitifs, Infox</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Esprit Critique, Évaluation des Sources & Fact-Checking</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Fact-checking, Esprit critique, Sources, Biais cognitifs) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Au-Duong.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #965670;">1</span>
+                <span>Étape 1 : Pourquoi Développer l'Esprit Critique en Informatique ?</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Fact-checking</em> en partant de zéro. Le Biais de Confirmation : Tendance naturelle à ne chercher et à ne retenir que les informations qui confirment nos hypothèses préalables (ex: ignorer un log d'erreur qui contredit notre conviction sur l'origine d'un bug). Complétez systématiquement cette analyse par la vérification suivante : L'Effet Dunning-Kruger : Biais par lequel les développeurs débutants surestiment largement leur maîtrise technique, tandis que les experts doutent davantage de leurs certitudes.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Fact-checking) : [R1.11 • Fact-checking] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #965670;">2</span>
+                <span>Étape 2 : La Grille d'Évaluation CRAAP (Norme Universitaire)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Esprit critique</em> en partant de zéro. Le Biais d'Ancrage : Tendance à se focaliser excessivement sur la première information reçue (ex: rester bloqué sur la première piste de débogage suggérée par un collègue). Complétez systématiquement cette analyse par la vérification suivante : L'Argument d'Autorité : Croire qu'une affirmation est nécessairement vraie simplement parce qu'elle émane d'une figure reconnue, sans vérifier les faits techniques sous-jacents.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Esprit critique) : [R1.11 • Esprit critique] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #965670;">3</span>
+                <span>Étape 3 : Les 4 Biais Cognitifs Majeurs à Combattre</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Sources</em> en partant de zéro. Recherche inversée d'images : Retrouver l'origine d'une capture d'écran via Google Lens ou TinEye pour vérifier sa date et son contexte réel. Complétez systématiquement cette analyse par la vérification suivante : Vérification des métadonnées (EXIF / Whois) : Analyser la date de création, l'auteur et l'hébergeur d'un document ou d'un nom de domaine.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Sources) : [R1.11 • Sources] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #965670;">4</span>
+                <span>Étape 4 : Méthodologie Pratique de Fact-Checking Numérique</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Biais cognitifs</em> en partant de zéro. Croisement triangulaire des sources : Ne jamais considérer une information technique comme acquise tant qu'elle n'a pas été confirmée par au moins deux sources indépendantes faisant autorité. Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Sources » dans le cadre de Esprit Critique, Évaluation des Sources & Fact-Checking : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Au-Duong et contrôler la cohé</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Biais cognitifs) : [R1.11 • Biais cognitifs] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        </div>
+    </article>
+    
 
-</article>
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #965670;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Esprit Critique, Évaluation des Sources & Fact-Checking</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Au-Duong)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Fact-checking</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.11 • Ch.2</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.11 / Ch.2</code><br><span class='text-[11px] text-slate-600'>1. Pourquoi Développer l'Esprit Critique en Informatique ?</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Le Biais de Confirmation : Tendance naturelle à ne chercher et à ne retenir que les informations qui confirment nos hypothèses préalables (ex: ignorer un log d'erreur qui contredit notre con</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Au-Duong : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Esprit critique</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.11 • Ch.2</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.11 / Ch.2</code><br><span class='text-[11px] text-slate-600'>2. La Grille d'Évaluation CRAAP (Norme Universitaire)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">L'Effet Dunning-Kruger : Biais par lequel les développeurs débutants surestiment largement leur maîtrise technique, tandis que les experts doutent davantage de leurs certitudes.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Au-Duong : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Sources</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.11 • Ch.2</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.11 / Ch.2</code><br><span class='text-[11px] text-slate-600'>3. Les 4 Biais Cognitifs Majeurs à Combattre</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Le Biais d'Ancrage : Tendance à se focaliser excessivement sur la première information reçue (ex: rester bloqué sur la première piste de débogage suggérée par un collègue).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Au-Duong : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Biais cognitifs</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.11 • Ch.2</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.11 / Ch.2</code><br><span class='text-[11px] text-slate-600'>4. Méthodologie Pratique de Fact-Checking Numérique</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">L'Argument d'Autorité : Croire qu'une affirmation est nécessairement vraie simplement parce qu'elle émane d'une figure reconnue, sans vérifier les faits techniques sous-jacents.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Au-Duong : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Infox</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.11 • Ch.2</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.11 / Ch.2</code><br><span class='text-[11px] text-slate-600'>1. Pourquoi Développer l'Esprit Critique en Informatique ?</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Recherche inversée d'images : Retrouver l'origine d'une capture d'écran via Google Lens ou TinEye pour vérifier sa date et son contexte réel.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Au-Duong : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. La Grille d'Évaluation CRAAP (Norme Univer</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.11 • Ch.2</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.11 / Ch.2</code><br><span class='text-[11px] text-slate-600'>2. La Grille d'Évaluation CRAAP (Norme Universitaire)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Vérification des métadonnées (EXIF / Whois) : Analyser la date de création, l'auteur et l'hébergeur d'un document ou d'un nom de domaine.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Au-Duong : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>3. Les 4 Biais Cognitifs Majeurs à Combattre</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.11 • Ch.2</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.11 / Ch.2</code><br><span class='text-[11px] text-slate-600'>3. Les 4 Biais Cognitifs Majeurs à Combattre</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Croisement triangulaire des sources : Ne jamais considérer une information technique comme acquise tant qu'elle n'a pas été confirmée par au moins deux sources indépendantes faisant autorité</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Au-Duong : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Fact-checking » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Fact-checking</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Esprit Critique, Évaluation des Sources & Fact-Checking</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.11</strong>, M. Au-Duong insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Fact-checking</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Esprit critique »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Esprit critique</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Bases de la Communication), une part majeure des points est dédiée à la robustesse : Le Biais de Confirmation : Tendance naturelle à ne chercher et à ne retenir que les informations qui confirment nos hypothèses préalables (ex: ignorer un log d'erreur qui contredit Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Esprit critique</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Sources »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Sources</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Au-Duong rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.11</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Sources</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #965670;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Pourquoi Développer l'Esprit Critique en Informatique ?</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.11 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.11 (Bases de la Communication)</strong> supervisé par M. Au-Duong, on vous demande d'analyser et de résoudre un problème portant sur <strong>Esprit Critique, Évaluation des Sources & Fact-Checking</strong> en mobilisant explicitement les notions de <em>Fact-checking, Esprit critique, Sources</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Fact-checking</em>. Rappel du cours : Le Biais de Confirmation : Tendance naturelle à ne chercher et à ne retenir que les informations qui confirment nos hypothèses préalables (ex: ignorer un log d'erreur qui contredit notre conviction sur l'origine d'un bug</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Pourquoi Développer l'Esprit Critique en Informatique ?</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. La Grille d'Évaluation CRAAP (Norme Universitaire)</em> : L'Effet Dunning-Kruger : Biais par lequel les développeurs débutants surestiment largement leur maîtrise technique, tandis que les experts doutent davantage de leurs certitudes.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Esprit critique</em> (Le Biais d'Ancrage : Tendance à se focaliser excessivement sur la première information reçue (ex: rester bloqué sur la première piste de débogage suggérée par un collègue).).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Posture intellectuelle de l'ingénieur, analyse de fiabilité des informations techniques, traçabilité des sources primaires, biais cognitifs ) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.11 — Ch.2 : Esprit Critique, Évaluation des Sources & Fact-Checking) ===
+1. Entrées analysées : Fact-checking, Esprit critique, Sources, Biais cognitifs
+2. Étape A (1. Pourquoi Développer l'Esprit Critique en Inform) : Validation des hypothèses -> OK
+3. Étape B (2. La Grille d'Évaluation CRAAP (Norme Universitai) : Application de la méthode officielle
+   -> Détail : Le Biais de Confirmation : Tendance naturelle à ne chercher et à ne retenir que les informations qui confirmen
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE M. AU-DUONG ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #965670;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Les 4 Biais Cognitifs Majeurs à Combattre</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Au-Duong</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.11</strong>, un exercice de synthèse combine <strong>Esprit critique</strong> et <strong>Sources</strong> au sein du thème <em>« Esprit Critique, Évaluation des Sources & Fact-Checking »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Esprit critique</em> : L'Argument d'Autorité : Croire qu'une affirmation est nécessairement vraie simplement parce qu'elle émane d'une figure reconnue, sans vérifier les faits techniques sous-jacents.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Au-Duong dans la section <em>3. Les 4 Biais Cognitifs Majeurs à Combattre</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Sources</em>, on obtient la séquence exacte : Recherche inversée d'images : Retrouver l'origine d'une capture d'écran via Google Lens ou TinEye pour vérifier sa date et son contexte réel.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Fact-checking, Esprit critique, Sources, Biais cognitifs</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.11 — Esprit critique) ===
+• Hypothèse initiale : Posture intellectuelle de l'ingénieur, analyse de fiabilité des informations techniques, traçabilité...
+• Opération principale : Mise en œuvre de Fact-checking combiné à Esprit critique
+• Point clé vérifié : L'Effet Dunning-Kruger : Biais par lequel les développeurs débutants surestiment largement leur maîtrise techn
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.11 • Fondamentaux (Fact-checking)</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans le chapitre « Esprit Critique, Évaluation des Sources & Fact-Checking » (R1.11), quelle est la règle méthodologique prioritaire concernant Fact-checking ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_11_chap2_esprit_critique_fact_checking_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Vérifier systématiquement les hypothèses et appliquer rigoureusement le principe : Le Biais de Confirmation : Tendance naturelle à ne chercher et à ne retenir que les informations qui confirment nos
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Ignorer les contraintes de Fact-checking et passer directement au résultat final sans justification intermédiaire.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Remplacer l'analyse formelle de Fact-checking par une approximation empirique non vérifiée.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Supprimer toutes les vérifications de bornes et de cohérence pour gagner du temps.
+            </button>
+            
+            </div>
+            <div id="qcm_R1_11_chap2_esprit_critique_fact_checking_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Comme l'exige M. Au-Duong en R1.11 (Bases de la Communication), la maîtrise de Fact-checking repose sur la vérification préalable des hypothèses et la traçabilité complète du raisonnement : Le Biais de Confirmation : Tendance naturelle à ne chercher et à ne retenir que les informations qui confirment nos hypothèses préalables (ex: ignorer un log d'erreur qui contredit
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.11 • Exigence Partiel (Esprit critique)</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Lors d'une évaluation sur « 2. La Grille d'Évaluation CRAAP (Norme Universitaire) », quel point distingue une copie excellente d'une copie sanctionnée ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Omettre l'étude des cas limites liés à Esprit critique.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_11_chap2_esprit_critique_fact_checking_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Articuler clairement Esprit critique avec une justification pas-à-pas : L'Effet Dunning-Kruger : Biais par lequel les développeurs débutants surestiment largement leur maîtrise techn
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Confondre les définitions de Fact-checking et de Esprit critique sans préciser le contexte.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Fournir un résultat brut sans aucune unité, trace ni démonstration.
+            </button>
+            
+            </div>
+            <div id="qcm_R1_11_chap2_esprit_critique_fact_checking_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> En partiel à l'IUT d'Anglet, la justification précise de Esprit critique (L'Effet Dunning-Kruger : Biais par lequel les développeurs débutants surestiment largement leur maîtrise technique, tandis que les experts doutent davantage de ) est indispensable pour valider la compétence visée par ce chapitre.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.11 • Vigilance & Pièges (Sources)</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle erreur classique faut-il absolument éviter lorsqu'on manipule Sources dans le cadre de « Esprit Critique, Évaluation des Sources & Fact-Checking » ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Documenter et vérifier chaque étape de transformation impliquant Sources.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Contrôler la cohérence du résultat final sur un jeu d'essai représentatif.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_11_chap2_esprit_critique_fact_checking_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Appliquer Sources mécaniquement hors de son domaine de validité sans contrôler les cas particuliers.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Respecter scrupuleusement les conventions officielles enseignées par M. Au-Duong.
+            </button>
+            
+            </div>
+            <div id="qcm_R1_11_chap2_esprit_critique_fact_checking_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Le piège majeur en examen consiste à appliquer Sources de façon automatique sans vérifier les conditions d'application ni les cas limites (Le Biais d'Ancrage : Tendance à se focaliser excessivement sur la première information reçue (ex: rester bloqué sur la première piste de débogage sugg).
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.11 • Validation & Autonomie</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Comment valider de manière certaine sa résolution d'un exercice de TD portant sur « Esprit Critique, Évaluation des Sources & Fact-Checking » ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) En s'arrêtant dès la première intuition sans relire l'énoncé.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) En supprimant les étapes intermédiaires de la trace d'exécution.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_11_chap2_esprit_critique_fact_checking_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) En modifiant les données de l'énoncé pour simplifier le problème.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_11_chap2_esprit_critique_fact_checking_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) En effectuant une trace complète pas-à-pas et en vérifiant que toutes les contraintes (Fact-checking, Esprit critique, Sources) sont respectées.
+            </button>
+            
+            </div>
+            <div id="qcm_R1_11_chap2_esprit_critique_fact_checking_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La validation par trace d'exécution et contrôle des contraintes (Fact-checking, Esprit critique, Sources) garantit qu'aucune erreur logique ou d'inattention ne subsiste avant de rendre sa copie.
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap1_theories_communication_shannon_jakobson.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 1 : Théories Fondamentales de la Communication (Shannon, Jakobson, Palo Alto)</span></a>
+            </div>
+            <a href="../R1.11.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.11</span>
+            </a>
+            <div>
+                <a href="chap3_communication_orale_non_verbale_proxemie.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #965670;"><span>Ch. 3 : Communication Orale, Présence Corporelle & Proxémie</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
     </main>
-
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
-        <div>
-            
-        <a href="chap1_theories_communication_shannon_jakobson.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 1 : Théories de la Communication : S...</span>
-        </a>
-        
-        </div>
-        <a href="../R1.11.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
-        </a>
-        <div>
-            
-        <a href="chap3_communication_orale_non_verbale_proxemie.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #965670;">
-            <span>Ch. 3 : Communication Orale, Non-Verbale...</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
-        
-        </div>
-    </footer>
 
     <script>
         lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>

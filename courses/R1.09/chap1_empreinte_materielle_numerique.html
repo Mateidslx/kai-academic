@@ -1,174 +1,275 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#55784E"/>
-    <title>Chapitre 1 : L'Empreinte Matérielle du Numérique : Extraction & Fabrication — R1.09 Introduction à l'Économie Durable & Numérique — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#55784E">
+    <title>R1.09 • Ch. 1 : Matérialité du Numérique & Limites Planétaires — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #55784E;
-            --bg-soft: #EFF4ED;
-            --border-soft: #C8DAC3;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.65;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .concept-badge {
-            display: inline-flex;
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #55784E;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.1rem 1.4rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
         }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
         }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.09.html">R1.09 Éco-Durable</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 1</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.09.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #55784E;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.09</span>
-            </a>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.09.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.09
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 1</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.09.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #EFF4ED; color: #55784E; border: 1px solid #C8DAC3;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25005
+                </span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #55784E;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 1 · Chapitre 1</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · Mme Fernandes</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #55784E;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #EFF4ED; color: #55784E; border: 1px solid #C8DAC3;">
+                        R1.09 • CHAPITRE 1
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Matérialité du Numérique & Limites Planétaires</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>Mme Fernandes</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                L'illusion de la dématérialisation, consommation énergétique mondiale, extraction minière des métaux critiques (lithium, cobalt, terres rares), empreinte eau des datacenters et paradoxe de Jevons (effet rebond).
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 1 : L'Empreinte Matérielle du Numérique : Extraction & Fabrication</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Impact environnemental des terminaux, extraction minière (lithium, cobalt, terres rares), consommation d'eau et d'énergie lors de la phase de fabrication.</p>
-    </section>
+    </div>
+    
 
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #55784E;"></i><span>1. L'Illusion de la « Dématérialisation »</span></h2>
-    
-    
-    
-    
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. L'Illusion de la « Dématérialisation »</h2>
 <p>
 Le terme populaire de « cloud » et l'expression trompeuse de « dématérialisation » masquent une réalité physique colossale : le secteur numérique est l'une des industries les plus gourmandes en énergie et en ressources minérales de la planète.
 <br>À l'échelle mondiale, le numérique représente aujourd'hui :
@@ -179,27 +280,7 @@ Le terme populaire de « cloud » et l'expression trompeuse de « dématérialis
     <li>Une consommation massive d'eau douce potable pour le refroidissement par évaporation des centres de données (data centers).</li>
 </ul>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #55784E;"></i><span>2. Répartition de l'Impact : Les Trois Tiers du Numérique</span></h2>
-    
-    
-    
-    
+<h2>2. Répartition de l'Impact : Les Trois Tiers du Numérique</h2>
 <p>
 Contrairement aux idées reçues qui focalisent l'attention sur les seuls serveurs, l'empreinte environnementale du numérique est très asymétrique :
 </p>
@@ -215,27 +296,7 @@ Contrairement aux idées reçues qui focalisent l'attention sur les seuls serveu
     </li>
 </ol>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #55784E;"></i><span>3. L'Extraction Minière des Métaux Critiques & Terres Rares</span></h2>
-    
-    
-    
-    
+<h2>3. L'Extraction Minière des Métaux Critiques & Terres Rares</h2>
 <p>
 La fabrication d'une simple puce électronique ou d'un processeur moderne exige des quantités phénoménales de matières premières :
 </p>
@@ -245,65 +306,424 @@ La fabrication d'une simple puce électronique ou d'un processeur moderne exige 
     <li>L'extraction de ces métaux implique l'usage massif de solvants acides, détruit les nappes phréatiques et génère des boues toxiques radioactives (thorium, uranium).</li>
 </ul>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #55784E;"></i><span>4. Le Paradoxe de Jevons & L'Effet Rebond</span></h2>
-    
-    
-    
-    
+<h2>4. Le Paradoxe de Jevons & L'Effet Rebond</h2>
 <p>
 Théorisé dès 1865 par l'économiste britannique William Stanley Jevons à propos du charbon, l'<strong>effet rebond</strong> stipule que :
 </p>
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
+<blockquote>
 <strong>Définition :</strong>
 L'augmentation de l'efficacité avec laquelle une ressource technologique est employée a tendance à <strong>augmenter</strong> la consommation globale de cette ressource, plutôt qu'à la réduire.
-</div></div>
+</blockquote>
 <ul>
     <li><em>Effet rebond direct :</em> Le passage au codec vidéo AV1 permet de diviser par deux la bande passante nécessaire pour un flux 1080p. Au lieu d'économiser l'énergie du réseau, les plateformes en profitent pour diffuser massivement des flux en 4K ou 8K et multiplier le temps de visionnage par deux.</li>
     <li><em>Effet rebond indirect :</em> Les gains financiers réalisés grâce à l'optimisation d'un service numérique sont réinjectés par les utilisateurs dans d'autres consommations polluantes (voyages, achats d'équipements additionnels).</li>
 </ul>
 
-
-
-</article>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
-        <div>
-            
+            </div>
         </div>
-        <a href="../R1.09.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
-        </a>
-        <div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #55784E;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Matérialité du Numérique & Limites Planétaires »</strong> constitue un pilier fondamental du module <strong>R1.09 — Économie Durable & Numérique</strong> enseigné par <strong>Mme Fernandes</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : L'illusion de la dématérialisation, consommation énergétique mondiale, extraction minière des métaux critiques (lithium, cobalt, terres rares), empreinte eau des datacenters et paradoxe de Jevons (effet rebond). En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Écologie, Numérique responsable, GES, Terres rares, Datacenters</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Matérialité du Numérique & Limites Planétaires</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Écologie, Numérique responsable, GES, Terres rares) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par Mme Fernandes.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-        <a href="chap2_cadre_legislatif_agec_reen_rgesn.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #55784E;">
-            <span>Ch. 2 : Cadre Législatif : Lois AGEC, RE...</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #55784E;">1</span>
+                <span>Étape 1 : L'Illusion de la « Dématérialisation »</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Écologie</em> en partant de zéro. 3,5% à 4% des émissions mondiales de gaz à effet de serre (GES) (davantage que l'ensemble du trafic aérien civil mondial, avec une croissance annuelle de plus de 6%) ; Complétez systématiquement cette analyse par la vérification suivante : Environ 10% de la consommation mondiale d'électricité ;</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Écologie) : [R1.09 • Écologie] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #55784E;">2</span>
+                <span>Étape 2 : Répartition de l'Impact : Les Trois Tiers du Numérique</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Numérique responsable</em> en partant de zéro. Une consommation massive d'eau douce potable pour le refroidissement par évaporation des centres de données (data centers). Complétez systématiquement cette analyse par la vérification suivante : Les Équipements Utilisateurs (Terminaux - plus de 70% de l'impact global) : Smartphones, ordinateurs, tablettes, écrans et objets connectés concentrent l'écrasante majorité des dégradations écologiques, essentiellement l</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Numérique responsable) : [R1.09 • Numérique responsable] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #55784E;">3</span>
+                <span>Étape 3 : L'Extraction Minière des Métaux Critiques & Terres Rares</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>GES</em> en partant de zéro. Les Centres de Données (Data Centers - environ 15% à 18%) : Stockage et calcul intensif. Consommation continue 24/7 et climatisation. Complétez systématiquement cette analyse par la vérification suivante : Les Réseaux de Télécommunication (environ 12% à 15%) : Antennes 4G/5G (les réseaux mobiles consomment environ 3 fois plus d'énergie au gigaoctet transféré que la fibre optique FTTx), routeurs dorsaux et câbles sous-marin</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (GES) : [R1.09 • GES] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #55784E;">4</span>
+                <span>Étape 4 : Le Paradoxe de Jevons & L'Effet Rebond</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Terres rares</em> en partant de zéro. Un smartphone de 150 grammes nécessite la mobilisation et l'extraction de plus de 70 kg de matières premières brutes (effet sac à dos écologique). Complétez systématiquement cette analyse par la vérification suivante : Plus de 50 métaux différents sont intégrés : cuivre, cobalt, lithium, or, argent, tantale, ainsi que des terres rares (néodyme, dysprosium pour les haut-parleurs et moteurs vibrants).</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Terres rares) : [R1.09 • Terres rares] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
         
         </div>
-    </footer>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #55784E;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Matérialité du Numérique & Limites Planétaires</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (Mme Fernandes)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Écologie</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>1. L'Illusion de la « Dématérialisation »</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">3,5% à 4% des émissions mondiales de gaz à effet de serre (GES) (davantage que l'ensemble du trafic aérien civil mondial, avec une croissance annuelle de plus de 6%) ;</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Numérique responsable</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>2. Répartition de l'Impact : Les Trois Tiers du Numérique</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Environ 10% de la consommation mondiale d'électricité ;</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>GES</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>3. L'Extraction Minière des Métaux Critiques & Terres Rares</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Une consommation massive d'eau douce potable pour le refroidissement par évaporation des centres de données (data centers).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Terres rares</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>4. Le Paradoxe de Jevons & L'Effet Rebond</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Les Équipements Utilisateurs (Terminaux - plus de 70% de l'impact global) : Smartphones, ordinateurs, tablettes, écrans et objets connectés concentrent l'écrasante majorité des dégradations </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Datacenters</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>1. L'Illusion de la « Dématérialisation »</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Les Centres de Données (Data Centers - environ 15% à 18%) : Stockage et calcul intensif. Consommation continue 24/7 et climatisation.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Jevons</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>2. Répartition de l'Impact : Les Trois Tiers du Numérique</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Les Réseaux de Télécommunication (environ 12% à 15%) : Antennes 4G/5G (les réseaux mobiles consomment environ 3 fois plus d'énergie au gigaoctet transféré que la fibre optique FTTx), routeur</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Effet rebond</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>3. L'Extraction Minière des Métaux Critiques & Terres Rares</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Un smartphone de 150 grammes nécessite la mobilisation et l'extraction de plus de 70 kg de matières premières brutes (effet sac à dos écologique).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>4. Le Paradoxe de Jevons & L'Effet Rebond</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.09 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.09 / Ch.1</code><br><span class='text-[11px] text-slate-600'>4. Le Paradoxe de Jevons & L'Effet Rebond</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Plus de 50 métaux différents sont intégrés : cuivre, cobalt, lithium, or, argent, tantale, ainsi que des terres rares (néodyme, dysprosium pour les haut-parleurs et moteurs vibrants).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Mme Fernandes : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Écologie » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Écologie</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Matérialité du Numérique & Limites Planétaires</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.09</strong>, Mme Fernandes insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Écologie</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Numérique responsable »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Numérique responsable</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Économie Durable & Numérique), une part majeure des points est dédiée à la robustesse : 3,5% à 4% des émissions mondiales de gaz à effet de serre (GES) (davantage que l'ensemble du trafic aérien civil mondial, avec une croissance annuelle de plus de 6%) ; Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Numérique responsable</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « GES »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>GES</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Mme Fernandes rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.09</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>GES</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #55784E;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. L'Illusion de la « Dématérialisation »</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.09 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.09 (Économie Durable & Numérique)</strong> supervisé par Mme Fernandes, on vous demande d'analyser et de résoudre un problème portant sur <strong>Matérialité du Numérique & Limites Planétaires</strong> en mobilisant explicitement les notions de <em>Écologie, Numérique responsable, GES</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Écologie</em>. Rappel du cours : 3,5% à 4% des émissions mondiales de gaz à effet de serre (GES) (davantage que l'ensemble du trafic aérien civil mondial, avec une croissance annuelle de plus de 6%) ;</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. L'Illusion de la « Dématérialisation »</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Répartition de l'Impact : Les Trois Tiers du Numérique</em> : Environ 10% de la consommation mondiale d'électricité ;</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Numérique responsable</em> (Une consommation massive d'eau douce potable pour le refroidissement par évaporation des centres de données (data centers).).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (L'illusion de la dématérialisation, consommation énergétique mondiale, extraction minière des métaux critiques (lithium, cobalt, terres rare) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.09 — Ch.1 : Matérialité du Numérique & Limites Planétaires) ===
+1. Entrées analysées : Écologie, Numérique responsable, GES, Terres rares
+2. Étape A (1. L'Illusion de la « Dématérialisation ») : Validation des hypothèses -> OK
+3. Étape B (2. Répartition de l'Impact : Les Trois Tiers du Nu) : Application de la méthode officielle
+   -> Détail : 3,5% à 4% des émissions mondiales de gaz à effet de serre (GES) (davantage que l'ensemble du trafic aérien civ
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE MME FERNANDES ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #55784E;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. L'Extraction Minière des Métaux Critiques & Terres Rares</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • Mme Fernandes</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.09</strong>, un exercice de synthèse combine <strong>Numérique responsable</strong> et <strong>GES</strong> au sein du thème <em>« Matérialité du Numérique & Limites Planétaires »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Numérique responsable</em> : Les Équipements Utilisateurs (Terminaux - plus de 70% de l'impact global) : Smartphones, ordinateurs, tablettes, écrans et objets connectés concentrent l'écrasante majorité des dégradations écologiques, essentiellement l</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par Mme Fernandes dans la section <em>3. L'Extraction Minière des Métaux Critiques & Terres Rares</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>GES</em>, on obtient la séquence exacte : Les Centres de Données (Data Centers - environ 15% à 18%) : Stockage et calcul intensif. Consommation continue 24/7 et climatisation.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Écologie, Numérique responsable, GES, Terres rares</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.09 — Numérique responsable) ===
+• Hypothèse initiale : L'illusion de la dématérialisation, consommation énergétique mondiale, extraction minière des métaux...
+• Opération principale : Mise en œuvre de Écologie combiné à Numérique responsable
+• Point clé vérifié : Environ 10% de la consommation mondiale d'électricité ;
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.09 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Qu'est-ce que « l'Effet Rebond » (ou Paradoxe de Jevons) en économie environnementale et numérique ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le fait qu'un ordinateur rebondisse lorsqu'il tombe par terre
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_09_chap1_empreinte_materielle_numerique_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Le phénomène où les gains d'efficacité énergétique ou technologique d'une ressource sont annulés voire dépassés par l'augmentation massive de la consommation globale de cette même ressource
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) La hausse des prix après une crise économique
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Le recyclage d'un matériau deux fois de suite
+            </button>
+            
+            </div>
+            <div id="qcm_R1_09_chap1_empreinte_materielle_numerique_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Formulé par William Stanley Jevons en 1865 : si l'on améliore la compression vidéo (codec H.265 deux fois plus économe en bande passante que le H.264), au lieu de consommer deux fois moins d'énergie, les utilisateurs en profitent pour regarder 10 fois plus de vidéos en 4K/8K ! La consommation totale augmente.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.09 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la différence fondamentale entre le modèle économique linéaire traditionnel et le modèle de l'économie circulaire ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) L'économie linéaire utilise des graphiques en ligne droite
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_09_chap1_empreinte_materielle_numerique_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) L'économie linéaire suit le schéma destructeur 'Extraire -> Fabriquer -> Jeter' ; l'économie circulaire vise à boucler les cycles de matière en maximisant l'éco-conception, la réparation, le réemploi et le recyclage pour minimiser le gaspillage et l'extraction de ressources vierges
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) L'économie circulaire n'utilise que de la monnaie en pièces rondes
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) L'économie linéaire est réservée aux pays pauvres
+            </button>
+            
+            </div>
+            <div id="qcm_R1_09_chap1_empreinte_materielle_numerique_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Dans l'industrie informatique, l'économie circulaire est vitale en raison de l'épuisement critique des métaux rares (lithium, cobalt, terres rares, tantale). Elle privilégie la durabilité matérielle, la réparabilité et le reconditionnement.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.09 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans le cycle de vie complet des équipements numériques (ordinateurs, smartphones, serveurs), quelle étape concentre la majeure partie (70 à 80 %) de l'empreinte carbone totale ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) La phase d'utilisation quotidienne (recharge de la batterie)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_09_chap1_empreinte_materielle_numerique_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) La phase de Fabrication (extraction des minerais rares, raffinage chimique, purification du silicium et assemblage industriel en salle blanche)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) La livraison par la poste
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Le recyclage final en fin de vie
+            </button>
+            
+            </div>
+            <div id="qcm_R1_09_chap1_empreinte_materielle_numerique_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Chiffre clé officiel de l'ADEME / ARCEP enseigné à l'IUT : fabriquer un ordinateur portable de 2 kg nécessite 800 kg de matières premières et génère l'écrasante majorité de ses gaz à effet de serre. Par conséquent, allonger la durée de vie de ses appareils (passer de 2 à 4 ou 5 ans) est le geste de sobriété numérique le plus efficace qui soit !
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.09 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Qu'appelle-t-on un « effet de réseau » (ou loi de Metcalfe) dans le modèle économique d'une plateforme numérique ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le fait que les câbles Ethernet s'emmêlent facilement
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_09_chap1_empreinte_materielle_numerique_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Un phénomène où la valeur d'un service augmente de manière disproportionnée pour chaque utilisateur au fur et à mesure que le nombre total d'autres utilisateurs de ce service grandit
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Une coupure générale d'Internet
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_09_chap1_empreinte_materielle_numerique_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) La vitesse maximale d'un routeur Wi-Fi
+            </button>
+            
+            </div>
+            <div id="qcm_R1_09_chap1_empreinte_materielle_numerique_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La loi de Metcalfe stipule que l'utilité d'un réseau est proportionnelle au carré du nombre d'utilisateurs (N^2). Un réseau social avec 2 personnes est inutile ; avec 2 milliards, il devient incontournable. C'est le moteur principal qui mène naturellement aux monopoles 'Winner-Take-All' dans le numérique.
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                
+            </div>
+            <a href="../R1.09.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.09</span>
+            </a>
+            <div>
+                <a href="chap2_cadre_legislatif_agec_reen_rgesn.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #55784E;"><span>Ch. 2 : Cadre Législatif & Référentiels : Lois AGEC, REEN & RGESN</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
 
     <script>
         lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>

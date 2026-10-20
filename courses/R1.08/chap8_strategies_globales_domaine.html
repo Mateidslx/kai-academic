@@ -95,6 +95,39 @@
             border-radius: 0 0.75rem 0.75rem 0;
             margin: 1rem 0;
         }
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin: 1rem 0;
+        }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
@@ -190,13 +223,359 @@
     </div>
 </article>
 
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #367357;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Les stratégies d'entreprise — Globales et de domaine »</strong> constitue un pilier fondamental du module <strong>R1.08 — Gestion des Organisations & Management Stratégique</strong> enseigné par <strong>M. Moulin / Mme Alzieu</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Stratégies corporate (spécialisation, diversification, intégration, externalisation) et stratégies génériques de Porter (coûts, différenciation, focalisation). En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Cours 8 · C3, R1.08, Management, Stratégie, M. Moulin</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Les stratégies d'entreprise — Globales et de domaine</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Cours 8 · C3, R1.08, Management, Stratégie) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Moulin / Mme Alzieu.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">1</span>
+                <span>Étape 1 : Les Stratégies Globales (Corporate Strategy)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Cours 8 · C3</em> en partant de zéro. Maîtrise opérationnelle de « Cours 8 · C3 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôler la cohérence d Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « R1.08 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôler l</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Cours 8 · C3) : [R1.08 • Cours 8 · C3] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">2</span>
+                <span>Étape 2 : Les Stratégies de Domaine (Business Strategies de Michael Porter)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>R1.08</em> en partant de zéro. Maîtrise opérationnelle de « Management » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôler la cohérence du  Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Stratégie » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôl</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (R1.08) : [R1.08 • R1.08] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">3</span>
+                <span>Étape 3 : La Spécialisation</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Management</em> en partant de zéro. Maîtrise opérationnelle de « M. Moulin » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôler la cohérence du r Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Examen IUT » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrô</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Management) : [R1.08 • Management] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">4</span>
+                <span>Étape 4 : La Diversification</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Stratégie</em> en partant de zéro. Maîtrise opérationnelle de « Cours 8 · C3 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôler la cohérence d Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « R1.08 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôler l</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Stratégie) : [R1.08 • Stratégie] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #367357;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Les stratégies d'entreprise — Globales et de domaine</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Moulin / Mme Alzieu)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Cours 8 · C3</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>I. Les Stratégies Globales (Corporate Strategy)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Cours 8 · C3 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>R1.08</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>II. Les Stratégies de Domaine (Business Strategies de Michael Porter)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « R1.08 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moul</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Management</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>1. La Spécialisation</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Management » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Stratégie</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>2. La Diversification</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Stratégie » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>M. Moulin</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>3. L'Intégration Verticale vs Externalisation</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « M. Moulin » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Examen IUT</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>1. Domination par les Coûts</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Examen IUT » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. Différenciation</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>2. Différenciation</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Cours 8 · C3 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>3. Focalisation (Niche)</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.8</code><br><span class='text-[11px] text-slate-600'>3. Focalisation (Niche)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « R1.08 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moul</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Moulin / Mme Alzieu : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Cours 8 · C3 » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Cours 8 · C3</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Les stratégies d'entreprise — Globales et de domaine</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.08</strong>, M. Moulin / Mme Alzieu insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Cours 8 · C3</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « R1.08 »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>R1.08</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Gestion des Organisations & Management Stratégique), une part majeure des points est dédiée à la robustesse : Maîtrise opérationnelle de « Cours 8 · C3 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>R1.08</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Management »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Management</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Moulin / Mme Alzieu rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.08</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Management</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #367357;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — I. Les Stratégies Globales (Corporate Strategy)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.08 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.08 (Gestion des Organisations & Management Stratégique)</strong> supervisé par M. Moulin / Mme Alzieu, on vous demande d'analyser et de résoudre un problème portant sur <strong>Les stratégies d'entreprise — Globales et de domaine</strong> en mobilisant explicitement les notions de <em>Cours 8 · C3, R1.08, Management</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Cours 8 · C3</em>. Rappel du cours : Maîtrise opérationnelle de « Cours 8 · C3 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et cont</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>I. Les Stratégies Globales (Corporate Strategy)</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>II. Les Stratégies de Domaine (Business Strategies de Michae</em> : Maîtrise opérationnelle de « R1.08 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôler l</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>R1.08</em> (Maîtrise opérationnelle de « Management » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du c).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Stratégies corporate (spécialisation, diversification, intégration, externalisation) et stratégies génériques de Porter (coûts, différenciat) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.08 — Ch.8 : Les stratégies d'entreprise — Globales et de domaine) ===
+1. Entrées analysées : Cours 8 · C3, R1.08, Management, Stratégie
+2. Étape A (I. Les Stratégies Globales (Corporate Strategy)) : Validation des hypothèses -> OK
+3. Étape B (II. Les Stratégies de Domaine (Business Strategies) : Application de la méthode officielle
+   -> Détail : Maîtrise opérationnelle de « Cours 8 · C3 » dans le cadre de Les stratégies d'entreprise — Globales et de doma
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE M. MOULIN / MME ALZIEU ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #367357;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 1. La Spécialisation</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Moulin / Mme Alzieu</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.08</strong>, un exercice de synthèse combine <strong>R1.08</strong> et <strong>Management</strong> au sein du thème <em>« Les stratégies d'entreprise — Globales et de domaine »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>R1.08</em> : Maîtrise opérationnelle de « Stratégie » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôl</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Moulin / Mme Alzieu dans la section <em>1. La Spécialisation</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Management</em>, on obtient la séquence exacte : Maîtrise opérationnelle de « M. Moulin » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Moulin / Mme Alzieu et contrôl</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Cours 8 · C3, R1.08, Management, Stratégie</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.08 — R1.08) ===
+• Hypothèse initiale : Stratégies corporate (spécialisation, diversification, intégration, externalisation) et stratégies g...
+• Opération principale : Mise en œuvre de Cours 8 · C3 combiné à R1.08
+• Point clé vérifié : Maîtrise opérationnelle de « R1.08 » dans le cadre de Les stratégies d'entreprise — Globales et de domaine : i
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la définition économique standard d'une entreprise selon le cours de Mme Alzieu ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Un bâtiment où travaillent des fonctionnaires
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap8_strategies_globales_domaine_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Une unité économique autonome combinant des facteurs de production (travail et capital) pour produire des biens et/ou des services marchands destinés à être vendus sur un marché dans le but de réaliser un profit
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Une association qui collecte des dons caritatifs
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Un groupe de personnes qui partagent le même compte bancaire
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap8_strategies_globales_domaine_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Les 3 caractéristiques indispensables d'une entreprise privée marchande : 1. Autonomie de décision, 2. Combinaison productive (Capital K + Travail L), 3. Vente sur un marché à un prix économiquement significatif couvrant au moins les coûts de production.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans le modèle de la « Chaîne de Valeur » de Michael Porter, comment se décomposent les activités créatrices de valeur ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) En activités de jour et activités de nuit
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap8_strategies_globales_domaine_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) En Activités Principales (logistique entrante, production, logistique sortante, commercialisation/vente, services) et Activités de Soutien (infrastructure, RH, R&D/technologie, approvisionnements)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) En dépenses obligatoires et dépenses facultatives
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) En activités manuelles et activités automatisées
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap8_strategies_globales_domaine_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Porter montre que l'avantage concurrentiel d'une entreprise provient de sa capacité à concevoir, produire, commercialiser et soutenir ses produits avec une marge supérieure à ses concurrents, grâce à l'articulation optimale entre activités principales et activités de soutien.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelles sont les 5 Forces Concurrentielles de Michael Porter qui déterminent l'attractivité d'un secteur économique ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le vent, la pluie, le froid, la chaleur et l'humidité
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap8_strategies_globales_domaine_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) La rivalité entre concurrents existants, la menace de nouveaux entrants, la menace de produits de substitution, le pouvoir de négociation des clients, et le pouvoir de négociation des fournisseurs
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Le marketing, la comptabilité, le droit, l'informatique et les RH
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Google, Apple, Facebook, Amazon et Microsoft
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap8_strategies_globales_domaine_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Modèle des 5 forces de Porter : l'intensité de ces forces détermine la rentabilité moyenne du secteur. Par exemple, si les clients ont un pouvoir de négociation écrasant ou si des produits de substitution émergent rapidement, les marges de l'entreprise s'effondrent.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Selon la classification officielle de l'INSEE, quels sont les critères d'une PME (Petite et Moyenne Entreprise) en France ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap8_strategies_globales_domaine_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Moins de 250 salariés, et un chiffre d'affaires inférieur à 50 millions d'euros (ou bilan inférieur à 43 M€)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Moins de 10 salariés et moins de 100 000 euros de CA
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Entre 1000 et 5000 salariés
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap8_strategies_globales_domaine_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Plus de 10 000 salariés
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap8_strategies_globales_domaine_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Grille officielle INSEE : 1. Microentreprise/TPE (< 10 salariés, CA < 2M€) ; 2. PME (< 250 salariés, CA < 50M€) ; 3. ETI - Entreprise de Taille Intermédiaire (< 5000 salariés, CA < 1.5 milliard d'€) ; 4. GE - Grande Entreprise (>= 5000 salariés).
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
     </main>
     
     <!-- Footer Navigation -->
     <footer class="glass-card rounded-2xl p-6 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 text-xs text-slate-500">
         <div class="flex items-center gap-2">
             <span class="concept-badge">R1.08</span>
-            <span>Enseignant : <strong>M. Moulin</strong> · IUT d'Anglet</span>
+            <span>Enseignant : <strong>M. Moulin / Mme Alzieu</strong> · IUT d'Anglet</span>
         </div>
         <div class="flex items-center gap-4">
             <a href="../R1.08.html" class="hover:text-slate-900 font-semibold flex items-center gap-1">
@@ -209,6 +588,27 @@
             </a>
         </div>
     </footer>
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>

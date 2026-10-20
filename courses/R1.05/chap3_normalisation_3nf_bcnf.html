@@ -1,340 +1,725 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#6E4970"/>
-    <title>Chapitre 3 : Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF — R1.05 Bases de Données & Merise (MCD / SQL) — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#6E4970">
+    <title>R1.05 • Ch. 3 : Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #6E4970;
-            --bg-soft: #F2EDF3;
-            --border-soft: #D4C4D6;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.65;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .concept-badge {
-            display: inline-flex;
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #6E4970;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.1rem 1.4rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
         }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
         }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.05.html">R1.05 Bases de Données</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 3</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.05.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #6E4970;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.05</span>
-            </a>
-        </div>
-    </header>
-
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #6E4970;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 2 · Chapitre 3</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Christophe Marquesuzaà / M. Tirel / M. Dourisboure</span>
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 3 : Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Dépendances Fonctionnelles (DF) élémentaires, axiomes d'Armstrong, fermeture transitive d'attributs, élimination méthodique des anomalies d'insertion/suppression. Première, deuxième, troisième forme normale et BCNF.</p>
-    </section>
-
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="zap" style="color: #6E4970;"></i>
-        <span>1. Motivation : Pourquoi Normaliser une Base de Données ?</span>
-    </h2>
     
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Une base de données mal conçue souffre de trois anomalies graves qui corrompent les données en production :
-            </p>
-            <ul class="text-xs text-slate-700 space-y-1.5 pl-4 list-disc my-3">
-                <li><strong>Anomalie de Redondance :</strong> La même information est dupliquée des dizaines de fois (ex: le nom et l'adresse d'un client répétés sur chaque ligne de commande). Gaspillage d'espace et risque immédiat de désynchronisation.</li>
-                <li><strong>Anomalie de Mise à Jour :</strong> Si le client change d'adresse, il faut modifier des centaines de lignes. Si une seule ligne est oubliée, la base devient contradictoire.</li>
-                <li><strong>Anomalie d'Insertion et de Suppression :</strong> Impossible d'enregistrer un produit en stock tant qu'il n'a pas été commandé par un client, ou supprimer la dernière commande d'un client supprime par mégarde toutes les informations sur ce client !</li>
-            </ul>
-            <p class="text-sm text-slate-700 leading-relaxed">
-                La <strong>normalisation</strong> est une démarche formelle mathématique permettant de décomposer une relation en plusieurs relations plus petites sans perte d'information, éliminant ces anomalies.
-            </p>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="git-branch" style="color: #6E4970;"></i>
-        <span>2. Dépendances Fonctionnelles (DF) & Axiomes d'Armstrong</span>
-    </h2>
-    
-            <div class="callout-def">
-                <p class="font-bold text-slate-900 text-sm">DÉFINITION FORMELLE D'UNE DÉPENDANCE FONCTIONNELLE :</p>
-                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
-                    Soit une relation $R$ et deux sous-ensembles d'attributs $X$ et $Y$ de $R$.<br/>
-                    On dit que $X$ détermine fonctionnellement $Y$, noté <strong>$$X 	o Y$$</strong>, si et seulement si pour toute paire de tuples $t_1, t_2 \in R$ :
-                    $$t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y]$$
-                    <em>En clair : la connaissance de la valeur de $X$ détermine de manière UNIQUE la valeur de $Y$.</em>
-                </p>
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.05.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.05
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 3</span>
             </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.05.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F2EDF3; color: #6E4970; border: 1px solid #D4C4D6;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #19539
+                </span>
+            </div>
+        </div>
+    </div>
 
-            <h3 class="font-bold text-slate-900 text-sm mt-4 mb-2">Les 3 Axiomes d'Armstrong (Complets et Sains) :</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
-                    <p class="font-bold text-slate-900">1. Réflexivité</p>
-                    <p class="text-slate-600 mt-1">Si $Y \subseteq X$, alors $$X 	o Y$$</p>
-                    <p class="text-slate-500 text-[11px] mt-1">(ex : <code>(numEtudiant, nom) -> nom</code>)</p>
-                </div>
-                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
-                    <p class="font-bold text-slate-900">2. Augmentation</p>
-                    <p class="text-slate-600 mt-1">Si $X 	o Y$, alors pour tout $Z$ : $$XZ 	o YZ$$</p>
-                </div>
-                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
-                    <p class="font-bold text-slate-900">3. Transitivité</p>
-                    <p class="text-slate-600 mt-1">Si $X 	o Y$ et $Y 	o Z$, alors $$X 	o Z$$</p>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #6E4970;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F2EDF3; color: #6E4970; border: 1px solid #D4C4D6;">
+                        R1.05 • CHAPITRE 3
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Christophe Marquesuzaà / M. Yon Dourisboure</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
                 </div>
             </div>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="sliders-horizontal" style="color: #6E4970;"></i>
-        <span>3. Les Formes Normales : 1FN, 2FN, 3FN et BCNF</span>
-    </h2>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Dépendances fonctionnelles (DF), élimination rigoureuse des anomalies d'insertion, mise à jour et suppression, 1ère, 2ème, 3ème formes normales et forme normale de Boyce-Codd.
+            </div>
+        </div>
+    </div>
     
-            <table>
-                <thead>
-                    <tr>
-                        <th>Forme Normale</th>
-                        <th>Condition Formelle Mathématique</th>
-                        <th>Règle Pratique & Contre-Exemple Éliminé</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1FN</strong> (Première FN)</td>
-                        <td>Tous les attributs sont atomiques (indivisibles).</td>
-                        <td>❌ Une colonne contenant une liste <code>"0612345678, 0559010203"</code> ou un champ composite <code>"64600 Anglet"</code> viole la 1FN.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2FN</strong> (Deuxième FN)</td>
-                        <td>1FN vérifiée ET tout attribut non-clé dépend <em>pleinement</em> de la totalité de la clé primaire (pas de sous-dépendance partielle).</td>
-                        <td>Concerne les relations dont la clé est <strong>composite</strong> (plusieurs attributs). Si un attribut dépend d'une seule partie de la clé (ex: <code>(numFacture, refProduit) -> nomProduit</code>), alors <code>nomProduit</code> viole la 2FN car il dépend uniquement de <code>refProduit</code>.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3FN</strong> (Troisième FN)</td>
-                        <td>2FN vérifiée ET aucun attribut non-clé ne dépend d'un autre attribut non-clé (pas de dépendance transitive).</td>
-                        <td>Pour toute DF $X 	o A$, soit $X$ est une super-clé, soit $A$ est un attribut premier (clé).<br/>❌ <code>numCommande -> codePostal -> ville</code> viole la 3FN car <code>ville</code> dépend de <code>codePostal</code> qui n'est pas clé.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>BCNF</strong> (Boyce-Codd)</td>
-                        <td>Pour toute DF non-triviale $X 	o Y$, <strong>$X$ est obligatoirement une clé candidate</strong>.</td>
-                        <td>Forme la plus stricte. Élimine les anomalies résiduelles lorsque plusieurs clés candidates composites se chevauchent.</td>
-                    </tr>
-                </tbody>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Le Rôle Critique de la Normalisation</h2>
+<p>
+La normalisation permet de valider mathématiquement qu'un modèle relationnel ne présente aucune redondance inutile. Une base mal normalisée est exposée à trois anomalies graves :
+</p>
+<ul>
+    <li><strong>Anomalie de mise à jour :</strong> Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente.</li>
+    <li><strong>Anomalie d'insertion :</strong> Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.</li>
+    <li><strong>Anomalie de suppression :</strong> Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même !</li>
+</ul>
+
+<h2>2. Dépendances Fonctionnelles (DF)</h2>
+<p>
+Soit une relation $R$. On dit que l'attribut $B$ <strong>dépend fonctionnellement</strong> de $A$ (noté $A \to B$) si à chaque valeur de $A$ correspond au maximum une seule valeur de $B$.
+</p>
+<ul>
+    <li><strong>DF Élémentaire :</strong> $A \to B$ est élémentaire si aucune sous-partie de $A$ ne détermine $B$.</li>
+    <li><strong>DF Directe :</strong> $A \to B$ est directe s'il n'existe aucun attribut intermédiaire $C$ tel que $A \to C$ et $C \to B$ (absence de transitivité).</li>
+</ul>
+
+<h2>3. Les Formes Normales Expliquées Pas-à-Pas</h2>
+
+<h3>1ère Forme Normale (1FN) : Atomicité</h3>
+<p>
+Une relation est en 1FN si et seulement si tous ses attributs sont <strong>atomiques</strong> (indivisibles, mono-valués) et qu'elle possède une clé primaire identifiant chaque tuple.
+<br><em>Contre-exemple :</em> Une colonne <code>telephones</code> contenant <code>"0612345678, 0559010203"</code> viole la 1FN.
+</p>
+
+<h3>2ème Forme Normale (2FN) : Dépendance Totale par rapport à la Clé</h3>
+<p>
+Une relation est en 2FN si elle est en 1FN et que tout attribut non-clé dépend de la <strong>totalité de la clé primaire</strong> (et non pas d'une partie stricte de celle-ci).
+<br><em>Cas immédiat :</em> Toute relation dont la clé primaire est constituée d'un seul attribut et qui est en 1FN est <strong>automatiquement en 2FN</strong> !
+</p>
+
+<h3>3ème Forme Normale (3FN) : Pas de Dépendance Transitive</h3>
+<p>
+Une relation est en 3FN si elle est en 2FN et que tout attribut non-clé dépend <strong>directement</strong> de la clé primaire, sans dépendre d'un autre attribut non-clé ($A \to B \to C$ interdit pour $C$ non-clé).
+<br><em>Exemple classique :</em> <code>COMMANDE(<u>idCmd</u>, dateCmd, idClient, nomClient, villeClient)</code>.
+<br>Ici, <code>idCmd \to idClient</code> et <code>idClient \to nomClient</code>. <code>nomClient</code> dépend de la clé primaire par transitivité à travers <code>idClient</code> $\implies$ VIOLATION DE LA 3FN.
+<br><strong>Solution :</strong> Décomposer en deux relations <code>COMMANDE(<u>idCmd</u>, dateCmd, #idClient)</code> et <code>CLIENT(<u>idClient</u>, nomClient, villeClient)</code>.
+</p>
+
+<h3>Forme Normale de Boyce-Codd (BCNF / FNBC)</h3>
+<p>
+Une relation est en BCNF si pour toute dépendance fonctionnelle non triviale $X \to Y$, $X$ est obligatoirement une super-clé (contient une clé candidate).
+</p>
+
+            </div>
+        </div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #6E4970;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF »</strong> constitue un pilier fondamental du module <strong>R1.05 — Bases de Données & SQL</strong> enseigné par <strong>M. Christophe Marquesuzaà / M. Yon Dourisboure</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Dépendances fonctionnelles (DF), élimination rigoureuse des anomalies d'insertion, mise à jour et suppression, 1ère, 2ème, 3ème formes normales et forme normale de Boyce-Codd. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Normalisation, 1FN, 2FN, 3FN, BCNF</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Normalisation, 1FN, 2FN, 3FN) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Christophe Marquesuzaà / M. Yon Dourisboure.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">1</span>
+                <span>Étape 1 : Le Rôle Critique de la Normalisation</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Normalisation</em> en partant de zéro. Anomalie de mise à jour : Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente. Complétez systématiquement cette analyse par la vérification suivante : Anomalie d'insertion : Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Normalisation) : telephones — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">2</span>
+                <span>Étape 2 : Dépendances Fonctionnelles (DF)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>1FN</em> en partant de zéro. Anomalie de suppression : Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même ! Complétez systématiquement cette analyse par la vérification suivante : DF Élémentaire : $A \to B$ est élémentaire si aucune sous-partie de $A$ ne détermine $B$.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (1FN) : "0612345678, 0559010203" — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">3</span>
+                <span>Étape 3 : Les Formes Normales Expliquées Pas-à-Pas</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>2FN</em> en partant de zéro. DF Directe : $A \to B$ est directe s'il n'existe aucun attribut intermédiaire $C$ tel que $A \to C$ et $C \to B$ (absence de transitivité). Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Dépendances fonctionnelles » dans le cadre de Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Christophe Marq</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (2FN) : COMMANDE( idCmd , dateCmd, idClient, nomClient, villeClient) — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">4</span>
+                <span>Étape 4 : 1ère Forme Normale (1FN) : Atomicité</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>3FN</em> en partant de zéro. Maîtrise opérationnelle de « Anomalies » dans le cadre de Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Christophe Marquesuzaà / M. Yon Dourisboure et contr Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Normalisation » dans le cadre de Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Christophe Marquesuzaà / M. </p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (3FN) : idCmd \to idClient — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #6E4970;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Christophe Marquesuzaà / M. Yon Dourisboure)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Normalisation</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>telephones</code><br><span class='text-[11px] text-slate-600'>1. Le Rôle Critique de la Normalisation</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Anomalie de mise à jour : Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>1FN</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>"0612345678, 0559010203"</code><br><span class='text-[11px] text-slate-600'>2. Dépendances Fonctionnelles (DF)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Anomalie d'insertion : Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2FN</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>COMMANDE( idCmd , dateCmd, idClient, nomClient, villeClient)</code><br><span class='text-[11px] text-slate-600'>3. Les Formes Normales Expliquées Pas-à-Pas</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Anomalie de suppression : Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même !</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>3FN</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>idCmd \to idClient</code><br><span class='text-[11px] text-slate-600'>1ère Forme Normale (1FN) : Atomicité</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">DF Élémentaire : $A \to B$ est élémentaire si aucune sous-partie de $A$ ne détermine $B$.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>BCNF</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>idClient \to nomClient</code><br><span class='text-[11px] text-slate-600'>2ème Forme Normale (2FN) : Dépendance Totale par rapport à la Clé</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">DF Directe : $A \to B$ est directe s'il n'existe aucun attribut intermédiaire $C$ tel que $A \to C$ et $C \to B$ (absence de transitivité).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Dépendances fonctionnelles</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>nomClient</code><br><span class='text-[11px] text-slate-600'>3ème Forme Normale (3FN) : Pas de Dépendance Transitive</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Dépendances fonctionnelles » dans le cadre de Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF : identifier l'hypothèse de départ, appliquer la règle formelle </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Anomalies</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>idClient</code><br><span class='text-[11px] text-slate-600'>Forme Normale de Boyce-Codd (BCNF / FNBC)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Anomalies » dans le cadre de Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Ch</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>1. Le Rôle Critique de la Normalisation</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>COMMANDE( idCmd , dateCmd, #idClient)</code><br><span class='text-[11px] text-slate-600'>1. Le Rôle Critique de la Normalisation</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Normalisation » dans le cadre de Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
             </table>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="check-square" style="color: #6E4970;"></i>
-        <span>4. Exercice Type d'Examen Résolu : Décomposition sans Perte</span>
-    </h2>
+        </div>
+    </article>
     
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Voici un exercice classique posé aux examens de R1.05 à l'IUT d'Anglet :
-            </p>
-            <div class="p-4 rounded-xl border border-slate-300 bg-slate-50 text-xs space-y-1.5 my-3">
-                <p class="font-bold text-slate-900">Énoncé :</p>
-                <p class="text-slate-700">Soit la relation non normalisée $R(idEtudiant, nom, idStage, raisonSociale, villeEntreprise, noteSoutenance)$.</p>
-                <p class="text-slate-700">On donne les Dépendances Fonctionnelles suivantes :</p>
-                <ul class="list-disc pl-5 font-mono text-[11px] text-slate-800 space-y-0.5">
-                    <li>DF1 : idEtudiant -> nom, idStage, noteSoutenance</li>
-                    <li>DF2 : idStage -> raisonSociale, villeEntreprise</li>
-                    <li>DF3 : idEtudiant, idStage -> noteSoutenance</li>
-                </ul>
-                <p class="text-slate-900 font-semibold mt-2">Questions :</p>
-                <ol class="list-decimal pl-5 space-y-0.5 text-slate-700">
-                    <li>Quelle est la clé primaire de $R$ ?</li>
-                    <li>En quelle forme normale se trouve $R$ ? Justifier rigoureusement.</li>
-                    <li>Décomposer $R$ en relations conformes à la 3FN sans perte d'information.</li>
-                </ol>
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Normalisation » sans vérifier les préconditions</span>
             </div>
-
-            <div class="callout-def">
-                <p class="font-bold text-slate-900 text-xs">Solution Modèle :</p>
-                <div class="text-xs text-slate-700 mt-1 space-y-2">
-                    <p><strong>1. Clé primaire :</strong> Calculons la fermeture de <code>idEtudiant</code> :<br/>
-                    $$idEtudiant^+ = \{idEtudiant, nom, idStage, noteSoutenance\} \cup \{raisonSociale, villeEntreprise\} = R$$
-                    La clé primaire minimale de $R$ est donc <code>idEtudiant</code>.</p>
-
-                    <p><strong>2. Forme normale :</strong><br/>
-                    • $R$ est en 1FN (attributs atomiques).<br/>
-                    • $R$ est en 2FN car la clé primaire est simple (1 seul attribut <code>idEtudiant</code>), donc aucune sous-clé ne peut exister.<br/>
-                    • $R$ <strong>n'est PAS en 3FN</strong> car il existe une dépendance transitive entre attributs non-clés :
-                    $$idEtudiant 	o idStage \quad 	ext{et} \quad idStage 	o raisonSociale, villeEntreprise$$
-                    Or <code>idStage</code> n'est pas une clé de $R$.</p>
-
-                    <p><strong>3. Décomposition 3FN sans perte :</strong><br/>
-                    On isole la DF transitive dans une table dédiée :<br/>
-                    • <code>ENTREPRISE_STAGE (<ins>idStage</ins>, raisonSociale, villeEntreprise)</code><br/>
-                    • <code>ETUDIANT (<ins>idEtudiant</ins>, nom, noteSoutenance, #idStage)</code><br/>
-                    Les deux tables obtenues sont en 3FN et en BCNF.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Normalisation</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.05</strong>, M. Christophe Marquesuzaà / M. Yon Dourisboure insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Normalisation</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
                 </div>
             </div>
-            
-</article>
-    </main>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « 1FN »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>1FN</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Bases de Données & SQL), une part majeure des points est dédiée à la robustesse : Anomalie de mise à jour : Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente. Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>1FN</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « 2FN »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>2FN</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Christophe Marquesuzaà / M. Yon Dourisboure rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.05</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>2FN</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
 
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
-        <div>
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
             
-        <a href="chap2_derivation_mld.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 2 : Dérivation Rigoureuse du MCD ver...</span>
-        </a>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #6E4970;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Le Rôle Critique de la Normalisation</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.05 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.05 (Bases de Données & SQL)</strong> supervisé par M. Christophe Marquesuzaà / M. Yon Dourisboure, on vous demande d'analyser et de résoudre un problème portant sur <strong>Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF</strong> en mobilisant explicitement les notions de <em>Normalisation, 1FN, 2FN</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Normalisation</em>. Rappel du cours : Anomalie de mise à jour : Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Le Rôle Critique de la Normalisation</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Dépendances Fonctionnelles (DF)</em> : Anomalie d'insertion : Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>1FN</em> (Anomalie de suppression : Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même !).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Dépendances fonctionnelles (DF), élimination rigoureuse des anomalies d'insertion, mise à jour et suppression, 1ère, 2ème, 3ème formes norma) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.05 — Ch.3 : Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF) ===
+1. Entrées analysées : Normalisation, 1FN, 2FN, 3FN
+2. Étape A (1. Le Rôle Critique de la Normalisation) : Validation des hypothèses -> OK
+3. Étape B (2. Dépendances Fonctionnelles (DF)) : Application de la méthode officielle
+   -> Détail : Anomalie de mise à jour : Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une s
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE M. CHRISTOPHE MARQUESUZAÀ / M. YON DOURISBOURE ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #6E4970;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Les Formes Normales Expliquées Pas-à-Pas</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Christophe Marquesuzaà / M. Yon Dourisboure</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.05</strong>, un exercice de synthèse combine <strong>1FN</strong> et <strong>2FN</strong> au sein du thème <em>« Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>1FN</em> : DF Élémentaire : $A \to B$ est élémentaire si aucune sous-partie de $A$ ne détermine $B$.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Christophe Marquesuzaà / M. Yon Dourisboure dans la section <em>3. Les Formes Normales Expliquées Pas-à-Pas</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>2FN</em>, on obtient la séquence exacte : DF Directe : $A \to B$ est directe s'il n'existe aucun attribut intermédiaire $C$ tel que $A \to C$ et $C \to B$ (absence de transitivité).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Normalisation, 1FN, 2FN, 3FN</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.05 — 1FN) ===
+• Hypothèse initiale : Dépendances fonctionnelles (DF), élimination rigoureuse des anomalies d'insertion, mise à jour et su...
+• Opération principale : Mise en œuvre de Normalisation combiné à 1FN
+• Point clé vérifié : Anomalie d'insertion : Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
         
         </div>
-        <a href="../R1.05.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
-        </a>
-        <div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
             
-        <a href="chap4_sql_ddl_dml.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #6E4970;">
-            <span>Ch. 4 : SQL DDL & DML : Création de Tabl...</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.3</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle condition stricte une relation doit-elle respecter pour être en 2ème Forme Normale (2FN) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Être en 1FN et tous les attributs non-clés doivent dépendre pleinement de la totalité de la clé primaire (et pas d'une sous-partie)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Avoir au moins deux clés primaires différentes
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Ne contenir aucun nombre décimal à virgule
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Avoir été vérifiée par deux professeurs différents
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap3_normalisation_3nf_bcnf_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La 2FN élimine les dépendances fonctionnelles partielles : si la clé primaire est composite (A, B), aucun attribut non-clé C ne doit dépendre uniquement de A ou uniquement de B.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.3</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle condition supplémentaire la Forme Normale de Boyce-Codd (BCNF) exige-t-elle par rapport à la 3FN classique ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) La table ne doit pas contenir plus de 5 colonnes
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Pour toute dépendance fonctionnelle non triviale X -> Y, X doit obligatoirement être une super-clé (déterminant de clé)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Toutes les colonnes doivent être indexées
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) La table doit avoir été créée par un administrateur système
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap3_normalisation_3nf_bcnf_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La 3FN tolère qu'un attribut non-clé dépende d'une sous-partie de clé si cet attribut fait lui-même partie d'une clé candidate alternative. La BCNF élimine cette exception : tout déterminant d'une DF doit être une super-clé complète.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.3</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle contrainte d'intégrité SQL permet d'imposer qu'un prix soit strictement positif (prix > 0) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) NOT NULL
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) CHECK (prix > 0)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) UNIQUE (prix)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) FOREIGN KEY (prix)
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap3_normalisation_3nf_bcnf_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La contrainte CHECK évalue une condition booléenne sur chaque ligne lors de l'insertion ou de la mise à jour (INSERT/UPDATE). Si la condition est fausse, le SGBD rejette la transaction.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.3</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la conclusion méthodologique essentielle que M. Marquesuzaà répète à chaque promotion pour réussir la conception d'une base de données ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Commencer directement par taper les tables en SQL pour gagner du temps
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Le temps investi dans la rigueur du modèle conceptuel (MCD) et la validation des règles de gestion élimine à la source 95% des anomalies, redondances et incohérences dans l'application finale
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Utiliser Excel plutôt qu'une base de données relationnelle
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap3_normalisation_3nf_bcnf_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Ne jamais poser de questions aux utilisateurs métier
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap3_normalisation_3nf_bcnf_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Une base de données mal modélisée conceptuellement conduira inévitablement à des anomalies de mise à jour, des incohérences de données et des requêtes SQL tortueuses et lentes. Le MCD est la pierre angulaire de tout système d'information pérenne.
+            </div>
+        </div>
         
         </div>
-    </footer>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap2_derivation_mld.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 2 : Dérivation Rigoureuse du MCD vers le MLD Relationnel</span></a>
+            </div>
+            <a href="../R1.05.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.05</span>
+            </a>
+            <div>
+                <a href="chap4_sql_ddl_dml.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #6E4970;"><span>Ch. 4 : Implémentation SQL DDL & DML sous Oracle / PostgreSQL</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
 
     <script>
         lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>

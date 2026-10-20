@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
     <meta name="theme-color" content="#8A5A44"/>
-    <title>Chapitre 2 : Complément à Deux (C2), Overflow & Norme Flottante IEEE 754 — R1.03 Architecture des Ordinateurs — KAI Academic</title>
+    <title>Chapitre 2 : Arithmétique Binaire, Complément à Deux & Virgule Flottante IEEE 754 — R1.03 Architecture des Ordinateurs & Systèmes — KAI Academic</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons CDN -->
@@ -31,27 +31,36 @@
             background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
             background-size: 28px 28px;
             color: #0f172a;
-            line-height: 1.65;
+            line-height: 1.7;
             -webkit-tap-highlight-color: transparent;
         }
         .font-dyslexic {
             font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
+            letter-spacing: 0.035em !important;
+            word-spacing: 0.09em !important;
+            line-height: 1.9 !important;
             background-color: #faf8f2 !important;
             background-image: none !important;
+        }
+        .font-dyslexic p, .font-dyslexic li, .font-dyslexic td {
+            font-size: 1.02rem !important;
+            line-height: 1.9 !important;
         }
         .glass-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+        .glass-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         }
         .concept-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 9999px;
             font-size: 0.72rem;
             font-weight: 700;
@@ -66,7 +75,7 @@
             border-radius: 0.75rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            margin: 1.25rem 0;
         }
         th {
             background-color: #f1f5f9;
@@ -74,7 +83,7 @@
             font-weight: 700;
             padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             border-bottom: 2px solid #cbd5e1;
         }
         td {
@@ -92,36 +101,70 @@
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         pre {
             background: #0f172a;
             color: #f8fafc;
-            padding: 1.1rem 1.4rem;
+            padding: 1.25rem 1.5rem;
             border-radius: 0.85rem;
             overflow-x: auto;
             margin: 1.25rem 0;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
         }
         code:not(pre code) {
             background: #f1f5f9;
             color: #0f172a;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
+            font-size: 0.84rem;
+            padding: 0.2rem 0.45rem;
             border-radius: 0.35rem;
             border: 1px solid #e2e8f0;
+        }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
         }
     </style>
 </head>
@@ -129,13 +172,13 @@
 
     <!-- Top Breadcrumb & Controls -->
     <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
+        <nav class="flex items-center gap-2 text-xs text-slate-500 font-mono">
             <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
                 <i class="w-3.5 h-3.5" data-lucide="home"></i>
                 <span>Hub</span>
             </a>
             <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.03.html">R1.03 Archi Matérielle</a>
+            <a class="hover:text-slate-900 font-medium" href="../R1.03.html">R1.03</a>
             <span>/</span>
             <span class="font-bold text-slate-900">Chapitre 2</span>
         </nav>
@@ -154,184 +197,506 @@
     <!-- Chapter Header Banner -->
     <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #8A5A44;">
         <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 1 · Chapitre 2</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Roose / M. Bouizem</span>
+            <span class="concept-badge">R1.03 · Masterclass Chapitre 2</span>
+            <span class="text-xs text-slate-500 font-mono">IUT d'Anglet · Enseignants référents : M. Jean-Noël Moulin / M. Philippe Roose</span>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 2 : Complément à Deux (C2), Overflow & Norme Flottante IEEE 754</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Entiers signés en Complément à Deux, détection d'overflow, norme flottante IEEE 754 simple précision 32 bits (signe, exposant biaisé +127, mantisse).</p>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 2 : Arithmétique Binaire, Complément à Deux & Virgule Flottante IEEE 754</h1>
+        <p class="text-slate-600 text-sm sm:text-base mt-2.5 max-w-3xl leading-relaxed">Théorie des entiers signés en Complément à 2 (C2), dynamique d'intervalle asymétrique, extension de signe. Arithmétique binaire dans l'ALU, distinction Carry (C) vs Overflow (V). Norme IEEE 754 simple et double précision, mantisse normalisée, zéros signés, dénormalisés, infinis et NaN.</p>
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500">
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-emerald-600" data-lucide="check-circle-2"></i> Cours Exhaustif Zéro Prérequis</span>
+            <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-amber-600" data-lucide="alert-triangle"></i> Pièges QCM M. Moulin</span>
+            <span class="px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 border border-orange-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-orange-600" data-lucide="cpu"></i> Carry vs Overflow V Décodé</span>
+            <span class="px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 border border-purple-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-purple-600" data-lucide="code"></i> IEEE 754 32/64 bits Pas-à-Pas</span>
+        </div>
     </section>
 
     <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>1. Les Entiers Signés en Complément à Deux ($C_2$)</span></h2>
-    
-    
-    
-    
-<p>
-Pour représenter les nombres négatifs dans l'UAL sans avoir à fabriquer des soustracteurs matériels séparés et sans avoir de double zéro ($+0$ et $-0$), tous les processeurs utilisent le <strong>complément à deux</strong> sur $N$ bits.
-</p>
-<p>
-L'intervalle des valeurs représentables sur $N$ bits signés est :
-</p>
-$$[-2^{N-1} ; +2^{N-1} - 1]$$
-<table class="w-full text-xs">
-    <thead>
-        <tr>
-            <th>Nombre de Bits ($N$)</th>
-            <th>Valeur Minimale Négative</th>
-            <th>Valeur Maximale Positive</th>
-            <th>Usage Matériel</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>8 bits (Octet / <code>int8_t</code>)</td>
-            <td>$-2^7 = -128$</td>
-            <td>$+2^7 - 1 = +127$</td>
-            <td>Types <code>char</code> en C</td>
-        </tr>
-        <tr>
-            <td>16 bits (<code>short</code>)</td>
-            <td>$-2^{15} = -32\,768$</td>
-            <td>$+2^{15} - 1 = +32\,767$</td>
-            <td>Registres historiques x86</td>
-        </tr>
-        <tr>
-            <td>32 bits (<code>int</code>)</td>
-            <td>$-2^{31} \approx -2{,}14 \times 10^9$</td>
-            <td>$+2^{31} - 1 \approx +2{,}14 \times 10^9$</td>
-            <td>Entiers standard</td>
-        </tr>
-        <tr>
-            <td>64 bits (<code>long</code>)</td>
-            <td>$-2^{63} \approx -9{,}22 \times 10^{18}$</td>
-            <td>$+2^{63} - 1 \approx +9{,}22 \times 10^{18}$</td>
-            <td>Adresses mémoire 64 bits</td>
-        </tr>
-    </tbody>
-</table>
+    <main class="space-y-8">
 
-<h3>Règle de Calcul du Complément à Deux d'un Nombre Négatif</h3>
-<ol>
-    <li>Écrire la valeur absolue positive du nombre en binaire sur $N$ bits.</li>
-    <li>Inverser tous les bits ($0 \leftrightarrow 1$, c'est le complément à un $C_1$).</li>
-    <li>Ajouter $1$ au mot binaire résultant : $C_2(x) = C_1(x) + 1$.</li>
-</ol>
-<pre><code>Exemple d'examen : Coder -45 sur 8 bits
-1. Valeur absolue (+45)_10 = 00101101
-2. Complément à un (inversion) = 11010010
-3. Ajout de 1                   = 11010011
-==> (-45)_10 codé en C2 sur 8 bits est (11010011)_2 = (D3)_16</code></pre>
+<!-- SECTION 1 : THÉORIE DES ENTIERS SIGNÉS & COMPLÉMENT À DEUX -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="hash" style="color: #8A5A44;"></i>
+        <span>1. Représentation des Nombres Entiers Relatifs & Complément à Deux (C2)</span>
+    </h2>
 
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Comment représenter un signe mathématique négatif ($-$ ou $+$) dans une mémoire électronique constituée exclusivement de bistables valant 0 ou 1 ?
+        Trois représentations ont été historiquement expérimentées, mais une seule s'est imposée universellement :
+    </p>
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <span class="font-bold text-slate-900 block">1. Signe + Valeur Absolue (SVA)</span>
+            <p class="text-slate-600 leading-relaxed">
+                Le bit de poids fort (MSB) vaut $0$ pour positif et $1$ pour négatif. Les $n-1$ autres bits portent la valeur absolue.
+            </p>
+            <div class="p-2 rounded bg-rose-50 text-rose-800 text-xs">
+                <strong>Gros défauts :</strong> Double zéro ($+0 = 0000$ et $-0 = 1000$). L'addition $5 + (-5)$ donne $0101 + 1101 = 0010$ ($+2$), ce qui est faux ! Nécessite des circuits matériels d'addition distincts et coûteux.
+            </div>
+        </div>
 
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <span class="font-bold text-slate-900 block">2. Complément à Un (C1)</span>
+            <p class="text-slate-600 leading-relaxed">
+                Pour obtenir l'opposé d'un nombre positif, on inverse simplement chaque bit ($0 	o 1$ et $1 	o 0$).
+            </p>
+            <div class="p-2 rounded bg-rose-50 text-rose-800 text-xs">
+                <strong>Défaut persistant :</strong> Possède toujours deux zéros distincts ($+0 = 0000$ et $-0 = 1111$). L'addition matérielle nécessite une propagation de la retenue de rebouclage (<em>end-around carry</em>).
+            </div>
+        </div>
 
+        <div class="p-4 rounded-xl border border-emerald-300 bg-emerald-50/50 space-y-2">
+            <span class="font-bold text-emerald-950 block">3. Complément à Deux (C2) — STANDARD</span>
+            <p class="text-emerald-900 leading-relaxed">
+                Le complément à deux résout TOUS les problèmes : un seul zéro unique, et <strong>le même circuit matériel d'additionneur sert indistinctement aux entiers signés et non signés</strong> !
+            </p>
+            <div class="p-2 rounded bg-emerald-100/70 text-emerald-950 font-mono text-xs">
+                C₂(N) = Inversion de tous les bits + 1 = NOT(N) + 1
+            </div>
+        </div>
+    </div>
 
-    
+    <div class="callout-def">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+            <i class="w-4 h-4 text-emerald-700" data-lucide="check-circle-2"></i>
+            <span>DYNAMIQUE FORMELLE D'UN MOT DE $n$ BITS EN COMPLÉMENT À DEUX</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-800 mt-2 leading-relaxed">
+            Sur un mot binaire de $n$ bits, le bit de poids fort $b_{n-1}$ possède le poids négatif <strong>$-2^{n-1}$</strong> tandis que tous les autres bits $b_i$ conservent leur poids positif classique $+2^i$ :
+            $$N = -b_{n-1} \cdot 2^{n-1} + \sum_{i=0}^{n-2} b_i \cdot 2^i$$
+            L'intervalle des valeurs représentables (la <strong>dynamique</strong>) est <strong>asymétrique</strong> :
+            $$[-2^{n-1} \;,\; +2^{n-1} - 1]$$
+        </p>
+        <div class="mt-2 text-xs text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200">
+            • Sur <strong>8 bits</strong> ($1$ octet / <code>int8_t</code> en C++) : de <strong>$-128$</strong> ($-2^7 = 10000000_2$) à <strong>$+127$</strong> ($+2^7 - 1 = 01111111_2$).<br/>
+            • Sur <strong>16 bits</strong> (<code>short</code> / <code>int16_t</code>) : de <strong>$-32\,768$</strong> à <strong>$+32\,767$</strong>.<br/>
+            • Sur <strong>32 bits</strong> (<code>int</code> / <code>int32_t</code>) : de <strong>$-2\,147\,483\,648$</strong> à <strong>$+2\,147\,483\,647$</strong>.
+        </div>
+    </div>
 
-
-
-    
-
-
-
-    
+    <!-- Règle de transformation rapide -->
+    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs sm:text-sm">
+        <h4 class="font-bold text-slate-900 flex items-center gap-2">
+            <i class="w-4 h-4 text-amber-600" data-lucide="zap"></i>
+            <span>Méthode Rapide « du premier 1 à droite » (Astuce Contrôle)</span>
+        </h4>
+        <p class="text-slate-700 leading-relaxed">
+            Pour inverser le signe d'un nombre en C2 sans poser l'addition $+1$ :
+            on parcourt le mot binaire de la <strong>droite vers la gauche</strong>.
+            On recopie fidèlement tous les zéros et le premier '1' rencontré.
+            Puis, <strong>on inverse impérativement tous les bits restants situés à gauche de ce premier '1'</strong>.
+        </p>
+        <pre class="bg-slate-900 text-slate-100 p-2.5 rounded font-mono text-xs">
+Exemple : Trouver -24 sur 8 bits
++24 décimal en binaire naturel = 0 0 0 1 1 0 0 0₂
+Parcours depuis la droite :
+- Les trois '0' et le premier '1' sont recopiés tels quels : ... 1 0 0 0
+- Les bits à gauche (0001) sont inversés (1110)            : 1 1 1 0 1 0 0 0
+Résultat immédiat : (-24)₁₀ = (1110 1000)₂ en C2.</pre>
+    </div>
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>2. Détection du Dépassement de Capacité (OVERFLOW)</span></h2>
-    
-    
-    
-    
-<p>
-Lors d'une addition de deux nombres signés dans l'UAL, un dépassement de capacité (overflow) se produit si et seulement si :
-</p>
-<ul>
-    <li>On additionne deux nombres strictement positifs et le résultat obtenu a un bit de signe à 1 (apparaît négatif) ;</li>
-    <li>On additionne deux nombres strictement négatifs et le résultat obtenu a un bit de signe à 0 (apparaît positif).</li>
-</ul>
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
-<strong>Règle Matérielle dans les Processeurs :</strong>
-<br>L'indicateur d'overflow (drapeau <code>V</code> dans le registre d'état FLAGS) est calculé par la porte XOR entre la retenue entrante dans le bit de signe et la retenue sortante du bit de signe :
-$$V = C_{\text{in}}(\text{signe}) \oplus C_{\text{out}}(\text{signe})$$
-Si $V = 1$, il y a dépassement arithmétique !
-</div></div>
+<!-- SECTION 2 : CARRY VS OVERFLOW DANS L'ALU -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="cpu" style="color: #8A5A44;"></i>
+        <span>2. Arithmétique dans l'ALU : Distinction Fondamentale Carry ($C$) vs Overflow ($V$)</span>
+    </h2>
 
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Dans un processeur, l'Unité Arithmétique et Logique (ALU / UAL) exécute les additions bit à bit sans savoir si l'humain considère les nombres comme signés ou non signés.
+        À chaque opération, elle met à jour deux drapeaux (flags) essentiels dans son registre d'état (<code>CCR / R-FLAGS</code>) :
+    </p>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-xl border border-sky-200 bg-sky-50/50 space-y-2">
+            <div class="flex items-center gap-2 font-bold text-sky-950">
+                <span class="px-2 py-0.5 rounded bg-sky-200 text-sky-900 font-mono">Flag C (Carry)</span>
+                <span>Retenue Sortante (Non Signé)</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Le drapeau <strong>Carry</strong> indique qu'une retenue est sortie du bit de poids fort ($C = C_{out\_msb} = 1$).
+                Il signale un dépassement de capacité pour les entiers <strong>NON SIGNÉS</strong> (débordement au-delà de $2^n - 1$, ex: $255 + 1 = 0$ sur 8 bits avec $C=1$).
+                Pour un calcul signé en C2, la valeur de Carry est <strong>complètement ignorée</strong> !
+            </p>
+        </div>
 
+        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/50 space-y-2">
+            <div class="flex items-center gap-2 font-bold text-rose-950">
+                <span class="px-2 py-0.5 rounded bg-rose-200 text-rose-900 font-mono">Flag V (Overflow)</span>
+                <span>Dépassement de Capacité Signé (C2)</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Le drapeau <strong>Overflow</strong> signale que le résultat arithmétique mathématique est sorti de l'intervalle représentable en C2 ($[-2^{n-1}, 2^{n-1}-1]$).
+                Physiquement dans le silicium, il est calculé par la porte OU Exclusif (XOR) entre la retenue entrante et la retenue sortante du MSB :
+            </p>
+            <div class="p-2 bg-white rounded border border-rose-200 font-mono text-center font-bold text-rose-900 text-xs">
+                V = C_in(MSB) ⊕ C_out(MSB)
+            </div>
+        </div>
+    </div>
 
-
-    
-
-
-
-    
-
-
-
-    
+    <div class="callout-def">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+            <i class="w-4 h-4 text-emerald-700" data-lucide="shield-alert"></i>
+            <span>RÈGLE D'OR DE DÉTECTION INTUITIVE DE L'OVERFLOW</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-800 mt-2 leading-relaxed">
+            Un overflow ne peut survenir <strong>QUE lors de l'addition de deux nombres de même signe</strong> :
+        </p>
+        <ul class="text-xs text-slate-800 mt-1 space-y-1">
+            <li>• $	ext{Positif} + 	ext{Positif} = 	ext{Négatif} \implies$ <strong>OVERFLOW IMMÉDIAT ($V=1$)</strong> (ex: $70 + 70 = 140 > 127$).</li>
+            <li>• $	ext{Négatif} + 	ext{Négatif} = 	ext{Positif} \implies$ <strong>OVERFLOW IMMÉDIAT ($V=1$)</strong> (ex: $-80 + (-70) = -150 < -128$).</li>
+            <li>• $	ext{Positif} + 	ext{Négatif}$ : <strong>L'overflow est rigoureusement IMPOSSIBLE ($V=0$ toujours)</strong>, car le résultat est mathématiquement compris entre les deux valeurs.</li>
+        </ul>
+    </div>
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>3. Nombres Réels à Virgule Flottante (Norme IEEE 754)</span></h2>
-    
-    
-    
-    
-<p>
-La norme IEEE 754 code les nombres réels sous forme scientifique binaire normalisée :
-</p>
-$$V = (-1)^s \times (1.m) \times 2^{e - \text{biais}}$$
+<!-- SECTION 3 : LA NORME IEEE 754 (FLOTTANTS) -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="layers" style="color: #8A5A44;"></i>
+        <span>3. Nombres à Virgule Flottante : La Norme IEEE 754</span>
+    </h2>
 
-<h3>Format Simple Précision (32 bits / <code>float</code> en C) :</h3>
-<ul>
-    <li><strong>Bit de signe $s$ :</strong> 1 bit (0 pour positif, 1 pour négatif).</li>
-    <li><strong>Exposant biaisé $e$ :</strong> 8 bits, avec un biais de $+127$ ($biais = 2^{8-1} - 1 = 127$). L'exposant réel est $E = e - 127$.</li>
-    <li><strong>Mantisse $m$ (Partie fractionnaire) :</strong> 23 bits. Le bit '1' devant la virgule est implicite (non stocké pour gagner 1 bit de précision).</li>
-</ul>
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Pour représenter des réels allant du rayon de l'atome ($10^{-10}$ m) à la distance des galaxies ($10^{26}$ m), l'ordinateur utilise l'écriture scientifique binaire normalisée régie par la norme internationale <strong>IEEE 754</strong> :
+    </p>
 
-<h3>Valeurs Spéciales IEEE 754 :</h3>
-<ul>
-    <li>Si $e = 255$ et $m = 0$ : représente l'infini ($\pm \infty$).</li>
-    <li>Si $e = 255$ et $m \neq 0$ : représente <strong>NaN</strong> (<em>Not a Number</em>, résultat de $0/0$ ou $\sqrt{-1}$).</li>
-    <li>Si $e = 0$ et $m = 0$ : représente le zéro ($+0$ ou $-0$).</li>
-    <li>Si $e = 0$ et $m \neq 0$ : nombres dénormalisés (permettent la dégradation gracieuse vers zéro).</li>
-</ul>
+    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-center font-mono text-sm sm:text-base text-slate-900 font-bold">
+        Valeur = (-1)^s × (1.m) × 2^(e - Biais)
+    </div>
 
+    <!-- Anatomie 32 bits -->
+    <div class="space-y-3">
+        <h3 class="text-base font-bold text-slate-900">Anatomie du Format Simple Précision (32 bits / <code>float</code> C++)</h3>
+        <div class="grid grid-cols-12 gap-1 text-center font-mono text-xs">
+            <div class="col-span-1 p-2.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">
+                <span class="block font-bold">Signe</span>
+                <span>1 bit</span>
+            </div>
+            <div class="col-span-4 p-2.5 rounded-lg bg-sky-100 text-sky-900 border border-sky-300">
+                <span class="block font-bold">Exposant Décalé (e)</span>
+                <span>8 bits (Biais = 127)</span>
+            </div>
+            <div class="col-span-7 p-2.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">
+                <span class="block font-bold">Mantisse / Fraction (m)</span>
+                <span>23 bits (avec "1." implicite)</span>
+            </div>
+        </div>
 
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-rose-900 block font-bold">1. Bit de Signe ($s$)</strong>
+                <p class="text-slate-600">• $s = 0 \implies$ nombre positif ($+$)<br/>• $s = 1 \implies$ nombre négatif ($-$)</p>
+            </div>
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-sky-900 block font-bold">2. Exposant Biaisé ($e$)</strong>
+                <p class="text-slate-600">Sur 8 bits, codé en non-signé de $0$ à $255$. L'exposant réel $E$ est décalé par un biais de $127$ :<br/><strong>$e = E_{	ext{réel}} + 127$</strong></p>
+            </div>
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-emerald-900 block font-bold">3. Mantisse Normalisée ($m$)</strong>
+                <p class="text-slate-600">En binaire scientifique, le premier chiffre non nul est obligatoirement '1' : le nombre s'écrit toujours $1.m$. Ce '1' est donc <strong>ompris (implicite)</strong>, ce qui permet de gagner 1 bit de précision gratuit !</p>
+            </div>
+        </div>
+    </div>
 
+    <!-- Tableau des valeurs spéciales -->
+    <div class="overflow-x-auto">
+        <table class="text-xs">
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Exposant $e$</th>
+                    <th>Mantisse $m$</th>
+                    <th>Interprétation Mathématique</th>
+                    <th>Exemple / Signification</th>
+                </tr>
+            </thead>
+            <tbody class="font-mono">
+                <tr>
+                    <td class="font-sans font-semibold">Zéro Signé</td>
+                    <td>00000000 (0)</td>
+                    <td>000...000 (0)</td>
+                    <td>$(-1)^s 	imes 0.0$</td>
+                    <td class="font-sans text-slate-600">$+0$ si $s=0$, $-0$ si $s=1$ (utile pour les limites $1/-0 = -\infty$)</td>
+                </tr>
+                <tr class="bg-amber-50/40">
+                    <td class="font-sans font-semibold text-amber-900">Dénormalisés (Subnormaux)</td>
+                    <td>00000000 (0)</td>
+                    <td>≠ 0</td>
+                    <td>$(-1)^s 	imes (0.m) 	imes 2^{-126}$</td>
+                    <td class="font-sans text-amber-800">Permet le <em>Gradual Underflow</em> (nombres infinitésimaux proches de zéro)</td>
+                </tr>
+                <tr>
+                    <td class="font-sans font-semibold">Normalisés</td>
+                    <td>1 à 254</td>
+                    <td>Quelconque</td>
+                    <td>$(-1)^s 	imes (1.m) 	imes 2^{e - 127}$</td>
+                    <td class="font-sans text-slate-600">Nombres flottants standards du quotidien</td>
+                </tr>
+                <tr class="bg-rose-50/40">
+                    <td class="font-sans font-semibold text-rose-900">Infinis</td>
+                    <td>11111111 (255)</td>
+                    <td>000...000 (0)</td>
+                    <td>$+\infty$ ou $-\infty$</td>
+                    <td class="font-sans text-rose-800">Résultat d'une division par zéro (ex: $1.0 / 0.0$) ou overflow</td>
+                </tr>
+                <tr class="bg-purple-50/40">
+                    <td class="font-sans font-semibold text-purple-900">NaN (Not a Number)</td>
+                    <td>11111111 (255)</td>
+                    <td>≠ 0</td>
+                    <td>Indéfini / Erreur mathématique</td>
+                    <td class="font-sans text-purple-800">Formes indéterminées : $0/0$, $\sqrt{-1}$, $\infty - \infty$</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </article>
+
+<!-- SECTION 4 : ATELIER PIÈGES D'EXAMEN -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="alert-triangle"></i>
+        <span>4. Atelier Pièges d'Examen de M. Moulin</span>
+    </h2>
+
+    <div class="space-y-4">
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">1</span>
+                <span>L'Opposé de la borne la plus négative ($-128$ sur 8 bits)</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                <span class="text-rose-700 font-semibold font-mono">Question piège récurrente :</span> Quel est le résultat en C2 de $-(-128)$ sur 8 bits ?
+                <br/>
+                $-128 = 10000000_2$. Inversons les bits : $01111111_2$. Ajoutons 1 : $01111111 + 1 = 10000000_2 = -128$ !
+                <span class="text-emerald-700 font-semibold font-mono">Explication :</span> $+128$ n'existe pas sur 8 bits signés (le max est $+127$). L'opération produit un <strong>Overflow ($V=1$)</strong> et redonne $-128$.
+            </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">2</span>
+                <span>Écrire le '1' implicite dans la mantisse IEEE 754</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Quand on convertit $1.011_2 	imes 2^3$, la mantisse à stocker sur 23 bits est <strong>uniquement la partie après la virgule</strong> : <code>01100000000000000000000</code>.
+                Mettre <code>1011...</code> est l'erreur n°1 sanctionnée d'un zéro à la question.
+            </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">3</span>
+                <span>Signe négatif de l'exposant IEEE 754</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Si le nombre est $0.0625 = 1.0 	imes 2^{-4}$, l'exposant réel est $E = -4$. L'exposant codé $e$ vaut $-4 + 127 = 123 = (01111011)_2$. Ne confondez pas le signe du nombre (bit 31) et le signe de son exposant !
+            </p>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 5 : EXERCICES RÉSOLUS PAS-À-PAS -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0 text-emerald-600" data-lucide="check-square"></i>
+        <span>5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)</span>
+    </h2>
+
+    <div class="space-y-6 text-xs sm:text-sm">
+        <!-- Exercice 1 -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900 text-sm">Exercice 1 : Codage IEEE 754 de $-19.625_{10}$ en Simple Précision</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-700 font-mono text-xs">Classique Examen</span>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 font-mono text-xs">
+                <p class="text-slate-900 font-bold font-sans">Solution Étape par Étape :</p>
+                <p>1. Signe : Le nombre est négatif $\implies$ <strong>s = 1</strong>.<br/>
+                2. Décomposition en binaire naturel :<br/>
+                • Partie entière 19 : 19 = 16 + 2 + 1 = (10011)₂<br/>
+                • Partie fractionnaire 0.625 : 0.625 = 0.5 + 0.125 = 2⁻¹ + 2⁻³ = (0.101)₂<br/>
+                --> 19.625₁₀ = (10011.101)₂<br/>
+                3. Normalisation scientifique binaire :<br/>
+                10011.101₂ = <strong>1.0011101₂ × 2⁴</strong> (décalage de 4 positions vers la gauche $\implies$ E = 4)<br/>
+                4. Exposant biaisé sur 8 bits :<br/>
+                e = E + 127 = 4 + 127 = 131₁₀ = 128 + 2 + 1 = <strong>(1000 0011)₂</strong><br/>
+                5. Mantisse m sur 23 bits (on prend les bits après la virgule et on bourre de zéros) :<br/>
+                m = <strong>0011 1010 0000 0000 0000 000</strong><br/>
+                6. Assemblage du mot 32 bits et conversion en hexadécimal :<br/>
+                Mot binaire :  1  10000011  00111010000000000000000<br/>
+                Regroupement : 1100  0001  1001  1101  0000  0000  0000  0000<br/>
+                En Hexadécimal : <strong>0xC19D0000</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Exercice 2 -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900 text-sm">Exercice 2 : Décodage Inverse IEEE 754 de `0x42E80000`</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-700 font-mono text-xs">Examen Partiel</span>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 font-mono text-xs">
+                <p class="text-slate-900 font-bold font-sans">Solution Étape par Étape :</p>
+                <p>1. Conversion Hexa vers Binaire 32 bits :<br/>
+                4 = 0100, 2 = 0010, E = 1110, 8 = 1000, 0 = 0000...<br/>
+                Mot : 0 10000101 11010000000000000000000<br/>
+                2. Extraction des champs :<br/>
+                • s = 0 $\implies$ Nombre positif (+)<br/>
+                • e = 10000101₂ = 128 + 4 + 1 = 133₁₀<br/>
+                • Exposant réel E = e - 127 = 133 - 127 = <strong>6</strong><br/>
+                • Mantisse m = 1101 0000...<br/>
+                3. Reconstitution de la valeur :<br/>
+                V = + 1.1101₂ × 2⁶ = 1110100₂ en décalant la virgule de 6 crans vers la droite.<br/>
+                4. Conversion en décimal :<br/>
+                1110100₂ = 64 + 32 + 16 + 4 = <strong>+116₁₀</strong>. Résultat net et exact !
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 6 : QCM INTERACTIFS M. MOULIN -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <div class="flex items-center justify-between border-b pb-3">
+        <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2.5">
+                <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="help-circle"></i>
+                <span>6. QCM Interactif Format Partiel M. Moulin</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">4 questions types avec calculs instantanés et détection des drapeaux.</p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">4 Questions</span>
+    </div>
+
+    <!-- Question 1 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Complément à 2</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Quelle est la valeur décimale de l'octet $11110110_2$ interprété en Complément à 2 ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q21-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) +246</button>
+            <button onclick="answerQuiz(this, true, 'q21-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) -10 (MSB = 1 donc négatif ; inversion + 1 : 00001001 + 1 = 00001010 = 10)</button>
+            <button onclick="answerQuiz(this, false, 'q21-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) -9</button>
+            <button onclick="answerQuiz(this, false, 'q21-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) -118</button>
+        </div>
+        <div id="q21-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> Le bit de poids fort est 1, le nombre est donc négatif. En appliquant la méthode rapide du premier 1 à droite : on conserve le 0 et le premier 1 (situés à droite), puis on inverse tout le reste : $111101 	o 000010$, soit le mot $00001010_2 = 10$. La valeur est donc <strong>-10</strong>.
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Flags ALU</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Sur un mot de 8 bits signés en C2, on additionne $A = 01010000_2$ (+80) et $B = 01000000_2$ (+64). Quelles sont les valeurs des drapeaux Carry ($C$) et Overflow ($V$) ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q22-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) C = 1, V = 1</button>
+            <button onclick="answerQuiz(this, true, 'q22-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) C = 0, V = 1 (+80 + +64 = +144 > +127 : overflow signé V=1, mais aucune retenue sortante 8 bits donc C=0)</button>
+            <button onclick="answerQuiz(this, false, 'q22-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) C = 0, V = 0</button>
+            <button onclick="answerQuiz(this, false, 'q22-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) C = 1, V = 0</button>
+        </div>
+        <div id="q22-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> $01010000 + 01000000 = 10010000_2$. Le résultat a un MSB valant 1 (négatif, $-112$) alors qu'on additionnait deux positifs ! Il y a donc un dépassement de capacité signé : $V=1$. En revanche, l'addition sur 8 bits ne produit aucune retenue sortante au-delà du 8ème bit : $C=0$.
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">IEEE 754 Biais</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Dans la norme IEEE 754 simple précision (32 bits), quelle est la valeur codée de l'exposant $e$ pour un réel ayant un exposant mathématique réel $E = -3$ ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q23-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) 127</button>
+            <button onclick="answerQuiz(this, true, 'q23-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) 124 (car e = E + 127 = -3 + 127 = 124 = 01111100₂)</button>
+            <button onclick="answerQuiz(this, false, 'q23-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) 130</button>
+            <button onclick="answerQuiz(this, false, 'q23-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) -3 codé en C2 sur 8 bits</button>
+        </div>
+        <div id="q23-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> En IEEE 754, l'exposant n'est PAS codé en Complément à 2 mais avec un <strong>biais positif fixe</strong> de $127$ ($2^{8-1}-1$). La formule est $e = E_{	ext{réel}} + 127 = -3 + 127 = 124$.
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">IEEE 754 Spéciaux</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Que représente un mot IEEE 754 simple précision avec un exposant $e = 255$ ($11111111_2$) et une mantisse fractionnaire $m = 000...000$ avec le bit de signe $s=1$ ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q24-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) NaN (Not a Number)</button>
+            <button onclick="answerQuiz(this, true, 'q24-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) -∞ (Moins l'Infini)</button>
+            <button onclick="answerQuiz(this, false, 'q24-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) Le plus petit nombre dénormalisé négatif</button>
+            <button onclick="answerQuiz(this, false, 'q24-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) -0</button>
+        </div>
+        <div id="q24-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> Lorsque l'exposant est à son maximum $e = 255$ et que la mantisse est strictement nulle ($m = 0$), la norme IEEE 754 réserve cette configuration pour représenter les <strong>infinis</strong>. Comme le bit de signe vaut 1, il s'agit rigoureusement de <strong>$-\infty$</strong>. (Si la mantisse avait été non nulle $m 
+e 0$, cela aurait représenté un NaN).
+        </div>
+    </div>
+</article>
+
     </main>
 
     <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
+    <footer class="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200">
         <div>
-            
-        <a href="chap1_numeration_conversions_codage.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
+            <a href="chap1_numeration_conversions_codage.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
             <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 1 : Systèmes de Numération Positionn...</span>
+            <span>Ch. 1 : Numération & Conversions</span>
         </a>
-        
         </div>
         <a href="../R1.03.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
             <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
+            <span>Sommaire du Module R1.03</span>
         </a>
         <div>
-            
-        <a href="chap3_algebre_boole_karnaugh_circuits.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
-            <span>Ch. 3 : Algèbre de Boole, Tableaux de Ka...</span>
+            <a href="chap3_algebre_boole_karnaugh_circuits.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
+            <span>Ch. 3 : Algèbre de Boole & Circuits</span>
             <i class="w-4 h-4" data-lucide="arrow-right"></i>
         </a>
-        
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
     </script>
 </body>
 </html>

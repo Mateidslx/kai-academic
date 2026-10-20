@@ -1,281 +1,284 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light" style="color-scheme: light;">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#8F4351"/>
-    <title>S1.05 — Recueil de Besoins & Audit Fonctionnel — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#7D4E5B">
+    <title>S1.05 — Recueil de Besoins & Cahier des Charges (SujetAno12) — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- KaTeX CDN for Mathematics Rendering -->
-    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
-            --accent-color: #8F4351;
+            --accent-color: #7D4E5B;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.09em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
-            transition: all 150ms ease-out;
-        }
-        .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.2rem 0.625rem;
-            border-radius: 9999px;
-            font-size: 0.6875rem;
-            font-weight: 600;
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub Académique</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="index.html">Matières</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900 font-mono">S1.05</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Header Banner -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 bg-white relative overflow-hidden shadow-xs" style="border-left: 6px solid #8F4351;">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <div class="flex items-center gap-2">
-                    <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono shadow-2xs" style="background-color: #8F4351;">
-                        S1.05
-                    </span>
-                    <span class="badge-pill font-mono text-[10px] font-bold" style="background-color: #F7ECEE; color: #8F4351; border: 1px solid #DFC0C6;">
-                        Moodle UPPA #19545
-                    </span>
-                    <span class="badge-pill font-mono text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                        3 Chapitres Complets
-                    </span>
-                </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Recueil de Besoins & Audit Fonctionnel</h1>
-                <p class="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
-                    <i class="w-4 h-4 text-slate-400" data-lucide="user-check"></i>
-                    <span>Enseignant Référent : <strong>Équipe SAÉ / S1</strong> · BUT 1 Informatique Anglet</span>
-                </p>
-                <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
-                    SAÉ 1.05 — Recueil d'exigences et audit fonctionnel : Méthodologie d'entretien client, techniques de questionnement ouvert/fermé, recueil et priorisation des exigences selon la méthode MoSCoW (Must, Should, Could, Won't), rédaction formalisée d'un cahier des charges fonctionnel, et élaboration de matrices de traçabilité des exigences.
-                </p>
-            </div>
-
-            <div class="flex items-center flex-wrap gap-2">
-                <a class="min-h-[44px] px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-2xs hover:brightness-95 transition flex items-center gap-2" href="S1.05/chap1_methodologie_interview_besoins.html" style="background-color: #8F4351;">
-                    <i class="w-4 h-4" data-lucide="play"></i>
-                    <span>Démarrer le cours</span>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
                 </a>
-                <a class="min-h-[44px] px-4 py-2.5 rounded-2xl text-xs font-semibold border flex items-center gap-2 shadow-2xs hover:brightness-95 transition" href="../revision/S1.05.html" style="border-color: #8F435140; color: #8F4351; background-color: #F7ECEE;">
-                    <i class="w-4 h-4" data-lucide="sparkles"></i>
-                    <span>Fiches de Révision</span>
+                <span class="text-slate-300">/</span>
+                <a href="index.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    S1.05
                 </a>
+                
             </div>
-        </div>
-
-        
-        <!-- BANNIÈRE OUTIL SPÉCIAL : Matrice MoSCoW & Rédacteur de Cahier des Charges — SAÉ 1.05 -->
-        <div class="mt-6 pt-5 border-t border-slate-100">
-            <a href="S1.05/atelier_moscow.html" class="p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group shadow-2xs" style="background-color: #F7ECEE; border-color: #8F4351;">
-                <div class="flex items-start gap-3.5">
-                    <div class="w-11 h-11 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5 font-black text-lg" style="background-color: #8F4351;">
-                        <i class="w-5 h-5" data-lucide="target"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <span class="text-sm sm:text-base font-extrabold text-slate-900">Matrice MoSCoW & Rédacteur de Cahier des Charges — SAÉ 1.05</span>
-                            <span class="px-2 py-0.5 rounded-md text-[10px] font-black text-white uppercase" style="background-color: #8F4351;">ATELIER D'INGÉNIERIE DES EXIGENCES</span>
-                        </div>
-                        <p class="text-xs text-slate-700 mt-1 leading-relaxed">
-                            Classez vos besoins selon la grille MoSCoW, auditez la complétude de vos user stories et exportez votre matrice de traçabilité conforme aux critères du BUT.
-                        </p>
-                    </div>
-                </div>
-                <span class="px-4 py-2.5 rounded-xl text-xs font-bold text-white shrink-0 flex items-center gap-1.5 group-hover:brightness-95" style="background-color: #8F4351;">
-                    <span>Lancer l'Atelier MoSCoW</span>
-                    <i class="w-4 h-4" data-lucide="arrow-right"></i>
+            <div class="flex items-center gap-2">
+                <a href="../revision/S1.05.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F5ECEE; color: #7D4E5B; border: 1px solid #D8C0C7;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25060
                 </span>
-            </a>
+            </div>
         </div>
-        
-        
-        <!-- SPECIAL EXAM TOOLS BOX (FICHE A4 + ANNALES) -->
-        <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-3">
-            <a href="S1.05/fiche_methode_a4.html" class="p-4 rounded-2xl border-2 hover:bg-slate-50 transition flex items-start justify-between group" style="border-color: #8F435140; background-color: #F7ECEE40;">
-                <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5" style="background-color: #8F4351;">
-                        <i class="w-5 h-5" data-lucide="file-check"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Fiche Méthode A4 : Guide d'Interview & MoSCoW</span>
-                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold" style="background-color: #F7ECEE; color: #8F4351;">MÉMENTO OFFICIEL</span>
-                        </div>
-                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            Guide de questionnement en entretien, formulation standardisée des exigences (exigence fonctionnelle vs non fonctionnelle) et critères de validation.
-                        </p>
-                    </div>
-                </div>
-                <i class="w-5 h-5 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right" style="color: #8F4351;"></i>
-            </a>
-
-            <a href="S1.05/annales_partiels_corriges.html" class="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-slate-100/70 transition flex items-start justify-between group">
-                <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white shrink-0 mt-0.5">
-                        <i class="w-5 h-5" data-lucide="award"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Cahiers des Charges Modèles & Grilles d'Audit</span>
-                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 bg-slate-200">EXEMPLES TYPES</span>
-                        </div>
-                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            Exemples réels de cahiers des charges fonctionnels validés avec matrices de traçabilité complètes et comptes-rendus d'interviews.
-                        </p>
-                    </div>
-                </div>
-                <i class="w-5 h-5 text-slate-500 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
-            </a>
-        </div>
-        
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- PROGRAMME OFFICIEL EN PARTIES (3 CHAPITRES) -->
-    <!-- ========================================================================= -->
-    <section class="space-y-6">
-<!-- Partie 1 : Du Recueil Client au Cahier des Charges Fonctionnel -->
-        <div class="space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #8F4351;"></span>
-                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
-                        Partie 1 : Du Recueil Client au Cahier des Charges Fonctionnel
-                    </h2>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #7D4E5B;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F5ECEE; color: #7D4E5B; border: 1px solid #D8C0C7;">
+                        S1.05 
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">S1.05 — Recueil de Besoins & Cahier des Charges (SujetAno12)</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>Équipe SAÉ S1 (Communication & Gestion de Projet)</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
                 </div>
-                <span class="text-xs font-mono text-slate-400">Ingénierie des Exigences & Traçabilité</span>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-<!-- Chapitre 1 -->
-                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8F4351;">
-                    <div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7ECEE; color: #8F4351;">CHAPITRE 1</span>
-                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
-                            Méthodologie d'Interview Client & Techniques de Questionnement
-                        </h3>
-                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                            Préparation du guide d'entretien, écoute active, reformulation, identification des besoins implicites vs explicites et compte-rendu d'interview.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-3">
-                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Interview</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Questionnement</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Besoins</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Écoute active</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="S1.05/chap1_methodologie_interview_besoins.html" style="background-color: #8F4351;">
-                            <span>Étudier ce chapitre</span>
-                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-<!-- Chapitre 2 -->
-                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8F4351;">
-                    <div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7ECEE; color: #8F4351;">CHAPITRE 2</span>
-                            <span class="text-slate-400 font-mono text-[11px]">50 min</span>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
-                            Priorisation des Exigences (Méthode MoSCoW) & Cahier des Charges
-                        </h3>
-                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                            Catégorisation MoSCoW (Must, Should, Could, Won't), rédaction formelle des exigences fonctionnelles et non fonctionnelles, structure du cahier des charges.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-3">
-                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">MoSCoW</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Priorisation</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Cahier des charges</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Exigences</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="S1.05/chap2_redaction_cahier_charges_moscow.html" style="background-color: #8F4351;">
-                            <span>Étudier ce chapitre</span>
-                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-<!-- Chapitre 3 -->
-                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #8F4351;">
-                    <div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F7ECEE; color: #8F4351;">CHAPITRE 3</span>
-                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
-                            Matrice de Traçabilité des Exigences & Validation Client
-                        </h3>
-                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                            Lien bidirectionnel entre besoins, spécifications et scénarios de test. Grille de conformité et revue formelle de validation avec le client.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-3">
-                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Traçabilité</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Matrice</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Validation</span> <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Recette</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="S1.05/chap3_matrice_tracabilite_validation.html" style="background-color: #8F4351;">
-                            <span>Étudier ce chapitre</span>
-                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Techniques professionnelles d'enquête de terrain et d'interviews des parties prenantes, formalisation méthodique du cahier des charges fonctionnel et technique (CdCF) et matrice de traçabilité des exigences selon la méthode MoSCoW.
             </div>
         </div>
-    </section>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+
+        <div class="flex items-center justify-between flex-wrap gap-4">
+            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+                <i data-lucide="book-open" class="w-5 h-5" style="color: #7D4E5B;"></i>
+                <span>Programme & Chapitres d'Apprentissage (3 chapitres)</span>
+            </h2>
+            <div class="flex items-center gap-2">
+                <a href="S1.05/chap1_methodologie_interview_besoins.html" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-2xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #7D4E5B;">
+                    <i data-lucide="play" class="w-4 h-4"></i>
+                    <span>Démarrer le Chapitre 1</span>
+                </a>
+                <a href="../revision/S1.05.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-2 shadow-2xs transition">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+                    <span>Fiche Révision (3 niveaux)</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Grille des Chapitres -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #7D4E5B;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F5ECEE; color: #7D4E5B; border: 1px solid #D8C0C7;">
+                        CHAPITRE 1
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Méthodologie d'Interview & Extraction des Règles Métier
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Préparation du guide d'entretien, techniques de relance d'écoute active, reformulation et détection des exigences implicites.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Interviews</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Écoute active</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Besoins métier</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Parties prenantes</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="S1.05/chap1_methodologie_interview_besoins.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #7D4E5B;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #7D4E5B;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F5ECEE; color: #7D4E5B; border: 1px solid #D8C0C7;">
+                        CHAPITRE 2
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Structure du Cahier des Charges & Priorisation MoSCoW
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Sections normalisées du cahier des charges fonctionnel, formulation sans ambiguïté des exigences et classification MoSCoW.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Cahier des charges</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">MoSCoW</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Exigences fonctionnelles</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Spécifications</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="S1.05/chap2_redaction_cahier_charges_moscow.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #7D4E5B;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #7D4E5B;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #F5ECEE; color: #7D4E5B; border: 1px solid #D8C0C7;">
+                        CHAPITRE 3
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">30 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Matrice de Traçabilité des Exigences & Validation Client
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Construction d'une matrice croisant chaque exigence avec son scénario de test unitaire et son jalon de livraison validé.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Traçabilité</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Recette</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Validation client</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Qualité</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="S1.05/chap3_matrice_tracabilite_validation.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #7D4E5B;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        </div>
+
+        
+        <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white shadow-xs">
+            <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+                <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+                    <i data-lucide="folder-down" class="w-5 h-5 text-blue-600"></i>
+                    <span>Documents & Supports Enseignants (3 fichiers vérifiés)</span>
+                </h2>
+                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono">
+                    Supports Officiels Moodle & IUT
+                </span>
+            </div>
+            
+                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
+                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full" style="background-color: #7D4E5B;"></span>
+                        <span>Supports & Ressources Officielles</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-normal">(3 documents)</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        
+                <a href="../supports/S1.05/S1.05-2026-Recueildebesoinsgroupes._p_d_f" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.05-2026-Recueildebesoinsgroupes">S1.05-2026-Recueildebesoinsgroupes</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">_P_D_F</span>
+                                <span>•</span>
+                                <span class="font-mono">59.8 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.05/S105-2026-Recueildebesoinsgroupes._p_d_f" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S105-2026-Recueildebesoinsgroupes">S105-2026-Recueildebesoinsgroupes</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">_P_D_F</span>
+                                <span>•</span>
+                                <span class="font-mono">59.8 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.05/SujetAno12._p_d_f" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="SujetAno12">SujetAno12</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">_P_D_F</span>
+                                <span>•</span>
+                                <span class="font-mono">213.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                    </div>
+                </div>
+                
+        </div>
+        
+
+    </main>
 
     <script>
         lucide.createIcons();

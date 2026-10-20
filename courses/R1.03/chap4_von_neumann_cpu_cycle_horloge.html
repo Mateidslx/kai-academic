@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
     <meta name="theme-color" content="#8A5A44"/>
-    <title>Chapitre 4 : Modèle de Von Neumann, CPU & Cycle Fetch-Decode-Execute — R1.03 Architecture des Ordinateurs — KAI Academic</title>
+    <title>Chapitre 4 : Architecture de Von Neumann, CPU, Cycles d'Horloge & Bus — R1.03 Architecture des Ordinateurs & Systèmes — KAI Academic</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons CDN -->
@@ -31,27 +31,36 @@
             background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
             background-size: 28px 28px;
             color: #0f172a;
-            line-height: 1.65;
+            line-height: 1.7;
             -webkit-tap-highlight-color: transparent;
         }
         .font-dyslexic {
             font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
+            letter-spacing: 0.035em !important;
+            word-spacing: 0.09em !important;
+            line-height: 1.9 !important;
             background-color: #faf8f2 !important;
             background-image: none !important;
+        }
+        .font-dyslexic p, .font-dyslexic li, .font-dyslexic td {
+            font-size: 1.02rem !important;
+            line-height: 1.9 !important;
         }
         .glass-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+        .glass-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         }
         .concept-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 9999px;
             font-size: 0.72rem;
             font-weight: 700;
@@ -66,7 +75,7 @@
             border-radius: 0.75rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            margin: 1.25rem 0;
         }
         th {
             background-color: #f1f5f9;
@@ -74,7 +83,7 @@
             font-weight: 700;
             padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             border-bottom: 2px solid #cbd5e1;
         }
         td {
@@ -92,36 +101,70 @@
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         pre {
             background: #0f172a;
             color: #f8fafc;
-            padding: 1.1rem 1.4rem;
+            padding: 1.25rem 1.5rem;
             border-radius: 0.85rem;
             overflow-x: auto;
             margin: 1.25rem 0;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
         }
         code:not(pre code) {
             background: #f1f5f9;
             color: #0f172a;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
+            font-size: 0.84rem;
+            padding: 0.2rem 0.45rem;
             border-radius: 0.35rem;
             border: 1px solid #e2e8f0;
+        }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
         }
     </style>
 </head>
@@ -129,13 +172,13 @@
 
     <!-- Top Breadcrumb & Controls -->
     <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
+        <nav class="flex items-center gap-2 text-xs text-slate-500 font-mono">
             <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
                 <i class="w-3.5 h-3.5" data-lucide="home"></i>
                 <span>Hub</span>
             </a>
             <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.03.html">R1.03 Archi Matérielle</a>
+            <a class="hover:text-slate-900 font-medium" href="../R1.03.html">R1.03</a>
             <span>/</span>
             <span class="font-bold text-slate-900">Chapitre 4</span>
         </nav>
@@ -154,141 +197,459 @@
     <!-- Chapter Header Banner -->
     <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #8A5A44;">
         <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 3 · Chapitre 4</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Roose / M. Bouizem</span>
+            <span class="concept-badge">R1.03 · Masterclass Chapitre 4</span>
+            <span class="text-xs text-slate-500 font-mono">IUT d'Anglet · Enseignants référents : M. Jean-Noël Moulin / M. Philippe Roose</span>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 4 : Modèle de Von Neumann, CPU & Cycle Fetch-Decode-Execute</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Composants fondamentaux (CPU, RAM, Bus, E/S), registres PC/IR/ACC/SP/PSW, décomposition temporelle de l'instruction machine et pipeline.</p>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 4 : Architecture de Von Neumann, CPU, Cycles d'Horloge & Bus</h1>
+        <p class="text-slate-600 text-sm sm:text-base mt-2.5 max-w-3xl leading-relaxed">Le modèle historique de Von Neumann vs Harvard, le goulot d'étranglement de Von Neumann. Anatomie du microprocesseur : PC, RI, Accumulateur, Flags, MAR, MDR. Les 3 bus système. Chronogramme d'instruction (Fetch, Decode, Execute, Write-Back), micro-opérations RTL, métriques de performance CPI et équation fondamentale du temps d'exécution.</p>
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500">
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-emerald-600" data-lucide="check-circle-2"></i> Cours Exhaustif Zéro Prérequis</span>
+            <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-amber-600" data-lucide="alert-triangle"></i> Pièges QCM M. Moulin</span>
+            <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 border border-blue-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-blue-600" data-lucide="cpu"></i> Cycle Fetch-Decode-Execute RTL</span>
+            <span class="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-800 border border-rose-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-rose-600" data-lucide="gauge"></i> Calculs Bus & Équation CPI</span>
+        </div>
     </section>
 
     <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>1. Le Modèle Fondateur de John von Neumann (1945)</span></h2>
-    
-    
-    
-    
-<p>
-Avant Von Neumann, les machines (comme l'ENIAC) étaient reconfigurées manuellement par câblage pour chaque nouveau problème. La révolution conceptuelle de l'architecture de Von Neumann est le <strong>principe du programme enregistré</strong> :
-</p>
-<div class="callout-def"><p class="font-bold text-slate-900 text-sm">Règle & Définition Fondamentale :</p><div class="text-sm text-slate-700 mt-1">
-<strong>Principe Fondateur :</strong>
-Les instructions du programme et les données numériques résident dans <strong>la même mémoire centrale</strong> sous forme de mots binaires indifférenciés. C'est l'état du processeur qui détermine si un octet est interprété comme une instruction ou comme une donnée.
-</div></div>
+    <main class="space-y-8">
 
+<!-- SECTION 1 : MODÈLE DE VON NEUMANN VS HARVARD -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="monitor" style="color: #8A5A44;"></i>
+        <span>1. Le Modèle de Von Neumann vs Architecture Harvard</span>
+    </h2>
 
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        En 1945, le mathématicien et physicien <strong>John von Neumann</strong> publia son célèbre rapport <em>First Draft of a Report on the EDVAC</em>.
+        Pour la première fois dans l'histoire des calculateurs, il introduisit le concept révolutionnaire de <strong>programme enregistré</strong> (<em>Stored-Program Concept</em>) : les instructions du programme et les données numériques sont stockées <strong>ensemble, indistinctement dans la même mémoire centrale</strong> sous forme de mots binaires.
+    </p>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+                <span>Architecture de Von Neumann (1945)</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xs font-mono">Standard PC/Serveurs</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                Une mémoire unique contient les instructions machine et les variables. Un bus commun relie la mémoire au processeur.
+            </p>
+            <div class="p-2.5 bg-amber-50 rounded-lg border border-amber-200 text-amber-950 text-xs">
+                <strong>Le Goulot d'Étranglement de Von Neumann (Bottleneck) :</strong> Comme le bus est partagé, le CPU ne peut pas simultanément charger une instruction et lire/écrire une donnée. Le débit du processeur est physiquement limité par la bande passante de la mémoire centrale.
+            </div>
+        </div>
 
-
-    
-
-
-
-    
-
-
-
-    
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+                <span>Architecture Harvard (1944)</span>
+                <span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 text-xs font-mono">DSP / Microcontrôleurs</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                La mémoire des instructions et la mémoire des données sont <strong>physiquement distinctes</strong> et possèdent chacune leur propre bus d'adresses et de données. Le CPU peut lire une instruction tout en manipulant une donnée.
+            </p>
+            <div class="p-2.5 bg-sky-50 rounded-lg border border-sky-200 text-sky-950 text-xs">
+                <strong>Harvard Modifié Moderne :</strong> Dans les processeurs x86 et ARM actuels, la RAM externe suit Von Neumann (unifiée), mais le premier niveau de mémoire cache interne (L1) est scindé en Harvard : <strong>L1 Instruction (L1i)</strong> et <strong>L1 Data (L1d)</strong> indépendants !
+            </div>
+        </div>
+    </div>
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>2. Les Composants Fondamentaux de la Machine de Von Neumann</span></h2>
-    
-    
-    
-    
-<ul>
-    <li><strong>Le Processeur (CPU - Central Processing Unit) :</strong>
-        <ul>
-            <li><strong>L'Unité Arithmétique et Logique (UAL / ALU) :</strong> Exécute les opérations arithmétiques (+, -, *, /) et logiques (AND, OR, NOT, décalages).</li>
-            <li><strong>L'Unité de Commande (UC / Control Unit) :</strong> Chef d'orchestre qui cadence et coordonne l'exécution de toutes les instructions.</li>
-            <li><strong>Le Banc de Registres :</strong> Mémoires ultra-rapides intégrées au cœur du silicium du CPU :
-                <ul>
-                    <li><code>PC (Program Counter / Compteur Ordinal)</code> : Contient l'adresse mémoire de la prochaine instruction à exécuter.</li>
-                    <li><code>RI (Instruction Register / Registre d'Instruction)</code> : Contient le code binaire de l'instruction en cours de décodage.</li>
-                    <li><code>ACC (Accumulateur)</code> : Registre de travail recevant les résultats immédiats des calculs de l'UAL.</li>
-                    <li><code>SP (Stack Pointer / Pointeur de Pile)</code> : Adresse du sommet de la pile d'exécution en mémoire vive.</li>
-                    <li><code>FLAGS / CCR (Registre d'état)</code> : Drapeaux de statut (Zéro <code>Z</code>, Négatif <code>N</code>, Retenue <code>C</code>, Dépassement <code>V</code>).</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li><strong>La Mémoire Centrale (RAM) :</strong> Espace linéaire de cellules adressables d'un octet chacune.</li>
-    <li><strong>Les Organes d'Entrées/Sorties (E/S) :</strong> Clavier, écran, disque, interfaces réseau.</li>
-    <li><strong>Les Bus Système :</strong> Fils conducteurs partagés reliant les composants :
-        <ul>
-            <li><em>Bus d'adresses (unidirectionnel CPU $\to$ RAM) :</em> Détermine la taille maximale de mémoire adressable ($k$ fils d'adresses $\implies 2^k$ octets adressables).</li>
-            <li><em>Bus de données (bidirectionnel) :</em> Véhicule les octets échangés.</li>
-            <li><em>Bus de commande / contrôle :</em> Signaux de synchronisation (Read/Write, horloge, interruptions).</li>
-        </ul>
-    </li>
-</ul>
+<!-- SECTION 2 : ANATOMIE DU CPU ET DES BUS -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="cpu" style="color: #8A5A44;"></i>
+        <span>2. Anatomie Détaillée du CPU & Typologie des 3 Bus Système</span>
+    </h2>
 
+    <!-- Les 3 Bus -->
+    <div class="space-y-3">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span>
+            <span>Les 3 Bus Système : Autoroutes de l'Information</span>
+        </h3>
+        <p class="text-sm text-slate-700 leading-relaxed">
+            Un <strong>bus</strong> est un ensemble de pistes conductrices parallèles transportant des signaux électriques logiques. Tout ordinateur repose sur 3 bus spécialisés :
+        </p>
 
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+                <div class="flex items-center justify-between font-bold text-slate-900">
+                    <span>1. Bus d'Adresses</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-200 text-slate-800 text-[11px] font-mono">Unidirectionnel</span>
+                </div>
+                <p class="text-slate-600 leading-relaxed">
+                    Émis exclusivement par le CPU vers la mémoire et les périphériques pour désigner la case mémoire à atteindre.
+                </p>
+                <div class="p-2 bg-white rounded border border-slate-200 font-mono text-[11px] text-slate-700">
+                    Si largeur = $k$ bits $\implies$ Espace adressable maximal = <strong>$2^k$ emplacements</strong> (ex: 32 bits = $2^{32} = 4$ Gio).
+                </div>
+            </div>
 
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+                <div class="flex items-center justify-between font-bold text-slate-900">
+                    <span>2. Bus de Données</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-200 text-slate-800 text-[11px] font-mono">Bidirectionnel</span>
+                </div>
+                <p class="text-slate-600 leading-relaxed">
+                    Transporte les données en lecture (Mémoire $	o$ CPU) et en écriture (CPU $	o$ Mémoire).
+                </p>
+                <div class="p-2 bg-white rounded border border-slate-200 font-mono text-[11px] text-slate-700">
+                    Largeur = taille du mot machine (8, 16, 32 ou 64 bits). Définit le volume de bits échangé à chaque cycle bus.
+                </div>
+            </div>
 
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+                <div class="flex items-center justify-between font-bold text-slate-900">
+                    <span>3. Bus de Contrôle</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-200 text-slate-800 text-[11px] font-mono">Lignes Spécialisées</span>
+                </div>
+                <p class="text-slate-600 leading-relaxed">
+                    Synchronise et pilote les transferts : signaux R/W (Read / Write), signal d'horloge CLK, ligne de Reset, demandes d'interruptions (IRQ) et acquittements (ACK).
+                </p>
+            </div>
+        </div>
+    </div>
 
-    
-
-
-
-    
-
-
-
-    
+    <!-- Registres Internes -->
+    <div class="space-y-3 pt-4 border-t border-slate-200">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span>
+            <span>Les Registres Internes du Processeur</span>
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-slate-900 block font-mono text-sm">PC (Program Counter)</strong>
+                <p class="text-slate-600">Ou <strong>Compteur Ordinal (CO)</strong>. Contient l'adresse mémoire de la <em>prochaine instruction</em> à exécuter. Incrémenté automatiquement dès la fin du Fetch.</p>
+            </div>
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-slate-900 block font-mono text-sm">RI (Instruction Register)</strong>
+                <p class="text-slate-600">Contient le <em>code binaire machine de l'instruction en cours</em> d'exécution. C'est son contenu qui est envoyé au décodeur de l'Unité de Commande.</p>
+            </div>
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-slate-900 block font-mono text-sm">ACC (Accumulateur)</strong>
+                <p class="text-slate-600">Registre de calcul principal de l'UAL (ALU). Stocke l'un des opérandes avant le calcul et recueille le résultat immédiat après le calcul.</p>
+            </div>
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-slate-900 block font-mono text-sm">R-FLAGS / CCR (État)</strong>
+                <p class="text-slate-600">Contient les drapeaux d'état mis à jour après chaque calcul : <strong>Z</strong> (Zero), <strong>N</strong> (Négatif), <strong>C</strong> (Carry / retenue), <strong>V</strong> (Overflow).</p>
+            </div>
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-slate-900 block font-mono text-sm">MAR (Memory Address Reg)</strong>
+                <p class="text-slate-600">Connecté directement au bus d'adresses. Contient l'adresse physique mémoire que le CPU souhaite lire ou écrire.</p>
+            </div>
+            <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                <strong class="text-slate-900 block font-mono text-sm">MDR (Memory Data Reg)</strong>
+                <p class="text-slate-600">Connecté directement au bus de données. Sert de tampon d'échange pour les données lues depuis la RAM ou à écrire en RAM.</p>
+            </div>
+        </div>
+    </div>
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>3. Le Cycle Fondamental Fetch - Decode - Execute</span></h2>
-    
-    
-    
-    
-<p>
-Pour chaque instruction, le processeur répète inlassablement ce cycle en 3 temps, cadencé par les impulsions de l'horloge système :
-</p>
-<ol>
-    <li><strong>1. Recherche de l'Instruction (FETCH) :</strong>
-        <br>L'UC place le contenu du registre <code>PC</code> sur le bus d'adresses et émet un signal de lecture. La mémoire renvoie le mot binaire qui est stocké dans le <code>RI</code>. Le <code>PC</code> est automatiquement incrémenté pour pointer vers l'instruction suivante.</li>
-    <li><strong>2. Décodage de l'Instruction (DECODE) :</strong>
-        <br>L'UC analyse les bits de l'instruction présente dans le <code>RI</code>. Elle sépare le <strong>Code Opération (OpCode)</strong> des opérandes (adresses ou registres concernés) et configure les circuits de commande.</li>
-    <li><strong>3. Exécution (EXECUTE) :</strong>
-        <br>L'UAL effectue l'opération requise. Le résultat est transféré vers l'accumulateur ou la mémoire. Les drapeaux du registre d'état (FLAGS) sont mis à jour selon le signe et la parité du résultat.</li>
-</ol>
+<!-- SECTION 3 : LE CYCLE FETCH-DECODE-EXECUTE (RTL) -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="refresh-cw" style="color: #8A5A44;"></i>
+        <span>3. Le Cycle d'Exécution d'une Instruction en Micro-Opérations RTL</span>
+    </h2>
 
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Chaque instruction élémentaire exécutée par un processeur se décompose en une séquence d'étapes cadencées par le signal d'horloge.
+        Au formalisme RTL (<em>Register Transfer Level</em>), voici le déroulement absolu :
+    </p>
 
+    <div class="overflow-x-auto">
+        <table class="text-xs">
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Étape Horloge</th>
+                    <th>Micro-Opération RTL</th>
+                    <th>Composants & Bus Impliqués</th>
+                    <th>Rôle Précis</th>
+                </tr>
+            </thead>
+            <tbody class="font-mono">
+                <tr class="bg-blue-50/40">
+                    <td rowspan="3" class="font-sans font-bold text-blue-900">1. FETCH<br/>(Recherche)</td>
+                    <td>T₀</td>
+                    <td>MAR $\leftarrow$ PC</td>
+                    <td class="font-sans text-slate-600">Bus interne CPU</td>
+                    <td class="font-sans text-slate-700">L'adresse de l'instruction pointée par le PC est copiée dans le registre d'adresse mémoire MAR.</td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                    <td>T₁</td>
+                    <td>MDR $\leftarrow$ RAM[MAR]<br/><strong class="text-amber-800">PC $\leftarrow$ PC + 1</strong></td>
+                    <td class="font-sans text-slate-600">Bus d'adresses, Bus de données, Bus de contrôle (Read)</td>
+                    <td class="font-sans text-slate-700">La RAM renvoie le mot d'instruction sur le bus de données dans MDR. <strong>Le PC est incrémenté immédiatement pour pointer l'instruction suivante !</strong></td>
+                </tr>
+                <tr class="bg-blue-50/40">
+                    <td>T₂</td>
+                    <td>RI $\leftarrow$ MDR</td>
+                    <td class="font-sans text-slate-600">Bus interne</td>
+                    <td class="font-sans text-slate-700">Le code machine est transféré dans le Registre d'Instruction.</td>
+                </tr>
+                <tr class="bg-amber-50/40">
+                    <td class="font-sans font-bold text-amber-900">2. DECODE<br/>(Décodage)</td>
+                    <td>T₃</td>
+                    <td>Opcode $\leftarrow$ RI[Opcode]<br/>Opérandes $\leftarrow$ RI[Opérandes]</td>
+                    <td class="font-sans text-slate-600">Unité de Commande (Séquenceur)</td>
+                    <td class="font-sans text-slate-700">L'unité de contrôle sépare le Code Opération (qui dit QUELLE opération faire : ADD, LOAD, JUMP) et les adresses/registres cibles.</td>
+                </tr>
+                <tr class="bg-emerald-50/40">
+                    <td rowspan="2" class="font-sans font-bold text-emerald-900">3. EXECUTE<br/>(Exécution & WB)</td>
+                    <td>T₄</td>
+                    <td>ACC $\leftarrow$ ACC + Opérande</td>
+                    <td class="font-sans text-slate-600">UAL (ALU), R-FLAGS</td>
+                    <td class="font-sans text-slate-700">L'UAL effectue l'opération arithmétique ou logique et met à jour les drapeaux Z, N, C, V.</td>
+                </tr>
+                <tr class="bg-emerald-50/40">
+                    <td>T₅</td>
+                    <td>Registre / RAM $\leftarrow$ Résultat</td>
+                    <td class="font-sans text-slate-600">Bus interne ou Bus données</td>
+                    <td class="font-sans text-slate-700">Write-back : écriture du résultat final dans sa destination.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
+    <!-- Performances & CPI -->
+    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs sm:text-sm">
+        <h3 class="font-bold text-slate-900 flex items-center gap-2">
+            <i class="w-4 h-4 text-rose-600" data-lucide="gauge"></i>
+            <span>L'Équation Fondamentale des Performances Processeur</span>
+        </h3>
+        <p class="text-slate-700 leading-relaxed">
+            Le temps total d'exécution $T_{	ext{exec}}$ nécessaire pour exécuter un programme de $N$ instructions est donné par :
+        </p>
+        <div class="p-3 bg-white rounded-lg border border-slate-200 text-center font-mono font-bold text-sm text-slate-900">
+            T_exec = N_instructions × CPI_moyen × τ = (N_instructions × CPI_moyen) / Fréquence
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-600 mt-2">
+            <p>• <strong>$N$ :</strong> Nombre d'instructions machine exécutées (dépend du compilateur et de l'algorithme).</p>
+            <p>• <strong>$	ext{CPI}$ :</strong> Cycles Per Instruction moyen (nombre de cycles d'horloge consommés par instruction, dépend de la micro-architecture).</p>
+            <p>• <strong>$	au = 1/f$ :</strong> Période de l'horloge en secondes (dépend de la finesse de gravure et de la fréquence en GHz).</p>
+        </div>
+    </div>
 </article>
+
+<!-- SECTION 4 : ATELIER PIÈGES D'EXAMEN -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="alert-triangle"></i>
+        <span>4. Atelier Pièges d'Examen de M. Moulin</span>
+    </h2>
+
+    <div class="space-y-4">
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">1</span>
+                <span>À quel moment exact le PC est-il incrémenté ?</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                <span class="text-rose-700 font-semibold font-mono">Erreur très courante :</span> Répondre « à la fin de l'instruction, après l'exécution ».
+                <br/>
+                <span class="text-emerald-700 font-semibold font-mono">Réalité matérielle :</span> Le Program Counter (PC) est incrémenté <strong>immédiatement dès que l'instruction a été chargée depuis la mémoire (phase Fetch)</strong>, avant même que l'instruction ne soit décodée ou exécutée ! C'est ce qui permet aux instructions de saut (JUMP/BRANCH) de calculer des offsets relatifs par rapport à l'adresse de l'instruction suivante ($PC + 	ext{offset}$).
+            </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">2</span>
+                <span>Calcul de l'espace mémoire adressable : Attention à l'unité !</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Si un bus d'adresse possède 24 bits : il génère $2^{24} = 16\,777\,216$ adresses différentes.
+                Si la mémoire est adressable par <strong>octet (8 bits)</strong>, la capacité est de $16$ Mio.
+                Mais si la mémoire est organisée en <strong>mots de 16 bits (2 octets)</strong>, la capacité maximale est de $16 	ext{ M mots} 	imes 2 	ext{ octets} = 32$ Mio ! Vérifiez toujours si l'énoncé de M. Moulin précise « adressable par octet » ou « par mot ».
+            </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">3</span>
+                <span>Confondre largeur du bus d'adresses et largeur du bus de données</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Le bus d'adresses détermine <strong>combien de cases différentes on peut nommer</strong>.
+                Le bus de données détermine <strong>la largeur de chaque case (combien de bits voyagent en un seul transfert)</strong>.
+                Un processeur avec un bus d'adresse de 32 bits et un bus de données de 64 bits possède un espace de $4$ milliards d'adresses et transfère 8 octets à la fois.
+            </p>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 5 : EXERCICES RÉSOLUS PAS-À-PAS -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0 text-emerald-600" data-lucide="check-square"></i>
+        <span>5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)</span>
+    </h2>
+
+    <div class="space-y-6 text-xs sm:text-sm">
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900 text-sm">Exercice : Dimensionnement de Mémoire & Comparaison de Performances CPU</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 font-mono text-xs">Partiel R1.03</span>
+            </div>
+            <p class="text-slate-700 font-medium">
+                Énoncé : Un programmeur hésite entre deux processeurs pour faire tourner une suite de $10^9$ instructions :<br/>
+                • CPU A : Fréquence $f_A = 4.0	ext{ GHz}$, avec un CPI moyen de $1.6$.<br/>
+                • CPU B : Fréquence $f_B = 5.0	ext{ GHz}$, avec un CPI moyen de $2.2$.<br/>
+                Lequel est le plus rapide et quel est le gain de temps en secondes ?
+            </p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 font-mono text-xs">
+                <p class="text-slate-900 font-bold font-sans">Solution Détaillée :</p>
+                <p>1. Calcul du temps d'exécution sur le CPU A :<br/>
+                T_A = (N × CPI_A) / f_A = (10⁹ × 1.6) / (4.0 × 10⁹) = 1.6 / 4.0 = <strong>0.400 seconde</strong>.
+                </p>
+                <p>2. Calcul du temps d'exécution sur le CPU B :<br/>
+                T_B = (N × CPI_B) / f_B = (10⁹ × 2.2) / (5.0 × 10⁹) = 2.2 / 5.0 = <strong>0.440 seconde</strong>.
+                </p>
+                <p class="font-sans text-emerald-800 font-bold mt-2">
+                    Conclusion : Le CPU A est plus rapide que le CPU B (0.400 s contre 0.440 s, soit 10% de vitesse en plus) malgré une fréquence plus basse !
+                    Cela prouve magistralement que la fréquence brute (les GHz) ne suffit pas : l'efficacité de la micro-architecture (un CPI bas) est tout aussi primordiale.
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 6 : QCM INTERACTIFS M. MOULIN -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <div class="flex items-center justify-between border-b pb-3">
+        <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2.5">
+                <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="help-circle"></i>
+                <span>6. QCM Interactif Format Partiel M. Moulin</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">Validez votre compréhension des mécanismes CPU et des bus.</p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">4 Questions</span>
+    </div>
+
+    <!-- Question 1 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Registres CPU</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Quel registre contient le code binaire de l'instruction qui est en train d'être décodée et exécutée ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q41-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) PC (Program Counter)</button>
+            <button onclick="answerQuiz(this, true, 'q41-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) RI (Registre d'Instruction / Instruction Register)</button>
+            <button onclick="answerQuiz(this, false, 'q41-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) ACC (Accumulateur)</button>
+            <button onclick="answerQuiz(this, false, 'q41-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) MAR (Memory Address Register)</button>
+        </div>
+        <div id="q41-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> C'est le <strong>RI (Registre d'Instruction)</strong> qui charge et conserve le code machine binaire de l'instruction en cours. Le PC, lui, ne contient que l'adresse de la PROCHAINE instruction.
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Bus & Mémoire</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Un microprocesseur dispose d'un bus d'adresses de 36 bits et d'une mémoire adressable par octet. Quelle est la taille maximale de la mémoire adressable ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q42-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) 4 Gio</button>
+            <button onclick="answerQuiz(this, false, 'q42-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) 16 Gio</button>
+            <button onclick="answerQuiz(this, true, 'q42-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) 64 Gio (car 2³⁶ = 2⁶ × 2³⁰ = 64 × 1 Gio = 64 Gio)</button>
+            <button onclick="answerQuiz(this, false, 'q42-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) 256 Gio</button>
+        </div>
+        <div id="q42-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> Avec 36 bits d'adresse, on peut indexer $2^{36}$ cases distinctes. Puisque chaque case contient 1 octet, l'espace mémoire total est de $2^{36}$ octets $= 2^6 	imes 2^{30} 	ext{ octets} = 64 	imes 1	ext{ Gio} = 64	ext{ Gio}$. (C'était exactement l'extension PAE des processeurs 32 bits).
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Architecture</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Qu'est-ce que le « goulot d'étranglement de Von Neumann » (Von Neumann Bottleneck) ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q43-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) La surchauffe du silicium de l'ALU lors d'opérations en virgule flottante.</button>
+            <button onclick="answerQuiz(this, true, 'q43-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) La limitation des performances causée par le bus unique partagé entre les instructions et les données, empêchant les accès simultanés.</button>
+            <button onclick="answerQuiz(this, false, 'q43-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) L'absence d'instructions de saut conditionnel.</button>
+            <button onclick="answerQuiz(this, false, 'q43-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) La saturation du Registre d'Instruction lors de calculs matriciels.</button>
+        </div>
+        <div id="q43-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> Dans une architecture de Von Neumann pure, le chemin de communication entre la CPU et la mémoire est unique. Même si le CPU est infiniment rapide, il doit attendre que les transferts séquentiels d'instructions et de données se succèdent sur ce bus partagé.
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Sens des Bus</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Parmi les affirmations suivantes concernant les bus d'un microprocesseur, laquelle est VRAIE ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q44-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) Le bus d'adresses est bidirectionnel car la mémoire envoie des adresses au CPU.</button>
+            <button onclick="answerQuiz(this, true, 'q44-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) Le bus d'adresses est unidirectionnel (CPU vers Mémoire/Périphériques) tandis que le bus de données est bidirectionnel.</button>
+            <button onclick="answerQuiz(this, false, 'q44-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) Le bus de données est unidirectionnel pour des raisons de sécurité électrique.</button>
+            <button onclick="answerQuiz(this, false, 'q44-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) Tous les bus système sont obligatoirement unidirectionnels.</button>
+        </div>
+        <div id="q44-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> C'est le maître de bus (le processeur) qui génère l'adresse de destination, le bus d'adresses est donc unidirectionnel sortant du CPU. En revanche, le bus de données transporte les mots dans les deux sens : en lecture (de la RAM vers le CPU) et en écriture (du CPU vers la RAM).
+        </div>
+    </div>
+</article>
+
     </main>
 
     <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
+    <footer class="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200">
         <div>
-            
-        <a href="chap3_algebre_boole_karnaugh_circuits.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
+            <a href="chap3_algebre_boole_karnaugh_circuits.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
             <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 3 : Algèbre de Boole, Tableaux de Ka...</span>
+            <span>Ch. 3 : Algèbre de Boole & Circuits</span>
         </a>
-        
         </div>
         <a href="../R1.03.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
             <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
+            <span>Sommaire du Module R1.03</span>
         </a>
         <div>
-            
-        <a href="chap5_hierarchie_memoire_caches_hamming.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
-            <span>Ch. 5 : Hiérarchie de Mémoire, Caches L1...</span>
+            <a href="chap5_hierarchie_memoire_caches_hamming.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
+            <span>Ch. 5 : Mémoires & Codes de Hamming</span>
             <i class="w-4 h-4" data-lucide="arrow-right"></i>
         </a>
-        
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
     </script>
 </body>
 </html>

@@ -161,6 +161,55 @@
             max-width: 100% !important;
             height: auto !important;
         }
+        
+        .callout-def {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-exam {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -272,6 +321,353 @@ Michael Porter (Harvard) modélise l'intensité concurrentielle et l'attractivit
             </div>
         </div>
 
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #367357;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT »</strong> constitue un pilier fondamental du module <strong>R1.08 — Gestion des Organisations</strong> enseigné par <strong>M. Yves Coustillas / M. Larretche / M. Moulin</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Analyse macro-économique avec la méthode PESTEL, les 5(+1) forces concurrentielles de Michael Porter, la chaîne de valeur, la matrice SWOT croisée et les stratégies génériques. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Stratégie, PESTEL, Porter, Forces concurrentielles, SWOT</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Stratégie, PESTEL, Porter, Forces concurrentielles) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Yves Coustillas / M. Larretche / M. Moulin.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">1</span>
+                <span>Étape 1 : Le Diagnostic Externe Macro-Économique : Modèle PESTEL</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Stratégie</em> en partant de zéro. P - Politique : Stabilité institutionnelle, politiques fiscales, subventions à l'innovation numérique (BPI France). Complétez systématiquement cette analyse par la vérification suivante : E - Économique : Inflation, taux d'intérêt, pouvoir d'achat des ménages, cours des devises.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Stratégie) : [R1.08 • Stratégie] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">2</span>
+                <span>Étape 2 : L'Analyse du Secteur d'Activité : Les 5(+1) Forces de Porter</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>PESTEL</em> en partant de zéro. S - Socioculturel : Pyramide des âges, généralisation du télétravail, sensibilité citoyenne à l'éthique des données. Complétez systématiquement cette analyse par la vérification suivante : T - Technologique : Ruptures d'intelligence artificielle générative, informatique quantique, essor des micro-architectures ARM.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (PESTEL) : [R1.08 • PESTEL] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">3</span>
+                <span>Étape 3 : La Matrice SWOT (Diagnostic Synthétique)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Porter</em> en partant de zéro. E - Écologique : Règlementations sur l'empreinte carbone, raréfaction des métaux précieux, obligations de réparabilité. Complétez systématiquement cette analyse par la vérification suivante : L - Légal : Règlement Général sur la Protection des Données (RGPD), directive NIS 2, droit du travail.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Porter) : [R1.08 • Porter] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #367357;">4</span>
+                <span>Étape 4 : Approfondissement Méthodologique — Volet 4</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Forces concurrentielles</em> en partant de zéro. La Rivalité entre Concurrents Existants : Nombre d'acteurs sur le marché, guerre des prix, croissance du marché. Complétez systématiquement cette analyse par la vérification suivante : La Menace des Nouveaux Entrants : Hauteur des barrières à l'entrée (brevets technologiques, investissements massifs en capital, économies d'échelle).</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Forces concurrentielles) : [R1.08 • Forces concurrentielles] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #367357;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Yves Coustillas / M. Larretche / M. Moulin)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Stratégie</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>1. Le Diagnostic Externe Macro-Économique : Modèle PESTEL</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">P - Politique : Stabilité institutionnelle, politiques fiscales, subventions à l'innovation numérique (BPI France).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>PESTEL</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>2. L'Analyse du Secteur d'Activité : Les 5(+1) Forces de Porter</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">E - Économique : Inflation, taux d'intérêt, pouvoir d'achat des ménages, cours des devises.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Porter</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>3. La Matrice SWOT (Diagnostic Synthétique)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">S - Socioculturel : Pyramide des âges, généralisation du télétravail, sensibilité citoyenne à l'éthique des données.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Forces concurrentielles</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>Approfondissement Méthodologique — Volet 4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">T - Technologique : Ruptures d'intelligence artificielle générative, informatique quantique, essor des micro-architectures ARM.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>SWOT</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>1. Le Diagnostic Externe Macro-Économique : Modèle PESTEL</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">E - Écologique : Règlementations sur l'empreinte carbone, raréfaction des métaux précieux, obligations de réparabilité.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Chaîne de valeur</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>2. L'Analyse du Secteur d'Activité : Les 5(+1) Forces de Porter</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">L - Légal : Règlement Général sur la Protection des Données (RGPD), directive NIS 2, droit du travail.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>3. La Matrice SWOT (Diagnostic Synthétique)</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>3. La Matrice SWOT (Diagnostic Synthétique)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">La Rivalité entre Concurrents Existants : Nombre d'acteurs sur le marché, guerre des prix, croissance du marché.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Approfondissement Méthodologique — Volet 4</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.08 • Ch.5</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.08 / Ch.5</code><br><span class='text-[11px] text-slate-600'>Approfondissement Méthodologique — Volet 4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">La Menace des Nouveaux Entrants : Hauteur des barrières à l'entrée (brevets technologiques, investissements massifs en capital, économies d'échelle).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Yves Coustillas / M. Larretche / M. Moulin : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Stratégie » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Stratégie</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.08</strong>, M. Yves Coustillas / M. Larretche / M. Moulin insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Stratégie</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « PESTEL »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>PESTEL</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Gestion des Organisations), une part majeure des points est dédiée à la robustesse : P - Politique : Stabilité institutionnelle, politiques fiscales, subventions à l'innovation numérique (BPI France). Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>PESTEL</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Porter »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Porter</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Yves Coustillas / M. Larretche / M. Moulin rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.08</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Porter</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #367357;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Le Diagnostic Externe Macro-Économique : Modèle PESTEL</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.08 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.08 (Gestion des Organisations)</strong> supervisé par M. Yves Coustillas / M. Larretche / M. Moulin, on vous demande d'analyser et de résoudre un problème portant sur <strong>Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT</strong> en mobilisant explicitement les notions de <em>Stratégie, PESTEL, Porter</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Stratégie</em>. Rappel du cours : P - Politique : Stabilité institutionnelle, politiques fiscales, subventions à l'innovation numérique (BPI France).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Le Diagnostic Externe Macro-Économique : Modèle PESTEL</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. L'Analyse du Secteur d'Activité : Les 5(+1) Forces de Por</em> : E - Économique : Inflation, taux d'intérêt, pouvoir d'achat des ménages, cours des devises.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>PESTEL</em> (S - Socioculturel : Pyramide des âges, généralisation du télétravail, sensibilité citoyenne à l'éthique des données.).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Analyse macro-économique avec la méthode PESTEL, les 5(+1) forces concurrentielles de Michael Porter, la chaîne de valeur, la matrice SWOT c) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.08 — Ch.5 : Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT) ===
+1. Entrées analysées : Stratégie, PESTEL, Porter, Forces concurrentielles
+2. Étape A (1. Le Diagnostic Externe Macro-Économique : Modèle) : Validation des hypothèses -> OK
+3. Étape B (2. L'Analyse du Secteur d'Activité : Les 5(+1) For) : Application de la méthode officielle
+   -> Détail : P - Politique : Stabilité institutionnelle, politiques fiscales, subventions à l'innovation numérique (BPI Fra
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE M. YVES COUSTILLAS / M. LARRETCHE / M. MOULIN ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #367357;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. La Matrice SWOT (Diagnostic Synthétique)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Yves Coustillas / M. Larretche / M. Moulin</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.08</strong>, un exercice de synthèse combine <strong>PESTEL</strong> et <strong>Porter</strong> au sein du thème <em>« Diagnostic Stratégique d'Entreprise : PESTEL, Porter & SWOT »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>PESTEL</em> : T - Technologique : Ruptures d'intelligence artificielle générative, informatique quantique, essor des micro-architectures ARM.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Yves Coustillas / M. Larretche / M. Moulin dans la section <em>3. La Matrice SWOT (Diagnostic Synthétique)</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Porter</em>, on obtient la séquence exacte : E - Écologique : Règlementations sur l'empreinte carbone, raréfaction des métaux précieux, obligations de réparabilité.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Stratégie, PESTEL, Porter, Forces concurrentielles</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.08 — PESTEL) ===
+• Hypothèse initiale : Analyse macro-économique avec la méthode PESTEL, les 5(+1) forces concurrentielles de Michael Porter...
+• Opération principale : Mise en œuvre de Stratégie combiné à PESTEL
+• Point clé vérifié : E - Économique : Inflation, taux d'intérêt, pouvoir d'achat des ménages, cours des devises.
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans le modèle de la « Chaîne de Valeur » de Michael Porter, comment se décomposent les activités créatrices de valeur ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) En activités de jour et activités de nuit
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) En Activités Principales (logistique entrante, production, logistique sortante, commercialisation/vente, services) et Activités de Soutien (infrastructure, RH, R&D/technologie, approvisionnements)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) En dépenses obligatoires et dépenses facultatives
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) En activités manuelles et activités automatisées
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Porter montre que l'avantage concurrentiel d'une entreprise provient de sa capacité à concevoir, produire, commercialiser et soutenir ses produits avec une marge supérieure à ses concurrents, grâce à l'articulation optimale entre activités principales et activités de soutien.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelles sont les 5 Forces Concurrentielles de Michael Porter qui déterminent l'attractivité d'un secteur économique ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le vent, la pluie, le froid, la chaleur et l'humidité
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) La rivalité entre concurrents existants, la menace de nouveaux entrants, la menace de produits de substitution, le pouvoir de négociation des clients, et le pouvoir de négociation des fournisseurs
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Le marketing, la comptabilité, le droit, l'informatique et les RH
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Google, Apple, Facebook, Amazon et Microsoft
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Modèle des 5 forces de Porter : l'intensité de ces forces détermine la rentabilité moyenne du secteur. Par exemple, si les clients ont un pouvoir de négociation écrasant ou si des produits de substitution émergent rapidement, les marges de l'entreprise s'effondrent.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans la matrice stratégique du Boston Consulting Group (Matrice BCG), comment appelle-t-on les produits qui génèrent d'importantes liquidités financières sans nécessiter d'investissements massifs (part de marché élevée sur un marché à faible croissance) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Les Dilemmes (Question Marks)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Les Vaches à Lait (Cash Cows)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Les Étoiles (Stars)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Les Poids Morts (Dogs)
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Les Vaches à lait constituent le socle financier de l'entreprise : arrivées à maturité, elles rapportent un cash flow considérable qui permet de financer la recherche et le développement des Dilemmes et des Étoiles de demain.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.08 • Ch.5</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelles sont les cinq composantes de base de la structure d'une organisation selon Henry Mintzberg ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le patron, les secrétaires, les ouvriers, les clients et les fournisseurs
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Le Sommet Stratégique, la Ligne Hiérarchique, le Centre Opérationnel, la Technostructure et le Support Logistique
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Le bureau, l'usine, le magasin, le site web et l'entrepôt
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) La direction générale, les RH, la comptabilité, le marketing et l'informatique
+            </button>
+            
+            </div>
+            <div id="qcm_R1_08_chap5_diagnostic_strategique_pestel_porter_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Architecture universelle de Mintzberg : 1. Sommet stratégique (décide de la vision globale), 2. Ligne hiérarchique (cadres intermédiaires reliant le sommet à la base), 3. Centre opérationnel (ceux qui fabriquent les biens/services), 4. Technostructure (experts qui standardisent le travail des autres : méthodes, qualité, DSI), 5. Support logistique (services internes : cantine, paie, juridique).
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
         <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
         <div class="flex items-center justify-between gap-4 pt-2">
             <div>
@@ -290,6 +686,27 @@ Michael Porter (Harvard) modélise l'intensité concurrentielle et l'attractivit
 
     <script>
         lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
         if (typeof mermaid !== 'undefined') {
             mermaid.initialize({
                 startOnLoad: true,

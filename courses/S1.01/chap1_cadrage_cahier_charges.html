@@ -1,174 +1,275 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#2B527A"/>
-    <title>Chapitre 1 : Cadrage du Projet, Spécifications Fonctionnelles & Cahier des Charges — S1.01 Implémentation d'un Besoin Client — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#2B527A">
+    <title>S1.01 • Ch. 1 : Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #2B527A;
-            --bg-soft: #E9F0F6;
-            --border-soft: #B5CCDE;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.65;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .concept-badge {
-            display: inline-flex;
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #2B527A;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.1rem 1.4rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
         }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
         }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../S1.01.html">S1.01 SAÉ Dév</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 1</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../S1.01.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #2B527A;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire S1.01</span>
-            </a>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../S1.01.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    S1.01
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 1</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/S1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25040
+                </span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #2B527A;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 1 · Chapitre 1</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · Équipe SAÉ 1.01</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #2B527A;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
+                        S1.01 • CHAPITRE 1
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique)</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Analyse de la demande client, formalisation des spécifications fonctionnelles, dictionnaire des données et planification prévisionnelle.
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 1 : Cadrage du Projet, Spécifications Fonctionnelles & Cahier des Charges</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Analyse du sujet client, délimitation du périmètre, rédaction des scénarios d'utilisation, identification des contraintes et validation des spécifications.</p>
-    </section>
+    </div>
+    
 
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #2B527A;"></i><span>1. Finalités & Enjeux Pédagogiques de la SAÉ 1.01</span></h2>
-    
-    
-    
-    
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Finalités & Enjeux Pédagogiques de la SAÉ 1.01</h2>
 <p>
 La Situation d'Apprentissage et d'Évaluation 1.01 (SAÉ 1.01) constitue le premier projet d'ingénierie logicielle d'envergure du BUT Informatique. Conduite en <strong>équipe d'étudiants (4 à 5 personnes)</strong> sur une durée de 6 à 8 semaines, elle simule une commande logicielle réelle émanant d'un client professionnel.
 <br>Ce projet mobilise et synthétise les compétences fondamentales acquises en :
@@ -179,27 +280,7 @@ La Situation d'Apprentissage et d'Évaluation 1.01 (SAÉ 1.01) constitue le prem
     <li><strong>S1.03 (Environnement Linux / Git) :</strong> Gestion collaborative du code source, branches Git, compilation automatisée via Makefile.</li>
 </ul>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #2B527A;"></i><span>2. Les 4 Jalons Clés du Projet (Cycle en V & Agile)</span></h2>
-    
-    
-    
-    
+<h2>2. Les 4 Jalons Clés du Projet (Cycle en V & Agile)</h2>
 <p>
 Pour garantir la livraison d'un produit logiciel de qualité industrielle, la SAÉ 1.01 est rythmée par 4 jalons contractuels évalués par les enseignants :
 </p>
@@ -222,27 +303,7 @@ Pour garantir la livraison d'un produit logiciel de qualité industrielle, la SA
     </li>
 </ol>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #2B527A;"></i><span>3. Le Dictionnaire des Données Formalisé</span></h2>
-    
-    
-    
-    
+<h2>3. Le Dictionnaire des Données Formalisé</h2>
 <p>
 Le dictionnaire des données est la pierre angulaire du cadrage. Il définit chaque information manipulée par le système :
 </p>
@@ -283,59 +344,418 @@ Le dictionnaire des données est la pierre angulaire du cadrage. Il définit cha
     </tbody>
 </table>
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-    
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #2B527A;"></i><span>4. Formalisation des Exigences : Méthode INVEST & User Stories</span></h2>
-    
-    
-    
-    
+<h2>4. Formalisation des Exigences : Méthode INVEST & User Stories</h2>
 <p>
 Chaque fonctionnalité attendue par le client est rédigée sous la forme standard d'une <strong>User Story</strong> :
 <br><em>« En tant que [rôle utilisateur], je souhaite [action ou fonctionnalité] afin de [bénéfice métier]. »</em>
 <br>Chaque User Story doit impérativement respecter les critères de qualité <strong>INVEST</strong> : Indépendante, Négociable, Valeur métier démontrable, Estimable en temps, Suffisamment petite (Small) et Testable de manière automatisée.
 </p>
 
-
-
-</article>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
-        <div>
-            
+            </div>
         </div>
-        <a href="../S1.01.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
-        </a>
-        <div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #2B527A;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client »</strong> constitue un pilier fondamental du module <strong>S1.01 — Implémentation d'un Besoin Client</strong> enseigné par <strong>Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique)</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Analyse de la demande client, formalisation des spécifications fonctionnelles, dictionnaire des données et planification prévisionnelle. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>SAÉ 1.01, Cadrage, Spécifications, Cahier des charges, Client</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (SAÉ 1.01, Cadrage, Spécifications, Cahier des charges) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique).</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-        <a href="chap2_architecture_modulaire_cpp.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #2B527A;">
-            <span>Ch. 2 : Architecture Logicielle Modulair...</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #2B527A;">1</span>
+                <span>Étape 1 : Finalités & Enjeux Pédagogiques de la SAÉ 1.01</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>SAÉ 1.01</em> en partant de zéro. R1.01 (Algorithmique & C++) : Rigueur de conception formelle, typage strict, modularité et gestion de la mémoire sans fuite. Complétez systématiquement cette analyse par la vérification suivante : R1.02 / R1.11 (Communication) : Rédaction professionnelle du cahier des charges, animation des réunions et soutenance orale.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (SAÉ 1.01) : .hpp — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #2B527A;">2</span>
+                <span>Étape 2 : Les 4 Jalons Clés du Projet (Cycle en V & Agile)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Cadrage</em> en partant de zéro. S1.03 (Environnement Linux / Git) : Gestion collaborative du code source, branches Git, compilation automatisée via Makefile. Complétez systématiquement cette analyse par la vérification suivante : Jalon 1 — Cadrage & Cahier des Charges : Analyse approfondie de la demande client, formalisation des spécifications fonctionnelles externes, rédaction du dictionnaire des données et identification des cas limites.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Cadrage) : #pragma once — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #2B527A;">3</span>
+                <span>Étape 3 : Le Dictionnaire des Données Formalisé</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Spécifications</em> en partant de zéro. Jalon 2 — Architecture Modulaire & Interfaces : Découpage logique de l'application en modules indépendants, rédaction des fichiers d'en-tête .hpp protégés par #pragma once et prototypes complets des fonctions sans implémentation. Complétez systématiquement cette analyse par la vérification suivante : Jalon 3 — Implémentation C++ & Validation Valgrind : Écriture des fichiers sources .cpp , compilation stricte sous Linux ( -Wall -Wextra -Werror ), exécution des bancs de tests unitaires et audit mémoire approfondi avec </p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Spécifications) : .cpp — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #2B527A;">4</span>
+                <span>Étape 4 : Formalisation des Exigences : Méthode INVEST & User Stories</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Cahier des charges</em> en partant de zéro. Jalon 4 — Recette & Soutenance Finale : Démonstration en direct de l'application devant le commanditaire, analyse réflexive des choix techniques et évaluation de la dynamique d'équipe. Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Spécifications » dans le cadre de Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client : identifier l'hypothèse de départ, appliquer la règle formelle du cours de Équipe SAÉ 1.01 </p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Cahier des charges) : -Wall -Wextra -Werror — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
         
         </div>
-    </footer>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #2B527A;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique))</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>SAÉ 1.01</strong><br><span class='text-[11px] text-slate-500 font-mono'>S1.01 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>.hpp</code><br><span class='text-[11px] text-slate-600'>1. Finalités & Enjeux Pédagogiques de la SAÉ 1.01</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">R1.01 (Algorithmique & C++) : Rigueur de conception formelle, typage strict, modularité et gestion de la mémoire sans fuite.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Cadrage</strong><br><span class='text-[11px] text-slate-500 font-mono'>S1.01 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>#pragma once</code><br><span class='text-[11px] text-slate-600'>2. Les 4 Jalons Clés du Projet (Cycle en V & Agile)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">R1.02 / R1.11 (Communication) : Rédaction professionnelle du cahier des charges, animation des réunions et soutenance orale.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Spécifications</strong><br><span class='text-[11px] text-slate-500 font-mono'>S1.01 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>.cpp</code><br><span class='text-[11px] text-slate-600'>3. Le Dictionnaire des Données Formalisé</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">S1.03 (Environnement Linux / Git) : Gestion collaborative du code source, branches Git, compilation automatisée via Makefile.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Cahier des charges</strong><br><span class='text-[11px] text-slate-500 font-mono'>S1.01 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>-Wall -Wextra -Werror</code><br><span class='text-[11px] text-slate-600'>4. Formalisation des Exigences : Méthode INVEST & User Stories</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Jalon 1 — Cadrage & Cahier des Charges : Analyse approfondie de la demande client, formalisation des spécifications fonctionnelles externes, rédaction du dictionnaire des données et identifi</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Client</strong><br><span class='text-[11px] text-slate-500 font-mono'>S1.01 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>idClient</code><br><span class='text-[11px] text-slate-600'>1. Finalités & Enjeux Pédagogiques de la SAÉ 1.01</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Jalon 2 — Architecture Modulaire & Interfaces : Découpage logique de l'application en modules indépendants, rédaction des fichiers d'en-tête .hpp protégés par #pragma once et prototypes comp</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. Les 4 Jalons Clés du Projet (Cycle en V & </strong><br><span class='text-[11px] text-slate-500 font-mono'>S1.01 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>unsigned int</code><br><span class='text-[11px] text-slate-600'>2. Les 4 Jalons Clés du Projet (Cycle en V & Agile)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Jalon 3 — Implémentation C++ & Validation Valgrind : Écriture des fichiers sources .cpp , compilation stricte sous Linux ( -Wall -Wextra -Werror ), exécution des bancs de tests unitaires et </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>3. Le Dictionnaire des Données Formalisé</strong><br><span class='text-[11px] text-slate-500 font-mono'>S1.01 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>nomClient</code><br><span class='text-[11px] text-slate-600'>3. Le Dictionnaire des Données Formalisé</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Jalon 4 — Recette & Soutenance Finale : Démonstration en direct de l'application devant le commanditaire, analyse réflexive des choix techniques et évaluation de la dynamique d'équipe.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « SAÉ 1.01 » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>SAÉ 1.01</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>S1.01</strong>, Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>SAÉ 1.01</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Cadrage »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Cadrage</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Implémentation d'un Besoin Client), une part majeure des points est dédiée à la robustesse : R1.01 (Algorithmique & C++) : Rigueur de conception formelle, typage strict, modularité et gestion de la mémoire sans fuite. Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Cadrage</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Spécifications »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Spécifications</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>S1.01</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Spécifications</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #2B527A;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Finalités & Enjeux Pédagogiques de la SAÉ 1.01</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel S1.01 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>S1.01 (Implémentation d'un Besoin Client)</strong> supervisé par Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique), on vous demande d'analyser et de résoudre un problème portant sur <strong>Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client</strong> en mobilisant explicitement les notions de <em>SAÉ 1.01, Cadrage, Spécifications</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>SAÉ 1.01</em>. Rappel du cours : R1.01 (Algorithmique & C++) : Rigueur de conception formelle, typage strict, modularité et gestion de la mémoire sans fuite.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Finalités & Enjeux Pédagogiques de la SAÉ 1.01</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Les 4 Jalons Clés du Projet (Cycle en V & Agile)</em> : R1.02 / R1.11 (Communication) : Rédaction professionnelle du cahier des charges, animation des réunions et soutenance orale.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Cadrage</em> (S1.03 (Environnement Linux / Git) : Gestion collaborative du code source, branches Git, compilation automatisée via Makefile.).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Analyse de la demande client, formalisation des spécifications fonctionnelles, dictionnaire des données et planification prévisionnelle.) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (S1.01 — Ch.1 : Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client) ===
+1. Entrées analysées : SAÉ 1.01, Cadrage, Spécifications, Cahier des charges
+2. Étape A (1. Finalités & Enjeux Pédagogiques de la SAÉ 1.01) : Validation des hypothèses -> OK
+3. Étape B (2. Les 4 Jalons Clés du Projet (Cycle en V & Agile) : Application de la méthode officielle
+   -> Détail : R1.01 (Algorithmique & C++) : Rigueur de conception formelle, typage strict, modularité et gestion de la mémoi
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE ÉQUIPE SAÉ 1.01 (M. ROEGEL / ENSEIGNANTS INFORMATIQUE) ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #2B527A;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Le Dictionnaire des Données Formalisé</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique)</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>S1.01</strong>, un exercice de synthèse combine <strong>Cadrage</strong> et <strong>Spécifications</strong> au sein du thème <em>« Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Cadrage</em> : Jalon 1 — Cadrage & Cahier des Charges : Analyse approfondie de la demande client, formalisation des spécifications fonctionnelles externes, rédaction du dictionnaire des données et identification des cas limites.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) dans la section <em>3. Le Dictionnaire des Données Formalisé</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Spécifications</em>, on obtient la séquence exacte : Jalon 2 — Architecture Modulaire & Interfaces : Découpage logique de l'application en modules indépendants, rédaction des fichiers d'en-tête .hpp protégés par #pragma once et prototypes complets des fonctions sans implém</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>SAÉ 1.01, Cadrage, Spécifications, Cahier des charges</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (S1.01 — Cadrage) ===
+• Hypothèse initiale : Analyse de la demande client, formalisation des spécifications fonctionnelles, dictionnaire des donn...
+• Opération principale : Mise en œuvre de SAÉ 1.01 combiné à Cadrage
+• Point clé vérifié : R1.02 / R1.11 (Communication) : Rédaction professionnelle du cahier des charges, animation des réunions et sou
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">S1.01 • Fondamentaux (SAÉ 1.01)</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans le chapitre « Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client » (S1.01), quelle est la règle méthodologique prioritaire concernant SAÉ 1.01 ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_S1_01_chap1_cadrage_cahier_charges_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Vérifier systématiquement les hypothèses et appliquer rigoureusement le principe : R1.01 (Algorithmique & C++) : Rigueur de conception formelle, typage strict, modularité et gestion de la mémoire sa
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Ignorer les contraintes de SAÉ 1.01 et passer directement au résultat final sans justification intermédiaire.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Remplacer l'analyse formelle de SAÉ 1.01 par une approximation empirique non vérifiée.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Supprimer toutes les vérifications de bornes et de cohérence pour gagner du temps.
+            </button>
+            
+            </div>
+            <div id="qcm_S1_01_chap1_cadrage_cahier_charges_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Comme l'exige Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique) en S1.01 (Implémentation d'un Besoin Client), la maîtrise de SAÉ 1.01 repose sur la vérification préalable des hypothèses et la traçabilité complète du raisonnement : R1.01 (Algorithmique & C++) : Rigueur de conception formelle, typage strict, modularité et gestion de la mémoire sans fuite.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">S1.01 • Exigence Partiel (Cadrage)</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Lors d'une évaluation sur « 2. Les 4 Jalons Clés du Projet (Cycle en V & Agile) », quel point distingue une copie excellente d'une copie sanctionnée ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Omettre l'étude des cas limites liés à Cadrage.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_S1_01_chap1_cadrage_cahier_charges_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Articuler clairement Cadrage avec une justification pas-à-pas : R1.02 / R1.11 (Communication) : Rédaction professionnelle du cahier des charges, animation des réunions et sou
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Confondre les définitions de SAÉ 1.01 et de Cadrage sans préciser le contexte.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Fournir un résultat brut sans aucune unité, trace ni démonstration.
+            </button>
+            
+            </div>
+            <div id="qcm_S1_01_chap1_cadrage_cahier_charges_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> En partiel à l'IUT d'Anglet, la justification précise de Cadrage (R1.02 / R1.11 (Communication) : Rédaction professionnelle du cahier des charges, animation des réunions et soutenance orale.) est indispensable pour valider la compétence visée par ce chapitre.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">S1.01 • Vigilance & Pièges (Spécifications)</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle erreur classique faut-il absolument éviter lorsqu'on manipule Spécifications dans le cadre de « Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client » ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Documenter et vérifier chaque étape de transformation impliquant Spécifications.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Contrôler la cohérence du résultat final sur un jeu d'essai représentatif.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_S1_01_chap1_cadrage_cahier_charges_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Appliquer Spécifications mécaniquement hors de son domaine de validité sans contrôler les cas particuliers.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Respecter scrupuleusement les conventions officielles enseignées par Équipe SAÉ 1.01 (M. Roegel / Enseignants Informatique).
+            </button>
+            
+            </div>
+            <div id="qcm_S1_01_chap1_cadrage_cahier_charges_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Le piège majeur en examen consiste à appliquer Spécifications de façon automatique sans vérifier les conditions d'application ni les cas limites (S1.03 (Environnement Linux / Git) : Gestion collaborative du code source, branches Git, compilation automatisée via Makefile.).
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">S1.01 • Validation & Autonomie</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Comment valider de manière certaine sa résolution d'un exercice de TD portant sur « Cadrage de Projet, Cahier des Charges & Recueil du Besoin Client » ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) En s'arrêtant dès la première intuition sans relire l'énoncé.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) En supprimant les étapes intermédiaires de la trace d'exécution.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_S1_01_chap1_cadrage_cahier_charges_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) En modifiant les données de l'énoncé pour simplifier le problème.
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_S1_01_chap1_cadrage_cahier_charges_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) En effectuant une trace complète pas-à-pas et en vérifiant que toutes les contraintes (SAÉ 1.01, Cadrage, Spécifications) sont respectées.
+            </button>
+            
+            </div>
+            <div id="qcm_S1_01_chap1_cadrage_cahier_charges_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La validation par trace d'exécution et contrôle des contraintes (SAÉ 1.01, Cadrage, Spécifications) garantit qu'aucune erreur logique ou d'inattention ne subsiste avant de rendre sa copie.
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                
+            </div>
+            <a href="../S1.01.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours S1.01</span>
+            </a>
+            <div>
+                <a href="chap2_architecture_modulaire_cpp.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #2B527A;"><span>Ch. 2 : Conception Modulaire C++, Conteneurs STL & Gestion Mémoire</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
 
     <script>
         lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>

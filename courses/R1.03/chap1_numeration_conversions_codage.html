@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
     <meta name="theme-color" content="#8A5A44"/>
-    <title>Chapitre 1 : Systèmes de Numération Positionnelle & Conversions de Bases — R1.03 Architecture des Ordinateurs — KAI Academic</title>
+    <title>Chapitre 1 : Systèmes de Numération Positionnelle & Conversions de Bases — R1.03 Architecture des Ordinateurs & Systèmes — KAI Academic</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons CDN -->
@@ -31,27 +31,36 @@
             background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
             background-size: 28px 28px;
             color: #0f172a;
-            line-height: 1.65;
+            line-height: 1.7;
             -webkit-tap-highlight-color: transparent;
         }
         .font-dyslexic {
             font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
+            letter-spacing: 0.035em !important;
+            word-spacing: 0.09em !important;
+            line-height: 1.9 !important;
             background-color: #faf8f2 !important;
             background-image: none !important;
+        }
+        .font-dyslexic p, .font-dyslexic li, .font-dyslexic td {
+            font-size: 1.02rem !important;
+            line-height: 1.9 !important;
         }
         .glass-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+        .glass-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         }
         .concept-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 9999px;
             font-size: 0.72rem;
             font-weight: 700;
@@ -66,7 +75,7 @@
             border-radius: 0.75rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            margin: 1.25rem 0;
         }
         th {
             background-color: #f1f5f9;
@@ -74,7 +83,7 @@
             font-weight: 700;
             padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             border-bottom: 2px solid #cbd5e1;
         }
         td {
@@ -92,36 +101,70 @@
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         pre {
             background: #0f172a;
             color: #f8fafc;
-            padding: 1.1rem 1.4rem;
+            padding: 1.25rem 1.5rem;
             border-radius: 0.85rem;
             overflow-x: auto;
             margin: 1.25rem 0;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
         }
         code:not(pre code) {
             background: #f1f5f9;
             color: #0f172a;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
+            font-size: 0.84rem;
+            padding: 0.2rem 0.45rem;
             border-radius: 0.35rem;
             border: 1px solid #e2e8f0;
+        }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
         }
     </style>
 </head>
@@ -129,13 +172,13 @@
 
     <!-- Top Breadcrumb & Controls -->
     <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
+        <nav class="flex items-center gap-2 text-xs text-slate-500 font-mono">
             <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
                 <i class="w-3.5 h-3.5" data-lucide="home"></i>
                 <span>Hub</span>
             </a>
             <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.03.html">R1.03 Archi Matérielle</a>
+            <a class="hover:text-slate-900 font-medium" href="../R1.03.html">R1.03</a>
             <span>/</span>
             <span class="font-bold text-slate-900">Chapitre 1</span>
         </nav>
@@ -154,138 +197,624 @@
     <!-- Chapter Header Banner -->
     <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #8A5A44;">
         <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 1 · Chapitre 1</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Roose / M. Bouizem</span>
+            <span class="concept-badge">R1.03 · Masterclass Chapitre 1</span>
+            <span class="text-xs text-slate-500 font-mono">IUT d'Anglet · Enseignants référents : M. Jean-Noël Moulin / M. Philippe Roose</span>
         </div>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 1 : Systèmes de Numération Positionnelle & Conversions de Bases</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Bases 2, 8, 10, 16. Décomposition polynomiale pondérée, divisions/multiplications successives, regroupements par paquets de bits (octal et hexadécimal).</p>
+        <p class="text-slate-600 text-sm sm:text-base mt-2.5 max-w-3xl leading-relaxed">Théorie rigoureuse de la numération polynomiale pondérée en base B. Méthodes complètes de conversions déterministes (divisions et multiplications successives, groupements directs par paquets de bits), fractions binaires et périodicité, codages BCD et Gray (binaire réfléchi), normes ASCII et UTF-8.</p>
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500">
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-emerald-600" data-lucide="check-circle-2"></i> Cours Exhaustif Zéro Prérequis</span>
+            <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-amber-600" data-lucide="alert-triangle"></i> Pièges QCM M. Moulin</span>
+            <span class="px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 border border-orange-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-orange-600" data-lucide="calculator"></i> Conversions & Calculs Pas-à-Pas</span>
+            <span class="px-2.5 py-1 rounded-lg bg-sky-50 text-sky-800 border border-sky-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-sky-600" data-lucide="binary"></i> Bases 2, 8, 10, 16 · BCD · Gray</span>
+        </div>
     </section>
 
     <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>1. Le Principe de Numération Positionnelle Pondérée</span></h2>
-    
-    
-    
-    
-<p>
-Dans tout système de numération positionnelle en base $B$, la valeur numérique d'un mot composé de $k+1$ chiffres $c_k c_{k-1} \dots c_1 c_0$ s'exprime selon le développement polynomial :
-</p>
-$$N = \sum_{i=0}^{k} c_i \cdot B^i = c_k \cdot B^k + c_{k-1} \cdot B^{k-1} + \dots + c_1 \cdot B^1 + c_0 \cdot B^0$$
-<p>Chaque chiffre $c_i$ vérifie impérativement la contrainte : $0 \le c_i < B$.</p>
+    <main class="space-y-8">
 
-<h3>Les 3 Bases Universelles en Informatique</h3>
-<ul>
-    <li><strong>Base 10 (Décimale) :</strong> Chiffres $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$. Poids : $10^0 = 1, 10^1 = 10, 10^2 = 100, 10^3 = 1000$.</li>
-    <li><strong>Base 2 (Binaire naturel) :</strong> Chiffres $\{0, 1\}$ (bits). Poids : $2^0 = 1, 2^1 = 2, 2^2 = 4, 2^3 = 8, 2^4 = 16, 2^5 = 32, 2^6 = 64, 2^7 = 128, 2^8 = 256$.</li>
-    <li><strong>Base 16 (Hexadécimale) :</strong> Chiffres $0$ à $9$ et lettres $\text{A}=10, \text{B}=11, \text{C}=12, \text{D}=13, \text{E}=14, \text{F}=15$. Un chiffre hexadécimal représente exactement <strong>4 bits (un quartet ou nibble)</strong> car $16 = 2^4$. Deux chiffres hexadécimaux forment exactement <strong>1 octet (8 bits)</strong>.</li>
-</ul>
+<!-- SECTION 1 : THÉORIE FONDAMENTALE DE LA NUMÉRATION -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="scale" style="color: #8A5A44;"></i>
+        <span>1. Théorie de la Numération Positionnelle Pondérée</span>
+    </h2>
 
+    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        Dans l'histoire des civilisations, deux grands systèmes de représentation des nombres se sont affrontés :
+        les <strong>systèmes additifs</strong> (comme les chiffres romains $XVI = 10 + 5 + 1$, où la position du symbole influe peu sur son ordre de grandeur et où les calculs arithmétiques sont atrocement complexes) et les <strong>systèmes positionnels pondérés</strong> inventés en Inde et transmis par le monde arabo-musulman.
+    </p>
 
+    <div class="callout-def">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+            <i class="w-4 h-4 text-emerald-700" data-lucide="book-open"></i>
+            <span>THÉORÈME FONDAMENTAL DE LA DÉCOMPOSITION POLYNOMIALE</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-800 mt-2 leading-relaxed">
+            Soit une base entière $B \ge 2$. Tout nombre réel positif $N$ s'écrit de manière unique sous la forme d'un mot constitué d'une suite de chiffres :
+        </p>
+        $$N = (c_k c_{k-1} \dots c_1 c_0 \,,\, c_{-1} c_{-2} \dots c_{-m})_B$$
+        <p class="text-xs sm:text-sm text-slate-800 mt-1 leading-relaxed">
+            Chaque chiffre $c_i$ est un élément de l'alphabet des symboles de la base vérifiant la contrainte stricte :
+            $$0 \le c_i < B$$
+            La valeur quantitative de $N$ dans le système décimal universel est donnée par la série polynomiale pondérée :
+            $$N = \sum_{i=-m}^{k} c_i \cdot B^i = c_k B^k + c_{k-1} B^{k-1} + \dots + c_1 B^1 + c_0 B^0 + c_{-1} B^{-1} + \dots + c_{-m} B^{-m}$$
+        </p>
+    </div>
 
+    <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-4">Les 4 Poids Clés & Bases Informatiques</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span> Base 2 (Binaire Naturel)</span>
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-slate-200">Alphabet {0, 1}</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                Le <strong>bit</strong> (<em>Binary Digit</em>) est l'unité élémentaire d'information en électronique numérique. Un transistor ne possède que deux états stables : bloqué (0 V, niveau logique 0) ou saturé (tension nominale $V_{cc}$, niveau logique 1).
+            </p>
+            <p class="text-slate-700 font-mono text-[11px] bg-white p-2 rounded border border-slate-200">
+                Poids : $2^0=1, 2^1=2, 2^2=4, 2^3=8, 2^4=16, 2^5=32, 2^6=64, 2^7=128, 2^8=256, 2^9=512, 2^{10}=1024$
+            </p>
+        </div>
 
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span> Base 16 (Hexadécimal)</span>
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-slate-200">{0..9, A..F}</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                Représentation condensée universelle en architecture matérielle. Comme $16 = 2^4$, <strong>1 chiffre hexadécimal code exactement 4 bits (un quartet / nibble)</strong>. Deux chiffres hexa représentent rigoureusement <strong>1 octet (8 bits)</strong>.
+            </p>
+            <p class="text-slate-700 font-mono text-[11px] bg-white p-2 rounded border border-slate-200">
+                A=10, B=11, C=12, D=13, E=14, F=15. Ex: 0xFF = 255.
+            </p>
+        </div>
 
-    
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span> Base 8 (Octal)</span>
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-slate-200">Alphabet {0..7}</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                Puisque $8 = 2^3$, <strong>1 chiffre octal code exactement 3 bits</strong>. Utilisé historiquement sur les machines PDP-11 et encore aujourd'hui dans les permissions UNIX (<code>chmod 755</code> : $7 = 111_2$, $5 = 101_2$).
+            </p>
+        </div>
 
-
-
-    
-
-
-
-    
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span> Base 10 (Décimal Humain)</span>
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-slate-200">Alphabet {0..9}</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+                Base naturelle pour l'humain due à ses 10 doigts. Nécessite une conversion en binaire dès l'entrée dans la machine, et une conversion inverse lors de la restitution sur écran/terminal.
+            </p>
+        </div>
+    </div>
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>2. Méthodes de Conversion Déterministes</span></h2>
-    
-    
-    
-    
+<!-- SECTION 2 : MÉTHODES DE CONVERSION DÉTERMINISTES -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="repeat" style="color: #8A5A44;"></i>
+        <span>2. Méthodes de Conversion Déterministes Pas-à-Pas</span>
+    </h2>
 
-<h3>A. Conversion Binaire $\longleftrightarrow$ Hexadécimal Directe</h3>
-<p>
-Puisque $16 = 2^4$, on regroupe les bits par paquets de 4 en partant de la droite (bit de poids faible) :
-</p>
-<pre><code>Binaire initial :    1 1 0 1   0 1 1 0   1 0 1 1   0 0 1 0
-Quartets de 4 bits :  1101      0110      1011      0010
-Valeurs décimales :    13         6        11         2
-Hexadécimal :           D         6         B         2
-Résultat :           (1101011010110010)_2 = (D6B2)_16</code></pre>
+    <div class="space-y-6 text-sm text-slate-700">
+        <!-- Sous-partie A -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-3">
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-bold" style="background-color: #8A5A44;">A</span>
+                <span>Base 10 vers Base 2 : Algorithme des Divisions Euclidiennes Successives</span>
+            </h3>
+            <p class="leading-relaxed">
+                Pour convertir un entier décimal $N$ en base $B$ (ici $B=2$), on divise successivement par $B$ jusqu'à obtenir un <strong>quotient strictement nul</strong>.
+                Le nombre dans la base cible est constitué par la suite des <strong>restes lus en remontant</strong> (du dernier reste obtenu, qui est le bit de poids fort MSB, jusqu'au premier reste, qui est le bit de poids faible LSB).
+            </p>
+            
+            <div class="overflow-x-auto">
+                <table class="text-xs">
+                    <thead>
+                        <tr>
+                            <th>Étape</th>
+                            <th>Division Euclidienne</th>
+                            <th>Quotient</th>
+                            <th>Reste ($c_i$)</th>
+                            <th>Poids Binaire</th>
+                            <th>Commentaire</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-mono">
+                        <tr>
+                            <td>1</td>
+                            <td>53 / 2</td>
+                            <td>26</td>
+                            <td class="font-bold text-amber-700">1</td>
+                            <td>$2^0$ (LSB)</td>
+                            <td class="font-sans text-slate-500">Premier reste $ightarrow$ tout à droite</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>26 / 2</td>
+                            <td>13</td>
+                            <td class="font-bold text-amber-700">0</td>
+                            <td>$2^1$</td>
+                            <td class="font-sans text-slate-500"></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>13 / 2</td>
+                            <td>6</td>
+                            <td class="font-bold text-amber-700">1</td>
+                            <td>$2^2$</td>
+                            <td class="font-sans text-slate-500"></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>6 / 2</td>
+                            <td>3</td>
+                            <td class="font-bold text-amber-700">0</td>
+                            <td>$2^3$</td>
+                            <td class="font-sans text-slate-500"></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>3 / 2</td>
+                            <td>1</td>
+                            <td class="font-bold text-amber-700">1</td>
+                            <td>$2^4$</td>
+                            <td class="font-sans text-slate-500"></td>
+                        </tr>
+                        <tr class="bg-amber-50/50">
+                            <td>6</td>
+                            <td>1 / 2</td>
+                            <td><strong>0</strong></td>
+                            <td class="font-bold text-emerald-700">1</td>
+                            <td>$2^5$ (MSB)</td>
+                            <td class="font-sans text-emerald-800 font-semibold">Quotient = 0 : Arrêt immédiat !</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-<h3>B. Décimal $\longrightarrow$ Binaire par Divisions Euclidiennes Successives</h3>
-<p>
-On divise successivement par 2 jusqu'à obtenir un quotient nul. Le nombre binaire se lit en relevant <strong>les restes dans l'ordre inverse</strong> (du dernier reste vers le premier).
-</p>
-<pre><code>Conversion de 53 en binaire :
-53 / 2 = 26 reste 1 (bit 0 - LSB)
-26 / 2 = 13 reste 0
-13 / 2 =  6 reste 1
- 6 / 2 =  3 reste 0
- 3 / 2 =  1 reste 1
- 1 / 2 =  0 reste 1 (bit 5 - MSB)
-==> (53)_10 = (110101)_2 = (0011 0101)_2 sur 8 bits = (35)_16</code></pre>
+            <div class="p-3 bg-slate-900 text-slate-100 rounded-xl font-mono text-xs">
+                Résultat en lisant les restes de bas en haut : (53)₁₀ = (110101)₂<br/>
+                Vérification polynomiale : 1×32 + 1×16 + 0×8 + 1×4 + 0×2 + 1×1 = 32 + 16 + 4 + 1 = 53. Parfait !
+            </div>
+        </div>
 
+        <!-- Sous-partie B -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-3">
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-bold" style="background-color: #8A5A44;">B</span>
+                <span>Partie Fractionnaire : Algorithme des Multiplications Successives par 2</span>
+            </h3>
+            <p class="leading-relaxed">
+                Pour convertir la partie fractionnaire d'un nombre (la partie située après la virgule, $0 \le F < 1$), on multiplie itérativement par 2 :
+                la <strong>partie entière du résultat (0 ou 1)</strong> constitue le bit fractionnaire (lu du premier au dernier, du haut vers le bas),
+                et on réitère la multiplication sur la nouvelle partie fractionnaire restante.
+            </p>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                    <h4 class="font-bold text-slate-900 text-xs">Exemple fini : Convertir $0.625_{10}$</h4>
+                    <pre class="text-[11px] font-mono leading-tight bg-slate-900 text-slate-100 p-2.5 rounded-lg">
+0.625 × 2 = 1.25  --> Entière = 1 (poids 2⁻¹ = 0.5)
+0.250 × 2 = 0.50  --> Entière = 0 (poids 2⁻² = 0.25)
+0.500 × 2 = 1.00  --> Entière = 1 (poids 2⁻³ = 0.125)
+0.000             --> Reste nul, arrêt !
 
+(0.625)₁₀ = (0.101)₂
+Vérif : 1/2 + 0/4 + 1/8 = 0.5 + 0.125 = 0.625.</pre>
+                </div>
 
+                <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2">
+                    <h4 class="font-bold text-amber-900 text-xs flex items-center gap-1.5">
+                        <i class="w-3.5 h-3.5 text-amber-600" data-lucide="alert-circle"></i>
+                        <span>Exemple Périodique Infini : Convertir $0.2_{10}$</span>
+                    </h4>
+                    <pre class="text-[11px] font-mono leading-tight bg-slate-900 text-slate-100 p-2.5 rounded-lg">
+0.2 × 2 = 0.4  --> Entière = 0
+0.4 × 2 = 0.8  --> Entière = 0
+0.8 × 2 = 1.6  --> Entière = 1
+0.6 × 2 = 1.2  --> Entière = 1
+0.2 × 2 = 0.4  --> On retombe sur 0.2 ! Boucle infinie !
 
-    
+(0.2)₁₀ = (0.0011 0011 0011...)₂
+La période "0011" se répète à l'infini en binaire !</pre>
+                </div>
+            </div>
+            <div class="callout-exam">
+                <strong class="text-amber-950 font-bold">Conséquence Fondamentale en Informatique :</strong> Un nombre décimal simple et fini comme $0.1$ ou $0.2$ ne peut <strong>JAMAIS</strong> être représenté de façon exacte en binaire dans la mémoire d'un ordinateur. Il subit obligatoirement un arrondi de troncature. C'est pourquoi en C++ ou Python, <code>0.1 + 0.2 != 0.3</code> (résultat : <code>0.30000000000000004</code>).
+            </div>
+        </div>
 
+        <!-- Sous-partie C -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-3">
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-bold" style="background-color: #8A5A44;">C</span>
+                <span>Passerelles Directes : Binaire $\longleftrightarrow$ Octal et Binaire $\longleftrightarrow$ Hexadécimal</span>
+            </h3>
+            <p class="leading-relaxed">
+                Puisque $16 = 2^4$ et $8 = 2^3$, il existe une bijection immédiate sans jamais avoir besoin de convertir en décimal :
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                    <span class="font-bold text-xs text-slate-900">Binaire $\longleftrightarrow$ Hexadécimal : Paquets de 4 bits</span>
+                    <p class="text-xs text-slate-600">On découpe en quartets de 4 bits en partant de la <strong>droite</strong> (virgule). On complète éventuellement le dernier quartet de gauche par des zéros.</p>
+                    <pre class="text-[11px] font-mono bg-slate-900 text-slate-100 p-2 rounded">
+Mot : 101111001010011₂
+Découpage :  0101   1110   0101   0011
+Valeurs   :    5      14      5      3
+En Hexa   :    5       E      5      3
+Résultat  : (5E53)₁₆</pre>
+                </div>
 
-
-    
-
-
-
-    
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                    <span class="font-bold text-xs text-slate-900">Binaire $\longleftrightarrow$ Octal : Paquets de 3 bits</span>
+                    <p class="text-xs text-slate-600">On découpe en triplets de 3 bits en partant de la <strong>droite</strong> (virgule).</p>
+                    <pre class="text-[11px] font-mono bg-slate-900 text-slate-100 p-2 rounded">
+Mot : 101111001010011₂
+Découpage :  001   011   111   001   010   011
+Valeurs   :   1     3     7     1     2     3
+En Octal  :   1     3     7     1     2     3
+Résultat  : (137123)₈</pre>
+                </div>
+            </div>
+        </div>
+    </div>
 </article>
 
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-2 flex items-center gap-2"><i class="w-5 h-5 shrink-0" data-lucide="book-open" style="color: #8A5A44;"></i><span>3. Encodages Textuels : De l'ASCII à UTF-8</span></h2>
-    
-    
-    
-    
-<ul>
-    <li><strong>ASCII standard (1963) :</strong> Codé sur 7 bits ($2^7 = 128$ caractères). Comprend les caractères de contrôle ($0$ à $31$), les chiffres ('0' = $48 = 0x30$), les majuscules ('A' = $65 = 0x41$) et les minuscules ('a' = $97 = 0x61$).</li>
-    <li><strong>UTF-8 (Norme universelle) :</strong> Encodage à longueur variable (de 1 à 4 octets) rétrocompatible avec l'ASCII :
-        <ul>
-            <li>Caractères ASCII (U+0000 à U+007F) : 1 octet (format <code>0xxxxxxx</code>).</li>
-            <li>Caractères latins accentués (é, è, à...) : 2 octets (format <code>110xxxxx 10xxxxxx</code>).</li>
-            <li>Symboles mathématiques / idéogrammes : 3 octets (format <code>1110xxxx 10xxxxxx 10xxxxxx</code>).</li>
-            <li>Emojis : 4 octets (format <code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code>).</li>
-        </ul>
-    </li>
-</ul>
+<!-- SECTION 3 : CODAGES SPÉCIFIQUES (BCD, GRAY, TEXTE) -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0" data-lucide="binary" style="color: #8A5A44;"></i>
+        <span>3. Codages Spécifiques : BCD, Code Gray & Encodages Textuels</span>
+    </h2>
 
+    <!-- BCD -->
+    <div class="space-y-4">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded text-xs text-white font-mono" style="background-color: #8A5A44;">BCD</span>
+            <span>Décimal Codé Binaire (Binary Coded Decimal — BCD 8421)</span>
+        </h3>
+        <p class="text-sm text-slate-700 leading-relaxed">
+            En BCD naturel, <strong>chaque chiffre décimal ($0$ à $9$) est codé individuellement et indépendamment sur un quartet de 4 bits</strong>.
+        </p>
 
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-xs sm:text-sm space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                    <span class="font-bold text-slate-900 block mb-1">Codage de 85 décimal :</span>
+                    <p class="font-mono text-xs text-slate-700">Chiffre 8 = 1000₂<br/>Chiffre 5 = 0101₂<br/>(85)₁₀ = <strong>(1000 0101)_(BCD)</strong></p>
+                    <p class="text-[11px] text-slate-500 mt-1 font-sans">En binaire pur, 85 = 0101 0101₂. Attention à ne jamais les confondre !</p>
+                </div>
+                <div class="p-2.5 bg-rose-50 rounded-lg border border-rose-200">
+                    <span class="font-bold text-rose-950 block mb-1">Pseudo-tétrades interdites :</span>
+                    <p class="text-xs text-rose-800 leading-relaxed">Sur 4 bits, il existe $2^4 = 16$ combinaisons ($0000$ à $1111$). Les 6 combinaisons de $10$ à $15$ ($1010$ à $1111$, soit A à F en hexa) sont strictement <strong>illégales en BCD</strong>.</p>
+                </div>
+            </div>
 
+            <div class="p-3 bg-amber-50/70 rounded-lg border border-amber-200 text-amber-950">
+                <strong class="font-bold block mb-1">Règle de l'Addition BCD & Correction +6 (0110) :</strong>
+                Lors de l'addition de deux quartets BCD, si la somme dépasse 9 (apparition d'une pseudo-tétrade $1010..1111$) ou si une retenue sort du quartet ($C=1$), le résultat est faux.
+                Il faut impérativement <strong>ajouter le facteur correctif $+6$ ($0110_2$)</strong> au quartet pour sauter les 6 combinaisons interdites et propager la retenue décimale au quartet suivant !
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Gray -->
+    <div class="space-y-4 pt-4 border-t border-slate-200">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded text-xs text-white font-mono" style="background-color: #8A5A44;">GRAY</span>
+            <span>Code Binaire Réfléchi (Code de Frank Gray)</span>
+        </h3>
+        <p class="text-sm text-slate-700 leading-relaxed">
+            Le code Gray possède une propriété mathématique cruciale : <strong>deux valeurs numériques consécutives ne diffèrent que par un seul et unique bit (distance de Hamming = 1)</strong>.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                <span class="font-bold text-slate-900 block">Pourquoi cette propriété est vitale ?</span>
+                <p class="text-slate-600 leading-relaxed">
+                    Dans les encodeurs optiques industriels (roues codeuses mesurant l'angle d'un moteur, bras robotique) :
+                    en binaire naturel, passer de $3$ ($011_2$) à $4$ ($100_2$) exige que les 3 bits changent rigoureusement d'état au même instant physique.
+                    À cause des tolérances mécaniques et des retards électroniques, un bit basculera avant les autres (ex: $011 	o 111 	o 100$).
+                    Pendant quelques nanosecondes, le capteur lira $7$ au lieu de $4$, provoquant des à-coups violents ou des bugs d'asservissement.
+                    Avec le code Gray, un seul capteur change à la fois : aucun état fantôme transitoire n'est possible.
+                </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                <span class="font-bold text-slate-900 block">Formules de Conversion Déterministes Binaire $\longleftrightarrow$ Gray</span>
+                <p class="text-slate-600">Soit $B = b_n \dots b_0$ le mot binaire et $G = g_n \dots g_0$ le mot Gray :</p>
+                <div class="bg-slate-900 text-slate-100 p-2.5 rounded font-mono text-[11px] space-y-1">
+                    <p>• Binaire vers Gray : $g_n = b_n$ (le bit de poids fort est identique)</p>
+                    <p>• Pour tout $i < n$ : $g_i = b_{i+1} \oplus b_i$</p>
+                    <p class="text-amber-300">Formule globale CPU : $G = B \oplus (B \gg 1)$</p>
+                    <div class="border-t border-slate-700 pt-1 mt-1 text-slate-300">
+                        <p>• Gray vers Binaire : $b_n = g_n$</p>
+                        <p>• Pour tout $i < n$ : $b_i = b_{i+1} \oplus g_i$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </article>
+
+<!-- SECTION 4 : ATELIER PIÈGES D'EXAMEN -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="alert-triangle"></i>
+        <span>4. Atelier Pièges d'Examen de M. Moulin</span>
+    </h2>
+
+    <p class="text-sm text-slate-700 leading-relaxed">
+        Dans les devoirs surveillés et partiels de R1.03 de l'IUT d'Anglet, les questions de numération sont conçues pour piéger les étudiants qui appliquent des recettes de cuisine sans en comprendre les fondements. Voici les 4 pièges récurrents disséqués :
+    </p>
+
+    <div class="space-y-4">
+        <!-- Piège 1 -->
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">1</span>
+                <span>Inversion de l'ordre de lecture des restes (MSB vs LSB)</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                <span class="text-rose-700 font-semibold font-mono">Erreur fréquente :</span> Écrire les restes de la division du premier au dernier (de haut en bas).
+                <br/>
+                <span class="text-emerald-700 font-semibold font-mono">Règle absolue :</span> Le premier reste obtenu correspond à la division par 2 de $N$ modulo 2 : c'est le reste qui n'a pas été multiplié par 2, c'est donc le <strong>bit de poids faible $2^0$ (LSB)</strong> situé tout à droite ! Le dernier reste avant que le quotient ne devienne nul est le bit de poids fort (MSB) situé tout à gauche.
+            </p>
+        </div>
+
+        <!-- Piège 2 -->
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">2</span>
+                <span>Regroupement en quartets hexadécimaux depuis la gauche au lieu de la droite</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Soit le mot binaire $110101_2$. Si on découpe depuis la gauche : on obtiendrait $(1101)_2 = D$ et $(0100)_2 = 4 \implies D4_{16} = 212_{10}$.
+                <br/>
+                <span class="text-rose-700 font-semibold font-mono">FAUX !</span> La partie entière doit TOUJOURS être calée sur la virgule à droite : $11 \ 0101_2 \implies (0011)_2 = 3$ et $(0101)_2 = 5 \implies 35_{16} = 53_{10}$.
+            </p>
+        </div>
+
+        <!-- Piège 3 -->
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">3</span>
+                <span>Oublier la correction +6 lors d'une retenue en addition BCD</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Calculer $8 + 9$ en BCD : $1000_2 + 1001_2 = 10001_2$. Il y a 5 bits : le 1 sortant est une retenue ($C=1$) et il reste $0001_2$.
+                Si on ne corrige pas, on lit $11_{10}$ au lieu de $17_{10}$ !
+                Avec la correction : $10001_2 + 0110_2 = 10111_2 \implies$ quartet de poids fort $0001_2 = 1$ et quartet faible $0111_2 = 7 \implies 17$. Résultat exact !
+            </p>
+        </div>
+
+        <!-- Piège 4 -->
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold text-amber-950">
+                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">4</span>
+                <span>Multiplier la partie entière au lieu de la fraction dans la conversion fractionnaire</span>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                Pour convertir $12.375$ : on sépare d'abord rigoureusement la partie entière $12$ (traitée par divisions euclidiennes) et la partie fractionnaire $0.375$ (traitée par multiplications par 2). Ne jamais multiplier le nombre entier par 2 !
+            </p>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 5 : EXERCICES RÉSOLUS PAS-À-PAS -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+        <i class="w-6 h-6 shrink-0 text-emerald-600" data-lucide="check-square"></i>
+        <span>5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)</span>
+    </h2>
+
+    <div class="space-y-6 text-xs sm:text-sm">
+        <!-- Exercice 1 -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900 text-sm">Exercice 1 : Multi-Conversions Complètes</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Niveau Examen</span>
+            </div>
+            <p class="text-slate-700 font-medium">
+                Énoncé : Soit le nombre décimal $N = 347_{10}$. Convertir $N$ en Binaire pur, en Hexadécimal et en Octal en détaillant chaque étape.
+            </p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 font-mono text-xs">
+                <p class="text-slate-900 font-bold font-sans">Solution Détaillée :</p>
+                <p>1. Conversion la plus rapide : passer directement par l'Hexadécimal (divisions par 16) :<br/>
+                • 347 / 16 = 21, reste = 11 = <strong>B</strong> (poids 16⁰)<br/>
+                • 21 / 16 = 1, reste = <strong>5</strong> (poids 16¹)<br/>
+                • 1 / 16 = 0, reste = <strong>1</strong> (poids 16²)<br/>
+                --> <strong>(347)₁₀ = (15B)₁₆</strong>
+                </p>
+                <p>2. Déduction immédiate en Binaire (éclatement de chaque chiffre hexa sur 4 bits) :<br/>
+                • 1₁₆ = 0001₂<br/>
+                • 5₁₆ = 0101₂<br/>
+                • B₁₆ = 1011₂<br/>
+                --> <strong>(347)₁₀ = (0001 0101 1011)₂ = (101011011)₂</strong>
+                </p>
+                <p>3. Déduction immédiate en Octal (regroupement par 3 bits depuis la droite) :<br/>
+                • Mot : 101 011 011₂<br/>
+                • 101₂ = 5, 011₂ = 3, 011₂ = 3<br/>
+                --> <strong>(347)₁₀ = (533)₈</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Exercice 2 -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900 text-sm">Exercice 2 : Addition BCD avec Correction</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Classique Contrôle</span>
+            </div>
+            <p class="text-slate-700 font-medium">
+                Énoncé : Effectuer l'addition BCD de $47_{10} + 38_{10}$ au niveau binaire en montrant les corrections nécessaires.
+            </p>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 font-mono text-xs">
+                <p class="text-slate-900 font-bold font-sans">Solution Détaillée :</p>
+                <p>47 en BCD = 0100 0111<br/>
+                   38 en BCD = 0011 1000
+                </p>
+                <p>Addition binaire brute du quartet des unités (0111 + 1000) :<br/>
+                0111 (7) + 1000 (8) = 1111 (15 en décimal).<br/>
+                1111 est une <strong>pseudo-tétrade interdite (> 9)</strong> !<br/>
+                Application de la correction +6 (0110) :<br/>
+                &nbsp;&nbsp;1111<br/>
+                + 0110<br/>
+                -------<br/>
+                1 0101 (retenue 1 propagée aux dizaines, et quartet unités = 0101 = 5)
+                </p>
+                <p>Addition du quartet des dizaines avec la retenue :<br/>
+                0100 (4) + 0011 (3) + 0001 (retenue 1) = 1000 (8 en décimal). Pas de correction nécessaire ($8 \le 9$).
+                </p>
+                <p class="font-sans text-emerald-800 font-bold">
+                    Résultat final en BCD : (1000 0101)_(BCD) = 85 décimal ($47 + 38 = 85$). Parfaitement vérifié.
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- SECTION 6 : QCM INTERACTIFS M. MOULIN -->
+<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+    <div class="flex items-center justify-between border-b pb-3">
+        <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2.5">
+                <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="help-circle"></i>
+                <span>6. QCM Interactif Format Partiel M. Moulin</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">Conçu pour réviser entre deux cours, tester vos réflexes sans calculatrice.</p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">4 Questions</span>
+    </div>
+
+    <!-- Question 1 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Numération & Poids</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Quelle est la valeur décimale exacte du mot binaire fractionnaire $(0.1011)_2$ ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q1-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) 0.6875</button>
+            <button onclick="answerQuiz(this, true, 'q1-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) 0.6875... Attendez : $1/2 + 1/8 + 1/16 = 0.5 + 0.125 + 0.0625 = 0.6875$</button>
+            <button onclick="answerQuiz(this, false, 'q1-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) 0.55</button>
+            <button onclick="answerQuiz(this, false, 'q1-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) 0.75</button>
+        </div>
+        <div id="q1-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> Les poids binaires après la virgule sont $2^{-1}=0.5$, $2^{-2}=0.25$, $2^{-3}=0.125$, $2^{-4}=0.0625$. Le mot $0.1011_2$ vaut donc $1 	imes 0.5 + 0 	imes 0.25 + 1 	imes 0.125 + 1 	imes 0.0625 = 0.5 + 0.125 + 0.0625 = 0.6875_{10}$.
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Conversions Hexa</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Quelle est la conversion hexadécimale du mot binaire $(1110010110)_2$ ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q2-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) E56</button>
+            <button onclick="answerQuiz(this, true, 'q2-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) 396 (regroupement depuis la droite : 0011 1001 0110 -> 3 9 6)</button>
+            <button onclick="answerQuiz(this, false, 'q2-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) 72B</button>
+            <button onclick="answerQuiz(this, false, 'q2-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) 1E56</button>
+        </div>
+        <div id="q2-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> On regroupe par 4 bits en partant impérativement de la droite :<br/>
+            • 0110₂ = 6<br/>
+            • 1001₂ = 9<br/>
+            • 11₂ complété à gauche par deux zéros = 0011₂ = 3<br/>
+            Le résultat est donc <strong>396₁₆</strong>. L'option A correspondait au piège du découpage depuis la gauche !
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Code Gray</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Quel est le mot en code Gray correspondant au nombre binaire $B = (1011)_2$ ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q3-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) 1110</button>
+            <button onclick="answerQuiz(this, true, 'q3-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) 1110... Attendez : g₃ = b₃ = 1, g₂ = b₃⊕b₂ = 1⊕0 = 1, g₁ = b₂⊕b₁ = 0⊕1 = 1, g₀ = b₁⊕b₀ = 1⊕1 = 0 -> 1110</button>
+            <button onclick="answerQuiz(this, false, 'q3-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) 0100</button>
+            <button onclick="answerQuiz(this, false, 'q3-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) 1001</button>
+        </div>
+        <div id="q3-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> $g_3 = 1$. $g_2 = 1 \oplus 0 = 1$. $g_1 = 0 \oplus 1 = 1$. $g_0 = 1 \oplus 1 = 0$. Le mot Gray est bien <strong>1110</strong>. En formule rapide CPU : $1011 \oplus (1011 \gg 1) = 1011 \oplus 0101 = 1110$.
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Arithmétique BCD</span>
+        </div>
+        <p class="text-sm font-semibold text-slate-900">
+            Pourquoi applique-t-on une correction de $+6$ ($0110_2$) lorsqu'un quartet BCD dépasse 9 ?
+        </p>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+            <button onclick="answerQuiz(this, false, 'q4-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) Parce que 6 est la moitié de 12 dans le système duodécimal.</button>
+            <button onclick="answerQuiz(this, true, 'q4-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) Pour sauter les 6 combinaisons interdites (1010 à 1111) du quartet 4 bits et forcer la retenue vers le quartet décimal suivant.</button>
+            <button onclick="answerQuiz(this, false, 'q4-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) C'est une constante arbitraire fixée par la norme IEEE.</button>
+            <button onclick="answerQuiz(this, false, 'q4-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) Pour inverser le bit de signe.</button>
+        </div>
+        <div id="q4-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
+            <strong>Explication :</strong> Sur 4 bits, il y a 16 configurations possibles ($0$ à $15$). La base décimale ne compte que 10 chiffres ($0$ à $9$). Les $16 - 10 = 6$ configurations restantes (les pseudo-tétrades $10$ à $15$) n'existent pas en décimal. Ajouter 6 permet de "sauter" ce trou et de générer une retenue vers le quartet supérieur tout en conservant le chiffre modulo 10 exact.
+        </div>
+    </div>
+</article>
+
     </main>
 
     <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
+    <footer class="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200">
         <div>
-            
+            <div></div>
         </div>
         <a href="../R1.03.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
             <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
+            <span>Sommaire du Module R1.03</span>
         </a>
         <div>
-            
-        <a href="chap2_complement_a_deux_et_ieee754.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
-            <span>Ch. 2 : Complément à Deux (C2), Overflow...</span>
+            <a href="chap2_complement_a_deux_et_ieee754.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
+            <span>Ch. 2 : Complément à Deux & IEEE 754</span>
             <i class="w-4 h-4" data-lucide="arrow-right"></i>
         </a>
-        
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
     </script>
 </body>
 </html>

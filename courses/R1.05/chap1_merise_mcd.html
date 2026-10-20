@@ -1,504 +1,745 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#6E4970"/>
-    <title>Chapitre 1 : Démarche Merise, Dictionnaire des Données & MCD — R1.05 Bases de Données & Merise (MCD / SQL) — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#6E4970">
+    <title>R1.05 • Ch. 1 : Démarche Merise, Dictionnaire des Données & MCD — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #6E4970;
-            --bg-soft: #F2EDF3;
-            --border-soft: #D4C4D6;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.65;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.03em !important;
-            word-spacing: 0.08em !important;
-            line-height: 1.85 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .concept-badge {
-            display: inline-flex;
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #6E4970;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
         .callout-exam {
             background-color: #fefce8;
             border-left: 4px solid #ca8a04;
-            padding: 1rem 1.25rem;
-            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.1rem 1.4rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
         }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
         }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.05.html">R1.05 Bases de Données</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 1</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.05.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #6E4970;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.05</span>
-            </a>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.05.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.05
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 1</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.05.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F2EDF3; color: #6E4970; border: 1px solid #D4C4D6;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #19539
+                </span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #6E4970;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">Partie 1 · Chapitre 1</span>
-            <span class="text-xs text-slate-500 font-mono">IUT Anglet · M. Christophe Marquesuzaà / M. Tirel / M. Dourisboure</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #6E4970;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F2EDF3; color: #6E4970; border: 1px solid #D4C4D6;">
+                        R1.05 • CHAPITRE 1
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Démarche Merise, Dictionnaire des Données & MCD</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Christophe Marquesuzaà / M. Yon Dourisboure</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Donnée vs Information, architecture ANSI/SPARC, dictionnaire des données, entités, associations, identifiants uniques soulignés et règle de la double lecture des cardinalités.
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 1 : Démarche Merise, Dictionnaire des Données & MCD</h1>
-        <p class="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">Donnée vs Information, architecture ANSI/SPARC 3 niveaux, dictionnaire des données épuré (interdiction des données calculées), entités, associations et double lecture des cardinalités. Faute éliminatoire : JAMAIS de clé étrangère dans un MCD !</p>
-    </section>
-
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-6">
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="layers" style="color: #6E4970;"></i>
-        <span>1. Contexte & Architecture ANSI/SPARC à 3 Niveaux</span>
-    </h2>
+    </div>
     
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Avant l'avènement des Systèmes de Gestion de Bases de Données (SGBD) relationnels, les applications informatiques stockaient leurs données dans des fichiers plats séquentiels ou indexés. Cette approche présentait des faiblesses critiques : redondance massive de l'information, incohérences en cascade lors des mises à jour, dépendance totale entre la structure physique des fichiers et le code des programmes, et absence de sécurité multi-utilisateurs.
-            </p>
-            <p class="text-sm text-slate-700 leading-relaxed mt-3">
-                Pour résoudre cette crise, le groupe d'étude ANSI/X3/SPARC a normalisé en 1975 une architecture fondamentale en <strong>3 niveaux d'abstraction</strong>, adoptée par la méthode française Merise créée en 1978 :
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4 text-xs">
-                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="brain"></i>1. Niveau Conceptuel (MCD)</span>
-                    <p class="text-slate-600">Répond à la question : <strong>QUOI ?</strong></p>
-                    <p class="text-slate-700 leading-relaxed">Représente la sémantique pure des données du métier, sans aucune contrainte informatique, matérielle ou logicielle. Compréhensible par les utilisateurs finaux.</p>
-                </div>
-                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="database"></i>2. Niveau Logique (MLD)</span>
-                    <p class="text-slate-600">Répond à la question : <strong>QUI FAIT QUOI ?</strong></p>
-                    <p class="text-slate-700 leading-relaxed">Adapte les concepts au modèle cible (relationnel). Traduit les entités en tables, définit les clés primaires et fait migrer les clés étrangères (#).</p>
-                </div>
-                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-                    <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="hard-drive"></i>3. Niveau Physique (MPD)</span>
-                    <p class="text-slate-600">Répond à la question : <strong>COMMENT ?</strong></p>
-                    <p class="text-slate-700 leading-relaxed">Implémentation concrète sous un SGBD particulier (PostgreSQL, Oracle) : allocation d'espaces disques (tablespaces), index B-Tree, types binaires réels et triggers.</p>
-                </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Les Fondements Théoriques de la Conception</h2>
+<p>
+Comme l'enseigne rigoureusement M. Marquesuzaà à l'IUT d'Anglet, la conception d'un système d'information repose sur deux distinctions épistémologiques capitales :
+</p>
+<ul>
+    <li><strong>Donnée vs Information :</strong> Une <em>donnée</em> est un fait brut non interprété (ex: <code>14</code>). Une <em>information</em> est une donnée contextualisée porteuse de sens pour la décision humaine (ex: <code>14/20 obtenu par Matéi au partiel de R1.05</code>).</li>
+    <li><strong>L'Architecture ANSI/SPARC à 3 Niveaux :</strong>
+        <ol>
+            <li><strong>Niveau Conceptuel (MCD) :</strong> Représente la sémantique métier du monde réel (<em>QUOI</em>), indépendamment de toute considération informatique, logicielle ou matérielle.</li>
+            <li><strong>Niveau Logique (MLD) :</strong> Adapte la structure aux contraintes du modèle de données cible (<em>QUI FAIT QUOI</em>, modèle relationnel en tables, colonnes et clés).</li>
+            <li><strong>Niveau Physique (MPD / SQL) :</strong> Décrit le stockage physique sur les supports magnétiques/SSD (<em>COMMENT</em>, fichiers disques, index B-Tree, tablespaces sous Oracle/PostgreSQL).</li>
+        </ol>
+    </li>
+</ul>
+
+<h2>2. Le Dictionnaire des Données Épuré</h2>
+<p>
+Avant d'esquisser la moindre boîte de modèle, le concepteur doit dresser le <strong>Dictionnaire des Données</strong> recensant toutes les propriétés élémentaires manipulées par le système.
+</p>
+<blockquote>
+<strong>RÈGLE D'OR DE MARQUESUZAÀ — INTERDICTION DES DONNÉES CALCULÉES :</strong>
+<br>Aucune donnée calculée ou déductible ne doit figurer dans le dictionnaire des données ou dans le MCD !
+<br>❌ <code>age</code> est proscrit $\implies$ stocker uniquement <code>dateNaissance</code> (l'âge se calcule par requête SQL à l'instant $t$).
+<br>❌ <code>montantTTC</code> ou <code>totalFacture</code> est proscrit $\implies$ stocker <code>prixUnitaireHT</code> et <code>tauxTVA</code>.
+<br>❌ <code>moyenneGenerale</code> est proscrite $\implies$ calculée dynamiquement par <code>AVG(note)</code>.
+</blockquote>
+
+<h2>3. Les Composants du Modèle Conceptuel de Données (MCD)</h2>
+
+<h3>A. L'Entité-Type (ou Individu)</h3>
+<p>
+Une <strong>entité</strong> représente une population d'objets du monde réel ayant une existence autonome et partageant les mêmes propriétés.
+</p>
+<ul>
+    <li><strong>Nom :</strong> Substantif au singulier écrit en MAJUSCULES (ex: <code>ETUDIANT</code>, <code>MODULE</code>, <code>ENSEIGNANT</code>).</li>
+    <li><strong>Identifiant :</strong> Propriété unique, discriminante, non nulle et pérenne dont la valeur permet de distinguer à coup sûr deux occurrences. <strong>Dans le MCD, l'identifiant est obligatoirement SOULIGNÉ</strong> (ex: <u>idEtudiant</u>).</li>
+    <li><strong>Propriétés (Attributs) :</strong> Caractéristiques atomiques (non divisibles) décrivant l'entité.</li>
+</ul>
+
+<h3>B. L'Association-Type (ou Relation)</h3>
+<p>
+Une association traduit un lien sémantique reliant deux ou plusieurs entités. Son nom est généralement un verbe à l'infinitif (ex: <code>INSCRIRE</code>, <code>ENSEIGNER</code>, <code>APPARTENIR</code>).
+<br>Une association peut être <strong>porteuse de données</strong> si une propriété dépend simultanément de toutes les entités connectées (ex: la <code>note</code> dépend à la fois de l'<code>ETUDIANT</code> et de l'<code>EVALUATION</code>).
+</p>
+
+<h3>C. La Règle de la Double Lecture des Cardinalités</h3>
+<p>
+Pour chaque patte reliant une entité $E$ à une association $A$, on définit un couple de cardinalités <code>(min, max)</code> :
+</p>
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-300 text-xs space-y-1">
+    <p><strong>Question rituelle de Marquesuzaà :</strong></p>
+    <p>« Pour UNE occurrence donnée de l'entité $E$, à combien d'occurrences de l'association $A$ peut-elle participer AU MINIMUM et AU MAXIMUM ? »</p>
+</div>
+<ul>
+    <li><code>0,1</code> : Au minimum 0 fois (facultatif), au maximum 1 seule fois.</li>
+    <li><code>1,1</code> : Au minimum 1 fois (obligatoire), au maximum 1 seule fois.</li>
+    <li><code>0,n</code> : Au minimum 0 fois, au maximum plusieurs fois ($n$).</li>
+    <li><code>1,n</code> : Au minimum 1 fois (au moins une), au maximum plusieurs fois ($n$).</li>
+</ul>
+
+<div class="p-4 rounded-xl bg-red-50 border border-red-300 text-red-950 text-xs">
+    <strong>🚨 FAUTE ÉLIMINATOIRE AU PARTIEL DE R1.05 :</strong><br>
+    <strong>JAMAIS DE CLÉ ÉTRANGÈRE DANS UN MCD !</strong><br>
+    Ne jamais inscrire d'attribut comme <code>idFormation</code> ou <code>codeGroupe</code> dans l'entité <code>ETUDIANT</code>. Les liens entre entités se matérialisent EXCLUSIVEMENT par les associations graphiques. Tout attribut étranger présent dans une boîte d'entité en MCD est sanctionné par zéro à la question !
+</div>
+
             </div>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="file-text" style="color: #6E4970;"></i>
-        <span>2. Le Dictionnaire des Données Épuré & Règles Fondamentales</span>
-    </h2>
-    
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Le <strong>Dictionnaire des Données (DD)</strong> est la liste exhaustive et formalisée de toutes les propriétés élémentaires manipulées par le système d'information. Chaque propriété doit être rigoureusement documentée :
-            </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Propriété</th>
-                        <th>Désignation Sémantique</th>
-                        <th>Type Conceptuel</th>
-                        <th>Domaine / Règle de Gestion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>numClient</code></td>
-                        <td>Identifiant unique attribué au client</td>
-                        <td>Entier &gt; 0</td>
-                        <td>Numéro séquentiel strict</td>
-                    </tr>
-                    <tr>
-                        <td><code>nomClient</code></td>
-                        <td>Nom de famille officiel du client</td>
-                        <td>Chaîne (50)</td>
-                        <td>En majuscules non vide</td>
-                    </tr>
-                    <tr>
-                        <td><code>dateNaissance</code></td>
-                        <td>Date de naissance de l'individu</td>
-                        <td>Date</td>
-                        <td>Passée : <code>dateNaissance &lt; CURRENT_DATE</code></td>
-                    </tr>
-                    <tr>
-                        <td><code>prixUnitaireHT</code></td>
-                        <td>Prix unitaire hors taxe du produit</td>
-                        <td>Monétaire Réel</td>
-                        <td>Strictement positif (&gt; 0.00 €)</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="callout-def">
-                <p class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="w-4 h-4 text-[#6E4970]" data-lucide="shield-alert"></i>RÈGLE D'OR DE M. MARQUESUZAÀ : INTERDICTION ABSOLUE DES DONNÉES CALCULÉES</p>
-                <div class="text-sm text-slate-700 mt-2 space-y-1.5">
-                    <p>Aucune donnée calculable ou déductible à partir d'autres propriétés ne doit figurer dans le Dictionnaire des Données ou dans le MCD !</p>
-                    <ul class="list-disc pl-5 space-y-1 text-xs">
-                        <li>❌ <strong>Proscrit :</strong> <code>age</code> $\implies$ Stocker uniquement <code>dateNaissance</code> (l'âge se calcule dynamiquement par rapport à la date du jour).</li>
-                        <li>❌ <strong>Proscrit :</strong> <code>montantTTC</code> $\implies$ Se déduit immédiatement de <code>montantHT * (1 + tauxTVA)</code>.</li>
-                        <li>❌ <strong>Proscrit :</strong> <code>montantTotalFacture</code> $\implies$ Se calcule par la somme des lignes de facturation (<code>SUM(quantite * prixUnitaire)</code>).</li>
-                        <li>❌ <strong>Proscrit :</strong> <code>moyenneGenerale</code> $\implies$ Calculée à la volée par <code>AVG(note)</code>.</li>
-                    </ul>
-                </div>
-            </div>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="box" style="color: #6E4970;"></i>
-        <span>3. Composants du MCD : Entités, Propriétés & Identifiants</span>
-    </h2>
-    
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Le <strong>Modèle Conceptuel de Données</strong> modélise la réalité sous forme d'un graphe composé d'entités-types et d'associations-types :
-            </p>
-            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-3 my-3">
-                <h3 class="font-bold text-slate-900 text-sm">A. L'Entité-Type (Individu)</h3>
-                <p class="text-xs text-slate-700 leading-relaxed">
-                    Une entité-type représente une population homogène d'objets ou de concepts ayant une existence matérielle ou immatérielle autonome dans le domaine d'étude (ex : <code>CLIENT</code>, <code>PRODUIT</code>, <code>SALARIE</code>).
-                </p>
-                <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
-                    <li><strong>Nom de l'entité :</strong> Toujours écrit en lettres <strong>MAJUSCULES</strong> et au <strong>SINGULIER</strong>.</li>
-                    <li><strong>Identifiant (Clé Conceptuelle) :</strong> Propriété obligatoire, unique et pérenne dont la valeur permet d'identifier sans aucune équivoque chaque occurrence de l'entité. <em>Convention stricte : l'identifiant est obligatoirement SOULIGNÉ dans la boîte conceptuelle</em> (ex : <u>idClient</u>).</li>
-                    <li><strong>Propriétés (Attributs) :</strong> Informations atomiques caractérisant l'entité. Une propriété ne peut appartenir qu'à une seule entité (règle de non-redondance).</li>
-                </ul>
-            </div>
-
-            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-3 my-3">
-                <h3 class="font-bold text-slate-900 text-sm">B. L'Association-Type (Relation)</h3>
-                <p class="text-xs text-slate-700 leading-relaxed">
-                    Une association-type traduit un lien sémantique perçu entre deux ou plusieurs entités.
-                </p>
-                <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
-                    <li><strong>Nom de l'association :</strong> Le plus souvent un <strong>verbe à l'infinitif</strong> (ex : <code>COMMANDER</code>, <code>APPARTENIR</code>, <code>ENSEIGNER</code>).</li>
-                    <li><strong>Dimension de l'association :</strong> Le nombre d'entités reliées (binaire = 2 entités, ternaire = 3 entités, réflexive = boucle reliant une entité à elle-même).</li>
-                    <li><strong>Association porteuse de données :</strong> Une association peut contenir des propriétés propres <em>uniquement si ces propriétés dépendent simultanément de toutes les entités connectées</em> (ex : la <code>quantiteCommandee</code> dépend à la fois de la <code>COMMANDE</code> et du <code>PRODUIT</code>).</li>
-                </ul>
-            </div>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="git-commit" style="color: #6E4970;"></i>
-        <span>4. La Règle d'Or de la Double Lecture des Cardinalités</span>
-    </h2>
-    
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Les <strong>cardinalités</strong> expriment le nombre minimum et maximum de fois où une occurrence d'une entité peut participer aux occurrences d'une association.
-            </p>
-            <div class="callout-def">
-                <p class="font-bold text-slate-900 text-sm">PROTOCOLE FORMEL DE QUESTIONNEMENT (M. MARQUESUZAÀ) :</p>
-                <p class="text-xs text-slate-700 mt-1 leading-relaxed">
-                    Pour déterminer les cardinalités de la patte reliant l'entité $E$ à l'association $A$, on pose obligatoirement la double question suivante :<br/>
-                    <em>« Pour UNE occurrence donnée de l'entité $E$, à combien d'occurrences de l'association $A$ participe-t-elle AU MINIMUM, et AU MAXIMUM ? »</em>
-                </p>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Couple</th>
-                        <th>Signification Sémantique</th>
-                        <th>Interprétation Métier</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>0,1</code></td>
-                        <td>Minimum 0, Maximum 1</td>
-                        <td>Participation facultative, au plus une seule fois.</td>
-                    </tr>
-                    <tr>
-                        <td><code>1,1</code></td>
-                        <td>Minimum 1, Maximum 1</td>
-                        <td>Participation obligatoire et unique (existence dépendante).</td>
-                    </tr>
-                    <tr>
-                        <td><code>0,n</code></td>
-                        <td>Minimum 0, Maximum plusieurs ($n$)</td>
-                        <td>Participation facultative, peut se répéter indéfiniment.</td>
-                    </tr>
-                    <tr>
-                        <td><code>1,n</code></td>
-                        <td>Minimum 1, Maximum plusieurs ($n$)</td>
-                        <td>Participation obligatoire, au moins une fois et potentiellement plusieurs.</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="alert-triangle" style="color: #ca8a04;"></i>
-        <span>5. Les 5 Pièges Critiques & Fautes Éliminatoires aux Partiels d'Anglet</span>
-    </h2>
-    
-            <div class="callout-exam">
-                <p class="font-bold text-amber-900 text-sm">🚨 BARÈME DE CORRECTION DE M. MARQUESUZAÀ — SANCTIONS DIRECTES :</p>
-                <div class="text-xs text-amber-800 mt-2 space-y-2">
-                    <p><strong>1. FAUTE ÉLIMINATOIRE SUPRÊME : CLÉ ÉTRANGÈRE DANS UNE ENTITÉ DU MCD</strong><br/>
-                    Il est STRICTEMENT INTERDIT d'écrire un attribut comme <code>numClient</code> ou <code>codeGroupe</code> dans l'entité <code>COMMANDE</code> ou <code>ETUDIANT</code>. Au niveau conceptuel, les liaisons sont uniquement assurées par les associations graphiques. Tout attribut étranger présent dans une boîte d'entité en MCD vaut <strong>0 point immédiat à la question</strong> !</p>
-
-                    <p><strong>2. Inversion des cardinalités min et max</strong><br/>
-                    Écrire <code>(1,0)</code> ou <code>(n,1)</code> démontre une incompréhension de la chronologie des bornes. La borne minimale est toujours à gauche, la borne maximale à droite : <code>(min, max)</code>.</p>
-
-                    <p><strong>3. Attribut mal placé dans une association</strong><br/>
-                    Placer un attribut dans une association binaire de cardinalité maximale 1 (ex : patte <code>(1,1)</code>) est une faute conceptuelle grave. Si une patte a pour cardinalité max 1, l'attribut dépend uniquement de cette entité et doit migrer directement dans l'entité !</p>
-
-                    <p><strong>4. Données calculées ou redondantes</strong><br/>
-                    Inscrire <code>age</code>, <code>totalTTC</code> ou <code>prixTotal</code> pénalise lourdement la note globale du dictionnaire des données.</p>
-
-                    <p><strong>5. Nommage incorrect</strong><br/>
-                    Entités au pluriel (<code>CLIENTS</code> au lieu de <code>CLIENT</code>) ou verbes conjugués dans les associations (<code>COMMANDE</code> au lieu de <code>COMMANDER</code>).</p>
-                </div>
-            </div>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="graduation-cap" style="color: #6E4970;"></i>
-        <span>6. Étude de Cas Complète Résolue : Clinique Vétérinaire</span>
-    </h2>
-    
-            <p class="text-sm text-slate-700 leading-relaxed">
-                Voici un sujet type des partiels de BUT 1 Informatique de l'IUT d'Anglet, résolu selon la rigueur méthodologique exigée.
-            </p>
-            <div class="p-4 rounded-xl border border-slate-300 bg-slate-50 text-xs space-y-2 my-3">
-                <p class="font-bold text-slate-900">Énoncé du sujet :</p>
-                <p class="text-slate-700 italic leading-relaxed">
-                    « Une clinique vétérinaire souhaite informatiser le suivi des animaux et des consultations. Chaque client est identifié par un numéro, un nom, un prénom, un téléphone et une adresse email. Un client peut posséder un ou plusieurs animaux, mais chaque animal appartient obligatoirement à un et un seul client. Pour chaque animal, on enregistre son numéro de puce (identifiant unique), son nom, son espèce (chien, chat, furet...), sa race et sa date de naissance.
-                    Les consultations sont assurées par les vétérinaires de la clinique (identifiés par un matricule, leur nom et leur spécialité). Une consultation a lieu à une date et heure précises, donne lieu à un diagnostic écrit et un montant facturé. Une consultation concerne exactement un seul animal et est effectuée par exactement un seul vétérinaire. Lors d'une consultation, le vétérinaire peut prescrire un ou plusieurs médicaments en précisant la posologie (ex : "2 comprimés par jour pendant 5 jours"). Un médicament est identifié par son code CIP, sa dénomination et son prix unitaire indicatif. »
-                </p>
-            </div>
-
-            <h3 class="font-bold text-slate-900 text-sm mt-4 mb-2">A. Dictionnaire des Données Épuré :</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Propriété</th>
-                        <th>Signification</th>
-                        <th>Type Conceptuel</th>
-                        <th>Nature</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>numClient</code></td><td>Identifiant unique du propriétaire</td><td>Entier</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>nomClient</code></td><td>Nom de famille du propriétaire</td><td>Texte(50)</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>prenomClient</code></td><td>Prénom du propriétaire</td><td>Texte(50)</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>numPuce</code></td><td>Identifiant puce électronique de l'animal</td><td>Chaîne(15)</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>nomAnimal</code></td><td>Nom usuel de l'animal</td><td>Texte(30)</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>dateNaissance</code></td><td>Date de naissance de l'animal</td><td>Date</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>numConsultation</code></td><td>Numéro séquentiel de la consultation</td><td>Entier</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>dateHeureConsult</code></td><td>Horodatage du rendez-vous médical</td><td>DateTime</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>diagnostic</code></td><td>Compte-rendu clinique du praticien</td><td>Texte</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>codeCIP</code></td><td>Code identifiant de présentation pharmaceutique</td><td>Chaîne(13)</td><td>Donnée élémentaire</td></tr>
-                    <tr><td><code>posologie</code></td><td>Modalité d'administration prescrite</td><td>Texte(100)</td><td>Donnée (Association PRESCRIRE)</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="font-bold text-slate-900 text-sm mt-6 mb-2">B. Schéma Textuel du Modèle Conceptuel (MCD) :</h3>
-            <pre>
-+---------------------+                      +---------------------+
-|       CLIENT        |                      |       ANIMAL        |
-+---------------------+                      +---------------------+
-| *numClient*         | (1,n)          (1,1) | *numPuce*           |
-| nomClient           |--------POSSEDER------| nomAnimal           |
-| prenomClient        |                      | espece              |
-| telephone           |                      | race                |
-| email               |                      | dateNaissance       |
-+---------------------+                      +---------------------+
-                                                        |
-                                                      (1,n)
-                                                        |
-                                                    CONCERNER
-                                                        |
-                                                      (1,1)
-+---------------------+                      +---------------------+
-|     VETERINAIRE     |                      |    CONSULTATION     |
-+---------------------+                      +---------------------+
-| *matriculeVet*      | (0,n)          (1,1) | *numConsultation*   |
-| nomVet              |-------EFFECTUER------| dateHeureConsult    |
-| specialite          |                      | diagnostic          |
-+---------------------+                      | tarifFacture        |
-                                             +---------------------+
-                                                        |
-                                                      (0,n)
-                                                        |
-                                                    PRESCRIRE [posologie]
-                                                        |
-                                                      (0,n)
-                                             +---------------------+
-                                             |     MEDICAMENT      |
-                                             +---------------------+
-                                             | *codeCIP*           |
-                                             | denomination        |
-                                             | prixUnitaire        |
-                                             +---------------------+
-            </pre>
-            <div class="callout-def">
-                <p class="font-bold text-slate-900 text-xs">Explication des choix sémantiques clés :</p>
-                <p class="text-xs text-slate-700 mt-1">
-                    • <code>POSSEDER</code> : Un client possède au moins un animal (1,n) selon l'énoncé. Un animal appartient à un et un seul client (1,1).<br/>
-                    • <code>PRESCRIRE</code> est une association porteuse contenant la propriété <code>posologie</code>, car celle-ci dépend conjointement de la consultation et du médicament prescrit.
-                </p>
-            </div>
-            
-</article>
-
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-5 h-5 shrink-0" data-lucide="check-circle-2" style="color: #6E4970;"></i>
-        <span>7. Synthèse Mémorielle & Checklist Avant le Partiel</span>
-    </h2>
-    
-            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
-                <p class="font-bold text-slate-900 text-sm">Les 5 Réflexes Absolus sur Votre Copie :</p>
-                <p class="text-slate-700">✅ <strong>Souligner impérativement</strong> l'identifiant dans chaque boîte d'entité.</p>
-                <p class="text-slate-700">✅ <strong>Vérifier deux fois</strong> qu'aucune clé étrangère ne s'est glissée dans une boîte d'entité.</p>
-                <p class="text-slate-700">✅ <strong>Relire les cardinalités</strong> à voix basse selon la formule : <em>« Pour UNE occurrence... au minimum ? au maximum ? »</em>.</p>
-                <p class="text-slate-700">✅ <strong>Chasser les données calculées</strong> : pas d'âge, pas de totaux, pas de moyennes dans le MCD.</p>
-                <p class="text-slate-700">✅ <strong>Valider les associations porteuses</strong> : s'assurer qu'aucune patte de l'association n'a un maximum de 1.</p>
-            </div>
-            
-</article>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-slate-200">
-        <div>
-            
         </div>
-        <a href="../R1.05.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module</span>
-        </a>
-        <div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #6E4970;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Démarche Merise, Dictionnaire des Données & MCD »</strong> constitue un pilier fondamental du module <strong>R1.05 — Bases de Données & SQL</strong> enseigné par <strong>M. Christophe Marquesuzaà / M. Yon Dourisboure</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Donnée vs Information, architecture ANSI/SPARC, dictionnaire des données, entités, associations, identifiants uniques soulignés et règle de la double lecture des cardinalités. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Merise, MCD, Entités, Associations, Cardinalités</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Démarche Merise, Dictionnaire des Données & MCD</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Merise, MCD, Entités, Associations) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Christophe Marquesuzaà / M. Yon Dourisboure.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-        <a href="chap2_derivation_mld.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #6E4970;">
-            <span>Ch. 2 : Dérivation Rigoureuse du MCD ver...</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">1</span>
+                <span>Étape 1 : Les Fondements Théoriques de la Conception</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Merise</em> en partant de zéro. Donnée vs Information : Une donnée est un fait brut non interprété (ex: 14 ). Une information est une donnée contextualisée porteuse de sens pour la décision humaine (ex: 14/20 obtenu par Matéi au partiel de R1.05 ). Complétez systématiquement cette analyse par la vérification suivante : L'Architecture ANSI/SPARC à 3 Niveaux : Niveau Conceptuel (MCD) : Représente la sémantique métier du monde réel ( QUOI ), indépendamment de toute considération informatique, logicielle ou matérielle.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Merise) : 14 — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">2</span>
+                <span>Étape 2 : Le Dictionnaire des Données Épuré</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>MCD</em> en partant de zéro. Niveau Logique (MLD) : Adapte la structure aux contraintes du modèle de données cible ( QUI FAIT QUOI , modèle relationnel en tables, colonnes et clés). Complétez systématiquement cette analyse par la vérification suivante : Niveau Physique (MPD / SQL) : Décrit le stockage physique sur les supports magnétiques/SSD ( COMMENT , fichiers disques, index B-Tree, tablespaces sous Oracle/PostgreSQL).</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (MCD) : 14/20 obtenu par Matéi au partiel de R1.05 — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">3</span>
+                <span>Étape 3 : Les Composants du Modèle Conceptuel de Données (MCD)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Entités</em> en partant de zéro. Nom : Substantif au singulier écrit en MAJUSCULES (ex: ETUDIANT , MODULE , ENSEIGNANT ). Complétez systématiquement cette analyse par la vérification suivante : Identifiant : Propriété unique, discriminante, non nulle et pérenne dont la valeur permet de distinguer à coup sûr deux occurrences. Dans le MCD, l'identifiant est obligatoirement SOULIGNÉ (ex: idEtudiant ).</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Entités) : age — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #6E4970;">4</span>
+                <span>Étape 4 : A. L'Entité-Type (ou Individu)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Associations</em> en partant de zéro. Propriétés (Attributs) : Caractéristiques atomiques (non divisibles) décrivant l'entité. Complétez systématiquement cette analyse par la vérification suivante : 0,1 : Au minimum 0 fois (facultatif), au maximum 1 seule fois.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Associations) : dateNaissance — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
         
         </div>
-    </footer>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #6E4970;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Démarche Merise, Dictionnaire des Données & MCD</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Christophe Marquesuzaà / M. Yon Dourisboure)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Merise</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>14</code><br><span class='text-[11px] text-slate-600'>1. Les Fondements Théoriques de la Conception</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Donnée vs Information : Une donnée est un fait brut non interprété (ex: 14 ). Une information est une donnée contextualisée porteuse de sens pour la décision humaine (ex: 14/20 obtenu par Ma</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>MCD</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>14/20 obtenu par Matéi au partiel de R1.05</code><br><span class='text-[11px] text-slate-600'>2. Le Dictionnaire des Données Épuré</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">L'Architecture ANSI/SPARC à 3 Niveaux : Niveau Conceptuel (MCD) : Représente la sémantique métier du monde réel ( QUOI ), indépendamment de toute considération informatique, logicielle ou ma</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Entités</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>age</code><br><span class='text-[11px] text-slate-600'>3. Les Composants du Modèle Conceptuel de Données (MCD)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Niveau Logique (MLD) : Adapte la structure aux contraintes du modèle de données cible ( QUI FAIT QUOI , modèle relationnel en tables, colonnes et clés).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Associations</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>dateNaissance</code><br><span class='text-[11px] text-slate-600'>A. L'Entité-Type (ou Individu)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Niveau Physique (MPD / SQL) : Décrit le stockage physique sur les supports magnétiques/SSD ( COMMENT , fichiers disques, index B-Tree, tablespaces sous Oracle/PostgreSQL).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Cardinalités</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>montantTTC</code><br><span class='text-[11px] text-slate-600'>B. L'Association-Type (ou Relation)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Nom : Substantif au singulier écrit en MAJUSCULES (ex: ETUDIANT , MODULE , ENSEIGNANT ).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Identifiant</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>totalFacture</code><br><span class='text-[11px] text-slate-600'>C. La Règle de la Double Lecture des Cardinalités</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Identifiant : Propriété unique, discriminante, non nulle et pérenne dont la valeur permet de distinguer à coup sûr deux occurrences. Dans le MCD, l'identifiant est obligatoirement SOULIGNÉ (</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Marquesuzaà</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>prixUnitaireHT</code><br><span class='text-[11px] text-slate-600'>1. Les Fondements Théoriques de la Conception</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Propriétés (Attributs) : Caractéristiques atomiques (non divisibles) décrivant l'entité.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. Le Dictionnaire des Données Épuré</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.05 • Ch.1</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>tauxTVA</code><br><span class='text-[11px] text-slate-600'>2. Le Dictionnaire des Données Épuré</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">0,1 : Au minimum 0 fois (facultatif), au maximum 1 seule fois.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Christophe Marquesuzaà / M. Yon Dourisboure : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Merise » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Merise</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Démarche Merise, Dictionnaire des Données & MCD</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.05</strong>, M. Christophe Marquesuzaà / M. Yon Dourisboure insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Merise</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « MCD »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>MCD</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Bases de Données & SQL), une part majeure des points est dédiée à la robustesse : Donnée vs Information : Une donnée est un fait brut non interprété (ex: 14 ). Une information est une donnée contextualisée porteuse de sens pour la décision humaine (ex: 14/20 obt Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>MCD</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Entités »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Entités</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Christophe Marquesuzaà / M. Yon Dourisboure rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.05</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Entités</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #6E4970;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Les Fondements Théoriques de la Conception</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.05 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.05 (Bases de Données & SQL)</strong> supervisé par M. Christophe Marquesuzaà / M. Yon Dourisboure, on vous demande d'analyser et de résoudre un problème portant sur <strong>Démarche Merise, Dictionnaire des Données & MCD</strong> en mobilisant explicitement les notions de <em>Merise, MCD, Entités</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Merise</em>. Rappel du cours : Donnée vs Information : Une donnée est un fait brut non interprété (ex: 14 ). Une information est une donnée contextualisée porteuse de sens pour la décision humaine (ex: 14/20 obtenu par Matéi au partiel de R1.05 ).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Les Fondements Théoriques de la Conception</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Le Dictionnaire des Données Épuré</em> : L'Architecture ANSI/SPARC à 3 Niveaux : Niveau Conceptuel (MCD) : Représente la sémantique métier du monde réel ( QUOI ), indépendamment de toute considération informatique, logicielle ou matérielle.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>MCD</em> (Niveau Logique (MLD) : Adapte la structure aux contraintes du modèle de données cible ( QUI FAIT QUOI , modèle relationnel en tables, colonnes et clés).).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Donnée vs Information, architecture ANSI/SPARC, dictionnaire des données, entités, associations, identifiants uniques soulignés et règle de ) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.05 — Ch.1 : Démarche Merise, Dictionnaire des Données & MCD) ===
+1. Entrées analysées : Merise, MCD, Entités, Associations
+2. Étape A (1. Les Fondements Théoriques de la Conception) : Validation des hypothèses -> OK
+3. Étape B (2. Le Dictionnaire des Données Épuré) : Application de la méthode officielle
+   -> Détail : Donnée vs Information : Une donnée est un fait brut non interprété (ex: 14 ). Une information est une donnée c
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE M. CHRISTOPHE MARQUESUZAÀ / M. YON DOURISBOURE ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #6E4970;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Les Composants du Modèle Conceptuel de Données (MCD)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Christophe Marquesuzaà / M. Yon Dourisboure</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.05</strong>, un exercice de synthèse combine <strong>MCD</strong> et <strong>Entités</strong> au sein du thème <em>« Démarche Merise, Dictionnaire des Données & MCD »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>MCD</em> : Niveau Physique (MPD / SQL) : Décrit le stockage physique sur les supports magnétiques/SSD ( COMMENT , fichiers disques, index B-Tree, tablespaces sous Oracle/PostgreSQL).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Christophe Marquesuzaà / M. Yon Dourisboure dans la section <em>3. Les Composants du Modèle Conceptuel de Données (MCD)</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Entités</em>, on obtient la séquence exacte : Nom : Substantif au singulier écrit en MAJUSCULES (ex: ETUDIANT , MODULE , ENSEIGNANT ).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Merise, MCD, Entités, Associations</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.05 — MCD) ===
+• Hypothèse initiale : Donnée vs Information, architecture ANSI/SPARC, dictionnaire des données, entités, associations, ide...
+• Opération principale : Mise en œuvre de Merise combiné à MCD
+• Point clé vérifié : L'Architecture ANSI/SPARC à 3 Niveaux : Niveau Conceptuel (MCD) : Représente la sémantique métier du monde rée
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Comment applique-t-on la règle formelle de la « double lecture » des cardinalités sur une association binaire entre deux entités A et B ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap1_merise_mcd_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) On lit la cardinalité minimale (le nombre minimum de fois qu'une occurrence de A participe à l'association) et maximale (le nombre maximum)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) On lit la cardinalité une fois en français et une fois en anglais
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) On multiplie la cardinalité de gauche par celle de droite
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) On lit d'abord les attributs de la clé primaire puis les attributs secondaires
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap1_merise_mcd_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La cardinalité (min, max) exprime pour une occurrence d'une entité donnée, le nombre minimum (0 ou 1) et maximum (1 ou n) de fois où elle peut être reliée à l'autre entité via l'association. Les valeurs canoniques sont (0,1), (1,1), (0,n) et (1,n).
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la conclusion méthodologique essentielle que M. Marquesuzaà répète à chaque promotion pour réussir la conception d'une base de données ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Commencer directement par taper les tables en SQL pour gagner du temps
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap1_merise_mcd_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Le temps investi dans la rigueur du modèle conceptuel (MCD) et la validation des règles de gestion élimine à la source 95% des anomalies, redondances et incohérences dans l'application finale
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Utiliser Excel plutôt qu'une base de données relationnelle
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Ne jamais poser de questions aux utilisateurs métier
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap1_merise_mcd_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Une base de données mal modélisée conceptuellement conduira inévitablement à des anomalies de mise à jour, des incohérences de données et des requêtes SQL tortueuses et lentes. Le MCD est la pierre angulaire de tout système d'information pérenne.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la distinction fondamentale entre une « donnée » et une « information » selon le cours de M. Marquesuzaà ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Une information est un texte, alors qu'une donnée est obligatoirement un nombre
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap1_merise_mcd_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Une donnée est brute et sans contexte ; une information est une donnée contextualisée porteuse de sens pour l'utilisateur
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Une donnée est stockée en SQL, une information est affichée en HTML
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Il n'y a aucune différence, ce sont deux synonymes parfaits
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap1_merise_mcd_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Dans l'enseignement Merise de M. Marquesuzaà, la donnée est l'élément brut enregistré (ex: 42), tandis que l'information est le résultat de l'interprétation de cette donnée dans son contexte (ex: la température de l'eau est de 42°C).
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.05 • Ch.1</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la règle formelle d'intégrité d'une entité dans un MCD selon M. Marquesuzaà ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Une entité doit comporter au moins 10 propriétés et être écrite en majuscules
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_05_chap1_merise_mcd_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Toute entité doit posséder un identifiant unique et discriminant, et chaque propriété doit être atomique et monovaluée pour chaque occurrence
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Une entité ne peut être reliée qu'à une seule autre entité
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_05_chap1_merise_mcd_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Les entités n'ont pas besoin d'identifiant si elles ont un nom
+            </button>
+            
+            </div>
+            <div id="qcm_R1_05_chap1_merise_mcd_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Chaque occurrence de l'entité doit pouvoir être identifiée sans ambiguïté par son identifiant (clé primaire conceptuelle). Les propriétés multivaluées (ex: plusieurs numéros de téléphone dans un même champ) sont strictement proscrites en Merise.
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                
+            </div>
+            <a href="../R1.05.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.05</span>
+            </a>
+            <div>
+                <a href="chap2_derivation_mld.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #6E4970;"><span>Ch. 2 : Dérivation Rigoureuse du MCD vers le MLD Relationnel</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+
+    </main>
 
     <script>
         lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>
