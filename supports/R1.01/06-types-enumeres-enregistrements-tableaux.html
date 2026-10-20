@@ -1,0 +1,2192 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Types énumérés - Enregistrements - Tableaux</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 30px; margin-bottom: -80px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Introduction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">3</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Types énumérés
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">6</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Enregistrements
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">19</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Tableaux
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">35</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Introduction">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Introduction" data-transition="convex">
+        <h1>Introduction</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Problème de départ</h4>
+
+        <div style="font-size: 67%;">
+            <p>
+                Jusqu'à maintenant, les programmes que nous avons écrits ont
+                manipulé des informations simples : des entiers, des nombres à
+                virgule, des chaînes de caractères etc :
+            </p>
+
+            <pre class="cpp" style="margin-top: 5px;"><code data-trim data-noescape data-line-numbers>
+                string nom; // le nom de l'étudiant
+                float moyenne ; // la moyenne de l' étudiant
+                bool estBoursier; // indique si l'étudiant est boursier
+             </code></pre>
+
+            <div class="fragment fade-right" style="margin-top: 40px;">
+                <p>
+                    Beaucoup de problèmes nécessitent néanmoins de manipuler des
+                    informations plus complexes qui ne peuvent être représentées avec
+                    des types de base :
+                </p>
+
+                <pre class="cpp" style="margin-top: 5px;"><code data-trim data-noescape data-line-numbers>
+                ???? noteDeMusique; // une note de musique (do, ré...)
+                ???? adresseIUT; // l'adresse complète de l'IUT
+                ???? grilleDeMorpion; // une grille de morpion vierge
+             </code></pre>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Construire de nouveaux types de données</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Dans ce cours, nous allons étudier quelques techniques qui
+                permettent à un programmeur de :
+            </p>
+            <ul>
+                <li style="margin-top: -17px;"><strong class="text-warning">fabriquer</strong>
+                    ses propres <strong class="text-warning">types</strong> de données ;</li>
+                <li style="margin-top: -7px;">déclarer ensuite des variables qui seront typées avec ces nouveaux types.</li>
+            </ul>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 30px;">
+                    De manière plus précise, nous aborderons les notions :
+                </p>
+                <ul>
+                    <li style="margin-top: -17px;">de type énuméré ;</li>
+                    <li style="margin-top: -7px;">d'enregistrement ;</li>
+                    <li style="margin-top: -7px;">de tableau.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Types énumérés">
+    <!--
+      l'attribut "id" de section implante les liens du menu du haut
+      l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+      -->
+
+    <section data-menu-title="Types énumérés" data-transition="convex">
+        <h1>Types énumérés</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Intérêt des types énumérés</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Un type énuméré est un type défini à partir d'une
+                <strong class="text-warning">liste de valeurs</strong>.
+            </p>
+
+            <p style="margin-top: 40px;">
+                Les types énumérés présentent un intérêt pour représenter des
+                informations ayant une liste de valeurs <strong>finie</strong> :
+            </p>
+            <ul>
+                <li style="margin-top: -17px;">Mois de l'année : janvier, février, mars...</li>
+                <li style="margin-top: -7px;">Notes de musique : do, ré, mi...</li>
+                <li style="margin-top: -7px;">Cartes à jouer : valet, as, roi, dame...</li>
+                <li style="margin-top: -7px;">État civil : célibataire, marié, veuf...</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Codage en C++</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Les types énumérés sont définis au moyen du mot clé <strong class="text-primary">enum</strong> en
+                suivant la syntaxe suivante :
+            </p>
+            <pre class="cpp" style="margin-top: 5px; font-size: 80%;"><code data-trim data-noescape>
+                  enum nomDuType { valeur1 , valeur2 , ... , valeurN };
+               </code></pre>
+
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 40px;">
+                    Exemple :
+                </p>
+                <pre class="cpp" style="margin-top: 5px; font-size: 75%;"><code data-trim data-noescape>
+                  enum UnJour {lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche};
+               </code></pre>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Construire un nouveau type énuméré et déclarer des variables associées</h4>
+
+        <div style="font-size: 67%;">
+            <p>
+                Une fois le type énuméré défini, il est possible de déclarer des
+                variables de ce type comme on le fait habituellement :
+            </p>
+            <pre class="cpp" style="margin-top: 5px; font-size: 75%;"><code data-trim data-noescape data-line-numbers>
+                  // Définition du type UnJour
+                  enum UnJour {lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche};
+  
+                  // Déclaration de deux variables de type UnJour
+                  UnJour premierJourSemaine = lundi;
+                  UnJour dernierJourSemaine = dimanche;
+               </code></pre>
+
+            <p class="fragment fade-right" style="margin-top: 40px;">
+                <i class="fas fa-bookmark"></i> Remarque : <strong>lundi</strong> et <strong>dimanche</strong> sont des
+                valeurs possibles
+                pour des variables de type <strong>UnJour</strong> : il ne faut pas les délimiter avec des guillemets
+                (<s>"lundi"</s>) car ce
+                ne sont pas des chaînes de caractères mais des valeurs de type <strong>UnJour</strong>.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Représentation du type énuméré en C++</h4>
+
+        <div style="font-size: 67%;">
+            <p>
+                Une énumération définit en fait des <strong class="text-warning">constantes entières</strong>
+                appelées ici <em>lundi</em>, <em>mardi</em>, <em>mercredi</em>, <em>jeudi</em>, <em>vendredi</em>,
+                </em>samedi</em>, </em>dimanche</em> :
+            </p>
+            <pre class="cpp" style="margin-top: 5px; font-size: 75%;"><code data-trim data-noescape>
+                  enum UnJour {lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche};
+               </code></pre>
+
+            <p style="margin-top: 50px;">
+                Par défaut, ces constantes prennent les valeurs entières à partir de
+                <strong>0</strong>.
+            </p>
+            <p style="margin-top: 50px;">
+                Dans l'exemple ci-dessus, lundi vaut 0 et dimanche vaut 6 :
+            </p>
+            <div class="text-center" style="margin-top: -25px;">
+                <img src="presentation/images/figure1.svg" width="90%">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Contrôler les constantes représentant les valeurs du type énuméré</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                On peut imposer les valeurs voulues pour les constantes du type
+                énumératif, si cela est jugé d'intérêt pour le programme élaboré :
+            </p>
+            <pre class="cpp" style="margin-top: 5px; font-size: 75%;"><code data-trim data-noescape>
+                  enum UnJour {lundi=1, mardi, mercredi, jeudi, vendredi, samedi, dimanche};
+               </code></pre>
+
+            <p>
+                Avec cette définition, la valeur <em>lundi</em> est associée à la constante entière 1,
+                la valeur <em>mardi</em> est associée à la constante entière 2... et la valeur
+                <em>dimanche</em> est associée à la constante entière 7.
+            </p>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 40px;">
+                    Autre exemple :
+                </p>
+                <pre class="cpp" style="margin-top: -5px; font-size: 75%;"><code data-trim data-noescape>
+                  enum UnPoids {leger=1, moyen=5, lourd=10};
+               </code></pre>
+                <p>
+                    Ici, la valeur <em>leger</em> est associée à la constante entière 1,
+                    la valeur <em>moyen</em> est associée à la constante entière 5 et la valeur
+                    <em>dimanche</em> est associée à la constante entière 10.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Les opérations autorisées nativement</h4>
+
+        <div style="font-size: 70%;">
+            <p style="margin-top: 40px;">
+                <i class="fas fa-check-square text-success"></i> Affectation entre variables de même type
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="fas fa-check-square text-success"></i> Comparaisons
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="far fa-check-square text-warning"> Affichage</i>
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="far fa-square text-danger"></i> Saisies</i>
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="far fa-square text-danger"></i> Incrémentations / décrémentations</i>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Affectation sur des types énumérés : autorisée</h4>
+
+        <div style="font-size: 65%;">
+
+            <pre class="cpp" style="margin-top: -5px; font-size: 70%;"><code data-trim data-noescape data-line-numbers>
+                enum UnJour { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche };
+  
+                UnJour debutWeekEnd = vendredi;
+                UnJour finWeekEnd = dimanche;
+                UnJour departEnVacances = debutWeekEnd;
+               </code></pre>
+
+            <div class="fragment fade-right">
+
+
+                <p style="margin-top: 30px;">
+                    <i class="fas fa-exclamation-triangle text-warning"></i> Attention : Même si les valeurs listées
+                    dans le type sont des
+                    constantes entières, il n’est pas possible d’affecter une de ces
+                    constantes :
+                </p>
+
+                <pre class="cpp" style="margin-top: -5px; font-size: 70%;"><code data-trim data-noescape data-line-numbers>
+                   enum UnJour { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche };
+                   UnJour debutWeekEnd = 4;
+                        </code></pre>
+
+                <p style="margin-top: 10px;">
+                    Résultat de la compilation :
+                </p>
+                <div class="text-center" style="margin-top: -25px; margin-bottom: -25px;">
+                    <img src="presentation/images/execution4.png" width="90%">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Comparaison sur des types énumérés : autorisée</h4>
+
+        <div style="font-size: 65%;">
+
+            <p>
+                Les valeurs des types énumérés étant définies comme des constantes
+                entières il est possible de les comparer entre elles :
+            </p>
+
+            <pre class="cpp" style="margin-top: -5px; font-size: 60%;"><code data-trim data-noescape data-line-numbers>
+                enum UnJour { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche };
+  
+                UnJour jourCourant; // Le jour courant de la semaine
+  
+                ...
+  
+                if (jourCourant >= vendredi && jourCourant <= dimanche)
+                {
+                    cout << "Bon week-end !" << endl;
+                }
+                else
+                {
+                    cout << "Bon courage !" << endl;
+                }
+               </code></pre>
+
+            <div class="fragment fade-right" style="margin-top: 30px">
+
+
+                <p>
+                    <i class="far fa-bookmark"></i> Remarque : La condition pourrait aussi s'écrire de manière moins
+                    lisible :
+                </p>
+                <pre class="cpp" style="margin-top: -5px; font-size: 60%;"><code data-trim data-noescape>
+                         if (jourCourant >= 4 && jourCourant <= 6)
+                        </code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Affichage sur des types énumérés : autorisé... mais...</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>
+                Il est possible d'utiliser l'opérateur <strong class="text-info">cout</strong> sur un type énuméré mais
+                la valeur affichée à l'écran sera la constante entière correspondante et non la valeur listée dans le
+                type
+                énuméré.
+            </p>
+
+            <pre class="cpp" style="margin-top: 15px; font-size: 70%;"><code data-trim data-noescape data-line-numbers>
+                enum UnJour { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche };
+  
+                UnJour debutWeekEnd = vendredi;
+                cout << "Je pars en vacances " << debutWeekEnd << endl;
+               </code></pre>
+
+            <div class="text-center" style="margin-top: -25px; margin-bottom: -25px;">
+                <img src="presentation/images/execution1.png" width="60%">
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Saisie sur des types énumérés : interdit</h4>
+
+        <div style="font-size: 70%;">
+
+
+            <pre class="cpp" style="margin-top: 25px; font-size: 70%;"><code data-trim data-noescape data-line-numbers>
+          enum UnJour { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche };
+          UnJour departEnVacances;
+  
+          cout << "Quel jour partez-vous en vacances ?";
+          cin >> departEnVacances;
+               </code></pre>
+
+            <p style="margin-top: 30px;">
+                Résultat de la compilation :
+            </p>
+            <div class="text-center" style="margin-top: -25px; margin-bottom: -25px;">
+                <img src="presentation/images/execution2.png" width="90%">
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Incrémentation sur des types énumérés : interdit</h4>
+
+        <div style="font-size: 70%;">
+
+
+            <pre class="cpp" style="margin-top: -5px; font-size: 70%;"><code data-trim data-noescape data-line-numbers>
+                enum UnJour { lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche };
+  
+                UnJour debutWeekEnd = vendredi;
+                UnJour departEnVacances;
+  
+                departEnVacances = debutWeekEnd + 1; /* INTERDIT car l'opérateur + ne
+                sait pas ajouter des entiers et des valeurs de type UnJour */
+               </code></pre>
+
+            <p style="margin-top: 30px;">
+                Résultat de la compilation
+            </p>
+            <div class="text-center" style="margin-top: -25px; margin-bottom: -25px;">
+                <img src="presentation/images/execution3.png" width="90%">
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Avantages / inconvénients des types énumérés</h4>
+
+        <div style="font-size: 61%;">
+
+            <div class="fragment fade-right">
+                <p>
+                    <i class="far fa-thumbs-up text-success"></i> Lisibilité du code :
+                </p>
+                <div class="row" style="margin-top: 0px;">
+                    <div class="col-md-7">
+                        <pre class="cpp" style="margin-top: -5px; font-size: 60%;"><code data-trim data-noescape>
+             if (jourCourant >= vendredi && jourCourant <= dimanche)
+                   </code></pre>
+                    </div>
+                    <div class="col-md-5">
+                        <pre class="cpp" style="margin-top: -5px; font-size: 60%;"><code data-trim data-noescape>
+             if (jourCourant >= 4 && jourCourant <= 6)
+                   </code></pre>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 50px;">
+                    <i class="far fa-thumbs-up text-success"></i> Contrôle des valeurs :
+                </p>
+                <div class="row" style="margin-top: 0px;">
+                    <div class="col-md-6">
+                        <pre class="cpp" style="margin-top: -5px; font-size: 60%;"><code data-trim data-noescape>
+                        enum UnJour { lundi, mardi, mercredi, jeudi, 
+                                      vendredi, samedi, dimanche };
+                        UnJour departEnVacances;
+                
+                        departEnVacances = vendrdi; // erreur :-)
+                   </code></pre>
+                    </div>
+                    <div class="col-md-6">
+                        <pre class="cpp" style="margin-top: -5px; font-size: 60%;"><code data-trim data-noescape>
+                     string departEnVacances;
+      
+                     departEnVacances = "vendrdi"; // pas d'erreur :-(
+                   </code></pre>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 50px;">
+                    <i class="far fa-thumbs-down text-warning"></i> Les opérations de saisie, affichage, incrémentation
+                    (et
+                    autres)
+                    sont à la charge du programmeur.
+                </p>
+                <p>
+                    <i class="fas fa-long-arrow-alt-right"></i> De manière générale, la création d'un nouveau type de
+                    donnée
+                    sous-entend aussi la création d'opérations permettant de manipuler ce nouveau type de donnée. On
+                    conçoit alors ce qu'on appelle un <strong>type abstrait de données</strong> (TAD).
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Enregistrements">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Enregistrements" data-transition="convex">
+        <h1>Enregistrements</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Intérêt des enregistrements</h4>
+
+        <div style="font-size: 62%;">
+            <p>
+                Les enregistrements<sup>[1]</sup> permettent de regrouper des informations qui peuvent être
+                hétérogènes au sein d'un même type.
+            </p>
+
+            <div class="card shadow rounded">
+                <h5 class="card-header">
+                    <i class="fas fa-book-reader"></i> &nbsp;
+                    Informations hétérogènes : Définition
+                </h5>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -30px; margin-bottom: -10px;">Des informations
+                        <strong>hétérogènes</strong> sont des informations ayant des
+                        types différents.
+                    </p>
+                </div>
+            </div>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 40px;">
+                    <strong>Exemple</strong> : Définition d'un type <em class="text-info">adresse</em> regroupant les
+                    données suivantes :
+                </p>
+                <ul>
+                    <li style="margin-top: -17px;">un numéro de rue (sous forme d'entier) ;</li>
+                    <li style="margin-top: -7px;">un nom de rue (sous forme de chaine) ;</li>
+                    <li style="margin-top: -7px;">un code postal (sous forme d'entier ou de chaine) ;</li>
+                    <li style="margin-top: -7px;">un nom de ville (sous forme de chaine).</li>
+                </ul>
+            </div>
+        </div>
+        <div style="font-size: 50%; padding-top: -20px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> appelés aussi record, n-uplet ou tuple <br />
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Codage en C++</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Un enregistrement est défini au moyen du mot clé
+                <strong class="text-info">struct</strong> en précisant le nom et le type de toutes les informations
+                qui le compose :
+            </p>
+            <pre class="cpp" style="margin-top: 5px; font-size: 80%;"><code data-trim data-noescape data-line-numbers>
+                struct UneAdresse
+                {
+                   unsigned short int numRue ; // numéro de rue
+                   string nomRue ; // nom de la rue
+                   unsigned int codePostal ; // code postal de la ville
+                   string nomVille ; // nom de la ville
+                };
+               </code></pre>
+
+        </div>
+
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Accès aux attributs</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                L'accès aux informations composant un enregistrement est réalisé
+                au moyen de la <strong>notation pointée</strong> (<em>cf.</em> ligne 17 ci-dessous) :
+            </p>
+            <pre class="cpp" style="margin-top: 5px; font-size: 67%;"><code data-trim data-noescape data-line-numbers>
+                // Définition du type UneAdresse
+                struct UneAdresse
+                {
+                   unsigned short int numRue ; // numéro de rue
+                   string nomRue ; // nom de la rue
+                   unsigned int codePostal ; // code postal de la ville
+                   string nomVille ; // nom de la ville
+                };
+
+                UneAdresse adresseIut ; // L'adresse de l'IUT
+
+                // Initialisation de l'adresse de l'IUT >> adresseIut
+                ...
+                ...
+
+                // adresseIut >> Afficher la ville où se trouve l'IUT >> écran
+                cout << adresseIut.nomVille;
+               </code></pre>
+        </div>
+
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Initialisation des attributs</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Les attributs d'un enregistrement peuvent être initialisés :
+            </p>
+            <ul>
+                <li>
+                    individuellement, n'importe quand :
+                    <pre class="cpp" style="margin-top: 5px; font-size: 80%;"><code data-trim data-noescape data-line-numbers>
+                        UneAdresse adresseIut ;
+                        adresseIut.numRue = 2;
+                        adresseIut.nomRue = "allée du Parc Montaury";
+                        adresseIut.codePostal = 64600;
+                        adresseIut.nomVille = "Anglet";
+                       </code></pre>
+                </li>
+                <li>
+                    globalement, à la déclaration :
+                    <pre class="cpp" style="margin-top: 5px; font-size: 80%;"><code data-trim data-noescape>
+                        UneAdresse adresseIut = {2,"allée du Parc Montaury", 64600,"Anglet"};
+                       </code></pre>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Les opérations autorisées nativement</h4>
+
+        <div style="font-size: 70%;">
+            <p style="margin-top: 40px;">
+                <i class="fas fa-check-square text-success"></i> Accès aux attributs via la notation pointée
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="fas fa-check-square text-success"></i> Affectation entre variables de même type
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="far fa-square text-danger"></i> Comparaisons
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="far fa-square text-danger"></i> Affichage</i>
+            </p>
+            <p style="margin-top: 40px;">
+                <i class="far fa-square text-danger"></i> Saisies</i>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Comparer deux enregistrements (1/2)</h4>
+
+        <div style="font-size: 63%;">
+
+            <p>
+                Il n'existe pas d'opérateur de comparaison entre deux enregistrements.
+            </p>
+            <p>
+                Dans l'exemple qui suit quel critère utiliser pour comparer deux adresses ? Le numéro de rue ?
+                Le code postal ? La ville ?
+            </p>
+
+            <pre class="cpp" style="margin-top: -5px; font-size: 65%;"><code data-trim data-noescape data-line-numbers>
+                UneAdresse adresseIut = {2,"allée du Parc Montaury", 64600,"Anglet"};
+                UneAdresse adresseBibliotheque = {3,"allée du Parc Montaury", 64600,"Anglet"};
+            
+                if (adresseIut > adresseBibliotheque)
+                {
+                   cout << "L'IUT se trouve après la bibliothèque";
+                }
+                else
+                {
+                   cout << "L'IUT se trouve avant la bibliothèque";
+                }
+               </code></pre>
+
+            <p>
+                Retour du compilateur :
+            </p>
+            <div class="text-center" style="margin-top: -25px; margin-bottom: -25px;">
+                <img src="presentation/images/execution5.png" width="80%">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Comparer deux enregistrements (2/2)</h4>
+
+        <div style="font-size: 63%;">
+
+            <p>
+                Il est toutefois possible de comparer les attributs de deux enregistrements si ces attributs sont
+                des types simples (entier, nombre à virgule, caractère...) comparables avec les opérateurs classiques.
+            </p>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 40px;">
+                    Dans l'exemple qui suit les adresses sont comparées sur le numéro de rue qui est un type simple
+                    (entier court non signé) :
+                </p>
+
+                <pre class="cpp" style="margin-top: -5px; font-size: 65%;"><code data-trim data-noescape data-line-numbers>
+                UneAdresse adresseIut = {2,"allée du Parc Montaury", 64600,"Anglet"};
+                UneAdresse adresseBibliotheque = {3,"allée du Parc Montaury", 64600,"Anglet"};
+            
+                if (adresseIut.numRue > adresseBibliotheque.numRue)
+                {
+                   cout << "L'IUT se trouve après la bibliothèque";
+                }
+                else
+                {
+                   cout << "L'IUT se trouve avant la bibliothèque";
+                }
+               </code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Afficher un enregistrement (1/2)</h4>
+
+        <div style="font-size: 63%;">
+
+            <p>
+                L'opérateur <strong class="text-info">cout</strong> n'est pas en mesure d'afficher un enregistrement.
+                D'ailleurs, si c'était possible, quelles seraient les règles d'affichage à respecter ?
+            </p>
+
+            <p style="margin-top: 40px;">Dans l'exemple ci-dessous, faudrait-il afficher l'adresse sur une seule ligne ?
+                Plusieurs ? Dans quel ordre
+                faudrait-il afficher chaque composant de l'adresse ? Comment les séparer ? Par des espaces ? Des
+                virgules ?
+            </p>
+            <pre class="cpp" style="margin-top: -5px; font-size: 80%;"><code data-trim data-noescape data-line-numbers>          
+                UneAdresse adresseIut = {2,"allée du Parc Montaury", 64600,"Anglet"};
+                cout << adresseIut;            
+               </code></pre>
+
+            <p>
+                Retour du compilateur :
+            </p>
+            <div class="text-center" style="margin-top: -25px; margin-bottom: -25px;">
+                <img src="presentation/images/execution6.png" width="80%">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Afficher un enregistrement (2/2)</h4>
+
+        <div style="font-size: 63%;">
+
+            <p>
+                Il est par contre possible d'utiliser l'opérateur <strong class="text-info">cout</strong>
+                pour afficher les attributs simples d'un enregistrement.
+            </p>
+
+            <p style="margin-top: 20px;">
+                Via cet affichage progressif attribut par attribut, on peut choisir les règles d'affichage à respecter.
+            </p>
+            <pre class="cpp" style="margin-top: -5px; font-size: 75%;"><code data-trim data-noescape data-line-numbers>          
+                UneAdresse adresseIut = {2,"allée du Parc Montaury", 64600,"Anglet"};
+
+                cout << adresseIut.numRue << ", " << adresseIut.nomRue << endl;
+                cout << adresseIut.codePostal << " " << adresseIut.nomVille << endl;          
+               </code></pre>
+
+            <p>
+                Résultat à l'écran :
+            </p>
+            <div class="text-center" style="margin-top: -90px; margin-bottom: -25px;">
+                <img src="presentation/images/execution7.png" width="45%">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Saisir un enregistrement (1/2)</h4>
+
+        <div style="font-size: 63%;">
+
+            <p>
+                L'opérateur <strong class="text-info">cin</strong> n'est pas en mesure de saisir un enregistrement.
+                D'ailleurs, si c'était possible, quelles seraient les règles de saisie à respecter ?
+            </p>
+
+            <p style="margin-top: 30px;">Dans l'exemple ci-dessous, dans quel ordre faudrait-il saisir les attributs
+                d'une adresse ? Avec quels
+                messages d'invite ? Faudrait-il faire des vérifications sur certaines saisies comme le code postal
+                par exemple ?
+            </p>
+            <pre class="cpp" style="margin-top: -5px; font-size: 80%;"><code data-trim data-noescape data-line-numbers>          
+                UneAdresse adresseIut; // L'adresse de l'IUT
+
+                cout << "Entrez l'adresse de l'IUT : ";
+                cin >> adresseIut;           
+               </code></pre>
+
+            <p>
+                Retour du compilateur :
+            </p>
+            <div class="text-center" style="margin-top: -25px; margin-bottom: -25px;">
+                <img src="presentation/images/execution8.png" width="90%">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Saisir un enregistrement (2/2)</h4>
+
+        <div style="font-size: 63%;">
+            <p>
+                Il est par contre possible d'utiliser l'opérateur <strong class="text-info">cin</strong>
+                pour saisir les attributs simples d'un enregistrement.
+            </p>
+
+            <p style="margin-top: 40px;">
+                Via cette saisie progressive attribut par attribut, on peut choisir dans quel ordre saisir les attributs
+                ainsi
+                que les messages d'invite :
+            </p>
+
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-md-6">
+                    <pre class="cpp" style="margin-top: -5px; font-size: 68%;"><code data-trim data-noescape data-line-numbers>          
+                        UneAdresse adresseIut; 
+        
+                        cout << "Adresse de l'IUT : " << endl;
+        
+                        cout << "Nom de la rue : ";
+                        cin >> adresseIut.nomRue; 
+                        
+                        cout << "Numéro de rue : ";
+                        cin >> adresseIut.numRue;
+                        
+                        cout << "Ville : ";
+                        cin >> adresseIut.nomVille;
+                    
+                        cout << "Code postal : ";
+                        cin >> adresseIut.codePostal;        
+                       </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-center">
+                        Résultat à l'écran :
+                    </p>
+                    <div class="text-center" style="margin-top: -40px; margin-bottom: -25px;">
+                        <img src="presentation/images/execution9.png" width="150%">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Imbriquer des enregistrements</h4>
+
+        <div style="font-size: 60%;">
+            <p>
+                Il est bien sûr possible d'imbriquer des enregistrements pour représenter des informations complexes :
+            </p>
+
+            <p style="margin-top: 20px;">
+                Dans l'exemple qui suit, le programmeur définit le type <strong class="text-info">UneVille</strong> qui
+                regroupe
+                le code postal et le nom de la ville puis il utilise ce type pour définir le type
+                <strong class="text-info">UneAdresse</strong> qui regroupe un numéro de rue, un nom de rue
+                et un élément de type <strong class="text-info">UneVille</strong> :
+            </p>
+            <pre class="cpp" style="margin-top: -5px; font-size: 65%;"><code data-trim data-noescape data-line-numbers>          
+                // Définition du type UneVille
+                struct UneVille
+                {
+                    unsigned int codePostal; // code postal de la ville
+                    string nomVille; // nom de la ville
+                };
+            
+                // Définition du type UneAdresse
+                struct UneAdresse
+                {
+                    unsigned short int numRue; // numéro de rue
+                    string nomRue; // nom de la rue
+                    UneVille ville;  
+                };       
+               </code></pre>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Accès aux attributs d'enregistrements imbriqués</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="row" style="margin-top: -10px;">
+                <div class="col-md-6">
+                    <p>
+                        L'accès aux attributs se fait en utilisant autant de fois que nécessaire la notation pointée.
+                    </p>
+                    <p style="margin-top: 30px;">Ainsi, pour afficher quelle est la ville enregistrée dans la variable
+                        <strong>adresseDeptInfo</strong>,
+                        on écrira :
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <img src="presentation/images/figure4.svg" width="55%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-left" style="margin-top: -80px;">
+                <img src="presentation/images/figure5.svg" width="60%">
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Initialisation des attributs d'enregistrements imbriqués</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    initialisation attribut par attribut :
+                    <pre class="cpp" style="margin-top: 5px; font-size: 80%;"><code data-trim data-noescape data-line-numbers>
+                        UneAdresse adresseDeptInfo ;
+                        adresseDeptInfo.numRue = 2;
+                        adresseDeptInfo.nomRue = "allée du Parc Montaury";
+                        adresseDeptInfo.ville.codePostal = 64600;
+                        adresseDeptInfo.ville.nomVille = "Anglet";
+                       </code></pre>
+                </li>
+                <li>
+                    intialisation globale à la déclaration :
+
+                    <div class="text-left" style="margin-top: -10px; margin-left: -30px;">
+                        <img src="presentation/images/figure7.png" width="73%">
+                    </div>
+
+                    <div class="text-right" style="margin-top: -160px;">
+                        <img src="presentation/images/figure6.svg" width="25%">
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Code complet des exemples précédents</h4>
+
+        <div style="font-size: 60%;">
+
+            <pre class="cpp" style="margin-top: -5px; font-size: 65%;"><code data-trim data-noescape data-line-numbers>          
+                // Définition du type UneVille
+                struct UneVille
+                {
+                    unsigned int codePostal; // code postal de la ville
+                    string nomVille; // nom de la ville
+                };
+            
+                // Définition du type UneAdresse
+                struct UneAdresse
+                {
+                    unsigned short int numRue; // numéro de rue
+                    string nomRue; // nom de la rue
+                    UneVille ville; // 
+                };
+            
+                UneAdresse adresseDeptInfo = { 2,"allée du Parc Montaury", {64600,"Anglet"} };
+            
+                cout << "Ville où se trouve le département info de l'IUT : " << endl;
+                cout << adresseDeptInfo.ville.nomVille;     
+               </code></pre>
+        </div>
+
+        <div class="text-center" style="margin-top: -15px;">
+            <img src="presentation/images/execution10.png" width="47%">
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section><section name="Tableaux">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Tableaux" data-transition="convex">
+        <h1>Tableaux</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: -20px;">Définitions</h4>
+
+        <div style="font-size: 60%;">
+
+            <div class="card shadow rounded" style="margin-top: -20px; margin-bottom: 30px;">
+                <h5 class="card-header" style="font-size: 90%; font-weight: bold;">
+                    <i class="fas fa-book-reader"></i> &nbsp;
+                    <strong>Tableaux</strong> : Définition
+                </h5>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -30px; margin-bottom: -10px;">
+                        Un tableau est une structure à <strong>accès direct</strong> regroupant
+                        <u>généralement</u> des données <strong>homogènes</strong><sup>[1]</sup>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow rounded fragment fade-right" data-fragment-index="2" style="margin-bottom: 30px;">
+                <h5 class="card-header" style="font-size: 90%; font-weight: bold;">
+                    <i class="fas fa-book-reader"></i> &nbsp;
+                    Informations <strong>homogènes</strong> : Définition
+                </h5>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -30px; margin-bottom: -10px;">
+                        Des informations <strong>homogènes</strong> sont des informations ayant toutes le
+                        <strong>même type</strong><sup>[2]</sup>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow rounded fragment fade-right" data-fragment-index="3">
+                <h5 class="card-header" style="font-size: 90%; font-weight: bold;">
+                    <i class="fas fa-book-reader"></i> &nbsp;
+                    Structure à <strong>accès direct</strong> : Définition
+                </h5>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -30px; margin-bottom: -10px;">
+                        Une structure à <strong>accès direct</strong> regroupe un ensemble d'éléments
+                        ordonnés et propose des mécanismes permettant d'accéder à
+                        chaque élément <strong>directement</strong> sans passer par ceux qui le précèdent.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div style="font-size: 40%; padding-top: -15px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> C'est le cas en C++ et Java par exemple mais ce n'est pas le cas en
+            PHP ou Cobol. <br />
+            <span class="fragment fade-right" data-fragment-index="2">
+                <span style="color: #35a3e5">
+                    [2]</span> Si les types sont différents on parlera d'informations hétérogènes.</span> <br />
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Structure d'un tableau</h4>
+
+        <div style="font-size: 63%;">
+
+            <p>
+                Un tableau est généralement vu comme une suite de cases<sup>[1]</sup> situées dans un espace mémoire
+                contiguë.
+            </p>
+
+            <p class="fragment fade-right" data-fragment-index="2" style="margin-top: 40px;">
+                Dans le cas d'un tableau homogène, les cases sont toutes de même taille et la taille de chaque case est
+                définie en fonction du type de donnée qu'elle contient.
+            </p>
+
+            <div class="fragment fade-right" data-fragment-index="3" style="margin-top: 40px;">
+                <p>
+                    Un tableau peut contenir quasiment tout type d'élément :
+                </p>
+
+                <div class="row" style="margin-top: 0px;">
+                    <div class="col-md-7">
+                        <ul>
+                            <li style="margin-top: -17px;">des données de type simple : entiers, nombre à virgule,
+                                caractère, chaine... <sup>[2]</sup>;</li>
+                            <li style="margin-top: -7px;">des pointeurs<sup>[3]</sup>; </li>
+                            <li style="margin-top: -7px;">des types énumérés ;</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5">
+                        <ul>
+                            <li style="margin-top: -7px;">des enregistrements ;</li>
+                            <li style="margin-top: -7px;">des objets ;</li>
+                            <li style="margin-top: -7px;">des tableaux.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="font-size: 40%; padding-top: -15px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> appelées aussi cellules. <br />
+
+            <span class="fragment fade-right" data-fragment-index="3">
+                <span style="color: #35a3e5">[2]</span> la taille d'une case du tableau est alors le
+                nombre d'octets sur lequel la donnée est codée.
+                <br /></span>
+
+            <span class="fragment fade-right" data-fragment-index="3">
+                <span style="color: #35a3e5">[3]</span> variables contenant une adresse mémoire.
+                <br /></span>
+        </div>
+    </section>
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Dimension d'un tableau</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Lorsque le tableau est composé de données de type simple, on parle
+                    de tableau à <strong>une dimension</strong> ou de <strong>vecteur</strong>.
+                </li>
+                <li style="margin-top: -1px;" class="fragment fade-right" data-fragment-index="2">
+                    Lorsque le tableau contient lui-même d'autres tableaux on parle de
+                    tableau <strong>multimensionnel</strong>.
+                </li>
+            </ul>
+
+            <div class="row" style="margin-top: 80px;">
+                <div class="col-md-4">
+                    <div class="text-center" style="margin-top: -30px;">
+                        <img src="presentation/images/figure8.jpg" width="30%">
+                    </div>
+                    <p class="text-center" style="font-size: 60%;">
+                        <em>un tableau à 1 dimension <br /> composé de 3 cases</em>
+                    </p>
+                </div>
+                <div class="col-md-4 fragment fade-left" fade-left" data-fragment-index="2">
+                    <div class="text-center" style="margin-top: -60px;">
+                        <img src="presentation/images/figure9.jpg" width="30%">
+                    </div>
+                    <p class="text-center" style="font-size: 60%; margin-top: -1px;">
+                        <em>un tableau à 2 dimensions <br />(appelé matrice ou table) <br />
+                            composé de 3 x 3 cases</em>
+                    </p>
+                </div>
+                <div class="col-md-4 fragment fade-left" data-fragment-index="2">
+                    <div class="text-center" style="margin-top: -80px;">
+                        <img src="presentation/images/figure10.jpg" width="40%">
+                    </div>
+                    <p class="text-center" style="font-size: 65%; margin-top: -22px;">
+                        <em>un tableau à 3 dimensions <br /> composé de 3 x 3 x 3 cases</em>
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableau statique / dynamique</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Lorsque la taille du tableau est fixe, elle est définie <strong>une fois pour
+                        toute</strong> à la déclaration du tableau
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    On parle alors de <strong class="text-primary">tableau statique</strong>.
+                </li>
+                <li>
+                    Lorsque la taille du tableau évolue en cours
+                    d'exécution, on parle de <strong class="text-primary">tableau dynamique</strong>.
+                </li>
+            </ul>
+
+            <p style="margin-top: 40px;">
+                Dans ce cours, nous n'aborderons que les <strong>tableaux statiques</strong>.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Déclaration d'un tableau statique à 1 dimension</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                La syntaxe pour déclarer un tableau est la suivante :
+            </p>
+            <p>
+                <strong class="text-info">typeDesElements</strong>
+                <strong class="text-success">nomDuTableau</strong>
+                <strong class="text-warning">[nombreDeCases]</strong>;
+            </p>
+            <ul style="margin-top: 20px;">
+                <li>
+                    <strong class="text-info">typeDesElements</strong> définit le type d'élément stocké dans le
+                    tableau (rappel : En C++, un tableau est composé uniquement
+                    d'éléments de même type, c'est une structure homogène) ;
+                </li>
+                <li style="margin-top: -3px;">
+                    <strong class="text-success">nomDuTableau</strong> est le nom du tableau. Le nom du tableau suit
+                    les mêmes règles qu'un nom de variable (nom parlant, sans
+                    accents ni espaces) ;
+                </li>
+                <li style="margin-top: -3px;">
+                    <strong class="text-warning">[nombreDeCases]</strong> une constante entière qui détermine le
+                    nombre de cases qui composent le tableau.
+                </li>
+            </ul>
+
+            <p>
+                Exemple :
+            </p>
+            <pre class="cpp"><code data-trim data-noescape style="font-size: 150%;">
+                float notes [10]; // Déclaration d'un tableau de 10 notes
+             </code></pre>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableau statique : contrainte d'usage</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Étant donné qu'un tableau est composé d'un nombre <strong>fixe</strong>
+                d'éléments homogènes, la taille d'un tableau statique est fixée
+                <strong class="text-warning">dès sa déclaration</strong>.
+            </p>
+
+            <div class="fragment fade-right">
+                <p style="margin-top:30px;">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    Le programme qui suit est donc <span class="text-danger">incorrect <i
+                            class="fas fa-exclamation-triangle"></i></span> :
+                </p>
+                <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 130%; line-height: 1.7;">
+                // Même si le compilateur ne génère aucune erreur, cette approche est INTERDITE
+
+                unsigned int tailleTab ; // Taille du tableau (sans valeur prédéfinie)
+                float notes [tailleTab]; // un tableau de taille ALEATOIRE !
+
+                cout << " Entrez le nombre de cases du tableau de notes : " ;
+                cin >> tailleTab ; /* Suite à la saisie de tailleTab, le tableau notes n'est pas  
+                                      redimensionné car ce n'est pas un tableau dynamique ! */
+             </code></pre>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Saisir la taille d'un tableau statique</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Si on souhaite saisir la taille du tableau au clavier, il est nécessaire de déclarer
+                le tableau <strong class="text-warning">après la saisie</strong> :
+            </p>
+
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 130%; line-height: 1.7;">
+                unsigned int tailleTab ; // Taille du tableau
+
+                cout << " Entrez le nombre de cases du tableau : " ;
+                cin >> tailleTab ;
+
+                // Déclaration d'un tableau de tailleTab cases :
+                float notes [tailleTab]; /* Ici la valeur de tailleTab est définie, la
+                                            déclaration du tableau est donc correcte. */
+             </code></pre>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Taille prédéfinie : bonne pratique</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Lorsque la taille d'un tableau statique est prédéfinie, <strong>une bonne pratique consiste à
+                    définir cette taille sous forme de constante </strong> :
+            </p>
+
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 130%; line-height: 1.7;">
+                const unsigned short int NB_CASES = 10; // Taille du tableau de notes
+                float notes [NB_CASES]; // Le tableau contenant les notes
+             </code></pre>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 40px;">Le fait de déclarer la taille du tableau sous forme de constante :</p>
+
+                <ul>
+                    <li style="margin-top: -10px;"> garantit que la taille du tableau est fixe ; </li>
+                    <li style="margin-top: -4px;"> améliore la lisibilité du code en indiquant que le tableau est
+                        statique (puisque sa taille est constante) ;</li>
+                    <li style="margin-top: -4px;"> permet de ré-exploiter facilement la taille du tableau lors des
+                        algorithmes de parcours.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Taille en mémoire</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                La taille d'un tableau est obtenue en multipliant la taille mémoire
+                d'un élément par le nombre de cases du tableau :
+            </p>
+
+            <table class="table table-bordered" style="margin-top: 30px;">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="text-center">Déclaration du tableau</th>
+                        <th scope="col" class="text-center">Taille occupée mémoire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">double notes [10];</td>
+                        <td class="text-center">10 cases x 8 octets = 80 octets</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">int nbEtudiantsParTd [4];</td>
+                        <td class="text-center">4 cases x 4 octets = 16 octets</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">char alphabet [26];</td>
+                        <td class="text-center">26 cases x 1 octet = 26 octets</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Accès aux éléments d'un tableau</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Chaque case d'un tableau porte un numéro appelé <strong class="text-primary">indice</strong>.
+            </p>
+
+            <p style="margin-top: 30px;">
+                Pour accéder à un élément d'un tableau, le programmeur doit
+                préciser le nom du tableau, suivi de l'indice de l'élément auquel il
+                souhaite accéder entre crochets :
+            </p>
+
+            <p>
+                <strong class="text-info">nomDuTableau</strong>
+                <strong class="text-success">[</strong>
+                <strong class="text-warning">indice</strong>
+                <strong class="text-success">]</strong>
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Propriétés des indices</h4>
+
+        <div style="font-size: 67%;">
+
+            <p>
+                On retiendra que :
+            </p>
+            <ul>
+                <li style="margin-top: -17px;">L'indice du premier élément du tableau est <strong
+                        class="text-danger">0</strong> ;</li>
+                <li style="margin-top: -7px;">Un indice est toujours positif ou nul ;</li>
+                <li style="margin-top: -7px;">L'indice du dernier élément du tableau est égal au
+                    <strong class="text-danger">nombre de cases - 1</strong>
+                </li>
+            </ul>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 30px;">
+                    Ainsi, on accédera au <strong class="text-primary">5</strong>ème élément d'un tableau
+                    <strong>notes</strong> en écrivant
+                    <strong>notes[<span class="text-warning">4</span>]</strong>
+                </p>
+                <div class="text-center" style="margin-top: -20px;">
+                    <img src="presentation/images/figure11.svg" width="97%">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Initialisation d'un tableau (1/2)</h4>
+
+        <div style="font-size: 67%;">
+
+            <div class="text-center" style="margin-top: -20px;">
+                <img src="presentation/images/figure12.svg" width="97%">
+            </div>
+
+            <p style="margin-top: -10px;">
+                Un tableau peut être initialisé en affectant successivement une valeur à chaque élément :
+            </p>
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 130%; line-height: 1.3;">
+                const unsigned int NB_CASES = 10; // Taille du tableau
+                float notes [NB_CASES]; // Déclaration du tableau de notes
+
+                // Initialisation de chaque élément du tableau
+                notes [0] = 9;
+                notes [1] = 11.5;
+                ...
+                ...
+                notes [8] = 7;
+                notes [9] = 15.5;
+             </code></pre>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Initialisation d'un tableau (2/2)</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="text-center" style="margin-top: -20px;">
+                <img src="presentation/images/figure12.svg" width="85%">
+            </div>
+
+            <p style="margin-top: -20px;">
+                Un tableau peut également être initialisé globalement à la déclaration :
+            </p>
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 120%; line-height: 1.4;">
+                const unsigned int NB_CASES = 10; // Taille du tableau
+                float notes [NB_CASES] = {9, 11.5, 6, 14.5, 10, 13, 11.5, 18, 7, 15.5};
+             </code></pre>
+
+            <div style="font-size: 85%;" class="fragment fade-left">
+                <p>
+                    <i class="fas fa-exclamation-triangle"></i> Attention cependant :
+                </p>
+                <ul>
+                    <li style="margin-top: -17px;">
+                        Le nombre de valeurs entre accolades ne doit pas être supérieur au nombre
+                        d'éléments du tableau ;
+                    </li>
+                    <li style="margin-top: -8px;">
+                        Les valeurs entre accolades doivent être des constantes (l'utilisation de variables
+                        provoquera une erreur du compilateur) ;
+                    </li>
+                    <li style="margin-top: -8px;">
+                        Il doit y avoir au moins une valeur entre accolades ;
+                    </li>
+                    <li style="margin-top: -30px;">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <p>
+                                    Si le nombre de valeurs entre accolades est inférieur au nombre de cases du
+                                    tableau, les derniers éléments sont initialisés à 0. Ainsi, l'instruction ci-contre
+                                    permet d'initialiser toutes les cases du tableau à zéro.
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <div style="font-size: 90%; margin-top: 50px;">
+                                    <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 130%; line-height: 1.4;">
+                                        const unsigned int NB_CASES = 10;
+                                        float notes [NB_CASES] = {0};
+                                     </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Tableaux multidimensionnels : représentation</h4>
+
+        <div style="font-size: 67%;">
+
+            <p style="margin-top: 20px;">
+                Les tableaux multidimensionnels sont des tableaux qui contiennent des tableaux.
+            </p>
+
+            <p style="margin-top: 20px;">
+                Par exemple le tableau à deux dimensions suivant (3 lignes, 4 colonnes), est
+                en fait un tableau comportant 3 cases, chaque case contenant un autre tableau
+                de 4 cellules :
+            </p>
+
+            <div class="text-center" style="margin-top: -20px;">
+                <img src="presentation/images/figure13.svg" width="90%">
+            </div>
+
+            <p style="margin-top: -10px;">
+                Les tableaux à deux dimensions peuvent par exemple être utilisés pour représenter un
+                échiquier, une grille de morpion, un jeu de bataille navale...
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableaux multidimensionnels : déclaration</h4>
+
+        <div style="font-size: 65%;">
+
+            <p style="margin-top: 20px;">
+                La syntaxe pour déclarer un tableau multidimensionnel est la suivante :
+            </p>
+            <p style="font-size: 75%;">
+                <strong class="text-info">typeDesElements</strong>
+                <strong class="text-success">nomDuTableau</strong>
+                <strong class="text-primary">[</strong><strong class="text-warning">nbCasesDimension1</strong><strong
+                    class="text-primary">]</strong>
+                <strong class="text-primary">[</strong><strong class="text-warning">nbCasesDimension2</strong><strong
+                    class="text-primary">]</strong>
+                <strong>...</strong>
+                <strong class="text-primary">[</strong><strong class="text-warning">nbCasesDimensionN</strong><strong
+                    class="text-primary">]</strong>;
+            </p>
+            <ul>
+                <li>Le nombre de cases de chaque dimension est défini entre crochets ;</li>
+                <li style="margin-top: -8px;">En théorie, le nombre de dimensions n'est pas limité.</li>
+            </ul>
+
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-8">
+                    <p>
+                        Exemple : Un tableau d'entiers positifs à deux dimensions (3 lignes, 4 colonnes) se
+                        définira de la manière suivante :
+                    </p>
+                    <pre class="cpp"><code data-trim data-noescape style="font-size: 150%;">
+                        unsigned int matrice [3][4] ;
+                     </code></pre>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center" style="margin-top: 15px;">
+                        <img src="presentation/images/figure14.svg" width="70%">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableaux multidimensionnels : accès aux éléments</h4>
+
+        <div style="font-size: 67%;">
+
+            <p style="margin-top: 20px;">
+                L'accès aux éléments d'un tableau multidimensionnel est réalisé en
+                donnant les indices permettant de désigner la case au travers de chaque
+                dimension.
+            </p>
+
+            <p style="margin-top: 30px;">
+                Ainsi,
+                <strong class="text-success">tab</strong>
+                <strong class="text-primary">[ </strong><strong class="text-warning">1</strong><strong
+                    class="text-primary"> ]</strong>
+                <strong class="text-primary">[ </strong><strong class="text-warning">2</strong><strong
+                    class="text-primary"> ]</strong>
+                désigne la case située :
+            </p>
+            <ul>
+                <li style="margin-top: -4px;">à la ligne <strong class="text-warning">1</strong>, colonne <strong
+                        class="text-warning">2</strong> (vue matricielle) ;</li>
+
+                <li style="margin-top: -9px;">à la case <strong class="text-warning">1</strong> du tableau principal
+                    puis à la case <strong class="text-warning">2</strong> du tableau qui se
+                    trouve à la case <strong class="text-warning">1</strong> du tableau principal (vue en tableaux
+                    imbriqués) :</li>
+            </ul>
+
+            <div class="text-center" style="margin-top: -10px;">
+                <img src="presentation/images/figure15.svg" width="90%">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableaux multidimensionnels : initialisation (1/2)</h4>
+
+        <div style="font-size: 67%;">
+
+            <p style="margin-top: 20px;">
+                L'initialisation d'un tableau multidimensionnel peut être réalisé en
+                affectant une valeur à chaque case qui le compose :
+            </p>
+
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 130%; line-height: 1.3;">
+                // Déclaration du tableau
+                unsigned int matrice [3][4] ; 
+
+                // Initialisation du tableau avec des valeurs
+                matrice [1][0] = 1; // initialisation de la ligne 1 , colonne 0
+                matrice [0][1] = 2; // initialisation de la ligne 0 , colonne 1
+                matrice [2][2] = 3; // initialisation de la ligne 2 , colonne 2
+             </code></pre>
+
+            <div class="text-center" style="margin-top: -5px;">
+                <img src="presentation/images/figure16.svg" width="90%">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Tableaux multidimensionnels : initialisation (2/2)</h4>
+
+        <div style="font-size: 67%;">
+
+            <p style="margin-top: 20px;">
+                Comme pour les tableaux unidimensionnels, il est possible d'initialiser un
+                tableau multidimensionnel globalement à la déclaration :
+            </p>
+
+            <pre class="cpp"><code data-trim data-noescape style="font-size: 140%;">
+                unsigned int matrice [3][4] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3} ;
+             </code></pre>
+
+            <div class="text-center" style="margin-top: -5px;">
+                <img src="presentation/images/figure17.svg" width="90%">
+            </div>
+
+        </div>
+
+    </section>
+
+   <!-- ====================================================================== -->
+
+
+   <section>
+
+    <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+
+
+        <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT11/0" 
+           role="button" target="_blank">
+           Sortez vos smartphones
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+
+</section>
+
+
+<!-- ====================================================================== -->
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

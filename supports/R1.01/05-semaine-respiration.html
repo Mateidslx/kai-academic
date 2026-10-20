@@ -1,0 +1,697 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+	<link rel="stylesheet" href="plugin/copycode/copycode.css">
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+
+		
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+
+
+	<style>
+		/* Styles pour rendre les commandes du carrousel bien visibles */
+		.carousel-control-prev-icon,
+		.carousel-control-next-icon {
+			background-color: rgba(204, 34, 34, 0.5) !important; /* Rendre l'icône de navigation plus visible */
+			width: 50px !important;
+			height: 50px !important;
+			border-radius: 50% !important;
+		}
+	
+		.carousel-control-prev-icon {
+			background-image: none !important; /* Supprimer l'icône Bootstrap par défaut */
+		}
+	
+		.carousel-control-next-icon {
+			background-image: none !important; /* Supprimer l'icône Bootstrap par défaut */
+		}
+	
+		.carousel-control-prev-icon:after {
+			content: '\f104' !important; /* Icône de Font Awesome pour la flèche gauche */
+			font-family: "Font Awesome 5 Free" !important;
+			font-weight: 900 !important;
+			font-size: 24px !important;
+			color: white !important;
+		}
+	
+		.carousel-control-next-icon:after {
+			content: '\f105' !important; /* Icône de Font Awesome pour la flèche droite */
+			font-family: "Font Awesome 5 Free" !important;
+			font-weight: 900 !important;
+			font-size: 24px !important;
+			color: white !important;
+		}
+	
+		/* Positionnement des commandes à gauche et à droite du carrousel */
+		.carousel-control-prev, .carousel-control-next {
+			position: absolute !important; /* Utilisation de position absolue pour un contrôle précis */
+			top: 50% !important; /* Centrer verticalement */
+			transform: translateY(-50%) !important;
+			z-index: 1000 !important; /* Pour s'assurer qu'elles apparaissent devant tout autre élément */
+			width: auto !important;
+			padding: 0 !important;
+		}
+	
+		.carousel-control-prev {
+			left: 0 !important; /* Ajustement à gauche */
+		}
+	
+		.carousel-control-next {
+			right: 0 !important; /* Ajustement à droite */
+		}
+	
+		/* S'assurer que le carrousel n'est pas caché par reveal.js */
+		.carousel {
+			position: relative !important;
+			z-index: 1 !important;
+		}
+	
+		/* S'assurer que le contenu du carrousel est bien dimensionné */
+		.carousel-inner {
+			width: 100% !important;
+			max-width: 80% !important;
+			margin: 0 auto !important;
+		}
+	
+		/* S'assurer que les images du carrousel ne sont pas affectées */
+		.carousel-item img {
+			display: block !important;
+			margin: 0 auto !important;
+		}
+
+		figure {
+    max-width: 300%; /* Augmente la largeur de la figure */
+    margin: 0 auto; /* Centre la figure dans le conteneur */
+}
+
+	</style>
+	
+	
+
+
+
+
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Les nombres magiques</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="15%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan de la présentation</h4>
+
+    <br />
+    <div style="font-size: 70%; margin-top: -40px;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Définition
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">03</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Problèmes
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">05</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Solution
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">07</span>
+              </td>
+            </tr>
+
+
+          </tbody>
+
+        </table>
+
+        <p style="margin-top: 120px;"></p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section>
+<section name="Définition">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Définition" data-transition="convex">
+        <h1>Définition</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Définition</h4>
+
+        <div style="font-size: 70%; line-height: 1.4;">
+
+
+            <div class="col col-lg-12">
+                <figure class="bg-white p-3 rounded" style="border-left: .25rem solid #f68e9d;">
+                    <blockquote class="blockquote shadow-lg"
+                        style="font-size: 100%; padding-left: 25px; padding-right: 25px;">
+                        <p>
+                            Un <strong class="text-primary">nombre magique</strong> est une valeur qui apparaît <span
+                                class="font-italic">"magiquement"</span>
+                            dans le code sans
+                            explication ou signification. Il nuit à la lisibilité, à la maintenabilité et à la
+                            compréhension du code.
+                        </p>
+                    </blockquote>
+                </figure>
+            </div>
+
+
+            <div class="fragment fade-left">
+                <p class="text-warning" style="margin-top: 50px; font-size: 110%;">Exemple</p>
+                <pre class="cpp"
+                    style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); border: solid 0.05em rgb(172, 172, 172); border-radius:5px;"><code data-trim data-noescape style="font-size: 75%; padding: 8px;">
+                salaire = 500 + 200 + 13 * 2500;
+                </code></pre>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+
+
+
+</section><section name="Problèmes">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Problèmes" data-transition="convex">
+        <h1>Problèmes</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="font-size: 94%;">Pourquoi les nombres magiques sont problématiques ?</h4>
+
+        <div style="font-size: 70%; line-height: 1.4;">
+            <ul>
+                <li style="margin-top: -7px; margin-bottom: -10px;"><span class="text-warning">Lisibilité réduite</span>
+                    : Signification du
+                    nombre peu claire ;</li>
+
+                <pre class="cpp"
+                    style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); border: solid 0.05em rgb(172, 172, 172); border-radius:5px;"><code data-trim data-noescape style="font-size: 75%; padding: 8px;">
+                salaire = 500 + 200 + 13 * 2500;
+                </code></pre>
+
+                <p style="font-size: 95%;">Que représentent les valeurs <span class="text-danger">500</span>, <span
+                        class="text-danger">200</span>, <span class="text-danger">13</span> et <span
+                        class="text-danger">2500</span> ?</p>
+
+
+                <div class="fragment fade-right">
+                    <li style="margin-top: 30px;"><span class="text-warning">Maintenance difficile</span> : Coûteux de
+                        modifier à plusieurs endroits.</li>
+
+                    <div class="row">
+                        <div class="col-md-3" style="font-size: 100%;">
+                            <p class="text-left" style="font-size: 85%;">Ici, faire évoluer les valeurs des <strong class ="text-success">2</strong>
+                                coefficients implique <strong class="text-danger">3</strong>
+                                modifications dans l'algorithme et le code.</p>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="text-center" style="margin-top: -15px;">
+                                <img class="" src="presentation/images/algo_2.png" width="650px">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+
+
+</section><section name="Solution">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Solution" data-transition="convex">
+        <h1>Solution</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 20px; margin-bottom: -70px !important;">Comment se débarasser des nombres magiques ?</h4>
+
+        <div style="font-size: 65%; margin-top: 10px;">
+
+            <div id="quoteCarousel" class="carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                    <!-- Citation 1 -->
+                    <div class="carousel-item active">
+                        <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-lg-8">
+                                    <figure class="text-center bg-white py-5 px-4 shadow-2"
+                                        style="border-radius: .75rem;">
+                                        <img src="presentation/images/robert_cecil_martin.jpg" width="120px"
+                                            alt="Oncle BOB" class="rounded-circle mb-4">
+                                        <blockquote class="blockquote pb-2">
+                                            <p>
+                                                <i class="fas fa-angle-double-left" style="color: #f9a169;"></i>
+                                                <span style="font-size: 105%;" class="lead font-italic">L'utilisation de
+                                                    nombres littéraux codés
+                                                    en dur (appelés « nombres magiques ») doit être évitée dans la
+                                                    mesure du possible. Si un nombre littéral doit être utilisé, il
+                                                    convient de <strong>le nommer comme une constante pour lui donner un
+                                                        sens</strong>.</span>
+                                                <i class="fas fa-angle-double-right" style="color: #f9a169;"></i>
+                                            </p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer mb-0 font-italic"
+                                            style="color: rgb(161, 161, 161) !important;">
+                                            Robert C. Martin (Oncle BOB)<br>
+                                            <span class="text-italic">Clean Code: A Handbook of Agile Software
+                                                Craftsmanship</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Citation 2 -->
+                    <div class="carousel-item">
+                        <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-lg-8">
+                                    <figure class="text-center bg-white py-5 px-4 shadow-2"
+                                        style="border-radius: .75rem;">
+                                        <img src="presentation/images/steve_McConnell.jpg" width="120px"
+                                            alt="Steve McConnell" class="rounded-circle mb-4">
+                                        <blockquote class="blockquote pb-2">
+                                            <p>
+                                                <i class="fas fa-angle-double-left" style="color: #f36f63;"></i>
+                                                <span class="lead font-italic">Les littéraux, en particulier les
+                                                    littéraux numériques, doivent être remplacés par des constantes
+                                                    nommées. Les <strong>constantes nommées éliminent les nombres
+                                                        magiques et rendent le code plus facile à lire</strong>.</span>
+                                                <i class="fas fa-angle-double-right" style="color: #f36f63;"></i>
+                                            </p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer mb-0 font-italic"
+                                            style="color: rgb(161, 161, 161) !important;">
+                                            Steve McConnell<br>
+                                            <span class="text-italic">Code Complete: A Practical Handbook of Software
+                                                Construction</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Citation 3 -->
+                    <div class="carousel-item">
+                        <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-lg-8">
+                                    <figure class="text-center bg-white py-5 px-4 shadow-2"
+                                        style="border-radius: .75rem;">
+                                        <img src="presentation/images/martin_fowler.png" width="150px"
+                                            alt="Martin Fowler" class="rounded-circle mb-4">
+                                        <blockquote class="blockquote pb-2">
+                                            <p>
+                                                <i class="fas fa-angle-double-left" style="color: #f36f63;"></i>
+                                                <span class="lead font-italic"><strong>Transformez les nombres
+                                                        magiques</strong> en
+                                                    constantes ou en variables significatives afin de réduire la charge
+                                                    cognitive des lecteurs du code</strong>.</span>
+                                                <i class="fas fa-angle-double-right" style="color: #f36f63;"></i>
+                                            </p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer mb-0 font-italic"
+                                            style="color: rgb(161, 161, 161) !important;">
+                                            Martin Fowler<br>
+                                            <span class="text-italic">Refactoring: Improving the Design of Existing
+                                                Code</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Citation 4 -->
+                    <div class="carousel-item">
+                        <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-lg-8">
+                                    <figure class="text-center bg-white py-5 px-4 shadow-2"
+                                        style="border-radius: .75rem;">
+                                        <img src="presentation/images/joshua_blosh.png" width="120px"
+                                            alt="Joshua Bloch" class="rounded-circle mb-4">
+                                        <blockquote class="blockquote pb-2">
+                                            <p>
+                                                <i class="fas fa-angle-double-left" style="color: #f36f63;"></i>
+                                                <span class="lead font-italic"><strong>Évitez les nombres magiques en
+                                                        les définissant comme des constantes avec des noms
+                                                        descriptifs.</strong></span>
+                                                <i class="fas fa-angle-double-right" style="color: #f36f63;"></i>
+                                            </p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer mb-0 font-italic"
+                                            style="color: rgb(161, 161, 161) !important;">
+                                            Joshua Bloch<br>
+                                            <span class="text-italic">Effective Java</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Commandes du carrousel -->
+                <a class="carousel-control-prev" href="#quoteCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#quoteCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+ 
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Exemples">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Exemples" data-transition="convex">
+        <h1>Exemples</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Dans un code...</h4>
+
+        <div style="font-size: 70%; line-height: 1.2;">
+
+            <ul>
+                <li style="margin-bottom: -15px;">Avant :</li>
+                <pre class="cpp"
+                style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); border: solid 0.05em rgb(172, 172, 172); border-radius:5px;"><code data-trim data-noescape style="font-size: 65%; padding: 8px;">
+                    salaire = 500 + 200 + 13 * 2500;
+                </code></pre>
+
+                <li style="margin-top: 60px; margin-bottom: -15px;">Après :</li>
+                <pre class="cpp"
+                style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); border: solid 0.05em rgb(172, 172, 172); border-radius:5px;"><code data-trim data-noescape style="font-size: 65%; padding: 8px;">
+                    const float SALAIRE_MENSUEL = 2500;  
+                    const unsigned short int NOMBRE_MOIS = 13; // Paiement d'un 13ème mois
+                    const float PRIME_ANCIENNETE = 500; 
+                    const float PRIME_INTERESSEMENT = 200;   
+                    float salaireAnnuel; 
+    
+                    salaireAnnuel = PRIME_ANCIENNETE + PRIME_INTERESSEMENT + NOMBRE_MOIS * SALAIRE_MENSUEL;
+                </code></pre>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Dans un algorithme...</h4>
+
+        <div style="font-size: 70%; line-height: 1.2;">
+
+            <p style="margin-top: 50px;">Avant...</p>
+            <div class="text-center" style="margin-top: -15px;">
+                <img class="" src="presentation/images/algo_2.png" width="700px">
+            </div>
+
+            <p style="margin-top:80px;"></p>
+        </div>
+
+    </section>
+
+
+   <!-- ====================================================================== -->
+
+   <section>
+
+    <h4>Dans un algorithme...</h4>
+
+    <div style="font-size: 70%; line-height: 1.2;">
+
+        <p style="margin-top: 50px;">Après...</p> 
+        <div class="text-center" style="margin-top: -15px;">
+            <img class="" src="presentation/images/algo_5.png" width="850px">
+        </div>
+
+        <p style="margin-top:80px;"></p>
+    </div>
+
+</section>
+
+    <!-- ====================================================================== -->
+
+
+
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<script src="dist/reveal.js"></script>
+<!-- Pour faire fonctionner le plugin copyecode il faut utiliser clipboard.min.js : -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<script src="plugin/copycode/copycode.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    copycode: {
+      plaintextonly: true,
+      copy: "Copier",
+      copied: "Copié!",
+      timeout: 1000,
+      copybg: "#dadada",
+      copiedbg: "#35a3e5",
+      copycolor: "#636363",
+      copiedcolor: "white"
+    },
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu, CopyCode],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+
+
+</body>
+
+</html>

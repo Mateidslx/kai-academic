@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R1.01 / S1.01 — TD7 : Algorithmes de parcours et de recherche (M. Patrick Etcheverry)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Lexend', sans-serif; background: #FAF8F5; color: #0F172A; line-height: 1.8; padding: 2rem; max-width: 960px; margin: 0 auto; }
+pre, code { font-family: 'JetBrains Mono', monospace; background: #0f172a; color: #f8fafc; padding: 0.75rem 1rem; border-radius: 0.75rem; display: block; overflow-x: auto; margin: 1rem 0; }
+h1, h2, h3, h4 { font-weight: 800; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+<div class="mb-6 p-4 rounded-xl bg-white border border-slate-200 shadow-xs">
+  <div class="text-xs font-mono font-bold text-teal-700">RESSOURCE OFFICIELLE MOODLE ELEARN UPPA (EXTRAITE EN MODE FURTIF #692243)</div>
+  <h1 class="text-xl font-black mt-1">R1.01 / S1.01 — TD7 : Algorithmes de parcours et de recherche (M. Patrick Etcheverry)</h1>
+</div>
+<div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+<div role="main"><div class="box py-3 generalbox center clearfix"><div class="no-overflow"><div style="max-width: 930px; margin: 0 auto; padding: 16px 20px 40px; box-sizing: border-box; color: #17233c; font-family: inherit; font-size: 18px; line-height: 1.68;"><!-- =========================================================
+
+       EN-TÊTE DU TD
+
+       ========================================================= -->
+<div style="display: flex; align-items: center; gap: 16px; margin: 0 0 30px; padding: 17px 22px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 5px solid #6e9fe6; border-radius: 13px; background: #f5f8fd; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+<div style="flex: 0 0 auto; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e3edfc; color: #3673c5; font-size: 18px; font-weight: 800; line-height: 1; box-shadow: 0 2px 7px rgba(15, 23, 42, .08);">TD7</div>
+<div style="min-width: 0;">
+<div style="margin: 0 0 4px; color: #356fae; font-size: 24px; font-weight: 800; line-height: 1.25;">Algorithmes de parcours et de recherche</div>
+<div style="color: #66758a; font-size: 15px; font-weight: 600; line-height: 1.4;">R1.01 - Initiation au développement</div>
+</div>
+</div>
+<!-- =========================================================
+
+       À NOTER
+
+       ========================================================= -->
+<div style="margin: 0; padding: 19px 22px; box-sizing: border-box; border: 1px solid #f1dfac; border-left: 4px solid #e2a82d; border-radius: 12px; background: #fffaf0; box-shadow: 0 4px 12px rgba(15, 23, 42, .05);">
+<div style="margin: 0 0 14px;"><span style="display: inline-block; padding: 4px 11px; border: 1.4px solid #d79800; border-radius: 999px; background: #fff8dc; color: #b77d00; font-size: 14px; font-weight: 800; line-height: 1.1;"> À noter </span></div>
+<p style="margin: 0 0 15px;">Tous les exercices de ce TD ne seront pas abordés pendant la séance. Ils sont volontairement plus nombreux que le temps imparti, afin de vous offrir un panel d’activités variées à travailler en autonomie ou, encore mieux, en groupe.</p>
+<p style="margin: 0;">Aucune correction écrite ne sera distribuée, mais vous pouvez demander un retour oral de votre travail à un enseignant du module.</p>
+</div>
+<!-- =========================================================
+
+       PRÉAMBULE
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Préambule concernant les chaînes de caractères</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0 0 12px;">Les chaînes de caractères ont les mêmes propriétés qu’un tableau de caractères :</p>
+<ul style="margin: 0 0 19px; padding-left: 28px;">
+<li style="margin: 0 0 12px; padding-left: 3px;">la 1 lettre se trouve en position <em>0</em> ;</li>
+<li style="margin: 0; padding-left: 3px;">on accède à la lettre d’indice <em>i</em> dans la chaîne <em>mot</em> via l’opérateur <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">[] : mot[i]</span>.</li>
+</ul>
+<p style="margin: 0 0 19px;">Les chaînes (pas les tableaux) disposent d’une méthode <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">size()</span> qui retourne le nombre de caractères de la chaîne. Ainsi, <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">mot.size()</span> retourne le nombre de caractères composant la chaîne <em>mot</em>.</p>
+<p style="margin: 0;">Pour chaque exercice, précisez si vous pouvez appliquer un des modèles d’algorithme vus en cours. Si c’est le cas, décrivez brièvement la stratégie qui permet d’adapter le modèle au problème posé.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 1
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 1 : Afficher un tableau</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0;">Proposez un algorithme qui permet d’afficher tous les entiers stockés dans un tableau composé de <em>nbCases</em>.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 2
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 2 : Incrémenter les valeurs négatives d’un tableau</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0;">Proposez un algorithme qui incrémente de 1 toutes les valeurs négatives d’un tableau d’entiers composé de <em>nbCases</em>.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 3
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 3 : Compter les valeurs négatives d’un tableau</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0;">Proposez un algorithme qui compte le nombre de valeurs négatives stockées dans un tableau d’entiers composé de <em>nbCases</em>.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 4
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 4 : Moyenne des valeurs d’un tableau</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0;">Proposez un algorithme qui calcule la moyenne de toutes les valeurs stockées dans un tableau d’entiers composé de <em>nbCases</em>.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 5
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 5 : Effectif d’un groupe de TP</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0 0 16px;">On considère le type <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">Etudiant</span> et les tableaux <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">etudiantsS1</span> et <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">etudiantsS3</span> tels que définis ci-dessous :</p>
+<!-- =====================================================
+
+           BLOC DE CODE
+
+           ===================================================== -->
+<div style="width: 100%; max-width: 820px; margin: 0 auto 20px; border: 1px solid #d7dbe3; border-radius: 12px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 12px rgba(15, 23, 42, .05);">
+<div style="height: 30px; background: #eef1f5; border-bottom: 1px solid #d7dbe3; padding: 0 12px; display: flex; align-items: center; gap: 8px; box-sizing: border-box;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;"> </span></div>
+<pre style="margin: 0; padding: 16px 18px; background: #ffffff; color: #0f172a; font-size: 16px; line-height: 1.55; font-family: 'Courier New', Courier, monospace; font-weight: 500; white-space: pre-wrap;"><span style="color: #7a8597; font-style: italic;">// Définition du type Etudiant</span>
+
+<span style="color: #d6335c; font-weight: bold;">struct</span> <span style="color: #2679b8; font-weight: bold;">Etudiant</span>
+
+{
+
+    <span style="color: #2679b8; font-weight: bold;">string</span> nom ;             <span style="color: #7a8597; font-style: italic;">// nom de l'étudiant</span>
+
+    <span style="color: #2679b8; font-weight: bold;">string</span> prenom;           <span style="color: #7a8597; font-style: italic;">// prénom de l'étudiant</span>
+
+    <span style="color: #d6335c; font-weight: bold;">unsigned short int</span> td;  <span style="color: #7a8597; font-style: italic;">// numéro de TD de l'étudiant</span>
+
+    <span style="color: #d6335c; font-weight: bold;">unsigned short int</span> tp;  <span style="color: #7a8597; font-style: italic;">// numéro de TP de l'étudiant</span>
+
+};
+
+
+
+<span style="color: #7a8597; font-style: italic;">// Nombre d'étudiants inscrits en semestre 1</span>
+
+<span style="color: #d6335c; font-weight: bold;">const unsigned int</span> EFFECTIF_S1 = <span style="color: #8061d6;">70</span>;
+
+<span style="color: #7a8597; font-style: italic;">// Nombre d'étudiants inscrits en semestre 3</span>
+
+<span style="color: #d6335c; font-weight: bold;">const unsigned int</span> EFFECTIF_S3 = <span style="color: #8061d6;">60</span>;
+
+
+
+<span style="color: #7a8597; font-style: italic;">// Etudiants inscrits en semestre 1 :</span>
+
+<span style="color: #2679b8; font-weight: bold;">Etudiant</span> etudiantsS1[EFFECTIF_S1];
+
+<span style="color: #7a8597; font-style: italic;">// Etudiants inscrits en semestre 3 :</span>
+
+<span style="color: #2679b8; font-weight: bold;">Etudiant</span> etudiantsS3[EFFECTIF_S3];</pre>
+</div>
+<p style="margin: 0 0 12px;">Proposez un algorithme qui affiche combien d’étudiants sont inscrits dans un groupe de TP appartenant à une promotion donnée. On considèrera que l’algorithme à élaborer aura en données :</p>
+<ul style="margin: 0 0 19px; padding-left: 28px;">
+<li style="margin: 0 0 12px; padding-left: 3px;">le tableau d’étudiants de la promotion à analyser ;</li>
+<li style="margin: 0; padding-left: 3px;">l’effectif de cette promotion.</li>
+</ul>
+<p style="margin: 0;">Le numéro du groupe de TP à analyser sera saisi au clavier.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 6
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 6 : Inverser un tableau</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0;">Proposez un algorithme qui inverse les valeurs entières d’un tableau composé de <em>nbCases</em> : la 1 valeur passe en dernière position, la dernière en 1 position, la 2 valeur passe en avant-dernière position, l’avant-dernière en 2 position, etc.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 7
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 7 : Recherche de voyelles dans une chaîne de caractères</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0 0 19px;"><strong>a/</strong>  Proposez un algorithme qui affiche la position de la <em>première</em> voyelle d’une chaîne de caractères.</p>
+<p style="margin: 0 0 19px;"><strong>b/</strong>  Proposez un algorithme qui affiche la position de la <em>dernière</em> voyelle d’une chaîne de caractères.</p>
+<p style="margin: 0;"><strong>c/</strong>  <em>(optionnel)</em> Proposez un algorithme qui affiche la position de <em>toutes</em> les voyelles d’une chaîne de caractères.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 8
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 8 : Détection de palindromes</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0 0 19px;">Un palindrome est un mot dont l’ordre des lettres reste le même qu’on le lise de gauche à droite ou de droite à gauche.</p>
+<p style="margin: 0 0 19px;">Exemples de palindromes : <em>laval, radar, elle, kayak...</em></p>
+<p style="margin: 0;">Proposez un algorithme qui détermine si une chaîne donnée est un palindrome ou non. Pour simplifier, considérez que la chaîne à analyser est toujours en minuscules.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       EXERCICE 9
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">Exercice 9 : Affichage des tables de multiplication</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0 0 19px;">On considère un tableau à deux dimensions représentant les tables de multiplication de 0 à 10 selon le format suivant :</p>
+<p style="margin: 0 0 16px;">Proposez un algorithme qui considère un tel tableau en donnée ainsi que son nombre de lignes et de colonnes, puis qui affiche toutes les tables de multiplication les unes en dessous des autres comme ci-dessous :</p>
+<!-- =====================================================
+
+           EXEMPLE D'AFFICHAGE
+
+           ===================================================== -->
+<div style="width: 100%; max-width: 820px; margin: 0 auto 20px; border: 1px solid #d7dbe3; border-radius: 12px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 12px rgba(15, 23, 42, .05);">
+<div style="height: 30px; background: #eef1f5; border-bottom: 1px solid #d7dbe3; padding: 0 12px; display: flex; align-items: center; gap: 8px; box-sizing: border-box;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;"> </span></div>
+<pre style="margin: 0; padding: 16px 18px; background: #ffffff; color: #0f172a; font-size: 17px; line-height: 1.55; font-family: 'Courier New', Courier, monospace; font-weight: 500; white-space: pre-wrap;"><strong>TABLE DE 0</strong>
+
+0 x 0 = 0
+
+0 x 1 = 0
+
+0 x 2 = 0
+
+0 x 3 = 0
+
+0 x 4 = 0
+
+0 x 5 = 0
+
+0 x 6 = 0
+
+0 x 7 = 0
+
+0 x 8 = 0
+
+0 x 9 = 0
+
+0 x 10 = 0
+
+<strong>TABLE DE 1</strong>
+
+1 x 0 = 0
+
+1 x 1 = 1
+
+1 x 2 = 2
+
+etc.</pre>
+</div>
+<p style="margin: 0;">Bien sûr, votre algorithme ne devra réaliser <strong>aucune multiplication</strong> étant donné que tous les résultats sont déjà disponibles dans le tableau fourni en donnée.</p>
+</div>
+</div>
+</div></div></div></div>
+</div>
+</body>
+</html>
