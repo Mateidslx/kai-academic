@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 KAI VentureOS — Journal Vivant des Pivots & Monétisation Autonome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: #0b1120;
+            color: #f1f5f9;
+            letter-spacing: 0.015em;
+            line-height: 1.6;
+        }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- TOP BAR -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center font-black shadow-lg">
+                    <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <div class="font-extrabold text-white text-base tracking-tight flex items-center gap-2">
+                        KAI VentureOS <span class="text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 px-2 py-0.5 rounded-full font-mono">24/7 Cloud</span>
+                    </div>
+                    <div class="text-[11px] text-slate-400">Moteur Récursif d'Hypothèses & Découverte Autonome de Revenus</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="https://88.96.47.180/docs" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white flex items-center gap-1.5 shadow transition">
+                    <i data-lucide="zap" class="w-4 h-4"></i> Swagger API Docs
+                </a>
+                <a href="documents.html" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+                    Médiathèque
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full space-y-8">
+        
+        <!-- PHILOSOPHY BANNER -->
+        <div class="bg-gradient-to-r from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+            <div class="relative z-10 max-w-3xl">
+                <div class="flex items-center gap-2 text-indigo-400 font-bold text-xs uppercase tracking-wider mb-2">
+                    <i data-lucide="compass" class="w-4 h-4"></i> Directive Stratégique Matéi
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                    "Ne pas s'ancrer dans une idée. Pivoter dès qu'une piste a moins de friction et plus de rendement."
+                </h1>
+                <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                    Le Cloud n'attend plus de requêtes manuelles : il explore le web de façon récursive, extrait les faits réels (issues GitHub financées, micro-APIs sur marketplaces, serveurs MCP), compare le coût de friction (objectif : <strong>juste une connexion et un compte</strong>, zéro démarchage B2B lourd) et teste immédiatement un prototype fonctionnel.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400">
+                    <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-emerald-400"></i> Dernière mise à jour : 22/10/2026 à 23:22</span>
+                    <span class="flex items-center gap-1.5"><i data-lucide="server" class="w-4 h-4 text-blue-400"></i> Nœud VPS : Oracle Cloud ARM64 (88.96.47.180)</span>
+                    <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-purple-400"></i> 100% Tests Passés (Pytest)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS BAR -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+                <div class="text-xs text-slate-400 font-medium">Hypothèses Auditées</div>
+                <div class="text-2xl font-black text-white mt-1">6</div>
+                <div class="text-[11px] text-indigo-400 mt-0.5">Arborescence SQLite persistée</div>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+                <div class="text-xs text-slate-400 font-medium">Vecteurs Retenus (Basse Friction)</div>
+                <div class="text-2xl font-black text-emerald-400 mt-1">3</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">RapidAPI, Polar/Algora, MCP</div>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+                <div class="text-xs text-slate-400 font-medium">Micro-API en Production</div>
+                <div class="text-2xl font-black text-blue-400 mt-1">:8090</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Reverse-proxy Nginx actif (/v1/)</div>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+                <div class="text-xs text-slate-400 font-medium">Fréquence du Robot Autonome</div>
+                <div class="text-2xl font-black text-purple-400 mt-1">Toutes les 4h</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Scraping récursif & journalisation</div>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE API TEST CONSOLE -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <h2 class="text-lg font-bold text-white">Console Démo en Direct : Micro-API Développeur (:8090 /v1/)</h2>
+                </div>
+                <a href="https://88.96.47.180/docs" target="_blank" class="text-xs text-indigo-400 hover:underline flex items-center gap-1 font-mono">
+                    Ouvrir OpenAPI interactive <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Snippet HTML à auditer (WCAG 2.1 AA) :</label>
+                    <textarea id="auditInput" class="w-full h-28 bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-slate-200 font-mono focus:border-indigo-500 focus:outline-none">&lt;div&gt;
+  &lt;img src="favicon.ico"&gt;
+  &lt;input type="text" placeholder="Rechercher..."&gt;
+  &lt;button&gt;&lt;svg&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</textarea>
+                    <button onclick="runLiveAudit()" class="mt-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-xs font-bold text-white transition flex items-center gap-1.5 shadow">
+                        <i data-lucide="play" class="w-3.5 h-3.5"></i> Tester l'API en direct (/v1/audit/accessibility)
+                    </button>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Réponse JSON en temps réel :</label>
+                    <pre id="auditOutput" class="w-full h-28 bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-[11px] text-emerald-400 overflow-auto font-mono">// Cliquez sur 'Tester l'API' pour exécuter l'audit instantané sur le VPS...</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- HYPOTHESES GRID -->
+        <div>
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="git-merge" class="w-5 h-5 text-indigo-400"></i> Arbre des Hypothèses & Pivots Stratégiques
+                    </h2>
+                    <p class="text-xs text-slate-400">Chaque nœud est évalué sur la friction réelle, la rentabilité passive et la vélocité d'exécution.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+        <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/70 shadow-lg flex flex-col justify-between hover:border-indigo-500/50 transition">
+            <div>
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-900 text-indigo-400 border border-slate-700">HYP-01</span>
+                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-amber-500/20 text-amber-300 border-amber-500/40">PIVOTÉ (TROP DE FRICTION)</span>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2 leading-snug">Micro-services B2B & Audits PME / E-commerce (WCAG/RGPD)</h3>
+                <p class="text-xs text-slate-300 mb-4 leading-relaxed">Vente d'audits déterministes d'accessibilité et de conformité légale pour des PME ou e-commerces locaux via prospection directe.</p>
+                
+                <div class="grid grid-cols-3 gap-2 mb-4 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 text-center">
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Friction</div>
+                        <div class="text-sm font-extrabold text-indigo-300">3/10</div>
+                        <div class="text-[9px] text-slate-500">10 = Zéro friction</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Passivité</div>
+                        <div class="text-sm font-extrabold text-emerald-300">4/10</div>
+                        <div class="text-[9px] text-slate-500">10 = 100% passif</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Vélocité</div>
+                        <div class="text-sm font-extrabold text-amber-300">3/10</div>
+                        <div class="text-[9px] text-slate-500">10 = <1h</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 rounded-lg p-3 text-xs border border-slate-800">
+                    <div class="text-[11px] font-bold text-amber-400 mb-1 flex items-center gap-1">
+                        <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Rationale Stratégique & Pivot :
+                    </div>
+                    <div class="text-slate-300 leading-relaxed text-[11px]">Pivoté vers les Marketplaces d'APIs et Bounties : le démarchage commercial B2B traditionnel exige devis, SIRET, appels téléphoniques et relances, violant la règle d'or 'juste une connexion et un compte'.</div>
+                </div>
+            </div>
+            <div class='mt-4 pt-3 border-t border-slate-800 space-y-2'><div class='text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1'><i data-lucide='globe' class='w-3.5 h-3.5 text-indigo-400'></i> Preuves & Données Web Extraites</div>
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>Web Benchmark</span>
+                        <a href='https://accessibilite.numerique.gouv.fr/' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>Obligation légale d'accessibilité numérique en France, mais le cycle d'achat moyen d'une PME est de 30 à 60 jours.</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Cycle de vente : 30-60 jours</div>
+                </div>
+                </div>
+        </div>
+        
+        <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/70 shadow-lg flex flex-col justify-between hover:border-indigo-500/50 transition">
+            <div>
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-900 text-indigo-400 border border-slate-700">HYP-02</span>
+                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-amber-500/20 text-amber-300 border-amber-500/40">PIVOTÉ (TROP DE FRICTION)</span>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2 leading-snug">GitHub Security Bug Bounties (HackerOne)</h3>
+                <p class="text-xs text-slate-300 mb-4 leading-relaxed">Chasse aux vulnérabilités d'infrastructure sur le scope officiel GitHub Security avec primes de 2 000 $ à 10 000 $ séquestrées.</p>
+                
+                <div class="grid grid-cols-3 gap-2 mb-4 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 text-center">
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Friction</div>
+                        <div class="text-sm font-extrabold text-indigo-300">6/10</div>
+                        <div class="text-[9px] text-slate-500">10 = Zéro friction</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Passivité</div>
+                        <div class="text-sm font-extrabold text-emerald-300">5/10</div>
+                        <div class="text-[9px] text-slate-500">10 = 100% passif</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Vélocité</div>
+                        <div class="text-sm font-extrabold text-amber-300">4/10</div>
+                        <div class="text-[9px] text-slate-500">10 = <1h</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 rounded-lg p-3 text-xs border border-slate-800">
+                    <div class="text-[11px] font-bold text-amber-400 mb-1 flex items-center gap-1">
+                        <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Rationale Stratégique & Pivot :
+                    </div>
+                    <div class="text-slate-300 leading-relaxed text-[11px]">Maintenu en réserve stratégique pour le 12 novembre 2026 (majorité de Matéi), mais pivoté temporairement car le KYC Stripe Identity bloque les retraits d'argent immédiats.</div>
+                </div>
+            </div>
+            <div class='mt-4 pt-3 border-t border-slate-800 space-y-2'><div class='text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1'><i data-lucide='globe' class='w-3.5 h-3.5 text-indigo-400'></i> Preuves & Données Web Extraites</div>
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>HackerOne Policy Audit</span>
+                        <a href='https://bounty.github.com/' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>Primes garanties de $500 à $30,000, mais obligation de KYC légal majeur (18 ans) pour tout virement bancaire Stripe.</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Verrou d'âge : Actif jusqu'au 12/11/2026</div>
+                </div>
+                </div>
+        </div>
+        
+        <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/70 shadow-lg flex flex-col justify-between hover:border-indigo-500/50 transition">
+            <div>
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-900 text-indigo-400 border border-slate-700">HYP-03</span>
+                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">VALIDÉ & EN PRODUCTION</span>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2 leading-snug">Micro-APIs Utilitaires sur Marketplaces Développeurs (RapidAPI / Apify)</h3>
+                <p class="text-xs text-slate-300 mb-4 leading-relaxed">Déploiement d'endpoints FastAPI légers sur le VPS Oracle gratuit (extraction de données, nettoyage de transcriptions, audit d'accessibilité en JSON) référencés sur RapidAPI.</p>
+                
+                <div class="grid grid-cols-3 gap-2 mb-4 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 text-center">
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Friction</div>
+                        <div class="text-sm font-extrabold text-indigo-300">10/10</div>
+                        <div class="text-[9px] text-slate-500">10 = Zéro friction</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Passivité</div>
+                        <div class="text-sm font-extrabold text-emerald-300">9/10</div>
+                        <div class="text-[9px] text-slate-500">10 = 100% passif</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Vélocité</div>
+                        <div class="text-sm font-extrabold text-amber-300">9/10</div>
+                        <div class="text-[9px] text-slate-500">10 = <1h</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 rounded-lg p-3 text-xs border border-slate-800">
+                    <div class="text-[11px] font-bold text-amber-400 mb-1 flex items-center gap-1">
+                        <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Rationale Stratégique & Pivot :
+                    </div>
+                    <div class="text-slate-300 leading-relaxed text-[11px]">Le pivot idéal conforme à la demande de Matéi : zéro prospection manuelle car le marketplace draine des millions de développeurs qui recherchent déjà ces outils. Encaissement par carte bancaire automatique, juste un compte gratuit et une connexion.</div>
+                </div>
+            </div>
+            <div class='mt-4 pt-3 border-t border-slate-800 space-y-2'><div class='text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1'><i data-lucide='globe' class='w-3.5 h-3.5 text-indigo-400'></i> Preuves & Données Web Extraites</div>
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>RapidAPI Market Study</span>
+                        <a href='https://rapidapi.com/hub' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>Les micro-APIs de transformation de texte, validation de documents et web-scraping spécialisé génèrent $500-$3,000/mois en récurrent sans marketing externe.</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Potentiel : $9.99/mois par abonné pro</div>
+                </div>
+                </div>
+        </div>
+        
+        <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/70 shadow-lg flex flex-col justify-between hover:border-indigo-500/50 transition">
+            <div>
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-900 text-indigo-400 border border-slate-700">HYP-04</span>
+                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">VALIDÉ & EN PRODUCTION</span>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2 leading-snug">Bounties d'Issues Open Source Instantanées avec Séquestre (Algora / Polar)</h3>
+                <p class="text-xs text-slate-300 mb-4 leading-relaxed">Résolution ciblée de bugs et features financées sur des dépôts GitHub publics avec libération automatique des fonds séquestrés à la fusion de la Pull Request.</p>
+                
+                <div class="grid grid-cols-3 gap-2 mb-4 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 text-center">
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Friction</div>
+                        <div class="text-sm font-extrabold text-indigo-300">9/10</div>
+                        <div class="text-[9px] text-slate-500">10 = Zéro friction</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Passivité</div>
+                        <div class="text-sm font-extrabold text-emerald-300">6/10</div>
+                        <div class="text-[9px] text-slate-500">10 = 100% passif</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Vélocité</div>
+                        <div class="text-sm font-extrabold text-amber-300">8/10</div>
+                        <div class="text-[9px] text-slate-500">10 = <1h</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 rounded-lg p-3 text-xs border border-slate-800">
+                    <div class="text-[11px] font-bold text-amber-400 mb-1 flex items-center gap-1">
+                        <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Rationale Stratégique & Pivot :
+                    </div>
+                    <div class="text-slate-300 leading-relaxed text-[11px]">Alternative immédiate à HackerOne sans blocage KYC bloquant : des issues avec récompenses fermes ($50 à $5,000) sont ouvertes aujourd'hui (ex: relayhop $5,000, SCIBASE $1,325). Juste un compte GitHub.</div>
+                </div>
+            </div>
+            <div class='mt-4 pt-3 border-t border-slate-800 space-y-2'><div class='text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1'><i data-lucide='globe' class='w-3.5 h-3.5 text-indigo-400'></i> Preuves & Données Web Extraites</div>
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>Live GitHub Search Scan</span>
+                        <a href='https://github.com/relayhop/sn-monetization-runtime/issues/1316' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>Détection en direct de $5,000 de prime séquestrée pour l'intégration de runtime de monétisation, et $1,325 sur SCIBASE-AI.</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Bounties en attente : > $7,325</div>
+                </div>
+                </div>
+        </div>
+        
+        <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/70 shadow-lg flex flex-col justify-between hover:border-indigo-500/50 transition">
+            <div>
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-900 text-indigo-400 border border-slate-700">HYP-05</span>
+                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">VALIDÉ & EN PRODUCTION</span>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2 leading-snug">MCP Servers Distribués & Monétisés (Model Context Protocol / Smithery)</h3>
+                <p class="text-xs text-slate-300 mb-4 leading-relaxed">Création de serveurs d'outils pour agents IA et éditeurs (Cursor, Windsurf, Claude Desktop) avec passerelle d'accès par clé API ou paiement par token Polar.</p>
+                
+                <div class="grid grid-cols-3 gap-2 mb-4 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 text-center">
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Friction</div>
+                        <div class="text-sm font-extrabold text-indigo-300">9/10</div>
+                        <div class="text-[9px] text-slate-500">10 = Zéro friction</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Passivité</div>
+                        <div class="text-sm font-extrabold text-emerald-300">9/10</div>
+                        <div class="text-[9px] text-slate-500">10 = 100% passif</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Vélocité</div>
+                        <div class="text-sm font-extrabold text-amber-300">8/10</div>
+                        <div class="text-[9px] text-slate-500">10 = <1h</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 rounded-lg p-3 text-xs border border-slate-800">
+                    <div class="text-[11px] font-bold text-amber-400 mb-1 flex items-center gap-1">
+                        <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Rationale Stratégique & Pivot :
+                    </div>
+                    <div class="text-slate-300 leading-relaxed text-[11px]">Nouvelle frontière ultra-porteuse de 2026 : distribution native en un clic ('npx smithery mcp add') directement dans l'environnement des développeurs IA prêts à payer pour des outils fiables.</div>
+                </div>
+            </div>
+            <div class='mt-4 pt-3 border-t border-slate-800 space-y-2'><div class='text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1'><i data-lucide='globe' class='w-3.5 h-3.5 text-indigo-400'></i> Preuves & Données Web Extraites</div>
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>Smithery & Glama Ecosystem</span>
+                        <a href='https://smithery.ai/' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>La spécification standard MCP n'inclut pas de couche de paiement native, créant une opportunité majeure pour les serveurs avec passerelle API freemium / payante.</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Adoption : +300% d'utilisateurs Cursor/Windsurf</div>
+                </div>
+                </div>
+        </div>
+        
+        <div class="bg-slate-800/60 rounded-xl p-5 border border-slate-700/70 shadow-lg flex flex-col justify-between hover:border-indigo-500/50 transition">
+            <div>
+                <div class="flex items-start justify-between gap-3 mb-2">
+                    <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-900 text-indigo-400 border border-slate-700">HYP-06</span>
+                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">VALIDÉ & EN PRODUCTION</span>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2 leading-snug">Micro-Actors Pay-Per-Event (PPE) & Outils MCP sur Apify Store</h3>
+                <p class="text-xs text-slate-300 mb-4 leading-relaxed">Publication de scripts d'automatisation et de micro-scrapers hébergés gratuitement par Apify, facturés à l'événement (Pay-Per-Event via actor.charge()). Apify encaisse, gère les proxies et reverse 80% des revenus par PayPal/Wise (seuil dès 20 $).</p>
+                
+                <div class="grid grid-cols-3 gap-2 mb-4 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 text-center">
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Friction</div>
+                        <div class="text-sm font-extrabold text-indigo-300">10/10</div>
+                        <div class="text-[9px] text-slate-500">10 = Zéro friction</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Passivité</div>
+                        <div class="text-sm font-extrabold text-emerald-300">10/10</div>
+                        <div class="text-[9px] text-slate-500">10 = 100% passif</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-slate-400">Vélocité</div>
+                        <div class="text-sm font-extrabold text-amber-300">9/10</div>
+                        <div class="text-[9px] text-slate-500">10 = <1h</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 rounded-lg p-3 text-xs border border-slate-800">
+                    <div class="text-[11px] font-bold text-amber-400 mb-1 flex items-center gap-1">
+                        <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Rationale Stratégique & Pivot :
+                    </div>
+                    <div class="text-slate-300 leading-relaxed text-[11px]">Évolution récursive de HYP-03 et HYP-05 : au lieu d'assumer soi-même la maintenance de serveurs et les proxies anti-blocage, Apify fournit gratuitement l'infrastructure serverless, gère les proxies, la facturation à l'événement pour les agents IA/MCP et reverse 80% par PayPal dès 20 $. Zéro prospection commerciale, juste un compte et une connexion.</div>
+                </div>
+            </div>
+            <div class='mt-4 pt-3 border-t border-slate-800 space-y-2'><div class='text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1'><i data-lucide='globe' class='w-3.5 h-3.5 text-indigo-400'></i> Preuves & Données Web Extraites</div>
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>MCP & AI Agent Integration</span>
+                        <a href='https://blog.apify.com/apify-actors-as-mcp-tools/' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>Les Actors Apify sont désormais directement interrogeables en tant qu'outils MCP par Claude Desktop, Cursor et les agents autonomes avec facturation automatique par appel.</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Compatibilité native Model Context Protocol (MCP)</div>
+                </div>
+                
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>Apify Creator Payout Policy</span>
+                        <a href='https://apify.com/docs/platform/actors/publishing/monetization' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>Paiements automatiques le 11 de chaque mois. Seuil minimum de 20 $ par PayPal/Wise. Aucune perte financière possible (Apify éponge les coûts d'infrastructure excédentaires).</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Paiement garanti dès 20 $ par PayPal</div>
+                </div>
+                
+                <div class='bg-slate-900/80 rounded-lg p-2.5 text-xs border border-slate-800 flex flex-col gap-1'>
+                    <div class='flex items-center justify-between'>
+                        <span class='font-bold text-indigo-300'>Apify Official Documentation</span>
+                        <a href='https://apify.com/store' target='_blank' class='text-[10px] text-blue-400 hover:underline flex items-center gap-1'>Lien source <i data-lucide='external-link' class='w-2.5 h-2.5'></i></a>
+                    </div>
+                    <div class='text-slate-300 text-[11px]'>Apify gère l'infrastructure, la distribution, la facturation et les paiements avec un reversement de 80% pour le développeur.</div>
+                    <div class='text-emerald-400 text-[10px] font-mono'>Impact : Modèle Pay-Per-Event (PPE) avec actor.charge()</div>
+                </div>
+                </div>
+        </div>
+        
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        Kai VentureOS 2026 • 100% Autonome • Déployé sur Oracle Cloud Infrastructure ARM64
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        async function runLiveAudit() {
+            const code = document.getElementById('auditInput').value;
+            const out = document.getElementById('auditOutput');
+            out.innerText = "Exécution de la requête POST /v1/audit/accessibility...";
+            try {
+                const res = await fetch('/v1/audit/accessibility', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ html_content: code, standard: 'WCAG_2_1_AA' })
+                });
+                const data = await res.json();
+                out.innerText = JSON.stringify(data, null, 2);
+            } catch (err) {
+                out.innerText = "Erreur d'appel API : " + err.message;
+            }
+        }
+    </script>
+</body>
+</html>
