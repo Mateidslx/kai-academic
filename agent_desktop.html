@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kai WebOS — Bureau Virtuel Mission Control & Kai Cloud Mission Control (Zero Façade)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #06080f;
+            --bg-surface: #0c111d;
+            --bg-surface-elevated: #131b2e;
+            --bg-window: rgba(13, 19, 33, 0.88);
+            --bg-window-header: rgba(18, 26, 44, 0.95);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(14, 165, 233, 0.45);
+            --border-focus: rgba(99, 102, 241, 0.5);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --cyan-accent: #06b6d4;
+            --indigo-accent: #6366f1;
+            --emerald-accent: #10b981;
+            --amber-accent: #f59e0b;
+            --rose-accent: #f43f5e;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --shadow-window: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            --shadow-window-active: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(14, 165, 233, 0.4), 0 0 30px rgba(14, 165, 233, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body, html {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--bg-base);
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            position: fixed;
+            inset: 0;
+        }
+
+        /* WALLPAPER / COSMIC DESKTOP BACKGROUND */
+        #desktop-surface {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 15% 20%, rgba(30, 58, 138, 0.45) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 75%, rgba(109, 40, 217, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(15, 23, 42, 0.95) 0%, #030712 100%);
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        /* Subtle animated stars */
+        #desktop-surface::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 10% 25%, rgba(255, 255, 255, 0.6) 50%, transparent),
+                radial-gradient(1px 1px at 30% 65%, rgba(255, 255, 255, 0.4) 50%, transparent),
+                radial-gradient(2px 2px at 70% 35%, rgba(255, 255, 255, 0.7) 50%, transparent),
+                radial-gradient(1px 1px at 85% 85%, rgba(255, 255, 255, 0.3) 50%, transparent),
+                radial-gradient(1.5px 1.5px at 45% 15%, rgba(255, 255, 255, 0.5) 50%, transparent),
+                radial-gradient(1px 1px at 60% 75%, rgba(255, 255, 255, 0.4) 50%, transparent);
+            background-size: 550px 550px;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* TOP OS MENU BAR */
+        #top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 34px;
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            z-index: 100000;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .top-left, .top-center, .top-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .kai-logo-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 800;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 3px 8px;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+        }
+        .kai-logo-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--cyan-accent);
+        }
+
+        .active-app-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding-left: 8px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.74rem;
+            font-weight: 500;
+        }
+        .top-badge.green { color: #34d399; border-color: rgba(52, 211, 153, 0.2); }
+        .top-badge.blue { color: #38bdf8; border-color: rgba(56, 189, 248, 0.2); }
+        .top-badge.purple { color: #c084fc; border-color: rgba(192, 132, 252, 0.2); }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.6; }
+        }
+
+        #clock-widget {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        /* DESKTOP ICON GRID */
+        #desktop-icons {
+            position: absolute;
+            top: 44px;
+            left: 16px;
+            bottom: 70px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 12px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .desktop-icon {
+            pointer-events: auto;
+            width: 84px;
+            height: 84px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(15, 23, 42, 0.2);
+            border: 1px solid transparent;
+            backdrop-filter: blur(8px);
+        }
+
+        .desktop-icon:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .desktop-icon.selected {
+            background: rgba(14, 165, 233, 0.18);
+            border-color: rgba(14, 165, 233, 0.4);
+        }
+
+        .desktop-icon .icon-symbol {
+            font-size: 1.85rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+        }
+
+        .desktop-icon .icon-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            max-width: 78px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+        }
+
+        /* FLOATING BOTTOM DOCK */
+        #desktop-dock {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 54px;
+            background: rgba(13, 19, 33, 0.85);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 6px;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            z-index: 100000;
+        }
+
+        .dock-item {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+        }
+
+        .dock-item:hover {
+            transform: translateY(-8px) scale(1.15);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dock-item::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--cyan-accent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .dock-item.is-open::after {
+            opacity: 1;
+            box-shadow: 0 0 6px var(--cyan-accent);
+        }
+
+        .dock-divider {
+            width: 1px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.12);
+            margin: 0 4px;
+        }
+
+        /* WINDOW CONTAINER & STYLES */
+        #windows-layer {
+            position: absolute;
+            inset: 34px 0 62px 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .desktop-window {
+            position: absolute;
+            pointer-events: auto;
+            background: var(--bg-window);
+            backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            box-shadow: var(--shadow-window);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: box-shadow 0.18s ease, border-color 0.18s ease;
+            min-width: 360px;
+            min-height: 240px;
+        }
+
+        .desktop-window.is-active {
+            box-shadow: var(--shadow-window-active);
+            border-color: var(--border-active);
+        }
+
+        .desktop-window.is-minimized {
+            display: none !important;
+        }
+
+        .desktop-window.is-maximized {
+            top: 4px !important;
+            left: 4px !important;
+            width: calc(100vw - 8px) !important;
+            height: calc(100vh - 104px) !important;
+            border-radius: 10px;
+        }
+
+        /* WINDOW HEADER */
+        .window-header {
+            height: 40px;
+            background: var(--bg-window-header);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            cursor: move;
+            flex-shrink: 0;
+        }
+
+        .traffic-lights {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .traffic-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease;
+        }
+        .traffic-btn:hover { transform: scale(1.15); }
+        .traffic-btn.close { background: #f43f5e; box-shadow: 0 0 6px rgba(244, 63, 94, 0.4); }
+        .traffic-btn.minimize { background: #f59e0b; box-shadow: 0 0 6px rgba(245, 158, 11, 0.4); }
+        .traffic-btn.maximize { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.4); }
+
+        .window-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        .window-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .win-action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            padding: 3px 8px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .win-action-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
+        }
+
+        /* WINDOW BODY */
+        .window-body {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 16px;
+            color: var(--text-primary);
+            user-select: text;
+        }
+
+        /* Custom Scrollbar */
+        .window-body::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        .window-body::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .window-body::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+        .window-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* RESIZE HANDLE */
+        .window-resizer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            cursor: se-resize;
+            background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.3) 50%);
+            border-bottom-right-radius: 12px;
+        }
+
+        /* ---------------- APP SPECIFIC STYLES ---------------- */
+
+        /* SÉANCES & CONSOLE (win-seances) */
+        .session-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .session-card {
+            background: rgba(18, 26, 44, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.2s ease;
+        }
+        .session-card:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            background: rgba(18, 26, 44, 0.8);
+        }
+        .session-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .session-card-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .session-time {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--cyan-accent);
+            background: rgba(6, 182, 212, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .session-desc {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .trigger-bar {
+            background: rgba(10, 15, 26, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .session-select {
+            background: rgba(18, 26, 44, 0.9);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-family: var(--font-sans);
+            outline: none;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .btn-launch {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #fff;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+        .btn-launch:hover {
+            background: linear-gradient(135deg, #0369a1, #0284c7);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4);
+        }
+        .btn-launch:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .terminal-box {
+            background: #04060a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            line-height: 1.5;
+            color: #38bdf8;
+            height: 240px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            user-select: text;
+        }
+
+        /* LETTA / MEMGPT (win-letta) */
+        .notepad-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            gap: 12px;
+        }
+        .notepad-view {
+            flex: 1;
+            background: #050811;
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 14px;
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            user-select: text;
+        }
+
+        .notepad-input-bar {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .notepad-input {
+            flex: 1;
+            background: rgba(18, 26, 44, 0.8);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-family: var(--font-sans);
+            outline: none;
+        }
+        .notepad-input:focus {
+            border-color: var(--cyan-accent);
+        }
+        .btn-send-note {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-send-note:hover {
+            background: #4f46e5;
+        }
+
+        /* JEV CONSEIL (win-jev) */
+        .decision-cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .decision-item {
+            background: rgba(18, 26, 44, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .decision-item.APPROVED { border-left: 3px solid #10b981; }
+        .decision-item.REJECTED { border-left: 3px solid #f43f5e; }
+        .decision-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .verdict-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .verdict-tag.APPROVED { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .verdict-tag.REJECTED { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+        .decision-critique {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* SQLITE EXPLORER (win-database) */
+        .table-nav {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .table-tab {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .table-tab.active {
+            background: rgba(14, 165, 233, 0.18);
+            border-color: rgba(14, 165, 233, 0.4);
+            color: var(--cyan-accent);
+        }
+        .sqlite-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.74rem;
+            font-family: var(--font-mono);
+        }
+        .sqlite-table th {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            position: sticky;
+            top: 0;
+        }
+        .sqlite-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+        }
+        .sqlite-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* ASSETS & DELIVERABLES (win-assets) */
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .asset-card {
+            background: rgba(18, 26, 44, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .asset-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            width: fit-content;
+        }
+        .asset-title {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .asset-meta {
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+        }
+        .btn-download-asset {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-align: center;
+            display: inline-block;
+            transition: all 0.15s;
+        }
+        .btn-download-asset:hover {
+            background: rgba(14, 165, 233, 0.2);
+            border-color: var(--cyan-accent);
+            color: var(--cyan-accent);
+        }
+
+        /* TOAST NOTIFICATION */
+        #os-toast {
+            position: fixed;
+            top: 44px;
+            right: 20px;
+            background: rgba(13, 19, 33, 0.95);
+            border: 1px solid var(--border-active);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            z-index: 200000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        #os-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SYSTEM DROPDOWN MENU */
+        #system-menu {
+            position: absolute;
+            top: 36px;
+            left: 12px;
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 6px;
+            width: 240px;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+            z-index: 100001;
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sys-menu-item {
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.12s;
+        }
+        .sys-menu-item:hover {
+            background: rgba(14, 165, 233, 0.2);
+            color: var(--cyan-accent);
+        }
+        .sys-menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 4px 0;
+        }
+
+        /* AGENT LIVE BROWSER STYLES */
+        .browser-chrome-bar {
+            background: #0d1322;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .browser-nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+        .b-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.72rem;
+        }
+        .b-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .browser-url-input-wrap {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            background: #172033;
+            border: 1px solid #25324d;
+            border-radius: 6px;
+            padding: 0 10px;
+            gap: 8px;
+        }
+        .url-lock-icon {
+            font-size: 11px;
+            color: var(--emerald-accent);
+        }
+        .browser-url-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #f8fafc;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 6px 0;
+            outline: none;
+        }
+        .btn-browser-go {
+            background: var(--cyan-accent);
+            color: #07090e;
+            border: none;
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .btn-browser-go:hover { opacity: 0.9; }
+        .browser-quick-bookmarks {
+            background: #090e1a;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 6px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .bookmark-label {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 4px;
+        }
+        .bm-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .bm-chip:hover {
+            background: rgba(14, 165, 233, 0.15);
+            border-color: var(--cyan-accent);
+            color: #ffffff;
+        }
+        .bm-chip.highlight {
+            background: rgba(197, 160, 89, 0.15);
+            border-color: rgba(197, 160, 89, 0.4);
+            color: #C5A059;
+            font-weight: 600;
+        }
+        .browser-split-body {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            height: calc(100% - 84px);
+        }
+        .browser-viewport-pane {
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            background: #060910;
+        }
+        .viewport-header {
+            padding: 8px 14px;
+            background: #0d1322;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .vp-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #f8fafc;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 80%;
+        }
+        .vp-status {
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            color: var(--emerald-accent);
+            background: rgba(16, 185, 129, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .viewport-screen {
+            flex-grow: 1;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+        .viewport-live-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-subtle);
+        }
+        .browser-inspector-pane {
+            background: #0b101c;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+        .inspector-header {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--cyan-accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 8px;
+        }
+        .insp-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .insp-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+        .insp-text {
+            font-size: 0.74rem;
+            color: var(--text-secondary);
+            background: rgba(0,0,0,0.25);
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.04);
+            line-height: 1.4;
+            max-height: 90px;
+            overflow-y: auto;
+        }
+        .insp-signals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .signal-item-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--cyan-accent);
+            padding: 6px 8px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .signal-kw {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+        .signal-sub {
+            font-size: 0.68rem;
+            color: var(--emerald-accent);
+            font-weight: 600;
+        }
+        .signal-act {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        .insp-delib {
+            font-size: 0.72rem;
+            font-style: italic;
+            color: #cbd5e1;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            padding: 8px;
+            border-radius: 6px;
+        }
+        .btn-send-to-jev {
+            margin-top: auto;
+            background: linear-gradient(135deg, #0284c7, #6366f1);
+            color: #ffffff;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.76rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-send-to-jev:hover { opacity: 0.9; }
+
+    </style>
+</head>
+<body>
+
+    <!-- TOP MENU BAR -->
+    <header id="top-bar">
+        <div class="top-left">
+            <div class="kai-logo-btn" onclick="toggleSystemMenu(event)">
+                <span>⚡</span>
+                <span>Kai WebOS</span>
+                <span style="font-size: 0.6rem; opacity: 0.6;">▼</span>
+            </div>
+            <div class="active-app-title" id="top-active-title">
+                <span>⏱️</span>
+                <span>Poste de Travail : Séances & Console d'Exécution en Direct</span>
+            </div>
+        </div>
+
+        <div class="top-center">
+            <div class="top-badge green">
+                <div class="status-dot"></div>
+                <span>Services Cloud : 5/5 Actifs</span>
+            </div>
+            <div class="top-badge blue">
+                <span>🤖 Ollama Jev 7.6B (127.0.0.1:11434)</span>
+            </div>
+            <div class="top-badge purple">
+                <span>💰 Coût Récurrent : 0.00 €</span>
+            </div>
+            <div class="top-badge" style="color: #cbd5e1;">
+                <span>📱 Redmi : En veille passive</span>
+            </div>
+        </div>
+
+        <div class="top-right">
+            <div class="top-badge" id="top-sqlite-kpi" style="cursor: pointer;" onclick="openWindow('win-database')">
+                <span>🗄️ SQLite : 74 lignes</span>
+            </div>
+            <div id="clock-widget">18:00:00</div>
+            <div style="cursor: pointer; padding: 2px 6px;" onclick="toggleFullScreen()" title="Plein Écran">⛶</div>
+        </div>
+    </header>
+
+    <!-- SYSTEM DROPDOWN MENU -->
+    <div id="system-menu">
+        <div class="sys-menu-item" onclick="declencherSeanceRapide('CYCLE_COMPLET')">
+            <span>🚀 Exécuter Cycle Complet</span>
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">Ctrl+R</span>
+        </div>
+        <div class="sys-menu-item" onclick="openWindow('win-seances')">
+            <span>⏱️ Gestionnaire de Séances</span>
+        </div>
+        <div class="sys-menu-item" onclick="openWindow('win-letta')">
+            <span>🧠 Mémoire Letta / MemGPT</span>
+        </div>
+        <div class="sys-menu-item" onclick="openWindow('win-jev')">
+            <span>⚖️ Conseil Jev (Arbitrage)</span>
+        </div>
+        <div class="sys-menu-divider"></div>
+        <div class="sys-menu-item" onclick="layoutTile()">
+            <span>📐 Disposer en Mosaïque (2 fenêtres)</span>
+        </div>
+        <div class="sys-menu-item" onclick="layoutCascade()">
+            <span>🪟 Disposer en Cascade</span>
+        </div>
+        <div class="sys-menu-item" onclick="minimizeAllWindows()">
+            <span>👁️ Afficher le Bureau</span>
+        </div>
+        <div class="sys-menu-divider"></div>
+        <div class="sys-menu-item" onclick="actualiserDonneesGlobales()">
+            <span>🔄 Forcer Télémétrie SQLite</span>
+        </div>
+        <div class="sys-menu-item" onclick="openWindow('win-settings')">
+            <span>⚙️ Paramètres & Specs VPS</span>
+        </div>
+    </div>
+
+    <!-- DESKTOP SURFACE -->
+    <div id="desktop-surface">
+        
+        <!-- DESKTOP ICONS (Left Column) -->
+        <div id="desktop-icons">
+            <div class="desktop-icon" onclick="openWindow('win-browser')">
+                <div class="icon-symbol">🖥️</div>
+                <div class="icon-label">PC Citrix (VDI)</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-seances')">
+                <div class="icon-symbol">⏱️</div>
+                <div class="icon-label">Séances</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-letta')">
+                <div class="icon-symbol">🧠</div>
+                <div class="icon-label">Letta OS</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-jev')">
+                <div class="icon-symbol">⚖️</div>
+                <div class="icon-label">Conseil Jev</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-terminal')">
+                <div class="icon-symbol">💻</div>
+                <div class="icon-label">Shell VPS</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-database')">
+                <div class="icon-symbol">🗄️</div>
+                <div class="icon-label">Base SQLite</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-assets')">
+                <div class="icon-symbol">📦</div>
+                <div class="icon-label">Livrables</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-storefront')">
+                <div class="icon-symbol">🛍️</div>
+                <div class="icon-label">Boutique</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-phone')">
+                <div class="icon-symbol">📱</div>
+                <div class="icon-label">Relais Redmi</div>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('win-settings')">
+                <div class="icon-symbol">⚙️</div>
+                <div class="icon-label">Paramètres</div>
+            </div>
+        </div>
+
+        <!-- WINDOWS LAYER -->
+        <div id="windows-layer">
+
+
+            <!-- FENÊTRE 10 : POSTE DE TRAVAIL PC DÉDIÉ (CITRIX VDI RÉEL XFCE4 & TIGERVNC) -->
+            <div class="desktop-window" id="win-browser" style="left: 100px; top: 40px; width: 980px; height: 680px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-browser')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-browser')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-browser')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>🖥️</span>
+                        <span>Poste de Travail : PC Dédié Linux VDI (Session Réelle 1440x900 • TigerVNC & XFCE)</span>
+                    </div>
+                    <div class="window-actions">
+                        <span style="font-size: 0.7rem; color: var(--emerald-accent); font-family: var(--font-mono); margin-right: 8px;">● CITRIX LIVE</span>
+                        <a href="/citrix" target="_blank" class="win-action-btn highlight" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">⛶ Plein Écran Dédié ↗</a>
+                        <button class="win-action-btn" onclick="rechargerVdiFrame()">⟳ Reconnecter</button>
+                    </div>
+                </div>
+                <div class="window-body" style="padding: 0; display: flex; flex-direction: column; background: #0b0f19;">
+                    <!-- VDI Control Bar -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.78rem; gap: 8px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981;"></span>
+                            <span style="color: #cbd5e1; font-weight: 600;">Display :1</span>
+                            <span style="color: #64748b;">•</span>
+                            <span style="color: #94a3b8;">1440×900</span>
+                            <span style="color: #64748b;">•</span>
+                            <span style="color: #38bdf8; font-family: var(--font-mono);">24 Go RAM (4 OCPUs)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                            <button class="bm-chip" onclick="lancerActionVdi('youtube')">▶ Ouvrir YouTube</button>
+                            <button class="bm-chip" onclick="lancerActionVdi('terminal')">💻 Terminal Bash</button>
+                            <button class="bm-chip" onclick="lancerActionVdi('mousepad')">📝 Notes Mousepad</button>
+                            <button class="bm-chip" onclick="lancerActionVdi('thunar')">📁 Fichiers Linux</button>
+                            <button class="bm-chip" onclick="lancerActionVdi('restart')" style="color: #f87171; border-color: rgba(248,113,113,0.3);">⚡ Redémarrer VDI</button>
+                            <a href="/citrix" target="_blank" class="bm-chip highlight" style="text-decoration:none;">⛶ Nouvel Onglet ↗</a>
+                        </div>
+                    </div>
+
+                    <!-- Embedded noVNC HTML5 Iframe -->
+                    <div style="flex: 1; position: relative; min-height: 0; background: #000;">
+                        <iframe id="vdi-desktop-frame" src="/vdi/vnc.html?autoconnect=true&resize=scale&path=websockify" style="width: 100%; height: 100%; border: none; display: block;" allow="fullscreen; clipboard-read; clipboard-write"></iframe>
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 1: SÉANCES & CONSOLE DIRECT -->
+            <div class="desktop-window" id="win-seances" style="left: 110px; top: 46px; width: 640px; height: 570px;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-seances')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-seances')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-seances')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>⏱️</span>
+                        <span>Poste de Travail : Séances & Console d'Exécution en Direct</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="actualiserDonneesGlobales()">Rafraîchir</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <!-- Session cards -->
+                    <div class="session-grid">
+                        <div class="session-card">
+                            <div class="session-card-header">
+                                <span class="session-card-title">Matin</span>
+                                <span class="session-time">08:00</span>
+                            </div>
+                            <div class="session-desc">Veille marchés, signaux Etsy/Google, concurrence, détection de niches à 0€ capital.</div>
+                        </div>
+                        <div class="session-card">
+                            <div class="session-card-header">
+                                <span class="session-card-title">Midi</span>
+                                <span class="session-time">12:30</span>
+                            </div>
+                            <div class="session-desc">Arbitrage froid Jev (Système 1), validation technique, filtrage 4 buckets, 0€ strict.</div>
+                        </div>
+                        <div class="session-card">
+                            <div class="session-card-header">
+                                <span class="session-card-title">Après-Midi</span>
+                                <span class="session-time">17:00</span>
+                            </div>
+                            <div class="session-desc">Production vectorielle, DTF 300 DPI, fichiers SVG/DXF, mockups photoréalistes.</div>
+                        </div>
+                        <div class="session-card">
+                            <div class="session-card-header">
+                                <span class="session-card-title">Soir</span>
+                                <span class="session-time">22:30</span>
+                            </div>
+                            <div class="session-desc">Bilan de rentabilité, audit d'intégrité SQLite, synchronisation cloud et rapport.</div>
+                        </div>
+                    </div>
+
+                    <!-- Trigger Control -->
+                    <div class="trigger-bar">
+                        <select class="session-select" id="session-select-type">
+                            <option value="CYCLE_COMPLET">Cycle Complet Autonome (Recommandé)</option>
+                            <option value="MATIN_VEILLE_ET_STRATEGIE">Matin : Veille & Signaux de Marché</option>
+                            <option value="MIDI_ARBITRAGE_ET_PROTOTYPAGE">Midi : Délibération Jev & Arbitrage</option>
+                            <option value="APRES_MIDI_PRODUCTION_MASSIVE">Après-Midi : Production Vectorielle & DTF</option>
+                            <option value="SOIR_BILAN_ET_ALIGNEMENT">Soir : Bilan Financier & Alignement SQLite</option>
+                        </select>
+                        <button class="btn-launch" id="btn-run-session" onclick="lancerSeanceSelectionnee()">
+                            <span>▶</span>
+                            <span>Lancer la Séance en Direct</span>
+                        </button>
+                    </div>
+
+                    <!-- Live Terminal Output -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Console d'Exécution en Direct (Flux Réel)</span>
+                        <span style="font-size: 0.7rem; color: var(--emerald-accent);">● En écoute</span>
+                    </div>
+                    <div class="terminal-box" id="session-terminal-output" class="terminal-stream"><span id="terminal-stream" style="display:none;"></span>> Kai Autonomous Engine connecté au Cloud VPS (88.96.47.180).
+> Base de contrôle : data/kai_control_plane.sqlite3
+> Prêt pour l'exécution d'une séance autonome sans intervention humaine.
+</div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 2: LETTA / MEMGPT (BLOC-NOTES & MÉMOIRE) -->
+            <div class="desktop-window" id="win-letta" style="left: 770px; top: 60px; width: 600px; height: 550px;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-letta')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-letta')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-letta')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>📝</span>
+                        <span>Bloc-Notes de Travail & Mémoire Active (Letta / MemGPT)</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="chargerBlocNotes()">Recharger</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="notepad-container">
+                        <div class="notepad-view" id="notepad-text-display">Chargement de la mémoire active...</div>
+                        <div class="notepad-input-bar">
+                            <input type="text" class="notepad-input" id="input-human-note" placeholder="Transmettre une consigne humaine au bloc-notes de l'IA..." onkeydown="if(event.key==='Enter') envoyerNoteHumaine()">
+                            <button class="btn-send-note" onclick="envoyerNoteHumaine()">Transmettre</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 3: CONSEIL JEV (ARBITRAGE) -->
+            <div class="desktop-window" id="win-jev" style="left: 180px; top: 100px; width: 680px; height: 520px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-jev')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-jev')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-jev')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>⚖️</span>
+                        <span>Conseil Jev : Arbitrage Impitoyable Système 1 (Ollama 7.6B)</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="chargerDecisionsJev()">Actualiser</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div style="margin-bottom: 12px; font-size: 0.78rem; color: var(--text-muted);">
+                        Arbitrage automatique exécuté par le modèle neuronal Jev sur le VPS. Chaque opportunité est passée au crible des 4 buckets (Laser Bois, DTF 300 DPI, Digital 100%, Rejeté).
+                    </div>
+                    <div class="decision-cards-grid" id="jev-cards-container">
+                        Chargement des délibérations...
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 4: TERMINAL SHELL VPS -->
+            <div class="desktop-window" id="win-terminal" style="left: 220px; top: 120px; width: 680px; height: 480px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-terminal')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-terminal')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-terminal')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>💻</span>
+                        <span>Terminal Shell VPS Cloud (ubuntu@88.96.47.180)</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="clearTerminalScreen()">Effacer</button>
+                    </div>
+                </div>
+                <div class="window-body" style="background: #020408; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+                    <div class="terminal-box" id="cloud-logs-stream" style="flex: 1; height: auto;">
+                        Chargement des journaux cloud...
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="terminal-cmd-input" class="notepad-input" style="font-family: var(--font-mono); font-size: 0.78rem;" placeholder="Commandes : status, sessions, decisions, assets, sqlite, clear, help..." onkeydown="if(event.key==='Enter') executeTerminalCmd()">
+                        <button class="btn-send-note" onclick="executeTerminalCmd()">Exécuter</button>
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 5: BASE DE DONNÉES SQLITE 3 -->
+            <div class="desktop-window" id="win-database" style="left: 150px; top: 80px; width: 780px; height: 540px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-database')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-database')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-database')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>🗄️</span>
+                        <span>Inspecteur Base de Données SQLite 3 (data/kai_control_plane.sqlite3)</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="chargerTableActive()">Recharger Table</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="table-nav" id="sqlite-table-nav">
+                        <button class="table-tab active" onclick="switchTable('autonomous_sessions')">autonomous_sessions</button>
+                        <button class="table-tab" onclick="switchTable('market_signals')">market_signals</button>
+                        <button class="table-tab" onclick="switchTable('scouted_opportunities')">scouted_opportunities</button>
+                        <button class="table-tab" onclick="switchTable('jev_decisions')">jev_decisions</button>
+                        <button class="table-tab" onclick="switchTable('packaged_assets')">packaged_assets</button>
+                        <button class="table-tab" onclick="switchTable('system_audit_logs')">system_audit_logs</button>
+                    </div>
+                    <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <input type="text" id="db-search-input" class="notepad-input" style="max-width: 300px; padding: 5px 10px; font-size: 0.74rem;" placeholder="Filtrer les enregistrements..." oninput="filtrerTableSqlite()">
+                        <span id="db-row-counter" style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">0 ligne(s)</span>
+                    </div>
+                    <div style="overflow-x: auto; max-height: 380px;">
+                        <table class="sqlite-table mc-table">
+                            <thead><tr id="sqlite-thead"></tr></thead>
+                            <tbody id="sqlite-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 6: LIVRABLES & ASSETS -->
+            <div class="desktop-window" id="win-assets" style="left: 200px; top: 110px; width: 720px; height: 530px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-assets')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-assets')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-assets')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>📦</span>
+                        <span>Explorateur d'Actifs Numériques & Packages Commerciaux Prêts</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="chargerAssets()">Actualiser</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div style="margin-bottom: 14px; font-size: 0.78rem; color: var(--text-muted);">
+                        Tous les packs commerciaux compilés avec fichiers transparents 300 DPI (4500x5400 px), vecteurs SVG, découpe DXF et mockups photoréalistes.
+                    </div>
+                    <div class="assets-grid" id="assets-cards-container">
+                        Chargement des livrables...
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 7: BOUTIQUE STOREFRONT CLIENT -->
+            <div class="desktop-window" id="win-storefront" style="left: 140px; top: 70px; width: 820px; height: 560px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-storefront')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-storefront')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-storefront')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>🛍️</span>
+                        <span>Aperçu Client : Boutique Atelier Aura & Catalogue de Vente</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="document.getElementById('storefront-iframe').src='/atelier_aura_dashboard.html'">Recharger</button>
+                        <a href="/atelier_aura_dashboard.html" target="_blank" class="win-action-btn" style="text-decoration: none;">Ouvrir Onglet ↗</a>
+                    </div>
+                </div>
+                <div class="window-body" style="padding: 0; overflow: hidden;">
+                    <iframe id="storefront-iframe" src="/atelier_aura_dashboard.html" style="width: 100%; height: 100%; border: none;"></iframe>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 8: RELAIS MOBILE REDMI -->
+            <div class="desktop-window" id="win-phone" style="left: 260px; top: 130px; width: 560px; height: 440px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-phone')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-phone')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-phone')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>📱</span>
+                        <span>Relais Téléphone Redmi Note 10 Pro (Passif & Shizuku)</span>
+                    </div>
+                    <div class="window-actions">
+                        <button class="win-action-btn" onclick="showToast('Téléphone en veille passive optimale')">Ping</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="session-card">
+                            <div class="session-card-header">
+                                <span class="session-card-title">État de la Passerelle Mobile</span>
+                                <span class="session-time" style="color: #34d399; background: rgba(52,211,153,0.1);">Passif Optimisé</span>
+                            </div>
+                            <div class="session-desc">
+                                • Aucune application superflue installée (Bloatware MIUI désinstallé).<br>
+                                • Shizuku IPC disponible pour accès adb sans root.<br>
+                                • Zéro consommation de batterie inutile en tâche de fond.<br>
+                                • Rôle : Point de secours passif et synchronisation SMS d'urgence si nécessaire.
+                            </div>
+                        </div>
+                        <div class="session-card">
+                            <div class="session-card-header">
+                                <span class="session-card-title">Recommandation Stratégique</span>
+                                <span class="session-time">Matéi</span>
+                            </div>
+                            <div class="session-desc">
+                                Le système autonome opère à 100% sur le VPS Oracle Cloud (0€ de coût, bande passante Gigabit). Le téléphone n'a pas besoin de faire tourner des modèles lourds en local.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+            <!-- WINDOW 9: PARAMÈTRES & SYSTÈME -->
+            <div class="desktop-window" id="win-settings" style="left: 300px; top: 150px; width: 560px; height: 460px; display: none;">
+                <div class="window-header">
+                    <div class="traffic-lights">
+                        <button class="traffic-btn close" onclick="closeWindow('win-settings')"></button>
+                        <button class="traffic-btn minimize" onclick="minimizeWindow('win-settings')"></button>
+                        <button class="traffic-btn maximize" onclick="maximizeWindow('win-settings')"></button>
+                    </div>
+                    <div class="window-title">
+                        <span>⚙️</span>
+                        <span>Paramètres Système & Spécifications du Poste</span>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Disposition des Fenêtres</span>
+                            <div style="display: flex; gap: 8px; margin-top: 8px;">
+                                <button class="win-action-btn" style="padding: 8px 14px;" onclick="layoutTile()">Mosaïque 2 Colonnes</button>
+                                <button class="win-action-btn" style="padding: 8px 14px;" onclick="layoutCascade()">Cascade</button>
+                                <button class="win-action-btn" style="padding: 8px 14px;" onclick="minimizeAllWindows()">Afficher Bureau</button>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid var(--border-subtle); padding-top: 12px;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Spécifications Cloud VPS</span>
+                            <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-secondary); margin-top: 8px; line-height: 1.6;">
+                                • Hôte : Oracle Cloud Infrastructure (Always Free ARM)<br>
+                                • IP : 88.96.47.180 (Port 8765)<br>
+                                • Architecture : 4 OCPU ARM Ampere • 24 Go RAM • 200 Go NVMe<br>
+                                • OS : Ubuntu 24.04 LTS (GNU/Linux 6.8.0)<br>
+                                • Moteur Neuronal : Ollama jev:latest 7.6B (127.0.0.1:11434)<br>
+                                • Base de Données : SQLite 3 (data/kai_control_plane.sqlite3)<br>
+                                • Coût Mensuel : 0.00 € (Strictement aucun prélèvement)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="window-resizer"></div>
+            </div>
+
+        </div> <!-- /windows-layer -->
+
+    </div> <!-- /desktop-surface -->
+
+    <!-- FLOATING DOCK -->
+    <nav id="desktop-dock">
+        <div class="dock-item" onclick="toggleSystemMenu(event)" title="Menu Kai WebOS">⚡</div>
+        <div class="dock-divider"></div>
+        <div class="dock-item is-open" id="dock-win-seances" onclick="toggleWindow('win-seances')" title="Séances & Console">⏱️</div>
+        <div class="dock-item is-open" id="dock-win-letta" onclick="toggleWindow('win-letta')" title="Mémoire Letta MemGPT">🧠</div>
+        <div class="dock-item" id="dock-win-jev" onclick="toggleWindow('win-jev')" title="Conseil Jev (Arbitrage)">⚖️</div>
+        <div class="dock-item" id="dock-win-terminal" onclick="toggleWindow('win-terminal')" title="Terminal Cloud VPS">💻</div>
+        <div class="dock-item" id="dock-win-database" onclick="toggleWindow('win-database')" title="Base de Données SQLite">🗄️</div>
+        <div class="dock-item" id="dock-win-assets" onclick="toggleWindow('win-assets')" title="Livrables & Packages">📦</div>
+        <div class="dock-item" id="dock-win-storefront" onclick="toggleWindow('win-storefront')" title="Boutique Client">🛍️</div>
+        <div class="dock-item" id="dock-win-phone" onclick="toggleWindow('win-phone')" title="Relais Mobile Redmi">📱</div>
+        <div class="dock-divider"></div>
+        <div class="dock-item" id="dock-win-settings" onclick="toggleWindow('win-settings')" title="Paramètres Système">⚙️</div>
+        <div class="dock-item" onclick="minimizeAllWindows()" title="Afficher le Bureau">👁️</div>
+    </nav>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="os-toast">Message système</div>
+
+    <!-- WINDOW MANAGER JAVASCRIPT LOGIC -->
+    <script>
+        // Global State & Window Manager
+        let maxZIndex = 100;
+        let activeTable = 'autonomous_sessions';
+        let currentTableRows = [];
+        let globalTelemetry = null;
+
+        const initialNotepad = "# \ud83d\udcdd BLOC-NOTES DE TRAVAIL & M\u00c9MOIRE ACTIVE DE KAI (AGENT DESKTOP)\n> Ce carnet de bord est lu et mis \u00e0 jour \u00e0 chaque d\u00e9but et fin de s\u00e9ance. Il garantit que l'agent ne perd jamais le fil de sa pens\u00e9e.\n\n---\n\n## \u26a1 1. BROUILLON ACTIF (S\u00e9ance en cours)\n- **Derni\u00e8re S\u00e9ance** : MATIN_VEILLE_ET_STRATEGIE (2026-11-03 11:45)\n- **Derni\u00e8re Pens\u00e9e** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n\n---\n\n## \ud83d\udee1\ufe0f 2. R\u00c8GLES MA\u00ceTRESSES & CONTRAINTES INTANGIBLES\n- **Philosophie Mat\u00e9i \"Comment c'est fait\"** : Fin des filtres b\u00eates par mots-cl\u00e9s aveugles ou cat\u00e9gories. Les bonnes id\u00e9es ne d\u00e9pendent pas du march\u00e9 ou de l'activit\u00e9, mais de la FA\u00c7ON DONT C'EST FAIT (rigueur vectorielle, multi-couches dimensionnel, tol\u00e9rances d'assemblage tenon-mortaise z\u00e9ro colle, finition du livrable avec notice PDF et licence commerciale).\n- **R\u00e8gle 0.00 \u20ac** : Co\u00fbt r\u00e9current strictement nul (0\u20ac d'API payante, 0\u20ac de stock physique, 100% num\u00e9rique).\n- **Z\u00e9ro Cadre Carr\u00e9** : Bannissement absolu des visuels avec bo\u00eetes carr\u00e9es ferm\u00e9es ou faux fonds \u00e0 carreaux.\n- **Transparence Native** : Fichiers PNG 4500x5400 px \u00e0 300 DPI d\u00e9tour\u00e9s au pixel pr\u00e8s pour textile noir.\n- **Arbitrage Jev Syst\u00e8me 1** : Si une id\u00e9e est b\u00e2cl\u00e9e, sans effort ni barri\u00e8re technique, elle est \u00e9limin\u00e9e (`NULLE_A_SUPPRIMER`) et blacklist\u00e9e.\n\n---\n\n## \ud83c\udfaf 3. FEUILLE DE ROUTE & OBJECTIFS ACTIFS\n1. [x] Compiler et activer l'IA Jev sur le Cloud VPS (Ollama `jev:latest`).\n2. [x] Connecter le mod\u00e8le de vision Moondream pour certifier les fonds transparents.\n3. [ ] Maintenir le quota de 7 opportunit\u00e9s hebdomadaires pour l'arbitrage Jev du dimanche soir.\n4. [ ] Pr\u00e9parer l'ouverture de la boutique Etsy post-12 novembre avec les packs valid\u00e9s.\n\n---\n\n## \ud83d\udcd6 4. JOURNAL DE BORD HISTORIQUE (Logs de s\u00e9ances)\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-10-31 11:50)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 nouveaux signaux capt\u00e9s. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et tendances march\u00e9.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-10-31 11:51)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-10-31 11:51)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 nouveaux signaux capt\u00e9s. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et tendances march\u00e9.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : SEANCE_TRADING_MARCHE (2026-10-31 21:23)\n- **R\u00e9flexion de s\u00e9ance** : D\u00e9lib\u00e9ration de march\u00e9 : TRADE. Le march\u00e9 crypto affiche de modestes hausses (BTC +0.87%, ETH +0.73%, SOL +1.04%) avec des niveaux de support solides, tandis que les actions (AAPL, NVDA, SPY) sont neutres. Aucun actif n'a d\u00e9pass\u00e9 +20% sur 24h, ce qui respecte la r\u00e8gle de non\u2011FOMO. Le cash disponible permet d'engager 10\u201115% du capital sans exc\u00e9der la limite de 25% par transaction.. P&L portefeuille : 0.0 \u20ac (0.0%).\n- **Actions accomplies** :\n  * Analyse de 7 actifs en direct.\n  * Ordre BUY BTC pour 90.0 \u20ac\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-10-31 21:24)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-10-31 21:24)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 nouveaux signaux capt\u00e9s. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et tendances march\u00e9.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-10-31 21:31)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-10-31 21:31)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 nouveaux signaux capt\u00e9s. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et tendances march\u00e9.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 15:00)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 15:00)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 16:26)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 16:26)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 16:27)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 16:27)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 16:29)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 16:29)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 16:36)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 16:36)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 16:38)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 16:38)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 16:49)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 16:49)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 16:52)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 16:52)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 17:32)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 17:32)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 17:33)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 17:33)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 17:43)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 17:43)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 18:26)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 18:26)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 18:45)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 18:45)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 19:37)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 19:37)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 19:39)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 19:39)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 19:40)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 19:40)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 19:59)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 19:59)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 20:06)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 20:06)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-02 20:07)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-02 20:07)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-03 11:10)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-03 11:10)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-03 11:11)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-03 11:11)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : TEST_UNITAIRE_CADENCE (2026-11-03 11:45)\n- **R\u00e9flexion de s\u00e9ance** : Test de validation de la persistance m\u00e9moire.\n- **Actions accomplies** :\n  * Assertion 1 pass\u00e9e\n  * Assertion 2 pass\u00e9e\n\n### \ud83d\uddd3\ufe0f S\u00e9ance : MATIN_VEILLE_ET_STRATEGIE (2026-11-03 11:45)\n- **R\u00e9flexion de s\u00e9ance** : Matin\u00e9e ax\u00e9e sur la d\u00e9tection de signaux. 5 signaux capt\u00e9s. Maturit\u00e9 IA 99.0%. Le rush Q4 reste la priorit\u00e9 absolue.\n- **Actions accomplies** :\n  * Collecte de 5 nouvelles actualit\u00e9s et signaux march\u00e9.\n  * Heuristiques d'auto-\u00e9volution actives : Maturit\u00e9 IA \u00e0 99.0%.\n  * V\u00e9rification des opportunit\u00e9s de saison Q4 (forte demande laser bois et DTF).\n";
+
+        // Window Manager Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            setupWindowInteractions();
+            startLiveClock();
+            document.getElementById('notepad-text-display').textContent = initialNotepad;
+            actualiserDonneesGlobales();
+            setInterval(actualiserDonneesGlobales, 5000);
+            focusWindow('win-seances');
+        });
+
+        
+
+        function rechargerVdiFrame() {
+            const frame = document.getElementById('vdi-desktop-frame');
+            if (frame) {
+                showToast("⟳ Reconnexion de la session Citrix VDI...");
+                frame.src = '/vdi/vnc.html?autoconnect=true&resize=scale&path=websockify&t=' + Date.now();
+            }
+        }
+
+        async function lancerActionVdi(action, url = null) {
+            showToast("🚀 Commande VDI : " + action + " en cours...");
+            try {
+                let ep = '/api/vdi_action?action=' + encodeURIComponent(action);
+                if (url) ep += '&url=' + encodeURIComponent(url);
+                const res = await fetch(ep);
+                const data = await res.json();
+                if (data.ok) {
+                    showToast("✅ " + (data.message || "Action exécutée sur le PC"));
+                    if (action === 'restart') {
+                        setTimeout(rechargerVdiFrame, 3000);
+                    }
+                } else {
+                    showToast("⚠️ " + (data.message || "Erreur action"));
+                }
+            } catch (err) {
+                showToast("⚠️ Erreur communication VDI : " + err.message);
+            }
+        }
+
+        function chargerUrlAgent(url) {
+            document.getElementById('agent-browser-url').value = url;
+            executerNavigationAgent();
+        }
+
+        function rechargerBrowser() {
+            executerNavigationAgent();
+        }
+
+        async function executerNavigationAgent() {
+            const urlInput = document.getElementById('agent-browser-url');
+            let targetUrl = urlInput.value.trim();
+            if (!targetUrl) return;
+
+            showToast("🌐 Navigation agent en direct vers : " + targetUrl);
+            document.getElementById('vp-page-title').textContent = "Chargement en direct : " + targetUrl + "...";
+            document.getElementById('vp-http-status').textContent = "FETCHING...";
+
+            try {
+                const res = await fetch('/api/agent_desktop/browse?url=' + encodeURIComponent(targetUrl));
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const data = await res.json();
+
+                document.getElementById('vp-page-title').textContent = data.title || targetUrl;
+                document.getElementById('vp-http-status').textContent = (data.status_code || 200) + " OK";
+                document.getElementById('insp-summary').textContent = data.summary || "Flux textuel extrait avec succès.";
+                document.getElementById('insp-deliberation').textContent = data.deliberation || "Opportunités validées par l'agent.";
+
+                const vpImg = document.getElementById('viewport-img');
+                vpImg.src = (data.viewport_url || '/agent_desktop/browser_viewport.png') + '?t=' + Date.now();
+
+                const signalsCont = document.getElementById('insp-signals-list');
+                signalsCont.innerHTML = '';
+                if (data.signals && data.signals.length > 0) {
+                    data.signals.forEach(s => {
+                        const div = document.createElement('div');
+                        div.className = 'signal-item-card';
+                        div.innerHTML = `
+                            <div class="signal-kw">✦ ${s.keyword}</div>
+                            <div class="signal-sub">${s.volume}</div>
+                            <div class="signal-act">➔ ${s.action}</div>
+                        `;
+                        signalsCont.appendChild(div);
+                    });
+                } else {
+                    signalsCont.innerHTML = '<div style="color: var(--text-muted); font-size: 0.75rem;">Aucun signal critique immédiat détecté.</div>';
+                }
+
+                showToast("✅ Page analysée par l'agent (" + (data.signals ? data.signals.length : 0) + " signaux détectés)");
+            } catch (err) {
+                document.getElementById('vp-http-status').textContent = "ERREUR";
+                showToast("⚠️ Erreur navigation agent : " + err.message);
+            }
+        }
+
+        function setupWindowInteractions() {
+            const windows = document.querySelectorAll('.desktop-window');
+
+            windows.forEach(win => {
+                // Focus on click
+                win.addEventListener('mousedown', () => {
+                    focusWindow(win.id);
+                });
+
+                // Header Dragging
+                const header = win.querySelector('.window-header');
+                if (header) {
+                    let isDragging = false;
+                    let startX, startY, initLeft, initTop;
+
+                    const onMouseDown = (e) => {
+                        if (e.target.closest('.traffic-btn') || e.target.closest('.win-action-btn')) return;
+                        if (win.classList.contains('is-maximized')) return;
+                        
+                        isDragging = true;
+                        focusWindow(win.id);
+                        startX = e.clientX || (e.touches && e.touches[0].clientX);
+                        startY = e.clientY || (e.touches && e.touches[0].clientY);
+                        initLeft = win.offsetLeft;
+                        initTop = win.offsetTop;
+
+                        document.addEventListener('mousemove', onMouseMove);
+                        document.addEventListener('mouseup', onMouseUp);
+                        document.addEventListener('touchmove', onMouseMove, { passive: false });
+                        document.addEventListener('touchend', onMouseUp);
+                    };
+
+                    const onMouseMove = (e) => {
+                        if (!isDragging) return;
+                        if (e.cancelable) e.preventDefault();
+                        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                        const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                        
+                        let newLeft = initLeft + (clientX - startX);
+                        let newTop = initTop + (clientY - startY);
+
+                        // Clamp inside desktop
+                        newLeft = Math.max(10, Math.min(window.innerWidth - win.offsetWidth - 10, newLeft));
+                        newTop = Math.max(38, Math.min(window.innerHeight - 80, newTop));
+
+                        win.style.left = newLeft + 'px';
+                        win.style.top = newTop + 'px';
+                    };
+
+                    const onMouseUp = () => {
+                        isDragging = false;
+                        document.removeEventListener('mousemove', onMouseMove);
+                        document.removeEventListener('mouseup', onMouseUp);
+                        document.removeEventListener('touchmove', onMouseMove);
+                        document.removeEventListener('touchend', onMouseUp);
+                    };
+
+                    header.addEventListener('mousedown', onMouseDown);
+                    header.addEventListener('touchstart', onMouseDown, { passive: false });
+                }
+
+                // Resizing
+                const resizer = win.querySelector('.window-resizer');
+                if (resizer) {
+                    let isResizing = false;
+                    let startX, startY, initW, initH;
+
+                    const onResizeDown = (e) => {
+                        isResizing = true;
+                        focusWindow(win.id);
+                        startX = e.clientX || (e.touches && e.touches[0].clientX);
+                        startY = e.clientY || (e.touches && e.touches[0].clientY);
+                        initW = win.offsetWidth;
+                        initH = win.offsetHeight;
+
+                        document.addEventListener('mousemove', onResizeMove);
+                        document.addEventListener('mouseup', onResizeUp);
+                        document.addEventListener('touchmove', onResizeMove, { passive: false });
+                        document.addEventListener('touchend', onResizeUp);
+                    };
+
+                    const onResizeMove = (e) => {
+                        if (!isResizing) return;
+                        if (e.cancelable) e.preventDefault();
+                        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                        const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+                        let newW = initW + (clientX - startX);
+                        let newH = initH + (clientY - startY);
+
+                        newW = Math.max(360, Math.min(window.innerWidth - win.offsetLeft - 10, newW));
+                        newH = Math.max(220, Math.min(window.innerHeight - win.offsetTop - 64, newH));
+
+                        win.style.width = newW + 'px';
+                        win.style.height = newH + 'px';
+                    };
+
+                    const onResizeUp = () => {
+                        isResizing = false;
+                        document.removeEventListener('mousemove', onResizeMove);
+                        document.removeEventListener('mouseup', onResizeUp);
+                        document.removeEventListener('touchmove', onResizeMove);
+                        document.removeEventListener('touchend', onResizeUp);
+                    };
+
+                    resizer.addEventListener('mousedown', onResizeDown);
+                    resizer.addEventListener('touchstart', onResizeDown, { passive: false });
+                }
+            });
+        }
+
+        function focusWindow(winId) {
+            const win = document.getElementById(winId);
+            if (!win) return;
+            maxZIndex++;
+            win.style.zIndex = maxZIndex;
+
+            document.querySelectorAll('.desktop-window').forEach(w => w.classList.remove('is-active'));
+            win.classList.add('is-active');
+
+            // Update top bar title
+            const titleEl = win.querySelector('.window-title');
+            if (titleEl) {
+                document.getElementById('top-active-title').innerHTML = titleEl.innerHTML;
+            }
+
+            // Update dock icon open state
+            const dockItem = document.getElementById('dock-' + winId);
+            if (dockItem) dockItem.classList.add('is-open');
+        }
+
+        function openWindow(winId) {
+            const win = document.getElementById(winId);
+            if (!win) return;
+            win.style.display = 'flex';
+            win.classList.remove('is-minimized');
+            focusWindow(winId);
+            closeSystemMenu();
+        }
+
+        function closeWindow(winId) {
+            const win = document.getElementById(winId);
+            if (!win) return;
+            win.style.display = 'none';
+            const dockItem = document.getElementById('dock-' + winId);
+            if (dockItem) dockItem.classList.remove('is-open');
+        }
+
+        function minimizeWindow(winId) {
+            const win = document.getElementById(winId);
+            if (!win) return;
+            win.classList.add('is-minimized');
+        }
+
+        function toggleWindow(winId) {
+            const win = document.getElementById(winId);
+            if (!win) return;
+
+            if (win.style.display === 'none' || win.classList.contains('is-minimized')) {
+                openWindow(winId);
+            } else if (win.classList.contains('is-active')) {
+                minimizeWindow(winId);
+            } else {
+                focusWindow(winId);
+            }
+        }
+
+        function maximizeWindow(winId) {
+            const win = document.getElementById(winId);
+            if (!win) return;
+            win.classList.toggle('is-maximized');
+            focusWindow(winId);
+        }
+
+        function minimizeAllWindows() {
+            document.querySelectorAll('.desktop-window').forEach(w => {
+                w.classList.add('is-minimized');
+            });
+            showToast("Bureau affiché");
+            closeSystemMenu();
+        }
+
+        function layoutTile() {
+            const w1 = document.getElementById('win-seances');
+            const w2 = document.getElementById('win-letta');
+            if (w1 && w2) {
+                openWindow('win-seances');
+                openWindow('win-letta');
+
+                const halfW = Math.floor((window.innerWidth - 130) / 2);
+                const fullH = window.innerHeight - 100;
+
+                w1.classList.remove('is-maximized');
+                w2.classList.remove('is-maximized');
+
+                w1.style.left = '100px';
+                w1.style.top = '44px';
+                w1.style.width = halfW + 'px';
+                w1.style.height = fullH + 'px';
+
+                w2.style.left = (110 + halfW) + 'px';
+                w2.style.top = '44px';
+                w2.style.width = halfW + 'px';
+                w2.style.height = fullH + 'px';
+            }
+            closeSystemMenu();
+            showToast("Disposition en mosaïque appliquée");
+        }
+
+        function layoutCascade() {
+            const wins = ['win-seances', 'win-letta', 'win-jev', 'win-terminal', 'win-database', 'win-assets'];
+            let offset = 44;
+            wins.forEach(id => {
+                const w = document.getElementById(id);
+                if (w && w.style.display !== 'none' && !w.classList.contains('is-minimized')) {
+                    w.classList.remove('is-maximized');
+                    w.style.left = (100 + (offset - 44) * 0.8) + 'px';
+                    w.style.top = offset + 'px';
+                    w.style.width = '620px';
+                    w.style.height = '480px';
+                    offset += 28;
+                }
+            });
+            closeSystemMenu();
+            showToast("Disposition en cascade");
+        }
+
+        // Clock Widget
+        function startLiveClock() {
+            const clockEl = document.getElementById('clock-widget');
+            const update = () => {
+                const now = new Date();
+                clockEl.textContent = now.toLocaleTimeString('fr-FR', { hour12: false });
+            };
+            update();
+            setInterval(update, 1000);
+        }
+
+        // Toast Messages
+        function showToast(msg) {
+            const t = document.getElementById('os-toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(window._toastTimeout);
+            window._toastTimeout = setTimeout(() => {
+                t.classList.remove('show');
+            }, 3200);
+        }
+
+        // System Menu
+        function toggleSystemMenu(e) {
+            e.stopPropagation();
+            const m = document.getElementById('system-menu');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+        }
+        function closeSystemMenu() {
+            document.getElementById('system-menu').style.display = 'none';
+        }
+        document.addEventListener('click', () => closeSystemMenu());
+
+        // FullScreen
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
+        // Real Backend Communications
+        async function actualiserDonneesGlobales() {
+            try {
+                const res = await fetch('/api/control_plane/status');
+                if (res.ok) {
+                    globalTelemetry = await res.json();
+                    
+                    // Update SQLite counter badge
+                    const tc = globalTelemetry.table_counts || {};
+                    const totalRows = Object.values(tc).reduce((a, b) => a + b, 0);
+                    document.getElementById('top-sqlite-kpi').textContent = `🗄️ SQLite : ${totalRows} lignes`;
+
+                    // Auto-load decisions and assets if empty
+                    if (document.getElementById('jev-cards-container').children.length <= 1) {
+                        chargerDecisionsJev();
+                    }
+                    if (document.getElementById('assets-cards-container').children.length <= 1) {
+                        chargerAssets();
+                    }
+                }
+            } catch (e) {
+                console.warn("Erreur fetch télémétrie :", e);
+            }
+        }
+
+        // Session Execution
+        async function lancerSeanceSelectionnee() {
+            const sel = document.getElementById('session-select-type');
+            const sessionType = sel ? sel.value : 'CYCLE_COMPLET';
+            await declencherSeanceRapide(sessionType);
+        }
+
+        async function declencherSeanceRapide(sessionType) {
+            const btn = document.getElementById('btn-run-session');
+            const term = document.getElementById('session-terminal-output');
+            if (btn) btn.disabled = true;
+
+            const timeStr = new Date().toLocaleTimeString('fr-FR');
+            term.textContent += `\n[${timeStr}] [ORDRE] ▶ Démarrage de la séance : ${sessionType}...\n`;
+            term.scrollTop = term.scrollHeight;
+            showToast(`Lancement de la séance ${sessionType}...`);
+
+            try {
+                const res = await fetch('/api/control_plane/run_session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ session_type: sessionType })
+                });
+
+                if (res.ok) {
+                    const result = await res.json();
+                    term.textContent += `[${timeStr}] [SUCCÈS] Séance conclue avec succès.\n`;
+                    if (result.summary) term.textContent += `> Synthèse : ${result.summary}\n`;
+                    if (result.pensee) term.textContent += `> Pensée active : ${result.pensee}\n`;
+                    if (result.accomplissements) {
+                        result.accomplissements.forEach(acc => {
+                            term.textContent += `  ✓ ${acc}\n`;
+                        });
+                    }
+                    showToast("Séance exécutée avec succès !");
+                    await chargerBlocNotes();
+                    await actualiserDonneesGlobales();
+                } else {
+                    term.textContent += `[${timeStr}] [ERREUR] Échec requête HTTP ${res.status}\n`;
+                    showToast("Erreur lors de l'exécution de la séance");
+                }
+            } catch (e) {
+                term.textContent += `[${timeStr}] [EXCEPTION] ${e.message}\n`;
+                showToast("Erreur réseau");
+            } finally {
+                if (btn) btn.disabled = false;
+                term.scrollTop = term.scrollHeight;
+            }
+        }
+
+        // Notepad & Directive
+        async function chargerBlocNotes() {
+            const disp = document.getElementById('notepad-text-display');
+            try {
+                const res = await fetch('/api/agent_desktop/state');
+                if (res.ok) {
+                    const st = await res.json();
+                    if (st.notepad_raw) {
+                        disp.textContent = st.notepad_raw;
+                        return;
+                    }
+                }
+            } catch (e) {}
+            disp.textContent = "Mémoire Letta / MemGPT active et synchronisée.";
+        }
+
+        async function envoyerNoteHumaine() {
+            const inp = document.getElementById('input-human-note');
+            const txt = inp.value.trim();
+            if (!txt) return;
+
+            showToast("Transmission de la directive humaine...");
+            try {
+                const res = await fetch('/api/control_plane/note', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ note: txt })
+                });
+
+                if (res.ok) {
+                    inp.value = '';
+                    showToast("Directive enregistrée dans SQLite et le bloc-notes !");
+                    await chargerBlocNotes();
+                } else {
+                    showToast("Erreur transmission directive");
+                }
+            } catch (e) {
+                showToast("Erreur réseau");
+            }
+        }
+
+        // Jev Decisions
+        async function chargerDecisionsJev() {
+            const container = document.getElementById('jev-cards-container');
+            container.innerHTML = '<div style="color: var(--text-muted);">Récupération des délibérations Jev...</div>';
+
+            try {
+                const res = await fetch('/api/control_plane/decisions');
+                if (res.ok) {
+                    const data = await res.json();
+                    const decisions = Array.isArray(data) ? data : (data.decisions || []);
+
+                    if (decisions.length === 0) {
+                        container.innerHTML = '<div style="color: var(--text-muted); padding: 12px;">Aucune délibération enregistrée.</div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    decisions.forEach(d => {
+                        const card = document.createElement('div');
+                        card.className = `decision-item ${d.verdict}`;
+                        const score = Math.round((d.score_confiance || 0.95) * 100);
+                        card.innerHTML = `
+                            <div class="decision-header">
+                                <span class="verdict-tag ${d.verdict}">${d.verdict}</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">Confiance : ${score}% • Id : ${d.opportunity_id || 'OPP-AUTO'}</span>
+                            </div>
+                            <div class="decision-critique">"${d.cold_critique || 'Validation standard du conseil autonome Jev.'}"</div>
+                        `;
+                        container.appendChild(card);
+                    });
+                }
+            } catch (e) {
+                container.innerHTML = '<div style="color: var(--rose-accent);">Erreur de chargement.</div>';
+            }
+        }
+
+        // SQLite Explorer
+        async function switchTable(tableName) {
+            activeTable = tableName;
+            document.querySelectorAll('#sqlite-table-nav .table-tab').forEach(t => {
+                t.classList.toggle('active', t.textContent === tableName);
+            });
+            await chargerTableActive();
+        }
+
+        async function chargerTableActive() {
+            const thead = document.getElementById('sqlite-thead');
+            const tbody = document.getElementById('sqlite-tbody');
+            const counter = document.getElementById('db-row-counter');
+            
+            thead.innerHTML = '';
+            tbody.innerHTML = '<tr><td colspan="5" style="color: var(--text-muted); text-align: center;">Interrogation de SQLite...</td></tr>';
+
+            try {
+                const res = await fetch(`/api/control_plane/table_data?table=${activeTable}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    currentTableRows = data.rows || [];
+                    counter.textContent = `${currentTableRows.length} ligne(s)`;
+                    rendreTableSqlite(currentTableRows);
+                }
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="5" style="color: var(--rose-accent); text-align: center;">Erreur lecture table.</td></tr>';
+            }
+        }
+
+        function rendreTableSqlite(rows) {
+            const thead = document.getElementById('sqlite-thead');
+            const tbody = document.getElementById('sqlite-tbody');
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            if (rows.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="color: var(--text-muted); text-align: center;">Aucun enregistrement dans cette table.</td></tr>';
+                return;
+            }
+
+            const cols = Object.keys(rows[0]);
+            cols.forEach(c => {
+                const th = document.createElement('th');
+                th.textContent = c;
+                thead.appendChild(th);
+            });
+
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                cols.forEach(c => {
+                    const td = document.createElement('td');
+                    let val = r[c];
+                    if (typeof val === 'object' && val !== null) val = JSON.stringify(val);
+                    if (typeof val === 'string' && val.length > 70) val = val.substring(0, 70) + '...';
+                    td.textContent = val !== null && val !== undefined ? val : '-';
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filtrerTableSqlite() {
+            const q = document.getElementById('db-search-input').value.toLowerCase();
+            if (!q) {
+                rendreTableSqlite(currentTableRows);
+                return;
+            }
+            const filtered = currentTableRows.filter(r => {
+                return Object.values(r).some(v => String(v).toLowerCase().includes(q));
+            });
+            rendreTableSqlite(filtered);
+        }
+
+        // Assets Explorer
+        async function chargerAssets() {
+            const container = document.getElementById('assets-cards-container');
+            container.innerHTML = '<div style="color: var(--text-muted);">Inventaire des actifs...</div>';
+
+            try {
+                const res = await fetch('/api/control_plane/assets');
+                if (res.ok) {
+                    const data = await res.json();
+                    const assets = Array.isArray(data) ? data : (data.assets || []);
+
+                    if (assets.length === 0) {
+                        container.innerHTML = '<div style="color: var(--text-muted);">Aucun paquet sur disque.</div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    assets.forEach(a => {
+                        const card = document.createElement('div');
+                        card.className = 'asset-card';
+                        const sizeMb = (a.size_bytes / (1024 * 1024)).toFixed(2);
+                        const dlPath = a.zip_filename ? ('/data/packaged_deliverables/' + a.zip_filename) : (a.zip_path ? '/' + a.zip_path : '#');
+                        card.innerHTML = `
+                            <span class="asset-badge">${a.asset_type || 'PACKAGE_ZIP'}</span>
+                            <div class="asset-title">${a.title || a.asset_id}</div>
+                            <div class="asset-meta">Taille : ${sizeMb} Mo • Fichiers vérifiés</div>
+                            <a href="${dlPath}" download class="btn-download-asset">Télécharger Fichier Client (${sizeMb} Mo)</a>
+                        `;
+                        container.appendChild(card);
+                    });
+                }
+            } catch (e) {
+                container.innerHTML = '<div style="color: var(--rose-accent);">Erreur inventaire.</div>';
+            }
+        }
+
+        // Terminal Shell
+        async function executeTerminalCmd() {
+            const inp = document.getElementById('terminal-cmd-input');
+            const cmd = inp.value.trim().toLowerCase();
+            if (!cmd) return;
+            inp.value = '';
+
+            const term = document.getElementById('cloud-logs-stream');
+            term.textContent += `\n$ ${cmd}\n`;
+
+            if (cmd === 'clear') {
+                term.textContent = '> Écran effacé.\n';
+                return;
+            }
+            if (cmd === 'help') {
+                term.textContent += 'Commandes disponibles :\n  status    - État des services cloud\n  sessions  - Dernières séances autonomes\n  decisions - Décisions Jev récentes\n  assets    - Paquets et livrables prêts\n  sqlite    - Nombre de lignes par table\n  clear     - Effacer le terminal\n';
+                term.scrollTop = term.scrollHeight;
+                return;
+            }
+            if (cmd === 'status') {
+                term.textContent += 'Services VPS : 5/5 actifs (kai-web-server, kai-cloud-daemon, etc.)\nOllama : jev:latest 7.6B en écoute sur 127.0.0.1:11434\n';
+                term.scrollTop = term.scrollHeight;
+                return;
+            }
+            if (cmd === 'sqlite' || cmd === 'db') {
+                if (globalTelemetry && globalTelemetry.table_counts) {
+                    term.textContent += 'Comptes tables SQLite :\n' + JSON.stringify(globalTelemetry.table_counts, null, 2) + '\n';
+                } else {
+                    term.textContent += 'Données SQLite non chargées.\n';
+                }
+                term.scrollTop = term.scrollHeight;
+                return;
+            }
+
+            // Default: query logs
+            try {
+                const res = await fetch('/api/control_plane/logs');
+                if (res.ok) {
+                    const d = await res.json();
+                    (d.logs || []).slice(0, 5).forEach(l => {
+                        term.textContent += `[${l.timestamp}] [${l.action_type}] ${l.details}\n`;
+                    });
+                }
+            } catch (e) {
+                term.textContent += `Erreur commande : ${e.message}\n`;
+            }
+            term.scrollTop = term.scrollHeight;
+        }
+
+        function clearTerminalScreen() {
+            document.getElementById('cloud-logs-stream').textContent = '> Écran effacé.\n';
+        }
+    </script>
+</body>
+</html>

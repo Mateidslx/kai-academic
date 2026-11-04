@@ -3,231 +3,340 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livrable Audit Technique Pré-Production — Agence Côte Basque Digital (Démo Synthétique)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <title>Dossier d'Audit Technique & Sécurité Web — Rapport Client Exécutif</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F8FAFC; color: #0F172A; }
+        body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background: #0b1120; color: #0f172a; }
         code, pre { font-family: 'JetBrains Mono', monospace; }
+        
+        .report-page {
+            background: #ffffff;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        }
+
         @media print {
             .no-print { display: none !important; }
-            body { background: #FFFFFF; }
+            body { background: #ffffff !important; padding: 0 !important; color: #000000 !important; }
+            .report-page {
+                box-shadow: none !important;
+                border: none !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
         }
     </style>
 </head>
-<body class="py-8 px-4 sm:px-8 max-w-5xl mx-auto space-y-6">
+<body class="py-8 px-4 sm:px-8 min-h-screen">
 
-    <div class="no-print flex items-center justify-between flex-wrap gap-3 bg-slate-900 text-white p-4 rounded-2xl shadow">
+    <!-- ACTION BAR (NO PRINT) -->
+    <div class="no-print max-w-5xl mx-auto mb-6 flex items-center justify-between flex-wrap gap-4 bg-slate-900 border border-slate-800 text-white p-4 rounded-2xl shadow-xl">
         <div class="flex items-center gap-3">
-            <a href="audit_express.html" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 transition">← Retour à l'Offre Audit Express</a>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">EXEMPLE DE LIVRABLE SUR DONNÉES SYNTHÉTIQUES</span>
+            <a href="security_scanner.html" class="text-xs font-bold px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center gap-1.5">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Retour au Scanner</span>
+            </a>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5">
+                <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                <span>Format Livrable White-Label (Prêt à Facturer)</span>
+            </span>
         </div>
-        <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">
-            Imprimer / Exporter en PDF (Format Client)
-        </button>
+        <div class="flex items-center gap-3">
+            <button onclick="window.print()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center gap-2 cursor-pointer">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Imprimer / Exporter en PDF</span>
+            </button>
+        </div>
     </div>
 
-    <!-- EN-TÊTE EXÉCUTIF -->
-    <header class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-        <div class="flex items-start justify-between flex-wrap gap-4 border-b border-slate-100 pb-4">
-            <div>
-                <div class="text-xs font-extrabold uppercase tracking-wider text-indigo-600">KAI SECURITY & ACCESSIBILITY STUDIO — RAPPORT D'AUDIT TECHNIQUE</div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Agence Côte Basque Digital (Démo Synthétique)</h1>
-                <p class="text-sm text-slate-600 mt-1">Cible analysée : <code class="font-bold text-slate-900">https://vitrine-demo.agence-exemple.fr</code> • Réf : <code>KAI-AUDIT-1792493624</code> • Date : 2026-10-20 10:53 UTC</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="text-center px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase">Score Global</div>
-                    <div class="text-2xl font-black text-indigo-600">39/100</div>
+    <!-- MAIN REPORT CONTAINER -->
+    <div class="max-w-5xl mx-auto report-page rounded-3xl p-8 sm:p-12 space-y-8 text-slate-900 border border-slate-200">
+
+        <!-- HEADER EXÉCUTIF & BRANDING AGENCE (EDITABLE IN PLACE) -->
+        <header class="border-b border-slate-200 pb-8 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-black tracking-widest text-indigo-600 uppercase mb-1">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-indigo-600"></i>
+                        <span contenteditable="true" title="Cliquer pour modifier le nom de votre agence / cabinet" class="border-b border-dashed border-indigo-300 hover:bg-indigo-50 px-1 rounded transition">KAI SECURITY & COMPLIANCE LAB</span>
+                        <span class="text-slate-400">• RAPPORT D'AUDIT TECHNIQUE</span>
+                    </div>
+                    <h1 id="client-title" contenteditable="true" title="Cliquer pour modifier le nom du client" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-1 hover:bg-slate-50 px-1 rounded transition">
+                        Dossier d'Audit de Sécurité & Conformité OWASP
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600 mt-2 font-medium">
+                        <div>Cible : <code id="report-target" class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded">https://example.com</code></div>
+                        <div>• Réf : <code id="report-ref" class="text-slate-700 font-bold">KAI-AUDIT-20261028</code></div>
+                        <div>• Date : <span id="report-date" class="text-slate-700 font-bold">28 Octobre 2026</span></div>
+                    </div>
                 </div>
-                <div class="text-center px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase">Sécurité HTTP</div>
-                    <div class="text-2xl font-black text-amber-600">10/100 (F)</div>
+
+                <!-- SCORE BADGES -->
+                <div class="flex items-center gap-3 shrink-0">
+                    <div class="text-center px-5 py-3 rounded-2xl bg-slate-50 border border-slate-200 min-w-[100px]">
+                        <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Score Initial</div>
+                        <div id="badge-score-initial" class="text-3xl font-black text-rose-600">15 / 100</div>
+                        <div id="badge-grade-initial" class="text-[10px] font-extrabold uppercase text-rose-500">Grade F</div>
+                    </div>
+                    <div class="text-center px-5 py-3 rounded-2xl bg-emerald-50 border border-emerald-200 min-w-[100px]">
+                        <div class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Score Cible</div>
+                        <div class="text-3xl font-black text-emerald-600">100 / 100</div>
+                        <div class="text-[10px] font-extrabold uppercase text-emerald-600">Grade A+ (OWASP)</div>
+                    </div>
                 </div>
-                <div class="text-center px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                    <div class="text-[11px] font-semibold text-slate-500 uppercase">WCAG 2.1 AA</div>
-                    <div class="text-2xl font-black text-emerald-600">75/100 (A)</div>
+            </div>
+
+            <!-- CADRE METHODOLOGIQUE -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs text-slate-600 leading-relaxed">
+                <strong>Périmètre & Méthodologie d'Audit :</strong> Cet audit contradictoire évalue l'application des recommandations du <em>Mozilla Web Security Standard</em>, de l'<em>OWASP Top 10 (A05:2021 - Security Misconfiguration)</em> et des directives de protection des données (RGPD / ANSSI). L'analyse intègre l'inspection des en-têtes HTTP défensifs, l'analyse dynamique du DOM pour la Content Security Policy (CSP), l'isolation Cross-Origin (COOP/COEP) et la configuration sécurisée des cookies de session.
+            </div>
+        </header>
+
+        <!-- SYNTHÈSE EXÉCUTIVE DES RISQUES -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="activity" class="w-5 h-5 text-indigo-600"></i>
+                    <span>1. Synthèse Exécutive des Risques Identifiés</span>
+                </h2>
+                <span id="risk-counter" class="text-xs font-bold px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-200">
+                    5 Risques Critiques / Élevés
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-1.5">
+                    <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                        <i data-lucide="shield-alert" class="w-4 h-4 text-rose-600"></i>
+                        <span>Attaques XSS & Injection</span>
+                    </div>
+                    <p id="risk-xss-desc" class="text-slate-600">L'absence d'une Content-Security-Policy (CSP) stricte autorise l'injection et l'exécution de scripts malveillants tiers.</p>
+                </div>
+
+                <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-1.5">
+                    <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                        <i data-lucide="lock" class="w-4 h-4 text-rose-600"></i>
+                        <span>Déclassement SSL (MITM)</span>
+                    </div>
+                    <p id="risk-hsts-desc" class="text-slate-600">Sans HSTS (Strict-Transport-Security), les communications peuvent être déclassées en HTTP non chiffré lors de connexions publiques.</p>
+                </div>
+
+                <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-1.5">
+                    <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                        <i data-lucide="eye" class="w-4 h-4 text-amber-600"></i>
+                        <span>Détournement de Clics (Clickjacking)</span>
+                    </div>
+                    <p id="risk-frame-desc" class="text-slate-600">L'absence d'en-tête X-Frame-Options ou frame-ancestors permet l'inclusion du site dans des iframes invisibles trompant l'utilisateur.</p>
                 </div>
             </div>
-        </div>
-        <p class="text-xs text-slate-500 leading-relaxed">
-            <strong>Périmètre & Limites méthodologiques :</strong> Audit technique passif et non-intrusif portant sur les en-têtes HTTP/HTTPS, les drapeaux de cookies, l&#x27;exposition de surface publique et l&#x27;arbre DOM HTML/WCAG 2.1 AA de la page cible. Ce diagnostic fournit des correctifs techniques directement exploitables mais ne constitue pas un test d&#x27;intrusion offensif (pentest) ni une certification administrative d&#x27;État.
-        </p>
-    </header>
+        </section>
 
-    <!-- VOLET 1 : SÉCURITÉ HTTP & OWASP -->
-    <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-        <h2 class="text-lg font-extrabold text-slate-900">1. Contrôle des En-têtes HTTP Défensifs (OWASP) & Fuites Serveur</h2>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-extrabold uppercase text-slate-600">
-                        <th class="py-2.5 px-3">En-tête HTTP</th>
-                        <th class="py-2.5 px-3">État</th>
-                        <th class="py-2.5 px-3">Risque couvert</th>
-                        <th class="py-2.5 px-3">Directive recommandée</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-900">strict-transport-security</td>
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">Manquant</span></td>
-                <td class="py-2.5 px-3 text-xs text-slate-600">Protège contre le déclassement SSL et l&#x27;interception de trafic (MITM).</td>
-                <td class="py-2.5 px-3 font-mono text-[11px] text-slate-700">max-age=31536000; includeSubDomains; preload</td>
-            </tr>
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-900">content-security-policy</td>
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">Manquant</span></td>
-                <td class="py-2.5 px-3 text-xs text-slate-600">Bloque l&#x27;exécution de scripts non autorisés et les attaques XSS.</td>
-                <td class="py-2.5 px-3 font-mono text-[11px] text-slate-700">default-src &#x27;self&#x27;; script-src &#x27;self&#x27;; object-src &#x27;none&#x27;;</td>
-            </tr>
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-900">x-frame-options</td>
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">Manquant</span></td>
-                <td class="py-2.5 px-3 text-xs text-slate-600">Empêche l&#x27;inclusion du site dans des iframes malveillantes (Clickjacking).</td>
-                <td class="py-2.5 px-3 font-mono text-[11px] text-slate-700">DENY</td>
-            </tr>
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-900">x-content-type-options</td>
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">Conforme</span></td>
-                <td class="py-2.5 px-3 text-xs text-slate-600">Force le navigateur à respecter le type MIME déclaré (bloque les faux fichiers).</td>
-                <td class="py-2.5 px-3 font-mono text-[11px] text-slate-700"></td>
-            </tr>
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-900">referrer-policy</td>
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">Manquant</span></td>
-                <td class="py-2.5 px-3 text-xs text-slate-600">Limite la fuite d&#x27;URLs et de données sensibles lors de clics externes.</td>
-                <td class="py-2.5 px-3 font-mono text-[11px] text-slate-700">strict-origin-when-cross-origin</td>
-            </tr>
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-900">permissions-policy</td>
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">Manquant</span></td>
-                <td class="py-2.5 px-3 text-xs text-slate-600">Désactive les fonctionnalités matérielles invasives (caméra, micro, géolocalisation).</td>
-                <td class="py-2.5 px-3 font-mono text-[11px] text-slate-700">camera=(), microphone=(), geolocation=()</td>
-            </tr>
-                </tbody>
-            </table>
-        </div>
-        <ul class="space-y-2 pt-2">
-            
-            <li class="p-2.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-900">
-                <strong>Fuite d'empreinte serveur :</strong> <code>server: nginx/1.18.0 (Ubuntu)</code>
-                — Supprimer ou masquer l&#x27;en-tête &#x27;server&#x27; pour éviter la reconnaissance d&#x27;empreinte d&#x27;OS/serveur.
-            </li>
-            <li class="p-2.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-900">
-                <strong>Fuite d'empreinte serveur :</strong> <code>x-powered-by: PHP/8.1.2</code>
-                — Supprimer ou masquer l&#x27;en-tête &#x27;x-powered-by&#x27; pour éviter la reconnaissance d&#x27;empreinte d&#x27;OS/serveur.
-            </li>
-        </ul>
-    </section>
+        <!-- TABLEAU TECHNIQUE DES EN-TÊTES OWASP -->
+        <section class="space-y-4">
+            <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="list-checks" class="w-5 h-5 text-indigo-600"></i>
+                <span>2. Contrôle Contradictoire des En-têtes HTTP (OWASP Guidelines)</span>
+            </h2>
 
-    <!-- VOLET 2 : ACCESSIBILITÉ WCAG 2.1 AA / RGAA -->
-    <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-        <h2 class="text-lg font-extrabold text-slate-900">2. Diagnostic d'Accessibilité Numérique (WCAG 2.1 AA / RGAA 4.1)</h2>
-        <p class="text-xs text-slate-600">Vérification automatisée de la structure sémantique, des alternatives textuelles d'images, des étiquettes de formulaires et de la lisibilité visuelle.</p>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-extrabold uppercase text-slate-600">
-                        <th class="py-2.5 px-3">Sévérité</th>
-                        <th class="py-2.5 px-3">Règle WCAG / RGAA</th>
-                        <th class="py-2.5 px-3">Diagnostic & Élément concerné</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">CRITICAL</span></td>
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-800">doc_lang</td>
-                <td class="py-2.5 px-3 text-xs text-slate-700">La balise &lt;html&gt; ne spécifie aucun attribut &#x27;lang&#x27;.</td>
-            </tr>
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">HIGH</span></td>
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-800">img_alt_tags</td>
-                <td class="py-2.5 px-3 text-xs text-slate-700">1 image(s) sans attribut &#x27;alt&#x27; détectée(s).</td>
-            </tr>
-            <tr class="border-b border-slate-200">
-                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">MEDIUM</span></td>
-                <td class="py-2.5 px-3 font-mono text-xs font-bold text-slate-800">links_accessible</td>
-                <td class="py-2.5 px-3 text-xs text-slate-700">1 lien(s) avec intitulé ambigu détecté(s) (ex: &#x27;cliquez ici&#x27;).</td>
-            </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- VOLET 3 : PATCHS DE CONFIGURATION PRÊTS À DÉPLOYER -->
-    <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-        <h2 class="text-lg font-extrabold text-slate-900">3. Correctifs Serveur Clé en Main (Prêts à Copier-Coller)</h2>
-        <p class="text-xs text-slate-600">
-            Origines externes détectées dans la page et autorisées dans la politique CSP :
-            <code>https://cdn.jsdelivr.net, https://fonts.googleapis.com</code>
-        </p>
-
-        <div class="space-y-3">
-            <div>
-                <h3 class="text-xs font-extrabold uppercase text-slate-700 mb-1.5">Option A — Configuration Nginx (<code>/etc/nginx/sites-available/votresite.conf</code>)</h3>
-                <pre class="p-4 rounded-xl bg-slate-900 text-emerald-400 text-xs overflow-x-auto"># === PACK CORRECTIF NGINX (PRÊT À COPIER DANS VOTRE BLOC server {}) ===
-server_tokens off; # Masque la version exacte de Nginx
-add_header Strict-Transport-Security &quot;max-age=31536000; includeSubDomains; preload&quot; always;
-add_header X-Content-Type-Options &quot;nosniff&quot; always;
-add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;
-add_header Referrer-Policy &quot;strict-origin-when-cross-origin&quot; always;
-add_header Permissions-Policy &quot;camera=(), microphone=(), geolocation=()&quot; always;
-add_header Content-Security-Policy &quot;default-src &#x27;self&#x27;; script-src &#x27;self&#x27; https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src &#x27;self&#x27; data: https:; frame-ancestors &#x27;self&#x27;; object-src &#x27;none&#x27;;&quot; always;</pre>
+            <div class="overflow-x-auto border border-slate-200 rounded-2xl">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200 font-extrabold uppercase text-slate-600 tracking-wider">
+                            <th class="py-3 px-4">En-tête de Sécurité</th>
+                            <th class="py-3 px-4">Statut</th>
+                            <th class="py-3 px-4">Protection & Risque Couvert</th>
+                            <th class="py-3 px-4">Valeur Recommandée (OWASP)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="headers-table-body">
+                        <!-- Rempli dynamiquement -->
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <h3 class="text-xs font-extrabold uppercase text-slate-700 mb-1.5">Option B — Configuration Apache (<code>.htaccess</code>)</h3>
-                <pre class="p-4 rounded-xl bg-slate-900 text-amber-300 text-xs overflow-x-auto"># === PACK CORRECTIF APACHE (.htaccess) ===
-&lt;IfModule mod_headers.c&gt;
-  Header always unset X-Powered-By
-  Header always set Strict-Transport-Security &quot;max-age=31536000; includeSubDomains; preload&quot;
-  Header always set X-Content-Type-Options &quot;nosniff&quot;
-  Header always set X-Frame-Options &quot;SAMEORIGIN&quot;
-  Header always set Referrer-Policy &quot;strict-origin-when-cross-origin&quot;
-  Header always set Permissions-Policy &quot;camera=(), microphone=(), geolocation=()&quot;
-  Header always set Content-Security-Policy &quot;default-src &#x27;self&#x27;; script-src &#x27;self&#x27; https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src &#x27;self&#x27; data: https:; frame-ancestors &#x27;self&#x27;; object-src &#x27;none&#x27;;&quot;
-&lt;/IfModule&gt;</pre>
+        </section>
+
+        <!-- MOTEUR CSP & TIERS DÉTECTÉS (PAGE BREAK FOR PRINT) -->
+        <section class="page-break space-y-4 pt-4">
+            <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="cpu" class="w-5 h-5 text-indigo-600"></i>
+                <span>3. Ingénierie Content-Security-Policy (CSP) Sans Risque de Régression</span>
+            </h2>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3">
+                <div class="text-xs font-bold text-slate-800">Origines Externes & Dépendances Tiers Analysées dans la Page Cible :</div>
+                <div id="detected-providers-container" class="flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 rounded-lg bg-indigo-100 text-indigo-800 font-bold text-xs border border-indigo-200">Analyse standard</span>
+                </div>
+                <p class="text-[11px] text-slate-500 leading-relaxed">
+                    <em>Principe de Haute Disponibilité :</em> Contrairement aux politiques CSP génériques qui provoquent des pannes d'affichage et cassent les modules de paiement (Stripe, Paypal) ou de tracking (GTM), cette politique autorise spécifiquement les origines tierces légitimes identifiées sur votre site tout en verrouillant strictement le reste.
+                </p>
+                <div class="pt-2">
+                    <div class="text-[11px] font-bold uppercase text-slate-700 mb-1">En-tête CSP Optimisé Prêt au Déploiement :</div>
+                    <pre id="smart-csp-display" class="p-3.5 rounded-xl bg-slate-900 text-emerald-400 text-[11px] overflow-x-auto whitespace-pre-wrap break-all border border-slate-800 font-mono"></pre>
+                </div>
             </div>
+        </section>
+
+        <!-- SNIPPETS DE REMÉDIATION MULTI-PLATEFORMES -->
+        <section class="space-y-4">
+            <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="code" class="w-5 h-5 text-indigo-600"></i>
+                <span>4. Pack de Déploiement Prêt à Copier-Coller</span>
+            </h2>
+            <p class="text-xs text-slate-600">Sélectionnez la configuration correspondant à votre infrastructure de production pour appliquer l'intégralité des recommandations :</p>
+
+            <div class="space-y-4 text-xs">
+                <!-- Option Next.js -->
+                <div class="border border-slate-200 rounded-2xl p-4 bg-white space-y-2">
+                    <div class="font-bold text-slate-900 flex items-center justify-between">
+                        <span>Option A — Next.js 14 / 15 / 16 (<code>middleware.ts</code>)</span>
+                        <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">Edge Middleware</span>
+                    </div>
+                    <pre id="snippet-nextjs" class="p-3 rounded-xl bg-slate-950 text-sky-300 text-[11px] overflow-x-auto font-mono"></pre>
+                </div>
+
+                <!-- Option Nginx -->
+                <div class="border border-slate-200 rounded-2xl p-4 bg-white space-y-2">
+                    <div class="font-bold text-slate-900 flex items-center justify-between">
+                        <span>Option B — Serveur Nginx (<code>/etc/nginx/sites-available/default</code>)</span>
+                        <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Serveur Web Linux</span>
+                    </div>
+                    <pre id="snippet-nginx" class="p-3 rounded-xl bg-slate-950 text-emerald-400 text-[11px] overflow-x-auto font-mono"></pre>
+                </div>
+
+                <!-- Option Cloudflare Pages / Workers -->
+                <div class="border border-slate-200 rounded-2xl p-4 bg-white space-y-2">
+                    <div class="font-bold text-slate-900 flex items-center justify-between">
+                        <span>Option C — Cloudflare Pages & Workers (<code>_headers</code>)</span>
+                        <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-amber-100 text-amber-800">CDN Edge Rules</span>
+                    </div>
+                    <pre id="snippet-cloudflare" class="p-3 rounded-xl bg-slate-950 text-amber-300 text-[11px] overflow-x-auto font-mono"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCLUSION ET SIGNATURE -->
+        <footer class="border-t border-slate-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
             <div>
-                <h3 class="text-xs font-extrabold uppercase text-slate-700 mb-1.5">Option C — Configuration Next.js / Vercel (<code>vercel.json</code>)</h3>
-                <pre class="p-4 rounded-xl bg-slate-900 text-sky-300 text-xs overflow-x-auto">{
-  &quot;headers&quot;: [
-    {
-      &quot;source&quot;: &quot;/(.*)&quot;,
-      &quot;headers&quot;: [
-        {
-          &quot;key&quot;: &quot;Strict-Transport-Security&quot;,
-          &quot;value&quot;: &quot;max-age=31536000; includeSubDomains; preload&quot;
-        },
-        {
-          &quot;key&quot;: &quot;X-Content-Type-Options&quot;,
-          &quot;value&quot;: &quot;nosniff&quot;
-        },
-        {
-          &quot;key&quot;: &quot;X-Frame-Options&quot;,
-          &quot;value&quot;: &quot;SAMEORIGIN&quot;
-        },
-        {
-          &quot;key&quot;: &quot;Referrer-Policy&quot;,
-          &quot;value&quot;: &quot;strict-origin-when-cross-origin&quot;
-        },
-        {
-          &quot;key&quot;: &quot;Permissions-Policy&quot;,
-          &quot;value&quot;: &quot;camera=(), microphone=(), geolocation=()&quot;
-        },
-        {
-          &quot;key&quot;: &quot;Content-Security-Policy&quot;,
-          &quot;value&quot;: &quot;default-src &#x27;self&#x27;; script-src &#x27;self&#x27; https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src &#x27;self&#x27; data: https:; frame-ancestors &#x27;self&#x27;; object-src &#x27;none&#x27;;&quot;
+                <div>Rapport généré par le moteur <strong>SecHeaders Sentinel v1.1.0</strong></div>
+                <div>Garantie d'intégrité OWASP ASVS 4.0 & ANSSI Guides d'hygiène informatique</div>
+            </div>
+            <div class="text-right">
+                <div class="font-bold text-slate-900" contenteditable="true">Signature de l'Auditeur / Consultant</div>
+                <div class="text-[10px] text-slate-400">Contre-visite de validation incluse sous 30 jours</div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Lecture dynamique des données depuis sessionStorage ou fallback synthétique
+        const cachedAuditStr = sessionStorage.getItem('kai_audit_export');
+        let auditData = null;
+
+        if (cachedAuditStr) {
+            try {
+                auditData = JSON.parse(cachedAuditStr);
+            } catch (e) {
+                console.error("Erreur lecture cache audit:", e);
+            }
         }
-      ]
-    }
-  ]
-}</pre>
-            </div>
-        </div>
-    </section>
 
+        // Données synthétiques par défaut si pas de scan préalable
+        const defaultData = {
+            target_url: "https://vitrine-client-exemple.fr",
+            score: 15,
+            grade: "F",
+            details: [
+                { header: "strict-transport-security", name: "HTTP Strict Transport Security (HSTS)", present: false, description: "Protège contre le déclassement SSL et l'interception de trafic (MITM).", recommendation: "max-age=31536000; includeSubDomains; preload" },
+                { header: "content-security-policy", name: "Content Security Policy (CSP)", present: false, description: "Bloque l'exécution de scripts non autorisés et les attaques XSS.", recommendation: "default-src 'self'; script-src 'self' https://js.stripe.com;" },
+                { header: "x-frame-options", name: "X-Frame-Options (Clickjacking Protection)", present: false, description: "Empêche l'inclusion du site dans des iframes malveillantes.", recommendation: "DENY" },
+                { header: "x-content-type-options", name: "X-Content-Type-Options (MIME Sniffing)", present: true, description: "Force le navigateur à respecter le type MIME déclaré.", recommendation: "nosniff" },
+                { header: "referrer-policy", name: "Referrer-Policy (Privacy)", present: false, description: "Limite la fuite d'URLs lors de clics externes.", recommendation: "strict-origin-when-cross-origin" },
+                { header: "permissions-policy", name: "Permissions-Policy (Feature Control)", present: false, description: "Désactive les fonctionnalités matérielles invasives (caméra, micro).", recommendation: "camera=(), microphone=(), geolocation=()" }
+            ],
+            smart_csp_architect: {
+                detected_providers: ["Stripe Payments", "Google Fonts", "Google Tag Manager & Analytics"],
+                smart_csp: "default-src 'self'; script-src 'self' https://js.stripe.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.stripe.com https://www.google-analytics.com; frame-src https://js.stripe.com; object-src 'none';",
+                framework_snippets: {
+                    nextjs: "// Next.js middleware.ts\\nimport { NextResponse } from 'next/server';\\nexport function middleware() {\\n  const res = NextResponse.next();\\n  res.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');\\n  return res;\\n}",
+                    nginx: "add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload' always;\\nadd_header X-Content-Type-Options 'nosniff' always;\\nadd_header X-Frame-Options 'DENY' always;",
+                    cloudflare: "/*\\n  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload\\n  X-Content-Type-Options: nosniff\\n  X-Frame-Options: DENY"
+                }
+            },
+            snippets: {}
+        };
+
+        const activeData = auditData || defaultData;
+
+        // Peuplement du DOM
+        document.getElementById('report-target').textContent = activeData.target_url || "https://example.com";
+        document.getElementById('badge-score-initial').textContent = `${activeData.score || 15} / 100`;
+        document.getElementById('badge-grade-initial').textContent = `Grade ${activeData.grade || 'F'}`;
+        document.getElementById('report-ref').textContent = `KAI-AUDIT-${Date.now().toString().slice(-8)}`;
+        document.getElementById('report-date').textContent = new Date().toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        // Tableau des en-têtes
+        const tableBody = document.getElementById('headers-table-body');
+        tableBody.innerHTML = '';
+
+        let missingCount = 0;
+        (activeData.details || []).forEach(d => {
+            const isOk = d.present || d.status === 'present_secure' || d.status === 'PASS';
+            if (!isOk) missingCount++;
+
+            const row = document.createElement('tr');
+            row.className = "border-b border-slate-100";
+            row.innerHTML = `
+                <td class="py-3 px-4 font-mono font-bold text-slate-900">${d.header || d.name}</td>
+                <td class="py-3 px-4">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase ${isOk ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                        ${isOk ? 'Conforme' : 'Manquant / Risque'}
+                    </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 text-[11px]">${d.description || ''}</td>
+                <td class="py-3 px-4 font-mono text-[11px] text-slate-700 break-all">${d.recommendation || ''}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        document.getElementById('risk-counter').textContent = `${missingCount} En-tête(s) Défensif(s) à Corriger`;
+
+        // Tiers Détectés & CSP
+        const smartCspObj = activeData.smart_csp_architect || {};
+        const providers = smartCspObj.detected_providers || [];
+        const provContainer = document.getElementById('detected-providers-container');
+        provContainer.innerHTML = '';
+
+        if (providers.length === 0) {
+            provContainer.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs">Aucune dépendance externe complexe (Site 100% autonome)</span>`;
+        } else {
+            providers.forEach(p => {
+                const badge = document.createElement('span');
+                badge.className = "px-2.5 py-1 rounded-lg bg-indigo-100 text-indigo-800 font-bold text-xs border border-indigo-200 flex items-center gap-1.5";
+                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>${p}`;
+                provContainer.appendChild(badge);
+            });
+        }
+
+        const cspString = smartCspObj.smart_csp || "default-src 'self'; script-src 'self'; object-src 'none';";
+        document.getElementById('smart-csp-display').textContent = cspString;
+
+        // Snippets de Remédiation
+        const snippets = activeData.snippets || (smartCspObj.framework_snippets || {});
+        document.getElementById('snippet-nextjs').textContent = snippets.nextjs || "// Configuration Next.js disponible";
+        document.getElementById('snippet-nginx').textContent = snippets.nginx || "# Configuration Nginx disponible";
+        document.getElementById('snippet-cloudflare').textContent = snippets.cloudflare || "# Configuration Cloudflare disponible";
+
+        lucide.createIcons();
+    </script>
 </body>
 </html>

@@ -1,103 +1,167 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#287271"/>
-    <title>Chapitre 6 : Sous-Programmes : Procédures, Fonctions & Paramètres — R1.01 Initiation au Développement (C++) — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#287271">
+    <title>R1.01 • Ch. 6 : Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09) — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #287271;
-            --bg-soft: #E9F2F1;
-            --border-soft: #B8D8D6;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.7;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.035em !important;
-            word-spacing: 0.09em !important;
-            line-height: 1.9 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
-        }
-        .font-dyslexic p, .font-dyslexic li, .font-dyslexic td {
-            font-size: 1.02rem !important;
-            line-height: 1.9 !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
-            transition: border-color 150ms ease, box-shadow 150ms ease;
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .glass-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
         }
-        .concept-badge {
-            display: inline-flex;
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.25rem 0.65rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #287271;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1.25rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.82rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
@@ -126,32 +190,11 @@
             border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.25rem 1.5rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
-            margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.84rem;
-            line-height: 1.65;
-            border: 1px solid #1e293b;
-        }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.84rem;
-            padding: 0.2rem 0.45rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
-        }
         .quiz-opt {
             transition: all 150ms ease-in-out;
             cursor: pointer;
         }
-        .quiz-opt:hover {
+        .quiz-opt:hover:not(:disabled) {
             background-color: #f8fafc;
             border-color: #94a3b8;
         }
@@ -166,411 +209,512 @@
             border-color: #ef4444 !important;
             color: #b91c1c !important;
         }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500 font-mono">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.01.html">R1.01</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 6</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.01.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #287271;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.01</span>
-            </a>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.01.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.01
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 6</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25021
+                </span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #287271;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">R1.01 · Masterclass Chapitre 6</span>
-            <span class="text-xs text-slate-500 font-mono">IUT d'Anglet · Enseignants référents : M. Patrick Etcheverry / M. Sébastien Dalmau</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #287271;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        R1.01 • CHAPITRE 6
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Supports officiels 08-procedures & 09-fonctions & Fiche pratique Elearn : Rôle des sous-programmes, distinction Procédure (action sans retour) vs Fonction (calcul atomique avec retour), arbre de décision du mode de transmission des paramètres (in, out, inout), passage par valeur vs référence &, et C++ Core Guidelines F.16/F.17.
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 6 : Sous-Programmes : Procédures, Fonctions & Paramètres</h1>
-        <p class="text-slate-600 text-sm sm:text-base mt-2.5 max-w-3xl leading-relaxed">Modularité du code, distinction formelle entre Procédure et Fonction, cadre de pile (Call Stack), l'arbre décisionnel du mode de passage des paramètres (valeur, référence &, référence constante const &), et la règle d'or d'ordonnancement d'Etcheverry.</p>
-        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500">
+    </div>
+    
 
-            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-emerald-600" data-lucide="check-circle-2"></i> Cours Complet Exhaustif</span>
-            <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-amber-600" data-lucide="alert-triangle"></i> Pièges d'Examen Partiel</span>
-            <span class="px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-teal-600" data-lucide="code"></i> Allman C/C++ Strict</span>
-            <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 border border-blue-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-blue-600" data-lucide="cpu"></i> Trace Mémoire RAM</span>
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Les Slides Officielles des Sous-Programmes</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+    <div class="rounded-2xl overflow-hidden border border-slate-300 shadow-md bg-slate-900" style="height: 380px;">
+        <iframe src="https://patrick-etcheverry.github.io/r1.01-initiation-au-dev/Cours/08-procedures" class="w-full h-full border-0" allowfullscreen></iframe>
+    </div>
+    <div class="rounded-2xl overflow-hidden border border-slate-300 shadow-md bg-slate-900" style="height: 380px;">
+        <iframe src="https://patrick-etcheverry.github.io/r1.01-initiation-au-dev/Cours/09-fonctions" class="w-full h-full border-0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<h2>2. L'ARBRE OFFICIEL DU MODE DE TRANSMISSION DES PARAMÈTRES (Moodle UPPA)</h2>
+<p>
+Voici le document officiel de M. Etcheverry pour choisir entre passage par valeur et passage par référence :
+</p>
+<div class="my-6 p-3 rounded-2xl border border-slate-300 bg-white shadow-md text-center">
+    <img src="images/choisir_mode_transmission_parametre.jpg" alt="Guide Officiel de Transmission des Paramètres - Patrick Etcheverry" class="max-w-full h-auto mx-auto rounded-xl">
+    <p class="text-xs text-slate-500 mt-2 font-medium">Fiche pratique officielle — R1.01 Initiation au développement — Université de Pau et des Pays de l'Adour</p>
+</div>
+
+<h2>3. Procédure vs Fonction : Quand Choisir Quoi ?</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Critère</th>
+            <th>Procédure (08-procedures)</th>
+            <th>Fonction (09-fonctions)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Rôle Principal</strong></td>
+            <td>Réaliser une <strong>action</strong> modifiant l'état du système (I/O, mise à jour, affichage).</td>
+            <td>Calculer et <strong>retourner une valeur unique</strong> typée.</td>
+        </tr>
+        <tr>
+            <td><strong>Valeur de retour en C++</strong></td>
+            <td>Type <code>void</code> (aucune valeur retournée directement).</td>
+            <td>Type explicite (<code>int</code>, <code>double</code>, <code>bool</code>, <code>string</code>) avec instruction <code>return</code>.</td>
+        </tr>
+        <tr>
+            <td><strong>Usage typique</strong></td>
+            <td><code>afficherMenu()</code>, <code>saisirNote(note)</code>, <code>echanger(a, b)</code></td>
+            <td><code>calculerPerimetre(rayon)</code>, <code>estPair(n)</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>4. Les 3 Modes de Transmission de Paramètres en C++</h2>
+<ol class="space-y-3 my-4">
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>1. Paramètre en Entrée Pure (<code>in</code>) $ightarrow$ Passage par Valeur (ou Référence Constante) :</strong><br>
+        Le sous-programme a besoin de lire la valeur de la variable sans la modifier. Une copie locale est transmise.<br>
+        <em>En C++ :</em> <code>void afficher(int valeur);</code><br>
+        <em>Pour les types volumineux (structures, tableaux) :</em> <code>void afficherGrand(const string& texte);</code> (C++ Core Guideline F.16).
+    </li>
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>2. Paramètre en Sortie Pure (<code>out</code>) $ightarrow$ Passage par Référence (<code>&</code>) :</strong><br>
+        Le sous-programme produit une valeur et doit la transmettre à l'appelant via le paramètre.<br>
+        <em>En C++ :</em> <code>void saisirValeur(int& resultat);</code>
+    </li>
+    <li class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>3. Paramètre en Entrée/Sortie (<code>inout</code>) $ightarrow$ Passage par Référence (<code>&</code>) :</strong><br>
+        Le sous-programme reçoit une variable avec une valeur initiale, et la modifie sur place.<br>
+        <em>En C++ :</em> <code>void echanger(int& a, int& b);</code> (C++ Core Guideline F.17).
+    </li>
+</ol>
+
+<h2>5. Recommandations Officielles C++ Core Guidelines (F.16 & F.17)</h2>
+<ul>
+    <li><strong>Règle F.16 :</strong> <em>« For "in" parameters, pass cheaply-copied types by value and others by reference to const. »</em></li>
+    <li><strong>Règle F.17 :</strong> <em>« For "in-out" parameters, pass by reference. »</em></li>
+    <li><strong>Règle F.20 :</strong> <em>« For "out" output values, prefer return values over output parameters. »</em> (Si un sous-programme produit un seul résultat, préférez une fonction avec <code>return</code> plutôt qu'un paramètre par référence).</li>
+</ul>
+
+            </div>
+        </div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #287271;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09) »</strong> constitue un pilier fondamental du module <strong>R1.01 — Initiation au Développement (Algorithmique Formelle & Programmation)</strong> enseigné par <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Supports officiels 08-procedures & 09-fonctions & Fiche pratique Elearn : Rôle des sous-programmes, distinction Procédure (action sans retour) vs Fonction (calcul atomique avec retour), arbre de décision du mode de transmission des paramètres (in, out, inout), passage par valeur vs référence &, et C++ Core Guidelines F.16/F.17. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Sous-programmes, Procédures, Fonctions, Passage par référence, C++ Core Guidelines</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Sous-programmes, Procédures, Fonctions, Passage par référence) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Patrick Etcheverry / M. Sébastien Dalmau.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">1</span>
+                <span>Étape 1 : Les Slides Officielles des Sous-Programmes</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Sous-programmes</em> en partant de zéro. 1. Paramètre en Entrée Pure ( in ) $ ightarrow$ Passage par Valeur (ou Référence Constante) : Le sous-programme a besoin de lire la valeur de la variable sans la modifier. Une copie locale est transmise. En C++ : void afficher(int valeur);  Complétez systématiquement cette analyse par la vérification suivante : 2. Paramètre en Sortie Pure ( out ) $ ightarrow$ Passage par Référence ( & ) : Le sous-programme produit une valeur et doit la transmettre à l'appelant via le paramètre. En C++ : void saisirValeur(int& resultat);</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Sous-programmes) : void — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">2</span>
+                <span>Étape 2 : L'ARBRE OFFICIEL DU MODE DE TRANSMISSION DES PARAMÈTRES (Moodle UPPA)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Procédures</em> en partant de zéro. 3. Paramètre en Entrée/Sortie ( inout ) $ ightarrow$ Passage par Référence ( & ) : Le sous-programme reçoit une variable avec une valeur initiale, et la modifie sur place. En C++ : void echanger(int& a, int& b); (C++ Core Guideline F.17). Complétez systématiquement cette analyse par la vérification suivante : Règle F.16 : « For "in" parameters, pass cheaply-copied types by value and others by reference to const. »</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Procédures) : int — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">3</span>
+                <span>Étape 3 : Procédure vs Fonction : Quand Choisir Quoi ?</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Fonctions</em> en partant de zéro. Règle F.17 : « For "in-out" parameters, pass by reference. » Complétez systématiquement cette analyse par la vérification suivante : Règle F.20 : « For "out" output values, prefer return values over output parameters. » (Si un sous-programme produit un seul résultat, préférez une fonction avec return plutôt qu'un paramètre par référence).</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Fonctions) : double — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">4</span>
+                <span>Étape 4 : Les 3 Modes de Transmission de Paramètres en C++</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Passage par référence</em> en partant de zéro. Maîtrise opérationnelle de « Procédures » dans le cadre de Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09) : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry / M. Sébastien D Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Fonctions » dans le cadre de Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09) : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etchever</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Passage par référence) : bool — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
         
         </div>
-    </section>
+    </article>
+    
 
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-8">
-
-<!-- SECTION 1 : MODULARITÉ & PHILOSOPHIE -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="boxes" style="color: #287271;"></i>
-        <span>1. La Modularité : Diviser pour Régner</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Un programme monolithique de 1000 lignes dans une seule fonction <code>main()</code> est illisible, impossible à débugger et non réutilisable. La modularité consiste à décomposer une application complexe en <strong>unités fonctionnelles autonomes</strong> appelées <strong>sous-programmes</strong> (fonctions et procédures).
-    </p>
-
-    <div class="callout-def">
-        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">LES 4 AVANTAGES DE LA MODULARITÉ :</h3>
-        <div class="text-xs sm:text-sm text-slate-800 mt-2 space-y-1.5 leading-relaxed">
-            <p>1. <strong>Lisibilité :</strong> Le <code>main()</code> devient un chef d'orchestre épuré de 20 lignes qui exprime la logique métier de haut niveau.</p>
-            <p>2. <strong>Réutilisabilité :</strong> Un sous-programme écrit une fois (ex: <code>saisirNoteControlee</code>) peut être appelé 50 fois depuis divers endroits du logiciel.</p>
-            <p>3. <strong>Testabilité unitaire :</strong> On peut tester et valider mathématiquement chaque fonction isolément avant de l'intégrer au système complet.</p>
-            <p>4. <strong>Encapsulation :</strong> Les variables internes du sous-programme sont privées et protégées contre les interférences accidentelles du reste du programme.</p>
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #287271;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Patrick Etcheverry / M. Sébastien Dalmau)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Sous-programmes</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.6</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>void</code><br><span class='text-[11px] text-slate-600'>1. Les Slides Officielles des Sous-Programmes</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">1. Paramètre en Entrée Pure ( in ) $ ightarrow$ Passage par Valeur (ou Référence Constante) : Le sous-programme a besoin de lire la valeur de la variable sans la modifier. Une copie locale e</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Procédures</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.6</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>int</code><br><span class='text-[11px] text-slate-600'>2. L'ARBRE OFFICIEL DU MODE DE TRANSMISSION DES PARAMÈTRES (Moodle UPP</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">2. Paramètre en Sortie Pure ( out ) $ ightarrow$ Passage par Référence ( & ) : Le sous-programme produit une valeur et doit la transmettre à l'appelant via le paramètre. En C++ : void saisir</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Fonctions</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.6</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>double</code><br><span class='text-[11px] text-slate-600'>3. Procédure vs Fonction : Quand Choisir Quoi ?</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">3. Paramètre en Entrée/Sortie ( inout ) $ ightarrow$ Passage par Référence ( & ) : Le sous-programme reçoit une variable avec une valeur initiale, et la modifie sur place. En C++ : void echa</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Passage par référence</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.6</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>bool</code><br><span class='text-[11px] text-slate-600'>4. Les 3 Modes de Transmission de Paramètres en C++</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Règle F.16 : « For "in" parameters, pass cheaply-copied types by value and others by reference to const. »</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>C++ Core Guidelines</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.6</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>string</code><br><span class='text-[11px] text-slate-600'>5. Recommandations Officielles C++ Core Guidelines (F.16 & F.17)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Règle F.17 : « For "in-out" parameters, pass by reference. »</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>1. Les Slides Officielles des Sous-Programmes</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.6</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>return</code><br><span class='text-[11px] text-slate-600'>1. Les Slides Officielles des Sous-Programmes</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Règle F.20 : « For "out" output values, prefer return values over output parameters. » (Si un sous-programme produit un seul résultat, préférez une fonction avec return plutôt qu'un paramètr</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. L'ARBRE OFFICIEL DU MODE DE TRANSMISSION D</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.6</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>afficherMenu()</code><br><span class='text-[11px] text-slate-600'>2. L'ARBRE OFFICIEL DU MODE DE TRANSMISSION DES PARAMÈTRES (Moodle UPP</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Procédures » dans le cadre de Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09) : identifier l'hypothèse de départ, appliquer la règle formelle </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
         </div>
-    </div>
-</article>
+    </article>
+    
 
-<!-- SECTION 2 : PROCÉDURE VS FONCTION -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="git-commit" style="color: #287271;"></i>
-        <span>2. Procédure ou Fonction : La Distinction Formelle</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        En C++, les deux concepts sont syntaxiquement déclarés sous le mot générique de « fonction », mais leur <strong>rôle sémantique en algorithmique</strong> est radicalement différent :
-    </p>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Critère</th>
-                <th>Procédure (<code>void</code>)</th>
-                <th>Fonction Pure (<code>TypeDeRetour</code>)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Définition</strong></td>
-                <td>Action qui réalise un traitement, modifie son environnement (affichage, fichier) ou mute des variables passées par référence.</td>
-                <td>Mécanisme de calcul qui évalue et <strong>renvoie un unique résultat</strong> par son nom via l'instruction <code>return</code>.</td>
-            </tr>
-            <tr>
-                <td><strong>Type de Retour</strong></td>
-                <td><code>void</code> (mot-clé indiquant le vide, aucun retour).</td>
-                <td>Un type valide : <code>int</code>, <code>double</code>, <code>bool</code>, <code>string</code>...</td>
-            </tr>
-            <tr>
-                <td><strong>Mode d'Appel</strong></td>
-                <td>Instruction autonome suivie d'un point-virgule :<br><code>afficherMenu();</code><br><code>echanger(x, y);</code></td>
-                <td>Utilisée <strong>au sein d'une expression</strong> (affectation, condition) :<br><code>double moy = calculerMoyenne(tab, n);</code><br><code>if (estPremier(n)) ...</code></td>
-            </tr>
-            <tr>
-                <td><strong>Règle d'Or IUT</strong></td>
-                <td>À choisir si le traitement produit 0 résultat ou plus de 1 résultat (via paramètres modifiables).</td>
-                <td>À choisir dès que le traitement produit <strong>exactement un résultat</strong> sans effet de bord.</td>
-            </tr>
-        </tbody>
-    </table>
-</article>
-
-<!-- SECTION 3 : PILE D'EXÉCUTION ET PORTÉE -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="layers" style="color: #287271;"></i>
-        <span>3. Modèle Mémoire : La Pile d'Exécution (Call Stack) & Portée des Variables</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Comprendre les sous-programmes exige de visualiser ce qui se passe physiquement dans la mémoire RAM lors d'un appel :
-    </p>
-
-    <div class="callout-def">
-        <h4 class="font-extrabold text-slate-900 text-sm">LE MÉCANISME DU CADRE DE PILE (STACK FRAME) :</h4>
-        <div class="text-xs sm:text-sm text-slate-800 mt-2 space-y-1.5 leading-relaxed">
-            <p>1. <strong>Empilement à l'appel :</strong> Lors de l'appel d'un sous-programme, le système suspend la fonction appelante et alloue un nouveau <em>cadre de pile</em> au sommet de la mémoire. Ce cadre contient l'adresse de retour (où reprendre l'exécution) et alloue l'espace pour tous les <strong>paramètres formels</strong> et les <strong>variables locales</strong>.</p>
-            <p>2. <strong>Cloisonnement strict (Portée / Scope) :</strong> Une variable locale déclarée dans un sous-programme n'existe que dans ce cadre. Deux fonctions différentes peuvent avoir une variable nommée <code>compteur</code> sans jamais interférer : ce sont deux cases RAM physiques totalement distinctes !</p>
-            <p>3. <strong>Dépilement au return :</strong> Dès que le sous-programme se termine (accolade fermante ou <code>return</code>), son cadre de pile est <strong>instantanément détruit</strong>. Toutes ses variables locales s'évaporent de la mémoire.</p>
-        </div>
-    </div>
-</article>
-
-<!-- SECTION 4 : L'ARBRE DÉCISIONNEL DES MODES DE PASSAGE -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="git-pull-request" style="color: #287271;"></i>
-        <span>4. L'Arbre Décisionnel Officiel des Modes de Passage de Paramètres</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        C'est le cœur méthodologique de l'IUT d'Anglet (aligné sur les <em>C++ Core Guidelines</em> de Bjarne Stroustrup et Herb Sutter, règles F.16 et F.17). Voici le cheminement obligatoire pour chaque paramètre :
-    </p>
-
-    <div class="p-5 rounded-2xl bg-slate-900 text-slate-200 font-mono text-xs sm:text-sm space-y-3 shadow-inner">
-        <p class="text-teal-400 font-bold border-b border-slate-700 pb-2">■ DÉCISION DU MODE DE PASSAGE (DOCUMENTATION OFFICIELLE UPPA) :</p>
-        <pre class="bg-transparent p-0 m-0 text-slate-200 border-0 text-xs leading-relaxed">
-                               ┌─────────────────────────────────────────┐
-                               │ Le paramètre doit-il être modifié par   │
-                               │ le sous-programme de façon visible ?    │
-                               └────────────────────┬────────────────────┘
-                                                    │
-                         ┌──────────────────────────┴──────────────────────────┐
-                    [ OUI ]                                               [ NON ]
-                         │                                                     │
-                         ▼                                                     ▼
-           ┌───────────────────────────┐                         ┌───────────────────────────┐
-           │   PASSAGE PAR RÉFÉRENCE   │                         │ Le paramètre est-il lourd │
-           │     Type& parametre       │                         │ ou léger à copier ?       │
-           │ Modifie la case d'origine │                         └─────────────┬─────────────┘
-           └───────────────────────────┘                                       │
-                                          ┌────────────────────────────────────┴────────────────────────────────────┐
-                                     [ LÉGER ]                                                             [ LOURD ]
-                                          │                                                                     │
-                                          ▼                                                                     ▼
-                             ┌──────────────────────────┐                                          ┌──────────────────────────┐
-                             │    PASSAGE PAR VALEUR    │                                          │ RÉFÉRENCE CONSTANTE      │
-                             │      Type parametre      │                                          │   const Type& parametre  │
-                             │ Copie locale peu coûteuse│                                          │ Zéro copie + protection  │
-                             │ (int, double, char, bool)│                                          │ (string, gros objets)    │
-                             └──────────────────────────┘                                          └──────────────────────────┘
-        </pre>
-    </div>
-
-    <div class="callout-exam">
-        <h4 class="font-bold text-amber-950 text-xs sm:text-sm">RÈGLE SPÉCIALE D'AMPHI : LA TRANSMISSION DES TABLEAUX EN C/C++ :</h4>
-        <p class="text-xs sm:text-sm text-amber-900 mt-1 leading-relaxed">
-            En C et C++, un tableau est <strong>automatiquement transmis par adresse</strong> (dégradation en pointeur). Par convention dans le cours de M. Etcheverry, on n'ajoute pas de <code>&amp;</code> :
-            <br>• Tableau modifiable : <code>void remplir(int tableau[], unsigned int taille);</code>
-            <br>• Tableau non modifiable : <code>void afficher(const int tableau[], unsigned int taille);</code>
-            <br><strong>Obligation absolue :</strong> Toujours transmettre la <code>taille</code> du tableau immédiatement après le tableau !
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
         </p>
-    </div>
-</article>
-
-<!-- SECTION 5 : ORDRE CONVENTIONNEL D'ETCHEVERRY -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="list-ordered" style="color: #287271;"></i>
-        <span>5. La Règle d'Or d'Ordonnancement des Paramètres</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Lors des examens sur table, M. Etcheverry sanctionne le désordre dans la signature des sous-programmes. L'ordre des paramètres dans la parenthèse doit refléter rigoureusement les natures formelles du dictionnaire :
-    </p>
-
-    <div class="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs sm:text-sm space-y-2">
-        <p class="text-teal-400 font-bold">L'ORDRE CANONIQUE STRICT DANS LA SIGNATURE :</p>
-        <p class="text-slate-200"><code>void sousProgramme ( /* 1. DONNÉES */ const Type&amp; d1, Type d2,</code></p>
-        <p class="text-slate-200"><code>                     /* 2. DONNÉES/RÉSULTATS */ Type&amp; dr1,</code></p>
-        <p class="text-slate-200"><code>                     /* 3. RÉSULTATS */ Type&amp; r1 );</code></p>
-    </div>
-</article>
-
-<!-- SECTION 6 : ATELIER PIÈGES D'EXAMEN -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="alert-octagon" style="color: #e11d48;"></i>
-        <span>6. Atelier Pièges d'Examen : Les Fautes Courantes en Sous-Programmes</span>
-    </h2>
-
-    <div class="space-y-4">
-        <!-- PIÈGE 1 : OUBLI DU & -->
-        <div class="p-4 sm:p-5 rounded-2xl border border-rose-200 bg-rose-50/30 space-y-3">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-bold text-rose-900 text-xs sm:text-sm flex items-center gap-2">
-                    <span class="px-2 py-0.5 rounded bg-rose-200 text-rose-900 font-mono text-xs">PIÈGE CARDINAL</span>
-                    Oubli du Symbole &amp; lors d'une Modification (Passage par valeur involontaire)
-                </span>
-                <span class="text-[11px] font-bold text-rose-700 uppercase bg-rose-100 px-2 py-0.5 rounded">-4 points</span>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Sous-programmes » sans vérifier les préconditions</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                <div class="p-3 bg-white rounded-xl border border-rose-200 space-y-1">
-                    <p class="font-bold text-rose-700">❌ Code Inefficace</p>
-                    <code class="text-xs block bg-slate-100 p-2 rounded">void saisir(int val)<br>{<br>    cin &gt;&gt; val;<br>}</code>
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Sous-programmes</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)</em>.</p>
                 </div>
-                <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-1">
-                    <p class="font-bold text-amber-800">⚠️ Mécanisme du Bug</p>
-                    <p class="text-slate-700"><code>val</code> est transmise par valeur : le système en crée une copie locale. <code>cin</code> remplit cette copie. Dès l'accolade fermante, la copie est détruite. Dans le <code>main</code>, la variable d'origine n'a pas bougé d'un bit !</p>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.01</strong>, M. Patrick Etcheverry / M. Sébastien Dalmau insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
                 </div>
-                <div class="p-3 bg-white rounded-xl border border-emerald-200 space-y-1">
-                    <p class="font-bold text-emerald-800">✅ Solution 20/20</p>
-                    <code class="text-xs block bg-slate-100 p-2 rounded">void saisir(int&amp; val)<br>{<br>    cin &gt;&gt; val;<br>}</code>
-                    <p class="text-slate-700 mt-1">Le <code>&amp;</code> crée un alias direct sur la case mémoire d'origine.</p>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Sous-programmes</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
                 </div>
             </div>
         </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Procédures »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Procédures</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Initiation au Développement (Algorithmique Formelle & Programmation)), une part majeure des points est dédiée à la robustesse : 1. Paramètre en Entrée Pure ( in ) $ ightarrow$ Passage par Valeur (ou Référence Constante) : Le sous-programme a besoin de lire la valeur de la variable sans la modifier. Une copi Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Procédures</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Fonctions »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Fonctions</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Patrick Etcheverry / M. Sébastien Dalmau rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.01</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Fonctions</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
 
-        <!-- PIÈGE 2 : DANGLING REFERENCE -->
-        <div class="p-4 sm:p-5 rounded-2xl border border-rose-200 bg-rose-50/30 space-y-3">
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
             <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-bold text-rose-900 text-xs sm:text-sm flex items-center gap-2">
-                    <span class="px-2 py-0.5 rounded bg-rose-200 text-rose-900 font-mono text-xs">CRASH MÉMOIRE</span>
-                    Retourner une Référence vers une Variable Locale Détruite
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #287271;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Les Slides Officielles des Sous-Programmes</span>
                 </span>
-                <span class="text-[11px] font-bold text-rose-700 uppercase bg-rose-100 px-2 py-0.5 rounded">Interdit Absolu</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.01 • Niveau Progressif</span>
             </div>
-            <p class="text-xs text-slate-700 leading-relaxed">
-                Ne jamais écrire <code>int&amp; fonction() { int temp = 5; return temp; }</code> : la case <code>temp</code> est détruite dès le <code>return</code>. Le programme appelant reçoit une référence vers une zone mémoire fantôme, provoquant un comportement indéfini (<em>Undefined Behavior</em>) ou un crash immédiat.
-            </p>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.01 (Initiation au Développement (Algorithmique Formelle & Programmation))</strong> supervisé par M. Patrick Etcheverry / M. Sébastien Dalmau, on vous demande d'analyser et de résoudre un problème portant sur <strong>Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)</strong> en mobilisant explicitement les notions de <em>Sous-programmes, Procédures, Fonctions</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Sous-programmes</em>. Rappel du cours : 1. Paramètre en Entrée Pure ( in ) $ ightarrow$ Passage par Valeur (ou Référence Constante) : Le sous-programme a besoin de lire la valeur de la variable sans la modifier. Une copie locale est transmise. En C++ : void af</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Les Slides Officielles des Sous-Programmes</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. L'ARBRE OFFICIEL DU MODE DE TRANSMISSION DES PARAMÈTRES (</em> : 2. Paramètre en Sortie Pure ( out ) $ ightarrow$ Passage par Référence ( & ) : Le sous-programme produit une valeur et doit la transmettre à l'appelant via le paramètre. En C++ : void saisirValeur(int& resultat);</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Procédures</em> (3. Paramètre en Entrée/Sortie ( inout ) $ ightarrow$ Passage par Référence ( & ) : Le sous-programme reçoit une variable avec une valeur initiale, et la modifie sur place. En C++ :).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Supports officiels 08-procedures & 09-fonctions & Fiche pratique Elearn : Rôle des sous-programmes, distinction Procédure (action sans retou) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.01 — Ch.6 : Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09)) ===
+1. Entrées analysées : Sous-programmes, Procédures, Fonctions, Passage par référence
+2. Étape A (1. Les Slides Officielles des Sous-Programmes) : Validation des hypothèses -> OK
+3. Étape B (2. L'ARBRE OFFICIEL DU MODE DE TRANSMISSION DES PA) : Application de la méthode officielle
+   -> Détail : 1. Paramètre en Entrée Pure ( in ) $ ightarrow$ Passage par Valeur (ou Référence Constante) : Le sous-programm
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE M. PATRICK ETCHEVERRY / M. SÉBASTIEN DALMAU ===</pre>
+            </div>
         </div>
-    </div>
-</article>
-
-<!-- SECTION 7 : EXERCICE GUIDÉ COMPLET -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="check-circle-2" style="color: #287271;"></i>
-        <span>7. Exercice Guidé Intégral : Procédures, Fonctions &amp; Tableaux</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Voici une architecture modulaire complète respectant l'intégralité des standards de l'IUT d'Anglet :
-    </p>
-
-    <pre><code>/*
- * Programme : GestionNotesModulaire
- * But : Démonstration complète des sous-programmes avec conformité Allman et Core Guidelines.
- * Auteur : Matéi de Saint Leger
- */
-
-#include &lt;iostream&gt;
-#include &lt;iomanip&gt;
-using namespace std;
-
-// =============================================================================
-// PROTOTYPES DES SOUS-PROGRAMMES (CONTRATS D'INTERFACE)
-// =============================================================================
-
-void echanger (int&amp; a, int&amp; b);
-// Rôle : Échange le contenu de deux entiers en mémoire.
-// Données/Résultats : a (int&), b (int&)
-
-void saisirNote (float&amp; note, float borneMin, float borneMax);
-// Rôle : Saisie contrôlée d'une note dans l'intervalle [borneMin ; borneMax].
-// Données : borneMin (float), borneMax (float)
-// Résultats : note (float&)
-
-float calculerMoyenne (const float tableauNotes[], unsigned int nbNotes);
-// Rôle : Calcule la moyenne arithmétique d'un tableau de notes sans le modifier.
-// Données : tableauNotes (const float[]), nbNotes (unsigned int)
-// Précondition : nbNotes > 0
-
-// =============================================================================
-// FONCTION PRINCIPALE MAIN
-// =============================================================================
-
-int main (void)
-{
-    const unsigned int NB_MAX = 5;
-    float notesPromo[NB_MAX];
-
-    // Remplissage via la procédure modulaire
-    for (unsigned int i = 0; i &lt; NB_MAX; ++i)
-    {
-        cout &lt;&lt; "Étudiant " &lt;&lt; (i + 1) &lt;&lt; " : ";
-        saisirNote(notesPromo[i], 0.0, 20.0);
-    }
-
-    // Calcul via la fonction pure
-    float moyenne = calculerMoyenne(notesPromo, NB_MAX);
-
-    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
-    cout &lt;&lt; "
-Moyenne de la promotion : " &lt;&lt; moyenne &lt;&lt; " / 20" &lt;&lt; endl;
-
-    return 0;
-}
-
-// =============================================================================
-// CORPS DES SOUS-PROGRAMMES
-// =============================================================================
-
-void echanger (int&amp; a, int&amp; b)
-{
-    int temp = a;
-    a = b;
-    b = temp;
-}
-
-void saisirNote (float&amp; note, float borneMin, float borneMax)
-{
-    do
-    {
-        cin &gt;&gt; note;
-        if (note &lt; borneMin || note &gt; borneMax)
-        {
-            cout &lt;&lt; "Note invalide. Veuillez entrer une valeur entre " 
-                 &lt;&lt; borneMin &lt;&lt; " et " &lt;&lt; borneMax &lt;&lt; " : ";
-        }
-    }
-    while (note &lt; borneMin || note &gt; borneMax);
-}
-
-float calculerMoyenne (const float tableauNotes[], unsigned int nbNotes)
-{
-    float somme = 0.0;
-    for (unsigned int i = 0; i &lt; nbNotes; ++i)
-    {
-        somme = somme + tableauNotes[i];
-    }
-    return somme / static_cast&lt;float&gt;(nbNotes);
-}</code></pre>
-</article>
-
-<!-- SECTION 8 : QCM INTERACTIF -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 quiz-container">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="help-circle" style="color: #287271;"></i>
-        <span>8. Auto-Évaluation Interactive : Paramètres &amp; Modularité (3 Questions)</span>
-    </h2>
-
-    <div class="space-y-3 pt-2">
-        <p class="text-xs sm:text-sm font-bold text-slate-900">Question 1 : Quel mode de passage est recommandé pour transmettre une variable de type <code>int</code> qui ne doit PAS être modifiée ?</p>
-        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
-            <button onclick="answerQuiz(this, true, 'q61-exp')" data-correct="true" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">A. Passage par valeur (int) car c'est un type primitif léger dont la copie est négligeable</button>
-            <button onclick="answerQuiz(this, false, 'q61-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">B. Passage par référence (int&)</button>
-            <button onclick="answerQuiz(this, false, 'q61-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">C. Passage par référence constante (const int&)</button>
-            <button onclick="answerQuiz(this, false, 'q61-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">D. Passage par pointeur brut</button>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #287271;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Procédure vs Fonction : Quand Choisir Quoi ?</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Patrick Etcheverry / M. Sébastien Dalmau</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.01</strong>, un exercice de synthèse combine <strong>Procédures</strong> et <strong>Fonctions</strong> au sein du thème <em>« Sous-Programmes, Procédures & Transmission de Paramètres (08 & 09) »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Procédures</em> : Règle F.16 : « For "in" parameters, pass cheaply-copied types by value and others by reference to const. »</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Patrick Etcheverry / M. Sébastien Dalmau dans la section <em>3. Procédure vs Fonction : Quand Choisir Quoi ?</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Fonctions</em>, on obtient la séquence exacte : Règle F.17 : « For "in-out" parameters, pass by reference. »</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Sous-programmes, Procédures, Fonctions, Passage par référence</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.01 — Procédures) ===
+• Hypothèse initiale : Supports officiels 08-procedures & 09-fonctions & Fiche pratique Elearn : Rôle des sous-programmes, ...
+• Opération principale : Mise en œuvre de Sous-programmes combiné à Procédures
+• Point clé vérifié : 2. Paramètre en Sortie Pure ( out ) $ ightarrow$ Passage par Référence ( & ) : Le sous-programme produit une v
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
         </div>
-        <div id="q61-exp" class="hidden p-3.5 rounded-xl bg-slate-100 text-xs text-slate-800 leading-relaxed">
-            <strong>Explication :</strong> Selon les <em>C++ Core Guidelines</em> et le cours de M. Etcheverry, les types légers de base (int, double, char, bool) doivent être passés par simple valeur car copier 4 octets est plus rapide que de déréférencer une référence.
+        
         </div>
-    </div>
-</article>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.6</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">En C, comment une fonction peut-elle modifier une variable déclarée dans la fonction appelante (passage par référence simulé) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) En passant le nom de la variable entre guillemets
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) En recevant en paramètre l'ADRESSE de la variable (un pointeur), et en modifiant son contenu via l'opérateur de déréférencement *
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Toutes les variables sont modifiables par défaut en C
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) En utilisant l'instruction return deux fois
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap6_sous_programmes_procedures_fonctions_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Le C ne pratique STRICTEMENT QUE le passage par valeur (copie des arguments). Pour modifier une variable externe (ex: la fameuse fonction swap(int *a, int *b)), on passe une copie de son ADRESSE mémoire. La fonction sait alors exactement où aller écrire dans la RAM de l'appelant.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.6</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Lorsqu'on passe un tableau à une fonction en C, pourquoi doit-on obligatoirement passer également sa taille en paramètre (ex: void afficher(int tab[], int taille)) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Parce que le C est un langage verbeux
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Parce que dans les paramètres d'une fonction, le tableau se dégrade automatiquement en un simple pointeur vers son premier élément (Array Decay), perdant ainsi toute notion de sa taille en mémoire
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Pour obliger l'étudiant à écrire plus de code
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Parce que la fonction en a besoin pour changer la couleur du tableau
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap6_sous_programmes_procedures_fonctions_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> En C, 'sizeof(tab)' à l'intérieur de la fonction ne renvoie pas la taille du tableau, mais la taille d'un pointeur (8 octets sur architecture 64 bits) ! Le paramètre 'taille' explicite est donc strictement indispensable.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.6</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la condition préalable indispensable pour pouvoir appliquer l'algorithme de Recherche Dichotomique (Binary Search) sur un tableau ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le tableau doit contenir au moins 1 million d'éléments
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Le tableau doit être PRÉALABLEMENT TRIÉ (dans l'ordre croissant ou décroissant)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Le tableau ne doit contenir que des nombres pairs
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Le tableau doit être alloué sur le tas avec malloc
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap6_sous_programmes_procedures_fonctions_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La recherche dichotomique compare l'élément cherché à la valeur médiane. Si le tableau est trié, elle sait avec certitude dans quelle moitié chercher et élimine 50% des éléments restants à chaque étape (complexité en O(log N)). Sur un tableau non trié, elle est totalement inopérante et donne un résultat faux !
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.6</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quel est le principe de fonctionnement du Tri à Bulles (Bubble Sort) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Faire chauffer la mémoire RAM pour faire monter les données
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Parcourir le tableau en comparant successivement les paires d'éléments adjacents consécutifs et les échanger s'ils sont dans le mauvais ordre, faisant ainsi 'remonter' les plus grands éléments vers la fin du tableau comme des bulles
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Ajouter des zéros entre chaque nombre
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap6_sous_programmes_procedures_fonctions_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Trier les données en les envoyant sur le réseau
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap6_sous_programmes_procedures_fonctions_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> À chaque passe complète, le plus grand élément restant remonte à sa position finale à droite. Si lors d'une passe entière aucun échange n'a été effectué, on peut s'arrêter prématurément car le tableau est déjà trié (optimisation avec un booléen permut).
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap5_decompositions_iteratives.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 5 : Décomposition Itérative & Choix d'une Structure Répétitive (04-iterations)</span></a>
+            </div>
+            <a href="../R1.01.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.01</span>
+            </a>
+            <div>
+                <a href="chap7_programmation_c_dalmau.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #287271;"><span>Ch. 7 : Programmation C ANSI, Pointeurs & Valgrind (M. Dalmau)</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
 
     </main>
 
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200">
-        <div>
-            <a href="chap5_decompositions_iteratives.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 5 : Décompositions Itératives</span>
-        </a>
-        </div>
-        <a href="../R1.01.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module R1.01</span>
-        </a>
-        <div>
-            <a href="chap7_programmation_c_dalmau.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #287271;">
-            <span>Ch. 7 : Langage C & Pointeurs</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
-        </div>
-    </footer>
-
     <script>
         lucide.createIcons();
+        
         function answerQuiz(btn, isCorrect, explanationId) {
             const container = btn.closest('.quiz-container');
+            if (!container) return;
             const buttons = container.querySelectorAll('.quiz-opt');
             buttons.forEach(b => {
                 b.disabled = true;
@@ -587,6 +731,23 @@ float calculerMoyenne (const float tableauNotes[], unsigned int nbNotes)
             const exp = document.getElementById(explanationId);
             if (exp) exp.classList.remove('hidden');
         }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>

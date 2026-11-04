@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" style="color-scheme: light;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#3B6978">
+  <meta name="description" content="Plateforme académique d'excellence BUT 1 Informatique — IUT de Bayonne et du Pays Basque">
+  <title>S1.03 • Synthèse Débruitée — S1.03 • BUT 1 Informatique Anglet</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Mermaid.js Interactive Mindmaps Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.mermaid) {
+        mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+      }
+    });
+  </script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      color-scheme: light;
+      --primary-matiere: #3B6978;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 28px 28px;
+      color: #0f172a;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    /* Mode Confort Dyslexie & Sensibilité Scotopique W3C */
+    .font-dyslexic {
+      font-family: 'Lexend', system-ui, -apple-system, sans-serif !important;
+      letter-spacing: 0.03em !important;
+      word-spacing: 0.09em !important;
+      line-height: 1.8 !important;
+      background-color: #faf8f2 !important; /* Teinte crème apaisante anti-éblouissement */
+      background-image: none !important;
+    }
+    .font-dyslexic p, .font-dyslexic li, .font-dyslexic dd {
+      font-size: 1.05rem !important;
+      line-height: 1.85 !important;
+      max-width: 75ch !important;
+    }
+    .font-dyslexic .glass-card {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+    }
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 16px rgba(0, 0, 0, 0.02);
+      transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.2rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    :focus-visible {
+      outline: 2px solid var(--primary-matiere);
+      outline-offset: 2px;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative overflow-x-hidden selection:bg-slate-900 selection:text-white">
+
+  <!-- Top Fixed Bar (Luxury Glass) -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/95 border-b border-slate-200/90 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Active Subject Badge -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3 group focus-visible:ring-2 focus-visible:ring-[#3B6978] rounded-xl p-1" aria-label="Accueil Hub BUT 1">
+          <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center font-black text-white text-sm shadow-sm border border-slate-800 group-hover:scale-105 transition-transform duration-150">
+            <span class="tracking-tight text-white font-mono">K</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-bold tracking-tight text-slate-900">KAI ACADEMIC</span>
+              <span class="badge-pill bg-[#EEF3F5] text-[#3B6978] border-[#C3D5DC] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#3B6978] mr-1"></span> HUB
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-mono hidden sm:block">BUT 1 Informatique • UPPA Anglet • TD2 / TP4</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center Search Shortcut Trigger -->
+      <div class="hidden md:flex items-center">
+        <button onclick="openSearchModal()" class="flex items-center gap-3 px-3.5 py-1.5 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 border border-slate-200 text-slate-500 text-xs transition duration-150 shadow-2xs group focus-visible:ring-2 focus-visible:ring-[#3B6978]">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600"></i>
+          <span>Rechercher un cours, diapo, concept...</span>
+          <kbd class="px-1.5 py-0.5 rounded bg-white text-[10px] font-mono text-slate-500 border border-slate-200 shadow-2xs">Ctrl+K</kbd>
+        </button>
+      </div>
+
+      <!-- Action buttons Desktop & Tablet -->
+      <div class="flex items-center gap-2">
+        <button onclick="toggleDyslexia()" id="dyslexiaToggle" class="min-h-[38px] px-3 py-1.5 rounded-xl text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 transition duration-150 flex items-center gap-2 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#3B6978]" aria-label="Basculer le mode dyslexie">
+          <i data-lucide="eye" class="w-3.5 h-3.5 text-slate-500"></i>
+          <span id="dyslexiaText" class="hidden sm:inline">Dyslexie</span>
+        </button>
+        <button onclick="openMatieresModal()" class="min-h-[38px] px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition duration-150 flex items-center gap-1.5 shadow-2xs sm:hidden focus-visible:ring-2 focus-visible:ring-[#3B6978]">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-slate-600"></i>
+          <span>Matières</span>
+        </button>
+        <a href="bibliotheque_cours.html" class="min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#3B6978] hover:bg-[#2f5460] text-white flex items-center gap-2 shadow-xs transition duration-150 focus-visible:ring-2 focus-visible:ring-[#3B6978]" aria-label="Accéder à la bibliothèque de cours">
+          <i data-lucide="folder-down" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Bibliothèque</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Subnav Tabs (Horizontal Scroll on Mobile with color indicators) -->
+    <nav aria-label="Navigation des cours" class="border-t border-slate-200/80 bg-slate-50/70 px-4 sm:px-6 lg:px-8 py-2 overflow-x-auto no-scrollbar flex items-center gap-1.5">
+      
+        <a href="index.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B6978] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#3B6978] shrink-0"></span>
+          <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="bibliotheque_cours.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B6978] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#3B6978] shrink-0"></span>
+          <i data-lucide="library" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>Bibliothèque</span>
+        </a>
+        <a href="r101_langage_c.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#287271] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#287271] shrink-0"></span>
+          <i data-lucide="cpu" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.01 C</span>
+        </a>
+        <a href="r102_interfaces_web.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#366687] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#366687] shrink-0"></span>
+          <i data-lucide="globe-2" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.02 Web</span>
+        </a>
+        <a href="r103_linux_systemes.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A5A44] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#8A5A44] shrink-0"></span>
+          <i data-lucide="server" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.03 Linux</span>
+        </a>
+        <a href="r105_chapitre1_fondements.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6E4970] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#6E4970] shrink-0"></span>
+          <i data-lucide="database" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.05 BDD</span>
+        </a>
+        <a href="r105_questions_marquesuzaa.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6E4970] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#6E4970] shrink-0"></span>
+          <i data-lucide="file-check-2" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>QCM BDD</span>
+        </a>
+        <a href="r106_gestion_organisation.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B85042] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#B85042] shrink-0"></span>
+          <i data-lucide="briefcase" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.06 Orga</span>
+        </a>
+        <a href="r107_maths_discretes.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C25444] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#C25444] shrink-0"></span>
+          <i data-lucide="binary" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.07 Maths</span>
+        </a>
+        <a href="r108_gestion_organisation.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#367357] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#367357] shrink-0"></span>
+          <i data-lucide="wallet" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.08 Gestion & TVA</span>
+        </a>
+        <a href="r109_economie_durable.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#55784E] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#55784E] shrink-0"></span>
+          <i data-lucide="leaf" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>R1.09 Éco-Durable</span>
+        </a>
+        <a href="s105_recueil_besoins.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8F4351] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#8F4351] shrink-0"></span>
+          <i data-lucide="target" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>S1.05 Besoins</span>
+        </a>
+        <a href="p101_ppp_pitch.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A5332] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#8A5332] shrink-0"></span>
+          <i data-lucide="video" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>P1.01 PPP</span>
+        </a>
+        <a href="portail_applications_uppa.html" class="group min-h-[38px] px-3 py-1.5 rounded-xl text-xs transition duration-150 shrink-0 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B6978] text-slate-600 hover:text-slate-900 hover:bg-slate-100/90 border border-transparent hover:border-slate-200 font-medium">
+          <span class="w-2 h-2 rounded-full bg-[#3B6978] shrink-0"></span>
+          <i data-lucide="globe" class="w-3.5 h-3.5 transition-colors"></i>
+          <span>Portail UPPA</span>
+        </a>
+    </nav>
+  </header>
+
+  <!-- Main Dynamic Content Container (Padding bottom ensures zero overlap with mobile bar) -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 sm:pb-12 flex-1 w-full space-y-6 relative z-10">
+    <div class="space-y-1.5">
+      <nav aria-label="Fil d'Ariane" class="text-xs text-slate-500 font-mono flex items-center gap-1 flex-wrap">
+        <i data-lucide="compass" class="w-3 h-3 text-slate-400 inline mr-0.5"></i>
+        <a href="index.html" class="text-[#3B6978] hover:underline font-medium transition focus-visible:ring-2 focus-visible:ring-[#3B6978] rounded px-1">Dashboard</a> <span class="text-slate-400 select-none">/</span> <a href="bibliotheque_cours.html" class="text-[#3B6978] hover:underline font-medium transition focus-visible:ring-2 focus-visible:ring-[#3B6978] rounded px-1">Bibliothèque</a> <span class="text-slate-400 select-none">/</span> <a href="s103_cours.html" class="text-[#3B6978] hover:underline font-medium transition focus-visible:ring-2 focus-visible:ring-[#3B6978] rounded px-1">S1.03 🔧 S1.03 — Installation d'un poste pour le développement</a>
+      </nav>
+      <div class="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5 flex-wrap">
+            <span>S1.03 • Synthèse Débruitée — S1.03</span>
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">Cours magistral transcrit avec correction automatique des hésitations et bruits parasites de classe.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Injected Page Content -->
+    
+    
+    <!-- En-tête Document Source Enseignant avec Thématique HUB -->
+    <div class="glass-card rounded-2xl p-5 border-l-4 border-l-[#3B6978] border-[#C3D5DC] hover:border-[#3B6978] bg-gradient-to-br from-[#EEF3F5]/50 via-white to-slate-50 shadow-xs mb-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="space-y-1.5">
+          <div class="flex items-center flex-wrap gap-2">
+            <span class="badge-pill bg-[#EEF3F5] text-[#3B6978] border-[#C3D5DC] font-mono font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#3B6978] mr-1"></span>S1.03
+            </span>
+            <span class="text-xs font-bold text-slate-800">🔧 S1.03 — Installation d'un poste pour le développement</span>
+            <span class="text-slate-300">•</span>
+            <span class="text-xs text-slate-600 font-medium flex items-center gap-1">
+              <i data-lucide="user" class="w-3 h-3 text-slate-400"></i> Équipe Pédagogique
+            </span>
+          </div>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <i data-lucide="file-text" class="w-4 h-4 text-[#3B6978]"></i>
+            <span>Synthèse Débruitée — S1.03</span>
+          </h2>
+          <div class="flex items-center flex-wrap gap-3 text-[11px] text-slate-500 font-mono">
+            <span class="flex items-center gap-1 text-[#3B6978] font-semibold bg-[#EEF3F5] text-[#3B6978] border-[#C3D5DC] px-2 py-0.5 rounded-lg border">
+              <i data-lucide="layers" class="w-3 h-3 text-[#3B6978]"></i> Séance du 03/11/2026
+            </span>
+            <span class="flex items-center gap-1">
+              <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i> Récupéré le 03/11/2026
+            </span>
+            <span class="flex items-center gap-1">
+              <i data-lucide="sparkles" class="w-3 h-3 text-emerald-500"></i> Synthétisé le 03/11/2026
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-center flex-wrap gap-2 shrink-0">
+          
+          
+        <a href="exports/cours_s1.03_Synth_se_D_bruit_e___S1_03_20261103.pdf" download class="min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#3B6978] hover:bg-[#2f5460] text-white transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#3B6978]">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span>Support Original PDF</span>
+        </a>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="glass-card rounded-2xl p-5 sm:p-6 border border-indigo-200/90 bg-gradient-to-br from-indigo-50/40 via-white to-slate-50 shadow-xs my-6">
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-indigo-100">
+        <span class="text-xs font-extrabold text-indigo-800 uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="git-fork" class="w-4 h-4 text-indigo-600"></i>
+          <span>Carte Mentale Interactive • Architecture Conceptuelle • S1.03</span>
+        </span>
+        <span class="text-[11px] font-bold text-indigo-700 bg-indigo-100/70 px-2.5 py-0.5 rounded-full border border-indigo-200">Mermaid SVG</span>
+      </div>
+      <div class="mermaid flex justify-center overflow-x-auto py-3">
+graph TD
+  A[S1.03] --> B[Notions Clés]
+  A --> C[Questions Élèves]
+      </div>
+    </div>
+    
+        <div class="space-y-4 my-6">
+          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-200/80">
+            <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold text-xs">1</span>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">1. Notions Clés et Explications</h2>
+          </div>
+          
+    <div class="rounded-2xl p-5 border-l-4 bg-white border border-slate-200/90 shadow-2xs my-4 space-y-2" style="border-left-color: var(--primary-matiere);">
+      <div class="flex items-center gap-2 text-xs font-bold tracking-wide" style="color: var(--primary-matiere);">
+        <i data-lucide="book-open" class="w-4 h-4" style="color: var(--primary-matiere);"></i>
+        <span class="uppercase">DÉFINITION OFFICIELLE DU COURS</span>
+        <span class="text-slate-300">•</span>
+        <span class="text-slate-900">1. Notions Clés et Explications</span>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+        NOTES PERSONNELLES EN SÉANCE :
+Notes
+Notes personnelles et points d'attention pris pendant la séance...
+📖 Synthèse Débruitée — S1.03 — Synthèse Pédagogique Complète
+Matière : S1.03 • Traité le : 22/10/2026 à 20:45
+✨ Rédigé pour comprendre l'intégralité du cours même sans avoir assisté à la séance.
+
+Enjeu & Contexte : Cours magistral transcrit avec correction automatique des hésitations et bruits parasites de classe.
+📄 Version PDF Imprimable du cours (A4) :
+http://88.96.47.180:8765/exports/cours_s1.03_Synth_se_D_bruit_e___S1_03_20261022.pdf
+🌐 Fiche interactive en ligne (Pure Light Luxury) :
+http://88.96.47.180:8765/index.html
+🧠 Schéma Mental (Mindmap du Cours)
+graph TD
+  A[S1.03] --> B[Notions Clés]
+  A --> C[Questions Élèves]
+1. Notions Clés et Explications
+NOTES PERSONNELLES EN SÉANCE :
+N
+      </p>
+      
+        <div class="pt-2.5 mt-2 border-t border-slate-200/80 text-xs text-slate-700">
+          <span class="font-bold" style="color: var(--primary-matiere);">Exemple concret :</span> Exemple traité en amphithéâtre
+        </div>
+    </div>
+          
+            <div class="glass-card rounded-2xl p-5 border border-slate-200/90 bg-white shadow-2xs my-4 space-y-3">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                <span>Points Clés & Synthèse à Retenir</span>
+              </div>
+              <ul class="space-y-1.5 pl-2"><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Concepts abordés par l'enseignant</span></li></ul>
+            </div>
+          
+          
+        </div>
+    
+    
+    <div class="glass-card rounded-2xl p-5 sm:p-6 border-indigo-200 bg-slate-900 text-white shadow-xs my-6 space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="text-xs font-bold text-indigo-400 flex items-center gap-2">
+          <i data-lucide="calculator" class="w-4 h-4"></i>
+          <span>Démonstration Pratique & Exercice Résolu</span>
+        </div>
+        <span class="badge-pill bg-indigo-950 text-indigo-300 border border-indigo-800 text-[10px]">Examen Type</span>
+      </div>
+      <p class="text-xs text-slate-300"><b>Énoncé :</b> Exemple d'application vu en classe</p>
+      <div class="p-3 rounded-lg bg-slate-800 text-xs font-mono text-indigo-300 space-y-1 border border-slate-700 whitespace-pre-line">
+        Résolution conforme au cours
+      </div>
+      <div class="text-xs font-semibold text-emerald-400 pt-1">Résultat Final : Validation des acquis</div>
+    </div>
+    
+    <div class="glass-card rounded-2xl p-5 sm:p-6 border border-indigo-100 bg-white shadow-xs my-6 space-y-3" id="quiz-s103-1">
+      <div class="flex items-center gap-2 text-xs font-bold text-indigo-700 tracking-wide uppercase">
+        <i data-lucide="check-square" class="w-4 h-4 text-indigo-600"></i>
+        <span>Auto-Évaluation Interactive</span>
+      </div>
+      <p class="text-xs sm:text-sm font-bold text-slate-900">Quel est le point central abordé en S1.03 ?</p>
+      <div class="space-y-2 pt-1">
+        <button onclick="checkQuiz('quiz-s103-1', 0, 0)" id="quiz-s103-1-btn-0" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
+          <span>Vrai : Se référer aux définitions du cours.</span>
+          <span class="quiz-badge hidden text-xs font-bold"></span>
+        </button>
+        <button onclick="checkQuiz('quiz-s103-1', 1, 0)" id="quiz-s103-1-btn-1" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
+          <span>Faux : L'affirmation inverse est la règle officielle</span>
+          <span class="quiz-badge hidden text-xs font-bold"></span>
+        </button>
+        <button onclick="checkQuiz('quiz-s103-1', 2, 0)" id="quiz-s103-1-btn-2" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
+          <span>Non applicable dans le cadre pédagogique du BUT 1</span>
+          <span class="quiz-badge hidden text-xs font-bold"></span>
+        </button>
+        <button onclick="checkQuiz('quiz-s103-1', 3, 0)" id="quiz-s103-1-btn-3" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
+          <span>Dépend de la configuration spécifique du serveur</span>
+          <span class="quiz-badge hidden text-xs font-bold"></span>
+        </button></div>
+      <div id="quiz-s103-1-exp" class="hidden p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 text-xs text-indigo-950 leading-relaxed mt-2 flex items-start gap-2.5">
+        <i data-lucide="info" class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5"></i>
+        <div>
+          <b class="text-indigo-900">Explication détaillée :</b> Se référer aux définitions du cours.
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Dynamic Pagination -->
+    
+  </main>
+
+  <!-- Luxury Editorial Footer -->
+  <footer class="mt-auto border-t border-slate-200 bg-white py-8 pb-24 sm:pb-8 text-xs text-slate-500 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center text-white font-mono font-bold text-xs">K</div>
+        <div>
+          <p class="font-semibold text-slate-800">IUT de Bayonne et du Pays Basque • Campus d'Anglet</p>
+          <p class="text-[11px] text-slate-400">Département Informatique • Promotion BUT 1 2026-2027</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-medium text-slate-600 flex-wrap">
+        <a href="bibliotheque_cours.html" class="hover:text-slate-900 transition flex items-center gap-1.5">
+          <i data-lucide="book" class="w-3.5 h-3.5"></i> Bibliothèque
+        </a>
+        <a href="r105_questions_marquesuzaa.html" class="hover:text-slate-900 transition flex items-center gap-1.5">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Fiche QCM
+        </a>
+        <a href="portail_applications_uppa.html" class="hover:text-slate-900 transition flex items-center gap-1.5">
+          <i data-lucide="shield" class="w-3.5 h-3.5"></i> Portail UPPA
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- BARRE DE NAVIGATION STICKY MOBILE (Ergonomie Smartphone Tactile)     -->
+  <!-- ===================================================================== -->
+  <aside aria-label="Navigation mobile rapide" class="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-slate-200/90 shadow-xl px-2 py-1.5 flex items-center justify-around">
+    <!-- Hub -->
+    <a href="index.html" class="flex flex-col items-center justify-center p-1.5 text-xs text-slate-600 hover:text-slate-900 active:scale-95 transition min-w-[56px] min-h-[44px]">
+      <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Hub</span>
+    </a>
+    <!-- Tiroir Matières en 1 tap -->
+    <button onclick="openMatieresModal()" class="flex flex-col items-center justify-center p-1.5 text-xs text-[#3B6978] active:scale-95 transition min-w-[56px] min-h-[44px]">
+      <i data-lucide="layers" class="w-5 h-5"></i>
+      <span class="text-[10px] font-bold mt-0.5">Matières</span>
+    </button>
+    <!-- PDFs -->
+    <a href="bibliotheque_cours.html" class="flex flex-col items-center justify-center p-1.5 text-xs text-slate-600 hover:text-slate-900 active:scale-95 transition min-w-[56px] min-h-[44px]">
+      <i data-lucide="folder-down" class="w-5 h-5"></i>
+      <span class="text-[10px] font-semibold mt-0.5">PDFs</span>
+    </a>
+    <!-- Dyslexie -->
+    <button onclick="toggleDyslexia()" class="flex flex-col items-center justify-center p-1.5 text-xs text-slate-600 hover:text-slate-900 active:scale-95 transition min-w-[56px] min-h-[44px]">
+      <i data-lucide="eye" class="w-5 h-5"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Dyslexie</span>
+    </button>
+    <!-- Recherche -->
+    <button onclick="openSearchModal()" class="flex flex-col items-center justify-center p-1.5 text-xs text-slate-600 hover:text-slate-900 active:scale-95 transition min-w-[56px] min-h-[44px]">
+      <i data-lucide="search" class="w-5 h-5"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Chercher</span>
+    </button>
+  </aside>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL / TIROIR MOBILE DES MATIÈRES COLORÉES (Navigation Rapide)       -->
+  <!-- ===================================================================== -->
+  <div id="matieresModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-2xl max-h-[85vh] rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col animate-in slide-in-from-bottom duration-200">
+      
+      <!-- En-tête Tiroir -->
+      <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50/80">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Toutes les Matières du BUT 1</h3>
+            <p class="text-[11px] text-slate-500">Accès direct avec code couleur officiel</p>
+          </div>
+        </div>
+        <button onclick="closeMatieresModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 min-h-[44px] min-w-[44px] flex items-center justify-center">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Liste Tactile des Matières Colorées -->
+      <div class="overflow-y-auto p-4 space-y-2.5">
+        <!-- R1.01 C -->
+        <a href="r101_langage_c.html" class="p-3.5 rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50/60 via-white to-slate-50 hover:border-teal-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-teal-100 text-teal-800 border border-teal-300 font-mono font-bold">R1.01</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Initiation au Développement (Langage C)</div>
+              <div class="text-[11px] text-teal-700 font-medium">M. Dalmau • Pointeurs, Mémoire & Algorithmique</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-teal-600"></i>
+        </a>
+
+        <!-- R1.02 Web -->
+        <a href="r102_interfaces_web.html" class="p-3.5 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50/60 via-white to-slate-50 hover:border-blue-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-blue-100 text-blue-800 border border-blue-300 font-mono font-bold">R1.02</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Interfaces Web & Architecture HTTP</div>
+              <div class="text-[11px] text-blue-700 font-medium">Équipe Web • Protocoles, HTML/CSS & Sécurité</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-blue-600"></i>
+        </a>
+
+        <!-- R1.03 Linux -->
+        <a href="r103_linux_systemes.html" class="p-3.5 rounded-2xl border border-orange-200 bg-gradient-to-r from-orange-50/60 via-white to-slate-50 hover:border-orange-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-orange-100 text-orange-800 border border-orange-300 font-mono font-bold">R1.03</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Systèmes & Réseaux Linux</div>
+              <div class="text-[11px] text-orange-700 font-medium">Équipe Systèmes • Terminal, POSIX & Scripts Bash</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-orange-600"></i>
+        </a>
+
+        <!-- R1.05 BDD -->
+        <a href="r105_chapitre1_fondements.html" class="p-3.5 rounded-2xl border border-violet-200 bg-gradient-to-r from-violet-50/60 via-white to-slate-50 hover:border-violet-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-violet-100 text-violet-800 border border-violet-300 font-mono font-bold">R1.05</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Conception de Bases de Données</div>
+              <div class="text-[11px] text-violet-700 font-medium">M. Marquesuzaà / M. Moulin • Merise, 3FN & SQL</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-violet-600"></i>
+        </a>
+
+        <!-- R1.06 Gestion -->
+        <a href="r106_gestion_organisation.html" class="p-3.5 rounded-2xl border border-slate-300 bg-gradient-to-r from-slate-100/60 via-white to-slate-50 hover:border-slate-500 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-slate-200 text-slate-800 border border-slate-300 font-mono font-bold">R1.06</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Gestion des Entreprises</div>
+              <div class="text-[11px] text-slate-600 font-medium">M. Moulin • Structures, Flux Financiers & Décision</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-600"></i>
+        </a>
+
+        <!-- R1.07 Maths -->
+        <a href="r107_maths_discretes.html" class="p-3.5 rounded-2xl border border-sky-200 bg-gradient-to-r from-sky-50/60 via-white to-slate-50 hover:border-sky-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-sky-100 text-sky-800 border border-sky-300 font-mono font-bold">R1.07</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Mathématiques Discrètes & Logique</div>
+              <div class="text-[11px] text-sky-700 font-medium">Mme. Roegel / M. Lagahe • Boole, Ensembles & Vérité</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-sky-600"></i>
+        </a>
+
+        <!-- R1.08 TVA & Gestion -->
+        <a href="r108_gestion_organisation.html" class="p-3.5 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50/60 via-white to-slate-50 hover:border-emerald-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-emerald-100 text-emerald-800 border border-emerald-300 font-mono font-bold">R1.08</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Gestion & Fiscalité (TVA & Finance)</div>
+              <div class="text-[11px] text-emerald-700 font-medium">M. Moulin • Neutralité TVA, Lituanie & Bilan</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-600"></i>
+        </a>
+
+        <!-- R1.09 Éco Durable -->
+        <a href="r109_economie_durable.html" class="p-3.5 rounded-2xl border border-green-200 bg-gradient-to-r from-green-50/60 via-white to-slate-50 hover:border-green-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-green-100 text-green-800 border border-green-300 font-mono font-bold">R1.09</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Économie Durable & Numérique Frugal</div>
+              <div class="text-[11px] text-green-700 font-medium">Mme. Fernandes • RGESN, Cycle ACV & Nudge</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-green-600"></i>
+        </a>
+
+        <!-- S1.05 SAE Besoins -->
+        <a href="s105_recueil_besoins.html" class="p-3.5 rounded-2xl border border-rose-200 bg-gradient-to-r from-rose-50/60 via-white to-slate-50 hover:border-rose-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-rose-100 text-rose-800 border border-rose-300 font-mono font-bold">S1.05</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Recueil de Besoins & Solutions</div>
+              <div class="text-[11px] text-rose-700 font-medium">Équipe SAE • Spécifications & Personas</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-rose-600"></i>
+        </a>
+
+        <!-- P1.01 Pitch PPP -->
+        <a href="p101_ppp_pitch.html" class="p-3.5 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50/60 via-white to-slate-50 hover:border-amber-400 transition flex items-center justify-between gap-3 shadow-2xs">
+          <div class="flex items-center gap-3">
+            <span class="badge-pill bg-amber-100 text-amber-800 border border-amber-300 font-mono font-bold">P1.01</span>
+            <div>
+              <div class="text-xs font-bold text-slate-900">Projet Professionnel & Pitch Vidéo</div>
+              <div class="text-[11px] text-amber-700 font-medium">Responsables PPP • Grille Évaluation & Métiers</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-amber-600"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Modal (Ctrl+K) -->
+  <div id="searchModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-start justify-center pt-16 sm:pt-20 px-4">
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <div class="p-3.5 border-b border-slate-200 flex items-center gap-2">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 ml-2"></i>
+        <input type="text" id="searchInput" placeholder="Rechercher un cours, chapitre, 3FN, MCD, SQL..." class="w-full text-sm bg-transparent border-none outline-none text-slate-800 placeholder-slate-400 py-1" oninput="filterSearchResults()">
+        <button onclick="closeSearchModal()" class="text-xs text-slate-400 hover:text-slate-600 px-2 py-1 rounded">Échap</button>
+      </div>
+      <div id="searchResults" class="max-h-80 overflow-y-auto p-2 space-y-1 text-xs">
+        <a href="r105_questions_marquesuzaa.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200 text-slate-800">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="file-check-2" class="w-4 h-4 text-violet-600"></i>
+            <div>
+              <div class="font-semibold text-slate-900">Fiche QCM TD R1.05 — Marquesuzaa & Moulin</div>
+              <div class="text-[11px] text-slate-500">Question 20/20 sur la 3FN et dépendances transitives</div>
+            </div>
+          </div>
+          <span class="badge-pill bg-violet-50 text-violet-700 border border-violet-200 font-mono">R1.05 BDD</span>
+        </a>
+        <a href="r109_chapitre1_ecoconception.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200 text-slate-800">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="leaf" class="w-4 h-4 text-green-600"></i>
+            <div>
+              <div class="font-semibold text-slate-900">R1.09 Ch. 1 — Éco-conception Logicielle & RGESN</div>
+              <div class="text-[11px] text-slate-500">79 critères RGESN, frugalité, cycle de vie ACV</div>
+            </div>
+          </div>
+          <span class="badge-pill bg-green-50 text-green-700 border border-green-200 font-mono">R1.09 Éco</span>
+        </a>
+        <a href="r108_chapitre1_tva_fiscalite.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200 text-slate-800">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="wallet" class="w-4 h-4 text-emerald-600"></i>
+            <div>
+              <div class="font-semibold text-slate-900">R1.08 Ch. 1 — TVA, Neutralité & Fraude Lituanie</div>
+              <div class="text-[11px] text-slate-500">Mécanisme TVA, effet Chirac restauration, budget public</div>
+            </div>
+          </div>
+          <span class="badge-pill bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">R1.08 TVA</span>
+        </a>
+        <a href="r101_langage_c.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200 text-slate-800">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="cpu" class="w-4 h-4 text-teal-600"></i>
+            <div>
+              <div class="font-semibold text-slate-900">R1.01 — Initiation C, Mémoire & Pointeurs</div>
+              <div class="text-[11px] text-slate-500">Syntaxe C, pointeurs, tableaux et pièges de mémoire</div>
+            </div>
+          </div>
+          <span class="badge-pill bg-teal-50 text-teal-700 border border-teal-200 font-mono">R1.01 C</span>
+        </a>
+        <a href="r103_linux_systemes.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200 text-slate-800">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="server" class="w-4 h-4 text-orange-600"></i>
+            <div>
+              <div class="font-semibold text-slate-900">R1.03 — Système & Réseaux Linux</div>
+              <div class="text-[11px] text-slate-500">Droits POSIX, scripts Bash, arborescence Unix</div>
+            </div>
+          </div>
+          <span class="badge-pill bg-orange-50 text-orange-700 border border-orange-200 font-mono">R1.03 Linux</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Scripts (A11y, Dyslexie, Tiroir Matières & Recherche) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+      applyDyslexiaState();
+    });
+
+    // Mode Dyslexie & Confort
+    let isDyslexic = localStorage.getItem('dyslexia_mode') === 'true';
+    function applyDyslexiaState() {
+      document.body.classList.toggle('font-dyslexic', isDyslexic);
+      const textEl = document.getElementById('dyslexiaText');
+      if (textEl) {
+        textEl.innerText = isDyslexic ? 'Dyslexie : ON' : 'Dyslexie';
+      }
+      const toggleBtn = document.getElementById('dyslexiaToggle');
+      if (toggleBtn) {
+        toggleBtn.classList.toggle('bg-amber-100', isDyslexic);
+        toggleBtn.classList.toggle('border-amber-300', isDyslexic);
+      }
+    }
+    function toggleDyslexia() {
+      isDyslexic = !isDyslexic;
+      localStorage.setItem('dyslexia_mode', isDyslexic);
+      applyDyslexiaState();
+    }
+
+    // Tiroir Matières Mobile
+    function openMatieresModal() {
+      const m = document.getElementById('matieresModal');
+      if (m) {
+        m.classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    function closeMatieresModal() {
+      const m = document.getElementById('matieresModal');
+      if (m) m.classList.add('hidden');
+    }
+
+    // Recherche Rapide
+    function openSearchModal() {
+      const modal = document.getElementById('searchModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        const input = document.getElementById('searchInput');
+        if (input) {
+          input.focus();
+        }
+      }
+    }
+    function closeSearchModal() {
+      const modal = document.getElementById('searchModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape') {
+        closeSearchModal();
+        closeMatieresModal();
+      }
+    });
+
+    function filterSearchResults() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const items = document.querySelectorAll('#searchResults a');
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+    }
+
+    // Interactive Quiz Engine
+    function checkQuiz(quizId, selectedIdx, correctIdx) {
+      const btns = document.querySelectorAll('#' + quizId + ' .quiz-btn');
+      btns.forEach((btn, idx) => {
+        btn.disabled = true;
+        const badge = btn.querySelector('.quiz-badge');
+        if (badge) badge.classList.remove('hidden');
+        if (idx === correctIdx) {
+          btn.classList.remove('bg-white', 'hover:bg-slate-50', 'border-slate-200');
+          btn.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-900', 'font-semibold');
+          if (badge) {
+            badge.innerText = 'Réponse exacte';
+            badge.classList.add('text-emerald-700');
+          }
+        } else if (idx === selectedIdx) {
+          btn.classList.remove('bg-white', 'hover:bg-slate-50', 'border-slate-200');
+          btn.classList.add('bg-rose-50', 'border-rose-400', 'text-rose-900');
+          if (badge) {
+            badge.innerText = 'Incorrect';
+            badge.classList.add('text-rose-700');
+          }
+        }
+      });
+      const exp = document.getElementById(quizId + '-exp');
+      if (exp) exp.classList.remove('hidden');
+    }
+
+    // Clipboard Copy Helper
+    function copyToClipboard(text, btnElement) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btnElement.innerHTML;
+        btnElement.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 inline mr-1"></i> Copié !';
+        if (window.lucide) lucide.createIcons();
+        setTimeout(() => {
+          btnElement.innerHTML = orig;
+          if (window.lucide) lucide.createIcons();
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

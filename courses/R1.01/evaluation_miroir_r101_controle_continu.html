@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R1.01 — Contrôle Continu — Initiation au Développement (Algorithmique & C++) • Vue Miroir Pédagogique</title>
+  
+  <!-- Typographie Lexend anti-fatigue & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '\\[', right: '\\]', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+          });"></script>
+
+  <style>
+    :root {
+      --accent: #287271;
+      --accent-soft: #EBF4F3;
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --surface-paper: #FCFAF7;
+      --text: #2D3748;
+      --text-muted: #5A6A80;
+      --border: #E2E8F0;
+      --border-soft: #EFEBE5;
+      --success: #2A7A4C;
+      --success-bg: #EDF7F1;
+      --warning: #C05621;
+      --warning-bg: #FEF7EE;
+      --danger: #B83232;
+      --danger-bg: #FDF2F2;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lexend', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      letter-spacing: 0.015em;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* BARRE SUPÉRIEURE DE NAVIGATION */
+    .top-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+    }
+
+    .back-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .badge-matiere {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+    }
+
+    .top-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .mobile-tab-toggle {
+      display: none;
+      gap: 0.5rem;
+    }
+
+    .tab-btn {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    /* CONTENEUR SPLIT SCREEN */
+    .split-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 46% 54%;
+      height: calc(100vh - 60px);
+      overflow: hidden;
+    }
+
+    /* PANNEAU GAUCHE : SUJET BRUT AUTHENTIQUE */
+    .pane-sujet {
+      background: var(--surface-paper);
+      border-right: 2px solid var(--border);
+      overflow-y: auto;
+      padding: 2.2rem;
+    }
+
+    .exam-paper {
+      background: #FFFFFF;
+      border: 1px solid #D8D2C6;
+      border-radius: 0.5rem;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .exam-header-banner {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    .exam-title-box {
+      border: 2px solid var(--text);
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: #FAF9F6;
+    }
+
+    .exam-title-box h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      color: #1A202C;
+    }
+
+    .exam-instructions {
+      font-size: 0.88rem;
+      margin: 1.2rem 0 2rem 0;
+      padding-left: 1.2rem;
+      color: #4A5568;
+    }
+
+    .exam-instructions li {
+      margin-bottom: 0.35rem;
+    }
+
+    .exam-exercise {
+      margin-bottom: 2.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed #CBD5E0;
+    }
+
+    .exam-exercise:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .exercise-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .exercise-title-bar h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .exercise-badge-jump {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.35rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--accent);
+    }
+
+    .exercise-badge-jump:hover {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    /* PANNEAU DROIT : MASTERCLASS VULGARISÉE */
+    .pane-explications {
+      background: var(--bg);
+      overflow-y: auto;
+      padding: 2.2rem 2.8rem;
+    }
+
+    .expl-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .expl-hero {
+      background: var(--surface);
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .expl-hero h1 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .expl-hero p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .expl-section {
+      background: var(--surface);
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 80px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .expl-section.highlighted {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .expl-section h2 {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+
+    .expl-section h3 {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    /* ENCADRÉS PÉDAGOGIQUES */
+    .box-why {
+      background: var(--success-bg);
+      border-left: 4px solid var(--success);
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    .box-why strong {
+      color: var(--success);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .box-trap {
+      background: var(--danger-bg);
+      border-left: 4px solid var(--danger);
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    .box-trap strong {
+      color: var(--danger);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .box-check {
+      background: #EBF4FC;
+      border-left: 4px solid #2B6CB0;
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    .box-check strong {
+      color: #2B6CB0;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    table.notion-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    table.notion-table th, table.notion-table td {
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.9rem;
+      text-align: left;
+    }
+
+    table.notion-table th {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    table.notion-table tr:nth-child(even) {
+      background: #FBF9F7;
+    }
+
+    details.interactive-solution {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      cursor: pointer;
+    }
+
+    details.interactive-solution summary {
+      font-weight: 600;
+      color: var(--accent);
+      outline: none;
+    }
+
+    details.interactive-solution[open] {
+      background: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+    }
+
+    pre {
+      background: #1E293B;
+      color: #F8FAFC;
+      padding: 1.1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    /* RESPONSIVE SMARTPHONE & TABLETTE */
+    @media (max-width: 960px) {
+      .split-container {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .mobile-tab-toggle {
+        display: flex;
+      }
+      .pane-sujet, .pane-explications {
+        height: calc(100vh - 110px);
+        padding: 1.2rem;
+      }
+      .pane-sujet.hidden, .pane-explications.hidden {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRE SUPÉRIEURE -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <a href="../../index.html#revisions" class="back-btn">← Portail KAI</a>
+      <span class="badge-matiere">R1.01</span>
+      <span class="top-title">Initiation au Développement (C++) — Contrôle Continu — Initiation au Développement (Algorithmique & C++)</span>
+    </div>
+    
+    <div class="mobile-tab-toggle">
+      <button class="tab-btn active" onclick="basculerTab('sujet')">📄 Sujet officiel</button>
+      <button class="tab-btn" onclick="basculerTab('expl')">💡 Explications</button>
+    </div>
+  </header>
+
+  <!-- CONTENEUR DOUBLE VOLET (SIDE-BY-SIDE) -->
+  <main class="split-container">
+    
+    <!-- VOLET GAUCHE : SUJET BRUT OFFICIEL -->
+    <section class="pane-sujet" id="col-sujet">
+      <article class="exam-paper">
+        
+        <div class="exam-header-banner">
+          <span>Outils fondamentaux</span>
+          <span>IUT de Bayonne - Pays basque<br>Département Informatique</span>
+        </div>
+
+        <div class="exam-title-box">
+          <h1>Contrôle Continu — Initiation au Développement (Algorithmique & C++)</h1>
+          <p><strong>Jeudi 5 novembre 2026</strong> — Durée : <strong>1h 30</strong></p>
+        </div>
+
+        <ul class="exam-instructions">
+          <li>Enseignants : MM. Carpentier, Etcheverry, Masson</li><li>Documents et calculatrices interdits — Rédaction claire à l'encre sur copie d'examen</li><li>Respect strict du formalisme IUT Anglet (tripartition En-tête / Déclarations / Traitements)</li><li>Passage de paramètres rigoureux (distinction claire entre valeur et référence '&')</li><li>Le barème total est sur 20 points</li>
+        </ul>
+
+        <!-- CONTENU DU SUJET BRUT (EXERCICES) -->
+        <div class="exam-body-content">
+          
+    <div class="exam-exercise" id="sujet-ex1">
+      <div class="exercise-title-bar">
+        <h2>Exercice 1 (5 points) — Spécifications & Trace d'Algorithme</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie1')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>On considère le sous-programme C++ suivant conçu selon les normes de l'IUT d'Anglet :</p>
+      <pre><code>void mystere(int a, int& b)
+{
+    int c;
+    c = a * 2;
+    b = b + c;
+    a = b - 4;
+}</code></pre>
+      <p>Dans la fonction principale <code>main()</code>, on exécute la séquence suivante :</p>
+      <pre><code>int x = 3;
+int y = 5;
+mystere(x, y);
+cout << "x = " << x << ", y = " << y << endl;</code></pre>
+      <ol style="margin-left: 1.5rem; margin-top: 0.6rem;">
+        <li style="margin-bottom: 0.5rem;">Quels sont les modes de passage des paramètres formels <code>a</code> et <code>b</code> ? Préciser les conséquences en mémoire.</li>
+        <li style="margin-bottom: 0.5rem;">Dresser la <strong>table de trace</strong> pas-à-pas de l'état de la mémoire avant, pendant et après l'appel.</li>
+        <li>Quelle est la sortie exacte affichée à l'écran par l'instruction <code>cout</code> ?</li>
+      </ol>
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex2">
+      <div class="exercise-title-bar">
+        <h2>Exercice 2 (5 points) — Procédure de Permutation & Piège de la Valeur</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie2')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>Un étudiant a écrit la procédure suivante pour échanger les valeurs de deux variables entières :</p>
+      <pre><code>void echanger(int val1, int val2)
+{
+    int temp = val1;
+    val1 = val2;
+    val2 = temp;
+}</code></pre>
+      <ol style="margin-left: 1.5rem; margin-top: 0.6rem;">
+        <li style="margin-bottom: 0.5rem;">Expliquer pourquoi cette procédure ne fonctionne pas lorsqu'elle est appelée depuis le <code>main()</code>.</li>
+        <li style="margin-bottom: 0.5rem;">Réécrire la procédure corrigée avec les prototypes et les corps conformes aux règles de Patrick Etcheverry.</li>
+        <li>Rédiger la fonction <code>main()</code> complète qui initialise deux variables à 10 et 20, appelle <code>echanger</code>, et affiche le résultat vérifié.</li>
+      </ol>
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex3">
+      <div class="exercise-title-bar">
+        <h2>Exercice 3 (5 points) — Décomposition Algorithmique & Calcul de Remise</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie3')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>On souhaite calculer le prix final après réduction pour un article donné :</p>
+      <ul style="margin-left: 1.5rem; margin-bottom: 0.6rem;">
+        <li>Entrée : Prix initial (flottant positif) et pourcentage de remise (entier entre 0 et 100).</li>
+        <li>Si la remise est supérieure à 50%, un message d'alerte « Remise exceptionnelle » doit être émis.</li>
+      </ul>
+      <ol style="margin-left: 1.5rem; margin-top: 0.6rem;">
+        <li style="margin-bottom: 0.5rem;">Donner les <strong>spécifications externes</strong> (entrées, sorties, préconditions).</li>
+        <li style="margin-bottom: 0.5rem;">Rédiger la fonction <code>calculerPrixReduit</code> en C++ en évitant impérativement le piège de la division entière.</li>
+        <li>Proposer un jeu d'essai exhaustif (cas nominal, cas limite 0%, cas limite 100%).</li>
+      </ol>
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex4">
+      <div class="exercise-title-bar">
+        <h2>Exercice 4 (5 points) — Parcours de Tableau & Algorithme du Minimum</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie4')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>On dispose d'un tableau d'entiers de taille $N > 0$.</p>
+      <ol style="margin-left: 1.5rem; margin-top: 0.6rem;">
+        <li style="margin-bottom: 0.5rem;">Écrire l'algorithme sous forme d'ordinogramme ou pseudo-code officiel IUT recherchant la valeur minimale et sa première position dans le tableau.</li>
+        <li style="margin-bottom: 0.5rem;">Traduire cet algorithme en sous-programme C++ avec passage du tableau en paramètre constant sécurisé.</li>
+        <li>Quelle est la complexité temporelle en nombre de comparaisons ? Justifier.</li>
+      </ol>
+    </div>
+    
+        </div>
+
+      </article>
+    </section>
+
+    <!-- VOLET DROIT : MASTERCLASS PÉDAGOGIQUE -->
+    <section class="pane-explications" id="col-explications">
+      <div class="expl-container">
+        
+        
+    <div class="expl-hero">
+      <h1>Masterclass Prépa Contrôle — R1.01 Initiation au Développement</h1>
+      <p>Guide d'excellence et d'entraînement pour le contrôle continu de R1.01 (MM. Carpentier, Etcheverry, Masson). Ce document décortique les questions types d'examen à l'IUT d'Anglet : passages par référence, tables de trace, pièges des divisions entières et manipulation des tableaux.</p>
+    </div>
+
+    <!-- 1. NOTIONS CLES -->
+    <div class="expl-section">
+      <h2>1. Ce que tu dois maîtriser pour ce contrôle</h2>
+      <table class="notion-table">
+        <thead>
+          <tr>
+            <th>Notion</th>
+            <th>Exercice</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Passage par valeur vs référence (&) et tables de trace</strong></td>
+            <td>1</td>
+            <td>5 points</td>
+          </tr>
+          <tr>
+            <td><strong>Procédure de permutation et mémoire</strong></td>
+            <td>2</td>
+            <td>5 points</td>
+          </tr>
+          <tr>
+            <td><strong>Sous-programmes, division flottante et jeux d'essais</strong></td>
+            <td>3</td>
+            <td>5 points</td>
+          </tr>
+          <tr>
+            <td><strong>Parcours de tableaux et recherche de minimum</strong></td>
+            <td>4</td>
+            <td>5 points</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EXERCICE 1 CORRIGÉ -->
+    <div class="expl-section" id="expl-partie1">
+      <h2>Exercice 1 — Spécifications & Table de Trace Pas-à-Pas</h2>
+      
+      <h3>1. Modes de passage des paramètres formels</h3>
+      <ul>
+        <li><strong>Paramètre <code>a</code> (par valeur) :</strong> Une COPIE indépendante de la variable passée en argument est créée dans la pile d'exécution du sous-programme. Toute modification de <code>a</code> à l'intérieur de <code>mystere</code> n'affectera jamais la variable d'origine <code>x</code> du <code>main</code>.</li>
+        <li><strong>Paramètre <code>b</code> (par référence <code>&</code>) :</strong> <code>b</code> est un ALIAS direct (référence mémoire) de la variable <code>y</code>. Toute modification apportée à <code>b</code> modifie instantanément <code>y</code> en mémoire centrale !</li>
+      </ul>
+
+      <h3>2. Table de trace pas-à-pas</h3>
+      <table class="notion-table">
+        <thead>
+          <tr>
+            <th>Étape d'exécution</th>
+            <th>x (main)</th>
+            <th>y / b</th>
+            <th>a (copie)</th>
+            <th>c (locale)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Avant l'appel (dans <code>main</code>)</td>
+            <td>3</td>
+            <td>5</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Entrée dans <code>mystere(x, y)</code></td>
+            <td>3</td>
+            <td>5 (alias y)</td>
+            <td>3</td>
+            <td>indéterminé</td>
+          </tr>
+          <tr>
+            <td><code>c = a * 2;</code> (3 * 2)</td>
+            <td>3</td>
+            <td>5</td>
+            <td>3</td>
+            <td><strong>6</strong></td>
+          </tr>
+          <tr>
+            <td><code>b = b + c;</code> (5 + 6)</td>
+            <td>3</td>
+            <td><strong>11</strong></td>
+            <td>3</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td><code>a = b - 4;</code> (11 - 4)</td>
+            <td>3</td>
+            <td>11</td>
+            <td><strong>7</strong></td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>Retour dans <code>main</code> (après destruction pile)</td>
+            <td><strong>3</strong></td>
+            <td><strong>11</strong></td>
+            <td>détruit</td>
+            <td>détruit</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. Sortie affichée à l'écran</h3>
+      <pre><code>x = 3, y = 11</code></pre>
+      <div class="box-check">
+        <strong>Vérification :</strong> <code>x</code> est resté intact à 3 car passé par valeur. <code>y</code> a été écrasé à 11 car lié par référence <code>&</code>.
+      </div>
+    </div>
+
+    <!-- EXERCICE 2 CORRIGÉ -->
+    <div class="expl-section" id="expl-partie2">
+      <h2>Exercice 2 — Permutation Mémoire & Procédures</h2>
+      
+      <div class="box-trap">
+        <strong>Le piège de la copie locale :</strong>
+        Dans le code initial, <code>val1</code> et <code>val2</code> sont passés par valeur. La permutation s'exécute parfaitement sur les deux copies temporaires, mais dès que l'accolade fermante <code>}</code> est atteinte, la pile est libérée et les variables du <code>main</code> n'ont absolument pas bougé !
+      </div>
+
+      <h3>Code corrigé aux normes IUT d'Anglet</h3>
+      <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Prototype avec références obligatoires
+void echanger(int& val1, int& val2);
+
+int main(void)
+{
+    // VARIABLES
+    int nombreA = 10;
+    int nombreB = 20;
+
+    // TRAITEMENTS
+    cout &lt;&lt; "Avant echange : A = " &lt;&lt; nombreA &lt;&lt; ", B = " &lt;&lt; nombreB &lt;&lt; endl;
+    echanger(nombreA, nombreB);
+    cout &lt;&lt; "Apres echange : A = " &lt;&lt; nombreA &lt;&lt; ", B = " &lt;&lt; nombreB &lt;&lt; endl;
+
+    return 0;
+}
+
+void echanger(int& val1, int& val2)
+{
+    // VARIABLES
+    int temp;
+
+    // TRAITEMENTS
+    temp = val1;
+    val1 = val2;
+    val2 = temp;
+}</code></pre>
+    </div>
+
+    <!-- EXERCICE 3 CORRIGÉ -->
+    <div class="expl-section" id="expl-partie3">
+      <h2>Exercice 3 — Calcul de Remise & Division Flottante</h2>
+      
+      <div class="box-why">
+        <strong>Attention absolue au piège C++ :</strong>
+        <code>taux = remise / 100;</code> avec deux entiers effectue une division entière : <code>20 / 100 = 0</code> ! Il faut impérativement diviser par <code>100.0f</code> flottant.
+      </div>
+
+      <pre><code>float calculerPrixReduit(float prixInitial, unsigned short int remise)
+{
+    // VARIABLES
+    float tauxDecimal;
+    float prixFinal;
+
+    // TRAITEMENTS
+    tauxDecimal = static_cast&lt;float&gt;(remise) / 100.0f;
+    prixFinal = prixInitial * (1.0f - tauxDecimal);
+
+    if (remise &gt; 50)
+    {
+        cout &lt;&lt; "Remise exceptionnelle appliquee !" &lt;&lt; endl;
+    }
+
+    return prixFinal;
+}</code></pre>
+    </div>
+
+    <!-- EXERCICE 4 CORRIGÉ -->
+    <div class="expl-section" id="expl-partie4">
+      <h2>Exercice 4 — Algorithme du Minimum dans un Tableau</h2>
+      
+      <h3>Sous-programme C++ avec passage sécurisé</h3>
+      <pre><code>void trouverMinimum(const int tab[], unsigned int taille, int& minVal, unsigned int& minPos)
+{
+    // PRECONDITION : taille &gt; 0
+    minVal = tab[0];
+    minPos = 0;
+
+    for (unsigned int i = 1; i &lt; taille; ++i)
+    {
+        if (tab[i] &lt; minVal)
+        {
+            minVal = tab[i];
+            minPos = i;
+        }
+    }
+}</code></pre>
+      <p><strong>Complexité temporelle :</strong> L'algorithme effectue exactement $(N - 1)$ comparaisons pour un tableau de taille $N$. Sa complexité est donc en $\mathcal{O}(N)$ (linéaire), ce qui est optimal car chaque élément doit être examiné au moins une fois.</p>
+    </div>
+    
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function basculerTab(tab) {
+      const colSujet = document.getElementById('col-sujet');
+      const colExpl = document.getElementById('col-explications');
+      const btns = document.querySelectorAll('.tab-btn');
+      
+      if (tab === 'sujet') {
+        colSujet.classList.remove('hidden');
+        colExpl.classList.add('hidden');
+        btns[0].classList.add('active');
+        btns[1].classList.remove('active');
+      } else {
+        colSujet.classList.add('hidden');
+        colExpl.classList.remove('hidden');
+        btns[0].classList.remove('active');
+        btns[1].classList.add('active');
+      }
+    }
+
+    function scrollerVersExercice(idTarget) {
+      // Si en vue mobile, basculer sur l'onglet explications
+      if (window.innerWidth <= 960) {
+        basculerTab('expl');
+      }
+      const target = document.getElementById(idTarget);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.classList.add('highlighted');
+        setTimeout(() => target.classList.remove('highlighted'), 2500);
+      }
+    }
+  </script>
+</body>
+</html>

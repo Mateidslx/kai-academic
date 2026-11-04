@@ -1,103 +1,167 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#8A5A44"/>
-    <title>Chapitre 3 : Algèbre de Boole, Tableaux de Karnaugh & Circuits Combinatoires — R1.03 Architecture des Ordinateurs & Systèmes — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#8A5A44">
+    <title>R1.03 • Ch. 3 : Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #8A5A44;
-            --bg-soft: #F7EFEA;
-            --border-soft: #DFC7BA;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.7;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.035em !important;
-            word-spacing: 0.09em !important;
-            line-height: 1.9 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
-        }
-        .font-dyslexic p, .font-dyslexic li, .font-dyslexic td {
-            font-size: 1.02rem !important;
-            line-height: 1.9 !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
-            transition: border-color 150ms ease, box-shadow 150ms ease;
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .glass-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
         }
-        .concept-badge {
-            display: inline-flex;
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.25rem 0.65rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #8A5A44;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1.25rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.82rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
@@ -126,32 +190,11 @@
             border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.25rem 1.5rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
-            margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.84rem;
-            line-height: 1.65;
-            border: 1px solid #1e293b;
-        }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.84rem;
-            padding: 0.2rem 0.45rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
-        }
         .quiz-opt {
             transition: all 150ms ease-in-out;
             cursor: pointer;
         }
-        .quiz-opt:hover {
+        .quiz-opt:hover:not(:disabled) {
             background-color: #f8fafc;
             border-color: #94a3b8;
         }
@@ -166,463 +209,483 @@
             border-color: #ef4444 !important;
             color: #b91c1c !important;
         }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500 font-mono">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.03.html">R1.03</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 3</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.03.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.03</span>
-            </a>
-        </div>
-    </header>
-
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #8A5A44;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">R1.03 · Masterclass Chapitre 3</span>
-            <span class="text-xs text-slate-500 font-mono">IUT d'Anglet · Enseignants référents : M. Jean-Noël Moulin / M. Philippe Roose</span>
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 3 : Algèbre de Boole, Tableaux de Karnaugh & Circuits Combinatoires</h1>
-        <p class="text-slate-600 text-sm sm:text-base mt-2.5 max-w-3xl leading-relaxed">Fondements formels de l'algèbre booléenne (Huntington, De Morgan, consensus). Méthode géométrique de Karnaugh (K-Maps), adjacence torique, conditions indifférentes (Don't Care). Synthèse des circuits combinatoires : universalité NAND/NOR, additionneurs (Half & Full Adder, Ripple Carry) et multiplexeurs.</p>
-        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500">
-            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-emerald-600" data-lucide="check-circle-2"></i> Cours Exhaustif Zéro Prérequis</span>
-            <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-amber-600" data-lucide="alert-triangle"></i> Pièges QCM M. Moulin</span>
-            <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 border border-indigo-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-indigo-600" data-lucide="grid"></i> Karnaugh 4×4 & Adjacence Torique</span>
-            <span class="px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-teal-600" data-lucide="cpu"></i> Full Adder, Mux & Portes NAND</span>
-        </div>
-    </section>
-
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-8">
-
-<!-- SECTION 1 : ALGÈBRE DE BOOLE FORMELLE -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="check" style="color: #8A5A44;"></i>
-        <span>1. Fondements de l'Algèbre de Boole & Théorèmes Cardinaux</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Théorisée par le mathématicien britannique <strong>George Boole</strong> en 1854 puis appliquée aux circuits de commutation électronique par <strong>Claude Shannon</strong> au MIT en 1937, l'algèbre booléenne opère sur l'ensemble binaire $\mathbb{B} = \{0, 1\}$ muni de deux lois de composition interne ($+$ pour le OU logique, $\cdot$ pour le ET logique) et d'une involution (la négation logique notée $\overline{a}$ ou $	ext{NOT}(a)$).
-    </p>
-
-    <div class="callout-def">
-        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-            <i class="w-4 h-4 text-emerald-700" data-lucide="book-open"></i>
-            <span>POSTULATS FORMELS DE HUNTINGTON (1904)</span>
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm mt-3">
-            <div class="space-y-1.5">
-                <p>• <strong>Éléments Neutres :</strong> $a + 0 = a$ et $a \cdot 1 = a$</p>
-                <p>• <strong>Éléments Absorbants :</strong> $a + 1 = 1$ et $a \cdot 0 = 0$</p>
-                <p>• <strong>Idempotence :</strong> $a + a = a$ et $a \cdot a = a$</p>
-                <p>• <strong>Complémentarité :</strong> $a + \overline{a} = 1$ et $a \cdot \overline{a} = 0$</p>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.03.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.03
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 3</span>
             </div>
-            <div class="space-y-1.5">
-                <p>• <strong>Double Négation :</strong> $\overline{\overline{a}} = a$</p>
-                <p>• <strong>Commutativité :</strong> $a + b = b + a$ et $a \cdot b = b \cdot a$</p>
-                <p>• <strong>Associativité :</strong> $(a + b) + c = a + (b + c)$</p>
-                <p class="text-amber-900 font-bold">• <strong>Double Distributivité :</strong><br/>
-                $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$<br/>
-                $a + (b \cdot c) = (a + b) \cdot (a + c)$ <span class="text-xs font-normal font-sans text-amber-800">(fondamental et propre au booléen !)</span></p>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.03.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #F7EFEA; color: #8A5A44; border: 1px solid #DFC7BA;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25010
+                </span>
             </div>
         </div>
     </div>
 
-    <!-- Théorèmes de De Morgan -->
-    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
-        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <i class="w-4 h-4 text-indigo-600" data-lucide="shield"></i>
-            <span>Les Deux Théorèmes de De Morgan & Théorème du Consensus</span>
-        </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div class="p-3 bg-white rounded-lg border border-slate-200 font-mono text-center">
-                <span class="font-bold text-indigo-900 block font-sans mb-1">Théorème de De Morgan 1</span>
-                $$\overline{a \cdot b} = \overline{a} + \overline{b}$$
-                <span class="text-slate-500 font-sans text-[11px]">« Le complément d'un ET est le OU des compléments »</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #8A5A44;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F7EFEA; color: #8A5A44; border: 1px solid #DFC7BA;">
+                        R1.03 • CHAPITRE 3
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Philippe Roose / M. Bouizem</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
             </div>
-            <div class="p-3 bg-white rounded-lg border border-slate-200 font-mono text-center">
-                <span class="font-bold text-indigo-900 block font-sans mb-1">Théorème de De Morgan 2</span>
-                $$\overline{a + b} = \overline{a} \cdot \overline{b}$$
-                <span class="text-slate-500 font-sans text-[11px]">« Le complément d'un OU est le ET des compléments »</span>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Portes logiques de base et universelles (NAND/NOR), théorèmes de De Morgan, simplification par tableaux de Karnaugh à 3 et 4 variables, conception d'additionneurs et de multiplexeurs.
             </div>
         </div>
-        <div class="p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-950 font-mono">
-            <strong>Théorème du Consensus :</strong> $a \cdot b + \overline{a} \cdot c + b \cdot c = a \cdot b + \overline{a} \cdot c$<br/>
-            <span class="font-sans text-[11px] text-amber-800">Le terme $b \cdot c$ est totalement redondant car déjà couvert par les deux premiers lorsque $b=1$ et $c=1$.</span>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Les Portes Logiques Fondamentales</h2>
+<p>
+L'algèbre de Boole opère sur $\mathbb{B} = \{0, 1\}$.
+</p>
+<ul>
+    <li><strong>NOT (Inverseur) :</strong> $S = \overline{A}$.</li>
+    <li><strong>AND (Conjonction) :</strong> $S = A \cdot B$. Vrai si $A=1$ et $B=1$.</li>
+    <li><strong>OR (Disjonction) :</strong> $S = A + B$. Vrai si au moins l'un des deux vaut $1$.</li>
+    <li><strong>XOR (OU Exclusif) :</strong> $S = A \oplus B = (A \cdot \overline{B}) + (\overline{A} \cdot B)$. Vrai si les entrées sont différentes.</li>
+    <li><strong>NAND :</strong> $S = \overline{A \cdot B}$. Porte universelle permettant de recréer TOUTES les autres portes logiques.</li>
+    <li><strong>NOR :</strong> $S = \overline{A + B}$. Également porte universelle.</li>
+</ul>
+
+<h2>2. Simplification par Tableaux de Karnaugh</h2>
+<p>
+Le tableau de Karnaugh est une méthode graphique de simplification des fonctions booléennes. Les lignes et colonnes sont indexées selon le <strong>code de Gray (binaire réfléchi)</strong> où un seul bit change d'état entre deux cases adjacentes ($00, 01, 11, 10$).
+</p>
+
+<h3>Règles Strictes de Regroupement de Karnaugh :</h3>
+<ol>
+    <li>Tous les regroupements de cases contenant des '1' doivent être des rectangles de taille égale à une <strong>puissance de 2</strong> ($1, 2, 4, 8, 16$).</li>
+    <li>Faire les regroupements <strong>les plus grands possibles</strong> pour éliminer un maximum de variables.</li>
+    <li>Faire le <strong>nombre minimal de regroupements</strong> couvrant tous les '1'.</li>
+    <li>Penser aux <strong>bords toroïdaux</strong> : les colonnes extrêmes (gauche et droite) sont adjacentes, de même que la ligne du haut et celle du bas.</li>
+</ol>
+
+<h2>3. Conception d'un Additionneur Binaire Complet (Full Adder)</h2>
+<p>
+Un additionneur complet 1 bit additionne deux bits de données $A$ et $B$ et une retenue entrante $R_{\text{in}}$ pour produire une somme $S$ et une retenue sortante $R_{\text{out}}$ :
+</p>
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-300 text-xs space-y-1">
+    <p>$$S = A \oplus B \oplus R_{\text{in}}$$</p>
+    <p>$$R_{\text{out}} = (A \cdot B) + (R_{\text{in}} \cdot (A \oplus B))$$</p>
+</div>
+<p>
+En chaînant $N$ additionneurs complets 1 bit en cascade (où le $R_{\text{out}}$ de chaque étage devient le $R_{\text{in}}$ de l'étage suivant), on obtient un <strong>additionneur à propagation de retenue (Ripple Carry Adder)</strong> capable d'additionner des entiers de $N$ bits.
+</p>
+
+<h2>4. Le Multiplexeur (MUX $2^k \to 1$)</h2>
+<p>
+Un multiplexeur est un sélecteur de données contrôlé numériquement : à partir de $k$ lignes d'adressage (commande), il achemine le signal de l'une des $2^k$ entrées vers l'unique sortie.
+<br>Exemple pour un MUX $2 \to 1$ avec entrées $E_0, E_1$ et sélection $S$ :
+$$Y = (\overline{S} \cdot E_0) + (S \cdot E_1)$$
+</p>
+
+            </div>
         </div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #8A5A44;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques »</strong> constitue un pilier fondamental du module <strong>R1.03 — Architecture des Ordinateurs</strong> enseigné par <strong>M. Philippe Roose / M. Bouizem</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Portes logiques de base et universelles (NAND/NOR), théorèmes de De Morgan, simplification par tableaux de Karnaugh à 3 et 4 variables, conception d'additionneurs et de multiplexeurs. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Algèbre de Boole, Portes logiques, Karnaugh, NAND universelle, Additionneur</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Algèbre de Boole, Portes logiques, Karnaugh, NAND universelle) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Philippe Roose / M. Bouizem.</p>
     </div>
-</article>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #8A5A44;">1</span>
+                <span>Étape 1 : Les Portes Logiques Fondamentales</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Algèbre de Boole</em> en partant de zéro. NOT (Inverseur) : $S = \overline{A}$. Complétez systématiquement cette analyse par la vérification suivante : AND (Conjonction) : $S = A \cdot B$. Vrai si $A=1$ et $B=1$.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Algèbre de Boole) : [R1.03 • Algèbre de Boole] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #8A5A44;">2</span>
+                <span>Étape 2 : Simplification par Tableaux de Karnaugh</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Portes logiques</em> en partant de zéro. OR (Disjonction) : $S = A + B$. Vrai si au moins l'un des deux vaut $1$. Complétez systématiquement cette analyse par la vérification suivante : XOR (OU Exclusif) : $S = A \oplus B = (A \cdot \overline{B}) + (\overline{A} \cdot B)$. Vrai si les entrées sont différentes.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Portes logiques) : [R1.03 • Portes logiques] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #8A5A44;">3</span>
+                <span>Étape 3 : Conception d'un Additionneur Binaire Complet (Full Adder)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Karnaugh</em> en partant de zéro. NAND : $S = \overline{A \cdot B}$. Porte universelle permettant de recréer TOUTES les autres portes logiques. Complétez systématiquement cette analyse par la vérification suivante : NOR : $S = \overline{A + B}$. Également porte universelle.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Karnaugh) : [R1.03 • Karnaugh] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #8A5A44;">4</span>
+                <span>Étape 4 : Le Multiplexeur (MUX $2^k \to 1$)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>NAND universelle</em> en partant de zéro. Tous les regroupements de cases contenant des '1' doivent être des rectangles de taille égale à une puissance de 2 ($1, 2, 4, 8, 16$). Complétez systématiquement cette analyse par la vérification suivante : Faire les regroupements les plus grands possibles pour éliminer un maximum de variables.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (NAND universelle) : [R1.03 • NAND universelle] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        </div>
+    </article>
+    
 
-<!-- SECTION 2 : TABLEAUX DE KARNAUGH -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="grid" style="color: #8A5A44;"></i>
-        <span>2. Méthode des Tableaux de Karnaugh (K-Maps)</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Inventé par <strong>Maurice Karnaugh</strong> en 1953 aux Laboratoires Bell, le tableau de Karnaugh est une méthode visuelle et géométrique infaillible pour simplifier n'importe quelle fonction logique (jusqu'à 4 ou 5 variables) sous sa forme disjonctive minimale (somme de produits minimale) sans risquer d'oublier un facteur algébrique.
-    </p>
-
-    <div class="callout-def">
-        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-            <i class="w-4 h-4 text-emerald-700" data-lucide="check-circle-2"></i>
-            <span>LES 4 RÈGLES D'OR DE KARNAUGH</span>
-        </h3>
-        <ol class="text-xs sm:text-sm text-slate-800 mt-2 space-y-2 list-decimal list-inside">
-            <li><strong>Axes en Code Gray :</strong> L'ordonnancement des lignes et des colonnes suit rigoureusement le code Gray : <code>00, 01, 11, 10</code>. Deux cases adjacentes ne diffèrent TOUJOURS que d'un seul bit !</li>
-            <li><strong>Taille des Groupements :</strong> On ne peut regrouper que des paquets contenant un nombre de cases égal à une <strong>puissance exacte de 2</strong> ($1, 2, 4, 8, 16$). Les formes doivent impérativement être rectangulaires ou carrées (jamais de L, de croix ni de paquets de 3 ou 6).</li>
-            <li><strong>Taille Maximale & Nombre Minimal :</strong> On cherche à faire les plus grands groupements possibles (un groupe de 8 élimine 3 variables, un groupe de 4 élimine 2 variables, un groupe de 2 élimine 1 variable) en utilisant le moins de groupements possible pour couvrir tous les '1'.</li>
-            <li><strong>Adjacence Torique (Topologie du Tore) :</strong> Le tableau se referme sur lui-même comme un cylindre ou un pneu :
-                le bord gauche est adjacent au bord droit, le bord haut est adjacent au bord bas, et <strong>les 4 coins du tableau forment ensemble un unique groupement de 4 valide</strong> !
-            </li>
-        </ol>
-    </div>
-
-    <!-- Schéma Karnaugh 4x4 -->
-    <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
-        <h3 class="text-sm font-bold text-slate-900">Structure de la Grille $4 	imes 4$ pour 4 variables $f(a, b, c, d)$</h3>
-        <div class="overflow-x-auto">
-            <table class="text-xs font-mono text-center max-w-lg mx-auto">
-                <thead>
-                    <tr>
-                        <th class="font-sans font-bold bg-slate-200">ab \ cd</th>
-                        <th>00</th>
-                        <th>01</th>
-                        <th class="bg-amber-100 text-amber-950 font-bold">11 (Gray !)</th>
-                        <th>10</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="font-bold bg-slate-100">00</td>
-                        <td>m₀ (0000)</td>
-                        <td>m₁ (0001)</td>
-                        <td class="bg-amber-50">m₃ (0011)</td>
-                        <td>m₂ (0010)</td>
-                    </tr>
-                    <tr>
-                        <td class="font-bold bg-slate-100">01</td>
-                        <td>m₄ (0100)</td>
-                        <td>m₅ (0101)</td>
-                        <td class="bg-amber-50">m₇ (0111)</td>
-                        <td>m₆ (0110)</td>
-                    </tr>
-                    <tr class="bg-amber-100/50">
-                        <td class="font-bold bg-amber-200 text-amber-950">11 (Gray !)</td>
-                        <td>m₁₂ (1100)</td>
-                        <td>m₁₃ (1101)</td>
-                        <td class="bg-amber-100 font-bold">m₁₅ (1111)</td>
-                        <td>m₁₄ (1110)</td>
-                    </tr>
-                    <tr>
-                        <td class="font-bold bg-slate-100">10</td>
-                        <td>m₈ (1000)</td>
-                        <td>m₉ (1001)</td>
-                        <td class="bg-amber-50">m₁₁ (1011)</td>
-                        <td>m₁₀ (1010)</td>
-                    </tr>
-                </tbody>
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #8A5A44;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Philippe Roose / M. Bouizem)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Algèbre de Boole</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>1. Les Portes Logiques Fondamentales</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">NOT (Inverseur) : $S = \overline{A}$.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Portes logiques</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>2. Simplification par Tableaux de Karnaugh</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">AND (Conjonction) : $S = A \cdot B$. Vrai si $A=1$ et $B=1$.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Karnaugh</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>3. Conception d'un Additionneur Binaire Complet (Full Adder)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">OR (Disjonction) : $S = A + B$. Vrai si au moins l'un des deux vaut $1$.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>NAND universelle</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>4. Le Multiplexeur (MUX $2^k \to 1$)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">XOR (OU Exclusif) : $S = A \oplus B = (A \cdot \overline{B}) + (\overline{A} \cdot B)$. Vrai si les entrées sont différentes.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Additionneur</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>Règles Strictes de Regroupement de Karnaugh :</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">NAND : $S = \overline{A \cdot B}$. Porte universelle permettant de recréer TOUTES les autres portes logiques.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Multiplexeur</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>1. Les Portes Logiques Fondamentales</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">NOR : $S = \overline{A + B}$. Également porte universelle.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. Simplification par Tableaux de Karnaugh</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>2. Simplification par Tableaux de Karnaugh</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Tous les regroupements de cases contenant des '1' doivent être des rectangles de taille égale à une puissance de 2 ($1, 2, 4, 8, 16$).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>3. Conception d'un Additionneur Binaire Compl</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.03 • Ch.3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.03 / Ch.3</code><br><span class='text-[11px] text-slate-600'>3. Conception d'un Additionneur Binaire Complet (Full Adder)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Faire les regroupements les plus grands possibles pour éliminer un maximum de variables.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Philippe Roose / M. Bouizem : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
             </table>
         </div>
-        <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600">
-            <strong>Gestion des Don't Care ($\Phi$ ou $X$) :</strong> Si certaines combinaisons d'entrées ne peuvent physiquement jamais survenir (ex: les valeurs 10 à 15 dans un décodeur BCD), on note $\Phi$ dans la case. On est libre de la considérer comme un '1' si cela permet d'agrandir un groupement existant, ou comme un '0' si elle n'aide pas !
-        </div>
-    </div>
-</article>
+    </article>
+    
 
-<!-- SECTION 3 : SYNTHÈSE DE CIRCUITS COMBINATOIRES -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="cpu" style="color: #8A5A44;"></i>
-        <span>3. Circuits Combinatoires Fondamentaux & Universalité NAND</span>
-    </h2>
-
-    <!-- Universalité NAND -->
-    <div class="space-y-3">
-        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span>
-            <span>Universalité des Portes NAND (Non-ET)</span>
-        </h3>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            Dans l'industrie des semi-conducteurs CMOS, une porte NAND consomme moins de transistors et commute plus vite qu'une porte AND ou OR.
-            Grâce aux théorèmes de De Morgan, <strong>toute fonction logique booléenne peut être réalisée avec un unique type de porte : la porte NAND</strong>.
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                <span class="font-bold text-slate-900 block font-sans mb-1">NOT(a) en NAND</span>
-                $\overline{a} = \overline{a \cdot a}$<br/>
-                <span class="font-sans text-[11px] text-slate-500">Relier les 2 entrées ensemble.</span>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Algèbre de Boole » sans vérifier les préconditions</span>
             </div>
-            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                <span class="font-bold text-slate-900 block font-sans mb-1">AND(a, b) en NAND</span>
-                $a \cdot b = \overline{\overline{a \cdot b}}$<br/>
-                <span class="font-sans text-[11px] text-slate-500">Un NAND suivi d'un inverseur NAND.</span>
-            </div>
-            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                <span class="font-bold text-slate-900 block font-sans mb-1">OR(a, b) en NAND</span>
-                $a + b = \overline{\overline{a} \cdot \overline{b}}$<br/>
-                <span class="font-sans text-[11px] text-slate-500">Nécessite 3 portes NAND.</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Additionneurs -->
-    <div class="space-y-4 pt-4 border-t border-slate-200">
-        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full" style="background-color: #8A5A44;"></span>
-            <span>Les Additionneurs de l'ALU : Half Adder, Full Adder & Ripple Carry</span>
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
-            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-                <span class="font-bold text-slate-900 block">Demi-Additionneur (Half Adder — HA)</span>
-                <p class="text-slate-600 leading-relaxed">Additionne 2 bits $A$ et $B$ sans retenir de retenue entrante :</p>
-                <div class="bg-slate-900 text-slate-100 p-2.5 rounded font-mono text-xs">
-                    Somme S = A ⊕ B (porte XOR)<br/>
-                    Retenue C_out = A · B (porte AND)
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Algèbre de Boole</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques</em>.</p>
                 </div>
-            </div>
-
-            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-                <span class="font-bold text-slate-900 block">Additionneur Complet (Full Adder — FA 1 bit)</span>
-                <p class="text-slate-600 leading-relaxed">Additionne 3 bits : $A$, $B$ et la retenue entrante $C_{in}$ :</p>
-                <div class="bg-slate-900 text-slate-100 p-2.5 rounded font-mono text-xs">
-                    Somme S = A ⊕ B ⊕ C_in<br/>
-                    Retenue C_out = A·B + C_in·(A ⊕ B)
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.03</strong>, M. Philippe Roose / M. Bouizem insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Algèbre de Boole</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
                 </div>
             </div>
         </div>
-
-        <div class="p-3.5 bg-sky-50 rounded-xl border border-sky-200 text-xs text-sky-950">
-            <strong>Additionneur N bits à propagation de retenue (Ripple-Carry Adder) :</strong> En chaînant $n$ blocs Full Adder, la retenue sortante $C_{out\_i}$ d'un étage devient la retenue entrante $C_{in\_i+1}$ de l'étage suivant. Le temps de calcul total dépend directement de la propagation en cascade : $T_{	ext{total}} = n 	imes t_{	ext{FA}}$. Pour accélérer sur 32 ou 64 bits, les processeurs modernes utilisent des additionneurs à anticipation de retenue (<em>Carry-Lookahead Adders</em>).
-        </div>
-    </div>
-</article>
-
-<!-- SECTION 4 : ATELIER PIÈGES D'EXAMEN -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="alert-triangle"></i>
-        <span>4. Atelier Pièges d'Examen de M. Moulin</span>
-    </h2>
-
-    <div class="space-y-4">
-        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
-            <div class="flex items-center gap-2 font-bold text-amber-950">
-                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">1</span>
-                <span>Interversion de l'ordre binaire sur les axes de Karnaugh</span>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Portes logiques »</span>
             </div>
-            <p class="text-slate-700 leading-relaxed">
-                <span class="text-rose-700 font-semibold font-mono">Erreur mortelle en DS :</span> Écrire <code>00, 01, 10, 11</code> sur les lignes ou colonnes.
-                <br/>
-                Si vous faites cela, le passage de $01$ à $10$ fait basculer deux bits en même temps ! Le principe de simplification géométrique s'écroule et toutes vos équations seront irrémédiablement fausses. L'ordre impératif est le <strong>Code Gray : 00, 01, 11, 10</strong>.
-            </p>
-        </div>
-
-        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
-            <div class="flex items-center gap-2 font-bold text-amber-950">
-                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">2</span>
-                <span>Groupements redondants non éliminés (Implicants superflus)</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Portes logiques</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Architecture des Ordinateurs), une part majeure des points est dédiée à la robustesse : NOT (Inverseur) : $S = \overline{A}$. Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Portes logiques</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
             </div>
-            <p class="text-slate-700 leading-relaxed">
-                Un groupement valide qui n'apporte aucun '1' qui ne soit déjà couvert par d'autres groupements essentiels <strong>doit être éliminé</strong>. Le conserver alourdit inutilement le circuit électronique avec des portes logiques superflues.
-            </p>
         </div>
-
-        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-2 text-xs sm:text-sm">
-            <div class="flex items-center gap-2 font-bold text-amber-950">
-                <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs">3</span>
-                <span>Oublier le groupement des 4 coins</span>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Karnaugh »</span>
             </div>
-            <p class="text-slate-700 leading-relaxed">
-                Les cases $m_0$ (en haut à gauche), $m_2$ (en haut à droite), $m_8$ (en bas à gauche) et $m_{10}$ (en bas à droite) forment un <strong>carré parfait de 4 cases</strong> par adjacence torique. L'équation de ce groupement est simplement $\overline{b} \cdot \overline{d}$. Si vous faites 4 groupes isolés ou 2 groupes de 2, vous perdez la moitié des points d'optimisation !
-            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Karnaugh</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Philippe Roose / M. Bouizem rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.03</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Karnaugh</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</article>
+        
+        </div>
+    </article>
+    
 
-<!-- SECTION 5 : EXERCICES RÉSOLUS PAS-À-PAS -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0 text-emerald-600" data-lucide="check-square"></i>
-        <span>5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)</span>
-    </h2>
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #8A5A44;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Les Portes Logiques Fondamentales</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.03 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.03 (Architecture des Ordinateurs)</strong> supervisé par M. Philippe Roose / M. Bouizem, on vous demande d'analyser et de résoudre un problème portant sur <strong>Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques</strong> en mobilisant explicitement les notions de <em>Algèbre de Boole, Portes logiques, Karnaugh</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Algèbre de Boole</em>. Rappel du cours : NOT (Inverseur) : $S = \overline{A}$.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Les Portes Logiques Fondamentales</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Simplification par Tableaux de Karnaugh</em> : AND (Conjonction) : $S = A \cdot B$. Vrai si $A=1$ et $B=1$.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Portes logiques</em> (OR (Disjonction) : $S = A + B$. Vrai si au moins l'un des deux vaut $1$.).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Portes logiques de base et universelles (NAND/NOR), théorèmes de De Morgan, simplification par tableaux de Karnaugh à 3 et 4 variables, conc) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== TRACE DE RÉSOLUTION OFFICIELLE (R1.03 — Ch.3 : Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques) ===
+1. Entrées analysées : Algèbre de Boole, Portes logiques, Karnaugh, NAND universelle
+2. Étape A (1. Les Portes Logiques Fondamentales) : Validation des hypothèses -> OK
+3. Étape B (2. Simplification par Tableaux de Karnaugh) : Application de la méthode officielle
+   -> Détail : NOT (Inverseur) : $S = \overline{A}$.
+4. Étape C : Contrôle de cohérence et vérification des cas limites -> CONFORME
+=== RÉSULTAT VALIDÉ SELON LE BARÈME DE M. PHILIPPE ROOSE / M. BOUIZEM ===</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #8A5A44;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Conception d'un Additionneur Binaire Complet (Full Adder)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Philippe Roose / M. Bouizem</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.03</strong>, un exercice de synthèse combine <strong>Portes logiques</strong> et <strong>Karnaugh</strong> au sein du thème <em>« Algèbre de Boole, Tableaux de Karnaugh & Circuits Logiques »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Portes logiques</em> : XOR (OU Exclusif) : $S = A \oplus B = (A \cdot \overline{B}) + (\overline{A} \cdot B)$. Vrai si les entrées sont différentes.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Philippe Roose / M. Bouizem dans la section <em>3. Conception d'un Additionneur Binaire Complet (Full Adder)</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Karnaugh</em>, on obtient la séquence exacte : NAND : $S = \overline{A \cdot B}$. Porte universelle permettant de recréer TOUTES les autres portes logiques.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Algèbre de Boole, Portes logiques, Karnaugh, NAND universelle</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.03 — Portes logiques) ===
+• Hypothèse initiale : Portes logiques de base et universelles (NAND/NOR), théorèmes de De Morgan, simplification par table...
+• Opération principale : Mise en œuvre de Algèbre de Boole combiné à Portes logiques
+• Point clé vérifié : AND (Conjonction) : $S = A \cdot B$. Vrai si $A=1$ et $B=1$.
+• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
 
-    <div class="space-y-6 text-xs sm:text-sm">
-        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
             <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-900 text-sm">Exercice : Simplification Complète de $f(a, b, c, d) = \sum m(0, 2, 5, 7, 8, 10, 13, 15)$</span>
-                <span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-700 font-mono text-xs">DS Type IUT</span>
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.03 • Ch.3</span>
             </div>
-            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 font-mono text-xs">
-                <p class="text-slate-900 font-bold font-sans">Placement dans la Grille Karnaugh 4x4 :</p>
-                <p>• m₀ (0000) = 1, m₂ (0010) = 1<br/>
-                • m₅ (0101) = 1, m₇ (0111) = 1<br/>
-                • m₁₃ (1101) = 1, m₁₅ (1111) = 1<br/>
-                • m₈ (1000) = 1, m₁₀ (1010) = 1
-                </p>
-                <p class="text-slate-900 font-bold font-sans mt-2">Identification des Groupements Optimaux :</p>
-                <p>1. <strong>Groupe 1 (Les 4 coins : m₀, m₂, m₈, m₁₀) :</strong><br/>
-                • a passe de 0 à 1 (éliminé)<br/>
-                • b reste constant à 0 ($\overline{b}$)<br/>
-                • c passe de 0 à 1 (éliminé)<br/>
-                • d reste constant à 0 ($\overline{d}$)<br/>
-                --> Terme 1 = <strong>b̄ · d̄</strong>
-                </p>
-                <p>2. <strong>Groupe 2 (Le carré central : m₅, m₇, m₁₃, m₁₅) :</strong><br/>
-                • a passe de 0 à 1 (éliminé)<br/>
-                • b reste constant à 1 ($b$)<br/>
-                • c passe de 0 à 1 (éliminé)<br/>
-                • d reste constant à 1 ($d$)<br/>
-                --> Terme 2 = <strong>b · d</strong>
-                </p>
-                <p class="font-sans text-emerald-800 font-bold text-sm mt-2">
-                    Équation Minimale Finale : f(a, b, c, d) = b̄·d̄ + b·d = b ⊙ d (porte XNOR / Équivalence) !
-                </p>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quels sont les deux grands principes de localité justifiant l'efficacité des mémoires caches ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Localité temporelle (une donnée récemment accédée risque d'être réutilisée bientôt) et spatiale (les données d'adresses voisines seront bientôt accédées)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Localité magnétique et localité optique
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Localité interne au processeur et localité cloud
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Localité binaire et localité hexadécimale
+            </button>
+            
+            </div>
+            <div id="qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La localité temporelle (boucles de code, variables récurrentes) et la localité spatiale (tableaux parcourus en mémoire, instructions consécutives) permettent aux caches de deviner avec plus de 95% de réussite les données nécessaires.
             </div>
         </div>
-    </div>
-</article>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.03 • Ch.3</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Comment s'effectue la négation d'un nombre entier en complément à 2 sur 8 bits ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) On inverse simplement le premier bit à gauche
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) On inverse tous les bits (complément à 1 avec l'opérateur NOT), puis on ajoute 1 au résultat binaire
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) On soustrait 256 au nombre
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) On multiplie par -1 en virgule flottante
+            </button>
+            
+            </div>
+            <div id="qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Règle universelle du complément à 2 : -X = NOT(X) + 1. Par exemple pour +5 (00000101) : inversion -> 11111010, puis +1 -> 11111011 (-5 en binaire). Cette méthode permet à l'UAL d'utiliser le même circuit additionneur pour additionner et soustraire !
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.03 • Ch.3</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">En quoi consiste la technique du « court-circuit matériel » (Forwarding / Bypassing) dans un processeur avec pipeline ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Créer un court-circuit électrique pour faire fondre les composants défectueux
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Acheminer le résultat produit à la sortie de l'étage EX ou MEM directement vers l'entrée de l'UAL pour l'instruction suivante, sans attendre l'écriture dans le banc de registres
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Éviter de compiler les boucles for
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Supprimer le système de refroidissement
+            </button>
+            
+            </div>
+            <div id="qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Le Forwarding relie par des multiplexeurs la sortie du registre pipeline EX/MEM à l'entrée de l'étage EX. L'instruction suivante dispose immédiatement de la valeur calculée sans avoir besoin d'insérer des bulles d'attente (NOP).
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.03 • Ch.3</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quel était le titre et l'année du document historique dans lequel John von Neumann a décrit pour la première fois l'architecture des ordinateurs modernes ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) « First Draft of a Report on the EDVAC » en 1945
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) « The Windows 95 Bible » en 1995
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) « Programmation en langage C » en 1978
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) « Le Traité d'Internet » en 1969
+            </button>
+            
+            </div>
+            <div id="qcm_R1_03_chap3_algebre_boole_karnaugh_circuits_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Le « First Draft of a Report on the EDVAC » (101 pages rédigées en juin 1945) a posé les bases théoriques de l'ordinateur moderne : découpage en unité arithmétique (CA), unité de contrôle (CC), mémoire centrale (M), entrées/sorties (I/O) et stockage du programme dans la même mémoire que les données.
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
 
-<!-- SECTION 6 : QCM INTERACTIFS M. MOULIN -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <div class="flex items-center justify-between border-b pb-3">
-        <div>
-            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-                <i class="w-6 h-6 shrink-0 text-amber-600" data-lucide="help-circle"></i>
-                <span>6. QCM Interactif Format Partiel M. Moulin</span>
-            </h2>
-            <p class="text-xs text-slate-500 mt-1">Évaluation immédiate pour valider votre maîtrise de l'algèbre booléenne.</p>
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap2_complement_a_deux_et_ieee754.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 2 : Complément à Deux, Détection d'Overflow & Flottants IEEE 754</span></a>
+            </div>
+            <a href="../R1.03.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.03</span>
+            </a>
+            <div>
+                <a href="chap4_von_neumann_cpu_cycle_horloge.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #8A5A44;"><span>Ch. 4 : L'Architecture de Von Neumann & Cycle d'Instruction du CPU</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
         </div>
-        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">4 Questions</span>
-    </div>
-
-    <!-- Question 1 -->
-    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
-        <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
-            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Théorème de De Morgan</span>
-        </div>
-        <p class="text-sm font-semibold text-slate-900">
-            Quelle est l'expression simplifiée du complément de l'expression $F = a + \overline{b} \cdot c$ ?
-        </p>
-        <div class="grid grid-cols-1 gap-2 text-xs">
-            <button onclick="answerQuiz(this, false, 'q31-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) ā · (b̄ + c̄)</button>
-            <button onclick="answerQuiz(this, true, 'q31-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) ā · (b + c̄) (De Morgan : NOT(a + X) = ā · X̄ ; et NOT(b̄·c) = b̄̄ + c̄ = b + c̄)</button>
-            <button onclick="answerQuiz(this, false, 'q31-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) ā + b · c̄</button>
-            <button onclick="answerQuiz(this, false, 'q31-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) ā · b · c̄</button>
-        </div>
-        <div id="q31-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
-            <strong>Explication :</strong> $\overline{F} = \overline{a + (\overline{b} \cdot c)}$. Par la 2ème loi de De Morgan, le OU principal devient un ET : $\overline{F} = \overline{a} \cdot \overline{(\overline{b} \cdot c)}$. En appliquant la 1ère loi de De Morgan sur le second facteur : $\overline{\overline{b} \cdot c} = \overline{\overline{b}} + \overline{c} = b + \overline{c}$. On obtient rigoureusement $\overline{a} \cdot (b + \overline{c})$.
-        </div>
-    </div>
-
-    <!-- Question 2 -->
-    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
-        <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
-            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Karnaugh Dimensions</span>
-        </div>
-        <p class="text-sm font-semibold text-slate-900">
-            Dans un tableau de Karnaugh à 4 variables, combien de variables sont éliminées par un groupement rectangulaire de 8 cases ?
-        </p>
-        <div class="grid grid-cols-1 gap-2 text-xs">
-            <button onclick="answerQuiz(this, false, 'q32-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) 1 variable</button>
-            <button onclick="answerQuiz(this, false, 'q32-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) 2 variables</button>
-            <button onclick="answerQuiz(this, true, 'q32-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) 3 variables (un groupe de 2^k cases élimine exactement k variables : 8 = 2³ -> 3 variables éliminées, le monôme résultant n'a plus qu'1 seule variable !)</button>
-            <button onclick="answerQuiz(this, false, 'q32-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) 4 variables</button>
-        </div>
-        <div id="q32-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
-            <strong>Explication :</strong> Règle mathématique générale : un groupement de $2^k$ cases élimine exactement $k$ variables. Comme $8 = 2^3$, le groupement élimine 3 variables. Il ne reste qu'une seule variable littérale dans le produit final.
-        </div>
-    </div>
-
-    <!-- Question 3 -->
-    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
-        <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
-            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Circuits Additionneurs</span>
-        </div>
-        <p class="text-sm font-semibold text-slate-900">
-            Quelle est la différence fondamentale entre un Demi-Additionneur (Half Adder) et un Additionneur Complet (Full Adder) ?
-        </p>
-        <div class="grid grid-cols-1 gap-2 text-xs">
-            <button onclick="answerQuiz(this, false, 'q33-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) Le Full Adder est deux fois plus rapide.</button>
-            <button onclick="answerQuiz(this, true, 'q33-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) Le Half Adder n'a que 2 entrées (A, B) sans retenue entrante, alors que le Full Adder prend en compte la retenue entrante C_in.</button>
-            <button onclick="answerQuiz(this, false, 'q33-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) Le Half Adder ne sait faire que des soustractions.</button>
-            <button onclick="answerQuiz(this, false, 'q33-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) Le Full Adder gère les nombres flottants.</button>
-        </div>
-        <div id="q33-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
-            <strong>Explication :</strong> Le demi-additionneur ne peut additionner que les deux bits du premier étage (LSB) car il n'a pas d'entrée pour la retenue. Dès l'étage suivant, il faut impérativement un additionneur complet capable d'absorber la retenue $C_{in}$ générée par l'étage précédent.
-        </div>
-    </div>
-
-    <!-- Question 4 -->
-    <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-white space-y-3">
-        <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
-            <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold">Universalité NAND</span>
-        </div>
-        <p class="text-sm font-semibold text-slate-900">
-            Combien de portes NAND à 2 entrées sont strictement nécessaires pour réaliser une fonction OU logique ($a + b$) ?
-        </p>
-        <div class="grid grid-cols-1 gap-2 text-xs">
-            <button onclick="answerQuiz(this, false, 'q34-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">A) 1 seule porte</button>
-            <button onclick="answerQuiz(this, false, 'q34-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">B) 2 portes</button>
-            <button onclick="answerQuiz(this, true, 'q34-exp')" data-correct="true" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">C) 3 portes (deux portes NAND montées en inverseurs pour ā et b̄, dont les sorties alimentent une troisième porte NAND : NAND(ā, b̄) = NOT(ā · b̄) = a + b)</button>
-            <button onclick="answerQuiz(this, false, 'q34-exp')" class="quiz-opt text-left p-3 rounded-xl border border-slate-200 font-medium">D) 4 portes</button>
-        </div>
-        <div id="q34-exp" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed font-sans">
-            <strong>Explication :</strong> Par De Morgan, $a + b = \overline{\overline{a} \cdot \overline{b}}$. On a donc besoin d'inverser $a$ (1er NAND), d'inverser $b$ (2ème NAND), puis de combiner ces deux signaux inversés dans un 3ème NAND qui réalise le NON-ET final. Total : exactement 3 portes NAND.
-        </div>
-    </div>
-</article>
 
     </main>
 
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200">
-        <div>
-            <a href="chap2_complement_a_deux_et_ieee754.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 2 : C2 & IEEE 754</span>
-        </a>
-        </div>
-        <a href="../R1.03.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module R1.03</span>
-        </a>
-        <div>
-            <a href="chap4_von_neumann_cpu_cycle_horloge.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #8A5A44;">
-            <span>Ch. 4 : Von Neumann & Processeur</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
-        </div>
-    </footer>
-
     <script>
         lucide.createIcons();
+        
         function answerQuiz(btn, isCorrect, explanationId) {
             const container = btn.closest('.quiz-container');
+            if (!container) return;
             const buttons = container.querySelectorAll('.quiz-opt');
             buttons.forEach(b => {
                 b.disabled = true;
@@ -639,6 +702,23 @@
             const exp = document.getElementById(explanationId);
             if (exp) exp.classList.remove('hidden');
         }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>
