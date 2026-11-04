@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background: #0b1120; color: #0f172a; }
+        body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background-color: #FAF7F2; color: #1C1917; }
         code, pre { font-family: 'JetBrains Mono', monospace; }
         
         .report-page {
@@ -38,19 +38,19 @@
 <body class="py-8 px-4 sm:px-8 min-h-screen">
 
     <!-- ACTION BAR (NO PRINT) -->
-    <div class="no-print max-w-5xl mx-auto mb-6 flex items-center justify-between flex-wrap gap-4 bg-slate-900 border border-slate-800 text-white p-4 rounded-2xl shadow-xl">
+    <div class="no-print max-w-5xl mx-auto mb-6 flex items-center justify-between flex-wrap gap-4 bg-[#FAF7F2] border border-[#E7E1D8] text-white p-4 rounded-2xl shadow-xl">
         <div class="flex items-center gap-3">
             <a href="security_scanner.html" class="text-xs font-bold px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center gap-1.5">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
                 <span>Retour au Scanner</span>
             </a>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#C5A059]/20 text-indigo-300 border border-[#C5A059]/30 flex items-center gap-1.5">
                 <i data-lucide="award" class="w-3.5 h-3.5"></i>
                 <span>Format Livrable White-Label (Prêt à Facturer)</span>
             </span>
         </div>
         <div class="flex items-center gap-3">
-            <button onclick="window.print()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center gap-2 cursor-pointer">
+            <button onclick="window.print()" class="px-5 py-2.5 rounded-xl bg-[#C5A059] hover:bg-[#C5A059] text-xs font-bold text-white shadow-lg shadow-[#C5A059]/30 transition flex items-center gap-2 cursor-pointer">
                 <i data-lucide="printer" class="w-4 h-4"></i>
                 <span>Imprimer / Exporter en PDF</span>
             </button>
@@ -64,10 +64,10 @@
         <header class="border-b border-slate-200 pb-8 space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
                 <div>
-                    <div class="flex items-center gap-2 text-xs font-black tracking-widest text-indigo-600 uppercase mb-1">
-                        <i data-lucide="shield-check" class="w-4 h-4 text-indigo-600"></i>
+                    <div class="flex items-center gap-2 text-xs font-black tracking-widest text-[#C5A059] uppercase mb-1">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-[#C5A059]"></i>
                         <span contenteditable="true" title="Cliquer pour modifier le nom de votre agence / cabinet" class="border-b border-dashed border-indigo-300 hover:bg-indigo-50 px-1 rounded transition">KAI SECURITY & COMPLIANCE LAB</span>
-                        <span class="text-slate-400">• RAPPORT D'AUDIT TECHNIQUE</span>
+                        <span class="text-[#78716C]">• RAPPORT D'AUDIT TECHNIQUE</span>
                     </div>
                     <h1 id="client-title" contenteditable="true" title="Cliquer pour modifier le nom du client" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-1 hover:bg-slate-50 px-1 rounded transition">
                         Dossier d'Audit de Sécurité & Conformité OWASP
@@ -104,7 +104,7 @@
         <section class="space-y-4">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="activity" class="w-5 h-5 text-indigo-600"></i>
+                    <i data-lucide="activity" class="w-5 h-5 text-[#C5A059]"></i>
                     <span>1. Synthèse Exécutive des Risques Identifiés</span>
                 </h2>
                 <span id="risk-counter" class="text-xs font-bold px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-200">
@@ -142,7 +142,7 @@
         <!-- TABLEAU TECHNIQUE DES EN-TÊTES OWASP -->
         <section class="space-y-4">
             <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="list-checks" class="w-5 h-5 text-indigo-600"></i>
+                <i data-lucide="list-checks" class="w-5 h-5 text-[#C5A059]"></i>
                 <span>2. Contrôle Contradictoire des En-têtes HTTP (OWASP Guidelines)</span>
             </h2>
 
@@ -166,7 +166,7 @@
         <!-- MOTEUR CSP & TIERS DÉTECTÉS (PAGE BREAK FOR PRINT) -->
         <section class="page-break space-y-4 pt-4">
             <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="cpu" class="w-5 h-5 text-indigo-600"></i>
+                <i data-lucide="cpu" class="w-5 h-5 text-[#C5A059]"></i>
                 <span>3. Ingénierie Content-Security-Policy (CSP) Sans Risque de Régression</span>
             </h2>
 
@@ -180,7 +180,7 @@
                 </p>
                 <div class="pt-2">
                     <div class="text-[11px] font-bold uppercase text-slate-700 mb-1">En-tête CSP Optimisé Prêt au Déploiement :</div>
-                    <pre id="smart-csp-display" class="p-3.5 rounded-xl bg-slate-900 text-emerald-400 text-[11px] overflow-x-auto whitespace-pre-wrap break-all border border-slate-800 font-mono"></pre>
+                    <pre id="smart-csp-display" class="p-3.5 rounded-xl bg-[#FAF7F2] text-emerald-400 text-[11px] overflow-x-auto whitespace-pre-wrap break-all border border-[#E7E1D8] font-mono"></pre>
                 </div>
             </div>
         </section>
@@ -188,7 +188,7 @@
         <!-- SNIPPETS DE REMÉDIATION MULTI-PLATEFORMES -->
         <section class="space-y-4">
             <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="code" class="w-5 h-5 text-indigo-600"></i>
+                <i data-lucide="code" class="w-5 h-5 text-[#C5A059]"></i>
                 <span>4. Pack de Déploiement Prêt à Copier-Coller</span>
             </h2>
             <p class="text-xs text-slate-600">Sélectionnez la configuration correspondant à votre infrastructure de production pour appliquer l'intégralité des recommandations :</p>
@@ -200,7 +200,7 @@
                         <span>Option A — Next.js 14 / 15 / 16 (<code>middleware.ts</code>)</span>
                         <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">Edge Middleware</span>
                     </div>
-                    <pre id="snippet-nextjs" class="p-3 rounded-xl bg-slate-950 text-sky-300 text-[11px] overflow-x-auto font-mono"></pre>
+                    <pre id="snippet-nextjs" class="p-3 rounded-xl bg-[#1C1917] text-sky-300 text-[11px] overflow-x-auto font-mono"></pre>
                 </div>
 
                 <!-- Option Nginx -->
@@ -209,7 +209,7 @@
                         <span>Option B — Serveur Nginx (<code>/etc/nginx/sites-available/default</code>)</span>
                         <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Serveur Web Linux</span>
                     </div>
-                    <pre id="snippet-nginx" class="p-3 rounded-xl bg-slate-950 text-emerald-400 text-[11px] overflow-x-auto font-mono"></pre>
+                    <pre id="snippet-nginx" class="p-3 rounded-xl bg-[#1C1917] text-emerald-400 text-[11px] overflow-x-auto font-mono"></pre>
                 </div>
 
                 <!-- Option Cloudflare Pages / Workers -->
@@ -218,7 +218,7 @@
                         <span>Option C — Cloudflare Pages & Workers (<code>_headers</code>)</span>
                         <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-amber-100 text-amber-800">CDN Edge Rules</span>
                     </div>
-                    <pre id="snippet-cloudflare" class="p-3 rounded-xl bg-slate-950 text-amber-300 text-[11px] overflow-x-auto font-mono"></pre>
+                    <pre id="snippet-cloudflare" class="p-3 rounded-xl bg-[#1C1917] text-amber-300 text-[11px] overflow-x-auto font-mono"></pre>
                 </div>
             </div>
         </section>
@@ -231,7 +231,7 @@
             </div>
             <div class="text-right">
                 <div class="font-bold text-slate-900" contenteditable="true">Signature de l'Auditeur / Consultant</div>
-                <div class="text-[10px] text-slate-400">Contre-visite de validation incluse sous 30 jours</div>
+                <div class="text-[10px] text-[#78716C]">Contre-visite de validation incluse sous 30 jours</div>
             </div>
         </footer>
 
@@ -322,7 +322,7 @@
             providers.forEach(p => {
                 const badge = document.createElement('span');
                 badge.className = "px-2.5 py-1 rounded-lg bg-indigo-100 text-indigo-800 font-bold text-xs border border-indigo-200 flex items-center gap-1.5";
-                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>${p}`;
+                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#C5A059]"></span>${p}`;
                 provContainer.appendChild(badge);
             });
         }
