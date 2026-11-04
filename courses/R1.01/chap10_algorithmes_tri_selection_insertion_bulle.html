@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" data-theme="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <title>Chapitre 10 : Algorithmes de Tri Fondamentaux (Sélection, Insertion, Bulle) — R1.01 Initiation au Développement — KAI Academic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: #FAF7F2;
+            color: #1C1917;
+        }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1C1917]">
+    <!-- NAVIGATION BAR -->
+    <header class="bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E7E1D8] sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <a href="../R1.01.html" class="w-9 h-9 rounded-xl bg-[#FFFFFF] border border-[#E7E1D8] text-[#1C1917] flex items-center justify-center hover:bg-[#F5EEDB] transition shadow-2xs">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                </a>
+                <div>
+                    <div class="font-extrabold text-[#1C1917] text-sm tracking-tight flex items-center gap-2">
+                        <span>R1.01 • Initiation au Développement</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#F5EEDB] text-[#8C6B28] border border-[#C5A059]/30">Chapitre 10</span>
+                    </div>
+                    <div class="text-[10px] text-[#78716C] font-semibold">Algorithmes de Tri Fondamentaux (Sélection, Insertion, Bulle)</div>
+                </div>
+            </div>
+            <a href="../../index.html" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-[#FFFFFF] border border-[#E7E1D8] text-[#1C1917] hover:bg-[#F5EEDB] transition flex items-center gap-1.5 shadow-2xs">
+                <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-[#C5A059]"></i>
+                <span>Toutes les Matières</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 space-y-6">
+        
+            <div class="bg-[#FFFFFF] border border-[#E7E1D8] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+                <div class="border-b border-[#E7E1D8] pb-5">
+                    <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F5EEDB] text-[#8C6B28] border border-[#C5A059]/30">Chapitre 10 • R1.01</span>
+                    <h1 class="text-2xl sm:text-3xl font-black text-[#1C1917] mt-2">Les Trois Algorithmes de Tri Fondamentaux</h1>
+                    <p class="text-xs sm:text-sm text-[#78716C] mt-1">Étude comparative, algorithmes en place et métriques de complexité O(n²)</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-4 rounded-2xl bg-[#FAF7F2] border border-[#E7E1D8] space-y-2">
+                        <div class="font-bold text-[#1C1917]">1. Tri par Sélection</div>
+                        <p class="text-[#78716C]">Cherche le plus petit élément de la partie non triée et l'échange avec l'élément à la frontière.</p>
+                        <div class="font-mono text-[10px] text-[#059669]">Comp : n(n-1)/2<br/>Échanges : O(n)</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-[#FAF7F2] border border-[#E7E1D8] space-y-2">
+                        <div class="font-bold text-[#1C1917]">2. Tri par Insertion</div>
+                        <p class="text-[#78716C]">Insère chaque élément à sa place exacte dans le sous-tableau trié en décalant les éléments plus grands.</p>
+                        <div class="font-mono text-[10px] text-[#059669]">Optimal si déjà trié O(n)</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-[#FAF7F2] border border-[#E7E1D8] space-y-2">
+                        <div class="font-bold text-[#1C1917]">3. Tri à Bulles (Bubble)</div>
+                        <p class="text-[#78716C]">Compare les couples adjacents et fait remonter les plus grands. Arrêt si aucun échange sur une passe.</p>
+                        <div class="font-mono text-[10px] text-[#059669]">Drapeau 'echangeEffectue'</div>
+                    </div>
+                </div>
+            </div>
+        
+    </main>
+
+    <footer class="mt-auto border-t border-[#E7E1D8] bg-[#FFFFFF] py-6 text-center text-xs text-[#78716C]">
+        <div class="max-w-4xl mx-auto px-4">
+            © 2026 Atelier Aura Paris • KAI Academic Copilot. Conforme au syllabus officiel BUT 1 Informatique IUT d'Anglet.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

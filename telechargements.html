@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" data-theme="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <title>Centre de Téléchargement 1-Clic — BUT 1 Informatique Anglet — KAI Academic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: #FAF7F2;
+            color: #1C1917;
+        }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background: #FFFFFF;
+            border: 1px solid #E7E1D8;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        .filter-chip.active {
+            background: #1C1917;
+            color: #FFFFFF;
+            border-color: #1C1917;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1C1917]">
+    <!-- NAVIGATION BAR -->
+    <header class="bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E7E1D8] sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="w-9 h-9 rounded-xl bg-[#FFFFFF] border border-[#E7E1D8] text-[#1C1917] flex items-center justify-center hover:bg-[#F5EEDB] transition shadow-2xs">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                </a>
+                <div>
+                    <div class="font-extrabold text-[#1C1917] text-sm tracking-tight flex items-center gap-2">
+                        <span>KAI Academic</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#F5EEDB] text-[#8C6B28] border border-[#C5A059]/30">Téléchargements</span>
+                    </div>
+                    <div class="text-[10px] text-[#78716C] font-semibold">Tous les Supports, Polycopiés, TP & Scripts SQL en 1 Clic</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="exports/KAI_ACADEMIC_TOUS_LES_SUPPORTS_BUT1.zip" download class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#C5A059] to-[#B38E46] text-white font-bold text-xs flex items-center gap-1.5 shadow-2xs transition">
+                    <i data-lucide="archive" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">Pack Intégral (.ZIP)</span>
+                    <span class="sm:hidden">ZIP</span>
+                </a>
+                <a href="index.html" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-[#FFFFFF] border border-[#E7E1D8] text-[#1C1917] hover:bg-[#F5EEDB] transition flex items-center gap-1.5 shadow-2xs">
+                    <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-[#C5A059]"></i>
+                    <span class="hidden sm:inline">Accueil Hub</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
+        
+        <!-- EN-TÊTE PRINCIPAL -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F5EEDB] border border-[#C5A059]/40 text-[#8C6B28] text-xs font-black uppercase tracking-wider mb-2">
+                        <span class="w-2 h-2 rounded-full bg-[#059669] animate-pulse"></span>
+                        Accès Direct & Souverain
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-black text-[#1C1917] tracking-tight">Centre de Téléchargement des Documents</h1>
+                    <p class="text-xs sm:text-sm text-[#78716C] mt-1 max-w-2xl">
+                        Retrouvez immédiatement tous les polycopiés PDF officiels, les TP et les scripts SQL du BUT 1 Informatique (Campus d'Anglet). Zéro recherche compliquée : téléchargez chaque document individuellement ou emportez l'archive complète.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <a href="exports/KAI_ACADEMIC_TOUS_LES_SUPPORTS_BUT1.zip" download class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#C5A059] to-[#B38E46] text-white font-extrabold text-xs flex items-center justify-center gap-2.5 shadow-md shadow-[#C5A059]/25 hover:opacity-95 transition">
+                        <i data-lucide="download-cloud" class="w-5 h-5"></i>
+                        <span>Télécharger Tous les Cours (.ZIP 36 Mo)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPOTLIGHT GASTRONOMIQUE (DEMANDE SPÉCIFIQUE UTILISATEUR) -->
+        <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-[#FFFFFF] via-[#FAF7F2] to-[#F5EEDB] border-2 border-[#C5A059] shadow-sm relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 w-44 h-44 rounded-full bg-[#C5A059]/10 pointer-events-none"></div>
+            
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+                <div class="space-y-3 max-w-2xl">
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full bg-[#C5A059] text-white font-mono font-bold text-[10px] tracking-wide">R1.05 • BDD & SQL</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-[#FFFFFF] border border-[#C5A059]/40 text-[#8C6B28] font-bold text-[10px]">M. Yon Dourisboure</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-[#059669]/10 text-[#059669] border border-[#059669]/20 font-bold text-[10px]">⭐ Prioritaire</span>
+                    </div>
+                    
+                    <h2 class="text-xl sm:text-2xl font-black text-[#1C1917] tracking-tight flex items-center gap-2">
+                        <i data-lucide="utensils" class="w-6 h-6 text-[#C5A059]"></i>
+                        <span>TP Guide Gastronomique — SQL DDL & DML Résolu</span>
+                    </h2>
+                    
+                    <p class="text-xs sm:text-sm text-[#78716C] leading-relaxed">
+                        Le TP officiel de référence sur les Projections (SELECT), Restrictions (WHERE) et Jointures. Contient les 6 tables relationnelles (<code>Restaurant</code>, <code>Vin</code>, <code>Plat</code>, <code>ProposerVin</code>, <code>ProposerPlat</code>, <code>Ouverture</code>), l'intégralité du jeu d'essai officiel d'Anglet/Bayonne/Biarritz, et les 11 requêtes résolues et commentées pas-à-pas (Q1 à Q11).
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2 text-xs pt-1">
+                        <span class="px-2.5 py-1 rounded-lg bg-[#FFFFFF] border border-[#E7E1D8] text-[#1C1917] font-mono text-[11px] font-semibold">tp_r105_guide_gastronomique.sql (26 Ko)</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-[#FFFFFF] border border-[#E7E1D8] text-[#1C1917] font-mono text-[11px] font-semibold">Oracle & PostgreSQL Ready</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-[#FFFFFF] border border-[#E7E1D8] text-[#059669] font-mono text-[11px] font-bold">11 / 11 Requêtes Validées</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
+                    <a href="tp_r105_guide_gastronomique.sql" download class="px-5 py-3 rounded-2xl bg-[#1C1917] hover:bg-[#292524] text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-sm transition">
+                        <i data-lucide="download" class="w-4 h-4 text-[#C5A059]"></i>
+                        <span>Télécharger le Script .SQL (26 Ko)</span>
+                    </a>
+                    <a href="courses/R1.05/tp_guide_gastronomique_dourisboure.html" class="px-5 py-3 rounded-2xl bg-[#FFFFFF] hover:bg-[#F5EEDB] border border-[#C5A059] text-[#8C6B28] font-bold text-xs flex items-center justify-center gap-2 shadow-2xs transition">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span>Consulter la Page Interactive</span>
+                    </a>
+                    <a href="exports/R105_TP_Guide_Gastronomique.sql" download class="text-[11px] text-[#78716C] hover:text-[#1C1917] text-center font-mono underline transition">
+                        Miroir exports/R105_TP_Guide_Gastronomique.sql
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- BARRE DE RECHERCHE & FILTRES -->
+        <div class="space-y-4">
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+                <div class="relative w-full">
+                    <i data-lucide="search" class="w-4 h-4 text-[#78716C] absolute left-3.5 top-3.5"></i>
+                    <input type="text" id="docSearchInput" oninput="filterDocuments()" placeholder="Rechercher un cours, TP, fiche, auteur (ex: Gastronomique, Von Neumann, Dalmau, Roose, Shell, Gauss, TVA)..." class="w-full pl-10 pr-4 py-3 rounded-2xl bg-[#FFFFFF] border border-[#E7E1D8] text-xs sm:text-sm font-semibold text-[#1C1917] placeholder-[#A8A29E] focus:outline-none focus:border-[#C5A059] transition shadow-2xs"/>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <span id="docCountBadge" class="text-xs font-bold px-3 py-2.5 rounded-2xl bg-[#FFFFFF] border border-[#E7E1D8] text-[#78716C]">
+                        40 documents
+                    </span>
+                </div>
+            </div>
+
+            <!-- CHIPS DE FILTRAGE PAR MATIÈRE -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none" id="categoryChips">
+                <button onclick="setFilter('ALL')" class="filter-chip active px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#1C1917] text-white transition">Toutes les Matières</button>
+                <button onclick="setFilter('R1.01')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.01 Algo & C</button>
+                <button onclick="setFilter('R1.02')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.02 Web</button>
+                <button onclick="setFilter('R1.03')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.03 Architecture</button>
+                <button onclick="setFilter('R1.04')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.04 Systèmes Linux</button>
+                <button onclick="setFilter('R1.05')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.05 BDD & SQL</button>
+                <button onclick="setFilter('R1.06')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.06 Maths Discrètes</button>
+                <button onclick="setFilter('R1.07')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.07 Outils Fondamentaux</button>
+                <button onclick="setFilter('R1.08')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.08 Gestion & TVA</button>
+                <button onclick="setFilter('R1.09')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.09 Économie</button>
+                <button onclick="setFilter('R1.11')" class="filter-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-[#E7E1D8] bg-[#FFFFFF] text-[#78716C] hover:text-[#1C1917] hover:bg-[#F5EEDB] transition">R1.11 Anglais</button>
+            </div>
+        </div>
+
+        <!-- GRILLE DE TOUS LES DOCUMENTS TÉLÉCHARGEABLES -->
+        <div id="documentsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Rempli par JavaScript ci-dessous -->
+        </div>
+
+    </main>
+
+    <footer class="mt-auto border-t border-[#E7E1D8] bg-[#FFFFFF] py-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#78716C]">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-[#1C1917]">KAI Academic</span>
+                <span>• BUT 1 Informatique (Campus d'Anglet)</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="hover:text-[#1C1917] transition">Hub Principal</a>
+                <a href="tp_r105_guide_gastronomique.sql" download class="hover:text-[#1C1917] transition">Script Guide Gastronomique</a>
+                <a href="exports/KAI_ACADEMIC_TOUS_LES_SUPPORTS_BUT1.zip" download class="hover:text-[#1C1917] font-bold text-[#8C6B28] transition">Télécharger Pack Global (.ZIP)</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE DONNÉES ET GESTION DES TÉLÉCHARGEMENTS -->
+    <script>
+        const DOCUMENTS = [
+            // R1.05 BDD
+            {
+                module: "R1.05",
+                nom: "TP Guide Gastronomique — SQL Résolu (DDL & DML)",
+                prof: "M. Yon Dourisboure",
+                format: "SQL",
+                taille: "26 Ko",
+                url: "tp_r105_guide_gastronomique.sql",
+                url_alt: "exports/R105_TP_Guide_Gastronomique.sql",
+                cours_url: "courses/R1.05/tp_guide_gastronomique_dourisboure.html",
+                desc: "Script SQL complet : Création des 6 tables, jeu d'essai officiel et solutions détaillées aux 11 requêtes."
+            },
+            {
+                module: "R1.05",
+                nom: "QCM Officiel de Base de Données (5 min)",
+                prof: "M. Christophe Marquesuzaà",
+                format: "PDF",
+                taille: "141 Ko",
+                url: "exports/R105_Question_QCM_Marquesuzaa.pdf",
+                cours_url: "courses/R1.05/qcm_officiel_marquesuzaa.html",
+                desc: "Questions d'évaluation rapide sur le modèle relationnel, clés étrangères et contraintes d'intégrité."
+            },
+            {
+                module: "R1.05",
+                nom: "Cours Magistral BDD Complet (140 Diapositives)",
+                prof: "M. Christophe Marquesuzaà",
+                format: "PDF",
+                taille: "1.7 Mo",
+                url: "exports/R105_BDD_Cours_Complet_140_Diapos.pdf",
+                cours_url: "courses/R1.05.html",
+                desc: "Diaporama exhaustif du semestre : modèle Entité-Association, normalisation 1FN/2FN/3FN, SQL DDL et DQL."
+            },
+            {
+                module: "R1.05",
+                nom: "Dossier de Conception BDD Semestre 1",
+                prof: "M. Christophe Marquesuzaà",
+                format: "PDF",
+                taille: "146 Ko",
+                url: "exports/R105_Dossier_ConceptionBD_Semestre1.pdf",
+                cours_url: "courses/R1.05.html",
+                desc: "Méthodologie formelle Merise, dictionnaire des données et dérivation vers le Modèle Logique de Données."
+            },
+            {
+                module: "R1.05",
+                nom: "Guide de Démarrage Oracle SQL Developer",
+                prof: "Équipe Enseignante",
+                format: "PDF",
+                taille: "382 Ko",
+                url: "exports/R105_Guide_SqlDeveloper.pdf",
+                cours_url: "courses/R1.05.html",
+                desc: "Configuration de connexion aux serveurs de l'IUT d'Anglet et exécution des scripts SQL."
+            },
+            {
+                module: "R1.05",
+                nom: "Analyse des Notes & Erreurs Fréquentes",
+                prof: "M. Christophe Marquesuzaà",
+                format: "PDF",
+                taille: "4.2 Mo",
+                url: "exports/R105_Analyse_Notes_Erreurs_2025_2026.pdf",
+                cours_url: "courses/R1.05.html",
+                desc: "Rapport d'audit des erreurs typiques commises en DS : pièges des cardinalités et oublis de clés."
+            },
+            // R1.03 Architecture
+            {
+                module: "R1.03",
+                nom: "TD3 — Architecture de Von Neumann & Machine Réelle",
+                prof: "M. Sébastien Dalmau",
+                format: "PDF",
+                taille: "541 Ko",
+                url: "exports/R103_TD3_Von_Neumann_Dalmau.pdf",
+                cours_url: "courses/R1.03/td3_architecture_von_neumann_dalmau.html",
+                desc: "Structure du processeur, cycle d'instruction fetch-decode-execute, bus de données et registres internes."
+            },
+            {
+                module: "R1.03",
+                nom: "TP1 — Révisions & Numération Binaire / Hexadécimale",
+                prof: "M. Sébastien Dalmau",
+                format: "PDF",
+                taille: "504 Ko",
+                url: "exports/R103_TP1_Revisions.pdf",
+                cours_url: "courses/R1.03.html",
+                desc: "Conversions de bases, complément à deux, dépassement de capacité et encodage IEEE-754."
+            },
+            // R1.04 Systèmes
+            {
+                module: "R1.04",
+                nom: "TP6 — Scripts Shell Cleanup & Analyse getopts",
+                prof: "M. Philippe Roose",
+                format: "PDF",
+                taille: "58 Ko",
+                url: "exports/R104_TP6_Shell_Cleanup_Getopts.pdf",
+                cours_url: "courses/R1.04/tp6_scripts_shell_cleanup_getopts.html",
+                desc: "Script de nettoyage intelligent de répertoires, parsing des options CLI avec getopts et code de retour."
+            },
+            {
+                module: "R1.04",
+                nom: "TP5 — Scripts Bash & Automatisation Système",
+                prof: "M. Philippe Roose",
+                format: "PDF",
+                taille: "44 Ko",
+                url: "exports/R104_TP5_Shell_Bash.pdf",
+                cours_url: "courses/R1.04/tp5_scripts_bash_fondamentaux.html",
+                desc: "Syntaxe fondamentale Bash, variables d'environnement, structures de contrôle et redirections."
+            },
+            {
+                module: "R1.04",
+                nom: "Polycopié de Cours Systèmes d'Exploitation & Linux",
+                prof: "M. Philippe Roose",
+                format: "PDF",
+                taille: "5.0 Mo",
+                url: "exports/cours_r104_systemes_roose.pdf",
+                cours_url: "courses/R1.04.html",
+                desc: "Cours complet sur la gestion des processus, signaux POSIX, ordonnancement et système de fichiers."
+            },
+            {
+                module: "R1.04",
+                nom: "Fiche Mémo Commandes Linux & Systèmes",
+                prof: "Équipe Systèmes",
+                format: "PDF",
+                taille: "9.2 Mo",
+                url: "exports/fiche_linux_r103_systemes.pdf",
+                cours_url: "courses/R1.04.html",
+                desc: "Guide de référence des commandes essentielles : grep, find, awk, sed, chmod, ps et kill."
+            },
+            // R1.06 Maths Discrètes
+            {
+                module: "R1.06",
+                nom: "Doc 1 — Division Euclidienne & Arithmétique Modulaire",
+                prof: "Mme Marie Bruyère",
+                format: "PDF",
+                taille: "400 Ko",
+                url: "exports/R106_Doc1_Division_Euclidienne.pdf",
+                cours_url: "courses/R1.06/doc1_division_euclidienne_arithmetique.html",
+                desc: "Théorème de la division euclidienne, congruences modulo n, algorithme d'Euclide et Bezout."
+            },
+            {
+                module: "R1.06",
+                nom: "Doc 4 — Ensembles, Parties & Cardinaux",
+                prof: "Mme Marie Bruyère",
+                format: "PDF",
+                taille: "240 Ko",
+                url: "exports/R106_Doc4_Cardinaux_Ensembles.pdf",
+                cours_url: "courses/R1.06.html",
+                desc: "Théorie des ensembles, opérations d'intersection et réunion, inclusion-exclusion et combinatoire."
+            },
+            {
+                module: "R1.06",
+                nom: "Doc 2 — Relations Binaires & Ordre",
+                prof: "Mme Marie Bruyère",
+                format: "PDF",
+                taille: "232 Ko",
+                url: "exports/R106_Maths_Discretes_Doc2.pdf",
+                cours_url: "courses/R1.06.html",
+                desc: "Relations d'équivalence, classes d'équivalence, relations d'ordre partiel et total, treillis."
+            },
+            {
+                module: "R1.06",
+                nom: "Doc 3 — Applications & Fonctions",
+                prof: "Mme Marie Bruyère",
+                format: "PDF",
+                taille: "238 Ko",
+                url: "exports/R106_Maths_Discretes_Doc3.pdf",
+                cours_url: "courses/R1.06.html",
+                desc: "Injections, surjections, bijections et composition d'applications."
+            },
+            // R1.01 Algo & C
+            {
+                module: "R1.01",
+                nom: "Fiche de Synthèse Conception Algorithmique (Etcheverry)",
+                prof: "M. Patrick Etcheverry",
+                format: "PDF",
+                taille: "7 Ko",
+                url: "exports/fiche_conception_r101_etcheverry.pdf",
+                cours_url: "courses/R1.01.html",
+                desc: "Méthode formelle : But à l'infinitif, dictionnaire des données et exclusion mutuelle absolue."
+            },
+            {
+                module: "R1.01",
+                nom: "Fiche Pratique C & Pointeurs (Dalmau)",
+                prof: "M. Sébastien Dalmau",
+                format: "PDF",
+                taille: "3 Ko",
+                url: "exports/fiche_c_r101_pointeurs.pdf",
+                cours_url: "courses/R1.01.html",
+                desc: "Syntaxe des pointeurs, adresses mémoire, passage de tableaux et utilisation de Valgrind."
+            },
+            // R1.02 Web
+            {
+                module: "R1.02",
+                nom: "Cours Protocole HTTP & Architecture Web",
+                prof: "Mme Sophie Voisin",
+                format: "PDF",
+                taille: "2.4 Mo",
+                url: "exports/cours_r1.02_Le_Protocole_HTTP_et_l_Archite_20261002.pdf",
+                cours_url: "courses/R1.02.html",
+                desc: "Méthodes GET/POST, codes d'état, en-têtes HTTP, cookies de session et modèle client-serveur."
+            },
+            {
+                module: "R1.02",
+                nom: "Interrogation de Cours Web (Sujet Étudiant)",
+                prof: "Mme Sophie Voisin",
+                format: "PDF",
+                taille: "865 Ko",
+                url: "exports/R102_Interro_Cours_Etudiant.pdf",
+                cours_url: "courses/R1.02.html",
+                desc: "Évaluation officielle sur le balisage sémantique HTML5, sélecteurs CSS et requêtes HTTP."
+            },
+            // R1.07 Outils Fondamentaux
+            {
+                module: "R1.07",
+                nom: "Diaporama Pivot de Gauss & Résolution Matricielle",
+                prof: "Équipe Mathématiques",
+                format: "PDF",
+                taille: "530 Ko",
+                url: "exports/R107_Diapos_Gauss_Jordan_Corr.pdf",
+                cours_url: "courses/R1.07.html",
+                desc: "Méthode de Gauss-Jordan pour la résolution de systèmes linéaires et inversion de matrices."
+            },
+            {
+                module: "R1.07",
+                nom: "Devoir Noté Outils Fondamentaux",
+                prof: "Équipe Mathématiques",
+                format: "PDF",
+                taille: "229 Ko",
+                url: "exports/R107_Devoir_Outils_Fondamentaux.pdf",
+                cours_url: "courses/R1.07.html",
+                desc: "Sujet officiel de devoir surveillé sur l'arithmétique et les matrices."
+            },
+            // R1.08 Gestion
+            {
+                module: "R1.08",
+                nom: "La TVA & la Fiscalité des Organisations",
+                prof: "Équipe Gestion",
+                format: "PDF",
+                taille: "10 Ko",
+                url: "exports/cours_r1.08_La_TVA_et_la_Fiscalit__des_Org_20261002.pdf",
+                cours_url: "courses/R1.08.html",
+                desc: "TVA collectée, déductible, calcul de la TVA à décaisser et impact sur le résultat d'exploitation."
+            },
+            // R1.09 Économie
+            {
+                module: "R1.09",
+                nom: "Économie & Régulation Publique (CM2)",
+                prof: "Équipe Économie",
+                format: "PDF",
+                taille: "4.4 Mo",
+                url: "exports/R109_Economie_Fondamentaux_CM2.pdf",
+                cours_url: "courses/R1.09.html",
+                desc: "Défaillances de marché, biens publics, externalités et politiques de régulation de l'État."
+            },
+            // R1.11 Anglais
+            {
+                module: "R1.11",
+                nom: "Giving a Talk — Guide de Présentation Orale en Anglais",
+                prof: "Équipe Anglais",
+                format: "PDF",
+                taille: "335 Ko",
+                url: "exports/R111_Giving_A_Talk_Oral_Presentation.pdf",
+                cours_url: "courses/R1.11.html",
+                desc: "Vocabulaire de transition, structure d'un exposé technique, accroche et gestion des questions."
+            }
+        ];
+
+        let currentFilter = 'ALL';
+
+        function renderDocuments() {
+            const container = document.getElementById('documentsGrid');
+            const searchVal = document.getElementById('docSearchInput').value.toLowerCase().trim();
+            
+            const filtered = DOCUMENTS.filter(doc => {
+                const matchFilter = (currentFilter === 'ALL' || doc.module === currentFilter);
+                const matchSearch = !searchVal || 
+                    doc.nom.toLowerCase().includes(searchVal) ||
+                    doc.prof.toLowerCase().includes(searchVal) ||
+                    doc.desc.toLowerCase().includes(searchVal) ||
+                    doc.module.toLowerCase().includes(searchVal);
+                return matchFilter && matchSearch;
+            });
+
+            document.getElementById('docCountBadge').innerText = `${filtered.length} document${filtered.length > 1 ? 's' : ''}`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full p-12 text-center bg-[#FFFFFF] rounded-2xl border border-[#E7E1D8]">
+                        <i data-lucide="search-x" class="w-10 h-10 text-[#78716C] mx-auto mb-3"></i>
+                        <h3 class="font-bold text-[#1C1917] text-base">Aucun document trouvé</h3>
+                        <p class="text-xs text-[#78716C] mt-1">Essayez un autre mot-clé ou réinitialisez le filtre de matière.</p>
+                        <button onclick="setFilter('ALL'); document.getElementById('docSearchInput').value='';" class="mt-4 px-4 py-2 rounded-xl bg-[#FAF7F2] border border-[#E7E1D8] text-xs font-bold text-[#1C1917] hover:bg-[#F5EEDB] transition">
+                            Afficher tous les documents
+                        </button>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            container.innerHTML = filtered.map(doc => {
+                const isSql = doc.format === 'SQL';
+                const formatColor = isSql 
+                    ? 'bg-[#F5EEDB] text-[#8C6B28] border-[#C5A059]/40' 
+                    : 'bg-red-50 text-red-700 border-red-200';
+                
+                return `
+                    <div class="glass-panel p-5 rounded-2xl flex flex-col justify-between hover:border-[#C5A059]/50 transition duration-200 group">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#FAF7F2] border border-[#E7E1D8] text-[#1C1917]">
+                                    ${doc.module}
+                                </span>
+                                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold border ${formatColor}">
+                                    ${doc.format} • ${doc.taille}
+                                </span>
+                            </div>
+                            
+                            <div>
+                                <h3 class="font-bold text-sm text-[#1C1917] group-hover:text-[#8C6B28] transition line-clamp-2">
+                                    ${doc.nom}
+                                </h3>
+                                <p class="text-[11px] text-[#78716C] mt-1 font-semibold flex items-center gap-1">
+                                    <i data-lucide="user" class="w-3 h-3 text-[#A8A29E]"></i>
+                                    <span>${doc.prof}</span>
+                                </p>
+                            </div>
+
+                            <p class="text-xs text-[#78716C] leading-relaxed line-clamp-2">
+                                ${doc.desc}
+                            </p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-[#E7E1D8] flex items-center justify-between gap-2">
+                            ${doc.cours_url ? `
+                                <a href="${doc.cours_url}" class="text-[11px] font-bold text-[#78716C] hover:text-[#1C1917] flex items-center gap-1 transition">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                    <span>Voir Cours</span>
+                                </a>
+                            ` : '<div></div>'}
+                            
+                            <a href="${doc.url}" download class="px-3.5 py-1.5 rounded-xl bg-[#1C1917] hover:bg-[#292524] text-white text-xs font-bold flex items-center gap-1.5 transition shadow-2xs">
+                                <i data-lucide="download" class="w-3.5 h-3.5 text-[#C5A059]"></i>
+                                <span>Télécharger</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        function setFilter(mod) {
+            currentFilter = mod;
+            document.querySelectorAll('.filter-chip').forEach(btn => {
+                if ((mod === 'ALL' && btn.innerText.includes('Toutes')) || btn.innerText.includes(mod)) {
+                    btn.classList.add('active');
+                    btn.classList.remove('bg-[#FFFFFF]', 'text-[#78716C]');
+                    btn.classList.add('bg-[#1C1917]', 'text-white');
+                } else {
+                    btn.classList.remove('active');
+                    btn.classList.remove('bg-[#1C1917]', 'text-white');
+                    btn.classList.add('bg-[#FFFFFF]', 'text-[#78716C]');
+                }
+            });
+            renderDocuments();
+        }
+
+        function filterDocuments() {
+            renderDocuments();
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDocuments();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
