@@ -1,103 +1,167 @@
 <!DOCTYPE html>
-<html lang="fr" class="light" data-theme="light">
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-    <meta name="theme-color" content="#287271"/>
-    <title>Chapitre 4 : Décompositions Alternatives (Si ... Alors ... Sinon) — R1.01 Initiation au Développement (C++) — KAI Academic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#287271">
+    <title>R1.01 • Ch. 4 : Décomposition Alternative & Structures de Choix (03-alternative) — KAI Academic</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- KaTeX CDN for Mathematics Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             color-scheme: light;
             --accent-color: #287271;
-            --bg-soft: #E9F2F1;
-            --border-soft: #B8D8D6;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
-            color: #0f172a;
-            line-height: 1.7;
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
-        }
-        .font-dyslexic {
-            font-family: 'Lexend', system-ui, sans-serif !important;
-            letter-spacing: 0.035em !important;
-            word-spacing: 0.09em !important;
-            line-height: 1.9 !important;
-            background-color: #faf8f2 !important;
-            background-image: none !important;
-        }
-        .font-dyslexic p, .font-dyslexic li, .font-dyslexic td {
-            font-size: 1.02rem !important;
-            line-height: 1.9 !important;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
-            transition: border-color 150ms ease, box-shadow 150ms ease;
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
-        .glass-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
         }
-        .concept-badge {
-            display: inline-flex;
+        .course-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.25rem 0.65rem;
-            border-radius: 9999px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background-color: var(--bg-soft);
-            color: var(--accent-color);
-            border: 1px solid var(--border-soft);
+            gap: 0.5rem;
         }
-        table {
+        .course-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .course-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .course-prose ul, .course-prose ol {
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .course-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .course-prose blockquote {
+            border-left: 5px solid #287271;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .course-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .course-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .course-prose table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0.85rem;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            margin: 1.25rem 0;
+            font-size: 0.88rem;
         }
-        th {
-            background-color: #f1f5f9;
+        .course-prose th {
+            background: #f8fafc;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.82rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        td {
             padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: top;
+            border-bottom: 2px solid #e2e8f0;
         }
-        tr:last-child td {
+        .course-prose td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .course-prose tr:last-child td {
             border-bottom: none;
         }
-        tr:hover td {
-            background-color: #f8fafc;
+        .mermaid-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
         .callout-def {
             background-color: #f0fdf4;
             border-left: 4px solid var(--accent-color);
@@ -126,32 +190,11 @@
             border-radius: 0 0.85rem 0.85rem 0;
             margin: 1.25rem 0;
         }
-        pre {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 1.25rem 1.5rem;
-            border-radius: 0.85rem;
-            overflow-x: auto;
-            margin: 1.25rem 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.84rem;
-            line-height: 1.65;
-            border: 1px solid #1e293b;
-        }
-        code:not(pre code) {
-            background: #f1f5f9;
-            color: #0f172a;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.84rem;
-            padding: 0.2rem 0.45rem;
-            border-radius: 0.35rem;
-            border: 1px solid #e2e8f0;
-        }
         .quiz-opt {
             transition: all 150ms ease-in-out;
             cursor: pointer;
         }
-        .quiz-opt:hover {
+        .quiz-opt:hover:not(:disabled) {
             background-color: #f8fafc;
             border-color: #94a3b8;
         }
@@ -163,376 +206,527 @@
         }
         .quiz-opt.incorrect {
             background-color: #fef2f2 !important;
-            border-color: #B85042 !important;
+            border-color: #ef4444 !important;
             color: #b91c1c !important;
         }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Breadcrumb & Controls -->
-    <header class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
-        <nav class="flex items-center gap-2 text-xs text-slate-500 font-mono">
-            <a class="hover:text-slate-900 flex items-center gap-1 font-medium" href="../../index.html">
-                <i class="w-3.5 h-3.5" data-lucide="home"></i>
-                <span>Hub</span>
-            </a>
-            <span>/</span>
-            <a class="hover:text-slate-900 font-medium" href="../R1.01.html">R1.01</a>
-            <span>/</span>
-            <span class="font-bold text-slate-900">Chapitre 4</span>
-        </nav>
-        <div class="flex items-center gap-2">
-            <button onclick="document.body.classList.toggle('font-dyslexic')" class="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-xs transition" title="Activer la typographie Lexend adaptée dyslexie et confort scotopique">
-                <i class="w-3.5 h-3.5 text-slate-500" data-lucide="eye"></i>
-                <span>Mode Confort / Dys</span>
-            </button>
-            <a href="../R1.01.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 shadow-xs hover:brightness-95 transition" style="background-color: #287271;">
-                <i class="w-3.5 h-3.5" data-lucide="book-open"></i>
-                <span>Sommaire R1.01</span>
-            </a>
+    
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.01.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    R1.01
+                </a>
+                <span class='text-slate-300'>/</span><span class='text-xs font-black text-slate-900'>Ch. 4</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25021
+                </span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Chapter Header Banner -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border-l-4 shadow-xs" style="border-left-color: #287271;">
-        <div class="flex items-center gap-2 mb-3">
-            <span class="concept-badge">R1.01 · Masterclass Chapitre 4</span>
-            <span class="text-xs text-slate-500 font-mono">IUT d'Anglet · Enseignants référents : M. Patrick Etcheverry / M. Sébastien Dalmau</span>
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #287271;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        R1.01 • CHAPITRE 4
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Décomposition Alternative & Structures de Choix (03-alternative)</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Support officiel 03-alternative : Formalisme des alternatives, les 4 formes (Si, Si-Sinon, Si-Si, Si-SinonSi-Sinon, Switch), la règle d'or de l'exclusion mutuelle absolue, piège des mentions du Bac et codage C++.
+            </div>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Chapitre 4 : Décompositions Alternatives (Si ... Alors ... Sinon)</h1>
-        <p class="text-slate-600 text-sm sm:text-base mt-2.5 max-w-3xl leading-relaxed">Prise de décision en algorithmique, principe d'exclusion mutuelle, couverture exhaustive, piège du Sinon vide, choix multiples avec switch/case, évaluation en court-circuit (short-circuit) et résolution complète d'équations avec alternatives.</p>
-        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500">
+    </div>
+    
 
-            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-emerald-600" data-lucide="check-circle-2"></i> Cours Complet Exhaustif</span>
-            <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-amber-600" data-lucide="alert-triangle"></i> Pièges d'Examen Partiel</span>
-            <span class="px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-teal-600" data-lucide="code"></i> Allman C/C++ Strict</span>
-            <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 border border-blue-200 font-semibold flex items-center gap-1"><i class="w-3 h-3 text-blue-600" data-lucide="cpu"></i> Trace Mémoire RAM</span>
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+<h2>1. Les Slides Officielles du Cours (03-alternative - 53 Diapos)</h2>
+<div class="my-6 rounded-2xl overflow-hidden border border-slate-300 shadow-lg bg-slate-900" style="height: 520px;">
+    <iframe src="https://patrick-etcheverry.github.io/r1.01-initiation-au-dev/Cours/03-alternative" class="w-full h-full border-0" allowfullscreen></iframe>
+</div>
+
+<h2>2. Principe & Formalisme de la Décomposition Alternative (Slide 4-10)</h2>
+<p>
+Une décomposition alternative exprime que la résolution d'un problème $P$ se fait selon la véracité d'une ou plusieurs conditions booléennes :
+</p>
+<ul>
+    <li>Sous le problème $P$, les sous-problèmes $P_1, P_2, \dots, P_n$ sont placés sur une même ligne horizontale.</li>
+    <li>Au-dessus de chaque branche, la <strong>condition d'activation</strong> est précisée entre crochets : $[C_1], [C_2], \dots, [C_n]$.</li>
+</ul>
+
+<h2>3. Les 4 Formes d'Alternatives (Slide 11-16)</h2>
+<ol class="space-y-3 my-4">
+    <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>1. Décomposition 'Si' (Action Conditionnelle Simple) :</strong><br>
+        Le sous-problème n'est exécuté que si la condition est vraie. Sinon, on ne fait rien ($P ightarrow [C] ightarrow P_1$).
+    </li>
+    <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>2. Décomposition 'Si - Sinon' (Alternative Binaire Exclusive) :</strong><br>
+        Si la condition est vraie, on exécute $P_1$ ; sinon, on exécute obligatoirement $P_2$ ($[C] ightarrow P_1$ et $[	ext{non } C] ightarrow P_2$).
+    </li>
+    <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>3. Décomposition 'Si - Si' (Conditions Indépendantes) :</strong><br>
+        Deux conditions séparées. Attention : les deux actions peuvent être exécutées si les deux conditions sont satisfaites !
+    </li>
+    <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>4. Décomposition 'Si - SinonSi - Sinon' (Cascade Exclusive) :</strong><br>
+        Une suite de conditions ordonnées où seule la première condition vérifiée est exécutée.
+    </li>
+    <li class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+        <strong>5. Cas du 'Switch' (Aiguillage par Valeur, Slide 25-34) :</strong><br>
+        Utilisé lorsque la résolution dépend de la valeur discrète d'une expression (ex. : valeur d'un dé entre 1 et 6).
+    </li>
+</ol>
+
+<h2>4. La Règle d'Or Absolue : L'Exclusion Mutuelle des Conditions (Slide 22-23)</h2>
+<div class="p-4 rounded-xl bg-rose-50 border border-rose-300 text-rose-950 my-4">
+    <strong>🚨 RÈGLE MAJEURE DE M. PATRICK ETCHEVERRY :</strong>
+    <p class="mt-1">
+        Le fait de rendre les conditions <strong>strictement mutuellement exclusives</strong> permet d'éviter des cas d'erreur, de rendre le programme indépendant de l'ordre d'évaluation des branches et d'assurer une robustesse totale.
+    </p>
+</div>
+
+<h3>Le Cas d'École des Mentions du Baccalauréat (Slide 21-23)</h3>
+<p>
+Considérons la moyenne d'un étudiant pour lui attribuer sa mention :
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+    <div class="p-4 rounded-xl bg-rose-50 border border-rose-200">
+        <h4 class="font-bold text-rose-900 text-xs">❌ MAUVAISE PRATIQUE (Sans exclusion)</h4>
+        <pre class="text-[11px] font-mono mt-2 text-rose-950">
+if (moyenne >= 10) cout &lt;&lt; "Passable";
+if (moyenne >= 12) cout &lt;&lt; "Assez Bien";
+if (moyenne >= 14) cout &lt;&lt; "Bien";
+if (moyenne >= 16) cout &lt;&lt; "Très Bien";
+// Pour moyenne = 15, le programme
+// affichera : "PassableAssez BienBien" !</pre>
+    </div>
+    <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+        <h4 class="font-bold text-emerald-900 text-xs">✅ BONNE PRATIQUE (Exclusion mutuelle)</h4>
+        <pre class="text-[11px] font-mono mt-2 text-emerald-950">
+if (moyenne >= 16) {
+    cout &lt;&lt; "Très Bien";
+} else if (moyenne >= 14) {
+    cout &lt;&lt; "Bien";
+} else if (moyenne >= 12) {
+    cout &lt;&lt; "Assez Bien";
+} else if (moyenne >= 10) {
+    cout &lt;&lt; "Passable";
+}</pre>
+    </div>
+</div>
+
+<h2>5. Bonnes Pratiques de Codage C++ (Slide 38-41)</h2>
+<ul>
+    <li><strong>Placement systématique des accolades :</strong> Même pour une seule instruction, délimitez toujours les blocs par <code>{ }</code> pour éviter le bug classique du <em>dangling else</em>.</li>
+    <li><strong>Clause <code>break</code> dans le switch :</strong> Chaque clause <code>case</code> doit impérativement se terminer par <code>break;</code> pour éviter le fall-through accidentel.</li>
+    <li><strong>Clause <code>default</code> obligatoire :</strong> Même si vous pensez avoir couvert tous les cas, prévoyez toujours un <code>default</code> défensif.</li>
+</ul>
+
+            </div>
+        </div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #287271;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Décomposition Alternative & Structures de Choix (03-alternative) »</strong> constitue un pilier fondamental du module <strong>R1.01 — Initiation au Développement (Algorithmique Formelle & Programmation)</strong> enseigné par <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Support officiel 03-alternative : Formalisme des alternatives, les 4 formes (Si, Si-Sinon, Si-Si, Si-SinonSi-Sinon, Switch), la règle d'or de l'exclusion mutuelle absolue, piège des mentions du Bac et codage C++. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Décomposition alternative, Exclusion mutuelle, Si-Sinon, Switch, Mentions Bac</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Décomposition Alternative & Structures de Choix (03-alternative)</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Décomposition alternative, Exclusion mutuelle, Si-Sinon, Switch) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Patrick Etcheverry / M. Sébastien Dalmau.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">1</span>
+                <span>Étape 1 : Les Slides Officielles du Cours (03-alternative - 53 Diapos)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Décomposition alternative</em> en partant de zéro. Sous le problème $P$, les sous-problèmes $P_1, P_2, \dots, P_n$ sont placés sur une même ligne horizontale. Complétez systématiquement cette analyse par la vérification suivante : Au-dessus de chaque branche, la condition d'activation est précisée entre crochets : $[C_1], [C_2], \dots, [C_n]$.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Décomposition alternative) : { } — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">2</span>
+                <span>Étape 2 : Principe & Formalisme de la Décomposition Alternative (Slide 4-10)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Exclusion mutuelle</em> en partant de zéro. 1. Décomposition 'Si' (Action Conditionnelle Simple) : Le sous-problème n'est exécuté que si la condition est vraie. Sinon, on ne fait rien ($P ightarrow [C] ightarrow P_1$). Complétez systématiquement cette analyse par la vérification suivante : 2. Décomposition 'Si - Sinon' (Alternative Binaire Exclusive) : Si la condition est vraie, on exécute $P_1$ ; sinon, on exécute obligatoirement $P_2$ ($[C] ightarrow P_1$ et $[ ext{non } C] ightarrow P_2$).</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Exclusion mutuelle) : break — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">3</span>
+                <span>Étape 3 : Les 4 Formes d'Alternatives (Slide 11-16)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Si-Sinon</em> en partant de zéro. 3. Décomposition 'Si - Si' (Conditions Indépendantes) : Deux conditions séparées. Attention : les deux actions peuvent être exécutées si les deux conditions sont satisfaites ! Complétez systématiquement cette analyse par la vérification suivante : 4. Décomposition 'Si - SinonSi - Sinon' (Cascade Exclusive) : Une suite de conditions ordonnées où seule la première condition vérifiée est exécutée.</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Si-Sinon) : case — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">4</span>
+                <span>Étape 4 : La Règle d'Or Absolue : L'Exclusion Mutuelle des Conditions (Slide 22-23)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Switch</em> en partant de zéro. 5. Cas du 'Switch' (Aiguillage par Valeur, Slide 25-34) : Utilisé lorsque la résolution dépend de la valeur discrète d'une expression (ex. : valeur d'un dé entre 1 et 6). Complétez systématiquement cette analyse par la vérification suivante : Placement systématique des accolades : Même pour une seule instruction, délimitez toujours les blocs par { } pour éviter le bug classique du dangling else .</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Switch) : break; — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
         
         </div>
-    </section>
+    </article>
+    
 
-    <!-- Chapter Masterclass Content -->
-    <main class="space-y-8">
-
-<!-- SECTION 1 : FONDEMENTS DES ALTERNATIVES -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="split" style="color: #287271;"></i>
-        <span>1. Fondements des Décompositions Alternatives : La Prise de Décision</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Dans un programme purement séquentiel, chaque instruction est exécutée de manière rigide, indépendamment des valeurs saisies par l'utilisateur. Or, la quasi-totalité des problèmes réels exige que le comportement du programme <strong>s'adapte dynamiquement</strong> en fonction de la validité ou de l'état des données. C'est le rôle fondamental de la <strong>décomposition alternative</strong>.
-    </p>
-
-    <div class="callout-def">
-        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">LES DEUX LOIS CARDINALES DE L'ALTERNATIVE (PATRICK ETCHEVERRY) :</h3>
-        <div class="text-xs sm:text-sm text-slate-800 mt-2 space-y-2">
-            <p>1. <strong>Principe d'Exclusion Mutuelle :</strong> Les branches d'une alternative sont strictement disjointes. Si la condition est VRAIE, la branche ALORS est exécutée et la branche SINON est ignorée. Si la condition est FAUSSE, la branche SINON est exécutée et la branche ALORS est ignorée. <em>Il est physiquement impossible que les deux branches s'exécutent au cours d'une même évaluation.</em></p>
-            <p>2. <strong>Principe de Couverture Exhaustive :</strong> L'ensemble des branches doit couvrir 100% des cas possibles de l'univers des données. Aucune valeur permise par les préconditions $\{P\}$ ne doit être abandonnée sans traitement défini.</p>
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #287271;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Décomposition Alternative & Structures de Choix (03-alternative)</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Patrick Etcheverry / M. Sébastien Dalmau)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Décomposition alternative</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>{ }</code><br><span class='text-[11px] text-slate-600'>1. Les Slides Officielles du Cours (03-alternative - 53 Diapos)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Sous le problème $P$, les sous-problèmes $P_1, P_2, \dots, P_n$ sont placés sur une même ligne horizontale.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Exclusion mutuelle</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>break</code><br><span class='text-[11px] text-slate-600'>2. Principe & Formalisme de la Décomposition Alternative (Slide 4-10)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Au-dessus de chaque branche, la condition d'activation est précisée entre crochets : $[C_1], [C_2], \dots, [C_n]$.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Si-Sinon</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>case</code><br><span class='text-[11px] text-slate-600'>3. Les 4 Formes d'Alternatives (Slide 11-16)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">1. Décomposition 'Si' (Action Conditionnelle Simple) : Le sous-problème n'est exécuté que si la condition est vraie. Sinon, on ne fait rien ($P ightarrow [C] ightarrow P_1$).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Switch</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>break;</code><br><span class='text-[11px] text-slate-600'>4. La Règle d'Or Absolue : L'Exclusion Mutuelle des Conditions (Slide </span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">2. Décomposition 'Si - Sinon' (Alternative Binaire Exclusive) : Si la condition est vraie, on exécute $P_1$ ; sinon, on exécute obligatoirement $P_2$ ($[C] ightarrow P_1$ et $[ ext{non } C] </td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Mentions Bac</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>default</code><br><span class='text-[11px] text-slate-600'>5. Bonnes Pratiques de Codage C++ (Slide 38-41)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">3. Décomposition 'Si - Si' (Conditions Indépendantes) : Deux conditions séparées. Attention : les deux actions peuvent être exécutées si les deux conditions sont satisfaites !</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Le Cas d'École des Mentions du Baccalauréat (</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>default</code><br><span class='text-[11px] text-slate-600'>Le Cas d'École des Mentions du Baccalauréat (Slide 21-23)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">4. Décomposition 'Si - SinonSi - Sinon' (Cascade Exclusive) : Une suite de conditions ordonnées où seule la première condition vérifiée est exécutée.</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>1. Les Slides Officielles du Cours (03-altern</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>{ }</code><br><span class='text-[11px] text-slate-600'>1. Les Slides Officielles du Cours (03-alternative - 53 Diapos)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">5. Cas du 'Switch' (Aiguillage par Valeur, Slide 25-34) : Utilisé lorsque la résolution dépend de la valeur discrète d'une expression (ex. : valeur d'un dé entre 1 et 6).</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
         </div>
-    </div>
+    </article>
+    
 
-    <div class="p-5 rounded-2xl bg-slate-900 text-slate-200 font-mono text-xs sm:text-sm space-y-3 shadow-inner">
-        <p class="text-teal-400 font-bold border-b border-slate-700 pb-2">■ REPRÉSENTATION DANS ALGOFORGE & ORDINOGRAMME :</p>
-        <pre class="bg-transparent p-0 m-0 text-slate-200 border-0 text-xs leading-relaxed">
-                            ┌────────────────────────┐
-                            │ Condition Booléenne ?  │  (Hexagone / Losange)
-                            └───────────┬────────────┘
-                                        │
-                         ┌──────────────┴──────────────┐
-                   [ VRAI ]                        [ FAUX ]
-                         │                              │
-                         ▼                              ▼
-              ┌─────────────────────┐        ┌─────────────────────┐
-              │    Branche ALORS    │        │    Branche SINON    │
-              │   (Action si Vrai)  │        │   (Action si Faux)  │
-              └─────────────────────┘        └─────────────────────┘
-        </pre>
-    </div>
-</article>
-
-<!-- SECTION 2 : LE PIÈGE DU SINON VIDE -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="help-circle" style="color: #287271;"></i>
-        <span>2. Conditionnelle Simple : Quand a-t-on le Droit au « Sinon Vide » ?</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Une question récurrente en TD : a-t-on le droit d'écrire un <code>if</code> sans clause <code>else</code> ? La réponse d'Etcheverry est nuancée et fait l'objet de points de barème aux contrôles :
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
-        <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-2">
-            <span class="font-bold text-emerald-900 flex items-center gap-1.5">
-                <i class="w-4 h-4 text-emerald-600" data-lucide="check"></i>
-                <span>Cas Légitime : Filtrage ou Mise à Jour d'Extremum</span>
-            </span>
-            <p class="text-slate-700 leading-relaxed">
-                Lorsqu'on cherche le maximum ou qu'on applique une remise facultative, si la condition n'est pas remplie, il n'y a littéralement <em>rien à faire</em> : la variable conserve sa valeur précédente.
-            </p>
-            <pre class="bg-slate-900 text-slate-100 p-2.5 rounded text-xs">if (nombre &gt; maximumActuel)
-{
-    maximumActuel = nombre;
-}
-// Pas de else nécessaire ici !</pre>
-        </div>
-
-        <div class="p-4 rounded-xl border border-rose-200 bg-rose-50/40 space-y-2">
-            <span class="font-bold text-rose-900 flex items-center gap-1.5">
-                <i class="w-4 h-4 text-rose-600" data-lucide="x"></i>
-                <span>Cas Interdit : Oubli de Gestion d'Erreur</span>
-            </span>
-            <p class="text-slate-700 leading-relaxed">
-                Vérifier une entrée sans prévoir le cas erroné est sanctionné lourdement : le programme continue son exécution avec des données corrompues sans alerter l'utilisateur.
-            </p>
-            <pre class="bg-slate-900 text-slate-100 p-2.5 rounded text-xs">// ❌ FAUTE D'EXAMEN :
-if (note &gt;= 0 &amp;&amp; note &lt;= 20)
-{
-    // Calcul...
-}
-// Manque le else : que fait-on si note = 999 ?</pre>
-        </div>
-    </div>
-</article>
-
-<!-- SECTION 3 : ÉVALUATION EN COURT-CIRCUIT -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="zap" style="color: #287271;"></i>
-        <span>3. Évaluation en Court-Circuit (Short-Circuit Evaluation) en C++</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Le standard ISO C++ applique une règle d'optimisation vitale pour la sécurité d'exécution des conditions logiques complexes :
-    </p>
-
-    <div class="callout-def">
-        <h4 class="font-extrabold text-slate-900 text-sm">LES DEUX RÈGLES DE COURT-CIRCUIT :</h4>
-        <div class="text-xs sm:text-sm text-slate-800 mt-2 space-y-2">
-            <p>• <strong>Opérateur ET (<code>&amp;&amp;</code>) :</strong> Si l'opérande de gauche est <strong>FAUX</strong>, le résultat global est nécessairement faux. Le C++ <em>n'évalue pas</em> l'opérande de droite.</p>
-            <p>• <strong>Opérateur OU (<code>||</code>) :</strong> Si l'opérande de gauche est <strong>VRAI</strong>, le résultat global est nécessairement vrai. Le C++ <em>n'évalue pas</em> l'opérande de droite.</p>
-        </div>
-    </div>
-
-    <div class="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs sm:text-sm space-y-2">
-        <p class="text-teal-400 font-bold">APPLICATION VITALE : PROTECTION CONTRE LA DIVISION PAR ZÉRO :</p>
-        <pre class="bg-transparent p-0 m-0 text-slate-200 border-0 text-xs leading-relaxed">if (diviseur != 0 &amp;&amp; (total / diviseur) &gt; 10)
-{
-    cout &lt;&lt; "Moyenne supérieure à 10";
-}</pre>
-        <p class="text-slate-400 text-xs pt-1">
-            Grâce au court-circuit, si <code>diviseur == 0</code>, le membre gauche est faux : le compilateur n'exécute JAMAIS <code>total / diviseur</code>, évitant ainsi le crash instantané du programme ! Si vous aviez inversé l'ordre : <code>if ((total / diviseur) &gt; 10 &amp;&amp; diviseur != 0)</code>, le programme aurait planté !
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
         </p>
-    </div>
-</article>
-
-<!-- SECTION 4 : LE SWITCH/CASE -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="layers" style="color: #287271;"></i>
-        <span>4. L'Instruction de Choix Multiple : switch ... case ... break</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        Lorsqu'une variable entière ou caractère peut prendre une valeur parmi une liste discrète connue, l'enchaînement de nombreux <code>if ... else if</code> devient lourd et peu lisible. Le C++ propose l'instruction <code>switch</code> :
-    </p>
-
-    <pre><code>switch (codeMenu)
-{
-    case 1:
-        cout &lt;&lt; "Option 1 : Consulter le profil" &lt;&lt; endl;
-        break; // INDISPENSABLE pour quitter le switch !
-
-    case 2:
-        cout &lt;&lt; "Option 2 : Modifier les informations" &lt;&lt; endl;
-        break;
-
-    case 3:
-        cout &lt;&lt; "Option 3 : Se déconnecter" &lt;&lt; endl;
-        break;
-
-    default: // Capture tous les cas non prévus (OBLIGATOIRE EN PARTIEL)
-        cout &lt;&lt; "Erreur : Choix invalide !" &lt;&lt; endl;
-        break;
-}</code></pre>
-
-    <div class="callout-danger">
-        <h4 class="font-bold text-rose-950 text-xs sm:text-sm">⚠️ LE DANGER MORTEL DU « FALLTHROUGH » (OUBLI DU break;) :</h4>
-        <p class="text-xs sm:text-sm text-rose-900 mt-1 leading-relaxed">
-            Si vous oubliez d'écrire <code>break;</code> à la fin d'un bloc <code>case</code>, le processeur ne s'arrête pas : il continue en « tombant » directement dans les instructions du <code>case</code> suivant, même si la condition ne correspond pas !
-        </p>
-    </div>
-</article>
-
-<!-- SECTION 5 : ATELIER PIÈGES D'EXAMEN -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="alert-octagon" style="color: #e11d48;"></i>
-        <span>5. Atelier Pièges d'Examen : Les Fautes Courantes en Alternative</span>
-    </h2>
-
-    <div class="space-y-4">
-        <!-- PIÈGE 1 : = au lieu de == -->
-        <div class="p-4 sm:p-5 rounded-2xl border border-rose-200 bg-rose-50/30 space-y-3">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-bold text-rose-900 text-xs sm:text-sm flex items-center gap-2">
-                    <span class="px-2 py-0.5 rounded bg-rose-200 text-rose-900 font-mono text-xs">PIÈGE N°1 EN C++</span>
-                    Confondre Affectation (=) et Égalité (==)
-                </span>
-                <span class="text-[11px] font-bold text-rose-700 uppercase bg-rose-100 px-2 py-0.5 rounded">Crash Logique</span>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Décomposition alternative » sans vérifier les préconditions</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                <div class="p-3 bg-white rounded-xl border border-rose-200 space-y-1">
-                    <p class="font-bold text-rose-700">❌ Code Erroné</p>
-                    <code class="text-xs block bg-slate-100 p-2 rounded">if (role = 2)<br>{<br>    cout &lt;&lt; "Admin";<br>}</code>
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Décomposition alternative</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Décomposition Alternative & Structures de Choix (03-alternative)</em>.</p>
                 </div>
-                <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-1">
-                    <p class="font-bold text-amber-800">⚠️ Mécanisme Diabolique</p>
-                    <p class="text-slate-700">L'instruction <code>role = 2</code> n'est pas un test : c'est une affectation ! Elle écrase <code>role</code> avec la valeur 2. Or, en C++, toute valeur non nulle est considérée comme VRAIE. La condition est donc <strong>toujours VRAIE</strong> !</p>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.01</strong>, M. Patrick Etcheverry / M. Sébastien Dalmau insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
                 </div>
-                <div class="p-3 bg-white rounded-xl border border-emerald-200 space-y-1">
-                    <p class="font-bold text-emerald-800">✅ Solution 20/20</p>
-                    <code class="text-xs block bg-slate-100 p-2 rounded">if (role == 2)<br>{<br>    cout &lt;&lt; "Admin";<br>}</code>
-                    <p class="text-slate-700 mt-1">Toujours doubler le signe égal pour un test.</p>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Décomposition alternative</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
                 </div>
             </div>
         </div>
-    </div>
-</article>
-
-<!-- SECTION 6 : EXERCICE GUIDÉ COMPLET (ÉQUATION SECOND DEGRÉ) -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="function-square" style="color: #287271;"></i>
-        <span>6. Exercice Guidé Intégral : Résolution Complète de $ax^2 + bx + c = 0$</span>
-    </h2>
-
-    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-        <strong>Énoncé :</strong> Écrire un programme complet qui résout dans $\mathbb{R}$ l'équation quadratique $ax^2 + bx + c = 0$. Il doit couvrir exhaustivement l'intégralité des cas particuliers avec rigueur mathématique.
-    </p>
-
-    <pre><code>/*
- * Programme : ResolutionSecondDegre
- * But : Calculer et afficher les solutions réelles de l'équation ax^2 + bx + c = 0.
- * Auteur : Matéi de Saint Leger
- */
-
-#include &lt;iostream&gt;
-#include &lt;cmath&gt; // Pour sqrt()
-using namespace std;
-
-int main (void)
-{
-    // =========================================================================
-    // VARIABLES
-    // =========================================================================
-    double a, b, c;   // Coefficients réels (Nature : D)
-    double delta;     // Discriminant b^2 - 4ac (Nature : INT)
-    double x1, x2;    // Solutions calculées (Nature : R)
-
-    // =========================================================================
-    // TRAITEMENTS AVEC ALTERNATIVES IMBRIQUÉES
-    // =========================================================================
-    cout &lt;&lt; "Entrez les coefficients a, b et c : ";
-    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
-
-    // CAS DÉGÉNÉRÉ : a == 0 (Ce n'est pas du second degré mais du premier degré !)
-    if (a == 0.0)
-    {
-        if (b == 0.0)
-        {
-            if (c == 0.0)
-            {
-                cout &lt;&lt; "L'équation est vérifiée pour tout réel (Infinité de solutions)." &lt;&lt; endl;
-            }
-            else
-            {
-                cout &lt;&lt; "Équation impossible : aucune solution." &lt;&lt; endl;
-            }
-        }
-        else
-        {
-            x1 = -c / b;
-            cout &lt;&lt; "Équation du premier degré : solution unique x = " &lt;&lt; x1 &lt;&lt; endl;
-        }
-    }
-    else // CAS RÉEL DU SECOND DEGRÉ (a != 0)
-    {
-        delta = (b * b) - (4.0 * a * c);
-
-        if (delta &gt; 0.0)
-        {
-            x1 = (-b - sqrt(delta)) / (2.0 * a);
-            x2 = (-b + sqrt(delta)) / (2.0 * a);
-            cout &lt;&lt; "Deux solutions réelles distinctes : x1 = " &lt;&lt; x1 
-                 &lt;&lt; " et x2 = " &lt;&lt; x2 &lt;&lt; endl;
-        }
-        else if (delta == 0.0)
-        {
-            x1 = -b / (2.0 * a);
-            cout &lt;&lt; "Une solution réelle double : x0 = " &lt;&lt; x1 &lt;&lt; endl;
-        }
-        else
-        {
-            cout &lt;&lt; "Discriminant négatif (" &lt;&lt; delta 
-                 &lt;&lt; ") : Aucune solution dans l'ensemble des réels R." &lt;&lt; endl;
-        }
-    }
-
-    return 0;
-}</code></pre>
-</article>
-
-<!-- SECTION 7 : QCM INTERACTIF -->
-<article class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 quiz-container">
-    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 border-b pb-3 flex items-center gap-2.5">
-        <i class="w-6 h-6 shrink-0" data-lucide="help-circle" style="color: #287271;"></i>
-        <span>7. Auto-Évaluation Interactive : Alternatives (3 Questions)</span>
-    </h2>
-
-    <div class="space-y-3 pt-2">
-        <p class="text-xs sm:text-sm font-bold text-slate-900">Question 1 : Si x = 0, que produit l'expression <code>if (x != 0 &amp;&amp; 10 / x &gt; 2)</code> ?</p>
-        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
-            <button onclick="answerQuiz(this, false, 'q41-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">A. Une erreur fatale de division par zéro (Crash)</button>
-            <button onclick="answerQuiz(this, true, 'q41-exp')" data-correct="true" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">B. La condition est évaluée à faux sans exécuter la division grâce au court-circuit</button>
-            <button onclick="answerQuiz(this, false, 'q41-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">C. La condition est vraie par défaut</button>
-            <button onclick="answerQuiz(this, false, 'q41-exp')" class="quiz-opt w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white">D. Erreur de compilation</button>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Exclusion mutuelle »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Exclusion mutuelle</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Initiation au Développement (Algorithmique Formelle & Programmation)), une part majeure des points est dédiée à la robustesse : Sous le problème $P$, les sous-problèmes $P_1, P_2, \dots, P_n$ sont placés sur une même ligne horizontale. Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Exclusion mutuelle</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
         </div>
-        <div id="q41-exp" class="hidden p-3.5 rounded-xl bg-slate-100 text-xs text-slate-800 leading-relaxed">
-            <strong>Explication :</strong> En C++, l'opérateur <code>&amp;&amp;</code> s'arrête immédiatement dès que son membre gauche est faux. Comme <code>x != 0</code> est faux, <code>10 / x</code> n'est jamais calculé.
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Si-Sinon »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Si-Sinon</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Patrick Etcheverry / M. Sébastien Dalmau rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.01</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Si-Sinon</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</article>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #287271;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Les Slides Officielles du Cours (03-alternative - 53 Diapos)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.01 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.01 (Initiation au Développement (Algorithmique Formelle & Programmation))</strong> supervisé par M. Patrick Etcheverry / M. Sébastien Dalmau, on vous demande d'analyser et de résoudre un problème portant sur <strong>Décomposition Alternative & Structures de Choix (03-alternative)</strong> en mobilisant explicitement les notions de <em>Décomposition alternative, Exclusion mutuelle, Si-Sinon</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Décomposition alternative</em>. Rappel du cours : Sous le problème $P$, les sous-problèmes $P_1, P_2, \dots, P_n$ sont placés sur une même ligne horizontale.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Les Slides Officielles du Cours (03-alternative - 53 Diap</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Principe & Formalisme de la Décomposition Alternative (Sl</em> : Au-dessus de chaque branche, la condition d'activation est précisée entre crochets : $[C_1], [C_2], \dots, [C_n]$.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Exclusion mutuelle</em> (1. Décomposition 'Si' (Action Conditionnelle Simple) : Le sous-problème n'est exécuté que si la condition est vraie. Sinon, on ne fait rien ($P ightarrow [C] ightarrow P_1$).).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Support officiel 03-alternative : Formalisme des alternatives, les 4 formes (Si, Si-Sinon, Si-Si, Si-SinonSi-Sinon, Switch), la règle d'or d) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">if (moyenne >= 10) cout &lt;&lt; "Passable";
+if (moyenne >= 12) cout &lt;&lt; "Assez Bien";
+if (moyenne >= 14) cout &lt;&lt; "Bien";
+if (moyenne >= 16) cout &lt;&lt; "Très Bien";
+// Pour moyenne = 15, le programme
+// affichera : "PassableAssez BienBien" !</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #287271;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — 3. Les 4 Formes d'Alternatives (Slide 11-16)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Patrick Etcheverry / M. Sébastien Dalmau</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.01</strong>, un exercice de synthèse combine <strong>Exclusion mutuelle</strong> et <strong>Si-Sinon</strong> au sein du thème <em>« Décomposition Alternative & Structures de Choix (03-alternative) »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Exclusion mutuelle</em> : 2. Décomposition 'Si - Sinon' (Alternative Binaire Exclusive) : Si la condition est vraie, on exécute $P_1$ ; sinon, on exécute obligatoirement $P_2$ ($[C] ightarrow P_1$ et $[ ext{non } C] ightarrow P_2$).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Patrick Etcheverry / M. Sébastien Dalmau dans la section <em>3. Les 4 Formes d'Alternatives (Slide 11-16)</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Si-Sinon</em>, on obtient la séquence exacte : 3. Décomposition 'Si - Si' (Conditions Indépendantes) : Deux conditions séparées. Attention : les deux actions peuvent être exécutées si les deux conditions sont satisfaites !</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Décomposition alternative, Exclusion mutuelle, Si-Sinon, Switch</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">if (moyenne >= 16) {
+    cout &lt;&lt; "Très Bien";
+} else if (moyenne >= 14) {
+    cout &lt;&lt; "Bien";
+} else if (moyenne >= 12) {
+    cout &lt;&lt; "Assez Bien";
+} else if (moyenne >= 10) {
+    cout &lt;&lt; "Passable";
+}</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.4</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Que contiennent respectivement les opérateurs & et * en langage C appliqués à une variable ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) & effectue une multiplication et * une division
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap4_decompositions_alternatives_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) & (opérateur d'adresse) fournit l'adresse mémoire où réside la variable ; * (opérateur d'indirection / déréférencement) accède à la valeur stockée à l'adresse pointée
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) & sert à déclarer un pointeur et * à le supprimer
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Ce sont des opérateurs de concaténation de texte
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap4_decompositions_alternatives_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Règle de syntaxe fondamentale : si int a = 5; et int *p = &a; alors p contient l'adresse mémoire de a (ex: 0x7ffd80). L'expression *p évalue le contenu de la boîte pointée par p, c'est-à-dire 5. Modifier *p = 10 modifie directement la variable a !
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.4</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans le style de programmation rigoureux exigé à l'IUT d'Anglet par M. Etcheverry, quelle est la règle d'or concernant l'utilisation des variables globales ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Les variables globales doivent être utilisées pour tout afin de simplifier le code
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap4_decompositions_alternatives_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Les variables globales sont FORMELLEMENT PROSCRITES : toutes les données doivent être déclarées localement et transmises explicitement aux fonctions par paramètres (entrées, sorties) pour préserver la pureté, la modularité et l'indépendance des composants
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) On a le droit aux variables globales si elles s'appellent toutes avec une majuscule
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Elles sont obligatoires pour les boucles for
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap4_decompositions_alternatives_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Les variables globales détruisent l'encapsulation, rendent les fonctions impossibles à tester unitairement et créent des effets de bord invisibles catastrophiques en cas de parallélisme. Zéro variable globale en BUT 1 !
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.4</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Dans le Schéma Fonctionnel de Décomposition (SFD), quel est le rôle d'une « spécification formelle » (Entrées, Sorties, Préconditions, Postconditions) ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Remplacer les commentaires du code
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap4_decompositions_alternatives_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Définir rigoureusement le contrat de la fonction : ce qu'elle exige impérativement avant exécution (Préconditions) et ce qu'elle garantit formellement après exécution (Postconditions)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Donner le nom de l'auteur et la date
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Indiquer la couleur de l'écran
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap4_decompositions_alternatives_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Le concept de programmation par contrat (conçu par Bertrand Meyer et enseigné rigoureusement à l'IUT d'Anglet) stipule que si l'appelant respecte les Préconditions (ex: tableau non vide, indice valide), la fonction s'engage à garantir les Postconditions (ex: tableau trié par ordre croissant).
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.4</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Que se passe-t-il si l'on oublie l'instruction « break; » à la fin d'un bloc « case » dans une structure switch en C ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le compilateur signale une erreur de syntaxe fatale et refuse de compiler
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap4_decompositions_alternatives_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Le programme continue son exécution en cascade séquentielle dans le case suivant (Fall-Through), exécutant son code même si la condition n'est pas vérifiée
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) L'ordinateur redémarre
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap4_decompositions_alternatives_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Le switch recommence depuis le début
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap4_decompositions_alternatives_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> En C, le switch est une instruction de saut (jump table). Les étiquettes 'case' ne sont que des points d'entrée. Sans 'break;', l'exécution se poursuit tout droit dans le case situé en-dessous jusqu'à rencontrer un break ou la fin du switch.
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <!-- Navigation Précédent / Suivant (Zéro Footer Parasite) -->
+        <div class="flex items-center justify-between gap-4 pt-2">
+            <div>
+                <a href="chap3_decompositions_sequentielles.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Ch. 3 : Décomposition Séquentielle & Schéma de Flot de Données (02-sequence)</span></a>
+            </div>
+            <a href="../R1.01.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.01</span>
+            </a>
+            <div>
+                <a href="chap5_decompositions_iteratives.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #287271;"><span>Ch. 5 : Décomposition Itérative & Choix d'une Structure Répétitive (04-iterations)</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            </div>
+        </div>
 
     </main>
 
-    <!-- Bottom Navigation -->
-    <footer class="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-slate-200">
-        <div>
-            <a href="chap3_decompositions_sequentielles.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="arrow-left"></i>
-            <span>Ch. 3 : Séquences & Arbres</span>
-        </a>
-        </div>
-        <a href="../R1.01.html" class="min-h-[40px] px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-xs transition">
-            <i class="w-4 h-4 text-slate-400" data-lucide="list"></i>
-            <span>Sommaire du Module R1.01</span>
-        </a>
-        <div>
-            <a href="chap5_decompositions_iteratives.html" class="min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center gap-2 shadow-xs hover:brightness-95 transition" style="background-color: #287271;">
-            <span>Ch. 5 : Décompositions Itératives</span>
-            <i class="w-4 h-4" data-lucide="arrow-right"></i>
-        </a>
-        </div>
-    </footer>
-
     <script>
         lucide.createIcons();
+        
         function answerQuiz(btn, isCorrect, explanationId) {
             const container = btn.closest('.quiz-container');
+            if (!container) return;
             const buttons = container.querySelectorAll('.quiz-opt');
             buttons.forEach(b => {
                 b.disabled = true;
@@ -549,6 +743,23 @@ int main (void)
             const exp = document.getElementById(explanationId);
             if (exp) exp.classList.remove('hidden');
         }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
     </script>
 </body>
 </html>
