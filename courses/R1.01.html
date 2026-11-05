@@ -46,6 +46,12 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
+
+    <!-- KaTeX CDN pour le rendu mathématique haute performance -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
 </head>
 <body class="flex flex-col min-h-screen">
 
@@ -100,6 +106,282 @@
 
     <!-- Main Content Area -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+
+    <!-- SECTION FORMULES & CALCULS D'EXAMEN DÉTAILLÉS PAS-À-PAS -->
+    <section class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black shadow-xs">
+                    <i data-lucide="calculator" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-black text-slate-900 tracking-tight">Formules Clés d'Examen & Déroulés Chiffrés Pas-à-Pas</h2>
+                    <p class="text-xs text-slate-500">Décorticage systématique des calculs officiels de l'IUT d'Anglet avec exemples réels et pièges d'examen.</p>
+                </div>
+            </div>
+            <span class="text-xs font-bold text-slate-400 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">Zéro Saut d'Étape</span>
+        </div>
+        
+<!-- COMPOSANT FORMULE : Spécification Calculatoire : La Course de Taxi (TD1 Officiel) (R1.01) -->
+<div class="formula-showcase-box my-6 p-5 sm:p-7 rounded-2xl bg-white border-2 border-slate-200/90 shadow-xs relative overflow-hidden" style="border-left: 6px solid #287271;">
+  
+  <!-- En-tête : Badge matière & Rôle -->
+  <div class="flex items-center justify-between gap-3 mb-3 flex-wrap">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider" style="background-color: #E8F4F3; color: #287271; border: 1.5px solid #28727133;">
+      <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+      <span>Formule Fondamentale d'Examen — R1.01</span>
+    </div>
+    <span class="text-xs font-mono font-bold text-slate-400 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-100">Application Directe</span>
+  </div>
+
+  <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Spécification Calculatoire : La Course de Taxi (TD1 Officiel)</h3>
+  <p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">Calcul du montant total facturé à un client en fonction de la distance et de la prise en charge forfaitaire.</p>
+
+  <!-- 1. FORMULE EN DISPLAY MATH GÉANT -->
+  <div class="my-4 p-4 sm:p-5 rounded-2xl bg-slate-950 text-amber-300 text-center font-mono text-lg sm:text-2xl shadow-inner border border-slate-800 overflow-x-auto">
+    $$\text{prixTotal} = \text{priseEnCharge} + (\text{distance} \times \text{tarifKm})$$
+  </div>
+
+  <!-- 2. DICTIONNAIRE DES VARIABLES & UNITÉS -->
+  <div class="my-4">
+    <h4 class="text-xs font-black text-slate-700 uppercase tracking-wide mb-2 flex items-center gap-1.5">
+      <i data-lucide="book-open" class="w-3.5 h-3.5 text-slate-400"></i>
+      <span>Dictionnaire des Variables & Unités :</span>
+    </h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+          <span class="font-mono font-black text-xs px-2 py-0.5 rounded shadow-2xs shrink-0" style="background-color: #E8F4F3; color: #287271;">
+            $$priseEnCharge$$
+          </span>
+          <div class="text-xs">
+            <span class="font-extrabold text-slate-900">Forfait de base</span>
+            <span class="text-[11px] font-semibold text-slate-500 ml-1">(euros (€))</span>
+            <div class="text-[11px] text-slate-600 mt-0.5 leading-snug">Montant fixe appliqué dès le démarrage de la course (réel $\ge 0$).</div>
+          </div>
+        </div>
+        
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+          <span class="font-mono font-black text-xs px-2 py-0.5 rounded shadow-2xs shrink-0" style="background-color: #E8F4F3; color: #287271;">
+            $$tarifKm$$
+          </span>
+          <div class="text-xs">
+            <span class="font-extrabold text-slate-900">Tarif kilométrique</span>
+            <span class="text-[11px] font-semibold text-slate-500 ml-1">(euros / km (€/km))</span>
+            <div class="text-[11px] text-slate-600 mt-0.5 leading-snug">Coût unitaire pour chaque kilomètre parcouru (réel $> 0$).</div>
+          </div>
+        </div>
+        
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+          <span class="font-mono font-black text-xs px-2 py-0.5 rounded shadow-2xs shrink-0" style="background-color: #E8F4F3; color: #287271;">
+            $$distance$$
+          </span>
+          <div class="text-xs">
+            <span class="font-extrabold text-slate-900">Distance parcourue</span>
+            <span class="text-[11px] font-semibold text-slate-500 ml-1">(kilomètres (km))</span>
+            <div class="text-[11px] text-slate-600 mt-0.5 leading-snug">Longueur du trajet mesurée au compteur (réel $\ge 0$).</div>
+          </div>
+        </div>
+        
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+          <span class="font-mono font-black text-xs px-2 py-0.5 rounded shadow-2xs shrink-0" style="background-color: #E8F4F3; color: #287271;">
+            $$prixTotal$$
+          </span>
+          <div class="text-xs">
+            <span class="font-extrabold text-slate-900">Prix facturé</span>
+            <span class="text-[11px] font-semibold text-slate-500 ml-1">(euros (€))</span>
+            <div class="text-[11px] text-slate-600 mt-0.5 leading-snug">Montant final à payer par l'usager (réel $\ge \text{priseEnCharge}$).</div>
+          </div>
+        </div>
+        
+    </div>
+  </div>
+
+  <!-- 3. EXEMPLE CONCRET CHIFFRÉ DÉROULÉ LIGNE PAR LIGNE -->
+  <div class="mt-5 p-4 sm:p-5 rounded-2xl bg-amber-50/70 border border-amber-200">
+    <div class="flex items-center gap-2 text-xs font-black text-amber-900 uppercase tracking-wide mb-2">
+      <i data-lucide="play-circle" class="w-4 h-4 text-amber-600"></i>
+      <span>Exemple Concret Chiffré Pas-à-Pas (Zéro Saut d'Étape)</span>
+    </div>
+    <p class="text-xs text-slate-800 mb-3 leading-relaxed">
+      <strong>Situation concrète :</strong> Un client monte dans un taxi à Anglet : forfait fixe = 3.00 €, tarif = 1.50 €/km, distance effectuée jusqu'à la gare de Bayonne = 7.0 km.
+    </p>
+    <div class="space-y-2">
+      
+        <div class="p-3 rounded-xl bg-white border border-amber-200 shadow-2xs">
+          <div class="text-[11px] font-bold text-slate-600 mb-1">Étape 1 — Injection des valeurs dans la formule :</div>
+          <div class="font-mono text-xs sm:text-sm text-slate-900 py-1 overflow-x-auto">
+            $$\text{prixTotal} = 3.00 + (7.0 \times 1.50)$$
+          </div>
+          
+        </div>
+        
+        <div class="p-3 rounded-xl bg-white border border-amber-200 shadow-2xs">
+          <div class="text-[11px] font-bold text-slate-600 mb-1">Étape 2 — Multiplication prioritaire :</div>
+          <div class="font-mono text-xs sm:text-sm text-slate-900 py-1 overflow-x-auto">
+            $$\text{prixTotal} = 3.00 + 10.50$$
+          </div>
+          
+        </div>
+        
+        <div class="p-3 rounded-xl bg-white border border-amber-200 shadow-2xs">
+          <div class="text-[11px] font-bold text-slate-600 mb-1">Étape 3 — Addition finale :</div>
+          <div class="font-mono text-xs sm:text-sm text-slate-900 py-1 overflow-x-auto">
+            $$\text{prixTotal} = 13.50 \text{ €}$$
+          </div>
+          
+        </div>
+        
+    </div>
+    <div class="mt-3 pt-3 border-t border-amber-200/80 flex items-center justify-between flex-wrap gap-2 text-xs">
+      <span class="font-bold text-amber-950">Résultat final calculé :</span>
+      <span class="font-mono font-black text-xs sm:text-sm px-3 py-1 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-300">
+        $$\text{prixTotal} = 13.50 \text{ €}$$
+      </span>
+    </div>
+  </div>
+
+  <!-- 4. POURQUOI ÇA MARCHE ? (Sens profond) -->
+  <div class="mt-4 p-3.5 rounded-xl bg-blue-50/80 border border-blue-200 text-xs text-blue-950">
+    <div class="font-black text-blue-900 flex items-center gap-1.5 mb-1">
+      <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-blue-600"></i>
+      <span>L'Intuition (Pourquoi ça marche ?) :</span>
+    </div>
+    <div class="text-[11px] text-blue-900/90 leading-relaxed">C'est une fonction affine classique $f(x) = ax + b$ où l'ordonnée à l'origine $b$ représente le coût fixe d'immobilisation du véhicule, et la pente $a$ le coût marginal de déplacement.</div>
+  </div>
+
+  <!-- 5. PIÈGE CLASSIQUE DU CONTRÔLE -->
+  <div class="mt-3 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 flex items-start gap-2.5">
+    <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-600 shrink-0 mt-0.5"></i>
+    <div class="text-[11px] leading-relaxed">
+      <strong class="font-black text-rose-900">Piège d'examen classique :</strong> Déclarer les variables en 'int' au lieu de 'double' ou 'float' : le tarif 1.50 € serait tronqué à 1 €, faussant complètement le calcul !
+    </div>
+  </div>
+
+</div>
+
+
+<!-- COMPOSANT FORMULE : Application d'une Réduction en Pourcentage (TP8 Officiel) (R1.01) -->
+<div class="formula-showcase-box my-6 p-5 sm:p-7 rounded-2xl bg-white border-2 border-slate-200/90 shadow-xs relative overflow-hidden" style="border-left: 6px solid #287271;">
+  
+  <!-- En-tête : Badge matière & Rôle -->
+  <div class="flex items-center justify-between gap-3 mb-3 flex-wrap">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider" style="background-color: #E8F4F3; color: #287271; border: 1.5px solid #28727133;">
+      <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+      <span>Formule Fondamentale d'Examen — R1.01</span>
+    </div>
+    <span class="text-xs font-mono font-bold text-slate-400 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-100">Application Directe</span>
+  </div>
+
+  <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Application d'une Réduction en Pourcentage (TP8 Officiel)</h3>
+  <p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">Calcul du prix remisé à partir d'un pourcentage entier sous Visual Studio Code.</p>
+
+  <!-- 1. FORMULE EN DISPLAY MATH GÉANT -->
+  <div class="my-4 p-4 sm:p-5 rounded-2xl bg-slate-950 text-amber-300 text-center font-mono text-lg sm:text-2xl shadow-inner border border-slate-800 overflow-x-auto">
+    $$\text{prixFinal} = \text{prixInitial} \times \left(1.0 - \frac{\text{reduc}}{100.0}\right)$$
+  </div>
+
+  <!-- 2. DICTIONNAIRE DES VARIABLES & UNITÉS -->
+  <div class="my-4">
+    <h4 class="text-xs font-black text-slate-700 uppercase tracking-wide mb-2 flex items-center gap-1.5">
+      <i data-lucide="book-open" class="w-3.5 h-3.5 text-slate-400"></i>
+      <span>Dictionnaire des Variables & Unités :</span>
+    </h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+          <span class="font-mono font-black text-xs px-2 py-0.5 rounded shadow-2xs shrink-0" style="background-color: #E8F4F3; color: #287271;">
+            $$prixInitial$$
+          </span>
+          <div class="text-xs">
+            <span class="font-extrabold text-slate-900">Prix de départ</span>
+            <span class="text-[11px] font-semibold text-slate-500 ml-1">(euros (€))</span>
+            <div class="text-[11px] text-slate-600 mt-0.5 leading-snug">Prix affiché avant application de la réduction (réel $> 0$).</div>
+          </div>
+        </div>
+        
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+          <span class="font-mono font-black text-xs px-2 py-0.5 rounded shadow-2xs shrink-0" style="background-color: #E8F4F3; color: #287271;">
+            $$reduc$$
+          </span>
+          <div class="text-xs">
+            <span class="font-extrabold text-slate-900">Taux de réduction</span>
+            <span class="text-[11px] font-semibold text-slate-500 ml-1">(pour cent (%))</span>
+            <div class="text-[11px] text-slate-600 mt-0.5 leading-snug">Valeur entière de la remise, ex: 20 pour 20% (entier $[0, 100]$).</div>
+          </div>
+        </div>
+        
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
+          <span class="font-mono font-black text-xs px-2 py-0.5 rounded shadow-2xs shrink-0" style="background-color: #E8F4F3; color: #287271;">
+            $$prixFinal$$
+          </span>
+          <div class="text-xs">
+            <span class="font-extrabold text-slate-900">Prix après remise</span>
+            <span class="text-[11px] font-semibold text-slate-500 ml-1">(euros (€))</span>
+            <div class="text-[11px] text-slate-600 mt-0.5 leading-snug">Prix final facturé au client (réel $\le \text{prixInitial}$).</div>
+          </div>
+        </div>
+        
+    </div>
+  </div>
+
+  <!-- 3. EXEMPLE CONCRET CHIFFRÉ DÉROULÉ LIGNE PAR LIGNE -->
+  <div class="mt-5 p-4 sm:p-5 rounded-2xl bg-amber-50/70 border border-amber-200">
+    <div class="flex items-center gap-2 text-xs font-black text-amber-900 uppercase tracking-wide mb-2">
+      <i data-lucide="play-circle" class="w-4 h-4 text-amber-600"></i>
+      <span>Exemple Concret Chiffré Pas-à-Pas (Zéro Saut d'Étape)</span>
+    </div>
+    <p class="text-xs text-slate-800 mb-3 leading-relaxed">
+      <strong>Situation concrète :</strong> Un article coûte 60.50 € et bénéficie d'une réduction de 20%.
+    </p>
+    <div class="space-y-2">
+      
+        <div class="p-3 rounded-xl bg-white border border-amber-200 shadow-2xs">
+          <div class="text-[11px] font-bold text-slate-600 mb-1">Étape 1 — Calcul du coefficient multiplicateur :</div>
+          <div class="font-mono text-xs sm:text-sm text-slate-900 py-1 overflow-x-auto">
+            $$1.0 - \frac{20.0}{100.0} = 1.0 - 0.20 = 0.80$$
+          </div>
+          
+        </div>
+        
+        <div class="p-3 rounded-xl bg-white border border-amber-200 shadow-2xs">
+          <div class="text-[11px] font-bold text-slate-600 mb-1">Étape 2 — Application au prix initial :</div>
+          <div class="font-mono text-xs sm:text-sm text-slate-900 py-1 overflow-x-auto">
+            $$\text{prixFinal} = 60.50 \times 0.80 = 48.40 \text{ €}$$
+          </div>
+          
+        </div>
+        
+    </div>
+    <div class="mt-3 pt-3 border-t border-amber-200/80 flex items-center justify-between flex-wrap gap-2 text-xs">
+      <span class="font-bold text-amber-950">Résultat final calculé :</span>
+      <span class="font-mono font-black text-xs sm:text-sm px-3 py-1 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-300">
+        $$\text{prixFinal} = 48.40 \text{ €}$$
+      </span>
+    </div>
+  </div>
+
+  <!-- 4. POURQUOI ÇA MARCHE ? (Sens profond) -->
+  <div class="mt-4 p-3.5 rounded-xl bg-blue-50/80 border border-blue-200 text-xs text-blue-950">
+    <div class="font-black text-blue-900 flex items-center gap-1.5 mb-1">
+      <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-blue-600"></i>
+      <span>L'Intuition (Pourquoi ça marche ?) :</span>
+    </div>
+    <div class="text-[11px] text-blue-900/90 leading-relaxed">Retirer 20% d'une somme revient à ne payer que 80% de sa valeur ($100\% - 20\% = 80\% = 0.80$).</div>
+  </div>
+
+  <!-- 5. PIÈGE CLASSIQUE DU CONTRÔLE -->
+  <div class="mt-3 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 flex items-start gap-2.5">
+    <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-600 shrink-0 mt-0.5"></i>
+    <div class="text-[11px] leading-relaxed">
+      <strong class="font-black text-rose-900">Piège d'examen classique :</strong> LE PIÈGE ULTIME EN C++ : écrire 'reduc / 100' entre entiers ! 20 / 100 donne 0 au lieu de 0.20, donc 1 - 0 = 1 et le prix reste inchangé ! Il faut obligatoirement écrire '100.0f' ou convertir en réel !
+    </div>
+  </div>
+
+</div>
+
+    </section>
+    
 
         <div class="flex items-center justify-between flex-wrap gap-4">
             <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
@@ -303,6 +585,303 @@
                 </a>
             </div>
         </div>
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 8
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Tableaux Unidimensionnels, Déclaration & Parcours Séquentiel (05-tableaux-1d)
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Notion de collection contiguë en mémoire vive, taille logique vs physique, parcours séquentiel avec boucle pour, recherche séquentielle avec sentinelle ou arrêt anticipé, calcul d'agrégats (somme, moyenne, extremums) et invariants de boucle.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tableaux 1D</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Parcours</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Invariants</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Recherche séquentielle</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Taille logique</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap8_tableaux_unidimensionnels_parcours.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 9
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Tableaux Bidimensionnels & Matrices (06-tableaux-2d)
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Tableaux à deux dimensions, repérage ligne-colonne (M[i][j]), boucles imbriquées pour le parcours, transposée, produit matriciel, applications géométriques et grilles de jeux (morpion, démineur).
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Matrices</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tableaux 2D</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Boucles imbriquées</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Algèbre matricielle</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Grilles</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap9_tableaux_bidimensionnels_matrices.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 10
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Algorithmes de Tri Fondamentaux (Sélection, Insertion, Bulle)
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Étude comparative et formelle des algorithmes de tri quadratiques O(n²) : Tri par sélection du minimum, Tri par insertion avec décalages, Tri à bulles optimisé avec drapeau. Traces pas-à-pas et invariants de boucle.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tri sélection</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tri insertion</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tri à bulles</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Complexité O(n²)</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Invariants</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap10_algorithmes_tri_selection_insertion_bulle.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 11
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Recherche Dichotomique & Analyse de Complexité Algorithmique
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Algorithme de recherche dichotomique sur tableau trié en O(log n), preuve formelle de terminaison et correction par variant et invariant, notion de complexité asymptotique (Grand O, cas favorable, pire cas, cas moyen).
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Dichotomie</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">O(log n)</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Complexité asymptotique</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Variant de boucle</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Preuve formelle</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap11_recherche_dichotomique_complexite.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 12
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Structures de Données Hétérogènes & Enregistrements (struct)
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Définition de types composés avec struct et typedef, agrégation de champs hétérogènes, passage d'enregistrements en paramètres (valeur vs pointeur/référence const), tableaux de structures.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">struct</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">typedef</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Types composés</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Enregistrements</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tableaux de structures</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap12_structures_donnees_enregistrements_struct.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 13
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Pointeurs, Adressage Mémoire & Arithmétique des Pointeurs
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Modèle mémoire d'un processus, pile (stack) vs tas (heap), opérateurs d'adresse (&) et d'indirection (*), arithmétique des pointeurs, équivalence tableau-pointeur en C, pointeur NULL et dangers des dangling pointers.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pointeurs</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Opérateur & et *</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Stack vs Heap</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Arithmétique</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Dangling pointer</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap13_pointeurs_adressage_memoire_arithmetique.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 14
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Allocation Dynamique de Mémoire (malloc, free) & Audit Valgrind
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Fonctions d'allocation dynamique standard : malloc, calloc, realloc, free. Cycle de vie des blocs sur le tas, règles d'or de libération mémoire, détection des fuites et accès illégaux (segfault, use-after-free) avec Valgrind Memcheck.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">malloc/free</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tas (Heap)</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Fuites mémoire</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Valgrind</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Segmentation fault</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap14_allocation_dynamique_malloc_free_valgrind.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 15
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">35 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Chaînes de Caractères en C (C-Strings & libc string.h)
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Représentation en mémoire des chaînes de caractères C terminées par le caractère nul '\0', risques de dépassement de tampon (buffer overflow), utilisation sécurisée de strlen, strcpy/strncpy, strcmp, strcat.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">C-Strings</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Caractère nul \0</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">string.h</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Buffer overflow</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Sécurité C</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap15_chaines_caracteres_c_strings.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 16
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Fichiers & Flux d'Entrée/Sortie (stdio.h, fopen, fclose)
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Persistance des données sur support de masse : flux FILE*, modes d'ouverture (r, w, a), lecture et écriture formatée (fscanf, fprintf), lecture ligne par ligne (fgets), et détection de fin de fichier (feof).
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Fichiers</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">FILE*</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">fopen/fclose</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">fprintf/fscanf</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Persistance</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap16_fichiers_flux_entree_sortie.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 17
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Récursivité Formelle & Principe Diviser pour Régner
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Définition inductive et formelle des algorithmes récursifs, cas de base (arrêt) vs cas récursif (progression), déroulement de la pile d'appels (call stack), récursivité terminale vs non terminale, tours de Hanoï et tri fusion.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Récursivité</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Cas de base</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Pile d'appels</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Diviser pour régner</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tours de Hanoï</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap17_recursivite_formelle_diviser_pour_regner.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #287271;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                        CHAPITRE 18
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">50 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Méthodologie d'Examen Etcheverry & Synthèse Algoforge
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Guide méthodologique complet pour réussir les évaluations et devoirs surveillés de M. Patrick Etcheverry : rédaction irréprochable des spécifications, arbres de choix, vérification des préconditions, et simulation sur Algoforge.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Méthodologie Etcheverry</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">DS R1.01</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Algoforge</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Spécifications</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Excellence académique</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="R1.01/chap18_methodologie_etcheverry_algoforge_synthese.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #287271;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    
         
         </div>
 
@@ -311,7 +890,7 @@
             <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
                 <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
                     <i data-lucide="folder-down" class="w-5 h-5 text-blue-600"></i>
-                    <span>Documents & Supports Enseignants (39 fichiers vérifiés)</span>
+                    <span>Documents & Supports Enseignants (35 fichiers vérifiés)</span>
                 </h2>
                 <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono">
                     Supports Officiels Moodle & IUT
@@ -322,27 +901,10 @@
                     <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full" style="background-color: #287271;"></span>
                         <span>Cours & Diaporamas</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(8 documents)</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-normal">(7 documents)</span>
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         
-                <a href="../supports/R1.01/1_presentation_sae_2026.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="1 presentation sae 2026">1 presentation sae 2026</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">48.4 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
                 <a href="../supports/R1.01/CoursNombresmagiquesDiaporama.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
                     <div class="flex items-center gap-3 overflow-hidden">
                         <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
@@ -723,7 +1285,7 @@
                     <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full" style="background-color: #287271;"></span>
                         <span>Supports & Ressources Officielles</span>
-                        <span class="text-[10px] font-mono text-slate-400 font-normal">(18 documents)</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-normal">(15 documents)</span>
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         
@@ -846,6 +1408,30 @@
                     <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
                 </a>
                 
+                <a href="../supports/R1.01/1_presentation_sae_2026.html" target="_blank" class="p-3.5 rounded-xl border border-blue-300 bg-blue-50/40 hover:border-blue-500 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-blue-100 text-blue-700">
+                            <i data-lucide="presentation" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-700 transition">1_presentation_sae_2026.html</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-blue-800 mt-0.5 font-mono">DIAPORAMA S1.01 • Nov 2026</div>
+                        </div>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-blue-600 shrink-0"></i>
+                </a>
+                <a href="../supports/R1.01/2_defense_collective_2026.html" target="_blank" class="p-3.5 rounded-xl border border-blue-300 bg-blue-50/40 hover:border-blue-500 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-blue-100 text-blue-700">
+                            <i data-lucide="presentation" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-700 transition">2_defense_collective_2026.html</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-blue-800 mt-0.5 font-mono">DIAPORAMA S1.01 • Fiche Optique</div>
+                        </div>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 text-blue-600 shrink-0"></i>
+                </a>
                 <a href="../supports/R1.01/07-modeles-algos-basiques.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
                     <div class="flex items-center gap-3 overflow-hidden">
                         <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
@@ -897,40 +1483,6 @@
                     <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
                 </a>
                 
-                <a href="../supports/R1.01/2_defense_collective_2026.html" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="monitor" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="2 defense collective 2026">2 defense collective 2026</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">HTML</span>
-                                <span>•</span>
-                                <span class="font-mono">13.5 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/choisir_mode_transmission_parametre.jpg" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="image" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="choisir mode transmission parametre">choisir mode transmission parametre</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">JPG</span>
-                                <span>•</span>
-                                <span class="font-mono">160.3 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
                 <a href="../supports/R1.01/choisirmodetransmissionparametre.jpg" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
                     <div class="flex items-center gap-3 overflow-hidden">
                         <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
@@ -976,23 +1528,6 @@
                                 <span class="font-mono font-semibold">JPG</span>
                                 <span>•</span>
                                 <span class="font-mono">573.1 Ko</span>
-                            </div>
-                        </div>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
-                </a>
-                
-                <a href="../supports/R1.01/patrick_etcheverry.jpg" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
-                            <i data-lucide="image" class="w-4 h-4"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="patrick etcheverry">patrick etcheverry</h4>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
-                                <span class="font-mono font-semibold">JPG</span>
-                                <span>•</span>
-                                <span class="font-mono">354.9 Ko</span>
                             </div>
                         </div>
                     </div>
