@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paramétrer Visual Studio Code à l'IUT — R1.01 (Elearn UPPA)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1E293B;
+      --primary: #2563EB;
+      --border: #E2E8F0;
+    }
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      margin: 0;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #EFF6FF;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-top: 0;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .source-meta {
+      font-size: 12px;
+      color: #64748B;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 8px;
+    }
+    pre {
+      padding: 16px;
+      overflow-x: auto;
+    }
+    code {
+      padding: 2px 6px;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: #F1F5F9;
+      font-weight: 700;
+    }
+    blockquote {
+      border-left: 4px solid var(--primary);
+      margin: 16px 0;
+      padding: 8px 16px;
+      background: #F8FAFC;
+      color: #334155;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">R1.01 — Ressource Officielle Elearn</div>
+    <h1>Paramétrer Visual Studio Code à l'IUT</h1>
+    <div class="source-meta">
+      Source originale : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692259" target="_blank" rel="noopener">https://elearn.univ-pau.fr/mod/page/view.php?id=692259</a> — Synchronisé automatiquement par Kai Sentinel
+    </div>
+    <div class="moodle-content">
+      <div role="main"><div class="box py-3 generalbox center clearfix"><div class="no-overflow"><div style="font-family: Tahoma, sans-serif; font-size: 115%; color: #334155; background: #ffffff; padding: 28px 18px;">
+<div style="max-width: 1040px; margin: 0 auto;"><!-- =========================================================
+         EN-TÊTE
+         ========================================================= -->
+<div style="margin: 0 0 28px 0; padding: 30px 28px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 18px; background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%); box-shadow: 0 12px 28px rgba(51, 65, 85, 0.08);">
+<h1 style="margin: 0; text-align: center; font-size: 2.25rem; line-height: 1.2; color: #2f6fbe; font-weight: bold;">Paramétrer Visual Studio Code à l'IUT</h1>
+</div>
+<!-- =========================================================
+         INTRODUCTION
+         ========================================================= -->
+<div style="margin: 0 0 30px 0; padding: 18px 20px; border: 1px solid #e2e8f0; border-radius: 14px; background: #fbfdff; box-shadow: 0 6px 18px rgba(51, 65, 85, 0.05);">
+<p style="margin: 0; line-height: 1.75;">Pour traiter les exercices de programmation sur lesquels nous travaillerons tout au long du module R1.01 - Initiation au développement, nous utiliserons l'environnement de programmation <a href="https://code.visualstudio.com/" rel="noopener" style="color: #2563eb; text-decoration: underline; font-weight: 500;" target="_blank"> Visual Studio Code </a> et nous programmerons en C++.</p>
+</div>
+<!-- =========================================================
+         SECTION 1
+         ========================================================= -->
+<div style="display: block; margin: 38px 0 16px 0; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%, #edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51, 65, 85, 0.05);">1. Mise en place des dossiers et des fichiers</div>
+<p style="line-height: 1.7; margin: .5rem 0 1rem 0;">Pour mettre en place l'environnement de travail que nous utiliserons tout au long du module, suivez les étapes ci-dessous :</p>
+<!-- =========================================================
+         LISTE 1
+         ========================================================= -->
+<ul data-bullets="square" style="margin: .4rem 0 1rem 0; padding-left: .6rem; display: grid; row-gap: .7rem;">
+<li style="list-style: none; margin: .3rem 0;">Sur <strong>votre espace de travail réseau</strong> désigné par le disque <strong style="color: #10b981;">F:</strong>, créez un dossier dans lequel vous rangerez les travaux pratiques des différentes matières que vous aborderez tout au long de l'année. <!-- Encadré Attention -->
+<div style="border: 1px solid #fed7aa; box-shadow: inset 6px 0 0 #f97316; border-radius: 12px; padding: 13px 14px; background: #fff7ed; margin: .75rem 0 0;">
+<p style="margin: 0; line-height: 1.65;"><strong style="color: #c2410c;">Attention</strong> : le chemin d’accès ne doit comporter ni espaces, ni caractères accentués. Par exemple : <strong style="color: #10b981;">F:\\travaux-pratiques</strong>. Sinon certains outils (par ex. le débogueur) ne fonctionneront pas.</p>
+</div>
+</li>
+<li style="margin: .3rem 0;">Toujours avec l'explorateur de fichiers de windows, rendez-vous <strong>à l'intérieur</strong> du dossier qui contiendra tous vos travaux pratiques (<strong style="color: #10b981;">F:\\travaux-pratiques</strong> dans cet exemple).</li>
+<li style="margin: .3rem 0;">Faites un clic droit à l'intérieur de ce dossier pour faire apparaître le menu contextuel de l'explorateur et sélectionnez l'option <strong>Git Bash Here</strong>.</li>
+<li style="margin: .3rem 0;">Dans le terminal qui vient de s'ouvrir, copiez-collez et enchaînez les commandes ci-dessous pour mettre en place votre espace de travail dédié au module R1.01 :
+<div style="margin-top: 10px; display: grid; row-gap: 10px;"><!-- Commande 1 -->
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;"><code id="git-clone" style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f8fafc; border: 1px solid #d9e4f2; color: #1e293b; padding: .5rem .7rem; border-radius: 10px; display: inline-block; box-shadow: inset 0 1px 0 rgba(255,255,255,.6);">git
+              clone https://github.com/patrick-etcheverry/cplusplus-r101.git
+              tp-r1-01-init-au-dev1</code> </div>
+<!-- Commande 2 -->
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;"><code id="cd" style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f8fafc; border: 1px solid #d9e4f2; color: #1e293b; padding: .5rem .7rem; border-radius: 10px; display: inline-block; box-shadow: inset 0 1px 0 rgba(255,255,255,.6);">cd
+              tp-r1-01-init-au-dev1</code> </div>
+<!-- Commande 3 -->
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;"><code id="rm" style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f8fafc; border: 1px solid #d9e4f2; color: #1e293b; padding: .5rem .7rem; border-radius: 10px; display: inline-block; box-shadow: inset 0 1px 0 rgba(255,255,255,.6);">rm
+              -fr .git README.md .gitignore</code> </div>
+</div>
+</li>
+</ul>
+<p style="line-height: 1.7; margin-top: 28px;">A la fin de ces étapes vous disposez d'un dossier <strong style="color: #10b981;">tp-r1-01-init-au-dev1</strong> qui contient plusieurs sous-dossiers :</p>
+<ul data-bullets="square" style="margin: .4rem 0 1rem 0; padding-left: .6rem; display: grid; row-gap: .7rem;">
+<li style="margin: .3rem 0;">le sous-dossier <strong style="color: #10b981;">tp1</strong> contiendra le code des exercices que vous traiterez durant ce TP1 (<strong>un sous-dossier par exercice</strong>),</li>
+<li style="margin: .3rem 0;">le sous-dossier <strong style="color: #10b981;">tp2</strong> contiendra le code des exercices que vous traiterez durant le TP2 (<strong>un sous-dossier par exercice</strong>),</li>
+<li style="margin: .3rem 0;">etc.</li>
+</ul>
+<p style="margin-top: 10px; line-height: 1.7;">Notez que le dossier <strong style="color: #10b981;">tp-r1-01-init-au-dev1</strong> contient un dossier <strong style="color: #10b981;">.vscode</strong> et un fichier <strong style="color: #10b981;">travaux-pratiques-r1-01</strong> (ou <strong style="color: #10b981;">travaux-pratiques-r1-01.code-workspace</strong> si votre explorateur de fichiers affiche les extensions). Ce dossier et ce fichier <strong style="color: #ef4444;">ne doivent pas être supprimés</strong>.</p>
+<p style="margin: 18px 0 10px 0; line-height: 1.7;">Si besoin, le déroulement des différentes étapes est illustré dans la vidéo ci-dessous :</p>
+<!-- =========================================================
+         VIDÉO 1
+         ========================================================= -->
+<div class="card" style="width: 50%; margin: 0 auto 18px auto; padding: 0; border: 0; border-radius: 14px; background: #ffffff; box-shadow: 0 18px 40px rgba(15, 23, 42, .24), 0 6px 14px rgba(15, 23, 42, .14);">
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000;"><iframe allowfullscreen="allowfullscreen" src="//mediakiosque.univ-pau.fr/video_priv/12973/1a0714d04c5411338aa88ec2df18f4e21940aa1925536989548cd76b740bd4e8/?is_iframe=true&amp;size=720" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; display: block;">
+</iframe></div>
+</div>
+<!-- =========================================================
+         SECTION 2
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px 0; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%, #edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51, 65, 85, 0.05);">2. Test de l'environnement de programmation</div>
+<p style="line-height: 1.7; margin: .5rem 0 1rem 0;">Pour vérifier que l'environnement de programmation est opérationnel, suivez les étapes ci-dessous :</p>
+<!-- =========================================================
+         LISTE 2
+         ========================================================= -->
+<ul data-bullets="square" style="margin: .4rem 0 1rem 0; padding-left: .6rem; display: grid; row-gap: .7rem;">
+<li style="margin: .3rem 0;">Dans le menu <strong>Démarrer</strong> de Windows recherchez et ouvrez l'application Visual Studio Code <strong style="color: #ef4444;">pour C++</strong> (attention de ne pas ouvrir l'application Visual Studio Code "tout court" qui ouvrira un éditeur non opérationnel pour programmer en C++) ;</li>
+<li style="margin: .3rem 0;">Pour éviter toute erreur de manipulation lors des futurs TP, nous vous conseillons fortement d'ajouter sur votre bureau un raccourci vers l'application Visual Studio Code <strong style="color: #ef4444;">pour C++</strong> que vous devrez ouvrir en début de chaque TP du module R1.01 ;</li>
+<li style="margin: .3rem 0;">Dans Visual Studio Code, utilisez le menu <span style="color: #2563eb;">Fichier</span> → <span style="color: #2563eb;">Ouvrir l'espace de travail à partir du fichier...</span></li>
+<li style="margin: .3rem 0;">Sélectionnez le fichier <strong style="color: #10b981;">travaux-pratiques-r1-01</strong> (ou <strong style="color: #10b981;">travaux-pratiques-r1-01.code-workspace</strong> si votre explorateur affiche les extensions) qui se trouve dans votre dossier <strong style="color: #10b981;">tp-r1-01-initiation-dev1</strong> ;</li>
+<li style="margin: .3rem 0;">Dans l'explorateur de fichier de Visual Studio Code (à gauche), ouvrez le fichier <strong style="color: #10b981;">main.cpp</strong> qui se trouve dans le dossier <strong style="color: #10b981;">tp1/hello-world</strong>.</li>
+<li style="margin: .3rem 0;">Utilisez le raccourci clavier <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .1rem .35rem; border-radius: 6px;">Ctrl</code> + <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .1rem .35rem; border-radius: 6px;">Maj</code> + <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .1rem .35rem; border-radius: 6px;">B</code> pour lancer une opération de compilation (cette notion sera abordée juste après). Vérifier qu'une nouvelle zone s'affiche au bas de la fenêtre de Visual Studio Code avec le résultat de la compilation.</li>
+<li style="margin: .3rem 0;">En haut à droite de l'interface de Visual Studio Code vous trouverez un bouton en forme de triangle (une sorte de bouton "Play"). Cliquez sur ce bouton pour exécuter le code. <br/><img class="img-fluid" src="https://elearn.univ-pau.fr/pluginfile.php/1459981/mod_page/content/42/image%20%281%29.png" style="margin-top: 10px; border-radius: 10px; box-shadow: 0 8px 18px rgba(51, 65, 85, 0.10); border: 1px solid #dbe3ee;"/></li>
+<li style="margin: .3rem 0;">Vérifiez qu'une fenêtre de terminal s'ouvre pour exécuter le programme et affiche la phrase "Hello world!".</li>
+<li style="margin: .3rem 0;">Si les deux dernières étapes se sont déroulées sans problème, votre environnement de programmation est prêt. <span style="color: #0ea5e9;">🙂</span></li>
+</ul>
+<p style="margin: 18px 0 10px 0; line-height: 1.7;">Si besoin, le déroulement des différentes étapes est illustré dans la vidéo ci-dessous :</p>
+<!-- =========================================================
+         VIDÉO 2
+         ========================================================= -->
+<div class="card" style="width: 50%; margin: 0 auto 18px auto; padding: 0; border: 0; border-radius: 14px; background: #ffffff; box-shadow: 0 18px 40px rgba(15, 23, 42, .24), 0 6px 14px rgba(15, 23, 42, .14);">
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000;"><iframe allowfullscreen="allowfullscreen" src="//mediakiosque.univ-pau.fr/video_priv/12974/868fcce8772971111721c494b74b8c0b79fbecb2448962b3f09c97c7b725d06e/?is_iframe=true&amp;size=720" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; display: block;">
+</iframe></div>
+</div>
+</div>
+</div>
+<!-- =========================================================
+     JAVASCRIPT
+     Puces carrées + boutons Copier
+     ========================================================= -->
+<p>
+
+</p></div></div></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algoforge — R1.01 (Elearn UPPA)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1E293B;
+      --primary: #2563EB;
+      --border: #E2E8F0;
+    }
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      margin: 0;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #EFF6FF;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-top: 0;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .source-meta {
+      font-size: 12px;
+      color: #64748B;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 8px;
+    }
+    pre {
+      padding: 16px;
+      overflow-x: auto;
+    }
+    code {
+      padding: 2px 6px;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: #F1F5F9;
+      font-weight: 700;
+    }
+    blockquote {
+      border-left: 4px solid var(--primary);
+      margin: 16px 0;
+      padding: 8px 16px;
+      background: #F8FAFC;
+      color: #334155;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">R1.01 — Ressource Officielle Elearn</div>
+    <h1>Algoforge</h1>
+    <div class="source-meta">
+      Source originale : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692261" target="_blank" rel="noopener">https://elearn.univ-pau.fr/mod/page/view.php?id=692261</a> — Synchronisé automatiquement par Kai Sentinel
+    </div>
+    <div class="moodle-content">
+      <div role="main"><div class="box py-3 generalbox center clearfix"><div class="no-overflow"><div style="font-family: Tahoma, sans-serif; font-size: 115%; color: #334155; background: #ffffff; padding: 28px 18px;">
+<div style="max-width: 1040px; margin: 0 auto;"><!-- =========================================================
+         EN-TÊTE
+         ========================================================= -->
+<div style="margin: 0 0 28px 0; padding: 24px 28px 28px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 18px; background: linear-gradient(180deg,#f8fbff 0%,#eef4fb 100%); box-shadow: 0 12px 28px rgba(51,65,85,.08); text-align: center;"><img alt="Logo Algoforge" class="transparent img-fluid" src="https://bing-chill-inc.github.io/wikiforge/img/algoforgeLogo(black).png" style="display: block; width: 82px; height: auto; margin: 0 auto 12px;"/>
+<h1 style="margin: 0; font-size: 2.15rem; line-height: 1.2; color: #2f6fbe; font-weight: bold;">Algoforge : un éditeur d'algorithmes open source</h1>
+<p style="margin: 8px 0 0; color: #637083; font-size: 1rem; line-height: 1.5;">Utilisable en ligne et installable sur Windows, macOS et Linux.</p>
+</div>
+<!-- =========================================================
+         INTRODUCTION
+         ========================================================= -->
+<div style="margin: 0 0 32px 0; padding: 18px 20px; border: 1px solid #e2e8f0; border-radius: 14px; background: #fbfdff; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin: 0; line-height: 1.75;"><strong>Algoforge</strong> est un éditeur d'algorithmes libre qui permet de concevoir des modèles avec le formalisme graphique utilisé à l'IUT. Développé avec des technologies web modernes, l'outil est accessible en ligne <a href="https://algoforge.fr" rel="noopener" style="color: #2563eb; text-decoration: underline; font-weight: 500;" target="_blank">(algoforge.fr)</a> et peut aussi être installé en version bureau sur <strong>Windows</strong>, <strong>macOS</strong> et <strong>Linux</strong>. L'objectif est simple : offrir aux étudiants un environnement ergonomique pour modéliser des algorithmes et accompagner l'apprentissage de l'algorithmique.</p>
+</div>
+<!-- =========================================================
+         PRINCIPALES FONCTIONNALITÉS
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Principales fonctionnalités</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Algoforge permet de <strong>concevoir des algorithmes en construisant visuellement leur structure</strong>. L'utilisateur assemble des éléments graphiques représentant des problèmes, des sous-problèmes ou encore des structures de contrôle classiques comme la <strong>décompositions séquentielles</strong>, <strong>alternatives</strong> et <strong>itératives</strong>.</p>
+<p style="margin-top: 0; line-height: 1.72;"><img class="img-fluid r101-lightbox-trigger" src="https://elearn.univ-pau.fr/pluginfile.php/1459983/mod_page/content/44/algoforge.jpg" style="cursor: zoom-in;" tabindex="0"/></p>
+<p style="line-height: 1.72;">Tout au long de la conception, l'éditeur propose également de <strong>formaliser le dictionnaire des variables</strong>. Chaque variable peut être définie avec son <em>nom</em>, son <em>type</em> et sa <em>signification</em>. Cette fonctionnalité incite à de bonnes pratiques méthodologiques et favorise la lisibilité des algorithmes créés.</p>
+<p style="line-height: 1.72;">L'ergonomie a été pensée pour rendre les manipulations les plus simples possibles. Les éléments sont <strong>sélectionnables à la souris</strong>, déplaçables par <strong>glisser-déposer</strong>, et il est possible de <strong>déplacer plusieurs blocs</strong> en même temps. Pour relier deux éléments, il suffit de les désigner : Algoforge <strong>génère automatiquement la connexion</strong> la plus adaptée, tout en <strong>contrôlant la validité des liens</strong>. L'utilisateur est ainsi guidé et évite de créer des assemblages qui ne respectent pas le formalisme algorithmique étudié en cours.</p>
+<p style="line-height: 1.72;">Lorsqu'un algorithme devient plus complexe, il peut être <strong>décomposé sur plusieurs plans</strong>, afin de travailler étape par étape tout en conservant une vision claire de l'ensemble. Pour gagner du temps, Algoforge met également à disposition une <strong>bibliothèque de composants algorithmiques préconfigurés</strong>. On y trouve non seulement les décompositions classiques (séquentielle, alternative, itérative), mais aussi des <strong>modèles d'algorithmes standards</strong> classiquement utilisés en algorithmique, comme <em>l'échange de deux valeurs</em>, la <em>saisie-vérification</em>, les <em>parcours complets</em> (systématiques ou conditionnés) ou encore la <em>recherche de première occurrence</em>.</p>
+<p style="margin-bottom: 0; line-height: 1.72;">Enfin, le travail réalisé peut être facilement réutilisé. Les algorithmes créés peuvent être <strong>sauvegardés puis ré-ouverts</strong> pour modification. Ils peuvent également être <strong>exportés sous différents formats</strong>, afin de faciliter leur intégration dans un rapport ou un document pédagogique. Les <strong>dictionnaires des variables</strong> associés peuvent eux aussi être exportés.</p>
+</div>
+<!-- =========================================================
+         INTÉGRATION À VISUAL STUDIO CODE
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Intégration à Visual Studio Code</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin: 0 0 10px; line-height: 1.72;"><strong>AlgoForge peut également être utilisé directement depuis Visual Studio Code grâce à une <a href="https://marketplace.visualstudio.com/items?itemName=algoforge.algoforge-vscode" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank">extension dédiée</a>.</strong> Celle-ci permet d'ouvrir et de modifier les fichiers d'algorithmes au format <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #eef3f9; border: 1px solid #d7e2f0; padding: .12rem .35rem; border-radius: 6px;">.af</code> sans quitter l'environnement de développement.</p>
+<p style="margin: 0 0 10px; line-height: 1.72;"><img class="img-fluid r101-lightbox-trigger" src="https://elearn.univ-pau.fr/pluginfile.php/1459983/mod_page/content/44/algoforge_dans_vscode.jpg" style="cursor: zoom-in;" tabindex="0"/></p>
+<p style="margin: 0; line-height: 1.72;">Cette intégration permet notamment de conserver dans un même espace de travail les <strong>algorithmes de conception et le code source associé</strong>. Il devient ainsi plus facile de passer de la conception à la programmation et, si nécessaire, de revenir à l'algorithme lorsqu'une difficulté rencontrée dans le code provient d'un problème de conception.</p>
+</div>
+<!-- =========================================================
+         LIENS UTILES
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Liens utiles</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<ul style="margin: 0 0 20px 18px; padding: 0; line-height: 1.7;">
+<li style="margin: 8px 0;">Version en ligne : <a href="https://algoforge.fr" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank">https://algoforge.fr</a></li>
+<li style="margin: 8px 0;">Dépôt GitHub : <a href="https://github.com/Bing-Chill-inc/Algoforge-main" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank">https://github.com/Bing-Chill-inc/Algoforge-main</a></li>
+<li style="margin: 8px 0;">Téléchargement des versions : <a href="https://github.com/Bing-Chill-inc/Algoforge-main/releases" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank">https://github.com/Bing-Chill-inc/Algoforge-main/releases</a></li>
+<li style="margin: 8px 0;">Documentation d'installation et d'utilisation : <a href="https://bing-chill-inc.github.io/wikiforge/" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank">https://bing-chill-inc.github.io/wikiforge/</a></li>
+<li style="margin: 8px 0;">Extension Visual Studio Code : <a href="https://marketplace.visualstudio.com/items?itemName=algoforge.algoforge-vscode" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank">https://marketplace.visualstudio.com/items?itemName=algoforge.algoforge-vscode</a></li>
+</ul>
+<!-- Boutons -->
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 18px;"><a href="https://algoforge.fr" rel="noopener" style="display: inline-flex; align-items: center; padding: .65rem 1rem; border-radius: 12px; background: linear-gradient(135deg,#eff6ff,#dbeafe); border: 1px solid #bfdbfe; color: #1d4ed8; text-decoration: none; font-weight: bold; box-shadow: 0 6px 14px rgba(59,130,246,.12);" target="_blank"> Ouvrir la version en ligne </a> <a href="https://github.com/Bing-Chill-inc/Algoforge-main/releases" rel="noopener" style="display: inline-flex; align-items: center; padding: .65rem 1rem; border-radius: 12px; background: linear-gradient(135deg,#ecfdf5,#d1fae5); border: 1px solid #a7f3d0; color: #065f46; text-decoration: none; font-weight: bold; box-shadow: 0 6px 14px rgba(16,185,129,.12);" target="_blank"> Télécharger une version de bureau </a> <a href="https://bing-chill-inc.github.io/wikiforge/" rel="noopener" style="display: inline-flex; align-items: center; padding: .65rem 1rem; border-radius: 12px; background: linear-gradient(135deg,#f5f3ff,#ede9fe); border: 1px solid #ddd6fe; color: #5b21b6; text-decoration: none; font-weight: bold; box-shadow: 0 6px 14px rgba(124,58,237,.10);" target="_blank"> Consulter la documentation </a> <a href="https://marketplace.visualstudio.com/items?itemName=algoforge.algoforge-vscode" rel="noopener" style="display: inline-flex; align-items: center; padding: .65rem 1rem; border-radius: 12px; background: linear-gradient(135deg,#fff7ed,#ffedd5); border: 1px solid #fed7aa; color: #c2410c; text-decoration: none; font-weight: bold; box-shadow: 0 6px 14px rgba(234,88,12,.10);" target="_blank"> Installer l'extension Visual Studio Code </a></div>
+</div>
+<!-- =========================================================
+         HISTOIRE
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Une histoire qui commence à l'IUT de Bayonne</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Algoforge s'inscrit dans la continuité d'un projet qui a débuté en 2011 au département informatique de l'IUT de Bayonne : Conçu par <strong><a href="https://github.com/erebe" style="color: #2563eb; text-decoration: underline;">Romain Gérard</a></strong>, un ancien étudiant de l'IUT, <strong>Tabula Rasa</strong> (<a href="https://github.com/erebe/Tabula_rasa" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank">voir le projet</a>) est un éditeur d'algorithmes qui a été utilisé pendant plus de quinze ans par les différentes promotions d'étudiants. À l'époque, il s'agissait d'une application desktop développée en C++ avec une interface graphique basée sur Qt.</p>
+<p style="line-height: 1.72;">Près de quinze ans plus tard, une nouvelle équipé d'étudiants a choisi de <strong>reprendre le flambeau</strong>. Leur ambition : préserver l'esprit de Tabula Rasa tout en <strong>modernisant l'outil</strong>. Algoforge vise à offrir une expérience plus ergonomique, enrichie de nouvelles fonctionnalités et reposant sur des technologies web modernes ouvrant la voie à de futures évolutions comme le <strong>stockage des algorithmes dans le cloud</strong> ou l'<strong>édition collaborative</strong> en ligne.</p>
+<p style="margin-bottom: 0; line-height: 1.72;">Le projet Algoforge a démarré en <strong>octobre 2022</strong> avec une phase d'analyse et de conception. L'année <strong>2023-2024</strong> a été consacrée au développement du <strong>moteur graphique</strong>, puis les dernières fonctionnalités et l'interface utilisateur (UX/UI) ont été finalisées en <strong>2024-2025</strong>.</p>
+</div>
+<!-- =========================================================
+         CONTRIBUTEURS
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Les étudiants contributeurs</div>
+<div style="border: 1px solid #e2e8f0; background: #fbfdff; border-radius: 14px; padding: 18px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/Feror-BotMaker" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Jokin SUARES </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/Fetnmax" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Maxime JACOB-SAUSSEREAU </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/Alakamar" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Adrien HIRIBARREN TOUYA </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/LucasMarrot" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Lucas MARROT </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/RomLabo" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Romain LABORDE </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/ToxykAuBleu" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Mathieu FOISSAC </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/SamuelCURRAN0" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Samuel CURRAN </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/Eliossore" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Esteban BACKES </a></div>
+<div style="flex: 1 1 280px; min-width: 220px; padding: 12px 14px; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(51,65,85,.05);"><a href="https://github.com/Sprocq" rel="noopener" style="color: #356fae; font-weight: bold; text-decoration: none;" target="_blank"> Fabien SPROCQ </a></div>
+</div>
+</div>
+<!-- Appel à l'action --></div>
+</div>
+<!-- =========================================================
+     LIGHTBOX
+     ========================================================= -->
+<div id="r101-lightbox" style="display: none; position: fixed; inset: 0; z-index: 99999; align-items: center; justify-content: center; box-sizing: border-box; padding: 28px; background: rgba(15,23,42,.92); cursor: zoom-out;"> <img alt="" class="img-fluid" id="r101-lightbox-image" style="display: block; max-width: 95vw; max-height: 90vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; background: #ffffff; box-shadow: 0 24px 60px rgba(0,0,0,.45); cursor: default;"/></div>
+<!-- =========================================================
+     JAVASCRIPT LIGHTBOX
+     ========================================================= -->
+<p>
+
+</p></div></div></div>
+    </div>
+  </div>
+</body>
+</html>

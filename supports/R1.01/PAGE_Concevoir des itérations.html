@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concevoir des itérations — R1.01 (Elearn UPPA)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1E293B;
+      --primary: #2563EB;
+      --border: #E2E8F0;
+    }
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      margin: 0;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #EFF6FF;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-top: 0;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .source-meta {
+      font-size: 12px;
+      color: #64748B;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 8px;
+    }
+    pre {
+      padding: 16px;
+      overflow-x: auto;
+    }
+    code {
+      padding: 2px 6px;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: #F1F5F9;
+      font-weight: 700;
+    }
+    blockquote {
+      border-left: 4px solid var(--primary);
+      margin: 16px 0;
+      padding: 8px 16px;
+      background: #F8FAFC;
+      color: #334155;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">R1.01 — Ressource Officielle Elearn</div>
+    <h1>Concevoir des itérations</h1>
+    <div class="source-meta">
+      Source originale : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=695682" target="_blank" rel="noopener">https://elearn.univ-pau.fr/mod/page/view.php?id=695682</a> — Synchronisé automatiquement par Kai Sentinel
+    </div>
+    <div class="moodle-content">
+      <div role="main"><div class="box py-3 generalbox center clearfix"><div class="no-overflow"><!-- =========================================================
+     R1.01 - Ressource
+     Choisir le bon type d'itération
+     ========================================================= -->
+<div style="font-family: Tahoma, sans-serif; font-size: 115%; color: #334155; background: #ffffff; padding: 28px 18px;">
+<div style="max-width: 1040px; margin: 0 auto;"><!-- =========================================================
+         EN-TÊTE
+         ========================================================= -->
+<div style="margin: 0 0 28px 0; padding: 30px 28px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 18px; background: linear-gradient(180deg,#f8fbff 0%,#eef4fb 100%); box-shadow: 0 12px 28px rgba(51,65,85,.08); text-align: center;">
+<h1 style="margin: 0; font-size: 2.15rem; line-height: 1.2; color: #2f6fbe; font-weight: bold;">Concevoir des itérations</h1>
+<p style="margin: 8px 0 0; color: #637083; font-size: 1rem; line-height: 1.5;">Quelques points de repère pour choisir une structure répétitive adaptée au problème à résoudre.</p>
+</div>
+<!-- =========================================================
+         INTRODUCTION
+         ========================================================= -->
+<div style="margin: 0 0 32px 0; padding: 18px 20px; border: 1px solid #e2e8f0; border-radius: 14px; background: #fbfdff; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin: 0 0 12px; line-height: 1.75;">Lorsqu'un traitement doit être répété, plusieurs structures itératives peuvent souvent être utilisées pour obtenir le même résultat. Le choix d'une structure adaptée dépend surtout de ce que l'on sait sur le <strong>nombre de répétitions</strong> et de la manière dont les <strong>conditions d'arrêt</strong> peuvent être évaluées.</p>
+<p style="margin: 0; line-height: 1.75;">Il ne s'agit donc pas de choisir une boucle par habitude, mais de rechercher la structure qui traduit le plus naturellement la logique de l'algorithme.</p>
+</div>
+<!-- =========================================================
+         1. SCHÉMA DE DÉCISION
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Le schéma de décision complet</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Le schéma suivant synthétise les différentes questions à se poser pour identifier la structure répétitive la plus adaptée. Il indique comment <strong>formaliser la structure répétitive d'un point de vue algorithmique</strong> puis, pour chaque structure ainsi formalisée, <strong>comment la coder en C++</strong>.</p>
+<!-- =========================================================
+           INSÉRER ICI TON GRAND SCHÉMA DE DÉCISION
+
+           Je te conseille de lui donner :
+
+           class="img-fluid r101-lightbox-trigger"
+
+           et le style :
+
+           style="display:block; width:100%; height:auto;
+                  margin:20px auto; cursor:zoom-in;
+                  border-radius:12px;
+                  border:1px solid #e2e8f0;
+                  box-shadow:0 12px 28px rgba(15,23,42,.14);"
+
+           La lightbox située en bas de cette page fonctionnera alors
+           automatiquement lorsque l'étudiant cliquera sur l'image.
+           ========================================================= -->
+<p style="margin-bottom: 0; line-height: 1.72; color: #64748b;">Dans ce schéma, <strong>P</strong> représente les traitements réalisés avant la répétition, <strong>Q</strong> le traitement répété et <strong>Q1</strong> et <strong>Q2</strong> deux parties du traitement séparées par l'évaluation d'une condition d'arrêt.</p>
+<p style="margin-bottom: 0; line-height: 1.72; color: #64748b;"></p>
+<p style="margin-bottom: 0; line-height: 1.72; color: #64748b;"><img alt="Schéma de décision pour choisir une structure répétitive" class="img-fluid r101-lightbox-trigger" src="https://elearn.univ-pau.fr/pluginfile.php/1471090/mod_page/content/11/methodoChoixStructRepetitive.png" style="display: block; width: 100%; height: auto; margin: 20px auto; cursor: zoom-in; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 12px 28px rgba(15,23,42,.14);"/></p>
+</div>
+<!-- =========================================================
+         2. PREMIÈRE QUESTION
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Première question : connaît-on le nombre de répétitions ?</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">La première question à se poser lorsque l'on conçoit une structure répétitive est la suivante :</p>
+<div style="margin: 20px auto; max-width: 700px; padding: 16px 20px; border: 1px solid #cfe0f7; border-radius: 12px; background: #f7faff; text-align: center; color: #356fae; font-weight: bold; font-size: 1.08rem;">Le nombre de répétitions est-il connu ou calculable avant d'entrer dans la boucle ?</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px;">
+<div style="flex: 1 1 320px; padding: 16px 18px; border: 1px solid #bbf7d0; border-left: 5px solid #22c55e; border-radius: 12px; background: #f0fdf4;">
+<div style="margin-bottom: 6px; color: #15803d; font-weight: bold;">Oui</div>
+<p style="margin: 0; line-height: 1.65;">Une <strong>boucle comptée</strong>, généralement exprimée avec <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #ffffff; border: 1px solid #bbf7d0; padding: .12rem .35rem; border-radius: 6px;">for</code>, est la structure la plus naturelle.</p>
+</div>
+<div style="flex: 1 1 320px; padding: 16px 18px; border: 1px solid #cfe0f7; border-left: 5px solid #6e9fe6; border-radius: 12px; background: #f7faff;">
+<div style="margin-bottom: 6px; color: #356fae; font-weight: bold;">Non</div>
+<p style="margin: 0; line-height: 1.65;">Le choix dépend alors de la ou des <strong>conditions d'arrêt</strong> et du moment auquel elles peuvent être évaluées.</p>
+</div>
+</div>
+</div>
+<!-- =========================================================
+         3. NOMBRE DE RÉPÉTITIONS CONNU
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Le nombre de répétitions est connu</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Lorsque le nombre de répétitions est <strong>connu ou calculable avant d'entrer dans la boucle</strong>, une boucle <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .12rem .35rem; border-radius: 6px;">for</code> est généralement la structure la plus adaptée.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 20px 0;">
+<div style="flex: 1 1 390px; border: 1px solid #dbe4ef; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<div style="padding: 8px 12px; background: #eef1f5; color: #475569; font-size: .9rem; font-weight: bold;">Boucle croissante</div>
+<pre style="margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 16px; line-height: 1.55; color: #1e293b; background: #fbfcfe;"><code>for (int i = A; i &lt;= B; i = i + 1)
+{
+    // Code à répéter
+    ...
+}</code></pre>
+</div>
+<div style="flex: 1 1 390px; border: 1px solid #dbe4ef; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<div style="padding: 8px 12px; background: #eef1f5; color: #475569; font-size: .9rem; font-weight: bold;">Boucle décroissante</div>
+<pre style="margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 16px; line-height: 1.55; color: #1e293b; background: #fbfcfe;"><code>for (int i = A; i &gt;= B; i = i - 1)
+{
+    // Code à répéter
+    ...
+}</code></pre>
+</div>
+</div>
+<!-- Conseil McConnell -->
+<div style="margin-top: 22px; padding: 15px 17px; border: 1px solid #d5e3f7; border-left: 5px solid #6e9fe6; border-radius: 12px; background: #f7faff;">
+<div style="margin-bottom: 6px; color: #356fae; font-weight: bold;">Conseil d'expert</div>
+<p style="margin: 0; line-height: 1.68;">Steve McConnell recommande la boucle <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;">for</code> lorsqu'une boucle doit être exécutée un nombre déterminé de fois. Son mécanisme de contrôle doit rester simple et clairement identifiable dès l'entrée dans la boucle. <span style="color: #64748b;">(McConnell, <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les langages</cite>, 2005, p. 398)</span></p>
+</div>
+</div>
+<!-- =========================================================
+         4. NOMBRE DE RÉPÉTITIONS INCONNU
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Le nombre de répétitions n'est pas connu</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Lorsque le nombre de répétitions n'est pas connu, le choix de la structure dépend du <strong>moment auquel la condition d'arrêt peut être évaluée</strong>.</p>
+<p style="line-height: 1.72;">Si une seule condition d'arrêt intervient, trois situations principales doivent être distinguées.</p>
+</div>
+<!-- =========================================================
+         CONDITION EN DÉBUT
+         ========================================================= -->
+<div style="margin: 28px 0 12px; padding: 11px 15px; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff; color: #356fae; font-size: 1.08rem; font-weight: bold;">La condition d'arrêt est évaluée au début</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 18px 20px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">On doit pouvoir déterminer <strong>avant d'exécuter le traitement</strong> si une nouvelle répétition doit avoir lieu.</p>
+<p style="line-height: 1.72;">La structure naturelle est alors une boucle <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .12rem .35rem; border-radius: 6px;">while</code>.</p>
+<div style="margin: 18px 0; border: 1px solid #dbe4ef; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<div style="padding: 8px 12px; background: #eef1f5; color: #475569; font-size: .9rem; font-weight: bold;">C++</div>
+<pre style="margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 16px; line-height: 1.55; color: #1e293b; background: #fbfcfe;"><code>while (!(condition_arret))
+{
+    // Code à répéter
+    ...
+}</code></pre>
+</div>
+<div style="padding: 13px 15px; border: 1px solid #dbeafe; border-radius: 10px; background: #eff6ff; color: #334155;"><strong style="color: #2563eb;">Conséquence :</strong> le corps de la boucle peut être exécuté <strong>zéro fois</strong>.</div>
+<div style="margin-top: 18px; color: #64748b; font-size: .95rem; line-height: 1.6;">Steve McConnell préconise notamment une boucle <code>while</code> lorsque le test se situe naturellement au début de la répétition. (McConnell, <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les langages</cite>, 2005, p. 395)</div>
+</div>
+<!-- =========================================================
+         CONDITION EN FIN
+         ========================================================= -->
+<div style="margin: 28px 0 12px; padding: 11px 15px; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff; color: #356fae; font-size: 1.08rem; font-weight: bold;">La condition d'arrêt est évaluée à la fin</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 18px 20px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">La condition d'arrêt ne peut être évaluée qu'<strong>après avoir réalisé le traitement</strong>.</p>
+<p style="line-height: 1.72;">La structure <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .12rem .35rem; border-radius: 6px;">do...while</code> traduit directement cette situation.</p>
+<div style="margin: 18px 0; border: 1px solid #dbe4ef; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<div style="padding: 8px 12px; background: #eef1f5; color: #475569; font-size: .9rem; font-weight: bold;">C++</div>
+<pre style="margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 16px; line-height: 1.55; color: #1e293b; background: #fbfcfe;"><code>do
+{
+    // Code à répéter
+    ...
+}
+while (!(condition_arret));</code></pre>
+</div>
+<div style="padding: 13px 15px; border: 1px solid #dbeafe; border-radius: 10px; background: #eff6ff; color: #334155;"><strong style="color: #2563eb;">Conséquence :</strong> le corps de la boucle est nécessairement exécuté <strong>au moins une fois</strong>.</div>
+<div style="margin-top: 18px; color: #64748b; font-size: .95rem; line-height: 1.6;">McConnell recommande ce type de boucle lorsque le traitement doit nécessairement être réalisé avant de pouvoir décider s'il doit être répété. (McConnell, <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les langages</cite>, 2005, p. 395)</div>
+</div>
+<!-- =========================================================
+         CONDITION AU MILIEU
+         ========================================================= -->
+<div style="margin: 28px 0 12px; padding: 11px 15px; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff; color: #356fae; font-size: 1.08rem; font-weight: bold;">La condition d'arrêt est évaluée en cours de répétition</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 18px 20px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Il arrive que la condition d'arrêt ne puisse être évaluée ni avant le traitement, ni après l'ensemble du traitement, mais <strong>entre deux parties de celui-ci</strong>.</p>
+<p style="line-height: 1.72;">Si le corps de la répétition est constitué de deux traitements <strong>Q1</strong> et <strong>Q2</strong>, et que la condition d'arrêt n'est connue qu'après Q1, la forme naturelle devient :</p>
+<div style="margin: 18px 0; border: 1px solid #dbe4ef; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<div style="padding: 8px 12px; background: #eef1f5; color: #475569; font-size: .9rem; font-weight: bold;">C++</div>
+<pre style="margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 16px; line-height: 1.55; color: #1e293b; background: #fbfcfe;"><code>while (true)
+{
+    // Code de Q1
+    ...
+
+    if (condition_arret)
+    {
+        break;
+    }
+
+    // Code de Q2
+    ...
+}</code></pre>
+</div>
+<p style="line-height: 1.72;">La forme <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .12rem .35rem; border-radius: 6px;">for
+          (;;)</code> peut également être utilisée pour exprimer une boucle sans condition d'arrêt placée dans son en-tête.</p>
+<div style="margin-top: 18px; color: #64748b; font-size: .95rem; line-height: 1.6;">McConnell qualifie cette organisation de boucle avec sortie en cours d'itération. En C++, elle peut notamment être exprimée avec une boucle sans fin et une instruction <code>break</code>. (McConnell, <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les langages</cite>, 2005, p. 395)</div>
+</div>
+<!-- =========================================================
+         5. PLUSIEURS CONDITIONS D'ARRÊT
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Plusieurs conditions d'arrêt</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Certaines répétitions peuvent être interrompues pour <strong>plusieurs raisons différentes</strong>.</p>
+<p style="line-height: 1.72;">Il faut alors déterminer si les différentes conditions d'arrêt peuvent être évaluées au même moment.</p>
+<!-- Conditions regroupables -->
+<div style="margin: 24px 0 12px; padding: 11px 15px; border-left: 5px solid #22c55e; border-radius: 0 10px 10px 0; background: #f0fdf4; color: #15803d; font-weight: bold;">Les conditions peuvent être évaluées au même moment</div>
+<p style="line-height: 1.72;">Les conditions peuvent alors être regroupées dans une <strong>condition logique composée</strong>. On retombe ensuite sur les cas précédents : test au début, en cours ou à la fin de la répétition.</p>
+<div style="margin: 18px 0; border: 1px solid #dbe4ef; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<div style="padding: 8px 12px; background: #eef1f5; color: #475569; font-size: .9rem; font-weight: bold;">Exemple : conditions évaluées au début</div>
+<pre style="margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 16px; line-height: 1.55; color: #1e293b; background: #fbfcfe;"><code>while (!(condition_arret_1 || condition_arret_2))
+{
+    // Traitement
+    ...
+}</code></pre>
+</div>
+<!-- Conditions à différents moments -->
+<div style="margin: 30px 0 12px; padding: 11px 15px; border-left: 5px solid #f59e0b; border-radius: 0 10px 10px 0; background: #fffbeb; color: #b45309; font-weight: bold;">Les conditions doivent être évaluées à des moments différents</div>
+<p style="line-height: 1.72;">Si les conditions d'arrêt ne peuvent pas être évaluées au même endroit du traitement, il devient naturel de placer chaque test au moment où l'information nécessaire devient disponible.</p>
+<div style="margin: 18px 0; border: 1px solid #dbe4ef; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<div style="padding: 8px 12px; background: #eef1f5; color: #475569; font-size: .9rem; font-weight: bold;">C++</div>
+<pre style="margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 16px; line-height: 1.55; color: #1e293b; background: #fbfcfe;"><code>while (true)
+{
+    // Code répété partie 1
+    ...
+
+    if (condition_arret_1)
+    {
+        break;
+    }
+
+    // Code répété partie 2
+    ...
+
+    if (condition_arret_2)
+    {
+        break;
+    }
+}</code></pre>
+</div>
+</div>
+<!-- =========================================================
+         6. À PROPOS DE BREAK
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">A propos de l'utilisation de break</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<p style="margin-top: 0; line-height: 1.72;">Une instruction <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .12rem .35rem; border-radius: 6px;">break</code> n'est pas une solution à employer systématiquement pour sortir d'une boucle.</p>
+<p style="line-height: 1.72;">Elle est particulièrement justifiée lorsque la logique du problème impose d'évaluer une condition d'arrêt <strong>au milieu d'une répétition</strong> ou lorsque plusieurs conditions d'arrêt doivent être vérifiées <strong>à différents endroits</strong>.</p>
+<div style="margin: 20px 0 0; padding: 16px 18px; border: 1px solid #fed7aa; border-left: 6px solid #f59e0b; border-radius: 12px; background: #fff7ed;">
+<div style="margin-bottom: 7px; color: #c2410c; font-weight: bold;">Bonne pratique</div>
+<p style="margin: 0 0 10px; line-height: 1.68;">Les <strong>C++ Core Guidelines</strong> recommandent de limiter l'usage de <code>break</code> et <code>continue</code> dans les boucles (<strong><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines?#es77-minimize-the-use-of-break-and-continue-in-loops" rel="noopener" style="color: #c2410c; text-decoration: underline;" target="_blank">ES.77</a></strong>).</p>
+<p style="margin: 0; line-height: 1.68;">Dans un corps de boucle complexe, une sortie placée au milieu du code peut facilement passer inaperçue à la lecture. Le recours à <code>break</code> doit donc correspondre à une véritable nécessité de la structure du problème et rester clairement identifiable.</p>
+</div>
+</div>
+<!-- =========================================================
+         7. TABLEAU RÉCAPITULATIF
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">En résumé : quelle structure choisir ?</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<div style="overflow-x: auto; border: 1px solid #dbe4ef; border-radius: 12px; box-shadow: 0 5px 14px rgba(51,65,85,.06);">
+<table role="table" style="width: 100%; border-collapse: collapse; color: #334155; background: #ffffff;">
+<thead>
+<tr>
+<th style="text-align: left; padding: 12px 14px; background: #edf4fc; color: #356fae; border-bottom: 1px solid #cfe0f7; border-right: 1px solid #dbe4ef;">Situation</th>
+<th style="text-align: left; padding: 12px 14px; background: #edf4fc; color: #356fae; border-bottom: 1px solid #cfe0f7;">Structure généralement adaptée</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 11px 14px; background: #f8fafc; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;">Nombre de répétitions connu ou calculable</td>
+<td style="padding: 11px 14px; background: #f8fafc; border-bottom: 1px solid #e5e7eb;"><code>for</code></td>
+</tr>
+<tr>
+<td style="padding: 11px 14px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;">Condition d'arrêt testée avant le traitement</td>
+<td style="padding: 11px 14px; border-bottom: 1px solid #e5e7eb;"><code>while</code></td>
+</tr>
+<tr>
+<td style="padding: 11px 14px; background: #f8fafc; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;">Condition d'arrêt testée après le traitement</td>
+<td style="padding: 11px 14px; background: #f8fafc; border-bottom: 1px solid #e5e7eb;"><code>do...while</code></td>
+</tr>
+<tr>
+<td style="padding: 11px 14px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;">Condition d'arrêt testée en cours de traitement</td>
+<td style="padding: 11px 14px; border-bottom: 1px solid #e5e7eb;">boucle sans fin + <code>break</code></td>
+</tr>
+<tr>
+<td style="padding: 11px 14px; background: #f8fafc; border-right: 1px solid #e5e7eb;">Plusieurs conditions testées à différents endroits</td>
+<td style="padding: 11px 14px; background: #f8fafc;">boucle sans fin + plusieurs <code>break</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- =========================================================
+         8. BONNES PRATIQUES C++
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Quelques bonnes pratiques en C++</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<ul style="margin: 0; padding-left: 1.4rem; line-height: 1.75;">
+<li style="margin: .6rem 0;">Les <strong>C++ Core Guidelines – ES.72</strong> recommandent de privilégier une boucle <code>for</code> lorsqu'il existe une variable de boucle évidente.</li>
+<li style="margin: .6rem 0;">La règle <strong>ES.73</strong> recommande plutôt <code>while</code> lorsqu'il n'existe pas de variable de boucle naturelle.</li>
+<li style="margin: .6rem 0;">La règle <strong>ES.77</strong> recommande de limiter l'usage de <code>break</code> et <code>continue</code> afin de préserver la lisibilité des boucles complexes.</li>
+</ul>
+</div>
+<!-- =========================================================
+         RÉFÉRENCES
+         ========================================================= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%,#edf4fc 100%); color: #2f6fbe; font-weight: bold; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">Références</div>
+<div style="border: 1px solid #e2e8f0; background: #ffffff; border-radius: 14px; padding: 20px 22px; margin-bottom: 22px; box-shadow: 0 6px 18px rgba(51,65,85,.05);">
+<ul style="margin: 0; padding-left: 1.4rem; line-height: 1.75;">
+<li style="margin: .7rem 0;"><strong>McConnell, Steve.</strong> <em>Code Complete, Second Edition</em>. Microsoft Press, 2004.</li>
+<li style="margin: .7rem 0;"><strong>McConnell, Steve.</strong> <em>Tout sur le code – Pour concevoir du logiciel de qualité, dans tous les langages</em>, 2005, notamment pages 395 et 398.</li>
+<li style="margin: .7rem 0;"><strong>Bjarne Stroustrup et Herb Sutter.</strong> <em>C++ Core Guidelines</em>, notamment les recommandations ES.72, ES.73, ES.75 et ES.77. <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank"> Consulter les C++ Core Guidelines </a></li>
+<li style="margin: .7rem 0;"><strong>cppreference.</strong> Référence technique sur les structures <code>for</code>, <code>while</code>, <code>do...while</code> et <code>break</code>. <a href="https://en.cppreference.com/w/cpp/language/for.html" rel="noopener" style="color: #2563eb; text-decoration: underline;" target="_blank"> Consulter cppreference </a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- =========================================================
+     LIGHTBOX POUR LE SCHÉMA
+     ========================================================= -->
+<div id="r101-lightbox" style="display: none; position: fixed; inset: 0; z-index: 99999; align-items: center; justify-content: center; box-sizing: border-box; padding: 28px; background: rgba(15,23,42,.92); cursor: zoom-out;"> <img alt="" class="img-fluid" id="r101-lightbox-image" style="display: block; max-width: 95vw; max-height: 90vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; background: #ffffff; box-shadow: 0 24px 60px rgba(0,0,0,.45); cursor: default;"/></div>
+<!-- =========================================================
+     JAVASCRIPT LIGHTBOX
+     ========================================================= -->
+<p>
+
+</p></div></div></div>
+    </div>
+  </div>
+</body>
+</html>
