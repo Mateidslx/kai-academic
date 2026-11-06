@@ -1,30 +1,29 @@
 /* ==========================================================================
-   MATÉI DE SAINT LÉGER — AUTHENTIC VIDEO FIGMA / CAD CURSOR CREATION ENGINE (V11)
-   1. Empty Dark Canvas Below Frontier (0% Ghost Opacity)
-   2. Stage 1: Real Wireframe Frame Drag-Out (0×0 -> W×H + Crosshair + Live Px Count)
-   3. Stage 2: Zero-Reflow Character-by-Character Typing + Clip-Path Widget Dragging
-   4. Explicit Reverse-CAD Deconstruction on Scroll-Up (Crimson ↺ W×H + Un-Typing)
-   5. Laser Smart-Guides, Live Telemetry HUD Pill & Card Specular Spotlight
+   MATÉI DE SAINT LÉGER — AUTHENTIC MULTI-AGENT CAD & FIGMA BUILDER ENGINE (V12)
+   1. On Page Refresh/Load: Multi-Cursor Crew Spawns & Constructs Hero Live
+   2. Floating Patrol State: Cursors Float Organically Around Viewport (Never Vanish)
+   3. Viewport Companion Physics: Cursors Smoothly Follow on Scroll-Up with Inertia
+   4. Scroll Frontier Construction: Cursors Swarm onto Unbuilt Content to Build Live
+   5. Two-Way Deconstruction: Crimson Reverse-CAD Scrub (↺ W×H + Un-Typing) on Scroll-Up
+   6. Laser Smart-Guides, Real-Time HUD Telemetry Pill & Card Specular Spotlight
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  const CURSOR_COLORS = [
-    '#ef4444', // Crimson
-    '#38bdf8', // Sky Blue
-    '#34d399', // Emerald
-    '#fbbf24', // Amber
-    '#f472b6', // Rose
-    '#22d3ee', // Cyan
-    '#fb923c', // Orange
-    '#a3e635', // Lime
-    '#fb7185', // Coral
-    '#60a5fa'  // Cobalt
+  const CURSOR_PROFILES = [
+    { name: 'Matéi', color: '#ef4444', anchorX: 0.16, anchorY: 0.22, fX: 0.82, fY: 0.70, pX: 0.2, pY: 0.5 },
+    { name: 'Kai', color: '#38bdf8', anchorX: 0.27, anchorY: 0.38, fX: 0.95, fY: 0.84, pX: 1.5, pY: 1.1 },
+    { name: 'AppSec', color: '#34d399', anchorX: 0.78, anchorY: 0.24, fX: 0.78, fY: 0.92, pX: 2.7, pY: 2.1 },
+    { name: 'Architect', color: '#fbbf24', anchorX: 0.52, anchorY: 0.44, fX: 0.65, fY: 0.68, pX: 3.8, pY: 0.9 },
+    { name: 'Design', color: '#f472b6', anchorX: 0.82, anchorY: 0.48, fX: 0.88, fY: 0.76, pX: 4.2, pY: 3.3 },
+    { name: 'Kernel', color: '#22d3ee', anchorX: 0.76, anchorY: 0.70, fX: 0.72, fY: 0.85, pX: 5.1, pY: 1.8 },
+    { name: 'Cloud', color: '#a3e635', anchorX: 0.22, anchorY: 0.76, fX: 0.90, fY: 0.64, pX: 0.8, pY: 4.1 },
+    { name: '3D-CAD', color: '#fb923c', anchorX: 0.56, anchorY: 0.84, fX: 0.84, fY: 0.80, pX: 2.2, pY: 2.9 }
   ];
 
   const MAX_FRAMES = 6;
-  const MAX_CURSORS = 10;
+  const MAX_CURSORS = CURSOR_PROFILES.length;
 
   const DYNAMIC_TEXT_IDS = new Set([
     'layer-desc',
@@ -62,10 +61,18 @@
   let rafId = null;
   let lastTs = 0;
   let prevScrollY = 0;
+  let prevScrollTs = performance.now();
+  let scrollVelocity = 0;
   let scrollDirection = 1; // 1 = assembling down, -1 = deconstructing up
   let scrollMotionTimer = 0;
   let isActivelyScrolling = false;
   let nextTaskUid = 1;
+
+  // Hero Initial Load / Refresh Live Creation Choreography
+  let isHeroIntroActive = false;
+  let heroIntroStartTs = 0;
+  let heroIntroCleaned = false;
+  let heroElements = null;
 
   function clamp01(x) {
     return x <= 0 ? 0 : x >= 1 ? 1 : x;
@@ -409,30 +416,33 @@
 
     cursorPool = [];
     for (let i = 0; i < MAX_CURSORS; i++) {
-      const color = CURSOR_COLORS[i % CURSOR_COLORS.length];
+      const prof = CURSOR_PROFILES[i];
       const cur = document.createElement('div');
       cur.className = 'saai-cursor';
       cur.style.opacity = '0';
       cur.innerHTML = `
         <svg class="saai-cursor-svg" viewBox="0 0 18 18" fill="none">
           <path class="cur-arrow" d="M2.1 1.7L16.3 7.5L9.5 10.0L7.0 16.8L2.1 1.7Z"
-                fill="${color}" stroke="#ffffff" stroke-width="1.45" stroke-linejoin="round"/>
+                fill="${prof.color}" stroke="#ffffff" stroke-width="1.45" stroke-linejoin="round"/>
           <g class="cur-cross">
             <line x1="9" y1="1.5" x2="9" y2="16.5" stroke="#04131f" stroke-width="3.2" stroke-linecap="round"/>
             <line x1="1.5" y1="9" x2="16.5" y2="9" stroke="#04131f" stroke-width="3.2" stroke-linecap="round"/>
-            <line x1="9" y1="2" x2="9" y2="16" stroke="${color}" stroke-width="1.7" stroke-linecap="round"/>
-            <line x1="2" y1="9" x2="16" y2="9" stroke="${color}" stroke-width="1.7" stroke-linecap="round"/>
+            <line x1="9" y1="2" x2="9" y2="16" stroke="${prof.color}" stroke-width="1.7" stroke-linecap="round"/>
+            <line x1="2" y1="9" x2="16" y2="9" stroke="${prof.color}" stroke-width="1.7" stroke-linecap="round"/>
             <circle cx="9" cy="9" r="1.5" fill="#ffffff"/>
           </g>
         </svg>
+        <span class="saai-cursor-tag" style="background: ${prof.color}; color: #050e18;">${prof.name}</span>
       `;
       overlayEl.appendChild(cur);
       cursorPool.push({
         el: cur,
+        tagEl: cur.querySelector('.saai-cursor-tag'),
+        prof,
         taskKey: null,
         alpha: 0,
-        x: 0,
-        y: 0,
+        x: window.innerWidth * prof.anchorX,
+        y: window.innerHeight * prof.anchorY,
         inited: false,
         crosshair: false
       });
@@ -508,7 +518,6 @@
       m.el.style.visibility = prevVis;
 
       const docTop = rect.top + scrollY;
-      // Wide, ultra-responsive two-way construction & deconstruction zone across [92% vh -> 22% vh]
       let startScroll = docTop - vh * 0.92;
       let endScroll =
         m.kind === 'coord'
@@ -673,10 +682,10 @@
   function updateHudPill(scrollY, activeFrameCount) {
     if (!hudPillEl) return;
     if (scrollY < 24) {
-      hudPillEl.classList.remove('visible');
-      return;
+      hudPillEl.classList.add('visible');
+    } else {
+      hudPillEl.classList.add('visible');
     }
-    hudPillEl.classList.add('visible');
 
     let visibleCount = 0;
     let builtCount = 0;
@@ -693,7 +702,7 @@
     const totalPct = visibleCount > 0 ? Math.round((sumP / visibleCount) * 100) : 0;
     const isFr = getLang() === 'fr';
     const reversingNow = scrollDirection < 0 && (isActivelyScrolling || activeFrameCount > 0);
-    const buildingNow = scrollDirection >= 0 && (isActivelyScrolling || activeFrameCount > 0);
+    const buildingNow = (isActivelyScrolling || activeFrameCount > 0 || isHeroIntroActive);
 
     let mode = 'settled';
     let label = isFr ? 'ASSEMBLÉ ●' : 'SETTLED ●';
@@ -713,6 +722,227 @@
     }
     hudCountEl.textContent = `${String(builtCount).padStart(2, '0')} / ${String(visibleCount).padStart(2, '0')}`;
     hudPctEl.textContent = `${totalPct}%`;
+  }
+
+  /* ------------------------------------------------------------------------
+     HERO INITIAL LIVE CONSTRUCTION CHOREOGRAPHY
+     On refresh / load at scrollY < 70, cursors visibly type & assemble Hero.
+     ------------------------------------------------------------------------ */
+  function initHeroIntroChoreography() {
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    if (scrollY >= 70) {
+      isHeroIntroActive = false;
+      return;
+    }
+
+    const nameEl = document.querySelector('.hero-name-block');
+    const roleTextEl = document.getElementById('role-flip-text');
+    const portraitStageEl = document.getElementById('portrait-stage');
+    const card1 = document.querySelector('.hero-right .hud-card:nth-child(1)');
+    const card2 = document.querySelector('.hero-right .hud-card:nth-child(2)');
+    const card3 = document.querySelector('.hero-right .hud-card:nth-child(3)');
+    const statsRow = document.querySelector('.hero-stats-row');
+
+    if (!nameEl || !portraitStageEl) {
+      isHeroIntroActive = false;
+      return;
+    }
+
+    heroElements = {
+      nameEl,
+      nameText: nameEl.textContent.trim() || 'MATÉI.',
+      roleTextEl,
+      roleText: roleTextEl ? roleTextEl.textContent.trim() : '',
+      portraitStageEl,
+      card1,
+      card2,
+      card3,
+      statsRow
+    };
+
+    isHeroIntroActive = true;
+    heroIntroStartTs = performance.now();
+    heroIntroCleaned = false;
+  }
+
+  function cleanHeroIntro() {
+    if (heroIntroCleaned || !heroElements) return;
+    heroIntroCleaned = true;
+    isHeroIntroActive = false;
+
+    if (heroElements.nameEl) {
+      heroElements.nameEl.textContent = heroElements.nameText;
+      heroElements.nameEl.style.opacity = '';
+    }
+    if (heroElements.roleTextEl) {
+      heroElements.roleTextEl.textContent = heroElements.roleText;
+      heroElements.roleTextEl.style.opacity = '';
+    }
+    if (heroElements.card1) {
+      heroElements.card1.style.clipPath = '';
+      heroElements.card1.style.opacity = '';
+    }
+    if (heroElements.card2) {
+      heroElements.card2.style.clipPath = '';
+      heroElements.card2.style.opacity = '';
+    }
+    if (heroElements.card3) {
+      heroElements.card3.style.clipPath = '';
+      heroElements.card3.style.opacity = '';
+    }
+  }
+
+  function getHeroIntroOperations(now) {
+    if (!heroElements || !isHeroIntroActive) return null;
+    const t = (now - heroIntroStartTs) / 1000; // elapsed seconds
+
+    if (t > 2.6 || (window.scrollY || 0) > 60) {
+      cleanHeroIntro();
+      return null;
+    }
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const frameTasks = [];
+    const cursorTargets = [];
+
+    // 1. Name "MATÉI." (0.05s -> 0.85s) by Cursor 0 (Matéi, Crimson)
+    if (t >= 0.05 && t <= 0.95 && heroElements.nameEl) {
+      const p = smoothstep(clamp01((t - 0.05) / 0.80));
+      const r = heroElements.nameEl.getBoundingClientRect();
+      const chars = Math.max(1, Math.min(heroElements.nameText.length, Math.round(heroElements.nameText.length * p)));
+      heroElements.nameEl.textContent = heroElements.nameText.slice(0, chars);
+
+      frameTasks.push({
+        key: 'hero_name_box',
+        kind: 'text',
+        left: r.left - 4,
+        top: r.top - 2,
+        width: r.width + 8,
+        height: r.height + 4,
+        dimW: Math.round(r.width),
+        dimH: Math.round(r.height),
+        cursorX: r.left + r.width * p + 4,
+        cursorY: r.bottom - 4,
+        crosshair: false,
+        score: -0.95
+      });
+      cursorTargets.push({
+        key: 'hero_name_box_drag',
+        x: r.left + r.width * p + 4,
+        y: r.bottom - 4,
+        crosshair: false,
+        cursorIdx: 0
+      });
+    }
+
+    // 2. Role Text (0.30s -> 1.25s) by Cursor 1 (Kai, Sky Blue)
+    if (t >= 0.30 && t <= 1.35 && heroElements.roleTextEl) {
+      const p = smoothstep(clamp01((t - 0.30) / 0.95));
+      const r = heroElements.roleTextEl.getBoundingClientRect();
+      const chars = Math.max(1, Math.min(heroElements.roleText.length, Math.round(heroElements.roleText.length * p)));
+      heroElements.roleTextEl.textContent = heroElements.roleText.slice(0, chars);
+
+      frameTasks.push({
+        key: 'hero_role_box',
+        kind: 'text',
+        left: r.left - 4,
+        top: r.top - 2,
+        width: r.width + 8,
+        height: r.height + 4,
+        dimW: Math.round(r.width * p),
+        dimH: Math.round(r.height),
+        cursorX: r.left + r.width * p + 3,
+        cursorY: r.bottom - 2,
+        crosshair: false,
+        score: -0.85
+      });
+      cursorTargets.push({
+        key: 'hero_role_box_drag',
+        x: r.left + r.width * p + 3,
+        y: r.bottom - 2,
+        crosshair: false,
+        cursorIdx: 1
+      });
+    }
+
+    // 3. Portrait Stage Wireframe (0.50s -> 1.85s) by Cursor 3 (Architect, Amber)
+    if (t >= 0.50 && t <= 1.95 && heroElements.portraitStageEl) {
+      const p = smoothstep(clamp01((t - 0.50) / 1.35));
+      const r = heroElements.portraitStageEl.getBoundingClientRect();
+      const curW = Math.max(40, r.width * (0.08 + 0.92 * p));
+      const curH = Math.max(40, r.height * (0.08 + 0.92 * p));
+
+      frameTasks.push({
+        key: 'hero_portrait_wire',
+        kind: 'wireframe',
+        left: r.left,
+        top: r.top,
+        width: curW,
+        height: curH,
+        dimW: Math.round(curW),
+        dimH: Math.round(curH),
+        cursorX: r.left + curW,
+        cursorY: r.top + curH,
+        crosshair: p < 0.85,
+        score: -0.90
+      });
+      cursorTargets.push({
+        key: 'hero_portrait_wire_drag',
+        x: r.left + curW,
+        y: r.top + curH,
+        crosshair: p < 0.85,
+        cursorIdx: 3
+      });
+    }
+
+    // 4. Hero Right Cards (0.85s -> 2.45s) by Cursors 2 (AppSec), 4 (Design), 5 (Kernel)
+    const cards = [
+      { el: heroElements.card1, start: 0.85, end: 1.85, cIdx: 2 },
+      { el: heroElements.card2, start: 1.15, end: 2.15, cIdx: 4 },
+      { el: heroElements.card3, start: 1.45, end: 2.45, cIdx: 5 }
+    ];
+
+    cards.forEach((cd, idx) => {
+      if (t >= cd.start && t <= cd.end + 0.1 && cd.el) {
+        const p = smoothstep(clamp01((t - cd.start) / (cd.end - cd.start)));
+        const r = cd.el.getBoundingClientRect();
+        const curW = Math.max(30, r.width * p);
+        const curH = Math.max(20, r.height * p);
+
+        const rightPct = ((1 - p) * 100).toFixed(1);
+        const bottomPct = ((1 - p) * 100).toFixed(1);
+        cd.el.style.clipPath = `inset(0 ${rightPct}% ${bottomPct}% 0)`;
+        cd.el.style.opacity = Math.min(1, p * 1.5).toFixed(2);
+
+        frameTasks.push({
+          key: `hero_card_${idx}`,
+          kind: 'clip',
+          left: r.left,
+          top: r.top,
+          width: curW,
+          height: curH,
+          dimW: Math.round(curW),
+          dimH: Math.round(curH),
+          cursorX: r.left + curW,
+          cursorY: r.top + curH,
+          crosshair: false,
+          score: -0.75 + idx * 0.05
+        });
+        cursorTargets.push({
+          key: `hero_card_${idx}_drag`,
+          x: r.left + curW,
+          y: r.top + curH,
+          crosshair: false,
+          cursorIdx: cd.cIdx
+        });
+      }
+    });
+
+    return {
+      frames: frameTasks.slice(0, MAX_FRAMES),
+      cursors: cursorTargets.slice(0, MAX_CURSORS)
+    };
   }
 
   function collectActiveOperations() {
@@ -892,7 +1122,7 @@
     };
   }
 
-  function updateOverlayPool(dt) {
+  function updateOverlayPool(dt, now) {
     if (!overlayEl) return false;
     if (window.innerWidth <= 660) {
       overlayEl.style.opacity = '0';
@@ -901,12 +1131,20 @@
     overlayEl.style.opacity = '1';
 
     const scrollY = window.scrollY || window.pageYOffset || 0;
-    const ops = scrollY < 16 ? { frames: [], cursors: [] } : collectActiveOperations();
+    let ops = null;
+
+    if (isHeroIntroActive) {
+      ops = getHeroIntroOperations(now);
+    }
+    if (!ops) {
+      ops = collectActiveOperations();
+    }
+
     const reversingVisual = scrollDirection < 0 && (isActivelyScrolling || ops.frames.length > 0);
 
     updateHudPill(scrollY, ops.frames.length);
 
-    let animating = false;
+    let animating = true; // Always maintain smooth organic drifting for idle cursors
     const posLerp = 1 - Math.exp(-dt * 24);
     const glideLerp = 1 - Math.exp(-dt * 15);
     const fadeLerp = 1 - Math.exp(-dt * 16);
@@ -915,7 +1153,7 @@
     if (guideXEl && guideYEl) {
       if (ops.frames.length > 0) {
         const lead = ops.frames[0];
-        const gAlpha = isActivelyScrolling ? '0.82' : '0.45';
+        const gAlpha = isActivelyScrolling || isHeroIntroActive ? '0.82' : '0.45';
         guideXEl.style.opacity = gAlpha;
         guideYEl.style.opacity = gAlpha;
         guideXEl.style.transform = `translate3d(0, ${lead.top.toFixed(1)}px, 0)`;
@@ -926,6 +1164,7 @@
       }
     }
 
+    // 1. Assign Frames
     const frameAssign = new Array(framePool.length).fill(null);
     const usedFrames = new Set();
 
@@ -954,11 +1193,6 @@
       const targetAlpha = ft ? 1 : 0;
 
       slot.alpha += (targetAlpha - slot.alpha) * fadeLerp;
-      if (Math.abs(targetAlpha - slot.alpha) > 0.004) {
-        animating = true;
-      } else {
-        slot.alpha = targetAlpha;
-      }
       slot.el.style.opacity = slot.alpha.toFixed(3);
 
       if (ft) {
@@ -980,14 +1214,6 @@
           slot.y += (ft.top - slot.y) * k;
           slot.w += (ft.width - slot.w) * k;
           slot.h += (ft.height - slot.h) * k;
-          if (
-            Math.abs(ft.left - slot.x) > 0.35 ||
-            Math.abs(ft.top - slot.y) > 0.35 ||
-            Math.abs(ft.width - slot.w) > 0.35 ||
-            Math.abs(ft.height - slot.h) > 0.35
-          ) {
-            animating = true;
-          }
         }
 
         slot.el.style.transform = `translate3d(${slot.x.toFixed(1)}px, ${slot.y.toFixed(1)}px, 0)`;
@@ -1001,10 +1227,18 @@
       }
     }
 
+    // 2. Assign Cursors: Active Construction vs Floating Companion Patrol
     const curAssign = new Array(cursorPool.length).fill(null);
     const usedCursors = new Set();
 
     ops.cursors.forEach((ct, idx) => {
+      // If task explicitly specifies cursor index (e.g. Hero build choreography)
+      if (typeof ct.cursorIdx === 'number' && !curAssign[ct.cursorIdx]) {
+        curAssign[ct.cursorIdx] = ct;
+        usedCursors.add(idx);
+        return;
+      }
+
       const matchIdx = cursorPool.findIndex(
         (c, cIdx) => !curAssign[cIdx] && c.taskKey === ct.key
       );
@@ -1039,20 +1273,22 @@
       }
     });
 
+    // 3. Update Every Cursor: NEVER DISAPPEAR (Always float in viewport & follow user on scroll-up!)
+    const tSec = now * 0.001;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
     for (let i = 0; i < cursorPool.length; i++) {
       const c = cursorPool[i];
       const ct = curAssign[i];
-      const targetAlpha = ct ? 1 : 0;
-
-      c.alpha += (targetAlpha - c.alpha) * fadeLerp;
-      if (Math.abs(targetAlpha - c.alpha) > 0.004) {
-        animating = true;
-      } else {
-        c.alpha = targetAlpha;
-      }
-      c.el.style.opacity = c.alpha.toFixed(3);
+      const prof = c.prof;
 
       if (ct) {
+        // ACTIVE CONSTRUCTION / DECONSTRUCTION MODE
+        const targetAlpha = 1.0;
+        c.alpha += (targetAlpha - c.alpha) * fadeLerp;
+        c.el.style.opacity = c.alpha.toFixed(3);
+
         const sameTask = c.taskKey === ct.key;
         c.taskKey = ct.key;
         if (c.crosshair !== ct.crosshair) {
@@ -1064,27 +1300,54 @@
         const ty = ct.crosshair ? ct.y - 9 : ct.y - 2;
 
         if (!c.inited) {
-          c.x = tx + (i % 2 === 0 ? -36 : 36);
-          c.y = ty + 28;
+          c.x = tx;
+          c.y = ty;
           c.inited = true;
-          animating = true;
         } else {
           const k = sameTask ? posLerp : glideLerp;
           c.x += (tx - c.x) * k;
           c.y += (ty - c.y) * k;
-          if (Math.abs(tx - c.x) > 0.35 || Math.abs(ty - c.y) > 0.35) {
-            animating = true;
-          }
         }
 
         c.el.style.transform = `translate3d(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px, 0)`;
-      } else if (c.alpha <= 0.01) {
+      } else {
+        // FLOATING COMPANION & VIEWPORT ESCORT PATROL ("les curseurs te suivent")
         c.taskKey = null;
-        c.inited = false;
+        if (c.crosshair) {
+          c.crosshair = false;
+          c.el.classList.remove('is-crosshair');
+        }
+
+        // Cursors maintain a vibrant, subtle presence (0.86 - 0.94)
+        const targetAlpha = 0.90;
+        c.alpha += (targetAlpha - c.alpha) * fadeLerp;
+        c.el.style.opacity = c.alpha.toFixed(3);
+
+        // Organic dual harmonic Lissajous drift
+        const driftX = Math.sin(tSec * prof.fX + prof.pX) * 26;
+        const driftY = Math.cos(tSec * prof.fY + prof.pY) * 20;
+
+        // Inertial follow on scroll ("si tu remontes, les curseurs te suivent")
+        const followOffsetY = Math.max(-48, Math.min(48, scrollVelocity * 0.12));
+
+        const targetX = Math.max(16, Math.min(vw - 85, vw * prof.anchorX + driftX));
+        const targetY = Math.max(55, Math.min(vh - 45, vh * prof.anchorY + driftY + followOffsetY));
+
+        if (!c.inited) {
+          c.x = targetX;
+          c.y = targetY;
+          c.inited = true;
+        } else {
+          // Smooth fluid tracking with slight spring inertia
+          c.x += (targetX - c.x) * (1 - Math.exp(-dt * 6.8));
+          c.y += (targetY - c.y) * (1 - Math.exp(-dt * 6.8));
+        }
+
+        c.el.style.transform = `translate3d(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px, 0)`;
       }
     }
 
-    return animating;
+    return true;
   }
 
   function tick(now) {
@@ -1093,7 +1356,6 @@
 
     const scrollY = window.scrollY || window.pageYOffset || 0;
     const scrubLerp = 1 - Math.exp(-dt * 16);
-    let modulesMoving = false;
 
     applyHeroUpperParallax(scrollY);
 
@@ -1108,7 +1370,6 @@
 
       if (Math.abs(diff) > 0.0009) {
         m.currentP += diff * scrubLerp;
-        modulesMoving = true;
       } else {
         m.currentP = targetP;
       }
@@ -1117,14 +1378,10 @@
     }
 
     applySectionGates();
-    const overlayMoving = updateOverlayPool(dt);
+    updateOverlayPool(dt, now);
 
-    if (modulesMoving || overlayMoving) {
-      rafId = window.requestAnimationFrame(tick);
-    } else {
-      rafId = null;
-      lastTs = 0;
-    }
+    // Keep the animation loop continuously running at 60fps for floating cursors
+    rafId = window.requestAnimationFrame(tick);
   }
 
   function requestTick() {
@@ -1222,6 +1479,8 @@
 
     const initScrollY = window.scrollY || window.pageYOffset || 0;
     prevScrollY = initScrollY;
+    prevScrollTs = performance.now();
+
     modules.forEach((m) => {
       const span = Math.max(1, m.endScroll - m.startScroll);
       const raw = clamp01((initScrollY - m.startScroll) / span);
@@ -1230,24 +1489,37 @@
     });
     applySectionGates();
     applyHeroUpperParallax(initScrollY);
-    updateOverlayPool(0.016);
+
+    initHeroIntroChoreography();
+    requestTick();
 
     window.addEventListener(
       'scroll',
       function () {
+        const now = performance.now();
+        const dt = Math.max(0.005, (now - prevScrollTs) / 1000);
+        prevScrollTs = now;
+
         const sy = window.scrollY || window.pageYOffset || 0;
         const delta = sy - prevScrollY;
+        scrollVelocity = delta / dt;
+
         if (Math.abs(delta) > 1.5) {
           scrollDirection = delta < 0 ? -1 : 1;
         }
+
+        // If user scrolls during hero intro, finalize early to ensure zero jank
+        if (isHeroIntroActive && Math.abs(sy) > 30) {
+          cleanHeroIntro();
+        }
+
         prevScrollY = sy;
         isActivelyScrolling = true;
         window.clearTimeout(scrollMotionTimer);
         scrollMotionTimer = window.setTimeout(function () {
           isActivelyScrolling = false;
-          requestTick();
-        }, 220);
-        requestTick();
+          scrollVelocity = 0;
+        }, 200);
       },
       { passive: true }
     );
@@ -1256,7 +1528,6 @@
       'resize',
       function () {
         measureModules();
-        requestTick();
       },
       { passive: true }
     );
@@ -1265,7 +1536,6 @@
       btn.addEventListener('click', function () {
         window.setTimeout(function () {
           measureModules();
-          requestTick();
         }, 35);
       });
     });

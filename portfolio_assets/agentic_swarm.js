@@ -1,6 +1,7 @@
-/* Legacy V1/V2 cache-buster shim: immediately upgrades stale tabs to V11 */
+// Auto-redirect shim for cached older versions of portfolio.html
 (function () {
-  if (typeof window !== 'undefined' && window.location && !window.location.search.includes('v=11')) {
-    window.location.replace('portfolio.html?v=11');
+  if (!window.location.search.includes('v=12')) {
+    var sep = window.location.search ? '&' : '?';
+    window.location.replace('portfolio.html' + window.location.search + sep + 'v=12');
   }
 })();
