@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matéi de Saint Léger — Systems Architect &amp; Autonomous AI Operator</title>
-  <meta name="description" content="Matéi de Saint Léger (@Mateidslx) — Architecting 24/7 autonomous multi-agent ecosystems, open-source security hardening (BasedHardware/omi), quantitative execution engines, and deterministic C99/Linux infrastructure." />
+  <title>Matéi de Saint Léger — Alternance BUT 2 Informatique | Python, TypeScript, C99 &amp; Architecture 3D</title>
+  <meta name="description" content="Portfolio interactif de Matéi de Saint Léger (@Mateidslx) — Étudiant en BUT Informatique (IUT de Bayonne / Anglet), candidat en alternance 2e année, 46 PRs open-source fusionnées, stages HUPI &amp; Marra, 2 mois d'immersion en Angleterre." />
   <meta name="theme-color" content="#050505" />
 
   <!-- OpenGraph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Matéi de Saint Léger — Systems Architect &amp; Autonomous Operator" />
-  <meta property="og:description" content="7-Layer Sovereign Autonomous AI Ecosystem, 36-Agent Swarm Orchestration, Open-Source Security Engineering &amp; Quantitative Systems." />
+  <meta property="og:title" content="Matéi de Saint Léger — Développeur Python, TypeScript, C99 &amp; Sécurité" />
+  <meta property="og:description" content="46 PRs open-source fusionnées (Twenty 40k★, Omi 8k★), vue éclatée 3D interactive, stages HUPI/Marra, immersion UK Brighton/Bournemouth. Candidat Alternance BUT 2." />
   <meta property="og:image" content="portfolio_assets/matei-cutout.png" />
 
   <link rel="icon" type="image/svg+xml" href="portfolio_assets/favicon-ms.svg" />
@@ -20,16 +20,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="portfolio_assets/noir_crimson.css" />
+  <link rel="stylesheet" href="portfolio_assets/noir_crimson.css?v=11" />
 
-  <!-- Structured Person Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Matéi de Saint Léger",
     "alternateName": "Mateidslx",
-    "jobTitle": "Systems Architect & Autonomous AI Operator",
+    "jobTitle": "Software & Systems Developer",
+    "alumniOf": [
+      "IUT de Bayonne et du Pays Basque (UPPA)",
+      "Lycée Polyvalent Cantau (Anglet)"
+    ],
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Biarritz / Anglet",
@@ -43,30 +46,47 @@
 </head>
 <body>
 
-  <!-- FLOATING CENTERED GLASS PILL DOCK -->
+  <!-- KINETIC CRIMSON SCROLL PROGRESS HAIRLINE -->
+  <div id="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- TACTILE HANGING PULL-CORD THEME SWITCH (NOIR STUDIO <-> WARM PAPER) -->
+  <button type="button" class="pull-cord-switch" id="pull-cord-btn"
+          title="Tirer la cordelette : Mode Noir / Mode Papier Clair"
+          aria-label="Basculer le thème clair ou sombre">
+    <span class="pull-cord-line" aria-hidden="true"></span>
+    <span class="pull-cord-knob" aria-hidden="true"></span>
+    <span class="pull-cord-hint" data-fr="Thème" data-en="Theme">Thème</span>
+  </button>
+
+  <!-- FLOATING CENTERED NAVIGATION DOCK -->
   <header class="nav-dock-wrap">
-    <nav class="nav-dock" aria-label="Primary Navigation">
+    <nav class="nav-dock" aria-label="Navigation principale">
       <a href="#top" class="dock-brand">
         <span class="dock-monogram">MS</span>
         <span class="dock-brand-name">MATÉI.</span>
       </a>
 
       <div class="dock-links">
-        <a href="#about" class="dock-link" data-en="About" data-fr="Profil">About</a>
-        <a href="#flagships" class="dock-link" data-en="Flagships" data-fr="Systèmes">Flagships</a>
-        <a href="#matrix" class="dock-link" data-en="Matrix" data-fr="Matrice">Matrix</a>
-        <a href="#contact" class="dock-link" data-en="Contact" data-fr="Contact">Contact</a>
+        <a href="#projects" class="dock-link" data-fr="Projets" data-en="Projects">Projets</a>
+        <a href="#exploded-architecture" class="dock-link" data-fr="Vue 3D" data-en="3D Stack">Vue 3D</a>
+        <a href="#domains" class="dock-link" data-fr="Compétences" data-en="Skills">Compétences</a>
+        <a href="#timeline" class="dock-link" data-fr="Parcours" data-en="Timeline">Parcours</a>
+        <a href="#experience-dna" class="dock-link" data-fr="Profil" data-en="Profile">Profil</a>
+        <a href="#contact" class="dock-link" data-fr="Contact" data-en="Contact">Contact</a>
       </div>
 
       <span class="dock-divider" aria-hidden="true"></span>
 
       <div class="dock-right">
-        <button type="button" class="lang-toggle" id="lang-toggle-btn" title="Switch language EN / FR">EN / FR</button>
+        <button type="button" class="cmdk-trigger" id="cmdk-open-btn" title="Palette rapide (Ctrl+K / ⌘K)">⌘K</button>
+        <button type="button" class="lang-toggle" id="lang-toggle-btn" title="Changer de langue FR / EN">FR / EN</button>
+        <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" download class="lang-toggle cv-dock-btn" id="dock-cv-link"
+           data-fr="CV PDF ↓" data-en="CV PDF ↓" title="Télécharger mon CV en PDF">CV PDF ↓</a>
         <span class="dock-status">
           <span class="status-dot" aria-hidden="true"></span>
-          <span data-en="Available" data-fr="Disponible">Available</span>
+          <span id="dock-local-time">Biarritz</span>
         </span>
-        <a href="#contact" class="dock-cta" data-en="DISPATCH →" data-fr="CONTACT →">DISPATCH →</a>
+        <a href="#contact" class="dock-cta" data-fr="ME CONTACTER →" data-en="GET IN TOUCH →">ME CONTACTER →</a>
       </div>
     </nav>
   </header>
@@ -74,638 +94,1057 @@
   <main class="page-shell" id="top">
 
     <!-- ====================================================================
-         HERO STAGE — HOLLOW CRIMSON WORDMARK + 3-COLUMN ARCHITECTURE
+         HERO STAGE — EDITORIAL WORDMARK + ROLE FLIP-CARD + PORTRAIT ABILITY CARD
          ==================================================================== -->
-    <section class="hero-section" aria-label="Introduction">
+    <section class="hero-section" aria-label="Présentation">
       <canvas id="op-art-canvas" aria-hidden="true"></canvas>
 
       <div class="container hero-inner">
-        <!-- Full-Width Hollow Crimson SVG Wordmark -->
         <div class="hero-wordmark-wrap" aria-hidden="true">
           <svg class="hero-wordmark-svg" viewBox="0 0 1240 190" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="wordmark-crimson-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ef4444" stop-opacity="0.92" />
+                <stop offset="62%" stop-color="#ef4444" stop-opacity="0.42" />
+                <stop offset="100%" stop-color="#ef4444" stop-opacity="0.06" />
+              </linearGradient>
+            </defs>
             <text x="50%" y="168" text-anchor="middle" textLength="1220" lengthAdjust="spacing">PORTFOLIO</text>
           </svg>
         </div>
 
         <div class="hero-stage-grid">
-          <!-- Left Flank: Identity, Bio, Actions, Sovereign Metrics -->
+          <!-- Left Flank: Greeting, Name, Tactile Flip-Pad Role Switcher, Honest Bio, CTAs -->
           <div class="hero-left">
-            <span class="hero-script" data-en="Hello, I'm" data-fr="Bonjour, je suis">Hello, I'm</span>
+            <span class="hero-script" data-fr="Salut, moi c'est" data-en="Hi, I'm">Salut, moi c'est</span>
             <h1 class="hero-name-block">MATÉI.</h1>
 
-            <div class="hero-role-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              <span data-en="SYSTEMS ARCHITECT &amp; AUTONOMOUS OPERATOR" data-fr="ARCHITECTE SYSTÈMES &amp; OPÉRATEUR AUTONOME">SYSTEMS ARCHITECT &amp; AUTONOMOUS OPERATOR</span>
+            <!-- Tactile Spiral Role Flip-Card -->
+            <div class="role-flip-wrap">
+              <span class="role-flip-prefix" data-fr="Je suis" data-en="I am a">Je suis</span>
+              <button type="button" class="role-flip-pad" id="role-flip-btn" title="Cliquer pour faire défiler mes rôles">
+                <span class="flip-rings" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </span>
+                <span class="role-flip-body">
+                  <span class="role-flip-text" id="role-flip-text">Développeur Python, TypeScript &amp; C99</span>
+                  <span class="role-flip-index" id="role-flip-index">01 / 04 ↻</span>
+                </span>
+              </button>
             </div>
 
             <p class="hero-bio" data-html="true"
-               data-en="Architecting <strong>24/7 autonomous cognitive ecosystems</strong>, multi-agent swarms, and <strong>deterministic execution engines</strong> from first principles — zero bloat, verified in physical reality."
-               data-fr="Conception d’<strong>écosystèmes cognitifs autonomes 24/7</strong>, d’essaims multi-agents et de <strong>moteurs d’exécution déterministes</strong> depuis les premiers principes — zéro superflu, vérifié dans le réel.">
-              Architecting <strong>24/7 autonomous cognitive ecosystems</strong>, multi-agent swarms, and <strong>deterministic execution engines</strong> from first principles — zero bloat, verified in physical reality.
+               data-fr="Étudiant en <strong>BUT Informatique à l’IUT de Bayonne et du Pays Basque (Anglet)</strong>, je vise une <strong>alternance en 2e année (Parcours A — Réalisation d’applications &amp; outils IA)</strong> sur la <strong>Côte Basque (BAB / Bidart), en hybride ou remote</strong>. Déjà auteur de <strong>46 PRs fusionnées en open-source</strong> (Twenty 40k★, Omi 8k★), enrichi par <strong>2 stages (HUPI &amp; Marra)</strong> et <strong>2 mois d’immersion en Angleterre</strong>."
+               data-en="Computer Science undergraduate at <strong>IUT de Bayonne et du Pays Basque (Anglet, France)</strong>, seeking a <strong>Year-2 apprenticeship (Track A — Application Engineering &amp; AI Tooling)</strong> on the <strong>Basque Coast, hybrid, or 100% remote</strong>. Author of <strong>46 merged open-source PRs</strong> (Twenty 40k★, Omi 8k★), backed by <strong>2 industry internships (HUPI &amp; Marra)</strong> and <strong>2 months of UK language immersion</strong>.">
+              Étudiant en <strong>BUT Informatique à l’IUT de Bayonne et du Pays Basque (Anglet)</strong>, je vise une <strong>alternance en 2e année (Parcours A — Réalisation d’applications &amp; outils IA)</strong> sur la <strong>Côte Basque (BAB / Bidart), en hybride ou remote</strong>. Déjà auteur de <strong>46 PRs fusionnées en open-source</strong> (Twenty 40k★, Omi 8k★), enrichi par <strong>2 stages (HUPI &amp; Marra)</strong> et <strong>2 mois d’immersion en Angleterre</strong>.
             </p>
 
             <div class="hero-cta-group">
-              <a href="#contact" class="btn-dispatch-link" data-en="INITIATE DISPATCH →" data-fr="INITIER UN ÉCHANGE →">INITIATE DISPATCH →</a>
-              <a href="#flagships" class="btn-explore-box" data-en="EXPLORE ARCHITECTURE" data-fr="EXPLORER L’ARCHITECTURE">EXPLORE ARCHITECTURE</a>
+              <a href="#projects" class="btn-primary-crimson magnetic-btn" data-fr="VOIR MES PROJETS →" data-en="VIEW MY WORK →">VOIR MES PROJETS →</a>
+              <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" download class="btn-explore-box magnetic-btn" id="hero-cv-link"
+                 data-fr="TÉLÉCHARGER MON CV (PDF) ↓" data-en="DOWNLOAD RESUME (PDF) ↓">TÉLÉCHARGER MON CV (PDF) ↓</a>
             </div>
 
             <div class="hero-stats-row">
               <div class="hero-stat-item">
-                <span class="hero-stat-val accent">36</span>
-                <span class="hero-stat-label" data-en="Swarm Agents" data-fr="Agents Autonomes">Swarm Agents</span>
+                <span class="hero-stat-val accent">46 PRs</span>
+                <span class="hero-stat-label" data-fr="Fusionnées en Open-Source" data-en="Merged in Production OSS">Fusionnées en Open-Source</span>
               </div>
               <div class="hero-stat-item">
-                <span class="hero-stat-val">7-Layer</span>
-                <span class="hero-stat-label" data-en="Core Stack" data-fr="Pile Souveraine">Core Stack</span>
+                <span class="hero-stat-val" data-fr="Alternance" data-en="Co-op 2026">Alternance</span>
+                <span class="hero-stat-label" data-fr="Cible : 2e année BUT Info" data-en="Target: Year-2 CS Degree">Cible : 2e année BUT Info</span>
               </div>
               <div class="hero-stat-item">
-                <span class="hero-stat-val">24/7</span>
-                <span class="hero-stat-label" data-en="Sovereign Cloud" data-fr="Cloud Souverain">Sovereign Cloud</span>
+                <span class="hero-stat-val">2 Mois UK</span>
+                <span class="hero-stat-label" data-fr="Brighton &amp; Bournemouth" data-en="Brighton &amp; Bournemouth">Brighton &amp; Bournemouth</span>
               </div>
             </div>
           </div>
 
-          <!-- Center Stage: Authentic Noir & Crimson Cutout Portrait -->
-          <div class="portrait-stage">
+          <!-- Center Stage: Authentic Cutout Portrait + Interactive Ability Card Flip -->
+          <div class="portrait-stage" id="portrait-stage">
+            <span class="portrait-coord-tag" aria-hidden="true">43.48°N · 1.55°W // CÔTE BASQUE</span>
             <div class="portrait-wireframe" aria-hidden="true"></div>
             <div class="portrait-crimson-panel" aria-hidden="true"></div>
             <picture>
-              <source srcset="portfolio_assets/matei-cutout.webp" type="image/webp" />
+              <source srcset="portfolio_assets/matei-cutout.webp?v=3" type="image/webp" />
               <img
-                src="portfolio_assets/matei-cutout.png"
-                alt="Matéi de Saint Léger — Editorial Noir Portrait"
+                src="portfolio_assets/matei-cutout.png?v=3"
+                alt="Matéi de Saint Léger — Portrait"
                 class="portrait-cutout-img"
                 width="760"
                 height="1018"
                 fetchpriority="high"
               />
             </picture>
-            <div class="portrait-badge">
-              <span class="status-dot" aria-hidden="true"></span>
-              <span data-en="SOVEREIGN SILICON ACTIVE" data-fr="SILICIUM SOUVERAIN ACTIF">SOVEREIGN SILICON ACTIVE</span>
+
+            <!-- Interactive Ability Card Overlay -->
+            <div class="ability-card-sheet" id="ability-card-sheet" aria-hidden="true">
+              <div class="ability-sheet-head">
+                <span data-fr="FICHE TECHNIQUE // MATÉI" data-en="ABILITY CARD // MATÉI">FICHE TECHNIQUE // MATÉI</span>
+                <button type="button" class="ability-close-btn" id="ability-close-btn" aria-label="Fermer">×</button>
+              </div>
+              <div class="ability-bars">
+                <div class="ability-row">
+                  <span>Python / FastAPI / MCP</span>
+                  <div class="ability-track"><i style="width:93%"></i></div>
+                </div>
+                <div class="ability-row">
+                  <span>TypeScript / React / NestJS</span>
+                  <div class="ability-track"><i style="width:88%"></i></div>
+                </div>
+                <div class="ability-row">
+                  <span data-fr="Algorithmique &amp; ISO C99 / C++" data-en="Algorithms &amp; ISO C99 / C++">Algorithmique &amp; ISO C99 / C++</span>
+                  <div class="ability-track"><i style="width:87%"></i></div>
+                </div>
+                <div class="ability-row">
+                  <span>Linux / PostgreSQL / AppSec</span>
+                  <div class="ability-track"><i style="width:89%"></i></div>
+                </div>
+              </div>
+              <div class="ability-meta-foot">
+                <span data-fr="Candidat Alternance BUT 2" data-en="Seeking Year-2 CS Co-op">Candidat Alternance BUT 2</span>
+                <span>@Mateidslx</span>
+              </div>
             </div>
+
+            <button type="button" class="portrait-badge" id="ability-toggle-btn">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span id="ability-btn-label" data-fr="MA FICHE COMPÉTENCES ↗" data-en="MY ABILITY CARD ↗">MA FICHE COMPÉTENCES ↗</span>
+            </button>
           </div>
 
-          <!-- Right Flank: Telemetry HUD Stack & Tech Signatures -->
+          <!-- Right Flank: Concrete Verifiable Highlights -->
           <div class="hero-right">
-            <article class="hud-card">
+            <a href="#project-oss" class="hud-card">
               <div class="hud-card-meta">
                 <span class="hud-card-index">01.</span>
-                <span>RUNTIME</span>
+                <span>46 PRS OPEN-SOURCE</span>
               </div>
-              <h2 class="hud-card-title" data-en="Kai Autonomous Core" data-fr="Noyau Autonome Kai">Kai Autonomous Core</h2>
+              <h2 class="hud-card-title">Twenty (40k★) &amp; Omi (8k★)</h2>
               <p class="hud-card-desc"
-                 data-en="36 specialized agents + 4-tier hierarchical memory + 19 Ubuntu systemd daemons."
-                 data-fr="36 agents spécialisés + mémoire hiérarchique 4-niveaux + 19 démons Ubuntu systemd.">
-                36 specialized agents + 4-tier hierarchical memory + 19 Ubuntu systemd daemons.
+                 data-fr="Correctifs sécurité, RBAC, concurrence et suites de tests fusionnés en production sur Twenty CRM, Omi et FinTech TS."
+                 data-en="Security, RBAC permissions, concurrency fixes, and test suites merged upstream into Twenty CRM, Omi, and TS FinTech.">
+                Correctifs sécurité, RBAC, concurrence et suites de tests fusionnés en production sur Twenty CRM, Omi et FinTech TS.
               </p>
-            </article>
+            </a>
 
-            <article class="hud-card">
+            <a href="#exploded-architecture" class="hud-card">
               <div class="hud-card-meta">
                 <span class="hud-card-index">02.</span>
-                <span>OPEN SOURCE</span>
+                <span data-fr="VUE ÉCLATÉE 3D" data-en="3D EXPLODED STACK">VUE ÉCLATÉE 3D</span>
               </div>
-              <h2 class="hud-card-title">BasedHardware / Omi</h2>
+              <h2 class="hud-card-title" data-fr="Architecture 6 Couches Interactive" data-en="Interactive 6-Layer 3D Stack">Architecture 6 Couches Interactive</h2>
               <p class="hud-card-desc"
-                 data-en="7 merged production security &amp; concurrency PRs across Python/FastAPI &amp; CLI."
-                 data-fr="7 PRs de sécurité et concurrence fusionnées en production (Python/FastAPI &amp; CLI).">
-                7 merged production security &amp; concurrency PRs across Python/FastAPI &amp; CLI.
+                 data-fr="Dissociation 3D temps réel avec physique de ressort : de l’interface 60 fps jusqu’au noyau Linux, C99 et Valgrind."
+                 data-en="Real-time spring-damped 3D dissociation from 60fps UI &amp; MCP servers down to Linux, ISO C99, and Valgrind.">
+                Dissociation 3D temps réel avec physique de ressort : de l’interface 60 fps jusqu’au noyau Linux, C99 et Valgrind.
               </p>
-            </article>
+            </a>
 
-            <article class="hud-card">
+            <a href="#timeline" class="hud-card">
               <div class="hud-card-meta">
                 <span class="hud-card-index">03.</span>
-                <span>EXECUTION</span>
+                <span data-fr="PARCOURS 2023—2026" data-en="JOURNEY 2023—2026">PARCOURS 2023—2026</span>
               </div>
-              <h2 class="hud-card-title" data-en="Deterministic Engines" data-fr="Moteurs Déterministes">Deterministic Engines</h2>
+              <h2 class="hud-card-title" data-fr="IUT Anglet, HUPI, Marra &amp; UK" data-en="IUT Anglet, HUPI, Marra &amp; UK">IUT Anglet, HUPI, Marra &amp; UK</h2>
               <p class="hud-card-desc"
-                 data-en="Polymarket V150 quantitative CLOB scanner &amp; zero-leak ISO C99 architecture."
-                 data-fr="Scanner quantitatif CLOB Polymarket V150 &amp; architecture ISO C99 zéro-fuite.">
-                Polymarket V150 quantitative CLOB scanner &amp; zero-leak ISO C99 architecture.
+                 data-fr="BUT Informatique, Bac Maths &amp; NSI à Cantau, stages chez HUPI (Tech/IA) et Marra (CAO), Brighton &amp; Bournemouth."
+                 data-en="CS degree at IUT Anglet, Math &amp; CS Baccalauréat, internships at HUPI &amp; Marra, plus Brighton &amp; Bournemouth stays.">
+                BUT Informatique, Bac Maths &amp; NSI à Cantau, stages chez HUPI (Tech/IA) et Marra (CAO), Brighton &amp; Bournemouth.
               </p>
-            </article>
+            </a>
 
-            <div class="tech-tags-row" aria-label="Core Technologies">
-              <span class="tech-tag">ISO C99</span>
+            <div class="tech-tags-row" aria-label="Technologies principales">
               <span class="tech-tag">Python</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">C99 / C++</span>
               <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">SQL / 3NF</span>
-              <span class="tech-tag">Linux / Systemd</span>
-              <span class="tech-tag">Security</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Linux / MCP</span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ====================================================================
-         01.00 SEC_ABOUT — BACKGROUND & WAY OF THINKING
-         ==================================================================== -->
-    <section class="section-block" id="about">
-      <div class="container">
-        <div class="section-coord-bar">
-          <span>// 01.00 SEC_ABOUT</span>
-          <span class="section-coord-line" aria-hidden="true"></span>
-          <span class="section-coord-index">INDEX [01 / 05]</span>
-        </div>
-
-        <p class="section-eyebrow" data-en="ENGINEER PROFILE" data-fr="PROFIL D’INGÉNIEUR">ENGINEER PROFILE</p>
-        <h2 class="section-title" data-en="Background &amp; Philosophy" data-fr="Parcours &amp; Façon de Penser">Background &amp; Philosophy</h2>
-
-        <div class="about-grid">
-          <div class="glass-panel about-narrative">
-            <p data-html="true"
-               data-en="I am <strong>Matéi de Saint Léger</strong> — a systems architect and autonomous AI builder operating on the French Basque Coast (<strong>Biarritz / Anglet</strong>). My academic foundation in <strong>Computer Science (BUT Informatique, UPPA)</strong> anchors low-level C99 memory discipline, relational database modeling, and POSIX systems administration."
-               data-fr="Je suis <strong>Matéi de Saint Léger</strong> — architecte systèmes et bâtisseur d’IA autonomes basé sur la Côte Basque (<strong>Biarritz / Anglet</strong>). Ma formation universitaire en <strong>BUT Informatique (IUT de Bayonne et du Pays Basque — UPPA)</strong> ancre une discipline stricte de gestion mémoire C99, de modélisation relationnelle et d’administration Linux.">
-              I am <strong>Matéi de Saint Léger</strong> — a systems architect and autonomous AI builder operating on the French Basque Coast (<strong>Biarritz / Anglet</strong>). My academic foundation in <strong>Computer Science (BUT Informatique, UPPA)</strong> anchors low-level C99 memory discipline, relational database modeling, and POSIX systems administration.
-            </p>
-            <p data-html="true"
-               data-en="My defining engineering capabilities, however, were forged directly in live production terminals: orchestrating <strong>24/7 multi-agent Linux daemons</strong>, auditing real-world attack surfaces on major open-source repositories, and iterating through <strong>150 generations of quantitative order-book tooling</strong>. I approach software not as black-boxglue, but as the disciplined composition of invariants, memory hierarchies, and verifiable state machines."
-               data-fr="Mes capacités décisives se sont toutefois forgées directement dans le terminal en conditions réelles : orchestration de <strong>démons multi-agents Linux 24/7</strong>, audit de surfaces d’attaque open-source en production et conception de <strong>150 générations d’outils quantitatifs sur carnets d’ordres</strong>. Je conçois le logiciel non comme un assemblage de boîtes noires, mais comme une mécanique d’invariants, de hiérarchies mémoire et d’états vérifiables.">
-              My defining engineering capabilities, however, were forged directly in live production terminals: orchestrating <strong>24/7 multi-agent Linux daemons</strong>, auditing real-world attack surfaces on major open-source repositories, and iterating through <strong>150 generations of quantitative order-book tooling</strong>. I approach software not as black-box glue, but as the disciplined composition of invariants, memory hierarchies, and verifiable state machines.
-            </p>
-
-            <blockquote class="manifesto-quote"
-                        data-en="“I design and deploy autonomous systems that operate 24/7 with auditable memory, fail-closed security gates, and physical post-action verification — engineered from first principles, never assumed.”"
-                        data-fr="« Je conçois et déploie des systèmes autonomes opérant 24/7 avec mémoire auditable, barrières de sécurité fail-closed et vérification physique de chaque état — bâtis depuis les premiers principes, jamais supposés. »">
-              “I design and deploy autonomous systems that operate 24/7 with auditable memory, fail-closed security gates, and physical post-action verification — engineered from first principles, never assumed.”
-            </blockquote>
-          </div>
-
-          <div class="principles-list">
-            <article class="principle-card">
-              <span class="principle-num">01</span>
-              <div>
-                <h3 class="principle-title" data-en="Physical Ground-Truth Verification" data-fr="Vérité Terrain Physique">Physical Ground-Truth Verification</h3>
-                <p class="principle-desc"
-                   data-en="Exit code 0 is never proof. Every deployment is validated via remote SHA-256 parity, live socket probes, Valgrind heap checks, and rendered DOM inspection."
-                   data-fr="Un code retour 0 n’est jamais une preuve. Chaque déploiement est validé par parité SHA-256 distante, sonde réseau, audit Valgrind et rendu réel.">
-                  Exit code 0 is never proof. Every deployment is validated via remote SHA-256 parity, live socket probes, Valgrind heap checks, and rendered DOM inspection.
-                </p>
-              </div>
-            </article>
-
-            <article class="principle-card">
-              <span class="principle-num">02</span>
-              <div>
-                <h3 class="principle-title" data-en="Dynamic Plasticity Over Static Dogma" data-fr="Plasticité Dynamique Sans Dogme">Dynamic Plasticity Over Static Dogma</h3>
-                <p class="principle-desc"
-                   data-en="Break complex problems down to raw mechanics, confront hypotheses against live market or runtime telemetry, and refactor relentlessly without ego."
-                   data-fr="Déconstruire chaque problème jusqu’à sa mécanique brute, confronter les hypothèses à la télémétrie réelle et réarchitecturer sans ego.">
-                  Break complex problems down to raw mechanics, confront hypotheses against live market or runtime telemetry, and refactor relentlessly without ego.
-                </p>
-              </div>
-            </article>
-
-            <article class="principle-card">
-              <span class="principle-num">03</span>
-              <div>
-                <h3 class="principle-title" data-en="Fail-Closed Attack-Surface Discipline" data-fr="Discipline Sécurité Fail-Closed">Fail-Closed Attack-Surface Discipline</h3>
-                <p class="principle-desc"
-                   data-en="Untrusted inputs, race windows, and unverified agent actions default to hard rejection — eliminating XSS, CWE-209 leaks, and OAuth token races at the root."
-                   data-fr="Entrées non fiables, fenêtres de concurrence et actions non qualifiées sont bloquées par défaut — éliminant failles XSS, fuites CWE-209 et courses OAuth.">
-                  Untrusted inputs, race windows, and unverified agent actions default to hard rejection — eliminating XSS, CWE-209 leaks, and OAuth token races at the root.
-                </p>
-              </div>
-            </article>
-
-            <article class="principle-card">
-              <span class="principle-num">04</span>
-              <div>
-                <h3 class="principle-title" data-en="Architectural Clarity &amp; Zero Bloat" data-fr="Clarté Architecturale &amp; Zéro Superflu">Architectural Clarity &amp; Zero Bloat</h3>
-                <p class="principle-desc"
-                   data-en="Symmetrical Allman structure, explicit dataflow contracts, and clean-room implementations that stay readable and deterministic under pressure."
-                   data-fr="Indentation symétrique Allman, contrats de flux explicites et implémentations clean-room lisibles et déterministes sous contrainte.">
-                  Symmetrical Allman structure, explicit dataflow contracts, and clean-room implementations that stay readable and deterministic under pressure.
-                </p>
-              </div>
-            </article>
-          </div>
+        <!-- Subtle Scroll Cue -->
+        <div class="hero-scroll-strip">
+          <span data-fr="OBJECTIF : ALTERNANCE EN 2E ANNÉE DE BUT INFORMATIQUE (IUT BAYONNE / ANGLET)" data-en="OBJECTIVE: YEAR-2 COMPUTER SCIENCE APPRENTICESHIP (CO-OP — FRANCE / REMOTE)">OBJECTIF : ALTERNANCE EN 2E ANNÉE DE BUT INFORMATIQUE (IUT BAYONNE / ANGLET)</span>
+          <span class="scroll-cue-right" data-fr="DÉFILER POUR ASSEMBLER ↓" data-en="SCROLL TO CONSTRUCT ↓">DÉFILER POUR ASSEMBLER ↓</span>
         </div>
       </div>
     </section>
 
+    <!-- TUBIK VISUAL DIVIDER 01: FULL-BLEED KINETIC TELEMETRY RIBBON -->
+    <div class="tubik-divider-ribbon" aria-hidden="true">
+      <div class="tubik-ribbon-track">
+        <span>46 PRS OPEN-SOURCE FUSIONNÉES</span><i>◆</i>
+        <span>TWENTY CRM (40K★) • BASEDHARDWARE/OMI (8K★)</span><i>◆</i>
+        <span>SECURITY-SCANNER-MCP (SMITHERY &amp; GLAMA)</span><i>◆</i>
+        <span>ISO C99 • C++ • VALGRIND ZERO-LEAK</span><i>◆</i>
+        <span>STAGES HUPI (DATA/IT) &amp; MARRA (CAO)</span><i>◆</i>
+        <span>2 MOIS IMMERSION ANGLETERRE (BRIGHTON &amp; BOURNEMOUTH)</span><i>◆</i>
+        <span>CANDIDAT ALTERNANCE BUT 2 INFORMATIQUE</span><i>◆</i>
+        <span>46 PRS OPEN-SOURCE FUSIONNÉES</span><i>◆</i>
+        <span>TWENTY CRM (40K★) • BASEDHARDWARE/OMI (8K★)</span><i>◆</i>
+        <span>SECURITY-SCANNER-MCP (SMITHERY &amp; GLAMA)</span><i>◆</i>
+        <span>ISO C99 • C++ • VALGRIND ZERO-LEAK</span><i>◆</i>
+        <span>STAGES HUPI (DATA/IT) &amp; MARRA (CAO)</span><i>◆</i>
+        <span>2 MOIS IMMERSION ANGLETERRE (BRIGHTON &amp; BOURNEMOUTH)</span><i>◆</i>
+        <span>CANDIDAT ALTERNANCE BUT 2 INFORMATIQUE</span><i>◆</i>
+      </div>
+    </div>
+
     <!-- ====================================================================
-         02.00 SEC_FLAGSHIPS — ARCHITECTURAL SHOWCASE & 7-LAYER STACK
+         01.00 SEC_PROJECTS — REAL CASE STUDIES + VISUAL PREVIEWS + GITHUB LAB
          ==================================================================== -->
-    <section class="section-block" id="flagships">
+    <section class="section-block" id="projects">
       <div class="container">
-        <div class="section-coord-bar">
-          <span>// 02.00 SEC_FLAGSHIPS</span>
+        <div class="section-coord-bar" data-scroll-build="coord">
+          <span>// 01.00 PROJETS_VÉRIFIABLES</span>
           <span class="section-coord-line" aria-hidden="true"></span>
-          <span class="section-coord-index">INDEX [02 / 05]</span>
+          <span class="section-coord-index">INDEX [01 / 06]</span>
         </div>
 
-        <p class="section-eyebrow" data-en="ARCHITECTURAL SHOWCASE" data-fr="VITRINE ARCHITECTURALE">ARCHITECTURAL SHOWCASE</p>
-        <h2 class="section-title" data-en="Flagship Deployments" data-fr="Déploiements Phares">Flagship Deployments</h2>
-        <p class="section-subtitle"
-           data-en="Production-grade autonomous infrastructure, open-source security patches, and quantitative engines running across local silicon and sovereign Linux nodes."
-           data-fr="Infrastructures autonomes de production, correctifs de sécurité open-source et moteurs quantitatifs déployés sur silicium local et serveurs Linux souverains.">
-          Production-grade autonomous infrastructure, open-source security patches, and quantitative engines running across local silicon and sovereign Linux nodes.
+        <p class="section-eyebrow" data-scroll-build="heading" data-fr="RÉALISATIONS &amp; DÉPÔTS GITHUB" data-en="SELECTED ENGINEERING WORK">RÉALISATIONS &amp; DÉPÔTS GITHUB</p>
+        <h2 class="section-title" data-scroll-build="heading" data-fr="46 PRs Open-Source, Outils Sécurité &amp; Projets Réels" data-en="46 Merged OSS PRs, Security Tools &amp; Systems Projects">46 PRs Open-Source, Outils Sécurité &amp; Projets Réels</h2>
+        <p class="section-subtitle" data-scroll-build="heading"
+           data-fr="Tout ce qui figure ci-dessous est public et vérifiable sur mon GitHub (@Mateidslx) : contributions fusionnées sur de grands dépôts open-source, serveurs MCP publiés, infrastructure Linux 24/7 et travaux de BUT Informatique."
+           data-en="Everything shown below is public and verifiable on GitHub (@Mateidslx): merged upstream patches in major open-source projects, published MCP security tools, 24/7 Linux infrastructure, and CS coursework.">
+          Tout ce qui figure ci-dessous est public et vérifiable sur mon GitHub (@Mateidslx) : contributions fusionnées sur de grands dépôts open-source, serveurs MCP publiés, infrastructure Linux 24/7 et travaux de BUT Informatique.
         </p>
 
-        <!-- Master Ecosystem Card -->
-        <div class="flagship-master">
-          <div class="flagship-top-bar">
-            <span class="core-pill">● CORE ECOSYSTEM</span>
-            <span class="hardware-meta">Substrate: Local Workstation + Ubuntu 24.04 Sovereign VPS // Zero Vendor Lock-In</span>
-          </div>
-
-          <h3 class="flagship-master-title" data-en="KAI — 7-Layer Autonomous AI Ecosystem" data-fr="KAI — Écosystème IA Autonome en 7 Couches">KAI — 7-Layer Autonomous AI Ecosystem</h3>
-          <p class="flagship-master-desc"
-             data-en="A persistent, self-auditing cognitive operating system running 24/7 across hybrid local/cloud infrastructure. Engineered from first principles with 36 specialized agent identities, 95+ domain skills, 4-tier provenance-backed memory, and deterministic post-action verification."
-             data-fr="Un système d’exploitation cognitif persistant et auto-vérifié fonctionnant 24/7 sur architecture hybride locale et cloud. Conçu depuis les premiers principes avec 36 identités d’agents, plus de 95 skills métiers, une mémoire à 4 niveaux traçable et un vérifieur d’état déterministe.">
-            A persistent, self-auditing cognitive operating system running 24/7 across hybrid local/cloud infrastructure. Engineered from first principles with 36 specialized agent identities, 95+ domain skills, 4-tier provenance-backed memory, and deterministic post-action verification.
-          </p>
-
-          <div class="flagship-metrics-grid">
-            <div class="flagship-metric-box">
-              <div class="flagship-metric-num">36</div>
-              <div class="flagship-metric-label" data-en="Agent Identities" data-fr="Agents Spécialisés">Agent Identities</div>
-            </div>
-            <div class="flagship-metric-box">
-              <div class="flagship-metric-num">95+</div>
-              <div class="flagship-metric-label" data-en="Agentic Skills" data-fr="Skills Modulaires">Agentic Skills</div>
-            </div>
-            <div class="flagship-metric-box">
-              <div class="flagship-metric-num">19</div>
-              <div class="flagship-metric-label" data-en="Systemd Daemons" data-fr="Démons Systemd">Systemd Daemons</div>
-            </div>
-            <div class="flagship-metric-box">
-              <div class="flagship-metric-num">4-Tier</div>
-              <div class="flagship-metric-label" data-en="Provenance Memory" data-fr="Mémoire Auditable">Provenance Memory</div>
-            </div>
-          </div>
-
-          <!-- Interactive 7-Layer Constitutional Stack Explorer -->
-          <div class="stack-explorer">
-            <div class="stack-explorer-head">
-              <span class="stack-explorer-title" data-en="7-LAYER CONSTITUTIONAL STACK" data-fr="PILE CONSTITUTIONNELLE EN 7 COUCHES">7-LAYER CONSTITUTIONAL STACK</span>
-              <span class="stack-explorer-hint" data-en="Click any layer to inspect live implementation &amp; invariant" data-fr="Cliquez sur une couche pour inspecter l’implémentation">Click any layer to inspect live implementation &amp; invariant</span>
-            </div>
-
-            <div class="layer-tabs" role="tablist" aria-label="7-Layer Constitutional Stack">
-              <button type="button" class="layer-tab active" role="tab" aria-selected="true" data-layer="0">L1: Sovereign Substrate</button>
-              <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="1">L2: 36-Agent Swarm</button>
-              <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="2">L3: 4-Tier Memory</button>
-              <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="3">L4: Fail-Closed Gate</button>
-              <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="4">L5: State Verifier</button>
-              <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="5">L6: Quant Engine V150</button>
-              <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="6">L7: C99 &amp; SQL Rigor</button>
-            </div>
-
-            <div class="layer-inspector-grid" role="tabpanel">
-              <div>
-                <div class="layer-badge" id="layer-badge">LAYER 01 // SILICON &amp; UBUNTU DAEMONS</div>
-                <h4 class="layer-detail-title" id="layer-title">Hybrid Local Workstation &amp; 24/7 Ubuntu Cloud Mesh</h4>
-                <p class="layer-detail-desc" id="layer-desc">
-                  Persistent execution across local Windows/WSL2 silicon and an Oracle Ubuntu 24.04 VPS running 19+ autonomous systemd services, keep-alive watchdogs, and reverse-proxied telemetry endpoints with zero SaaS lock-in.
-                </p>
-                <div class="layer-pills" id="layer-pills"></div>
-              </div>
-
-              <div class="layer-code-box">
-                <div class="layer-code-header">
-                  <span id="layer-code-file">kai-watchdog.service // sovereign_keepalive.py</span>
-                  <span>INVARIANT // ACTIVE</span>
-                </div>
-                <pre class="layer-code-pre" id="layer-code-pre"></pre>
-              </div>
-            </div>
-          </div>
+        <!-- Interactive Category Filter Pills -->
+        <div class="project-filter-bar" data-scroll-build="heading" role="tablist" aria-label="Filtrer les projets">
+          <button type="button" class="proj-filter-btn active" data-filter="all" data-fr="Tous les projets (04)" data-en="All Case Studies (04)">Tous les projets (04)</button>
+          <button type="button" class="proj-filter-btn" data-filter="oss" data-fr="Open-Source (46 PRs)" data-en="Open Source (46 PRs)">Open-Source (46 PRs)</button>
+          <button type="button" class="proj-filter-btn" data-filter="sec" data-fr="Sécurité, MCP &amp; Linux" data-en="AppSec, MCP &amp; Linux">Sécurité, MCP &amp; Linux</button>
+          <button type="button" class="proj-filter-btn" data-filter="web" data-fr="C99, SQL &amp; Projets Web" data-en="C99, SQL &amp; Web Apps">C99, SQL &amp; Projets Web</button>
         </div>
 
-        <!-- 3 Sub-Flagship Cards -->
-        <div class="flagship-subgrid">
-          <article class="sub-flagship-card">
-            <div>
-              <div class="sub-flagship-top">
-                <span class="sub-flagship-tag">OPEN-SOURCE SECURITY</span>
-                <span class="sub-flagship-stat">7 Merged PRs</span>
+        <!-- Case Study Deck -->
+        <div class="case-deck">
+
+          <!-- CASE 01: 46 MERGED OPEN-SOURCE PULL REQUESTS -->
+          <article class="case-card" id="project-oss" data-cat="oss" data-scroll-build="card">
+            <div class="case-info">
+              <div class="case-kicker">
+                <span class="case-status-dot"></span>
+                <span data-fr="OPEN SOURCE • 46 PULL REQUESTS FUSIONNÉES EN PRODUCTION" data-en="OPEN SOURCE • 46 PULL REQUESTS MERGED UPSTREAM">OPEN SOURCE • 46 PULL REQUESTS FUSIONNÉES EN PRODUCTION</span>
               </div>
-              <h3 class="sub-flagship-title">BasedHardware / Omi</h3>
-              <p class="sub-flagship-desc"
-                 data-en="Shipped 7 upstream security and reliability contributions (#14604, #15974, #16025, #17258, #17272, #19637, #20168): XSS vector elimination, CWE-209 stack-trace masking, CLI buffer bounds, and atomic OAuth token refresh locks."
-                 data-fr="7 contributions de sécurité et fiabilité fusionnées en production (#14604, #15974, #16025, #17258, #17272, #19637, #20168) : élimination XSS, masquage CWE-209, bornage CLI et verrous OAuth atomiques.">
-                Shipped 7 upstream security and reliability contributions (#14604, #15974, #16025, #17258, #17272, #19637, #20168): XSS vector elimination, CWE-209 stack-trace masking, CLI buffer bounds, and atomic OAuth token refresh locks.
+              <h3 class="case-title" data-fr="Contributions Sécurité, Backend &amp; Tests — Twenty (40k★), Omi (8k★) &amp; FinTech" data-en="Security, Backend &amp; TDD Contributions — Twenty (40k★), Omi (8k★) &amp; FinTech">Contributions Sécurité, Backend &amp; Tests — Twenty (40k★), Omi (8k★) &amp; FinTech</h3>
+              <p class="case-desc"
+                 data-fr="Contributions régulières à des bases de code professionnelles en Python (FastAPI) et TypeScript (NestJS, React, Next.js, Vitest) : contrôle de permissions RBAC sur Twenty CRM, élimination de fuites d’exceptions CWE-209 et XSS sur BasedHardware/omi, et correction de bugs financiers critiques."
+                 data-en="Active upstream contributor across production Python (FastAPI) and TypeScript (NestJS, React, Next.js, Vitest) codebases: RBAC permission guards in Twenty CRM, CWE-209 &amp; XSS remediation in BasedHardware/omi, and financial transaction &amp; accessibility suites.">
+                Contributions régulières à des bases de code professionnelles en Python (FastAPI) et TypeScript (NestJS, React, Next.js, Vitest) : contrôle de permissions RBAC sur Twenty CRM, élimination de fuites d’exceptions CWE-209 et XSS sur BasedHardware/omi, et correction de bugs financiers critiques.
               </p>
+
+              <!-- Ecosystem Switcher inside Case 01 -->
+              <div class="layer-tabs oss-eco-tabs" role="tablist" aria-label="Écosystèmes Open-Source">
+                <button type="button" class="oss-eco-tab active" data-oss="0">01. Twenty CRM (40k★)</button>
+                <button type="button" class="oss-eco-tab" data-oss="1">02. BasedHardware / Omi (8k★)</button>
+                <button type="button" class="oss-eco-tab" data-oss="2">03. FinTech TypeScript (38 PRs)</button>
+              </div>
+
+              <div class="case-tags">
+                <span class="tech-tag">Python / FastAPI</span>
+                <span class="tech-tag">TypeScript / NestJS</span>
+                <span class="tech-tag">React / Vitest</span>
+                <span class="tech-tag" data-fr="RBAC, CWE-209 &amp; XSS" data-en="RBAC, CWE-209 &amp; XSS">RBAC, CWE-209 &amp; XSS</span>
+              </div>
+              <div class="case-actions">
+                <a href="https://github.com/pulls?q=is%3Apr+author%3AMateidslx+is%3Amerged" target="_blank" rel="noopener noreferrer" class="btn-case-pill magnetic-btn"
+                   data-fr="Voir mes 46 PRs fusionnées sur GitHub ↗" data-en="Inspect all 46 Merged PRs on GitHub ↗">Voir mes 46 PRs fusionnées sur GitHub ↗</a>
+              </div>
             </div>
-            <div class="sub-flagship-footer">
-              <span>Python • FastAPI • Redis Locks</span>
-              <a href="https://github.com/BasedHardware/omi/pulls?q=is%3Apr+author%3AMateidslx" target="_blank" rel="noopener noreferrer" class="card-ext-link">Inspect PRs ↗</a>
+
+            <div class="case-preview-window">
+              <div class="preview-bar">
+                <span class="preview-dots"><i></i><i></i><i></i></span>
+                <span class="preview-title" id="oss-window-title">github.com/twentyhq/twenty — merged/@Mateidslx</span>
+              </div>
+              <div class="preview-body" id="oss-pr-list"></div>
             </div>
           </article>
 
-          <article class="sub-flagship-card">
-            <div>
-              <div class="sub-flagship-top">
-                <span class="sub-flagship-tag">QUANTITATIVE SYSTEMS</span>
-                <span class="sub-flagship-stat">V71 → V150</span>
+          <!-- CASE 02: SECURITY-SCANNER-MCP -->
+          <article class="case-card" id="project-mcp" data-cat="sec" data-scroll-build="card">
+            <div class="case-info">
+              <div class="case-kicker">
+                <span class="case-status-dot"></span>
+                <span data-fr="OUTIL CYBERSÉCURITÉ • PUBLIÉ SUR SMITHERY &amp; GLAMA" data-en="CYBERSECURITY TOOLING • PUBLISHED ON SMITHERY &amp; GLAMA">OUTIL CYBERSÉCURITÉ • PUBLIÉ SUR SMITHERY &amp; GLAMA</span>
               </div>
-              <h3 class="sub-flagship-title">Polymarket V150 Arbitrage</h3>
-              <p class="sub-flagship-desc"
-                 data-en="High-discipline CLOB microstructure engine scanning prediction-market order books in real time. Computes fee-adjusted expected value, cross-outcome arbitrage bounds, and deterministic drawdown halts."
-                 data-fr="Moteur d’analyse de microstructure CLOB scrutant les carnets d’ordres en temps réel. Calcul d’espérance nette de frais, détection d’arbitrages multi-issues et coupe-circuits stricts de risque.">
-                High-discipline CLOB microstructure engine scanning prediction-market order books in real time. Computes fee-adjusted expected value, cross-outcome arbitrage bounds, and deterministic drawdown halts.
+              <h3 class="case-title" data-fr="Security Scanner MCP — Auditeur d’En-têtes HTTP &amp; RFC 9116" data-en="Security Scanner MCP — HTTP Headers &amp; RFC 9116 Vulnerability Auditor">Security Scanner MCP — Auditeur d’En-têtes HTTP &amp; RFC 9116</h3>
+              <p class="case-desc"
+                 data-fr="Développement et publication d’un serveur Model Context Protocol (MCP) en Python permettant d’auditer automatiquement la posture de sécurité HTTP d’un domaine : vérification CSP, HSTS, X-Frame-Options, détection de divulgation de versions serveurs et conformité RFC 9116 (/.well-known/security.txt)."
+                 data-en="Designed and published a Python Model Context Protocol (MCP) server that audits web domain security posture: inspecting CSP, HSTS, X-Frame-Options, server banner leaks, and RFC 9116 (/.well-known/security.txt) vulnerability disclosure compliance.">
+                Développement et publication d’un serveur Model Context Protocol (MCP) en Python permettant d’auditer automatiquement la posture de sécurité HTTP d’un domaine : vérification CSP, HSTS, X-Frame-Options, détection de divulgation de versions serveurs et conformité RFC 9116 (/.well-known/security.txt).
               </p>
+              <div class="case-tags">
+                <span class="tech-tag">Python 3.12</span>
+                <span class="tech-tag">Model Context Protocol (MCP)</span>
+                <span class="tech-tag">RFC 9116 (security.txt)</span>
+                <span class="tech-tag">HTTP Hardening</span>
+              </div>
+              <div class="case-actions">
+                <a href="https://github.com/Mateidslx/security-scanner-mcp" target="_blank" rel="noopener noreferrer" class="btn-case-pill magnetic-btn"
+                   data-fr="Ouvrir le dépôt security-scanner-mcp ↗" data-en="View security-scanner-mcp on GitHub ↗">Ouvrir le dépôt security-scanner-mcp ↗</a>
+              </div>
             </div>
-            <div class="sub-flagship-footer">
-              <span>Asyncio • WebSockets • Kelly Risk</span>
-              <span>24/7 Live Telemetry</span>
+
+            <div class="case-preview-window">
+              <div class="preview-bar">
+                <span class="preview-dots"><i></i><i></i><i></i></span>
+                <span class="preview-title">github.com/Mateidslx/security-scanner-mcp</span>
+              </div>
+              <div class="preview-code-wrap">
+                <div class="layer-badge" data-fr="REGISTRES PUBLICS // SMITHERY.AI &amp; GLAMA.AI" data-en="PUBLIC REGISTRIES // SMITHERY.AI &amp; GLAMA.AI">REGISTRES PUBLICS // SMITHERY.AI &amp; GLAMA.AI</div>
+                <h4 class="layer-detail-title" data-fr="Inspection Automatisée des En-têtes &amp; Politiques de Divulgation" data-en="Automated HTTP Security Header &amp; RFC 9116 Audit">Inspection Automatisée des En-têtes &amp; Politiques de Divulgation</h4>
+                <pre class="layer-code-pre">$ uv run security_scanner_mcp.py --target https://example.org
+{
+  "strict_transport_security": "PASS (max-age=63072000; preload)",
+  "content_security_policy":   "PASS (no unsafe-inline)",
+  "rfc9116_security_txt":      "FOUND (/.well-known/security.txt)",
+  "server_version_leak":       "NONE_DETECTED"
+}</pre>
+                <div class="layer-pills">
+                  <span class="layer-pill">OWASP Headers</span>
+                  <span class="layer-pill">RFC 9116</span>
+                  <span class="layer-pill">Smithery Verified</span>
+                  <span class="layer-pill">MIT License</span>
+                </div>
+              </div>
             </div>
           </article>
 
-          <article class="sub-flagship-card">
-            <div>
-              <div class="sub-flagship-top">
-                <span class="sub-flagship-tag">SYSTEMS WORKBENCH</span>
-                <span class="sub-flagship-stat">0 Heap Leaks</span>
+          <!-- CASE 03: KAI PERSONAL INFRASTRUCTURE -->
+          <article class="case-card" id="project-kai" data-cat="sec" data-scroll-build="card">
+            <div class="case-info">
+              <div class="case-kicker">
+                <span class="case-status-dot"></span>
+                <span data-fr="INFRASTRUCTURE PERSONNELLE • PYTHON &amp; UBUNTU 24.04" data-en="PERSONAL INFRASTRUCTURE • PYTHON &amp; UBUNTU 24.04">INFRASTRUCTURE PERSONNELLE • PYTHON &amp; UBUNTU 24.04</span>
               </div>
-              <h3 class="sub-flagship-title">AlgoForge &amp; C99 Tooling</h3>
-              <p class="sub-flagship-desc"
-                 data-en="Deterministic algorithm design &amp; static pointer verification suite enforcing strict ISO C99 (-Wall -Wextra -Werror), Valgrind zero-leak audits, Allman structural clarity, and 3NF SQL data integrity."
-                 data-fr="Atelier algorithmique déterministe et suite d’audit mémoire imposant C99 strict (-Wall -Wextra -Werror), zéro fuite sous Valgrind, architecture Allman et intégrité relationnelle SQL 3NF.">
-                Deterministic algorithm design &amp; static pointer verification suite enforcing strict ISO C99 (-Wall -Wextra -Werror), Valgrind zero-leak audits, Allman structural clarity, and 3NF SQL data integrity.
+              <h3 class="case-title" data-fr="Kai — Orchestrateur d’Agents IA &amp; Serveur Linux 24/7" data-en="Kai — Multi-Agent Python Orchestrator &amp; 24/7 Linux Server">Kai — Orchestrateur d’Agents IA &amp; Serveur Linux 24/7</h3>
+              <p class="case-desc"
+                 data-fr="Conception d’un environnement d’automatisation complet reliant mon poste de travail local et un VPS Ubuntu 24.04 : routage de tâches en graphe acyclique (DAG), mémoire persistante SQLite WAL avec suivi des sources, et vérification automatique de l’état réel après chaque déploiement."
+                 data-en="Engineered a personal automation and AI orchestration stack spanning my local workstation and an Ubuntu 24.04 VPS: DAG task scheduling, persistent SQLite WAL memory with source tracking, and automated post-deployment verification.">
+                Conception d’un environnement d’automatisation complet reliant mon poste de travail local et un VPS Ubuntu 24.04 : routage de tâches en graphe acyclique (DAG), mémoire persistante SQLite WAL avec suivi des sources, et vérification automatique de l’état réel après chaque déploiement.
+              </p>
+
+              <!-- Interactive Layer Switcher inside Case 03 -->
+              <div class="layer-tabs" role="tablist" aria-label="Modules de l'architecture Kai">
+                <button type="button" class="layer-tab active" role="tab" aria-selected="true" data-layer="0">01. Linux &amp; Systemd</button>
+                <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="1">02. Orchestration DAG</button>
+                <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="2">03. Mémoire SQLite</button>
+                <button type="button" class="layer-tab" role="tab" aria-selected="false" data-layer="3">04. Vérification SHA-256</button>
+              </div>
+
+              <p class="layer-inline-desc" id="layer-desc">
+                Déploiement continu sur serveur Ubuntu 24.04 avec unités systemd dédiées, supervision automatique des processus et reverse-proxy Nginx sans dépendance propriétaire.
               </p>
             </div>
-            <div class="sub-flagship-footer">
-              <span>ISO C99 • Valgrind • SQL</span>
-              <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="card-ext-link">GitHub ↗</a>
+
+            <div class="case-preview-window">
+              <div class="preview-bar">
+                <span class="preview-dots"><i></i><i></i><i></i></span>
+                <span class="preview-title" id="layer-code-file">ubuntu@vps:~/kai-agent$ systemctl status</span>
+              </div>
+              <div class="preview-code-wrap">
+                <div class="layer-badge" id="layer-badge">MODULE 01 // INFRASTRUCTURE LINUX</div>
+                <h4 class="layer-detail-title" id="layer-title">Services Systemd &amp; Supervision 24/7</h4>
+                <pre class="layer-code-pre" id="layer-code-pre"></pre>
+                <div class="layer-pills" id="layer-pills"></div>
+              </div>
             </div>
           </article>
+
+          <!-- CASE 04: KAI ACADEMIC, C99 / VALGRIND & SQL -->
+          <article class="case-card" id="project-c99" data-cat="web" data-scroll-build="card">
+            <div class="case-info">
+              <div class="case-kicker">
+                <span class="case-status-dot"></span>
+                <span data-fr="INGÉNIERIE ACADÉMIQUE &amp; BAS NIVEAU • IUT BAYONNE / ANGLET" data-en="ACADEMIC &amp; SYSTEMS ENGINEERING • IUT BAYONNE / ANGLET">INGÉNIERIE ACADÉMIQUE &amp; BAS NIVEAU • IUT BAYONNE / ANGLET</span>
+              </div>
+              <h3 class="case-title" data-fr="Kai Academic, Programmes ISO C99 sous Valgrind &amp; Bases SQL 3NF" data-en="Kai Academic Portal, Zero-Leak ISO C99 &amp; Normalized SQL">Kai Academic, Programmes ISO C99 sous Valgrind &amp; Bases SQL 3NF</h3>
+              <p class="case-desc"
+                 data-fr="Création de Kai Academic (portail web interactif de révision, QCM et entraînement algorithmique pour le BUT Informatique), couplé à mes travaux systèmes : développement C99 compilé sans aucun warning (-Wall -Wextra -Werror), validé zéro fuite sous Valgrind, et bases relationnelles Merise / PostgreSQL."
+                 data-en="Built Kai Academic (an interactive study, quiz, and algorithm training web platform for the CS Bachelor curriculum), alongside strict low-level C99 modules compiled with -Wall -Wextra -Werror, audited under Valgrind, and normalized Merise/PostgreSQL databases.">
+                Création de Kai Academic (portail web interactif de révision, QCM et entraînement algorithmique pour le BUT Informatique), couplé à mes travaux systèmes : développement C99 compilé sans aucun warning (-Wall -Wextra -Werror), validé zéro fuite sous Valgrind, et bases relationnelles Merise / PostgreSQL.
+              </p>
+              <div class="case-tags">
+                <span class="tech-tag">ISO C99 / Valgrind</span>
+                <span class="tech-tag">Merise / PostgreSQL</span>
+                <span class="tech-tag">HTML / CSS / JS (WCAG AAA)</span>
+                <span class="tech-tag">AlgoForge</span>
+              </div>
+              <div class="case-actions">
+                <a href="https://github.com/Mateidslx/kai-academic" target="_blank" rel="noopener noreferrer" class="btn-case-pill magnetic-btn"
+                   data-fr="Explorer Kai Academic sur GitHub ↗" data-en="Explore Kai Academic on GitHub ↗">Explorer Kai Academic sur GitHub ↗</a>
+              </div>
+            </div>
+
+            <div class="case-preview-window">
+              <div class="preview-bar">
+                <span class="preview-dots"><i></i><i></i><i></i></span>
+                <span class="preview-title">gcc -std=c99 -Wall -Wextra -Werror &amp;&amp; valgrind</span>
+              </div>
+              <div class="preview-code-wrap">
+                <pre class="layer-code-pre">int verifier_bornes_tampon(const uint8_t *buf, size_t taille)
+{
+    if (buf == NULL || taille == 0U || taille &gt; MAX_TRAME)
+    {
+        return ERREUR_BORNES;
+    }
+    return analyser_trame_deterministe(buf, taille);
+}
+
+/* Valgrind Summary:
+   in use at exit: 0 bytes in 0 blocks
+   ERROR SUMMARY: 0 errors from 0 contexts */</pre>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Additional GitHub Repositories & Coursework Lab Bento Strip -->
+        <div class="repo-lab-wrap" data-scroll-build="card">
+          <div class="repo-lab-header">
+            <span class="layer-badge" data-fr="AUTRES PROJETS GITHUB, IA &amp; TRAVAUX SEMESTRE 2" data-en="MORE GITHUB PROJECTS, NEURAL PROTOTYPES &amp; CS LABS">AUTRES PROJETS GITHUB, IA &amp; TRAVAUX SEMESTRE 2</span>
+            <a href="https://github.com/Mateidslx?tab=repositories" target="_blank" rel="noopener noreferrer" class="repo-all-link"
+               data-fr="Voir mes 21 dépôts GitHub ↗" data-en="View all 21 GitHub repos ↗">Voir mes 21 dépôts GitHub ↗</a>
+          </div>
+          <div class="repo-mini-grid four-cols">
+            <a href="https://github.com/Mateidslx/chessbot" target="_blank" rel="noopener noreferrer" class="repo-mini-card">
+              <div class="repo-mini-top">
+                <span class="repo-mini-name">V-Bot Web &amp; Réseaux de Neurones</span>
+                <span class="repo-mini-lang">Python / OpenCV / NN</span>
+              </div>
+              <p class="repo-mini-desc"
+                 data-fr="Extraction d’état d’échiquier DOM &amp; OpenCV en notation FEN, protocole UCI Stockfish NNUE, calcul de complexité et prototypes de réseaux de neurones."
+                 data-en="DOM &amp; OpenCV chessboard FEN extractor, Stockfish NNUE UCI engine bridge, board complexity heuristics, and Python neural network prototypes.">
+                Extraction d’état d’échiquier DOM &amp; OpenCV en notation FEN, protocole UCI Stockfish NNUE, calcul de complexité et prototypes de réseaux de neurones.
+              </p>
+            </a>
+
+            <a href="https://github.com/Mateidslx/mathballx" target="_blank" rel="noopener noreferrer" class="repo-mini-card">
+              <div class="repo-mini-top">
+                <span class="repo-mini-name">mathballx (v6.0-PRO)</span>
+                <span class="repo-mini-lang">JavaScript / Vite 60fps</span>
+              </div>
+              <p class="repo-mini-desc"
+                 data-fr="Moteur de simulation physique haute précision à 60 fps et pipeline d’enregistrement vidéo automatisé via navigateur headless."
+                 data-en="High-precision 60fps physics simulation engine and automated headless-browser video rendering pipeline.">
+                Moteur de simulation physique haute précision à 60 fps et pipeline d’enregistrement vidéo automatisé via navigateur headless.
+              </p>
+            </a>
+
+            <a href="https://github.com/Mateidslx/kai-academic" target="_blank" rel="noopener noreferrer" class="repo-mini-card">
+              <div class="repo-mini-top">
+                <span class="repo-mini-name" data-fr="Projets IUT S2 &amp; Katas C++" data-en="Semester-2 CS &amp; C++ Katas">Projets IUT S2 &amp; Katas C++</span>
+                <span class="repo-mini-lang">C++ / POO / Graphes</span>
+              </div>
+              <p class="repo-mini-desc"
+                 data-fr="Travaux de Semestre 2 en BUT Informatique à Anglet : conception orientée objet (POO), théorie des graphes, protocoles réseaux et IHM."
+                 data-en="Semester-2 Computer Science engineering labs at IUT Anglet: C++ OOP design, graph algorithms, network protocols, and GUI applications.">
+                Travaux de Semestre 2 en BUT Informatique à Anglet : conception orientée objet (POO), théorie des graphes, protocoles réseaux et IHM.
+              </p>
+            </a>
+
+            <a href="https://github.com/keephq/keep/pulls?q=is%3Apr+author%3AMateidslx" target="_blank" rel="noopener noreferrer" class="repo-mini-card">
+              <div class="repo-mini-top">
+                <span class="repo-mini-name">keephq / keep &amp; NSI</span>
+                <span class="repo-mini-lang">Python / SQL / AIOps</span>
+              </div>
+              <p class="repo-mini-desc"
+                 data-fr="6 Pull Requests Python sur la plateforme AIOps Keep (Auth0 OIDC, Grafana, CEL) et projets fondateurs de Terminale NSI (Python, SQL, structures de données)."
+                 data-en="6 backend PRs submitted to Keep AIOps (Auth0 OIDC, Grafana, CEL) plus Senior NSI projects in Python, SQL, and data structures.">
+                6 Pull Requests Python sur la plateforme AIOps Keep (Auth0 OIDC, Grafana, CEL) et projets fondateurs de Terminale NSI (Python, SQL, structures de données).
+              </p>
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ====================================================================
-         03.00 SEC_MATRIX — FILTERABLE BENTO SYSTEMS MATRIX
-         ==================================================================== -->
-    <section class="section-block" id="matrix">
+    <!-- TUBIK VISUAL DIVIDER 02: PRECISION CAD VERNIER RULER & SURFACE CONTRAST -->
+    <div class="tubik-divider-ruler" aria-hidden="true">
       <div class="container">
-        <div class="section-coord-bar">
-          <span>// 03.00 SEC_MATRIX</span>
+        <div class="cad-ruler-bar">
+          <span class="cad-ruler-code">CAD // SCALE 1:1 [MM]</span>
+          <div class="cad-ruler-ticks"></div>
+          <span class="cad-ruler-origin" data-fr="AXE Z // VUE ÉCLATÉE 3D INTERACTIVE" data-en="Z-AXIS // INTERACTIVE 3D EXPLODED VIEW">AXE Z // VUE ÉCLATÉE 3D INTERACTIVE</span>
+          <div class="cad-ruler-ticks"></div>
+          <span class="cad-ruler-code">HOOKE k=135 · c=18</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         02.00 SEC_EXPLODED_VIEW — INTERACTIVE 3D / 2.5D EXPLODED STACK
+         ==================================================================== -->
+    <section class="section-block section-surface-alt" id="exploded-architecture">
+      <div class="container">
+        <div class="section-coord-bar" data-scroll-build="coord">
+          <span>// 02.00 ARCHITECTURE_ÉCLATÉE_3D</span>
           <span class="section-coord-line" aria-hidden="true"></span>
-          <span class="section-coord-index">INDEX [03 / 05]</span>
+          <span class="section-coord-index">INDEX [02 / 06]</span>
         </div>
 
-        <div class="matrix-header-row">
+        <div class="exploded-header-split">
           <div>
-            <p class="section-eyebrow" data-en="ENGINEERING INDEX" data-fr="INDEX D’INGÉNIERIE">ENGINEERING INDEX</p>
-            <h2 class="section-title" data-en="The Systems Matrix" data-fr="La Matrice des Systèmes">The Systems Matrix</h2>
-            <p class="section-subtitle"
-               data-en="Modular subsystems engineered for autonomous resilience, cryptographic provenance, and sub-second execution."
-               data-fr="Sous-systèmes modulaires conçus pour la résilience autonome, la traçabilité mémoire et l’exécution déterministe.">
-              Modular subsystems engineered for autonomous resilience, cryptographic provenance, and sub-second execution.
+            <p class="section-eyebrow" data-scroll-build="heading" data-fr="VUE ÉCLATÉE INTERACTIVE (3D ISOMÉTRIQUE)" data-en="INTERACTIVE 3D EXPLODED ARCHITECTURE">VUE ÉCLATÉE INTERACTIVE (3D ISOMÉTRIQUE)</p>
+            <h2 class="section-title" data-scroll-build="heading" data-fr="Sous le capot : ma pile technique dissociée en 6 couches" data-en="Under the Hood: My 6-Layer Engineering Stack">Sous le capot : ma pile technique dissociée en 6 couches</h2>
+            <p class="section-subtitle" data-scroll-build="heading"
+               data-fr="Faites défiler la page, déplacez le curseur de dissociation ou survolez une plaque 3D : chaque couche s’écarte sur l’axe Z avec amorti par ressort, lignes de repère vectorielles et atténuation dynamique des ombres."
+               data-en="Scroll naturally, drag the dissociation slider, or hover any 3D slab: each layer separates along the Z-axis with spring physics, live SVG callout lines, and dynamic shadow attenuation.">
+              Faites défiler la page, déplacez le curseur de dissociation ou survolez une plaque 3D : chaque couche s’écarte sur l’axe Z avec amorti par ressort, lignes de repère vectorielles et atténuation dynamique des ombres.
             </p>
           </div>
 
-          <div class="filter-bar" role="group" aria-label="Filter Systems Matrix">
-            <button type="button" class="filter-btn active" data-filter="all" data-en="All Systems (6)" data-fr="Tous (6)">All Systems (6)</button>
-            <button type="button" class="filter-btn" data-filter="ai" data-en="Autonomous AI" data-fr="IA Autonome">Autonomous AI</button>
-            <button type="button" class="filter-btn" data-filter="security" data-en="Security &amp; OSS" data-fr="Sécurité &amp; OSS">Security &amp; OSS</button>
-            <button type="button" class="filter-btn" data-filter="systems" data-en="Quant &amp; Core C/SQL" data-fr="Quant &amp; C/SQL">Quant &amp; Core C/SQL</button>
+          <!-- Manual Explosion Controls -->
+          <div class="exploded-controls-card" data-scroll-build="card">
+            <div class="exploded-ctrl-top">
+              <label for="exploded-range" class="exploded-ctrl-label" data-fr="DISSOCIATION AXE Z" data-en="Z-AXIS DISSOCIATION">DISSOCIATION AXE Z</label>
+              <span class="exploded-pct-badge" id="exploded-pct-label">0%</span>
+            </div>
+            <input type="range" id="exploded-range" class="exploded-range-input" min="0" max="100" value="0" aria-label="Niveau d'éclatement 3D" />
+            <div class="exploded-ctrl-actions">
+              <button type="button" class="btn-explode-toggle" id="exploded-toggle-btn">Éclater la vue 3D (100%)</button>
+              <span class="exploded-physics-hint" data-fr="Ressort amorti • Inclinaison 3D" data-en="Spring damped • 3D pointer tilt">Ressort amorti • Inclinaison 3D</span>
+            </div>
           </div>
         </div>
 
-        <div class="bento-grid">
-          <article class="bento-card" data-category="ai">
-            <div>
-              <div class="bento-meta">
-                <span class="bento-id">#SYS-01</span>
-                <span>ORCHESTRATION</span>
-              </div>
-              <h3 class="bento-title">Topological Task DAG Engine</h3>
-              <p class="bento-desc"
-                 data-en="Typed lifecycle state machine scheduling multi-agent workflows with cycle detection, bounded retries, and deterministic compensation rollbacks."
-                 data-fr="Machine à états typée orchestrant les graphes multi-agents avec détection de cycles, réessais bornés et rollbacks déterministes.">
-                Typed lifecycle state machine scheduling multi-agent workflows with cycle detection, bounded retries, and deterministic compensation rollbacks.
-              </p>
-            </div>
-            <div class="tech-tags-row">
-              <span class="tech-tag">DAG Scheduler</span>
-              <span class="tech-tag">Rollback</span>
-            </div>
-          </article>
+        <!-- 3-Column Interactive 3D Stage + Dynamic SVG Callout Leader Lines -->
+        <div class="exploded-stage" id="exploded-stage" data-scroll-build="card">
+          <svg class="exploded-leader-svg" id="exploded-leader-svg" aria-hidden="true"></svg>
 
-          <article class="bento-card" data-category="ai security">
-            <div>
-              <div class="bento-meta">
-                <span class="bento-id">#SYS-02</span>
-                <span>VERIFICATION</span>
-              </div>
-              <h3 class="bento-title">Post-Action Physical Verifier</h3>
-              <p class="bento-desc"
-                 data-en="Eliminates hallucinated success reports by auditing filesystem byte digests, remote SSH service states, HTTP headers, and headless browser renders."
-                 data-fr="Élimine les validations illusoires en inspectant les empreintes SHA-256, les démons SSH distants, les en-têtes HTTP et le rendu navigateur.">
-                Eliminates hallucinated success reports by auditing filesystem byte digests, remote SSH service states, HTTP headers, and headless browser renders.
-              </p>
-            </div>
-            <div class="tech-tags-row">
-              <span class="tech-tag">SHA-256 Audit</span>
-              <span class="tech-tag">Playwright</span>
-            </div>
-          </article>
+          <!-- Left Callouts (L06, L04, L02) -->
+          <div class="exploded-callouts-col left" id="exploded-callouts-left"></div>
 
-          <article class="bento-card" data-category="security">
-            <div>
-              <div class="bento-meta">
-                <span class="bento-id">#SYS-03</span>
-                <span>APPSEC &amp; CONCURRENCY</span>
-              </div>
-              <h3 class="bento-title">AI Code &amp; OAuth Security Auditor</h3>
-              <p class="bento-desc"
-                 data-en="Automated red-team scanner hunting hardcoded secrets, CWE-209 trace leaks, prompt-injection sinks, and token-refresh race conditions before merge."
-                 data-fr="Auditeur de sécurité détectant secrets exposés, fuites CWE-209, injections de prompts et conditions de course OAuth avant mise en production.">
-                Automated red-team scanner hunting hardcoded secrets, CWE-209 trace leaks, prompt-injection sinks, and token-refresh race conditions before merge.
-              </p>
+          <!-- Center 3D Isometric Extruded Stack -->
+          <div class="exploded-3d-viewport">
+            <div class="exploded-axis-guide" aria-hidden="true">
+              <span>Z+ // UI</span>
+              <i></i>
+              <span>Z0 // KERNEL</span>
             </div>
-            <div class="tech-tags-row">
-              <span class="tech-tag">CWE-209</span>
-              <span class="tech-tag">Atomic Locks</span>
-            </div>
-          </article>
+            <div class="exploded-floor-shadow" id="exploded-floor-shadow" aria-hidden="true"></div>
+            <div class="exploded-stack-3d" id="exploded-stack-3d" role="group" aria-label="Couches 3D de l'architecture"></div>
+          </div>
 
-          <article class="bento-card" data-category="ai">
-            <div>
-              <div class="bento-meta">
-                <span class="bento-id">#SYS-04</span>
-                <span>MEMORY OS</span>
-              </div>
-              <h3 class="bento-title">Letta 4-Tier Provenance Store</h3>
-              <p class="bento-desc"
-                 data-en="Hierarchical memory paging combining pinned Core identity blocks, SQLite WAL event recall, and archival vector search with contradiction detection."
-                 data-fr="Pagination mémoire hiérarchique combinant blocs Core épinglés, journal SQLite WAL et recherche vectorielle avec détection de contradictions.">
-                Hierarchical memory paging combining pinned Core identity blocks, SQLite WAL event recall, and archival vector search with contradiction detection.
-              </p>
-            </div>
-            <div class="tech-tags-row">
-              <span class="tech-tag">SQLite WAL</span>
-              <span class="tech-tag">Provenance</span>
-            </div>
-          </article>
+          <!-- Right Callouts (L05, L03, L01) -->
+          <div class="exploded-callouts-col right" id="exploded-callouts-right"></div>
+        </div>
 
-          <article class="bento-card" data-category="systems">
-            <div>
-              <div class="bento-meta">
-                <span class="bento-id">#SYS-05</span>
-                <span>QUANT MICROSTRUCTURE</span>
-              </div>
-              <h3 class="bento-title">CLOB Spread &amp; EV Telemetry</h3>
-              <p class="bento-desc"
-                 data-en="Low-latency order-book ingestion pipeline evaluating bid-ask depth, maker/taker fee drag, and multi-leg probability conservation invariants."
-                 data-fr="Pipeline basse latence d’analyse de profondeur bid-ask, d’impact des frais maker/taker et de conservation des probabilités multi-issues.">
-                Low-latency order-book ingestion pipeline evaluating bid-ask depth, maker/taker fee drag, and multi-leg probability conservation invariants.
-              </p>
-            </div>
-            <div class="tech-tags-row">
-              <span class="tech-tag">Order Books</span>
-              <span class="tech-tag">Risk Caps</span>
-            </div>
-          </article>
-
-          <article class="bento-card" data-category="systems security">
-            <div>
-              <div class="bento-meta">
-                <span class="bento-id">#SYS-06</span>
-                <span>LOW-LEVEL RIGOR</span>
-              </div>
-              <h3 class="bento-title">Zero-Leak C99 &amp; 3NF Relational Core</h3>
-              <p class="bento-desc"
-                 data-en="Strict compiler-enforced C99 modules paired with normalized Merise/SQL schemas ensuring referential integrity and deterministic pointer bounds."
-                 data-fr="Modules C99 compilés sans tolérance d’avertissement couplés à des schémas Merise/SQL normalisés garantissant intégrité et bornage mémoire.">
-                Strict compiler-enforced C99 modules paired with normalized Merise/SQL schemas ensuring referential integrity and deterministic pointer bounds.
-              </p>
-            </div>
-            <div class="tech-tags-row">
-              <span class="tech-tag">GCC -Werror</span>
-              <span class="tech-tag">PostgreSQL</span>
-            </div>
-          </article>
+        <!-- Selected Layer Deep Inspector Bar -->
+        <div class="exploded-inspector-bar" data-scroll-build="card">
+          <div class="exploded-insp-main">
+            <span class="layer-badge" id="exploded-inspector-tag">COUCHE 06 // INTERFACE &amp; EXPÉRIENCE</span>
+            <h3 class="exploded-insp-title" id="exploded-inspector-title">Interfaces 60 fps, React &amp; Accessibilité WCAG</h3>
+            <p class="exploded-insp-desc" id="exploded-inspector-desc">
+              Applications TypeScript / React / Next.js et interfaces HTML/CSS/JS natives fluides à 60 fps, navigation clavier (⌘K, focus-trap) et contrastes soignés.
+            </p>
+          </div>
+          <div class="exploded-insp-proof-box">
+            <span class="exploded-proof-kicker" data-fr="VÉRIFICATION CONCRÈTE" data-en="CONCRETE PROOF">VÉRIFICATION CONCRÈTE</span>
+            <p class="exploded-insp-proof" id="exploded-inspector-proof">Preuves : Ce portfolio interactif • Kai Academic • 38 PRs Frontend &amp; Vitest</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ====================================================================
-         04.00 SEC_ARSENAL — SOVEREIGN TECHNICAL STACK
-         ==================================================================== -->
-    <section class="section-block" id="arsenal">
+    <!-- TUBIK VISUAL DIVIDER 03: NEGATIVE-SPACE EDITORIAL ENGINEERING QUOTE -->
+    <div class="tubik-divider-editorial">
       <div class="container">
-        <div class="section-coord-bar">
-          <span>// 04.00 SEC_ARSENAL</span>
+        <div class="editorial-quote-inner" data-scroll-build="heading">
+          <span class="editorial-quote-mark" aria-hidden="true">§</span>
+          <blockquote class="editorial-quote-text"
+                      data-fr="« Un programme ne fonctionne pas parce qu’il compile sans erreur apparente — il fonctionne lorsque sa mémoire, ses permissions et son état réel sont vérifiés par les tests. »"
+                      data-en="“Software isn’t working just because exit code 0 returned — it works when its memory bounds, permissions, and physical state are proven by tests.”">
+            « Un programme ne fonctionne pas parce qu’il compile sans erreur apparente — il fonctionne lorsque sa mémoire, ses permissions et son état réel sont vérifiés par les tests. »
+          </blockquote>
+          <span class="editorial-quote-meta" data-fr="PRINCIPE D’INGÉNIERIE // VALGRIND • VITEST • PYTEST • PLAYWRIGHT" data-en="ENGINEERING PRINCIPLE // VALGRIND • VITEST • PYTEST • PLAYWRIGHT">PRINCIPE D’INGÉNIERIE // VALGRIND • VITEST • PYTEST • PLAYWRIGHT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         03.00 SEC_DOMAINS — INTERACTIVE SPECIALTY DOORS / VAULTS
+         ==================================================================== -->
+    <section class="section-block" id="domains">
+      <div class="container">
+        <div class="section-coord-bar" data-scroll-build="coord">
+          <span>// 03.00 COMPÉTENCES_CLÉS</span>
           <span class="section-coord-line" aria-hidden="true"></span>
-          <span class="section-coord-index">INDEX [04 / 05]</span>
+          <span class="section-coord-index">INDEX [03 / 06]</span>
         </div>
 
-        <p class="section-eyebrow" data-en="CAPABILITY MATRIX" data-fr="MATRICE DE COMPÉTENCES">CAPABILITY MATRIX</p>
-        <h2 class="section-title" data-en="Sovereign Technical Arsenal" data-fr="Arsenal Technique Souverain">Sovereign Technical Arsenal</h2>
+        <p class="section-eyebrow" data-scroll-build="heading" data-fr="DOMAINES D’INTERVENTION" data-en="CORE CAPABILITIES">DOMAINES D’INTERVENTION</p>
+        <h2 class="section-title" data-scroll-build="heading" data-fr="Ce que je sais concevoir concrètement" data-en="What I Bring to an Engineering Team">Ce que je sais concevoir concrètement</h2>
+        <p class="section-subtitle" data-scroll-build="heading"
+           data-fr="Cliquez sur une porte technique pour inspecter les outils, méthodes de test et livrables que je maîtrise au quotidien."
+           data-en="Select any engineering portal below to inspect the concrete tools, testing discipline, and deliverables I work with daily.">
+          Cliquez sur une porte technique pour inspecter les outils, méthodes de test et livrables que je maîtrise au quotidien.
+        </p>
 
-        <div class="arsenal-grid">
-          <div class="arsenal-col">
-            <div class="arsenal-col-code">01 // AUTONOMOUS AI</div>
-            <h3 class="arsenal-col-title" data-en="Agentic Cognition" data-fr="Cognition Agentique">Agentic Cognition</h3>
-            <ul class="arsenal-list">
-              <li>36-Agent Swarm Routing</li>
-              <li>Model Context Protocol (MCP)</li>
-              <li>Letta 4-Tier Memory Paging</li>
-              <li>Bounded Context Compilers</li>
-              <li>Dynamic Failure Replanning</li>
-            </ul>
+        <div class="doors-showcase" data-scroll-build="card">
+          <div class="doors-grid" role="tablist" aria-label="Domaines de compétences">
+            <button type="button" class="door-card active" data-door="0" role="tab" aria-selected="true">
+              <span class="door-plaque">01 // BACKEND &amp; SÉCURITÉ</span>
+              <span class="door-title" data-fr="Python, APIs &amp; Sécurité" data-en="Python, APIs &amp; AppSec">Python, APIs &amp; Sécurité</span>
+              <span class="door-handle" aria-hidden="true"></span>
+              <span class="door-cta" data-fr="Ouvrir →" data-en="Open →">Ouvrir →</span>
+            </button>
+
+            <button type="button" class="door-card" data-door="1" role="tab" aria-selected="false">
+              <span class="door-plaque">02 // SYSTÈMES &amp; C99</span>
+              <span class="door-title" data-fr="Bas Niveau &amp; Linux" data-en="Low-Level C &amp; Linux">Bas Niveau &amp; Linux</span>
+              <span class="door-handle" aria-hidden="true"></span>
+              <span class="door-cta" data-fr="Ouvrir →" data-en="Open →">Ouvrir →</span>
+            </button>
+
+            <button type="button" class="door-card" data-door="2" role="tab" aria-selected="false">
+              <span class="door-plaque">03 // AGENTS IA &amp; OUTILS</span>
+              <span class="door-title" data-fr="Automatisation &amp; IA" data-en="AI Agents &amp; Automation">Automatisation &amp; IA</span>
+              <span class="door-handle" aria-hidden="true"></span>
+              <span class="door-cta" data-fr="Ouvrir →" data-en="Open →">Ouvrir →</span>
+            </button>
+
+            <button type="button" class="door-card" data-door="3" role="tab" aria-selected="false">
+              <span class="door-plaque">04 // DATA &amp; WEB</span>
+              <span class="door-title" data-fr="SQL, Merise &amp; Interfaces" data-en="SQL, Data &amp; Web UI">SQL, Merise &amp; Interfaces</span>
+              <span class="door-handle" aria-hidden="true"></span>
+              <span class="door-cta" data-fr="Ouvrir →" data-en="Open →">Ouvrir →</span>
+            </button>
           </div>
 
-          <div class="arsenal-col">
-            <div class="arsenal-col-code">02 // SYSTEMS &amp; SILICON</div>
-            <h3 class="arsenal-col-title" data-en="Low-Level &amp; Linux" data-fr="Bas Niveau &amp; Linux">Low-Level &amp; Linux</h3>
-            <ul class="arsenal-list">
-              <li>ISO C99 &amp; Valgrind Audits</li>
-              <li>Python 3.12 Asyncio / FastAPI</li>
-              <li>Ubuntu 24.04 &amp; Systemd Units</li>
-              <li>Nginx Reverse Proxy &amp; SSH</li>
-              <li>Android ADB &amp; IPC Diagnostics</li>
-            </ul>
-          </div>
-
-          <div class="arsenal-col">
-            <div class="arsenal-col-code">03 // SECURITY &amp; PROOF</div>
-            <h3 class="arsenal-col-title" data-en="AppSec &amp; Verification" data-fr="Sécurité &amp; Preuve">AppSec &amp; Verification</h3>
-            <ul class="arsenal-list">
-              <li>Fail-Closed Policy Engines</li>
-              <li>XSS &amp; CWE-209 Remediation</li>
-              <li>Idempotent OAuth Concurrency</li>
-              <li>SHA-256 Post-Action Verification</li>
-              <li>Headless DOM &amp; TDD Gates</li>
-            </ul>
-          </div>
-
-          <div class="arsenal-col">
-            <div class="arsenal-col-code">04 // QUANT &amp; DATA</div>
-            <h3 class="arsenal-col-title" data-en="Markets &amp; Schemas" data-fr="Marchés &amp; Données">Markets &amp; Schemas</h3>
-            <ul class="arsenal-list">
-              <li>CLOB Order-Book Microstructure</li>
-              <li>EV &amp; Bounded Kelly Sizing</li>
-              <li>Merise Conceptual Modeling</li>
-              <li>Normalized SQL / SQLite WAL</li>
-              <li>Clean-Room Canvas &amp; Web UI</li>
-            </ul>
+          <div class="door-detail-panel" id="door-detail-panel" role="tabpanel">
+            <div>
+              <span class="layer-badge" id="door-badge">DOMAINE 01 // BACKEND PYTHON &amp; SÉCURITÉ APPLICATIVE</span>
+              <h3 class="door-detail-heading" id="door-heading">APIs FastAPI robustes, concurrence maîtrisée et correction de failles</h3>
+              <p class="door-detail-desc" id="door-desc">
+                Développement de services Python asynchrones propres, validation stricte des entrées et audit de sécurité inspiré de cas réels en production open-source.
+              </p>
+            </div>
+            <ul class="door-checklist" id="door-checklist"></ul>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- TUBIK VISUAL DIVIDER 04: HIGH-CONTRAST VERIFIED METRICS BAND -->
+    <div class="tubik-divider-metrics" aria-label="Repères chiffrés vérifiés">
+      <div class="container">
+        <div class="metrics-band-grid" data-scroll-build="card">
+          <div class="metric-band-cell">
+            <span class="metric-band-num">46</span>
+            <span class="metric-band-lbl" data-fr="PRs Open-Source fusionnées" data-en="Merged Open-Source PRs">PRs Open-Source fusionnées</span>
+          </div>
+          <div class="metric-band-cell">
+            <span class="metric-band-num" data-fr="02 Mois" data-en="02 Months">02 Mois</span>
+            <span class="metric-band-lbl" data-fr="Immersion en Angleterre (Brighton &amp; Bournemouth)" data-en="UK Immersion (Brighton &amp; Bournemouth)">Immersion en Angleterre (Brighton &amp; Bournemouth)</span>
+          </div>
+          <div class="metric-band-cell">
+            <span class="metric-band-num" data-fr="02 Stages" data-en="02 Internships">02 Stages</span>
+            <span class="metric-band-lbl" data-fr="Entreprises HUPI (Tech/Data) &amp; Marra (CAO)" data-en="HUPI (IT/Data) &amp; Marra (CAD Drafting)">Entreprises HUPI (Tech/Data) &amp; Marra (CAO)</span>
+          </div>
+          <div class="metric-band-cell">
+            <span class="metric-band-num">~1500</span>
+            <span class="metric-band-lbl" data-fr="Elo moyen aux Échecs (+ moteur V-Bot UCI)" data-en="Average Chess Elo (+ V-Bot UCI Engine)">Elo moyen aux Échecs (+ moteur V-Bot UCI)</span>
+          </div>
+          <div class="metric-band-cell">
+            <span class="metric-band-num">BUT 2</span>
+            <span class="metric-band-lbl" data-fr="Cible Alternance Parcours A (BAB / Remote)" data-en="Year-2 Co-op Target (Basque Coast / Remote)">Cible Alternance Parcours A (BAB / Remote)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ====================================================================
-         05.00 SEC_DISPATCH — DIRECT CONNECT & FOOTER
+         04.00 SEC_TIMELINE — COMPLETE 8-MILESTONE DATED CHRONOLOGY (2026 -> 2023)
+         ==================================================================== -->
+    <section class="section-block" id="timeline">
+      <div class="container">
+        <div class="section-coord-bar" data-scroll-build="coord">
+          <span>// 04.00 PARCOURS_CHRONOLOGIQUE_2023_2026</span>
+          <span class="section-coord-line" aria-hidden="true"></span>
+          <span class="section-coord-index">INDEX [04 / 06]</span>
+        </div>
+
+        <div class="timeline-split">
+          <!-- Left Sticky Year Readout -->
+          <div class="timeline-sticky-left" data-scroll-build="card">
+            <p class="section-eyebrow" data-fr="MON PARCOURS DATÉ" data-en="DATED CHRONOLOGY">MON PARCOURS DATÉ</p>
+            <h2 class="timeline-lead" data-fr="De 2023 à aujourd’hui." data-en="From 2023 to Today.">De 2023 à aujourd’hui.</h2>
+            <div class="timeline-big-year" id="timeline-big-year">2026</div>
+            <div class="timeline-period-label" id="timeline-period-label">OBJECTIF RENTRÉE 2026 • ALTERNANCE BUT 2</div>
+            <div class="timeline-step-bar">
+              <span id="timeline-step-count">01 / 08</span>
+              <div class="timeline-step-track">
+                <div class="timeline-step-fill" id="timeline-step-fill" style="width: 12.5%"></div>
+              </div>
+            </div>
+            <p class="timeline-sticky-note"
+               data-fr="8 jalons vérifiables : projets open-source, études supérieures à l’IUT d’Anglet, séjours linguistiques en Angleterre, baccalauréat scientifique et stages en entreprise."
+               data-en="8 verifiable milestones spanning open-source engineering, university CS studies, UK language immersions, scientific Baccalauréat, and early industry internships.">
+              8 jalons vérifiables : projets open-source, études supérieures à l’IUT d’Anglet, séjours linguistiques en Angleterre, baccalauréat scientifique et stages en entreprise.
+            </p>
+          </div>
+
+          <!-- Right Scrollable 8-Milestone Rail -->
+          <div class="timeline-rail">
+
+            <!-- 01 / 08: 2026-2027 Alternance BUT 2 -->
+            <article class="timeline-item active" data-year="2026"
+                     data-period-fr="OBJECTIF RENTRÉE 2026 • ALTERNANCE BUT 2" data-period-en="NEXT MILESTONE • YEAR-2 CS APPRENTICESHIP"
+                     data-step="01 / 08" data-pct="12.5%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="RENTRÉE 2026 — 2027 • CANDIDATURE ALTERNANCE" data-en="2026 — 2027 • YEAR-2 APPRENTICESHIP TARGET">RENTRÉE 2026 — 2027 • CANDIDATURE ALTERNANCE</span>
+                <span class="timeline-loc-pill" data-fr="BAB / Bidart • Hybride • Remote" data-en="Basque Coast • Hybrid • Remote">BAB / Bidart • Hybride • Remote</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="Recherche d’Alternance — 2e année de BUT Informatique (Parcours A)" data-en="Seeking a Year-2 Computer Science Software Apprenticeship (Track A)">Recherche d’Alternance — 2e année de BUT Informatique (Parcours A)</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Prêt à rejoindre une équipe d’ingénierie logicielle dès la 2e année de mon BUT Informatique (Parcours A : Réalisation d’applications — conception, développement, validation) : backend Python / TypeScript, full-stack web, sécurité applicative, Linux ou outils IA / MCP. Véhiculé et autonome sur Biarritz, Anglet, Bayonne et Bidart."
+                 data-en="Ready to join an engineering team for my Year-2 CS degree (Track A: Application Design, Development &amp; Validation) across Python/TypeScript backends, full-stack web, application security, Linux, or AI/MCP tooling. Autonomous commuter across Biarritz, Anglet, Bayonne &amp; Bidart.">
+                Prêt à rejoindre une équipe d’ingénierie logicielle dès la 2e année de mon BUT Informatique (Parcours A : Réalisation d’applications — conception, développement, validation) : backend Python / TypeScript, full-stack web, sécurité applicative, Linux ou outils IA / MCP. Véhiculé et autonome sur Biarritz, Anglet, Bayonne et Bidart.
+              </p>
+            </article>
+
+            <!-- 02 / 08: 2025-2026 46 PRs Open-Source & MCP -->
+            <article class="timeline-item" data-year="2026"
+                     data-period-fr="2025 — 2026 • 46 PRS OPEN-SOURCE &amp; MCP" data-period-en="2025 — 2026 • 46 MERGED PRS &amp; MCP"
+                     data-step="02 / 08" data-pct="25%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="2025 — 2026 • PRODUCTION OPEN-SOURCE" data-en="2025 — 2026 • UPSTREAM OPEN SOURCE">2025 — 2026 • PRODUCTION OPEN-SOURCE</span>
+                <span class="timeline-loc-pill">GitHub @Mateidslx</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="46 Pull Requests fusionnées (Twenty 40k★, Omi 8k★, FinTech) &amp; Security Scanner MCP" data-en="46 Merged Pull Requests (Twenty 40k★, Omi 8k★, FinTech) &amp; Security Scanner MCP">46 Pull Requests fusionnées (Twenty 40k★, Omi 8k★, FinTech) &amp; Security Scanner MCP</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Contrôles de permissions RBAC (#26490) et ORM (#26502) fusionnés sur Twenty CRM, élimination de fuites CWE-209 et XSS sur BasedHardware/omi, 38 PRs TypeScript/React/Vitest sur plateformes FinTech, publication de security-scanner-mcp (Smithery &amp; Glama) et mise en production 24/7 de l’infrastructure Kai sur VPS Ubuntu 24.04."
+                 data-en="RBAC permission guards (#26490) and ORM batch payloads (#26502) merged in Twenty CRM, CWE-209 &amp; XSS patches in BasedHardware/omi, 38 TypeScript/React/Vitest PRs in FinTech apps, publication of security-scanner-mcp, and 24/7 Ubuntu 24.04 VPS orchestration.">
+                Contrôles de permissions RBAC (#26490) et ORM (#26502) fusionnés sur Twenty CRM, élimination de fuites CWE-209 et XSS sur BasedHardware/omi, 38 PRs TypeScript/React/Vitest sur plateformes FinTech, publication de security-scanner-mcp (Smithery &amp; Glama) et mise en production 24/7 de l’infrastructure Kai sur VPS Ubuntu 24.04.
+              </p>
+            </article>
+
+            <!-- 03 / 08: Septembre 2025 - Présent BUT Informatique IUT Anglet -->
+            <article class="timeline-item" data-year="2025"
+                     data-period-fr="SEPTEMBRE 2025 — PRÉSENT • IUT D’ANGLET" data-period-en="SEPTEMBER 2025 — PRESENT • UPPA ANGLET"
+                     data-step="03 / 08" data-pct="37.5%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="SEPTEMBRE 2025 — PRÉSENT • ÉTUDES SUPÉRIEURES" data-en="SEPTEMBER 2025 — PRESENT • UNIVERSITY CS DEGREE">SEPTEMBRE 2025 — PRÉSENT • ÉTUDES SUPÉRIEURES</span>
+                <span class="timeline-loc-pill">Anglet (UPPA)</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="BUT Informatique — IUT de Bayonne et du Pays Basque (Campus d’Anglet)" data-en="Bachelor of Technology in Computer Science — IUT Bayonne / Anglet">BUT Informatique — IUT de Bayonne et du Pays Basque (Campus d’Anglet)</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Formation intensive couvrant les 6 compétences du BUT Informatique (Semestres 1 &amp; 2) : algorithmique structurée, programmation ISO C99 sous Valgrind, C++ &amp; POO, théorie des graphes, conception de bases de données Merise / PostgreSQL, administration système Linux, réseaux, IHM et création du portail d’entraide Kai Academic."
+                 data-en="Intensive Computer Science engineering curriculum (Semesters 1 &amp; 2): structured algorithms, Valgrind-verified ISO C99, C++ OOP, graph theory, 3NF Merise/PostgreSQL databases, Linux systems, networking, GUI labs, and creation of the Kai Academic peer study portal.">
+                Formation intensive couvrant les 6 compétences du BUT Informatique (Semestres 1 &amp; 2) : algorithmique structurée, programmation ISO C99 sous Valgrind, C++ &amp; POO, théorie des graphes, conception de bases de données Merise / PostgreSQL, administration système Linux, réseaux, IHM et création du portail d’entraide Kai Academic.
+              </p>
+            </article>
+
+            <!-- 04 / 08: Juillet 2025 Séjour linguistique Brighton -->
+            <article class="timeline-item" data-year="2025"
+                     data-period-fr="JUILLET 2025 (1 MOIS) • BRIGHTON, ANGLETERRE" data-period-en="JULY 2025 (1 MONTH) • BRIGHTON, ENGLAND"
+                     data-step="04 / 08" data-pct="50%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="JUILLET 2025 • SÉJOUR LINGUISTIQUE (1 MOIS)" data-en="JULY 2025 • LANGUAGE IMMERSION (1 MONTH)">JUILLET 2025 • SÉJOUR LINGUISTIQUE (1 MOIS)</span>
+                <span class="timeline-loc-pill">Brighton, UK</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="Séjour linguistique en immersion totale — Brighton, Angleterre" data-en="Full-Immersion English Language Stay — Brighton, England">Séjour linguistique en immersion totale — Brighton, Angleterre</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Un mois complet en immersion anglophone intégrale à Brighton pour perfectionner ma fluidité à l’oral et à l’écrit — un atout direct que je mobilise aujourd’hui quotidiennement pour collaborer en anglais avec les mainteneurs de dépôts open-source internationaux."
+                 data-en="One full month of total English immersion in Brighton to sharpen spoken and written fluency — directly supporting my daily technical communication with international open-source maintainers.">
+                Un mois complet en immersion anglophone intégrale à Brighton pour perfectionner ma fluidité à l’oral et à l’écrit — un atout direct que je mobilise aujourd’hui quotidiennement pour collaborer en anglais avec les mainteneurs de dépôts open-source internationaux.
+              </p>
+            </article>
+
+            <!-- 05 / 08: 2022 - Juin 2025 Baccalauréat Lycée Polyvalent Cantau Anglet -->
+            <article class="timeline-item" data-year="2025"
+                     data-period-fr="2022 — JUIN 2025 • LYCÉE POLYVALENT CANTAU" data-period-en="2022 — JUNE 2025 • LYCÉE POLYVALENT CANTAU"
+                     data-step="05 / 08" data-pct="62.5%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="2022 — JUIN 2025 • BACCALAURÉAT GÉNÉRAL" data-en="2022 — JUNE 2025 • FRENCH BACCALAURÉAT">2022 — JUIN 2025 • BACCALAURÉAT GÉNÉRAL</span>
+                <span class="timeline-loc-pill">Lycée Cantau, Anglet</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="Baccalauréat Général — Spécialités Mathématiques &amp; NSI (+ SI en Première)" data-en="General Baccalauréat — Mathematics &amp; Computer Science (NSI) + Engineering Sciences (SI)">Baccalauréat Général — Spécialités Mathématiques &amp; NSI (+ SI en Première)</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Obtention du Baccalauréat Général au Lycée Polyvalent Cantau d’Anglet avec les spécialités Mathématiques et Numérique &amp; Sciences Informatiques (NSI) en Terminale, précédées de la spécialité Sciences de l’Ingénieur (SI) en Première : algorithmique Python, structures de données, bases SQL et analyse des systèmes."
+                 data-en="Graduated from Lycée Polyvalent Cantau (Anglet) with Senior specialties in Mathematics and Computer Science (NSI), preceded by Engineering Sciences (SI) in Junior year: Python algorithms, data structures, relational SQL, and systems analysis.">
+                Obtention du Baccalauréat Général au Lycée Polyvalent Cantau d’Anglet avec les spécialités Mathématiques et Numérique &amp; Sciences Informatiques (NSI) en Terminale, précédées de la spécialité Sciences de l’Ingénieur (SI) en Première : algorithmique Python, structures de données, bases SQL et analyse des systèmes.
+              </p>
+            </article>
+
+            <!-- 06 / 08: Juillet 2024 Séjour linguistique Bournemouth -->
+            <article class="timeline-item" data-year="2024"
+                     data-period-fr="JUILLET 2024 (1 MOIS) • BOURNEMOUTH, ANGLETERRE" data-period-en="JULY 2024 (1 MONTH) • BOURNEMOUTH, ENGLAND"
+                     data-step="06 / 08" data-pct="75%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="JUILLET 2024 • SÉJOUR LINGUISTIQUE (1 MOIS)" data-en="JULY 2024 • LANGUAGE IMMERSION (1 MONTH)">JUILLET 2024 • SÉJOUR LINGUISTIQUE (1 MOIS)</span>
+                <span class="timeline-loc-pill">Bournemouth, UK</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="Séjour linguistique en immersion — Bournemouth, Angleterre" data-en="English Language Immersion Stay — Bournemouth, England">Séjour linguistique en immersion — Bournemouth, Angleterre</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Premier séjour d’un mois en Angleterre sur la côte sud (Bournemouth) axé sur la pratique intensive de l’anglais oral et écrit en situation quotidienne et l’autonomie à l’étranger."
+                 data-en="First one-month language stay on England’s south coast (Bournemouth), building strong everyday spoken and written English proficiency and independence abroad.">
+                Premier séjour d’un mois en Angleterre sur la côte sud (Bournemouth) axé sur la pratique intensive de l’anglais oral et écrit en situation quotidienne et l’autonomie à l’étranger.
+              </p>
+            </article>
+
+            <!-- 07 / 08: Juin 2024 Stage informatique chez HUPI -->
+            <article class="timeline-item" data-year="2024"
+                     data-period-fr="JUIN 2024 (2 SEMAINES) • STAGE CHEZ HUPI" data-period-en="JUNE 2024 (2 WEEKS) • INTERNSHIP AT HUPI"
+                     data-step="07 / 08" data-pct="87.5%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="JUIN 2024 • STAGE EN ENTREPRISE INFORMATIQUE (SECONDE)" data-en="JUNE 2024 • IT &amp; DATA SCIENCE INTERNSHIP">JUIN 2024 • STAGE EN ENTREPRISE INFORMATIQUE (SECONDE)</span>
+                <span class="timeline-loc-pill">HUPI • Côte Basque</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="Stage d’observation &amp; initiation — HUPI (Entreprise Informatique, IA &amp; Data)" data-en="Software &amp; Data Observation Internship — HUPI (Basque Coast)">Stage d’observation &amp; initiation — HUPI (Entreprise Informatique, IA &amp; Data)</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Immersion de deux semaines déterminante au sein de l’entreprise informatique HUPI : observation concrète du travail d’équipe entre développeurs et data scientists, découverte des méthodes professionnelles et pratique guidée en Python, JavaScript, HTML et CSS."
+                 data-en="Pivotal two-week immersion inside tech &amp; data company HUPI: observing real-world collaboration across software developers and data scientists, agile workflows, and hands-on practice in Python, JavaScript, HTML, and CSS.">
+                Immersion de deux semaines déterminante au sein de l’entreprise informatique HUPI : observation concrète du travail d’équipe entre développeurs et data scientists, découverte des méthodes professionnelles et pratique guidée en Python, JavaScript, HTML et CSS.
+              </p>
+            </article>
+
+            <!-- 08 / 08: Janvier 2023 Stage chez Marra -->
+            <article class="timeline-item" data-year="2023"
+                     data-period-fr="JANVIER 2023 (1 SEMAINE) • STAGE CHEZ MARRA" data-period-en="JANUARY 2023 (1 WEEK) • INTERNSHIP AT MARRA"
+                     data-step="08 / 08" data-pct="100%" data-scroll-build="card">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <div class="timeline-meta-row">
+                <span class="timeline-date" data-fr="JANVIER 2023 • STAGE EN BUREAU D’ÉTUDES (3E)" data-en="JANUARY 2023 • TECHNICAL DRAFTING INTERNSHIP">JANVIER 2023 • STAGE EN BUREAU D’ÉTUDES (3E)</span>
+                <span class="timeline-loc-pill">Marra • Côte Basque</span>
+              </div>
+              <h3 class="timeline-item-title" data-fr="Stage d’observation — Marra (Entreprise Dessinateur-Projeteur)" data-en="Technical Drafting Observation Internship — Marra">Stage d’observation — Marra (Entreprise Dessinateur-Projeteur)</h3>
+              <p class="timeline-item-desc"
+                 data-fr="Première découverte d’une entreprise pendant une semaine auprès d’un dessinateur-projeteur : initiation à la précision des plans techniques, à la modélisation structurée en bureau d’études et aux exigences de rigueur professionnelle."
+                 data-en="One-week first immersion in a technical design office alongside a CAD drafter-designer: discovering structured technical blueprints, spatial precision, and professional workplace standards.">
+                Première découverte d’une entreprise pendant une semaine auprès d’un dessinateur-projeteur : initiation à la précision des plans techniques, à la modélisation structurée en bureau d’études et aux exigences de rigueur professionnelle.
+              </p>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TUBIK VISUAL DIVIDER 05: SVG ISOMETRIC HORIZON GRID WAVE -->
+    <div class="tubik-divider-iso-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 76" preserveAspectRatio="none">
+        <path d="M0,38 C320,8 560,68 880,34 C1120,10 1300,52 1440,28" fill="none" stroke="rgba(239,68,68,0.42)" stroke-width="1.5" />
+        <path d="M0,54 C360,24 620,74 940,44 C1160,24 1320,60 1440,42" fill="none" stroke="rgba(161,161,170,0.22)" stroke-width="1" stroke-dasharray="5 6" />
+      </svg>
+    </div>
+
+    <!-- ====================================================================
+         05.00 SEC_EXPERIENCE_DNA — STAGES, UK IMMERSION, WORK ETHIC & CHESS
+         ==================================================================== -->
+    <section class="section-block section-surface-alt" id="experience-dna">
+      <div class="container">
+        <div class="section-coord-bar" data-scroll-build="coord">
+          <span>// 05.00 PROFIL_TERRAIN_ET_ADN</span>
+          <span class="section-coord-line" aria-hidden="true"></span>
+          <span class="section-coord-index">INDEX [05 / 06]</span>
+        </div>
+
+        <p class="section-eyebrow" data-scroll-build="heading" data-fr="EXPÉRIENCES TERRAIN, LANGUES &amp; PERSONNALITÉ" data-en="FIELD EXPERIENCE, LANGUAGES &amp; WORK ETHIC">EXPÉRIENCES TERRAIN, LANGUES &amp; PERSONNALITÉ</p>
+        <h2 class="section-title" data-scroll-build="heading" data-fr="Ancrage professionnel, immersion UK &amp; rigueur tactique" data-en="Industry Grounding, UK Immersion &amp; Tactical Discipline">Ancrage professionnel, immersion UK &amp; rigueur tactique</h2>
+        <p class="section-subtitle" data-scroll-build="heading"
+           data-fr="Au-delà du code sur GitHub : mes premières immersions en entreprise sur la Côte Basque, deux étés complets en Angleterre, ma méthode de travail et ma pratique des échecs."
+           data-en="Beyond GitHub commits: early internships on the Basque Coast, two full summers in England, disciplined work habits, and competitive chess.">
+          Au-delà du code sur GitHub : mes premières immersions en entreprise sur la Côte Basque, deux étés complets en Angleterre, ma méthode de travail et ma pratique des échecs.
+        </p>
+
+        <div class="dna-bento-grid rich-dna-grid">
+
+          <!-- CARD 01: STAGES HUPI & MARRA -->
+          <div class="dna-card" data-scroll-build="card">
+            <span class="layer-badge" data-fr="01 // PREMIÈRES IMMERSIONS EN ENTREPRISE" data-en="01 // EARLY INDUSTRY INTERNSHIPS">01 // PREMIÈRES IMMERSIONS EN ENTREPRISE</span>
+            <h3 class="dna-card-title" data-fr="HUPI (Tech, IA &amp; Data) &amp; Marra (Bureau d’études CAO)" data-en="HUPI (IT, AI &amp; Data) &amp; Marra (CAD Design Office)">HUPI (Tech, IA &amp; Data) &amp; Marra (Bureau d’études CAO)</h3>
+            <p class="dna-card-desc"
+               data-fr="Deux stages qui ont confirmé ma vocation pour l’ingénierie logicielle et le travail en équipe :"
+               data-en="Two early internships that confirmed my drive for software engineering and structured teamwork:">
+              Deux stages qui ont confirmé ma vocation pour l’ingénierie logicielle et le travail en équipe :
+            </p>
+            <div class="dna-mini-timeline">
+              <div class="dna-mini-row">
+                <span class="dna-mini-tag">JUIN 2024 • HUPI</span>
+                <p data-fr="2 semaines d’immersion avec des développeurs et data scientists (Python, JavaScript, HTML/CSS, méthodes d’équipe)."
+                   data-en="2 weeks shadowing software developers and data scientists (Python, JavaScript, HTML/CSS, team workflows).">
+                  2 semaines d’immersion avec des développeurs et data scientists (Python, JavaScript, HTML/CSS, méthodes d’équipe).
+                </p>
+              </div>
+              <div class="dna-mini-row">
+                <span class="dna-mini-tag">JANV. 2023 • MARRA</span>
+                <p data-fr="1 semaine auprès d’un dessinateur-projeteur : découverte de la conception sur plans techniques et de la précision géométrique."
+                   data-en="1 week with a technical CAD drafter-designer: blueprint precision, spatial modeling, and studio rigor.">
+                  1 semaine auprès d’un dessinateur-projeteur : découverte de la conception sur plans techniques et de la précision géométrique.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 02: IMMERSION UK (BRIGHTON + BOURNEMOUTH) & LANGUES / MOBILITÉ -->
+          <div class="dna-card" data-scroll-build="card">
+            <span class="layer-badge" data-fr="02 // OUVERTURE INTERNATIONALE &amp; MOBILITÉ BAB" data-en="02 // UK IMMERSIONS, LANGUAGES &amp; MOBILITY">02 // OUVERTURE INTERNATIONALE &amp; MOBILITÉ BAB</span>
+            <h3 class="dna-card-title" data-fr="2 Mois en Angleterre (Brighton &amp; Bournemouth)" data-en="2 Months in England (Brighton &amp; Bournemouth)">2 Mois en Angleterre (Brighton &amp; Bournemouth)</h3>
+            <p class="dna-card-desc"
+               data-fr="Deux séjours linguistiques d’un mois en immersion totale (Bournemouth en juillet 2024, Brighton en juillet 2025) qui me permettent d’échanger naturellement en anglais technique à l’écrit comme à l’oral."
+               data-en="Two full-month immersion stays in England (Bournemouth in July 2024, Brighton in July 2025), enabling natural daily collaboration in technical English.">
+              Deux séjours linguistiques d’un mois en immersion totale (Bournemouth en juillet 2024, Brighton en juillet 2025) qui me permettent d’échanger naturellement en anglais technique à l’écrit comme à l’oral.
+            </p>
+            <div class="lang-matrix">
+              <div class="lang-chip"><strong>Français</strong> <span data-fr="Langue maternelle" data-en="Native">Langue maternelle</span></div>
+              <div class="lang-chip accent"><strong>English</strong> <span data-fr="Tech quotidien + 2 mois UK" data-en="Daily Tech + 2 mo. UK">Tech quotidien + 2 mois UK</span></div>
+              <div class="lang-chip"><strong>Euskara</strong> <span data-fr="Basque (notions)" data-en="Basque (basics)">Basque (notions)</span></div>
+              <div class="lang-chip"><strong>Español</strong> <span data-fr="Compréhension écrite/orale" data-en="Reading &amp; listening">Compréhension écrite/orale</span></div>
+            </div>
+          </div>
+
+          <!-- CARD 03: QUALITÉS PROFESSIONNELLES & MÉTHODE VÉRIFIÉE -->
+          <div class="dna-card" data-scroll-build="card">
+            <span class="layer-badge" data-fr="03 // ÉTHIQUE DE TRAVAIL &amp; QUALITÉ LOGICIELLE" data-en="03 // WORK ETHIC &amp; VERIFICATION CULTURE">03 // ÉTHIQUE DE TRAVAIL &amp; QUALITÉ LOGICIELLE</span>
+            <h3 class="dna-card-title" data-fr="Sérieux, calme, organisé &amp; orienté preuves" data-en="Calm, organized, punctual &amp; test-driven">Sérieux, calme, organisé &amp; orienté preuves</h3>
+            <p class="dna-card-desc"
+               data-fr="Habitué aux revues de code exigeantes en open-source : je privilégie la fiabilité, le respect strict des délais et la validation systématique (Valgrind, Vitest, Pytest, Playwright)."
+               data-en="Shaped by strict upstream code reviews: I prioritize reliability, deadline discipline, and automated verification (Valgrind, Vitest, Pytest, Playwright).">
+              Habitué aux revues de code exigeantes en open-source : je privilégie la fiabilité, le respect strict des délais et la validation systématique (Valgrind, Vitest, Pytest, Playwright).
+            </p>
+            <div class="trait-bars-list">
+              <div class="trait-bar-item">
+                <div class="trait-bar-head"><span data-fr="Rigueur &amp; Respect des délais" data-en="Rigor &amp; Deadline Reliability">Rigueur &amp; Respect des délais</span><span>5 / 5</span></div>
+                <div class="trait-bar-track"><i style="width: 100%"></i></div>
+              </div>
+              <div class="trait-bar-item">
+                <div class="trait-bar-head"><span data-fr="Motivation &amp; Curiosité « sous le capot »" data-en="Drive &amp; Under-the-Hood Curiosity">Motivation &amp; Curiosité « sous le capot »</span><span>5 / 5</span></div>
+                <div class="trait-bar-track"><i style="width: 100%"></i></div>
+              </div>
+              <div class="trait-bar-item">
+                <div class="trait-bar-head"><span data-fr="Organisation &amp; Travail en équipe (Git / PRs)" data-en="Organization &amp; Team Collaboration (Git / PRs)">Organisation &amp; Travail en équipe (Git / PRs)</span><span>4.6 / 5</span></div>
+                <div class="trait-bar-track"><i style="width: 92%"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 04: ÉCHECS (~1500 ELO) + MINI TACTICAL SVG BOARD & SPORT -->
+          <div class="dna-card dna-chess-card" data-scroll-build="card">
+            <div class="dna-chess-split">
+              <div>
+                <span class="layer-badge" data-fr="04 // ÉCHECS, CALCUL &amp; VIE ACTIVE" data-en="04 // CHESS, CALCULATION &amp; SPORTS">04 // ÉCHECS, CALCUL &amp; VIE ACTIVE</span>
+                <h3 class="dna-card-title" data-fr="Échecs (~1500 Elo), V-Bot UCI &amp; Sport Côte Basque" data-en="Chess (~1500 Elo), V-Bot UCI &amp; Basque Coast Sports">Échecs (~1500 Elo), V-Bot UCI &amp; Sport Côte Basque</h3>
+                <p class="dna-card-desc"
+                   data-fr="Passionné par les échecs et les jeux de réflexion (~1500 Elo de moyenne sur mes comptes) : calcul d’arbres de variantes, gestion du temps sous pression et développement de mon propre extracteur FEN / Stockfish NNUE (V-Bot). Pratique sportive régulière à Biarritz/Anglet."
+                   data-en="Passionate about chess and strategy games (~1500 average rating): tactical tree calculation, clock management under pressure, and building my own OpenCV/DOM FEN + Stockfish NNUE analyzer (V-Bot). Regular sports on the Basque Coast.">
+                  Passionné par les échecs et les jeux de réflexion (~1500 Elo de moyenne sur mes comptes) : calcul d’arbres de variantes, gestion du temps sous pression et développement de mon propre extracteur FEN / Stockfish NNUE (V-Bot). Pratique sportive régulière à Biarritz/Anglet.
+                </p>
+              </div>
+
+              <!-- Crisp Vector Mini Tactical Board (4x4 Endgame Corner Motif) -->
+              <div class="chess-mini-widget" aria-label="Aperçu tactique Échecs ~1500 Elo">
+                <div class="chess-mini-head">
+                  <span>ELO ~1500</span>
+                  <span>NNUE +2.4</span>
+                </div>
+                <svg class="chess-mini-svg" viewBox="0 0 120 120" aria-hidden="true">
+                  <rect width="120" height="120" fill="#121218" />
+                  <!-- Light squares -->
+                  <rect x="0" y="0" width="30" height="30" fill="#272732" />
+                  <rect x="60" y="0" width="30" height="30" fill="#272732" />
+                  <rect x="30" y="30" width="30" height="30" fill="#272732" />
+                  <rect x="90" y="30" width="30" height="30" fill="#272732" />
+                  <rect x="0" y="60" width="30" height="30" fill="#272732" />
+                  <rect x="60" y="60" width="30" height="30" fill="#272732" />
+                  <rect x="30" y="90" width="30" height="30" fill="#272732" />
+                  <rect x="90" y="90" width="30" height="30" fill="#272732" />
+                  <!-- Tactical Knight Jump Highlight -->
+                  <rect x="60" y="30" width="30" height="30" fill="rgba(239,68,68,0.28)" stroke="#ef4444" stroke-width="1.2" />
+                  <path d="M45 105 L45 45 L75 45" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 2" />
+                  <circle cx="75" cy="45" r="4" fill="#ef4444" />
+                  <!-- Minimal geometric chess glyphs -->
+                  <text x="45" y="111" text-anchor="middle" fill="#fafafa" font-size="20" font-family="serif">♞</text>
+                  <text x="105" y="22" text-anchor="middle" fill="#a1a1aa" font-size="20" font-family="serif">♚</text>
+                  <text x="15" y="52" text-anchor="middle" fill="#ef4444" font-size="20" font-family="serif">♜</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         06.00 SEC_CONTACT — DIRECT CONNECT & FOOTER
          ==================================================================== -->
     <section class="section-block" id="contact">
       <div class="container">
-        <div class="section-coord-bar">
-          <span>// 05.00 SEC_DISPATCH</span>
+        <div class="section-coord-bar" data-scroll-build="coord">
+          <span>// 06.00 CONTACT_ALTERNANCE</span>
           <span class="section-coord-line" aria-hidden="true"></span>
-          <span class="section-coord-index">INDEX [05 / 05]</span>
+          <span class="section-coord-index">INDEX [06 / 06]</span>
         </div>
 
-        <div class="contact-card">
-          <p class="section-eyebrow">DIRECT CONNECT</p>
+        <div class="contact-card" data-scroll-build="card">
+          <p class="section-eyebrow" data-fr="CANDIDATURE ALTERNANCE BUT 2 &amp; PROJETS" data-en="YEAR-2 APPRENTICESHIP &amp; DIRECT CONTACT">CANDIDATURE ALTERNANCE BUT 2 &amp; PROJETS</p>
           <h2 class="contact-title"
-              data-en="Let's Architect Something Extraordinary."
-              data-fr="Architecturons Quelque Chose d’Extraordinaire.">
-            Let's Architect Something Extraordinary.
+              data-fr="À la recherche d’une alternance pour ma 2e année de BUT Informatique."
+              data-en="Seeking a Year-2 Software Engineering Apprenticeship.">
+            À la recherche d’une alternance pour ma 2e année de BUT Informatique.
           </h2>
           <p class="contact-desc"
-             data-en="Available for autonomous AI system architecture, open-source security engineering, quantitative infrastructure, and ambitious technical collaborations."
-             data-fr="Disponible pour l’architecture de systèmes IA autonomes, l’ingénierie sécurité open-source, l’infrastructure quantitative et les collaborations techniques ambitieuses.">
-            Available for autonomous AI system architecture, open-source security engineering, quantitative infrastructure, and ambitious technical collaborations.
+             data-fr="Vous recrutez un alternant sérieux, organisé et déjà habitué aux revues de code exigeantes en production (Python, TypeScript, C99/C++, SQL, Linux, Sécurité) ? Échangeons directement par e-mail."
+             data-en="Looking for a serious, organized apprentice already accustomed to production code reviews and test-driven engineering across Python, TypeScript, C99/C++, SQL, and Linux? Let's connect directly.">
+            Vous recrutez un alternant sérieux, organisé et déjà habitué aux revues de code exigeantes en production (Python, TypeScript, C99/C++, SQL, Linux, Sécurité) ? Échangeons directement par e-mail.
           </p>
 
           <div class="email-dispatch-row">
             <span class="email-address-text">matei64200@gmail.com</span>
-            <button type="button" class="btn-copy-email" id="btn-copy-email"
-                    data-en="Copy Email Address" data-fr="Copier l’Adresse E-mail">
-              Copy Email Address
+            <button type="button" class="btn-copy-email magnetic-btn" id="btn-copy-email"
+                    data-fr="Copier mon e-mail" data-en="Copy Email Address">
+              Copier mon e-mail
             </button>
+            <a href="mailto:matei64200@gmail.com?subject=Alternance%20BUT%202%20Informatique%20%E2%80%94%20Mat%C3%A9i%20de%20Saint%20L%C3%A9ger" class="btn-mailto-link"
+               data-fr="Proposer un entretien ↗" data-en="Send Email ↗">Proposer un entretien ↗</a>
           </div>
 
           <div class="social-pills-row">
+            <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" download class="social-pill cv-pill">
+              <span>↓</span>
+              <span data-fr="Télécharger CV Français (PDF)" data-en="Download French CV (PDF)">Télécharger CV Français (PDF)</span>
+            </a>
+            <a href="portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf" download class="social-pill cv-pill">
+              <span>↓</span>
+              <span data-fr="Télécharger CV Anglais (PDF)" data-en="Download English Resume (PDF)">Télécharger CV Anglais (PDF)</span>
+            </a>
             <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="social-pill">
               <span>⌘</span>
               <span>github.com/Mateidslx</span>
             </a>
-            <a href="https://github.com/BasedHardware/omi/pulls?q=is%3Apr+author%3AMateidslx" target="_blank" rel="noopener noreferrer" class="social-pill">
-              <span>⚡</span>
-              <span>BasedHardware/omi (7 PRs)</span>
+            <a href="https://github.com/pulls?q=is%3Apr+author%3AMateidslx+is%3Amerged" target="_blank" rel="noopener noreferrer" class="social-pill">
+              <span>⊕</span>
+              <span data-fr="46 PRs fusionnées (GitHub)" data-en="46 Merged PRs (GitHub)">46 PRs fusionnées (GitHub)</span>
             </a>
-            <span class="social-pill">
-              <span>◎</span>
-              <span>Biarritz / Anglet — FR</span>
-            </span>
+          </div>
+
+          <div class="telemetry-strip" aria-label="Informations locales">
+            <span><strong data-fr="ZONE :" data-en="AREA:">ZONE :</strong> BAB / BIDART • HYBRIDE • REMOTE (<span id="live-biarritz-clock">--:-- CET</span>)</span>
+            <span><strong data-fr="PARCOURS :" data-en="TRACK:">PARCOURS :</strong> BUT 2 RÉALISATION D’APPLICATIONS</span>
+            <span><strong>RACCOURCI :</strong> CTRL+K / ⌘K</span>
           </div>
 
           <footer class="footer-credit">
-            <span>© 2026 Matéi de Saint Léger. Designed with Noir &amp; Crimson Op-Art.</span>
-            <span data-en="Engineered from first principles. Zero corporate fluff." data-fr="Conçu depuis les premiers principes. Zéro superflu.">Engineered from first principles. Zero corporate fluff.</span>
-            <button type="button" class="footer-replay-btn" id="footer-replay-swarm"
-                    data-en="↻ Replay 28-Agent Live Build" data-fr="↻ Relancer la Construction par les 28 Agents">
-              ↻ Replay 28-Agent Live Build
+            <span data-fr="© 2026 Matéi de Saint Léger — Conçu et codé sur mesure en HTML, CSS &amp; JS natif." data-en="© 2026 Matéi de Saint Léger — Hand-crafted in vanilla HTML, CSS &amp; JS.">© 2026 Matéi de Saint Léger — Conçu et codé sur mesure en HTML, CSS &amp; JS natif.</span>
+            <button type="button" class="footer-replay-btn" id="footer-back-top"
+                    data-fr="↑ Remonter tout en haut" data-en="↑ Back to Top">
+              ↑ Remonter tout en haut
             </button>
           </footer>
         </div>
@@ -714,9 +1153,25 @@
 
   </main>
 
+  <!-- RAUNO / LINEAR INSPIRED COMMAND PALETTE (CTRL+K / CMD+K) -->
+  <div class="cmdk-backdrop" id="cmdk-backdrop" role="dialog" aria-modal="true" aria-label="Palette de commandes">
+    <div class="cmdk-dialog">
+      <div class="cmdk-input-wrap">
+        <span class="cmdk-prompt">&gt;_</span>
+        <input type="text" class="cmdk-input" id="cmdk-input"
+               data-placeholder-fr="Rechercher une section, vue 3D, télécharger mon CV, changer la langue..."
+               data-placeholder-en="Jump to section, 3D stack, download resume, switch language..."
+               placeholder="Rechercher une section, vue 3D, télécharger mon CV, changer la langue..." autocomplete="off" />
+        <span class="cmdk-esc-hint">ESC</span>
+      </div>
+      <div class="cmdk-list" id="cmdk-list"></div>
+    </div>
+  </div>
+
   <div class="toast-banner" id="toast-banner" role="status" aria-live="polite"></div>
 
-  <script src="portfolio_assets/portfolio_core.js" defer></script>
-  <script src="portfolio_assets/agentic_swarm.js" defer></script>
+  <script src="portfolio_assets/portfolio_core.js?v=11" defer></script>
+  <script src="portfolio_assets/exploded_view.js?v=11" defer></script>
+  <script src="portfolio_assets/scroll_architect.js?v=11" defer></script>
 </body>
 </html>
