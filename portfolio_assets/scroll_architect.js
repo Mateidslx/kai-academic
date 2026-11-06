@@ -1,29 +1,30 @@
 /* ==========================================================================
-   MATÉI DE SAINT LÉGER — AUTHENTIC MULTI-AGENT CAD & FIGMA BUILDER ENGINE (V12)
-   1. On Page Refresh/Load: Multi-Cursor Crew Spawns & Constructs Hero Live
-   2. Floating Patrol State: Cursors Float Organically Around Viewport (Never Vanish)
-   3. Viewport Companion Physics: Cursors Smoothly Follow on Scroll-Up with Inertia
-   4. Scroll Frontier Construction: Cursors Swarm onto Unbuilt Content to Build Live
-   5. Two-Way Deconstruction: Crimson Reverse-CAD Scrub (↺ W×H + Un-Typing) on Scroll-Up
-   6. Laser Smart-Guides, Real-Time HUD Telemetry Pill & Card Specular Spotlight
+   MATÉI DE SAINT LÉGER — AUTHENTIC VIDEO FIGMA / CAD CREATION ENGINE (V13)
+   Exact match to user video reference (media_1793992329783):
+   1. Clean sharp cursor arrows (NO parasite name tags cluttering the screen)
+   2. Zero cursors when idle / doing nothing (clean, readable content)
+   3. On Refresh / Page Load: Cursors actively build Hero, then smoothly fade out
+   4. On Scroll Down: Cursors appear at the frontier to build unbuilt elements live
+   5. On Scroll Up: Cursors appear to deconstruct cards (crimson frames ↺ W×H + un-typing)
+   6. Authentic Figma Frames: 4 white corner square handles + live dimension badges
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  const CURSOR_PROFILES = [
-    { name: 'Matéi', color: '#ef4444', anchorX: 0.16, anchorY: 0.22, fX: 0.82, fY: 0.70, pX: 0.2, pY: 0.5 },
-    { name: 'Kai', color: '#38bdf8', anchorX: 0.27, anchorY: 0.38, fX: 0.95, fY: 0.84, pX: 1.5, pY: 1.1 },
-    { name: 'AppSec', color: '#34d399', anchorX: 0.78, anchorY: 0.24, fX: 0.78, fY: 0.92, pX: 2.7, pY: 2.1 },
-    { name: 'Architect', color: '#fbbf24', anchorX: 0.52, anchorY: 0.44, fX: 0.65, fY: 0.68, pX: 3.8, pY: 0.9 },
-    { name: 'Design', color: '#f472b6', anchorX: 0.82, anchorY: 0.48, fX: 0.88, fY: 0.76, pX: 4.2, pY: 3.3 },
-    { name: 'Kernel', color: '#22d3ee', anchorX: 0.76, anchorY: 0.70, fX: 0.72, fY: 0.85, pX: 5.1, pY: 1.8 },
-    { name: 'Cloud', color: '#a3e635', anchorX: 0.22, anchorY: 0.76, fX: 0.90, fY: 0.64, pX: 0.8, pY: 4.1 },
-    { name: '3D-CAD', color: '#fb923c', anchorX: 0.56, anchorY: 0.84, fX: 0.84, fY: 0.80, pX: 2.2, pY: 2.9 }
+  const CURSOR_COLORS = [
+    '#ef4444', // Crimson
+    '#38bdf8', // Sky Blue
+    '#34d399', // Emerald
+    '#fbbf24', // Amber
+    '#f472b6', // Rose
+    '#22d3ee', // Cyan
+    '#fb923c', // Orange
+    '#a3e635'  // Lime
   ];
 
   const MAX_FRAMES = 6;
-  const MAX_CURSORS = CURSOR_PROFILES.length;
+  const MAX_CURSORS = 8;
 
   const DYNAMIC_TEXT_IDS = new Set([
     'layer-desc',
@@ -61,8 +62,6 @@
   let rafId = null;
   let lastTs = 0;
   let prevScrollY = 0;
-  let prevScrollTs = performance.now();
-  let scrollVelocity = 0;
   let scrollDirection = 1; // 1 = assembling down, -1 = deconstructing up
   let scrollMotionTimer = 0;
   let isActivelyScrolling = false;
@@ -380,7 +379,7 @@
     overlayEl.className = 'builder-cursors-layer';
     overlayEl.setAttribute('aria-hidden', 'true');
 
-    // Figma / CAD Laser Smart-Alignment Guides
+    // Laser Smart-Alignment Guides
     guideXEl = document.createElement('div');
     guideXEl.className = 'saai-smart-guide guide-x';
     guideYEl = document.createElement('div');
@@ -388,6 +387,7 @@
     overlayEl.appendChild(guideXEl);
     overlayEl.appendChild(guideYEl);
 
+    // Frame Pool with 4 white corner square handles and dimension badge
     framePool = [];
     for (let i = 0; i < MAX_FRAMES; i++) {
       const box = document.createElement('div');
@@ -414,35 +414,34 @@
       });
     }
 
+    // Clean cursor arrows: sharp SVG pointers WITHOUT any parasitic text tags
     cursorPool = [];
     for (let i = 0; i < MAX_CURSORS; i++) {
-      const prof = CURSOR_PROFILES[i];
+      const color = CURSOR_COLORS[i % CURSOR_COLORS.length];
       const cur = document.createElement('div');
       cur.className = 'saai-cursor';
       cur.style.opacity = '0';
       cur.innerHTML = `
         <svg class="saai-cursor-svg" viewBox="0 0 18 18" fill="none">
           <path class="cur-arrow" d="M2.1 1.7L16.3 7.5L9.5 10.0L7.0 16.8L2.1 1.7Z"
-                fill="${prof.color}" stroke="#ffffff" stroke-width="1.45" stroke-linejoin="round"/>
+                fill="${color}" stroke="#ffffff" stroke-width="1.45" stroke-linejoin="round"/>
           <g class="cur-cross">
             <line x1="9" y1="1.5" x2="9" y2="16.5" stroke="#04131f" stroke-width="3.2" stroke-linecap="round"/>
             <line x1="1.5" y1="9" x2="16.5" y2="9" stroke="#04131f" stroke-width="3.2" stroke-linecap="round"/>
-            <line x1="9" y1="2" x2="9" y2="16" stroke="${prof.color}" stroke-width="1.7" stroke-linecap="round"/>
-            <line x1="2" y1="9" x2="16" y2="9" stroke="${prof.color}" stroke-width="1.7" stroke-linecap="round"/>
+            <line x1="9" y1="2" x2="9" y2="16" stroke="${color}" stroke-width="1.7" stroke-linecap="round"/>
+            <line x1="2" y1="9" x2="16" y2="9" stroke="${color}" stroke-width="1.7" stroke-linecap="round"/>
             <circle cx="9" cy="9" r="1.5" fill="#ffffff"/>
           </g>
         </svg>
-        <span class="saai-cursor-tag" style="background: ${prof.color}; color: #050e18;">${prof.name}</span>
       `;
       overlayEl.appendChild(cur);
       cursorPool.push({
         el: cur,
-        tagEl: cur.querySelector('.saai-cursor-tag'),
-        prof,
+        color,
         taskKey: null,
         alpha: 0,
-        x: window.innerWidth * prof.anchorX,
-        y: window.innerHeight * prof.anchorY,
+        x: 0,
+        y: 0,
         inited: false,
         crosshair: false
       });
@@ -450,7 +449,7 @@
 
     document.body.appendChild(overlayEl);
 
-    // Sleek Bottom-Right Architectural Telemetry Pill
+    // Minimalist Bottom-Right Telemetry Pill
     hudPillEl = document.createElement('div');
     hudPillEl.id = 'architect-hud-pill';
     hudPillEl.className = 'architect-hud-pill';
@@ -458,7 +457,7 @@
     hudPillEl.setAttribute('aria-hidden', 'true');
     hudPillEl.innerHTML = `
       <span class="architect-hud-dot"></span>
-      <span class="architect-hud-status">CONSTRUCTION ↓</span>
+      <span class="architect-hud-status">ASSEMBLÉ ●</span>
       <span class="architect-hud-sep">·</span>
       <span class="architect-hud-count">00 / 00</span>
       <span class="architect-hud-sep">·</span>
@@ -682,10 +681,10 @@
   function updateHudPill(scrollY, activeFrameCount) {
     if (!hudPillEl) return;
     if (scrollY < 24) {
-      hudPillEl.classList.add('visible');
-    } else {
-      hudPillEl.classList.add('visible');
+      hudPillEl.classList.remove('visible');
+      return;
     }
+    hudPillEl.classList.add('visible');
 
     let visibleCount = 0;
     let builtCount = 0;
@@ -702,7 +701,7 @@
     const totalPct = visibleCount > 0 ? Math.round((sumP / visibleCount) * 100) : 0;
     const isFr = getLang() === 'fr';
     const reversingNow = scrollDirection < 0 && (isActivelyScrolling || activeFrameCount > 0);
-    const buildingNow = (isActivelyScrolling || activeFrameCount > 0 || isHeroIntroActive);
+    const buildingNow = isActivelyScrolling || activeFrameCount > 0;
 
     let mode = 'settled';
     let label = isFr ? 'ASSEMBLÉ ●' : 'SETTLED ●';
@@ -725,12 +724,12 @@
   }
 
   /* ------------------------------------------------------------------------
-     HERO INITIAL LIVE CONSTRUCTION CHOREOGRAPHY
-     On refresh / load at scrollY < 70, cursors visibly type & assemble Hero.
+     HERO INITIAL LIVE CONSTRUCTION CHOREOGRAPHY (PUNCHY & CLEAN)
+     Runs fast on refresh (1.4s), then fades out completely to leave the page clean!
      ------------------------------------------------------------------------ */
   function initHeroIntroChoreography() {
     const scrollY = window.scrollY || window.pageYOffset || 0;
-    if (scrollY >= 70) {
+    if (scrollY >= 60) {
       isHeroIntroActive = false;
       return;
     }
@@ -741,7 +740,6 @@
     const card1 = document.querySelector('.hero-right .hud-card:nth-child(1)');
     const card2 = document.querySelector('.hero-right .hud-card:nth-child(2)');
     const card3 = document.querySelector('.hero-right .hud-card:nth-child(3)');
-    const statsRow = document.querySelector('.hero-stats-row');
 
     if (!nameEl || !portraitStageEl) {
       isHeroIntroActive = false;
@@ -756,8 +754,7 @@
       portraitStageEl,
       card1,
       card2,
-      card3,
-      statsRow
+      card3
     };
 
     isHeroIntroActive = true;
@@ -794,21 +791,19 @@
 
   function getHeroIntroOperations(now) {
     if (!heroElements || !isHeroIntroActive) return null;
-    const t = (now - heroIntroStartTs) / 1000; // elapsed seconds
+    const t = (now - heroIntroStartTs) / 1000;
 
-    if (t > 2.6 || (window.scrollY || 0) > 60) {
+    if (t > 1.6 || (window.scrollY || 0) > 40) {
       cleanHeroIntro();
       return null;
     }
 
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
     const frameTasks = [];
     const cursorTargets = [];
 
-    // 1. Name "MATÉI." (0.05s -> 0.85s) by Cursor 0 (Matéi, Crimson)
-    if (t >= 0.05 && t <= 0.95 && heroElements.nameEl) {
-      const p = smoothstep(clamp01((t - 0.05) / 0.80));
+    // 1. Name "MATÉI." (0.04s -> 0.70s)
+    if (t >= 0.04 && t <= 0.85 && heroElements.nameEl) {
+      const p = smoothstep(clamp01((t - 0.04) / 0.66));
       const r = heroElements.nameEl.getBoundingClientRect();
       const chars = Math.max(1, Math.min(heroElements.nameText.length, Math.round(heroElements.nameText.length * p)));
       heroElements.nameEl.textContent = heroElements.nameText.slice(0, chars);
@@ -831,14 +826,13 @@
         key: 'hero_name_box_drag',
         x: r.left + r.width * p + 4,
         y: r.bottom - 4,
-        crosshair: false,
-        cursorIdx: 0
+        crosshair: false
       });
     }
 
-    // 2. Role Text (0.30s -> 1.25s) by Cursor 1 (Kai, Sky Blue)
-    if (t >= 0.30 && t <= 1.35 && heroElements.roleTextEl) {
-      const p = smoothstep(clamp01((t - 0.30) / 0.95));
+    // 2. Role Text (0.25s -> 0.95s)
+    if (t >= 0.25 && t <= 1.10 && heroElements.roleTextEl) {
+      const p = smoothstep(clamp01((t - 0.25) / 0.70));
       const r = heroElements.roleTextEl.getBoundingClientRect();
       const chars = Math.max(1, Math.min(heroElements.roleText.length, Math.round(heroElements.roleText.length * p)));
       heroElements.roleTextEl.textContent = heroElements.roleText.slice(0, chars);
@@ -861,14 +855,13 @@
         key: 'hero_role_box_drag',
         x: r.left + r.width * p + 3,
         y: r.bottom - 2,
-        crosshair: false,
-        cursorIdx: 1
+        crosshair: false
       });
     }
 
-    // 3. Portrait Stage Wireframe (0.50s -> 1.85s) by Cursor 3 (Architect, Amber)
-    if (t >= 0.50 && t <= 1.95 && heroElements.portraitStageEl) {
-      const p = smoothstep(clamp01((t - 0.50) / 1.35));
+    // 3. Portrait Stage Wireframe (0.35s -> 1.35s)
+    if (t >= 0.35 && t <= 1.45 && heroElements.portraitStageEl) {
+      const p = smoothstep(clamp01((t - 0.35) / 1.0));
       const r = heroElements.portraitStageEl.getBoundingClientRect();
       const curW = Math.max(40, r.width * (0.08 + 0.92 * p));
       const curH = Math.max(40, r.height * (0.08 + 0.92 * p));
@@ -891,20 +884,19 @@
         key: 'hero_portrait_wire_drag',
         x: r.left + curW,
         y: r.top + curH,
-        crosshair: p < 0.85,
-        cursorIdx: 3
+        crosshair: p < 0.85
       });
     }
 
-    // 4. Hero Right Cards (0.85s -> 2.45s) by Cursors 2 (AppSec), 4 (Design), 5 (Kernel)
+    // 4. Hero Right KPI Cards (0.50s -> 1.50s)
     const cards = [
-      { el: heroElements.card1, start: 0.85, end: 1.85, cIdx: 2 },
-      { el: heroElements.card2, start: 1.15, end: 2.15, cIdx: 4 },
-      { el: heroElements.card3, start: 1.45, end: 2.45, cIdx: 5 }
+      { el: heroElements.card1, start: 0.50, end: 1.25 },
+      { el: heroElements.card2, start: 0.70, end: 1.40 },
+      { el: heroElements.card3, start: 0.90, end: 1.55 }
     ];
 
     cards.forEach((cd, idx) => {
-      if (t >= cd.start && t <= cd.end + 0.1 && cd.el) {
+      if (t >= cd.start && t <= cd.end + 0.05 && cd.el) {
         const p = smoothstep(clamp01((t - cd.start) / (cd.end - cd.start)));
         const r = cd.el.getBoundingClientRect();
         const curW = Math.max(30, r.width * p);
@@ -933,8 +925,7 @@
           key: `hero_card_${idx}_drag`,
           x: r.left + curW,
           y: r.top + curH,
-          crosshair: false,
-          cursorIdx: cd.cIdx
+          crosshair: false
         });
       }
     });
@@ -1144,20 +1135,20 @@
 
     updateHudPill(scrollY, ops.frames.length);
 
-    let animating = true; // Always maintain smooth organic drifting for idle cursors
-    const posLerp = 1 - Math.exp(-dt * 24);
-    const glideLerp = 1 - Math.exp(-dt * 15);
+    let animating = false;
+    const posLerp = 1 - Math.exp(-dt * 26);
+    const glideLerp = 1 - Math.exp(-dt * 18);
     const fadeLerp = 1 - Math.exp(-dt * 16);
 
     // Update Laser Smart-Alignment Guides on primary frame
     if (guideXEl && guideYEl) {
-      if (ops.frames.length > 0) {
+      if (ops.frames.length > 0 && (isActivelyScrolling || isHeroIntroActive)) {
         const lead = ops.frames[0];
-        const gAlpha = isActivelyScrolling || isHeroIntroActive ? '0.82' : '0.45';
-        guideXEl.style.opacity = gAlpha;
-        guideYEl.style.opacity = gAlpha;
+        guideXEl.style.opacity = '0.78';
+        guideYEl.style.opacity = '0.78';
         guideXEl.style.transform = `translate3d(0, ${lead.top.toFixed(1)}px, 0)`;
         guideYEl.style.transform = `translate3d(${lead.left.toFixed(1)}px, 0, 0)`;
+        animating = true;
       } else {
         guideXEl.style.opacity = '0';
         guideYEl.style.opacity = '0';
@@ -1193,6 +1184,11 @@
       const targetAlpha = ft ? 1 : 0;
 
       slot.alpha += (targetAlpha - slot.alpha) * fadeLerp;
+      if (Math.abs(targetAlpha - slot.alpha) > 0.005) {
+        animating = true;
+      } else {
+        slot.alpha = targetAlpha;
+      }
       slot.el.style.opacity = slot.alpha.toFixed(3);
 
       if (ft) {
@@ -1208,12 +1204,21 @@
           slot.w = ft.width;
           slot.h = ft.height;
           slot.inited = true;
+          animating = true;
         } else {
           const k = sameTask ? posLerp : glideLerp;
           slot.x += (ft.left - slot.x) * k;
           slot.y += (ft.top - slot.y) * k;
           slot.w += (ft.width - slot.w) * k;
           slot.h += (ft.height - slot.h) * k;
+          if (
+            Math.abs(ft.left - slot.x) > 0.4 ||
+            Math.abs(ft.top - slot.y) > 0.4 ||
+            Math.abs(ft.width - slot.w) > 0.4 ||
+            Math.abs(ft.height - slot.h) > 0.4
+          ) {
+            animating = true;
+          }
         }
 
         slot.el.style.transform = `translate3d(${slot.x.toFixed(1)}px, ${slot.y.toFixed(1)}px, 0)`;
@@ -1227,18 +1232,11 @@
       }
     }
 
-    // 2. Assign Cursors: Active Construction vs Floating Companion Patrol
+    // 2. Assign Cursors: ONLY ACTIVE CURSORS ARE VISIBLE (Zero parasites when idle!)
     const curAssign = new Array(cursorPool.length).fill(null);
     const usedCursors = new Set();
 
     ops.cursors.forEach((ct, idx) => {
-      // If task explicitly specifies cursor index (e.g. Hero build choreography)
-      if (typeof ct.cursorIdx === 'number' && !curAssign[ct.cursorIdx]) {
-        curAssign[ct.cursorIdx] = ct;
-        usedCursors.add(idx);
-        return;
-      }
-
       const matchIdx = cursorPool.findIndex(
         (c, cIdx) => !curAssign[cIdx] && c.taskKey === ct.key
       );
@@ -1273,22 +1271,21 @@
       }
     });
 
-    // 3. Update Every Cursor: NEVER DISAPPEAR (Always float in viewport & follow user on scroll-up!)
-    const tSec = now * 0.001;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
     for (let i = 0; i < cursorPool.length; i++) {
       const c = cursorPool[i];
       const ct = curAssign[i];
-      const prof = c.prof;
+      // Target alpha is 1 when actively assigned, 0 when idle (CLEAN SCREEN!)
+      const targetAlpha = ct ? 1 : 0;
+
+      c.alpha += (targetAlpha - c.alpha) * fadeLerp;
+      if (Math.abs(targetAlpha - c.alpha) > 0.005) {
+        animating = true;
+      } else {
+        c.alpha = targetAlpha;
+      }
+      c.el.style.opacity = c.alpha.toFixed(3);
 
       if (ct) {
-        // ACTIVE CONSTRUCTION / DECONSTRUCTION MODE
-        const targetAlpha = 1.0;
-        c.alpha += (targetAlpha - c.alpha) * fadeLerp;
-        c.el.style.opacity = c.alpha.toFixed(3);
-
         const sameTask = c.taskKey === ct.key;
         c.taskKey = ct.key;
         if (c.crosshair !== ct.crosshair) {
@@ -1300,54 +1297,27 @@
         const ty = ct.crosshair ? ct.y - 9 : ct.y - 2;
 
         if (!c.inited) {
-          c.x = tx;
-          c.y = ty;
+          c.x = tx + (i % 2 === 0 ? -28 : 28);
+          c.y = ty + 24;
           c.inited = true;
+          animating = true;
         } else {
           const k = sameTask ? posLerp : glideLerp;
           c.x += (tx - c.x) * k;
           c.y += (ty - c.y) * k;
+          if (Math.abs(tx - c.x) > 0.35 || Math.abs(ty - c.y) > 0.35) {
+            animating = true;
+          }
         }
 
         c.el.style.transform = `translate3d(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px, 0)`;
-      } else {
-        // FLOATING COMPANION & VIEWPORT ESCORT PATROL ("les curseurs te suivent")
+      } else if (c.alpha <= 0.01) {
         c.taskKey = null;
-        if (c.crosshair) {
-          c.crosshair = false;
-          c.el.classList.remove('is-crosshair');
-        }
-
-        // Cursors maintain a vibrant, subtle presence (0.86 - 0.94)
-        const targetAlpha = 0.90;
-        c.alpha += (targetAlpha - c.alpha) * fadeLerp;
-        c.el.style.opacity = c.alpha.toFixed(3);
-
-        // Organic dual harmonic Lissajous drift
-        const driftX = Math.sin(tSec * prof.fX + prof.pX) * 26;
-        const driftY = Math.cos(tSec * prof.fY + prof.pY) * 20;
-
-        // Inertial follow on scroll ("si tu remontes, les curseurs te suivent")
-        const followOffsetY = Math.max(-48, Math.min(48, scrollVelocity * 0.12));
-
-        const targetX = Math.max(16, Math.min(vw - 85, vw * prof.anchorX + driftX));
-        const targetY = Math.max(55, Math.min(vh - 45, vh * prof.anchorY + driftY + followOffsetY));
-
-        if (!c.inited) {
-          c.x = targetX;
-          c.y = targetY;
-          c.inited = true;
-        } else {
-          // Smooth fluid tracking with slight spring inertia
-          c.x += (targetX - c.x) * (1 - Math.exp(-dt * 6.8));
-          c.y += (targetY - c.y) * (1 - Math.exp(-dt * 6.8));
-        }
-
-        c.el.style.transform = `translate3d(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px, 0)`;
+        c.inited = false;
       }
     }
 
-    return true;
+    return animating;
   }
 
   function tick(now) {
@@ -1355,7 +1325,8 @@
     lastTs = now;
 
     const scrollY = window.scrollY || window.pageYOffset || 0;
-    const scrubLerp = 1 - Math.exp(-dt * 16);
+    const scrubLerp = 1 - Math.exp(-dt * 18);
+    let modulesMoving = false;
 
     applyHeroUpperParallax(scrollY);
 
@@ -1370,6 +1341,7 @@
 
       if (Math.abs(diff) > 0.0009) {
         m.currentP += diff * scrubLerp;
+        modulesMoving = true;
       } else {
         m.currentP = targetP;
       }
@@ -1378,10 +1350,14 @@
     }
 
     applySectionGates();
-    updateOverlayPool(dt, now);
+    const overlayMoving = updateOverlayPool(dt, now);
 
-    // Keep the animation loop continuously running at 60fps for floating cursors
-    rafId = window.requestAnimationFrame(tick);
+    if (modulesMoving || overlayMoving || isHeroIntroActive || isActivelyScrolling) {
+      rafId = window.requestAnimationFrame(tick);
+    } else {
+      rafId = null;
+      lastTs = 0;
+    }
   }
 
   function requestTick() {
@@ -1479,7 +1455,6 @@
 
     const initScrollY = window.scrollY || window.pageYOffset || 0;
     prevScrollY = initScrollY;
-    prevScrollTs = performance.now();
 
     modules.forEach((m) => {
       const span = Math.max(1, m.endScroll - m.startScroll);
@@ -1496,20 +1471,14 @@
     window.addEventListener(
       'scroll',
       function () {
-        const now = performance.now();
-        const dt = Math.max(0.005, (now - prevScrollTs) / 1000);
-        prevScrollTs = now;
-
         const sy = window.scrollY || window.pageYOffset || 0;
         const delta = sy - prevScrollY;
-        scrollVelocity = delta / dt;
 
         if (Math.abs(delta) > 1.5) {
           scrollDirection = delta < 0 ? -1 : 1;
         }
 
-        // If user scrolls during hero intro, finalize early to ensure zero jank
-        if (isHeroIntroActive && Math.abs(sy) > 30) {
+        if (isHeroIntroActive && Math.abs(sy) > 25) {
           cleanHeroIntro();
         }
 
@@ -1518,8 +1487,10 @@
         window.clearTimeout(scrollMotionTimer);
         scrollMotionTimer = window.setTimeout(function () {
           isActivelyScrolling = false;
-          scrollVelocity = 0;
-        }, 200);
+          requestTick();
+        }, 180);
+
+        requestTick();
       },
       { passive: true }
     );
@@ -1528,6 +1499,7 @@
       'resize',
       function () {
         measureModules();
+        requestTick();
       },
       { passive: true }
     );
@@ -1536,6 +1508,7 @@
       btn.addEventListener('click', function () {
         window.setTimeout(function () {
           measureModules();
+          requestTick();
         }, 35);
       });
     });
