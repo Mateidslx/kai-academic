@@ -14,16 +14,16 @@
       accent: '#ef4444',
       tagFr: 'COUCHE 06 // INTERFACE & EXPÉRIENCE',
       tagEn: 'LAYER 06 // UI & INTERACTION',
-      titleFr: 'Interfaces 60 fps, React & Accessibilité WCAG',
-      titleEn: '60fps Web UI, React & WCAG Accessibility',
-      shortFr: 'UI / React / 60fps',
-      shortEn: 'UI / React / 60fps',
+      titleFr: 'Interfaces 60 fps, WebSockets & Accessibilité WCAG',
+      titleEn: '60fps Web UI, WebSockets & WCAG Accessibility',
+      shortFr: 'UI / WebSockets / 60fps',
+      shortEn: 'UI / WebSockets / 60fps',
       descFr:
-        'Applications TypeScript / React / Next.js et interfaces HTML/CSS/JS natives fluides à 60 fps, navigation clavier (⌘K, focus-trap) et contrastes soignés.',
+        'Interfaces HTML/CSS/JS natives et réactives à 60 fps : navigation au clavier (⌘K, focus-trap), flux de carnets d\'ordres temps réel et contrastes optimisés.',
       descEn:
-        'Responsive TypeScript / React / Next.js apps and zero-bloat 60fps vanilla interfaces with full keyboard navigation (⌘K, modal focus-traps) and high contrast.',
-      proofFr: 'Preuves : Ce portfolio interactif • Kai Academic • 38 PRs Frontend & Vitest',
-      proofEn: 'Proof: This interactive portfolio • Kai Academic • 38 Frontend & Vitest PRs',
+        'Responsive vanilla interfaces at 60fps: full keyboard navigation (⌘K, modal focus-traps), real-time orderbook depth streams, and high contrast.',
+      proofFr: 'Preuves : Ce portfolio interactif • Kai Academic • Dashboard Polymarket Live',
+      proofEn: 'Proof: This interactive portfolio • Kai Academic • Live Polymarket Dashboard',
       svgIcon: `<rect x="18" y="22" width="64" height="44" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="18" y1="33" x2="82" y2="33" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="27.5" r="2" fill="#ef4444"/><circle cx="32" cy="27.5" r="2" fill="currentColor"/><path d="M30 50 L42 42 L52 52 L70 39" fill="none" stroke="#ef4444" stroke-width="2.5"/>`
     },
     {
@@ -31,18 +31,18 @@
       side: 'right',
       slot: 0,
       accent: '#fb7185',
-      tagFr: 'COUCHE 05 // INTELLIGENCE & AUTOMATISATION',
-      tagEn: 'LAYER 05 // AI AGENTS & NEURAL LAB',
-      titleFr: 'Serveurs MCP, Orchestration DAG & Réseaux de Neurones',
-      titleEn: 'MCP Servers, DAG Orchestration & Neural Prototypes',
-      shortFr: 'IA / MCP / Neurones',
-      shortEn: 'AI / MCP / Neural',
+      tagFr: 'COUCHE 05 // INTELLIGENCE & ESSAIM AUTONOME',
+      tagEn: 'LAYER 05 // AI AGENTS & SWARM LAB',
+      titleFr: 'Serveurs MCP, Swarms Multi-Agents (Kai) & Trading Quant',
+      titleEn: 'MCP Servers, Multi-Agent Swarms & Quant Trading',
+      shortFr: 'IA / MCP / Quant',
+      shortEn: 'AI / MCP / Quant',
       descFr:
-        'Serveurs Model Context Protocol publiés (Smithery/Glama), graphes de tâches Python déterministes, extraction OpenCV/FEN (Stockfish NNUE) et réseaux de neurones.',
+        'Serveurs Model Context Protocol (Smithery/Glama), consensus multi-agents (36 agents spécialisés), arbitrage de prédictions Polymarket et modèles bayésiens.',
       descEn:
-        'Published Model Context Protocol servers, deterministic Python task DAGs, OpenCV/DOM chess state extraction (Stockfish NNUE), and neural network prototypes.',
-      proofFr: 'Preuves : security-scanner-mcp • V-Bot Chess UCI • Orchestrateur Kai',
-      proofEn: 'Proof: security-scanner-mcp • V-Bot Chess UCI • Kai DAG Orchestrator',
+        'Published Model Context Protocol servers, multi-agent consensus swarms (36 specialized agents), Polymarket prediction arbitrage, and Bayesian models.',
+      proofFr: 'Preuves : security-scanner-mcp • Moteur Polymarket V71-V150 • Swarm Kai',
+      proofEn: 'Proof: security-scanner-mcp • Polymarket Engine V71-V150 • Kai Swarm',
       svgIcon: `<circle cx="30" cy="32" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="30" cy="58" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="54" cy="45" r="7" fill="none" stroke="#ef4444" stroke-width="2.5"/><circle cx="75" cy="45" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><line x1="36" y1="34" x2="47" y2="42" stroke="currentColor" stroke-width="1.8"/><line x1="36" y1="56" x2="47" y2="48" stroke="currentColor" stroke-width="1.8"/><line x1="61" y1="45" x2="69" y2="45" stroke="#ef4444" stroke-width="2.2"/>`
     },
     {
@@ -50,388 +50,336 @@
       side: 'left',
       slot: 1,
       accent: '#ef4444',
-      tagFr: 'COUCHE 04 // SÉCURITÉ & GARDE-FOUS',
+      tagFr: 'COUCHE 04 // SÉCURITÉ APPLICATIVE & GARDE-FOUS',
       tagEn: 'LAYER 04 // APPSEC & HARDENING',
-      titleFr: 'Permissions RBAC, Anti-XSS, CWE-209 & RFC 9116',
-      titleEn: 'RBAC Guards, Anti-XSS, CWE-209 & RFC 9116',
+      titleFr: 'Failles XSS (CWE-79), Masquage d\'Erreurs (CWE-209) & RBAC',
+      titleEn: 'XSS Fixes (CWE-79), Error Masking (CWE-209) & RBAC',
       shortFr: 'AppSec / RBAC / XSS',
       shortEn: 'AppSec / RBAC / XSS',
       descFr:
-        'Contrôle strict des autorisations sur les mutations sensibles, masquage des traces internes d’exceptions, validation des bornes et conformité security.txt.',
+        'Contrôle strict des autorisations, assainissement des entrées utilisateur, élimination des fuites de traces de pile internes et vérification RFC 9116.',
       descEn:
-        'Strict authorization checks on sensitive mutations, internal stack-trace sanitization, payload boundary validation, and RFC 9116 disclosure compliance.',
-      proofFr: 'Preuves : PR #26490 sur Twenty CRM (40k★) • 6+ PRs sécurité sur BasedHardware/omi',
-      proofEn: 'Proof: PR #26490 in Twenty CRM (40k★) • 6+ security PRs in BasedHardware/omi',
-      svgIcon: `<path d="M50 18 L76 28 V46 C76 62 64 73 50 79 C36 73 24 62 24 46 V28 Z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M40 48 L47 55 L61 40" fill="none" stroke="#ef4444" stroke-width="2.8" stroke-linecap="round"/>`
+        'Strict mutation authorization checks, input sanitization, internal stack trace leak elimination, and RFC 9116 security.txt verification.',
+      proofFr: 'Preuves : 7 PRs fusionnées sur BasedHardware/omi • Audits de sécurité',
+      proofEn: 'Proof: 7 merged PRs on BasedHardware/omi • AppSec code audits',
+      svgIcon: `<path d="M50 18 L76 30 V50 C76 66 50 82 50 82 C50 82 24 66 24 50 V30 Z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M50 36 V62 M38 49 H62" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>`
     },
     {
       code: 'L03',
       side: 'right',
       slot: 1,
-      accent: '#f87171',
-      tagFr: 'COUCHE 03 // LOGIQUE MÉTIER & APIS',
-      tagEn: 'LAYER 03 // BACKEND & REAL-TIME APIS',
-      titleFr: 'Services Python FastAPI, NestJS & Tests Hermétiques',
-      titleEn: 'FastAPI, NestJS Services & Hermetic Test Suites',
-      shortFr: 'FastAPI / NestJS / TDD',
-      shortEn: 'FastAPI / NestJS / TDD',
+      accent: '#38bdf8',
+      tagFr: 'COUCHE 03 // DONNÉES & PERSISTANCE',
+      tagEn: 'LAYER 03 // DATA & PERSISTENCE',
+      titleFr: 'SQLite WAL, Vecteurs & Modélisation Relationnelle 3NF',
+      titleEn: 'SQLite WAL, Vectors & Normalized Relational SQL',
+      shortFr: 'Data / SQLite / SQL 3NF',
+      shortEn: 'Data / SQLite / SQL 3NF',
       descFr:
-        'APIs REST & WebSockets asynchrones, verrous distribués atomiques sur les flux OAuth concurrents, et couverture de non-régression Pytest / Vitest.',
+        'Conception de schémas relationnels normalisés (Merise MCD/MLD, SQL 3NF), bases vectorielles haute performance et grand livre de transactions immuable.',
       descEn:
-        'Asynchronous REST & WebSocket backends, atomic concurrency locks across OAuth flows, and hermetic Pytest / Vitest regression test suites.',
-      proofFr: 'Preuves : 46 Pull Requests fusionnées en production • Scanners WebSockets',
-      proofEn: 'Proof: 46 upstream merged Pull Requests • Real-time WebSocket scanners',
-      svgIcon: `<rect x="20" y="24" width="60" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="20" y="48" width="60" height="16" rx="3" fill="none" stroke="#ef4444" stroke-width="2.2"/><circle cx="29" cy="32" r="2.5" fill="#ef4444"/><circle cx="29" cy="56" r="2.5" fill="currentColor"/><line x1="42" y1="32" x2="70" y2="32" stroke="currentColor" stroke-width="2"/><line x1="42" y1="56" x2="70" y2="56" stroke="#ef4444" stroke-width="2"/>`
+        'Normalized relational schemas (Merise MCD/MLD, 3NF SQL), high-performance vector databases, and immutable transaction ledger architecture.',
+      proofFr: 'Preuves : Letta Memory OS • Trade Ledger SHA-256 • Projets R1.05 IUT',
+      proofEn: 'Proof: Letta Memory OS • SHA-256 Trade Ledger • IUT R1.05 SQL Labs',
+      svgIcon: `<ellipse cx="50" cy="28" rx="28" ry="10" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M22 28 V50 C22 56 34 60 50 60 C66 60 78 56 78 50 V28" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M22 50 V72 C22 78 34 82 50 82 C66 82 78 78 78 72 V50" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M40 45 L50 53 L62 39" fill="none" stroke="#38bdf8" stroke-width="2.5"/>`
     },
     {
       code: 'L02',
       side: 'left',
       slot: 2,
-      accent: '#ef4444',
-      tagFr: 'COUCHE 02 // DONNÉES & PERSISTANCE',
-      tagEn: 'LAYER 02 // RELATIONAL DATA & WAL',
-      titleFr: 'Modélisation Merise 3NF, PostgreSQL & SQLite WAL',
-      titleEn: '3NF Data Modeling, PostgreSQL & SQLite WAL',
-      shortFr: 'PostgreSQL / SQL 3NF',
-      shortEn: 'PostgreSQL / 3NF SQL',
+      accent: '#f59e0b',
+      tagFr: 'COUCHE 02 // SERVICES LINUX & SUPERVISION',
+      tagEn: 'LAYER 02 // LINUX SERVICES & SUPERVISION',
+      titleFr: '19 Démons Systemd, VPS Oracle Cloud 24/7 & Auto-Guérison',
+      titleEn: '19 Systemd Units, 24/7 Oracle VPS & Watchdogs',
+      shortFr: 'Systemd / Linux / 24-7',
+      shortEn: 'Systemd / Linux / 24-7',
       descFr:
-        'Schémas relationnels normalisés (MCD / MLD), intégrité référentielle stricte, requêtes analytiques SQL et journalisation transactionnelle Write-Ahead Logging.',
+        'Supervision d\'infrastructure serveur Ubuntu 24.04 sans dépendance propriétaire : démons systemd redémarrés automatiquement, tunnels Cloudflare chiffrés et scripts de veille.',
       descEn:
-        'Normalized relational schemas (3NF), strict referential integrity, analytical SQL queries, and local Write-Ahead Logging (WAL) provenance stores.',
-      proofFr: 'Preuves : Projets BDD IUT Anglet (R1.05 / S1.04) • Mémoire SQLite Kai • Twenty ORM',
-      proofEn: 'Proof: IUT Database Labs • Kai SQLite WAL Store • Twenty ORM PR #26502',
-      svgIcon: `<ellipse cx="50" cy="27" rx="26" ry="9" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M24 27 V46 C24 51 35.6 55 50 55 C64.4 55 76 51 76 46 V27" fill="none" stroke="#ef4444" stroke-width="2.3"/><path d="M24 46 V64 C24 69 35.6 73 50 73 C64.4 73 76 69 76 64 V46" fill="none" stroke="currentColor" stroke-width="2.3"/>`
+        'Ubuntu 24.04 server orchestration without proprietary cloud locks: self-healing systemd services, encrypted Cloudflare tunnels, and continuous daemons.',
+      proofFr: 'Preuves : VPS Oracle Cloud 88.96.47.180 • Uptime 99.98% • Sentinelles actives',
+      proofEn: 'Proof: Oracle Cloud VPS 88.96.47.180 • 99.98% uptime • Active sentinels',
+      svgIcon: `<rect x="20" y="24" width="60" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="28" cy="34" r="2.5" fill="#f59e0b"/><line x1="36" y1="34" x2="68" y2="34" stroke="currentColor" stroke-width="2"/><rect x="20" y="52" width="60" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="28" cy="62" r="2.5" fill="#10b981"/><line x1="36" y1="62" x2="56" y2="62" stroke="currentColor" stroke-width="2"/>`
     },
     {
       code: 'L01',
       side: 'right',
       slot: 2,
-      accent: '#dc2626',
-      tagFr: 'COUCHE 01 // SOCLE SYSTÈME & MÉMOIRE',
-      tagEn: 'LAYER 01 // LINUX KERNEL & C/C++ CORE',
-      titleFr: 'ISO C99 / C++, Zéro Fuite Valgrind & Ubuntu 24.04',
-      titleEn: 'ISO C99 / C++, Zero-Leak Valgrind & Ubuntu 24.04',
-      shortFr: 'C/C++ / Valgrind / Linux',
-      shortEn: 'C/C++ / Valgrind / Linux',
+      accent: '#38bdf8',
+      tagFr: 'COUCHE 01 // BAS NIVEAU, C99 & INTÉGRITÉ MÉMOIRE',
+      tagEn: 'LAYER 01 // SYSTEMS, ISO C99 & MEMORY INTEGRITY',
+      titleFr: 'ISO C99 Stricte, Arbres AST & Valgrind Zéro Fuite',
+      titleEn: 'Strict ISO C99, AST Trees & Zero-Leak Valgrind',
+      shortFr: 'C99 / AST / Valgrind',
+      shortEn: 'C99 / AST / Valgrind',
       descFr:
-        'Compilation stricte (-Wall -Wextra -Werror), gestion manuelle de la mémoire vérifiée sous Valgrind, et administration serveur Linux 24/7 (systemd, Docker, Nginx).',
+        'Développement en C standard ANSI/ISO C99 compilé sous -Wall -Wextra -Werror, Allman bracing style, prototypage rigoureux et vérification dynamique Valgrind (0 octet perdu).',
       descEn:
-        'Zero-warning C/C++ compilation (-Wall -Wextra -Werror), Valgrind heap verification, and 24/7 Ubuntu 24.04 cloud administration (systemd, Docker, Nginx).',
-      proofFr: 'Preuves : VPS Ubuntu 24.04 en production • Travaux C / C++ & Katas IUT Anglet',
-      proofEn: 'Proof: Live Ubuntu 24.04 VPS • Zero-leak C / C++ & OOP Systems Coursework',
-      svgIcon: `<rect x="28" y="28" width="44" height="36" rx="4" fill="none" stroke="#ef4444" stroke-width="2.5"/><rect x="38" y="37" width="24" height="18" fill="none" stroke="currentColor" stroke-width="2"/><line x1="36" y1="20" x2="36" y2="28" stroke="currentColor" stroke-width="2"/><line x1="50" y1="20" x2="50" y2="28" stroke="currentColor" stroke-width="2"/><line x1="64" y1="20" x2="64" y2="28" stroke="currentColor" stroke-width="2"/><line x1="36" y1="64" x2="36" y2="72" stroke="currentColor" stroke-width="2"/><line x1="50" y1="64" x2="50" y2="72" stroke="currentColor" stroke-width="2"/><line x1="64" y1="64" x2="64" y2="72" stroke="currentColor" stroke-width="2"/>`
+        'ANSI/ISO C99 systems programming compiled under -Wall -Wextra -Werror, Allman bracing style, strict prototyping, and Valgrind verification (0 bytes leaked).',
+      proofFr: 'Preuves : AlgoForge Pro Studio • Katas algorithmiques IUT Anglet (R1.01)',
+      proofEn: 'Proof: AlgoForge Pro Studio • IUT Anglet algorithmic katas (R1.01)',
+      svgIcon: `<rect x="26" y="26" width="48" height="48" rx="6" fill="none" stroke="currentColor" stroke-width="2.3"/><line x1="34" y1="18" x2="34" y2="26" stroke="#38bdf8" stroke-width="2.5"/><line x1="50" y1="18" x2="50" y2="26" stroke="#38bdf8" stroke-width="2.5"/><line x1="66" y1="18" x2="66" y2="26" stroke="#38bdf8" stroke-width="2.5"/><line x1="34" y1="74" x2="34" y2="82" stroke="#38bdf8" stroke-width="2.5"/><line x1="50" y1="74" x2="50" y2="82" stroke="#38bdf8" stroke-width="2.5"/><line x1="66" y1="74" x2="66" y2="82" stroke="#38bdf8" stroke-width="2.5"/><text x="50" y="55" font-family="monospace" font-size="14" font-weight="bold" fill="currentColor" text-anchor="middle">C99</text>`
     }
   ];
 
+  function getLang() {
+    return document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'fr';
+  }
+
   function initExplodedArchitecture() {
-    const section = document.getElementById('exploded-architecture');
     const stage = document.getElementById('exploded-stage');
-    const stackEl = document.getElementById('exploded-stack-3d');
-    const leftCol = document.getElementById('exploded-callouts-left');
-    const rightCol = document.getElementById('exploded-callouts-right');
-    const svgEl = document.getElementById('exploded-leader-svg');
+    const stackContainer = document.getElementById('exploded-stack-3d');
+    const calloutsLeft = document.getElementById('exploded-callouts-left');
+    const calloutsRight = document.getElementById('exploded-callouts-right');
+    const leaderSvg = document.getElementById('exploded-leader-svg');
+    const floorShadow = document.getElementById('exploded-floor-shadow');
     const slider = document.getElementById('exploded-range');
     const pctLabel = document.getElementById('exploded-pct-label');
     const toggleBtn = document.getElementById('exploded-toggle-btn');
-    const floorShadow = document.getElementById('exploded-floor-shadow');
 
-    if (!section || !stage || !stackEl || !leftCol || !rightCol || !svgEl) return;
+    const inspTag = document.getElementById('exploded-inspector-tag');
+    const inspTitle = document.getElementById('exploded-inspector-title');
+    const inspDesc = document.getElementById('exploded-inspector-desc');
+    const inspProof = document.getElementById('exploded-inspector-proof');
+
+    if (!stage || !stackContainer || !calloutsLeft || !calloutsRight) return;
 
     let selectedIdx = 0;
-    let manualOverride = false;
-    let targetE = 0.0;
     let currentE = 0.0;
-    let velE = 0.0;
-
+    let targetE = 0.0;
+    let currentRotX = 57;
     let targetRotX = 57;
+    let currentRotZ = -38;
     let targetRotZ = -38;
-    let curRotX = 57;
-    let curRotZ = -38;
+    let manualOverride = false;
+    let isTicking = false;
 
-    let rafId = null;
-    let lastTs = 0;
+    // Build slabs and callout elements
+    const slabs = [];
+    const callouts = [];
 
-    // Build 6 3D plates + 6 callout cards + 6 SVG leader paths
-    const plateEls = [];
-    const pinEls = [];
-    const calloutEls = [];
-    const leaderPaths = [];
-    const leaderDots = [];
+    // Clear existing children
+    stackContainer.innerHTML = '';
+    calloutsLeft.innerHTML = '';
+    calloutsRight.innerHTML = '';
 
-    stackEl.innerHTML = '';
-    leftCol.innerHTML = '';
-    rightCol.innerHTML = '';
-    svgEl.innerHTML = '';
+    EXPLODED_LAYERS.forEach((data, index) => {
+      // 3D Slab
+      const slab = document.createElement('div');
+      slab.className = `exploded-slab slab-${data.code.toLowerCase()}`;
+      slab.setAttribute('data-index', String(index));
+      slab.setAttribute('role', 'button');
+      slab.setAttribute('tabindex', '0');
+      slab.setAttribute('aria-label', `${data.code} : ${data.titleFr}`);
 
-    EXPLODED_LAYERS.forEach((layer, idx) => {
-      // 1. 3D Isometric Plate (div[role="button"] for true preserve-3d across all engines)
-      const plate = document.createElement('div');
-      plate.setAttribute('role', 'button');
-      plate.setAttribute('tabindex', '0');
-      plate.className = 'iso-plate' + (idx === 0 ? ' is-selected' : '');
-      plate.setAttribute('data-idx', String(idx));
-      plate.setAttribute('aria-label', `${layer.code} — ${layer.titleFr}`);
-
-      plate.innerHTML = `
-        <span class="iso-plate-face iso-face-top">
-          <span class="iso-plate-head">
-            <span class="iso-code">${layer.code}</span>
-            <span class="iso-led"></span>
-          </span>
-          <svg class="iso-glyph" viewBox="0 0 100 92" aria-hidden="true">${layer.svgIcon}</svg>
-          <span class="iso-plate-label" data-fr="${layer.shortFr}" data-en="${layer.shortEn}">${layer.shortFr}</span>
-          <span class="iso-anchor-pin" data-side="${layer.side}"></span>
-        </span>
-        <span class="iso-plate-face iso-face-front" aria-hidden="true"></span>
-        <span class="iso-plate-face iso-face-right" aria-hidden="true"></span>
+      slab.innerHTML = `
+        <div class="slab-face top">
+          <div class="slab-chip">
+            <span class="slab-badge">${data.code}</span>
+            <span class="slab-name">${data.shortFr}</span>
+          </div>
+          <svg class="slab-glyph" viewBox="0 0 100 100">${data.svgIcon}</svg>
+        </div>
+        <div class="slab-face side-x"></div>
+        <div class="slab-face side-y"></div>
       `;
-      plateEls.push(plate);
-      pinEls.push(plate.querySelector('.iso-anchor-pin'));
+      stackContainer.appendChild(slab);
+      slabs.push(slab);
 
-      // 2. Callout Card (Left or Right column)
-      const card = document.createElement('button');
-      card.type = 'button';
-      card.className = 'exp-callout-card' + (idx === 0 ? ' is-selected' : '');
-      card.setAttribute('data-idx', String(idx));
-      card.innerHTML = `
-        <span class="exp-callout-kicker" data-fr="${layer.tagFr}" data-en="${layer.tagEn}">${layer.tagFr}</span>
-        <strong class="exp-callout-title" data-fr="${layer.titleFr}" data-en="${layer.titleEn}">${layer.titleFr}</strong>
-        <span class="exp-callout-proof" data-fr="${layer.proofFr}" data-en="${layer.proofEn}">${layer.proofFr}</span>
+      // Callout Button
+      const callout = document.createElement('button');
+      callout.type = 'button';
+      callout.className = `exploded-callout callout-${data.side}`;
+      callout.setAttribute('data-index', String(index));
+      callout.innerHTML = `
+        <span class="callout-code">${data.code}</span>
+        <div class="callout-body">
+          <strong class="callout-title">${data.titleFr}</strong>
+          <span class="callout-meta">${data.shortFr}</span>
+        </div>
       `;
-      if (layer.side === 'left') {
-        leftCol.appendChild(card);
+
+      if (data.side === 'left') {
+        calloutsLeft.appendChild(callout);
       } else {
-        rightCol.appendChild(card);
+        calloutsRight.appendChild(callout);
       }
-      calloutEls.push(card);
+      callouts.push(callout);
 
-      // 3. SVG Callout Leader Line + Pin Dot
-      const ns = 'http://www.w3.org/2000/svg';
-      const path = document.createElementNS(ns, 'path');
-      path.setAttribute('class', 'exp-leader-line' + (idx === 0 ? ' is-selected' : ''));
-      svgEl.appendChild(path);
-      leaderPaths.push(path);
+      // Interaction listeners
+      function triggerSelect() {
+        selectLayer(index);
+        manualOverride = true;
+        if (targetE < 0.35) targetE = 0.75;
+        requestTick();
+      }
 
-      const dot = document.createElementNS(ns, 'circle');
-      dot.setAttribute('r', '3.6');
-      dot.setAttribute('class', 'exp-leader-dot' + (idx === 0 ? ' is-selected' : ''));
-      svgEl.appendChild(dot);
-      leaderDots.push(dot);
-
-      // Click / Hover / Keyboard selection
-      const selectFn = () => selectLayer(idx);
-      plate.addEventListener('click', selectFn);
-      plate.addEventListener('mouseenter', selectFn);
-      plate.addEventListener('keydown', (e) => {
+      slab.addEventListener('click', triggerSelect);
+      callout.addEventListener('click', triggerSelect);
+      slab.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          selectFn();
+          triggerSelect();
         }
       });
-      card.addEventListener('click', selectFn);
-      card.addEventListener('mouseenter', selectFn);
     });
-
-    // Append 3D plates bottom-to-top (L01 -> L06) to match physical Z elevation
-    for (let i = plateEls.length - 1; i >= 0; i--) {
-      stackEl.appendChild(plateEls[i]);
-    }
-
-    function getLang() {
-      return document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'fr';
-    }
 
     function selectLayer(idx) {
       selectedIdx = idx;
-      const isFr = getLang() === 'fr';
-      const layer = EXPLODED_LAYERS[idx] || EXPLODED_LAYERS[0];
+      const data = EXPLODED_LAYERS[idx];
+      const lang = getLang();
 
-      plateEls.forEach((el, i) => el.classList.toggle('is-selected', i === idx));
-      calloutEls.forEach((el, i) => el.classList.toggle('is-selected', i === idx));
-      leaderPaths.forEach((el, i) => el.classList.toggle('is-selected', i === idx));
-      leaderDots.forEach((el, i) => el.classList.toggle('is-selected', i === idx));
+      slabs.forEach((s, i) => s.classList.toggle('active', i === idx));
+      callouts.forEach((c, i) => c.classList.toggle('active', i === idx));
 
-      const inspTag = document.getElementById('exploded-inspector-tag');
-      const inspTitle = document.getElementById('exploded-inspector-title');
-      const inspDesc = document.getElementById('exploded-inspector-desc');
-      const inspProof = document.getElementById('exploded-inspector-proof');
-
-      if (inspTag) inspTag.textContent = isFr ? layer.tagFr : layer.tagEn;
-      if (inspTitle) inspTitle.textContent = isFr ? layer.titleFr : layer.titleEn;
-      if (inspDesc) inspDesc.textContent = isFr ? layer.descFr : layer.descEn;
-      if (inspProof) inspProof.textContent = isFr ? layer.proofFr : layer.proofEn;
-
-      requestTick();
+      if (inspTag) inspTag.textContent = lang === 'en' ? data.tagEn : data.tagFr;
+      if (inspTitle) inspTitle.textContent = lang === 'en' ? data.titleEn : data.titleFr;
+      if (inspDesc) inspDesc.textContent = lang === 'en' ? data.descEn : data.descFr;
+      if (inspProof) inspProof.textContent = lang === 'en' ? data.proofEn : data.proofFr;
     }
 
     function computeScrollExplosion() {
-      const rect = section.getBoundingClientRect();
-      const vh = Math.max(520, window.innerHeight);
-      // Explodes smoothly as section enters center of viewport, re-assembles when scrolling away up
-      const progress = (vh * 0.78 - rect.top) / (vh * 0.68);
+      const rect = stage.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const start = vh * 0.85;
+      const end = vh * 0.15;
+      const progress = (start - rect.top) / (start - end);
       return Math.max(0, Math.min(1, progress));
-    }
-
-    function updateLeaderLines(eFactor) {
-      if (window.innerWidth <= 980) {
-        svgEl.style.opacity = '0';
-        return;
-      }
-
-      const stageRect = stage.getBoundingClientRect();
-      if (stageRect.width < 100 || stageRect.height < 100) return;
-
-      svgEl.setAttribute('viewBox', `0 0 ${stageRect.width} ${stageRect.height}`);
-      const fade = Math.max(0, Math.min(1, (eFactor - 0.18) / 0.45));
-      svgEl.style.opacity = fade.toFixed(3);
-
-      EXPLODED_LAYERS.forEach((layer, idx) => {
-        const pinRect = pinEls[idx].getBoundingClientRect();
-        const cardRect = calloutEls[idx].getBoundingClientRect();
-
-        const px = pinRect.left + pinRect.width * 0.5 - stageRect.left;
-        const py = pinRect.top + pinRect.height * 0.5 - stageRect.top;
-
-        const cx =
-          layer.side === 'left'
-            ? cardRect.right - stageRect.left + 4
-            : cardRect.left - stageRect.left - 4;
-        const cy = cardRect.top + cardRect.height * 0.5 - stageRect.top;
-
-        const elbowX = layer.side === 'left' ? cx + (px - cx) * 0.42 : cx - (cx - px) * 0.42;
-        const d = `M ${px.toFixed(1)} ${py.toFixed(1)} L ${elbowX.toFixed(1)} ${cy.toFixed(1)} L ${cx.toFixed(1)} ${cy.toFixed(1)}`;
-
-        leaderPaths[idx].setAttribute('d', d);
-        leaderDots[idx].setAttribute('cx', px.toFixed(1));
-        leaderDots[idx].setAttribute('cy', py.toFixed(1));
-      });
     }
 
     function applyVisuals() {
       const e = currentE;
-
-      // Update UI Slider & Button Readout
       const pct = Math.round(e * 100);
-      if (slider && document.activeElement !== slider) {
-        slider.value = String(pct);
-      }
-      if (pctLabel) {
-        pctLabel.textContent = `${pct}%`;
-      }
+      if (slider && !manualOverride) slider.value = String(pct);
+      if (pctLabel) pctLabel.textContent = `${pct}%`;
+
+      const lang = getLang();
       if (toggleBtn) {
-        const isFr = getLang() === 'fr';
-        toggleBtn.textContent =
-          e > 0.55
-            ? isFr
-              ? 'Assembler le bloc (0%)'
-              : 'Assemble Core (0%)'
-            : isFr
-            ? 'Éclater la vue 3D (100%)'
-            : 'Explode 3D View (100%)';
+        if (e > 0.55) {
+          toggleBtn.textContent = lang === 'en' ? 'Contract 3D View (0%)' : 'Rassembler la vue (0%)';
+        } else {
+          toggleBtn.textContent = lang === 'en' ? 'Explode 3D View (100%)' : 'Éclater la vue (100%)';
+        }
       }
 
-      // Apply 3D stack orientation
-      stackEl.style.transform = `rotateX(${curRotX.toFixed(2)}deg) rotateZ(${curRotZ.toFixed(2)}deg)`;
+      // Position Slabs along Z axis
+      const n = slabs.length;
+      slabs.forEach((slab, i) => {
+        const orderFromBottom = n - 1 - i;
+        const baseZ = orderFromBottom * 18;
+        const expandedZ = orderFromBottom * 82;
+        const z = baseZ + (expandedZ - baseZ) * e;
+        const isSelected = i === selectedIdx;
+        const lift = isSelected ? 12 : 0;
 
-      // Position each of the 6 extruded plates along Z with spring dissociation + attenuating shadows
-      const compactGap = 14;
-      const explodedGap = 66;
-      const gap = compactGap + (explodedGap - compactGap) * e;
-      const centerOffset = 2.5 * gap;
-
-      plateEls.forEach((plate, idx) => {
-        const layerOrderFromBottom = 5 - idx; // L01 = 0 (bottom), L06 = 5 (top)
-        const zPos = layerOrderFromBottom * gap - centerOffset;
-        const isSel = idx === selectedIdx;
-        const pullOut = isSel && e > 0.15 ? 14 : 0;
-
-        // Shadow attenuates & spreads softly on top face without flattening preserve-3d (Golden Rule #3)
-        const shadowAlpha = (0.64 - e * 0.34).toFixed(2);
-        const shadowBlur = Math.round(14 + e * 28);
-        const topFace = plate.firstElementChild;
-
-        plate.style.transform = `translate3d(${pullOut}px, ${pullOut}px, ${zPos.toFixed(1)}px)`;
-        if (topFace) {
-          topFace.style.boxShadow = `${Math.round(6 + e * 10)}px ${Math.round(10 + e * 16)}px ${shadowBlur}px rgba(0, 0, 0, ${shadowAlpha})`;
-        }
+        slab.style.transform = `translate3d(0, 0, ${z + lift}px)`;
+        slab.style.opacity = '1';
       });
 
-      // Floor ambient shadow softens and widens as stack levitates & explodes
+      // Floor Shadow
       if (floorShadow) {
-        const sc = (0.86 + e * 0.28).toFixed(3);
-        const op = (0.62 - e * 0.28).toFixed(3);
-        floorShadow.style.transform = `translate(-50%, -50%) rotateX(60deg) scale(${sc})`;
-        floorShadow.style.opacity = op;
+        const shadowScale = 1 - e * 0.28;
+        const shadowOpacity = 0.75 - e * 0.45;
+        floorShadow.style.transform = `scale(${shadowScale})`;
+        floorShadow.style.opacity = String(shadowOpacity);
       }
 
-      // Fade in & slide Callout Cards synchronized with dissociation (Golden Rule #2)
-      calloutEls.forEach((card, idx) => {
-        const stagger = idx * 0.045;
-        const localP = Math.max(0, Math.min(1, (e - 0.12 - stagger) / 0.48));
-        const sideSign = EXPLODED_LAYERS[idx].side === 'left' ? -14 : 14;
-        if (card.style.visibility !== 'hidden') {
-          card.style.opacity = (0.58 + localP * 0.42).toFixed(3);
-        }
-        card.style.transform = `translate3d(${((1 - localP) * sideSign).toFixed(1)}px, 0, 0)`;
+      // Animate Callouts Opacity & Drift
+      callouts.forEach((callout, i) => {
+        const isLeft = EXPLODED_LAYERS[i].side === 'left';
+        const slideX = isLeft ? (1 - e) * -16 : (1 - e) * 16;
+        callout.style.opacity = String(0.4 + e * 0.6);
+        callout.style.transform = `translateX(${slideX}px)`;
       });
 
-      updateLeaderLines(e);
+      // Draw SVG Leader Lines
+      drawLeaderLines();
     }
 
-    function tick(now) {
-      const dt = lastTs ? Math.min(0.04, Math.max(0.005, (now - lastTs) / 1000)) : 0.016;
-      lastTs = now;
+    function drawLeaderLines() {
+      if (!leaderSvg) return;
+      const stageRect = stage.getBoundingClientRect();
+      const w = stageRect.width;
+      const h = stageRect.height;
 
-      if (!manualOverride) {
-        targetE = computeScrollExplosion();
+      leaderSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      let paths = '';
+
+      slabs.forEach((slab, i) => {
+        const callout = callouts[i];
+        if (!slab || !callout) return;
+
+        const slabRect = slab.getBoundingClientRect();
+        const calloutRect = callout.getBoundingClientRect();
+
+        const isLeft = EXPLODED_LAYERS[i].side === 'left';
+        const startX = isLeft ? calloutRect.right - stageRect.left : calloutRect.left - stageRect.left;
+        const startY = calloutRect.top + calloutRect.height / 2 - stageRect.top;
+
+        const endX = isLeft ? slabRect.left + slabRect.width * 0.2 - stageRect.left : slabRect.right - slabRect.width * 0.2 - stageRect.left;
+        const endY = slabRect.top + slabRect.height / 2 - stageRect.top;
+
+        const isSelected = i === selectedIdx;
+        const strokeColor = isSelected ? '#ff1744' : 'rgba(255, 255, 255, 0.2)';
+        const strokeWidth = isSelected ? 2 : 1;
+        const dash = isSelected ? '' : 'stroke-dasharray="3 3"';
+
+        const midX = (startX + endX) / 2;
+
+        paths += `
+          <path d="M${startX},${startY} C${midX},${startY} ${midX},${endY} ${endX},${endY}"
+                fill="none" stroke="${strokeColor}" stroke-width="${strokeWidth}" ${dash} opacity="${currentE > 0.15 ? 0.85 : 0.2}" />
+        `;
+      });
+
+      leaderSvg.innerHTML = paths;
+    }
+
+    function tick() {
+      // Spring physics toward targetE
+      const diffE = targetE - currentE;
+      currentE += diffE * 0.14;
+
+      const diffRotX = targetRotX - currentRotX;
+      currentRotX += diffRotX * 0.14;
+
+      const diffRotZ = targetRotZ - currentRotZ;
+      currentRotZ += diffRotZ * 0.14;
+
+      if (stackContainer) {
+        stackContainer.style.transform = `rotateX(${currentRotX}deg) rotateZ(${currentRotZ}deg)`;
       }
-
-      // Real Hooke's Law Damped Spring Physics (Golden Rule #1)
-      const stiffness = 135;
-      const damping = 18;
-      const accel = stiffness * (targetE - currentE) - damping * velE;
-      velE += accel * dt;
-      currentE += velE * dt;
-      currentE = Math.max(0, Math.min(1, currentE));
-
-      // Smooth pointer tilt interpolation
-      const rotAlpha = 1 - Math.exp(-dt * 10);
-      curRotX += (targetRotX - curRotX) * rotAlpha;
-      curRotZ += (targetRotZ - curRotZ) * rotAlpha;
 
       applyVisuals();
 
-      const unsettled =
-        Math.abs(targetE - currentE) > 0.0015 ||
-        Math.abs(velE) > 0.002 ||
-        Math.abs(targetRotX - curRotX) > 0.04 ||
-        Math.abs(targetRotZ - curRotZ) > 0.04;
-
-      if (unsettled) {
-        rafId = window.requestAnimationFrame(tick);
+      if (Math.abs(diffE) > 0.002 || Math.abs(diffRotX) > 0.05 || Math.abs(diffRotZ) > 0.05) {
+        requestAnimationFrame(tick);
       } else {
         currentE = targetE;
-        velE = 0;
-        applyVisuals();
-        rafId = null;
-        lastTs = 0;
+        currentRotX = targetRotX;
+        currentRotZ = targetRotZ;
+        isTicking = false;
       }
     }
 
     function requestTick() {
-      if (!rafId) {
-        lastTs = 0;
-        rafId = window.requestAnimationFrame(tick);
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(tick);
       }
     }
 
-    // Scroll listener (re-engages automatic scroll mode when user scrolls away & back)
     window.addEventListener(
       'scroll',
       function () {
-        const rect = section.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > window.innerHeight) {
-          manualOverride = false;
+        if (!manualOverride) {
+          targetE = computeScrollExplosion();
+        } else {
+          const rect = stage.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > window.innerHeight) {
+            manualOverride = false;
+          }
         }
         requestTick();
       },
@@ -440,7 +388,6 @@
 
     window.addEventListener('resize', requestTick, { passive: true });
 
-    // Interactive Slider & Toggle Button
     if (slider) {
       slider.addEventListener('input', function () {
         manualOverride = true;
@@ -457,15 +404,14 @@
       });
     }
 
-    // Subtle 3D Parallax Tilt on Pointer Move over the Stage
     stage.addEventListener(
       'mousemove',
       function (ev) {
         const r = stage.getBoundingClientRect();
         const nx = (ev.clientX - r.left) / Math.max(1, r.width) - 0.5;
         const ny = (ev.clientY - r.top) / Math.max(1, r.height) - 0.5;
-        targetRotX = 57 - ny * 10;
-        targetRotZ = -38 + nx * 14;
+        targetRotX = 57 - ny * 8;
+        targetRotZ = -38 + nx * 10;
         requestTick();
       },
       { passive: true }
@@ -477,17 +423,15 @@
       requestTick();
     });
 
-    // Expose language refresh hook so FR/EN toggle updates the inspector & button
-    window.__refreshExplodedLang = function () {
-      selectLayer(selectedIdx);
-      applyVisuals();
-    };
-
     selectLayer(0);
     targetE = computeScrollExplosion();
     currentE = targetE;
     applyVisuals();
   }
 
-  window.addEventListener('DOMContentLoaded', initExplodedArchitecture);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExplodedArchitecture);
+  } else {
+    initExplodedArchitecture();
+  }
 })();

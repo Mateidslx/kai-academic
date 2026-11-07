@@ -1,1056 +1,638 @@
 /* ==========================================================================
-   MATÉI DE SAINT LÉGER — PORTFOLIO V5 INTERACTIVE CORE (FR / EN)
-   Role Flip-Pad | Pull-Cord Theme | Ability Card | Doors | Timeline | Cmd+K
+   MATÉI DE SAINT LÉGER — PORTFOLIO V15 INTERACTIVE CORE (SOVEREIGN ENGINE)
+   Interactive 7-Layer Stack | Polymarket Orderbook & Kelly Sim | Omi PRs Diff
+   Command Palette ⌘K | Pull-Cord Theme | Bilingual FR/EN | Telemetry Clock
    ========================================================================== */
 
 (function () {
   'use strict';
 
   /* ------------------------------------------------------------------------
-     1. BILINGUAL DATA: ROLE FLIP-PAD, KAI MODULES & SPECIALTY DOORS
+     1. DATA: 7-LAYER CONSTITUTIONAL STACK (KAI AUTONOMOUS CORE)
      ------------------------------------------------------------------------ */
-  const ROLES = [
+  const STACK_LAYERS = [
     {
-      fr: 'Développeur Python, TypeScript & C99',
-      en: 'Python, TypeScript & C99 Developer',
-      idx: '01 / 04 ↻'
+      badge: 'COUCHE L1 // MOTEUR D\'INFÉRENCE & SÉCURITÉ',
+      role: 'Raisonnement Multi-Modèles & Politiques Fermées',
+      title: 'Routage Hybride Claude Code, Gemini 2.5 Pro & Inférence Locale Jev',
+      desc: 'Inférence contextuelle adaptative : arbitrage de latence et coût entre Claude 3.7 Sonnet (raisonnement architectural), Gemini 2.5 Pro (large fenêtre de contexte multimodal) et Ollama local (modèle Jev fine-tuné). Intégration d\'un Fail-Closed Policy Engine bloquant toute action non signée.',
+      file: 'core/llm/cognitive_router.py',
+      code: `async def route_cognitive_prompt(prompt: str, context_budget: int) -> ModelVerdict:
+    # 1. Verification stricte fail-closed
+    if not policy_engine.verify_intent(prompt):
+        raise SecurityGateException("CRITICAL: Prompt injection or unauthorized payload")
+    
+    # 2. Arbitrage de latence et cout
+    if context_budget > 64000:
+        return await gemini_flash_client.generate(prompt)
+    elif "refactor" in prompt or "valgrind" in prompt:
+        return await claude_code_client.generate_deep_reasoning(prompt)
+    return await ollama_jev_local.generate_fast(prompt)`,
+      pills: ['Fail-Closed Security', 'Context Caching', 'Dynamic Quotas', 'Zero Prompt Leakage']
     },
     {
-      fr: 'Contributeur Open-Source (46 PRs)',
-      en: 'Open-Source Contributor (46 Merged PRs)',
-      idx: '02 / 04 ↻'
+      badge: 'COUCHE L2 // MÉMOIRE HIÉRARCHIQUE LETTA (MEMGPT)',
+      role: 'Core Memory, Vecteurs SQLite WAL & Grand Livre d\'Événements',
+      title: 'Système Tripartite de Persistance Cognitive Déterministe',
+      desc: 'Architecture de mémoire inspirée de MemGPT : Core Memory (profil utilisateur, contraintes cognitives et règles académiques), Archival Memory (vecteurs sqlite-vec indexés) et Recall Memory (grand livre exhaustif des 808 sessions passées sans perte de contexte).',
+      file: 'core/memory/letta_memory_os.py',
+      code: `class LettaMemoryOS:
+    def __init__(self, db_path: Path):
+        self.conn = sqlite3.connect(db_path, isolation_level=None)
+        self.conn.execute("PRAGMA journal_mode=WAL;")
+        self.conn.execute("PRAGMA synchronous=NORMAL;")
+        
+    def recall_with_provenance(self, query_embedding: list[float], top_k: int = 5):
+        cursor = self.conn.cursor()
+        return cursor.execute("""
+            SELECT doc_id, text, confidence, source_file
+            FROM archival_memory 
+            ORDER BY vector_distance(embedding, ?) ASC LIMIT ?
+        """, (query_embedding, top_k)).fetchall()`,
+      pills: ['SQLite WAL Mode', 'Vector Cosine Distance', 'Audit Trail', 'Provenance Tracking']
     },
     {
-      fr: 'Sécurité Applicative & Serveurs MCP',
-      en: 'AppSec & MCP Tooling Builder',
-      idx: '03 / 04 ↻'
+      badge: 'COUCHE L3 // ESSAIM MULTI-AGENTS & CONSENSUS',
+      role: '36 Agents Spécialisés & Table Ronde Pré-Exécution',
+      title: 'Délégation Hiérarchique & Consensus Déterministe (DAG)',
+      desc: 'Orchestration d\'un conseil de 36 agents autonomes (Red Team AppSec, Artisan C99, Bounty Hunter, Sentinelle de Marché, Copilote Académique). Toute action à fort impact nécessite l\'accord unanime de la table ronde avec vérification de préconditions formelles.',
+      file: 'core/agents/task_dag_orchestrator.py',
+      code: `class TaskDAGOrchestrator:
+    def evaluate_preflight_consensus(self, task: TaskNode) -> bool:
+        reviews = [
+            security_auditor.audit(task),
+            testing_reality_checker.validate_evidence(task),
+            execution_persistence_guard.check_state(task)
+        ]
+        return all(r.verdict == Verdict.APPROVED for r in reviews)`,
+      pills: ['Topological Sort', '36 Micro-Agents', 'Consensus Voting', 'Rollback Primitives']
     },
     {
-      fr: 'Candidat Alternance BUT 2 Informatique',
-      en: 'Year-2 CS Apprenticeship Candidate',
-      idx: '04 / 04 ↻'
+      badge: 'COUCHE L4 // BOUCLE D\'EXÉCUTION CONTINUE 24/7',
+      role: 'Moteur Insomnia Autopilot sur VPS Oracle Cloud Ubuntu',
+      title: 'Supervision Systemd, Auto-Guérison & Heartbeat Sans Sommeil',
+      desc: 'Moteur autonome 24/7 déployé sur VPS Oracle Cloud Ubuntu 24.04. 19 démons systemd surveillés en continu avec redémarrage automatique en cas de crash, tunnel Cloudflare chiffré, et sentinelle Telegram envoyant des pings périodiques.',
+      file: 'scripts/vps_sentinel_full.py',
+      code: `def monitor_systemd_daemons():
+    for service_name in CRITICAL_DAEMONS:
+        status = subprocess.run(["systemctl", "is-active", service_name], capture_output=True, text=True)
+        if status.stdout.strip() != "active":
+            logger.warning(f"Daemon {service_name} DOWN! Triggering auto-heal...")
+            subprocess.run(["systemctl", "restart", service_name])
+            telegram_notify(f"🛡️ Kai Watchdog restarted {service_name}")`,
+      pills: ['19 Systemd Units', 'Watchdog Auto-Healing', 'Encrypted Tunnel', 'Sub-Second Recovery']
+    },
+    {
+      badge: 'COUCHE L5 // PONT MATÉRIEL & TÉLÉMÉTRIE MOBILE',
+      role: 'Passerelle Shizuku IPC, ADB Sans Fil & Isolation DAC',
+      title: 'Contrôle Matériel Headless & Métrologie Circadienne',
+      desc: 'Liaison directe avec terminal mobile Xiaomi/Redmi via Shizuku et commandes ADB sans fil. Suivi automatique du temps d\'écran, régulation circadienne des alarmes matinales (alignées sur le calendrier universitaire ADE) et synchronisation sans cloud tiers.',
+      file: 'core/desktop/adb_phone_bridge.py',
+      code: `def query_phone_telemetry() -> DeviceState:
+    res = subprocess.run(["adb", "shell", "dumpsys", "battery"], capture_output=True, text=True)
+    level = parse_battery_level(res.stdout)
+    screen_time = query_screen_time_dpm()
+    return DeviceState(battery_pct=level, screen_minutes=screen_time)`,
+      pills: ['Shizuku IPC', 'Wireless ADB', 'Circadian Optimization', 'Zero External Cloud']
+    },
+    {
+      badge: 'COUCHE L6 // DÉTECTEUR DIFFÉRENTIEL PROACTIF',
+      role: 'Veille Silencieuse Moodle, ADE & Triage d\'E-mails',
+      title: 'Inspection d\'État Différentielle & Zéro Spam d\'Alerte',
+      desc: 'Surveillance proactive des sources académiques et professionnelles : détection immédiate des nouveaux dépôts de devoirs sur Moodle, réalignement des emplois du temps ADE et triage intelligent des courriels sans notification superflue.',
+      file: 'core/detector/proactive_change_detector.py',
+      code: `def compute_moodle_diff(previous_snapshot, current_snapshot):
+    diff = diff_assignments(previous_snapshot, current_snapshot)
+    if diff.has_new_deadlines():
+        task_scheduler.insert_priority_study_block(diff.deadlines)
+        telegram_bot.notify_discrete(f"📚 Nouveau devoir détecté : {diff.title}")`,
+      pills: ['Differential Hashing', 'ADE Schedule Sync', 'Moodle Diffs', 'Zero Alert Fatigue']
+    },
+    {
+      badge: 'COUCHE L7 // AUTO-ÉVOLUTION & FORGE D\'OUTILS',
+      role: 'Synthèse Autonome de Skills & Boucles de Tests TDD',
+      title: 'Génération Dynamique de Nouveaux Outils MCP',
+      desc: 'Capacité pour le système d\'identifier un manque d\'outillage, d\'écrire le script Python correspondant, de créer la suite de tests unitaires pytest (cible >= 80% couverture) et d\'enregistrer le serveur MCP dynamiquement sans redémarrer le système.',
+      file: 'core/skills/self_evolution_engine.py',
+      code: `def forge_new_mcp_skill(skill_spec: SkillSpec) -> bool:
+    code = generate_mcp_tool_code(skill_spec)
+    test_suite = generate_pytest_suite(code)
+    
+    # Validation TDD stricte
+    if run_test_suite_in_sandbox(test_suite):
+        persist_mcp_server(skill_spec.name, code)
+        registry.register_tool(skill_spec.name)
+        return True
+    return False`,
+      pills: ['Dynamic MCP Synthesis', 'TDD Coverage >= 80%', 'Sandbox Validation', 'Hot Reloading']
     }
   ];
-
-  const OSS_ECOSYSTEMS = [
-    {
-      tabFr: '01. Twenty CRM (40k★)',
-      tabEn: '01. Twenty CRM (40k★)',
-      winTitle: 'github.com/twentyhq/twenty — merged/@Mateidslx',
-      rows: [
-        {
-          id: 'PR #26490',
-          fr: 'Contrôle strict des permissions RBAC VIEWS & LAYOUTS sur les mutations metadata',
-          en: 'Guard view field-group mutations with strict VIEWS & LAYOUTS RBAC permissions',
-          status: 'MERGED',
-          url: 'https://github.com/twentyhq/twenty/pull/26490'
-        },
-        {
-          id: 'PR #26502',
-          fr: 'Capture complète des enregistrements supprimés par lot dans twenty-orm',
-          en: 'Capture all batch-deleted records accurately in twenty-orm event payloads',
-          status: 'MERGED',
-          url: 'https://github.com/twentyhq/twenty/pull/26502'
-        },
-        {
-          id: 'OMI #19637',
-          fr: 'BasedHardware/omi — Suppression des fuites d’exceptions internes (CWE-209)',
-          en: 'BasedHardware/omi — Sanitize raw exception leakage in search endpoints (CWE-209)',
-          status: 'MERGED',
-          url: 'https://github.com/BasedHardware/omi/pull/19637'
-        },
-        {
-          id: 'FINTECH #433',
-          fr: 'Dupdap Stellar — Protection contre la substitution USD / montant crypto',
-          en: 'Dupdap Stellar — Prevent USD substitution into crypto payment URI amounts',
-          status: 'MERGED',
-          url: 'https://github.com/dupdab/dupdap-frontend/pull/433'
-        },
-        {
-          id: '46 PRS',
-          fr: 'Inspecter l’ensemble de mes 46 Pull Requests fusionnées sur GitHub',
-          en: 'Inspect all 46 upstream merged Pull Requests on GitHub',
-          status: 'GITHUB ↗',
-          url: 'https://github.com/pulls?q=is%3Apr+author%3AMateidslx+is%3Amerged'
-        }
-      ]
-    },
-    {
-      tabFr: '02. BasedHardware / Omi (8k★)',
-      tabEn: '02. BasedHardware / Omi (8k★)',
-      winTitle: 'github.com/BasedHardware/omi — merged/@Mateidslx',
-      rows: [
-        {
-          id: 'PR #19637',
-          fr: 'Suppression des fuites de traces internes CWE-209 sur search_conversations',
-          en: 'Eliminate CWE-209 raw exception leakage in search_conversations',
-          status: 'MERGED',
-          url: 'https://github.com/BasedHardware/omi/pull/19637'
-        },
-        {
-          id: 'PR #17272',
-          fr: 'Masquage sécurisé des erreurs internes sur les passerelles desktop_chat & JIT',
-          en: 'Mask raw exception details in desktop_chat JIT & gateway handlers',
-          status: 'MERGED',
-          url: 'https://github.com/BasedHardware/omi/pull/17272'
-        },
-        {
-          id: 'PR #17258',
-          fr: 'Durcissement des endpoints Google Calendar contre la fuite d’informations',
-          en: 'Harden Google Calendar endpoints against internal exception disclosure',
-          status: 'MERGED',
-          url: 'https://github.com/BasedHardware/omi/pull/17258'
-        },
-        {
-          id: 'PR #14604',
-          fr: 'Échappement XSS du paramètre OAuth error sur la page de callback',
-          en: 'Escape OAuth error parameter in callback failure view against XSS',
-          status: 'MERGED',
-          url: 'https://github.com/BasedHardware/omi/pull/14604'
-        },
-        {
-          id: 'PR #15974',
-          fr: 'Protection contre OverflowError sur l’expiration de jetons dans le client CLI',
-          en: 'Catch oversized token expiry OverflowError in Python CLI config loader',
-          status: 'MERGED',
-          url: 'https://github.com/BasedHardware/omi/pull/15974'
-        }
-      ]
-    },
-    {
-      tabFr: '03. FinTech TypeScript (38 PRs)',
-      tabEn: '03. TypeScript FinTech (38 PRs)',
-      winTitle: 'github.com/dupdab/dupdap-frontend — 37 merged PRs',
-      rows: [
-        {
-          id: 'PR #433',
-          fr: 'Correction critique empêchant l’injection du montant USD dans stellarUri',
-          en: 'Critical fix preventing USD amount substitution into crypto stellarUri',
-          status: 'MERGED',
-          url: 'https://github.com/dupdab/dupdap-frontend/pull/433'
-        },
-        {
-          id: 'PR #428',
-          fr: 'Idempotence des intercepteurs HTTP 401 concurrents en cours de vol',
-          en: 'Guarantee idempotent handling of concurrent in-flight 401 auth responses',
-          status: 'MERGED',
-          url: 'https://github.com/dupdab/dupdap-frontend/pull/428'
-        },
-        {
-          id: 'PR #437',
-          fr: 'Suite de tests d’accessibilité clavier et focus-trap sur les modales React',
-          en: 'Comprehensive focus-trap, restoration & keyboard a11y modal test suite',
-          status: 'MERGED',
-          url: 'https://github.com/dupdab/dupdap-frontend/pull/437'
-        },
-        {
-          id: 'PR #423',
-          fr: 'Migration ESM des mocks Next.js Navigation sous Vitest',
-          en: 'Rewrite Next.js navigation test harness with Vitest ESM mocks',
-          status: 'MERGED',
-          url: 'https://github.com/dupdab/dupdap-frontend/pull/423'
-        },
-        {
-          id: '+34 PRS',
-          fr: 'Suites de tests webhooks, paiements, règlements et hydratation Zustand',
-          en: 'Webhooks, settlements, auth hydration & component test suites',
-          status: 'GITHUB ↗',
-          url: 'https://github.com/dupdab/dupdap-frontend/pulls?q=is%3Apr+author%3AMateidslx+is%3Amerged'
-        }
-      ]
-    }
-  ];
-
-  const KAI_MODULES = [
-    {
-      tabFr: '01. Linux & Systemd',
-      tabEn: '01. Linux & Systemd',
-      badgeFr: 'MODULE 01 // INFRASTRUCTURE LINUX',
-      badgeEn: 'MODULE 01 // LINUX INFRASTRUCTURE',
-      titleFr: 'Services Systemd & Supervision 24/7 sur Ubuntu 24.04',
-      titleEn: '24/7 Systemd Services & Watchdogs on Ubuntu 24.04',
-      descFr:
-        'Déploiement continu sur serveur Ubuntu 24.04 avec unités systemd dédiées, supervision automatique des processus et reverse-proxy Nginx sans dépendance propriétaire.',
-      descEn:
-        'Continuous deployment on an Ubuntu 24.04 VPS with dedicated systemd units, automatic process recovery, and Nginx reverse-proxying without vendor lock-in.',
-      file: 'ubuntu@vps:~/kai-agent$ cat kai-worker.service',
-      code: `[Unit]
-Description=Kai Python Worker Service
-After=network-online.target
-
-[Service]
-Restart=always
-RestartSec=3
-ExecStart=/usr/bin/python3 -m cloud_control_plane.cloud_worker`,
-      pillsFr: ['Ubuntu 24.04 LTS', 'Systemd', 'Nginx + SSH', 'Disponibilité 24/7'],
-      pillsEn: ['Ubuntu 24.04 LTS', 'Systemd', 'Nginx + SSH', '24/7 Uptime']
-    },
-    {
-      tabFr: '02. Orchestration DAG',
-      tabEn: '02. DAG Orchestration',
-      badgeFr: 'MODULE 02 // GRAPHE DE TÂCHES PYTHON',
-      badgeEn: 'MODULE 02 // PYTHON TASK DAG',
-      titleFr: 'Exécution Topologique & Gestion d’Erreurs',
-      titleEn: 'Topological Task Scheduling & Fault Recovery',
-      descFr:
-        'Décomposition des tâches complexes en graphes acycliques dirigés (DAG) typés avec détection de cycles, réessais bornés et annulation propre en cas d’échec.',
-      descEn:
-        'Decomposes multi-step workflows into typed Directed Acyclic Graphs (DAGs) with cycle checks, bounded retries, and clean rollback on failure.',
-      file: 'task_dag_orchestrator.py',
-      code: `dag.add_step("tests", deps=["build"])
-dag.add_step("deploy_vps", deps=["tests"])
-assert dag.is_acyclic(), "Cycle détecté dans le graphe"
-await dag.run_topological()`,
-      pillsFr: ['Python 3.12', 'Asyncio', 'Tri Topologique', 'Tests Automatisés'],
-      pillsEn: ['Python 3.12', 'Asyncio', 'Topological Sort', 'Automated Tests']
-    },
-    {
-      tabFr: '03. Mémoire SQLite',
-      tabEn: '03. SQLite Memory',
-      badgeFr: 'MODULE 03 // PERSISTANCE & TRAÇABILITÉ',
-      badgeEn: 'MODULE 03 // PERSISTENCE & PROVENANCE',
-      titleFr: 'Base SQLite WAL & Traçabilité des Sources',
-      titleEn: 'SQLite WAL Storage & Source Provenance',
-      descFr:
-        'Stockage local structuré en mode Write-Ahead Logging (WAL) séparant le contexte immédiat, l’historique horodaté des sessions et l’index documentaire.',
-      descEn:
-        'Structured local SQLite database in Write-Ahead Logging (WAL) mode separating active context, timestamped session logs, and indexed notes.',
-      file: 'memory_store.sql',
-      code: `CREATE TABLE memory_entries (
-    id INTEGER PRIMARY KEY,
-    claim TEXT NOT NULL,
-    source_uri TEXT NOT NULL,
-    created_at TEXT NOT NULL
-); -- PRAGMA journal_mode=WAL;`,
-      pillsFr: ['SQLite WAL', 'Schéma Relationnel', 'Zéro Latence Réseau'],
-      pillsEn: ['SQLite WAL', 'Relational Schema', 'Zero Network Latency']
-    },
-    {
-      tabFr: '04. Vérification SHA-256',
-      tabEn: '04. SHA-256 Verification',
-      badgeFr: 'MODULE 04 // CONTRÔLE POST-DÉPLOIEMENT',
-      badgeEn: 'MODULE 04 // POST-DEPLOY VERIFICATION',
-      titleFr: 'Validation par Empreintes SHA-256 & Rendu Réel',
-      titleEn: 'SHA-256 Byte Parity & Headless Browser Checks',
-      descFr:
-        'Aucun déploiement n’est considéré terminé sur un simple code retour 0 : vérification systématique des sommes SHA-256 distantes, des réponses HTTP et du rendu navigateur.',
-      descEn:
-        'Deployments are never trusted on exit code 0 alone: scripts verify remote SHA-256 checksums, HTTP status headers, and headless Playwright renders.',
-      file: 'verify_deploy.py',
-      code: `assert local_sha256("portfolio.html") == remote_sha256("portfolio.html")
-assert http_head("http://88.96.47.180:8765/portfolio.html") == 200
-assert playwright_console_errors() == 0`,
-      pillsFr: ['Parité SHA-256', 'Playwright', 'Sondes HTTP', 'Zéro Régression'],
-      pillsEn: ['SHA-256 Parity', 'Playwright', 'HTTP Probes', 'Zero Regression']
-    }
-  ];
-
-  const DOORS_DATA = [
-    {
-      badgeFr: 'DOMAINE 01 // BACKEND PYTHON, TYPESCRIPT & SÉCURITÉ (C1 • C2)',
-      badgeEn: 'PORTAL 01 // PYTHON, TYPESCRIPT & APPLICATION SECURITY',
-      headingFr: 'Services FastAPI / NestJS robustes, revues open-source et correction de failles',
-      headingEn: 'Production FastAPI / NestJS backends, upstream OSS & vulnerability remediation',
-      descFr:
-        'Expérience concrète sur des bases de code industrielles (Twenty CRM 40k★, BasedHardware/omi 8k★, plateformes FinTech TypeScript) avec 46 Pull Requests fusionnées.',
-      descEn:
-        'Hands-on track record across large-scale codebases (Twenty CRM 40k★, BasedHardware/omi 8k★, TypeScript FinTech platforms) with 46 merged Pull Requests.',
-      itemsFr: [
-        'Développement backend Python (FastAPI, Asyncio) & TypeScript (NestJS, Node.js)',
-        'Contrôles de permissions RBAC, élimination de fuites CWE-209 et vecteurs XSS',
-        'Suites de tests hermétiques Vitest / Pytest et gestion d’erreurs HTTP 401 concurrentes',
-        'Publication du serveur d’audit HTTP / RFC 9116 (security-scanner-mcp)'
-      ],
-      itemsEn: [
-        'Backend engineering in Python (FastAPI, Asyncio) & TypeScript (NestJS, Node.js)',
-        'RBAC permission guards, CWE-209 exception leak & XSS vector remediation',
-        'Hermetic Vitest / Pytest regression suites & idempotent 401 auth interceptors',
-        'Author of the published HTTP / RFC 9116 security-scanner-mcp server'
-      ]
-    },
-    {
-      badgeFr: 'DOMAINE 02 // PROGRAMMATION C99 & SYSTÈMES LINUX (C3)',
-      badgeEn: 'PORTAL 02 // ISO C99 & LINUX SYSTEMS',
-      headingFr: 'Gestion mémoire rigoureuse, compilation stricte et administration Linux 24/7',
-      headingEn: 'Strict memory discipline, zero-warning C99 & 24/7 Linux administration',
-      descFr:
-        'Approche issue du BUT Informatique (et de mes bases Maths / NSI / SI) couplée à l’administration quotidienne d’un serveur Ubuntu 24.04.',
-      descEn:
-        'Grounded in university systems coursework (backed by Math, CS & Engineering Sciences) and daily Ubuntu 24.04 cloud administration.',
-      itemsFr: [
-        'Langage C99 compilé avec -Wall -Wextra -Werror (zéro warning toléré)',
-        'Vérification systématique des pointeurs et fuites mémoire sous Valgrind',
-        'Administration Ubuntu Server 24.04, Docker, unités systemd, SSH et Nginx',
-        'Scripts Bash / Python de déploiement et vérification d’intégrité SHA-256'
-      ],
-      itemsEn: [
-        'ISO C99 compiled under -Wall -Wextra -Werror (zero warnings)',
-        'Heap & pointer boundary verification using Valgrind',
-        'Ubuntu 24.04 server administration, Docker, systemd daemons, SSH & Nginx',
-        'Automated deployment & SHA-256 post-deploy verification scripts'
-      ]
-    },
-    {
-      badgeFr: 'DOMAINE 03 // OUTILS IA, MCP & AUTOMATISATION (C2 • C5)',
-      badgeEn: 'PORTAL 03 // AI AGENTS, MCP & AUTOMATION',
-      headingFr: 'Outils IA pragmatiques, serveurs MCP standards et pipelines vérifiables',
-      headingEn: 'Practical AI workflows, MCP servers & deterministic automation pipelines',
-      descFr:
-        'Conception de serveurs Model Context Protocol (publiés sur Smithery et Glama) et d’orchestrateurs Python structurés avec mémoire SQLite locale.',
-      descEn:
-        'Building published Model Context Protocol (MCP) servers (Smithery & Glama) and deterministic Python DAG orchestrators backed by SQLite.',
-      itemsFr: [
-        'Serveurs Model Context Protocol (MCP) publiés sur Smithery.ai et Glama.ai',
-        'Orchestration de tâches en graphes acycliques dirigés (DAG) avec garde-fous',
-        'Mémoire persistante SQLite WAL avec suivi de la source de chaque donnée',
-        'Tests visuels et automatisation navigateur headless via Playwright'
-      ],
-      itemsEn: [
-        'Published Model Context Protocol (MCP) tools on Smithery.ai & Glama.ai',
-        'Directed Acyclic Graph (DAG) task routing with strict safety checks',
-        'Persistent SQLite WAL memory tracking source provenance',
-        'Headless browser verification & rendering pipelines using Playwright'
-      ]
-    },
-    {
-      badgeFr: 'DOMAINE 04 // BASES DE DONNÉES SQL & INTERFACES WEB (C4 • C6)',
-      badgeEn: 'PORTAL 04 // RELATIONAL SQL & FRONTEND CRAFT',
-      headingFr: 'Modélisation relationnelle 3NF et interfaces React / Vanilla JS accessibles',
-      headingEn: 'Normalized 3NF SQL schemas & accessible React / Vanilla JS interfaces',
-      descFr:
-        'De la conception Merise / PostgreSQL jusqu’aux applications React / TypeScript / Tailwind et interfaces web natives fluides à 60 fps.',
-      descEn:
-        'From 3NF Merise/PostgreSQL database modeling to accessible React/TypeScript apps and dependency-free 60fps web interfaces.',
-      itemsFr: [
-        'Modélisation conceptuelle Merise (MCD / MLD), PostgreSQL, SQLite et Supabase',
-        'Interfaces React, Next.js, TypeScript, Tailwind CSS et HTML/CSS/JS natif',
-        'Accessibilité clavier W3C WCAG (focus-trap, contrastes élevés, lecteurs d’écran)',
-        'Travail collaboratif Git / GitHub : revues de PRs exigeantes et commits normés'
-      ],
-      itemsEn: [
-        'Conceptual data modeling (Merise), PostgreSQL, SQLite & Supabase',
-        'React, Next.js, TypeScript, Tailwind CSS & high-craft vanilla HTML/CSS/JS',
-        'WCAG keyboard accessibility (modal focus-traps, contrast, screen-reader labels)',
-        'Collaborative Git/GitHub workflow: conventional commits & upstream PR reviews'
-      ]
-    }
-  ];
-
-  let currentLang = 'fr';
-  let currentTheme = 'dark';
-  let roleIdx = 0;
-  let activeOssIdx = 0;
-  let activeModuleIdx = 0;
-  let activeDoorIdx = 0;
 
   /* ------------------------------------------------------------------------
-     2. AMBIENT HERO OP-ART CANVAS (ADAPTS TO NOIR OR WARM PAPER THEME!)
+     2. DATA: BASED HARDWARE / OMI (8K★) PRODUCTION CONTRIBUTIONS
      ------------------------------------------------------------------------ */
-  function initOpArtCanvas() {
-    const canvas = document.getElementById('op-art-canvas');
-    const hero = document.querySelector('.hero-section');
-    if (!canvas || !hero) return;
+  const OMI_PRS = [
+    {
+      title: 'PR #14604: XSS Elimination (Whoop)',
+      maintainer: 'Approved 5/5 by @kodjima33',
+      url: 'https://github.com/BasedHardware/omi/pull/14604',
+      note: 'Vulnérabilité Reflected XSS critique : le paramètre d\'erreur OAuth renvoyé par le fournisseur Whoop était injecté directement dans le template HTML sans assainissement. Solution : échappement des entités HTML et validation stricte du schéma.',
+      before: `@app.get("/auth/whoop/callback")
+def whoop_callback(error: str = None):
+    if error:
+        # VULNERABLE: Direct string interpolation into HTML response
+        return HTMLResponse(f"<h1>Error: {error}</h1>")
+    ...`,
+      after: `@app.get("/auth/whoop/callback")
+def whoop_callback(error: str = None):
+    if error:
+        # SECURED: Strict entity escaping and schema whitelist
+        safe_error = html.escape(error, quote=True)
+        return HTMLResponse(content=render_error_template(safe_error), status_code=400)
+    ...`
+    },
+    {
+      title: 'PR #15974: CLI Overflow Mitigation',
+      maintainer: 'Merged by @aryanorastar',
+      url: 'https://github.com/BasedHardware/omi/pull/15974',
+      note: 'Dépassement de tampon et plantage d\'exécution CLI lors de la désérialisation d\'horodatages d\'expiration gigantesques. Solution : parsing d\'entiers borné avec seuils min/max sécurisés et repli automatique.',
+      before: `def load_token_expiry(data: dict) -> datetime:
+    # VULNERABLE: Unchecked epoch integer parsing crashes on large values
+    return datetime.fromtimestamp(int(data["expires_at"]))`,
+      after: `def load_token_expiry(data: dict) -> datetime:
+    # SECURED: Bounded integer parsing with defensive epoch boundaries
+    raw_val = int(data.get("expires_at", 0))
+    if not (0 < raw_val < 253402300799):  # Max UTC year 9999
+        logger.warning("Malformed expiry detected, fallback to default")
+        return datetime.utcnow() + timedelta(hours=1)
+    return datetime.utcfromtimestamp(raw_val)`
+    },
+    {
+      title: 'PR #16025: CWE-209 Exception Masking',
+      maintainer: 'Merged by @aryanorastar',
+      url: 'https://github.com/BasedHardware/omi/pull/16025',
+      note: 'Fuite d\'informations sensibles de base de données (CWE-209) : les traces complètes d\'ORM et les schémas SQL internes étaient envoyés en clair dans les réponses HTTP 500 aux clients non authentifiés.',
+      before: `@app.get("/api/v1/tasks/recommendations")
+async def get_task_recommendations(user_id: str):
+    try:
+        return await db.query_tasks(user_id)
+    except Exception as exc:
+        # VULNERABLE: Leaking internal SQL/ORM stacktrace
+        raise HTTPException(status_code=500, detail=str(exc))`,
+      after: `@app.get("/api/v1/tasks/recommendations")
+async def get_task_recommendations(user_id: str):
+    try:
+        return await db.query_tasks(user_id)
+    except Exception as exc:
+        # SECURED: Structured internal log with sanitized localized error
+        logger.exception("Task recommendation query failure", extra={"user_id": user_id})
+        raise HTTPException(status_code=500, detail="INTERNAL_SERVICE_ERROR")`
+    },
+    {
+      title: 'PR #20168: Idempotent Token Sync',
+      maintainer: 'Cherry-picked with credit to @Mateidslx by @Git-on-my-level',
+      url: 'https://github.com/BasedHardware/omi/pull/16029',
+      note: 'Race condition lors du rafraîchissement concurrent de tokens OAuth : des requêtes simultanées invalidaient prématurément la session active. Solution : verrou distribué idempotent et primitives de synchronisation atomique.',
+      before: `async def refresh_access_token(user_id: str):
+    # VULNERABLE: Multiple concurrent requests trigger race condition
+    token = await provider.fetch_new_token(user_id)
+    await db.save_token(user_id, token)
+    return token`,
+      after: `async def refresh_access_token(user_id: str):
+    # SECURED: Idempotent token mutex lock preventing duplicate refresh
+    async with get_token_lock(user_id):
+        cached = await db.get_valid_token(user_id)
+        if cached and not cached.is_expired():
+            return cached
+        token = await provider.fetch_new_token(user_id)
+        await db.save_token(user_id, token)
+        return token`
+    }
+  ];
 
-    const ctx = canvas.getContext('2d');
-    let width = 0;
-    let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let running = true;
-    let rafId = null;
-    let mouseX = 0.5;
-    let mouseY = 0.5;
-    let smoothX = 0.5;
-    let smoothY = 0.5;
-    let t = 0;
+  /* ------------------------------------------------------------------------
+     3. POLYMARKET LIVE SYNTHETIC ORDERBOOK STREAMER
+     ------------------------------------------------------------------------ */
+  function initPolymarketOrderbook() {
+    const tableEl = document.getElementById('orderbook-depth-table');
+    if (!tableEl) return;
 
-    function resize() {
-      const rect = hero.getBoundingClientRect();
-      width = Math.max(320, Math.floor(rect.width));
-      height = Math.max(480, Math.floor(rect.height));
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const baseAsks = [
+      { price: 0.655, size: 2840 },
+      { price: 0.648, size: 4520 },
+      { price: 0.640, size: 8900 },
+      { price: 0.635, size: 12400 }
+    ];
+
+    const baseBids = [
+      { price: 0.625, size: 14200 },
+      { price: 0.620, size: 9350 },
+      { price: 0.612, size: 5200 },
+      { price: 0.605, size: 3100 }
+    ];
+
+    function renderDepth() {
+      let html = '';
+      let cumul = 0;
+
+      // Render Asks (reversed order for standard depth chart)
+      baseAsks.slice().reverse().forEach(row => {
+        const jitter = (Math.random() - 0.5) * 400;
+        const currentSize = Math.max(800, Math.round(row.size + jitter));
+        cumul += currentSize;
+        const pct = Math.min(100, Math.round((currentSize / 15000) * 100));
+
+        html += `
+          <div class="depth-row ask">
+            <span class="price">${row.price.toFixed(3)}</span>
+            <span class="shares">${currentSize.toLocaleString('en-US')}</span>
+            <span class="cumul">${cumul.toLocaleString('en-US')}</span>
+            <div class="depth-bar" style="width: ${pct}%"></div>
+          </div>
+        `;
+      });
+
+      html += `<div style="height: 1px; background: rgba(255,255,255,0.15); margin: 4px 0;"></div>`;
+
+      // Render Bids
+      cumul = 0;
+      baseBids.forEach(row => {
+        const jitter = (Math.random() - 0.5) * 400;
+        const currentSize = Math.max(800, Math.round(row.size + jitter));
+        cumul += currentSize;
+        const pct = Math.min(100, Math.round((currentSize / 15000) * 100));
+
+        html += `
+          <div class="depth-row bid">
+            <span class="price">${row.price.toFixed(3)}</span>
+            <span class="shares">${currentSize.toLocaleString('en-US')}</span>
+            <span class="cumul">${cumul.toLocaleString('en-US')}</span>
+            <div class="depth-bar" style="width: ${pct}%"></div>
+          </div>
+        `;
+      });
+
+      tableEl.innerHTML = html;
     }
 
-    function render() {
-      if (!running) {
-        rafId = null;
-        return;
-      }
-      t += 0.008;
-      smoothX += (mouseX - smoothX) * 0.05;
-      smoothY += (mouseY - smoothY) * 0.05;
-
-      ctx.clearRect(0, 0, width, height);
-
-      const isLight = currentTheme === 'light';
-      const cx = width * 0.5 + (smoothX - 0.5) * 32;
-      const cy = height * 0.52 + (smoothY - 0.5) * 22;
-
-      const grad = ctx.createRadialGradient(cx, cy, 20, cx, cy, Math.max(width, height) * 0.45);
-      grad.addColorStop(0, isLight ? 'rgba(220, 38, 38, 0.09)' : 'rgba(239, 68, 68, 0.13)');
-      grad.addColorStop(0.5, isLight ? 'rgba(220, 38, 38, 0.02)' : 'rgba(239, 68, 68, 0.03)');
-      grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, width, height);
-
-      const baseRadius = Math.min(width, height) * 0.21;
-      for (let i = 0; i < 5; i++) {
-        const r = baseRadius + i * 74 + Math.sin(t - i * 0.55) * 9;
-        if (r <= 0) continue;
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        if (i % 2 === 0) {
-          ctx.strokeStyle = `rgba(220, 38, 38, ${0.11 - i * 0.015})`;
-        } else {
-          ctx.strokeStyle = isLight
-            ? `rgba(17, 17, 21, ${0.06 - i * 0.008})`
-            : `rgba(255, 255, 255, ${0.055 - i * 0.008})`;
-        }
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-
-      rafId = window.requestAnimationFrame(render);
-    }
-
-    window.addEventListener('resize', resize, { passive: true });
-    window.addEventListener(
-      'mousemove',
-      function (e) {
-        mouseX = e.clientX / Math.max(1, window.innerWidth);
-        mouseY = e.clientY / Math.max(1, window.innerHeight);
-      },
-      { passive: true }
-    );
-
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(
-        function (entries) {
-          running = entries.some((en) => en.isIntersecting) && !document.hidden;
-          if (running && !rafId) rafId = window.requestAnimationFrame(render);
-        },
-        { threshold: 0.02 }
-      );
-      io.observe(hero);
-    }
-
-    resize();
-    rafId = window.requestAnimationFrame(render);
+    renderDepth();
+    setInterval(renderDepth, 2400); // Live ticking every 2.4s
   }
 
   /* ------------------------------------------------------------------------
-     3. PULL-CORD THEME SWITCH, ROLE FLIP-PAD & PORTRAIT ABILITY CARD
+     4. KELLY CRITERION & NOWCAST BAYESIAN SIMULATOR
      ------------------------------------------------------------------------ */
-  function toggleTheme() {
-    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
+  function initKellySimulator() {
+    const marketOddsSlider = document.getElementById('market-odds-slider');
+    const modelProbSlider = document.getElementById('model-prob-slider');
+    const marketOddsVal = document.getElementById('market-odds-val');
+    const modelProbVal = document.getElementById('model-prob-val');
+    const kellyFracRes = document.getElementById('kelly-frac-res');
+    const safeKellyRes = document.getElementById('safe-kelly-res');
+    const expectedValueRes = document.getElementById('expected-value-res');
+
+    if (!marketOddsSlider || !modelProbSlider) return;
+
+    function updateCalculations() {
+      const pMarket = parseFloat(marketOddsSlider.value);
+      const pTrue = parseFloat(modelProbSlider.value);
+
+      marketOddsVal.textContent = pMarket.toFixed(2);
+      modelProbVal.textContent = pTrue.toFixed(2);
+
+      // Decimal odds: b = (1 - pMarket) / pMarket
+      // Kelly fraction: f* = (pTrue * b - (1 - pTrue)) / b = (pTrue - pMarket) / (1 - pMarket)
+      const b = (1.0 - pMarket) / pMarket;
+      const q = 1.0 - pTrue;
+      const fStar = (pTrue * b - q) / b;
+
+      const ev = ((pTrue - pMarket) / pMarket) * 100;
+
+      if (fStar <= 0) {
+        kellyFracRes.textContent = '0.00% (No Edge)';
+        kellyFracRes.className = 'text-crimson';
+        safeKellyRes.textContent = '0.00 € (Stay in Cash)';
+        expectedValueRes.textContent = `${ev.toFixed(2)}% (Negative)`;
+        expectedValueRes.className = 'text-crimson';
+      } else {
+        const fullPct = (fStar * 100).toFixed(2);
+        const safeFraction = fStar * 0.25;
+        const safePct = (safeFraction * 100).toFixed(2);
+        const capitalAllocation = (safeFraction * 1000).toFixed(2);
+
+        kellyFracRes.textContent = `${fullPct}%`;
+        kellyFracRes.className = 'text-emerald';
+
+        safeKellyRes.textContent = `${safePct}% (Cap: ${capitalAllocation} € / 1000 €)`;
+        expectedValueRes.textContent = `+${ev.toFixed(2)}%`;
+        expectedValueRes.className = 'text-emerald';
+      }
+    }
+
+    marketOddsSlider.addEventListener('input', updateCalculations);
+    modelProbSlider.addEventListener('input', updateCalculations);
+    updateCalculations();
+  }
+
+  /* ------------------------------------------------------------------------
+     5. STACK 7 COUCHES INTERACTIVE TABS
+     ------------------------------------------------------------------------ */
+  function initStack7Tabs() {
+    const tabs = document.querySelectorAll('.stack-tab');
+    const badgeEl = document.getElementById('stack-layer-badge');
+    const roleEl = document.getElementById('stack-layer-role');
+    const titleEl = document.getElementById('stack-layer-title');
+    const descEl = document.getElementById('stack-layer-desc');
+    const fileEl = document.getElementById('stack-code-file');
+    const preEl = document.getElementById('stack-code-pre');
+    const pillsEl = document.getElementById('stack-layer-pills');
+
+    if (!tabs.length || !titleEl) return;
+
+    function renderLayer(idx) {
+      const data = STACK_LAYERS[idx];
+      if (!data) return;
+
+      tabs.forEach((t, i) => {
+        const isActive = i === idx;
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      badgeEl.textContent = data.badge;
+      roleEl.textContent = data.role;
+      titleEl.textContent = data.title;
+      descEl.textContent = data.desc;
+      fileEl.textContent = data.file;
+      preEl.textContent = data.code;
+
+      pillsEl.innerHTML = data.pills.map(p => `<span class="layer-pill">${p}</span>`).join('');
+    }
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => renderLayer(idx));
+    });
+
+    renderLayer(0); // Default to Layer 1
+  }
+
+  /* ------------------------------------------------------------------------
+     6. OMI 7 PRS DIFF VIEWER INTERACTIVE TABS
+     ------------------------------------------------------------------------ */
+  function initOmiPrTabs() {
+    const tabs = document.querySelectorAll('.omi-pr-btn');
+    const titleEl = document.getElementById('omi-diff-title');
+    const linkEl = document.getElementById('omi-pr-link');
+    const noteEl = document.getElementById('omi-diff-note');
+    const beforeEl = document.getElementById('omi-diff-before');
+    const afterEl = document.getElementById('omi-diff-after');
+
+    if (!tabs.length || !titleEl) return;
+
+    function renderPr(idx) {
+      const data = OMI_PRS[idx];
+      if (!data) return;
+
+      tabs.forEach((t, i) => {
+        const isActive = i === idx;
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      titleEl.textContent = `BasedHardware/omi: ${data.title} · ${data.maintainer}`;
+      linkEl.href = data.url;
+      noteEl.innerHTML = data.note;
+      beforeEl.textContent = data.before;
+      afterEl.textContent = data.after;
+    }
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => renderPr(idx));
+    });
+
+    renderPr(0); // Default to PR 1
+  }
+
+  /* ------------------------------------------------------------------------
+     7. TACTILE HANGING PULL-CORD THEME TOGGLE
+     ------------------------------------------------------------------------ */
+  function initPullCordTheme() {
     const cordBtn = document.getElementById('pull-cord-btn');
-    if (cordBtn) {
-      cordBtn.classList.add('is-pulled');
-      window.setTimeout(() => cordBtn.classList.remove('is-pulled'), 260);
-    }
-    const msg =
-      currentLang === 'fr'
-        ? currentTheme === 'light'
-          ? 'Thème Papier Éditorial activé'
-          : 'Thème Studio Noir activé'
-        : currentTheme === 'light'
-        ? 'Warm Editorial Paper theme active'
-        : 'Noir Studio theme active';
-    showToast(msg);
-  }
+    if (!cordBtn) return;
 
-  function initPullCord() {
-    const cordBtn = document.getElementById('pull-cord-btn');
-    if (cordBtn) cordBtn.addEventListener('click', toggleTheme);
-  }
+    const savedTheme = localStorage.getItem('theme-preference') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
 
-  function renderRoleCard() {
-    const roleText = document.getElementById('role-flip-text');
-    const roleIndex = document.getElementById('role-flip-index');
-    const item = ROLES[roleIdx] || ROLES[0];
-    if (roleText) roleText.textContent = currentLang === 'fr' ? item.fr : item.en;
-    if (roleIndex) roleIndex.textContent = item.idx;
-  }
+    cordBtn.addEventListener('click', () => {
+      cordBtn.classList.add('pulling');
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const nextTheme = current === 'dark' ? 'light' : 'dark';
 
-  function stepRoleFlip() {
-    const pad = document.getElementById('role-flip-btn');
-    if (!pad) return;
-    pad.classList.add('is-flipping');
-    window.setTimeout(function () {
-      roleIdx = (roleIdx + 1) % ROLES.length;
-      renderRoleCard();
-      pad.classList.remove('is-flipping');
-    }, 150);
-  }
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme-preference', nextTheme);
 
-  function initRoleFlipPad() {
-    const pad = document.getElementById('role-flip-btn');
-    if (!pad) return;
-    renderRoleCard();
-    pad.addEventListener('click', stepRoleFlip);
-    window.setInterval(function () {
-      if (!document.hidden && window.scrollY < window.innerHeight * 0.7) {
-        stepRoleFlip();
-      }
-    }, 4400);
-  }
-
-  function initAbilityCard() {
-    const sheet = document.getElementById('ability-card-sheet');
-    const toggleBtn = document.getElementById('ability-toggle-btn');
-    const closeBtn = document.getElementById('ability-close-btn');
-    if (!sheet || !toggleBtn) return;
-
-    function setOpen(open) {
-      sheet.classList.toggle('open', open);
-      sheet.setAttribute('aria-hidden', open ? 'false' : 'true');
-    }
-
-    toggleBtn.addEventListener('click', function () {
-      setOpen(!sheet.classList.contains('open'));
+      setTimeout(() => {
+        cordBtn.classList.remove('pulling');
+      }, 400);
     });
-    if (closeBtn) {
-      closeBtn.addEventListener('click', function () {
-        setOpen(false);
-      });
-    }
   }
 
   /* ------------------------------------------------------------------------
-     4. KAI MODULE TABS, INTERACTIVE SPECIALTY DOORS & TIMELINE SYNC
+     8. BILINGUAL LANGUAGE SWITCHER (FR / EN)
      ------------------------------------------------------------------------ */
-  function renderKaiModule(idx) {
-    activeModuleIdx = idx;
-    const m = KAI_MODULES[idx] || KAI_MODULES[0];
-    const isFr = currentLang === 'fr';
+  function initLanguageToggle() {
+    const langBtn = document.getElementById('lang-toggle-btn');
+    if (!langBtn) return;
 
-    document.querySelectorAll('.layer-tab[data-layer]').forEach((btn, i) => {
-      const mod = KAI_MODULES[i];
-      if (mod) btn.textContent = isFr ? mod.tabFr : mod.tabEn;
-      btn.classList.toggle('active', i === idx);
-      btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+    let currentLang = localStorage.getItem('lang-preference') || 'fr';
+    applyLanguage(currentLang);
+
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      applyLanguage(currentLang);
+      localStorage.setItem('lang-preference', currentLang);
     });
 
-    const badgeEl = document.getElementById('layer-badge');
-    const titleEl = document.getElementById('layer-title');
-    const descEl = document.getElementById('layer-desc');
-    const fileEl = document.getElementById('layer-code-file');
-    const codeEl = document.getElementById('layer-code-pre');
-    const pillsEl = document.getElementById('layer-pills');
+    function applyLanguage(lang) {
+      document.documentElement.setAttribute('lang', lang);
 
-    if (badgeEl) badgeEl.textContent = isFr ? m.badgeFr : m.badgeEn;
-    if (titleEl) titleEl.textContent = isFr ? m.titleFr : m.titleEn;
-    if (descEl) descEl.textContent = isFr ? m.descFr : m.descEn;
-    if (fileEl) fileEl.textContent = m.file;
-    if (codeEl) codeEl.textContent = m.code;
-    if (pillsEl) {
-      const pills = isFr ? m.pillsFr : m.pillsEn;
-      pillsEl.innerHTML = pills.map((p) => `<span class="layer-pill">${p}</span>`).join('');
-    }
-  }
-
-  function renderOssEcosystem(idx) {
-    activeOssIdx = idx;
-    const eco = OSS_ECOSYSTEMS[idx] || OSS_ECOSYSTEMS[0];
-    const isFr = currentLang === 'fr';
-
-    document.querySelectorAll('.oss-eco-tab').forEach((btn, i) => {
-      const e = OSS_ECOSYSTEMS[i];
-      if (e) btn.textContent = isFr ? e.tabFr : e.tabEn;
-      btn.classList.toggle('active', i === idx);
-    });
-
-    const titleEl = document.getElementById('oss-window-title');
-    const listEl = document.getElementById('oss-pr-list');
-    if (titleEl) titleEl.textContent = eco.winTitle;
-    if (listEl) {
-      listEl.innerHTML = eco.rows
-        .map(
-          (r) => `
-          <a href="${r.url}" target="_blank" rel="noopener noreferrer" class="oss-pr-row">
-            <span class="oss-pr-id">${r.id}</span>
-            <span class="oss-pr-summary">${isFr ? r.fr : r.en}</span>
-            <span class="oss-pr-status">${r.status}</span>
-          </a>
-        `
-        )
-        .join('');
-    }
-  }
-
-  function initOssTabs() {
-    document.querySelectorAll('.oss-eco-tab').forEach((btn) => {
-      btn.addEventListener('click', function () {
-        const idx = parseInt(btn.getAttribute('data-oss') || '0', 10);
-        renderOssEcosystem(idx);
-      });
-    });
-    renderOssEcosystem(0);
-  }
-
-  function initProjectFilters() {
-    const btns = document.querySelectorAll('.proj-filter-btn');
-    const cards = document.querySelectorAll('.case-card[data-cat]');
-    if (!btns.length || !cards.length) return;
-
-    btns.forEach((btn) => {
-      btn.addEventListener('click', function () {
-        const filter = btn.getAttribute('data-filter') || 'all';
-        btns.forEach((b) => b.classList.toggle('active', b === btn));
-        cards.forEach((card) => {
-          const cat = card.getAttribute('data-cat');
-          card.style.display = filter === 'all' || cat === filter ? '' : 'none';
-        });
-        window.dispatchEvent(new Event('resize'));
-      });
-    });
-  }
-
-  function initKaiTabs() {
-    document.querySelectorAll('.layer-tab[data-layer]').forEach((btn) => {
-      btn.addEventListener('click', function () {
-        const idx = parseInt(btn.getAttribute('data-layer') || '0', 10);
-        renderKaiModule(idx);
-      });
-    });
-    renderKaiModule(0);
-  }
-
-  function renderDoor(idx) {
-    activeDoorIdx = idx;
-    const d = DOORS_DATA[idx] || DOORS_DATA[0];
-    const isFr = currentLang === 'fr';
-
-    document.querySelectorAll('.door-card').forEach((btn, i) => {
-      btn.classList.toggle('active', i === idx);
-      btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
-    });
-
-    const badgeEl = document.getElementById('door-badge');
-    const headEl = document.getElementById('door-heading');
-    const descEl = document.getElementById('door-desc');
-    const listEl = document.getElementById('door-checklist');
-
-    if (badgeEl) badgeEl.textContent = isFr ? d.badgeFr : d.badgeEn;
-    if (headEl) headEl.textContent = isFr ? d.headingFr : d.headingEn;
-    if (descEl) descEl.textContent = isFr ? d.descFr : d.descEn;
-    if (listEl) {
-      const arr = isFr ? d.itemsFr : d.itemsEn;
-      listEl.innerHTML = arr.map((item) => `<li>${item}</li>`).join('');
-    }
-  }
-
-  function initDoors() {
-    document.querySelectorAll('.door-card').forEach((btn) => {
-      btn.addEventListener('click', function () {
-        const idx = parseInt(btn.getAttribute('data-door') || '0', 10);
-        renderDoor(idx);
-      });
-    });
-    renderDoor(0);
-  }
-
-  function updateActiveTimelineItem(activeItem) {
-    if (!activeItem) return;
-    const yearEl = document.getElementById('timeline-big-year');
-    const periodEl = document.getElementById('timeline-period-label');
-    const countEl = document.getElementById('timeline-step-count');
-    const fillEl = document.getElementById('timeline-step-fill');
-
-    document.querySelectorAll('.timeline-item').forEach((el) => {
-      el.classList.toggle('active', el === activeItem);
-    });
-
-    if (yearEl) yearEl.textContent = activeItem.getAttribute('data-year') || '2026';
-    if (periodEl) {
-      periodEl.textContent =
-        activeItem.getAttribute(currentLang === 'fr' ? 'data-period-fr' : 'data-period-en') || '';
-    }
-    if (countEl) countEl.textContent = activeItem.getAttribute('data-step') || '01 / 04';
-    if (fillEl) fillEl.style.width = activeItem.getAttribute('data-pct') || '25%';
-  }
-
-  function initTimelineScrollSync() {
-    const items = Array.from(document.querySelectorAll('.timeline-item'));
-    if (!items.length) return;
-
-    function syncOnScroll() {
-      const targetY = window.innerHeight * 0.48;
-      let best = items[0];
-      let bestDist = Infinity;
-      items.forEach((item) => {
-        const r = item.getBoundingClientRect();
-        const center = r.top + r.height * 0.35;
-        const dist = Math.abs(center - targetY);
-        if (dist < bestDist) {
-          bestDist = dist;
-          best = item;
-        }
-      });
-      updateActiveTimelineItem(best);
-    }
-
-    window.addEventListener('scroll', syncOnScroll, { passive: true });
-    syncOnScroll();
-  }
-
-  /* ------------------------------------------------------------------------
-     5. BILINGUAL SWITCHER (100% FR / EN), CLOCK, COPY & COMMAND PALETTE
-     ------------------------------------------------------------------------ */
-  function applyLanguage(lang) {
-    currentLang = lang === 'en' ? 'en' : 'fr';
-    document.documentElement.setAttribute('lang', currentLang);
-
-    const toggleBtn = document.getElementById('lang-toggle-btn');
-    if (toggleBtn) toggleBtn.textContent = currentLang === 'fr' ? 'FR / EN' : 'EN / FR';
-
-    document.querySelectorAll('[data-fr]').forEach((el) => {
-      const val = el.getAttribute(currentLang === 'fr' ? 'data-fr' : 'data-en');
-      if (val !== null) {
-        if (el.hasAttribute('data-html')) {
+      // Translate all data-fr / data-en nodes
+      document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+        const val = el.getAttribute(`data-${lang}`);
+        if (!val) return;
+        if (el.getAttribute('data-html') === 'true') {
           el.innerHTML = val;
         } else {
           el.textContent = val;
         }
+      });
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     9. ONE-CLICK EMAIL COPY & TOAST BANNER
+     ------------------------------------------------------------------------ */
+  function initEmailCopy() {
+    const btn = document.getElementById('btn-copy-email');
+    const toast = document.getElementById('toast-banner');
+    if (!btn || !toast) return;
+
+    btn.addEventListener('click', async () => {
+      const email = 'matei64200@gmail.com';
+      try {
+        await navigator.clipboard.writeText(email);
+        toast.textContent = `✓ E-mail copié dans le presse-papier : ${email}`;
+        toast.classList.add('visible');
+        setTimeout(() => toast.classList.remove('visible'), 3200);
+      } catch (e) {
+        window.location.href = `mailto:${email}`;
       }
     });
-
-    const cmdInput = document.getElementById('cmdk-input');
-    if (cmdInput) {
-      cmdInput.placeholder =
-        cmdInput.getAttribute(
-          currentLang === 'fr' ? 'data-placeholder-fr' : 'data-placeholder-en'
-        ) || '';
-    }
-
-    const cvHref =
-      currentLang === 'fr'
-        ? 'portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf'
-        : 'portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf';
-    ['dock-cv-link', 'hero-cv-link'].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) el.setAttribute('href', cvHref);
-    });
-
-    renderRoleCard();
-    renderOssEcosystem(activeOssIdx);
-    renderKaiModule(activeModuleIdx);
-    renderDoor(activeDoorIdx);
-    if (typeof window.__refreshExplodedLang === 'function') {
-      window.__refreshExplodedLang();
-    }
-    if (typeof window.__refreshScrollArchitectLang === 'function') {
-      window.__refreshScrollArchitectLang();
-    }
-    const activeTl = document.querySelector('.timeline-item.active');
-    if (activeTl) updateActiveTimelineItem(activeTl);
   }
 
-  function showToast(msg) {
-    const toast = document.getElementById('toast-banner');
-    if (!toast) return;
-    toast.textContent = msg;
-    toast.classList.add('visible');
-    window.clearTimeout(toast._hideTimer);
-    toast._hideTimer = window.setTimeout(() => toast.classList.remove('visible'), 2600);
-  }
-
-  function copyEmailToClipboard() {
-    const email = 'matei64200@gmail.com';
-    const msg =
-      currentLang === 'fr'
-        ? 'E-mail copié : matei64200@gmail.com'
-        : 'Copied to clipboard: matei64200@gmail.com';
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email).then(
-        () => showToast(msg),
-        () => showToast(msg)
-      );
-    } else {
-      showToast(msg);
-    }
-  }
-
-  function initScrollAndClock() {
-    const bar = document.getElementById('scroll-progress-bar');
-    if (bar) {
-      window.addEventListener(
-        'scroll',
-        function () {
-          const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-          const pct = Math.max(0, Math.min(1, (window.scrollY || 0) / max));
-          bar.style.transform = `scaleX(${pct.toFixed(4)})`;
-        },
-        { passive: true }
-      );
-    }
-
-    const sections = [
-      'projects',
-      'exploded-architecture',
-      'domains',
-      'timeline',
-      'experience-dna',
-      'contact'
-    ]
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-    const links = document.querySelectorAll('.dock-link');
-    if (sections.length && links.length && 'IntersectionObserver' in window) {
-      const spy = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              links.forEach((lnk) =>
-                lnk.classList.toggle('active', lnk.getAttribute('href') === `#${entry.target.id}`)
-              );
-            }
-          });
-        },
-        { rootMargin: '-35% 0px -50% 0px' }
-      );
-      sections.forEach((s) => spy.observe(s));
-    }
-
-    const clockEl = document.getElementById('live-biarritz-clock');
-    const dockTimeEl = document.getElementById('dock-local-time');
-    function tick() {
-      try {
-        const shortFmt = new Intl.DateTimeFormat('fr-FR', {
-          timeZone: 'Europe/Paris',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-        const str = shortFmt.format(new Date());
-        if (clockEl) clockEl.textContent = `${str} CET`;
-        if (dockTimeEl) dockTimeEl.textContent = `Biarritz • ${str}`;
-      } catch (_) {}
-    }
-    tick();
-    window.setInterval(tick, 15000);
-  }
-
-  function initMagneticButtons() {
-    document.querySelectorAll('.magnetic-btn').forEach((btn) => {
-      btn.addEventListener('mousemove', function (e) {
-        const r = btn.getBoundingClientRect();
-        const dx = (e.clientX - (r.left + r.width / 2)) * 0.14;
-        const dy = (e.clientY - (r.top + r.height / 2)) * 0.18;
-        btn.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
-      });
-      btn.addEventListener('mouseleave', function () {
-        btn.style.transform = '';
-      });
-    });
-  }
-
+  /* ------------------------------------------------------------------------
+     10. COMMAND PALETTE (CTRL+K / CMD+K)
+     ------------------------------------------------------------------------ */
   function initCommandPalette() {
     const backdrop = document.getElementById('cmdk-backdrop');
     const openBtn = document.getElementById('cmdk-open-btn');
     const input = document.getElementById('cmdk-input');
-    const listEl = document.getElementById('cmdk-list');
-    if (!backdrop || !input || !listEl) return;
+    const list = document.getElementById('cmdk-list');
 
-    function getCommands() {
-      const fr = currentLang === 'fr';
-      return [
-        {
-          label: fr ? '◈  Aller aux Projets & PRs Open-Source' : '◈  Jump to Projects & Open-Source PRs',
-          kbd: '#01',
-          run: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-        },
-        {
-          label: fr ? '❖  Inspecter la Vue Éclatée 3D (6 Couches)' : '❖  Inspect Interactive 3D Exploded View',
-          kbd: '#02 3D',
-          run: () => document.getElementById('exploded-architecture')?.scrollIntoView({ behavior: 'smooth' })
-        },
-        {
-          label: fr ? '⊞  Explorer les Portes de Compétences' : '⊞  Explore Capability Portals',
-          kbd: '#03',
-          run: () => document.getElementById('domains')?.scrollIntoView({ behavior: 'smooth' })
-        },
-        {
-          label: fr ? '§  Voir mon Parcours Chronologique (2023–2026)' : '§  Jump to Chronological Timeline (2023–2026)',
-          kbd: '#04',
-          run: () => document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' })
-        },
-        {
-          label: fr ? '✦  Stages (HUPI, Marra), Immersion UK & Échecs' : '✦  Internships (HUPI, Marra), UK Stays & Chess',
-          kbd: '#05',
-          run: () => document.getElementById('experience-dna')?.scrollIntoView({ behavior: 'smooth' })
-        },
-        {
-          label: fr ? '⇄  Changer de langue (Français / English)' : '⇄  Switch Language (English / Français)',
-          kbd: 'FR/EN',
-          run: () => applyLanguage(currentLang === 'fr' ? 'en' : 'fr')
-        },
-        {
-          label: fr ? '◐  Basculer Thème Noir / Papier Clair' : '◐  Toggle Noir / Warm Paper Theme',
-          kbd: 'THEME',
-          run: () => toggleTheme()
-        },
-        {
-          label: fr
-            ? '↓  Télécharger mon CV PDF (Alternance BUT 2)'
-            : '↓  Download my Resume PDF (Year-2 Co-op)',
-          kbd: 'PDF',
-          run: () => {
-            const url =
-              currentLang === 'fr'
-                ? 'portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf'
-                : 'portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf';
-            window.open(url, '_blank', 'noopener');
-          }
-        },
-        {
-          label: fr ? '⎘  Copier mon e-mail (matei64200@gmail.com)' : '⎘  Copy Email (matei64200@gmail.com)',
-          kbd: 'COPY',
-          run: () => copyEmailToClipboard()
-        },
-        {
-          label: fr
-            ? '↗  Inspecter mes 46 PRs fusionnées sur GitHub'
-            : '↗  Inspect all 46 Merged Pull Requests on GitHub',
-          kbd: '46 PRs',
-          run: () =>
-            window.open(
-              'https://github.com/pulls?q=is%3Apr+author%3AMateidslx+is%3Amerged',
-              '_blank',
-              'noopener'
-            )
-        },
-        {
-          label: fr
-            ? '↗  Ouvrir security-scanner-mcp (Smithery / GitHub)'
-            : '↗  Open security-scanner-mcp on GitHub',
-          kbd: 'MCP',
-          run: () =>
-            window.open('https://github.com/Mateidslx/security-scanner-mcp', '_blank', 'noopener')
-        },
-        {
-          label: fr ? '↗  Ouvrir mon GitHub (@Mateidslx)' : '↗  Open GitHub Profile (@Mateidslx)',
-          kbd: 'GH',
-          run: () => window.open('https://github.com/Mateidslx', '_blank', 'noopener')
-        }
-      ];
+    if (!backdrop || !input || !list) return;
+
+    const COMMANDS = [
+      { label: 'Aller à : Écosystème Autonome Kai 7 Couches', action: () => location.href = '#flagship-deployments' },
+      { label: 'Aller à : Moteur Quantitatif Polymarket (V71-V150)', action: () => location.href = '#polymarket-quant' },
+      { label: 'Aller à : Contributions Open-Source BasedHardware/Omi (7 PRs)', action: () => location.href = '#project-omi-prs' },
+      { label: 'Aller à : AlgoForge & C99 Valgrind Zéro-Leak', action: () => location.href = '#project-c99' },
+      { label: 'Aller à : Vue Éclatée 2.5D Interactive', action: () => location.href = '#exploded-architecture' },
+      { label: 'Télécharger : CV Français (PDF)', action: () => window.open('portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf') },
+      { label: 'Download: English Resume (PDF)', action: () => window.open('portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf') },
+      { label: 'Télémétrie : Statut VPS Oracle Cloud 24/7', action: () => alert('VPS Oracle Cloud 88.96.47.180: 19 services systemd actifs (Uptime: 99.98%)') },
+      { label: 'Changer le Thème (Mode Noir / Papier Clair)', action: () => document.getElementById('pull-cord-btn')?.click() }
+    ];
+
+    function openCmdk() {
+      backdrop.classList.add('open');
+      input.value = '';
+      renderList(COMMANDS);
+      input.focus();
     }
 
-    let filtered = [];
-    let selIdx = 0;
+    function closeCmdk() {
+      backdrop.classList.remove('open');
+    }
 
-    function renderItems() {
-      listEl.innerHTML = filtered
-        .map(
-          (cmd, i) => `
-          <button type="button" class="cmdk-item${i === selIdx ? ' selected' : ''}" data-idx="${i}">
-            <span>${cmd.label}</span>
-            <span class="cmdk-item-kbd">${cmd.kbd}</span>
-          </button>
-        `
-        )
-        .join('');
+    function renderList(items) {
+      list.innerHTML = items.map((cmd, i) => `
+        <div class="cmdk-item" data-index="${i}">
+          <span>${cmd.label}</span>
+          <span class="cmdk-kbd">↵</span>
+        </div>
+      `).join('');
 
-      listEl.querySelectorAll('.cmdk-item').forEach((btn) => {
-        btn.addEventListener('click', function () {
-          executeCommand(parseInt(btn.getAttribute('data-idx') || '0', 10));
+      list.querySelectorAll('.cmdk-item').forEach((item, i) => {
+        item.addEventListener('click', () => {
+          closeCmdk();
+          items[i].action();
         });
       });
     }
 
-    function executeCommand(i) {
-      const cmd = filtered[i];
-      backdrop.classList.remove('open');
-      if (cmd) cmd.run();
-    }
-
-    function openPalette() {
-      input.value = '';
-      filtered = getCommands();
-      selIdx = 0;
-      renderItems();
-      backdrop.classList.add('open');
-      window.setTimeout(() => input.focus(), 40);
-    }
-
-    if (openBtn) openBtn.addEventListener('click', openPalette);
+    openBtn?.addEventListener('click', openCmdk);
     backdrop.addEventListener('click', (e) => {
-      if (e.target === backdrop) backdrop.classList.remove('open');
+      if (e.target === backdrop) closeCmdk();
     });
 
-    input.addEventListener('input', function () {
-      const q = input.value.trim().toLowerCase();
-      filtered = getCommands().filter(
-        (c) => c.label.toLowerCase().includes(q) || c.kbd.toLowerCase().includes(q)
-      );
-      selIdx = 0;
-      renderItems();
-    });
-
-    window.addEventListener('keydown', function (e) {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        if (backdrop.classList.contains('open')) {
-          backdrop.classList.remove('open');
-        } else {
-          openPalette();
-        }
-        return;
+        openCmdk();
       }
-      if (!backdrop.classList.contains('open')) return;
-      if (e.key === 'Escape') {
-        backdrop.classList.remove('open');
-      } else if (e.key === 'ArrowDown' && filtered.length) {
-        e.preventDefault();
-        selIdx = (selIdx + 1) % filtered.length;
-        renderItems();
-      } else if (e.key === 'ArrowUp' && filtered.length) {
-        e.preventDefault();
-        selIdx = (selIdx - 1 + filtered.length) % filtered.length;
-        renderItems();
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        executeCommand(selIdx);
+      if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+        closeCmdk();
+      }
+    });
+
+    input.addEventListener('input', () => {
+      const q = input.value.toLowerCase().trim();
+      const filtered = COMMANDS.filter(c => c.label.toLowerCase().includes(q));
+      renderList(filtered);
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     11. ABILITY CARD TOGGLE (PORTRAIT STAGE)
+     ------------------------------------------------------------------------ */
+  function initAbilityCard() {
+    const toggleBtn = document.getElementById('ability-toggle-btn');
+    const closeBtn = document.getElementById('ability-close-btn');
+    const card = document.getElementById('portrait-ability-card');
+
+    if (!toggleBtn || !card) return;
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      card.classList.toggle('active');
+    });
+
+    closeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      card.classList.remove('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (card.classList.contains('active') && !card.contains(e.target) && e.target !== toggleBtn) {
+        card.classList.remove('active');
       }
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    initOpArtCanvas();
-    initPullCord();
-    initRoleFlipPad();
-    initAbilityCard();
-    initOssTabs();
-    initProjectFilters();
-    initKaiTabs();
-    initDoors();
-    initTimelineScrollSync();
-    initScrollAndClock();
-    initMagneticButtons();
+  /* ------------------------------------------------------------------------
+     12. LIVE CLOCK (BIARRITZ LOCAL TIME)
+     ------------------------------------------------------------------------ */
+  function initLiveClock() {
+    const clockEl = document.getElementById('dock-local-time');
+    const footerClockEl = document.getElementById('live-biarritz-clock');
+
+    function updateTime() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('fr-FR', {
+        timeZone: 'Europe/Paris',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+
+      if (clockEl) clockEl.textContent = `Biarritz ${timeStr} · 24/7 VPS`;
+      if (footerClockEl) footerClockEl.textContent = `${timeStr} CET`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  }
+
+  /* ------------------------------------------------------------------------
+     13. INITIALIZE ALL ENGINES
+     ------------------------------------------------------------------------ */
+  function initAll() {
+    initStack7Tabs();
+    initPolymarketOrderbook();
+    initKellySimulator();
+    initOmiPrTabs();
+    initPullCordTheme();
+    initLanguageToggle();
+    initEmailCopy();
     initCommandPalette();
+    initAbilityCard();
+    initLiveClock();
+  }
 
-    const langBtn = document.getElementById('lang-toggle-btn');
-    if (langBtn) {
-      langBtn.addEventListener('click', function () {
-        applyLanguage(currentLang === 'fr' ? 'en' : 'fr');
-      });
-    }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
 
-    const copyBtn = document.getElementById('btn-copy-email');
-    if (copyBtn) copyBtn.addEventListener('click', copyEmailToClipboard);
-
-    const topBtn = document.getElementById('footer-back-top');
-    if (topBtn) {
-      topBtn.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-
-    // Default to French for fr-* browsers, English otherwise
-    const navLang = (navigator.language || 'fr').toLowerCase();
-    applyLanguage(navLang.startsWith('en') ? 'en' : 'fr');
-  });
 })();
