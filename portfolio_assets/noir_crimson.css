@@ -5415,6 +5415,112 @@ body.sahir-mode {
   box-shadow: 0 2px 6px rgba(0,0,0,0.6);
 }
 
+/* ==========================================================================
+   AUTHENTIC WIREFRAME & SEQUENTIAL CONSTRUCTION ENGINE
+   ========================================================================== */
+
+/* Unbuilt Wireframe State (Figma Canvas Blueprint) */
+.unbuilt-wireframe {
+  position: relative !important;
+  outline: 1px dashed rgba(56, 189, 248, 0.35) !important;
+  outline-offset: 3px !important;
+  background: rgba(56, 189, 248, 0.015) !important;
+  transition: outline 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hide inner direct contents while wireframe is unbuilt */
+.unbuilt-wireframe > * {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease-in, visibility 0.2s ease-in;
+}
+
+/* For elements with text directly inside */
+.unbuilt-wireframe.wf-text-target {
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+/* Figma Dimension Tag on unbuilt wireframe box */
+.unbuilt-wireframe::after {
+  content: attr(data-dim);
+  position: absolute;
+  bottom: -18px;
+  right: 0;
+  background: rgba(2, 132, 199, 0.9);
+  color: #ffffff;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.56rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 15;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Active Building State (Figma Active Selection) */
+.is-building {
+  outline: 1.5px solid #38bdf8 !important;
+  outline-offset: 3px !important;
+  background: rgba(56, 189, 248, 0.05) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3) !important;
+}
+
+.is-building > * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.is-building.wf-text-target {
+  color: inherit !important;
+}
+
+/* Fully Built State (Clean, Crisp, Complete Production UI) */
+.is-built {
+  outline: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.is-built::after {
+  display: none !important;
+  content: none !important;
+}
+
+.is-built > * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.is-built.wf-text-target {
+  color: inherit !important;
+}
+
+/* Typewriter Caret */
+.tw-caret {
+  display: inline-block;
+  color: #38bdf8;
+  font-weight: 900;
+  margin-left: 2px;
+  animation: tw-blink 0.75s step-start infinite;
+}
+
+@keyframes tw-blink {
+  50% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .figma-agent-cursor,
+  .figma-selection-overlay {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-columns-grid,
   .about-split-grid,

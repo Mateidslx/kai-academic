@@ -1,10 +1,17 @@
 /* ==========================================================================
-   AUTHENTIC SAHIR (DfWWldaTQTz.mp4) MULTIPLAYER ARCHITECT & TOUR ENGINE
-   1:1 Pixel-level reproduction of the Live Figma / IDE Autonomous Tour:
-   - 8 Multiplayer Cursors with Name Badges (Alex, Soren, Elena, Kai, Axel...)
-   - Thin Blue Figma Selection Frames (#38bdf8) with 4 Corner Handles & Dimensions
-   - Character-by-Character Typewriter Effect with Blinking Caret (|)
-   - Bottom Telemetry Scrubber Dock: 20 agents X / 252 layers — Touring 1x
+   MATÉI DE SAINT LÉGER — AUTONOMOUS MULTIPLAYER ARCHITECT ENGINE (v16)
+   Strictly aligned with DfWWldaTQTz.mp4 & Explicit User Directives:
+   1. On load/refresh: Screen starts dark with delicate blue wireframes and 0 layers.
+   2. Hero construction: Multiplayer cursors spawn, attach Figma boxes, type text,
+      and assemble hero sequentially (0 -> 52 layers).
+   3. ZERO PARASITIC CURSORS: Once a section is built, cursors smoothly glide to
+      parking stations on the far left/right margins and idle gently. They NEVER
+      obstruct text, buttons, or cards!
+   4. Human scroll-driven build: Below the fold, elements stay unbuilt wireframes.
+      As the human scrolls down, incoming elements queue and assemble steadily
+      one-by-one ("au fur et à mesure, pas en accéléré ni rien").
+   5. Zero deconstruction: Scrolling back UP retains 100% of built elements.
+   6. Bottom dock: Live agent dots, 0 -> 252 layers, and interactive scrubber knob.
    ========================================================================== */
 
 (function () {
@@ -18,21 +25,26 @@
     { name: 'Axel',  color: '#a855f7' }, // Purple
     { name: 'Iris',  color: '#ec4899' }, // Pink
     { name: 'Lex',   color: '#fb923c' }, // Orange
-    { name: 'Astra', color: '#22d3ee' }  // Cyan
+    { name: 'Astra', color: '#22d3ee' }  // Bright Cyan
   ];
 
   const TOTAL_LAYERS = 252;
-  let currentLayer = 52;
-  let isTouring = true;
-  let tourSpeed = 1.0;
+  const HERO_FINAL_LAYER = 52;
+
   let cursorNodes = [];
   let figmaSelectionBox = null;
   let figmaDimTag = null;
-  let activeElementTarget = null;
-  let tourRafId = null;
+
+  let isHeroBuilding = true;
+  let isQueueWorkerRunning = false;
+  let buildQueue = [];
+  let registeredLayers = [];
+
+  let isAutoTouring = false;
+  let autoTourRaf = null;
 
   /* ------------------------------------------------------------------------
-     1. CREATE MULTIPLAYER CURSORS & FIGMA SELECTION OVERLAY
+     1. CREATE MULTIPLAYER LAYER, FIGMA SELECTION OVERLAY & CURSORS
      ------------------------------------------------------------------------ */
   function setupMultiplayerLayer() {
     let overlay = document.getElementById('sahir-multiplayer-layer');
@@ -46,8 +58,9 @@
       overlay.style.overflow = 'hidden';
       document.body.appendChild(overlay);
     }
+    overlay.innerHTML = '';
 
-    // 1. Create Figma Selection Box
+    // Figma Selection Box
     figmaSelectionBox = document.createElement('div');
     figmaSelectionBox.className = 'figma-selection-overlay';
     figmaSelectionBox.style.opacity = '0';
@@ -61,7 +74,7 @@
     overlay.appendChild(figmaSelectionBox);
     figmaDimTag = document.getElementById('figma-dim-tag');
 
-    // 2. Create Multiplayer Cursors
+    // Spawn 8 Multiplayer Cursors
     cursorNodes = AGENTS.map((agent, i) => {
       const node = document.createElement('div');
       node.className = 'figma-agent-cursor';
@@ -72,35 +85,64 @@
         <span class="cur-nametag" style="background:${agent.color}">${agent.name}</span>
       `;
       overlay.appendChild(node);
+
+      // Start position offscreen or at edges
+      const isLeft = i < 4;
+      const startX = isLeft ? -50 : window.innerWidth + 50;
+      const startY = 120 + i * 80;
+
       return {
         el: node,
         agent,
-        x: window.innerWidth * (0.2 + (i % 4) * 0.2),
-        y: 120 + (i % 3) * 150,
-        tx: window.innerWidth * (0.2 + (i % 4) * 0.2),
-        ty: 120 + (i % 3) * 150,
+        x: startX,
+        y: startY,
+        tx: startX,
+        ty: startY,
         orbitAngle: (i / AGENTS.length) * Math.PI * 2,
-        speed: 0.015 + (i % 3) * 0.005
+        speed: 0.018 + (i % 3) * 0.005,
+        isParked: true
       };
     });
   }
 
   /* ------------------------------------------------------------------------
-     2. FIGMA SELECTION BOX TARGETING
+     2. PARKING MARGINS (ZERO PARASITIC CURSORS ON IDLE)
      ------------------------------------------------------------------------ */
-  function attachFigmaBox(element, label) {
-    if (!element || !figmaSelectionBox) return;
-    activeElementTarget = element;
+  function parkCursorsAtMargins() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
 
-    const rect = element.getBoundingClientRect();
-    figmaSelectionBox.style.top = `${rect.top + window.scrollY - 3}px`;
-    figmaSelectionBox.style.left = `${rect.left + window.scrollX - 4}px`;
-    figmaSelectionBox.style.width = `${rect.width + 8}px`;
-    figmaSelectionBox.style.height = `${rect.height + 6}px`;
+    cursorNodes.forEach((c, i) => {
+      c.isParked = true;
+      if (i < 4) {
+        // Left margin: x between 20px and 45px
+        c.tx = 24 + (i % 2) * 16;
+        c.ty = 160 + i * (h * 0.17);
+      } else {
+        // Right margin: x between w-55px and w-30px
+        c.tx = w - (48 + (i % 2) * 16);
+        c.ty = 180 + (i - 4) * (h * 0.17);
+      }
+    });
+
+    detachFigmaBox();
+  }
+
+  /* ------------------------------------------------------------------------
+     3. FIGMA SELECTION BOX HELPERS
+     ------------------------------------------------------------------------ */
+  function attachFigmaBox(element, customLabel) {
+    if (!element || !figmaSelectionBox) return;
+    const r = element.getBoundingClientRect();
+
+    figmaSelectionBox.style.top = `${r.top + window.scrollY - 3}px`;
+    figmaSelectionBox.style.left = `${r.left + window.scrollX - 4}px`;
+    figmaSelectionBox.style.width = `${Math.max(40, r.width + 8)}px`;
+    figmaSelectionBox.style.height = `${Math.max(20, r.height + 6)}px`;
     figmaSelectionBox.style.opacity = '1';
 
     if (figmaDimTag) {
-      figmaDimTag.textContent = label || `${Math.round(rect.width)} × ${Math.round(rect.height)}`;
+      figmaDimTag.textContent = customLabel || `${Math.round(r.width)} × ${Math.round(r.height)}`;
     }
   }
 
@@ -111,271 +153,387 @@
   }
 
   /* ------------------------------------------------------------------------
-     3. TYPEWRITER EFFECT WITH BLINKING CARET
+     4. REGISTER ALL CONSTRUCTIBLE LAYERS AS WIREFRAMES ON LOAD
      ------------------------------------------------------------------------ */
-  function typewriteElement(boxEl, onComplete) {
-    if (!boxEl) return;
-    const fullText = boxEl.getAttribute('data-full-text') || '';
-    const contentSpan = boxEl.querySelector('.tw-content');
-    const caretSpan = boxEl.querySelector('.tw-caret');
+  function registerAllElementsAsWireframes() {
+    const layerDefs = [
+      // Hero Elements (Built in sequence on load)
+      { id: 'hero-nav', selector: '.top-nav-bar', layerWeight: 10, isHero: true },
+      { id: 'hero-wordmark', selector: '.hero-wordmark-display', layerWeight: 10, isHero: true },
+      { id: 'hero-greeting', selector: '#hero-greeting', layerWeight: 4, isHero: true, isTypewriter: true },
+      { id: 'hero-plate', selector: '#hero-name-plate', layerWeight: 4, isHero: true },
+      { id: 'hero-role', selector: '#hero-role-pill', layerWeight: 6, isHero: true, isTypewriter: true },
+      { id: 'hero-bio', selector: '#hero-bio-para', layerWeight: 6, isHero: true, isTypewriter: true },
+      { id: 'hero-btns', selector: '.hero-btn-group', layerWeight: 4, isHero: true },
+      { id: 'hero-stats', selector: '.hero-stats-trio', layerWeight: 4, isHero: true },
+      { id: 'hero-portrait', selector: '#portrait-stage-box', layerWeight: 4, isHero: true },
+      { id: 'hero-hud-01', selector: '#hud-card-01', layerWeight: 2, isHero: true },
+      { id: 'hero-hud-02', selector: '#hud-card-02', layerWeight: 2, isHero: true },
+      { id: 'hero-hud-03', selector: '#hud-card-03', layerWeight: 2, isHero: true },
+      { id: 'hero-tech-tags', selector: '.tech-tags-bar', layerWeight: 2, isHero: true },
 
-    if (!contentSpan) return;
+      // Section 01: About
+      { id: 'about-index', selector: '#about .section-index-line', layerWeight: 4 },
+      { id: 'about-eyebrow', selector: '#about .section-eyebrow-red', layerWeight: 4 },
+      { id: 'about-title', selector: '#about .section-title-large', layerWeight: 6 },
+      { id: 'about-p1', selector: '#tw-para-1', layerWeight: 10, isTypewriter: true },
+      { id: 'about-p2', selector: '#tw-para-2', layerWeight: 12, isTypewriter: true },
+      { id: 'about-sovereign', selector: '#card-sovereign-silicon', layerWeight: 10, isTypewriter: true },
 
-    attachFigmaBox(boxEl, `${Math.round(boxEl.offsetWidth)} × ${Math.round(boxEl.offsetHeight)}`);
+      // Section 02: Flagships
+      { id: 'flag-eyebrow', selector: '#flagships .section-eyebrow-red', layerWeight: 4 },
+      { id: 'flag-title', selector: '#flagships .section-title-large', layerWeight: 6 },
+      { id: 'flag-sub', selector: '#flagships .section-subtitle-gray', layerWeight: 4 },
+      { id: 'flag-master', selector: '.master-flagship-box', layerWeight: 20 },
+      { id: 'flag-stack', selector: '.stack-section-inner', layerWeight: 16 },
+      { id: 'flag-quant', selector: '#trio-quant', layerWeight: 12 },
+      { id: 'flag-oss', selector: '#trio-oss', layerWeight: 12 },
+      { id: 'flag-systems', selector: '#trio-systems', layerWeight: 12 },
 
-    // Dispatch lead cursor Alex to the typing point
-    const leadCursor = cursorNodes[0];
-    let charIdx = 0;
-    const speed = 20; // 20ms per character for snappy authentic typing
+      // Section 03: Matrix
+      { id: 'mat-eyebrow', selector: '#matrix .section-eyebrow-red', layerWeight: 4 },
+      { id: 'mat-title', selector: '#matrix .section-title-large', layerWeight: 6 },
+      { id: 'mat-filter', selector: '.matrix-filter-bar', layerWeight: 6 },
+      { id: 'mat-grid', selector: '.matrix-cards-grid', layerWeight: 24 },
 
-    function stepType() {
-      if (charIdx <= fullText.length) {
-        contentSpan.textContent = fullText.slice(0, charIdx);
+      // Section 04: Direct Connect
+      { id: 'conn-eyebrow', selector: '#contact .section-eyebrow-red', layerWeight: 4 },
+      { id: 'conn-title', selector: '#contact .section-title-large', layerWeight: 6 },
+      { id: 'conn-lead', selector: '#contact .max-w-lead', layerWeight: 6 },
+      { id: 'conn-email', selector: '.direct-email-box', layerWeight: 10 },
+      { id: 'conn-pills', selector: '.direct-social-pills', layerWeight: 8 },
+      { id: 'conn-footer', selector: '.sahir-footer', layerWeight: 5 }
+    ];
 
-        // Move lead cursor along with typing
-        if (leadCursor) {
-          const r = boxEl.getBoundingClientRect();
-          leadCursor.tx = r.left + Math.min(r.width - 20, charIdx * 8.5);
-          leadCursor.ty = r.top + 14;
+    layerDefs.forEach(def => {
+      const el = document.querySelector(def.selector);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const dimStr = `${Math.round(rect.width || 280)} × ${Math.round(rect.height || 40)}`;
+        el.setAttribute('data-dim', dimStr);
+        el.classList.add('unbuilt-wireframe');
+
+        // Text elements preparation
+        if (def.isTypewriter) {
+          const contentSpan = el.querySelector('.tw-content');
+          if (contentSpan) contentSpan.textContent = '';
         }
 
+        registeredLayers.push({
+          id: def.id,
+          el,
+          layerWeight: def.layerWeight,
+          isHero: !!def.isHero,
+          isTypewriter: !!def.isTypewriter,
+          isBuilt: false,
+          isEnqueued: false
+        });
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     5. TYPEWRITER EFFECT HELPER
+     ------------------------------------------------------------------------ */
+  function typewriteElement(el, speed, onComplete) {
+    const fullText = el.getAttribute('data-full-text') || el.querySelector('[data-full-text]')?.getAttribute('data-full-text') || '';
+    const contentSpan = el.querySelector('.tw-content');
+    const caretSpan = el.querySelector('.tw-caret');
+
+    if (!contentSpan || !fullText) {
+      if (onComplete) onComplete();
+      return;
+    }
+
+    let charIdx = 0;
+    const charDelay = speed || 14;
+
+    function nextChar() {
+      if (charIdx <= fullText.length) {
+        contentSpan.textContent = fullText.slice(0, charIdx);
         charIdx++;
-        setTimeout(stepType, speed);
+        setTimeout(nextChar, charDelay);
       } else {
         if (caretSpan) caretSpan.style.display = 'none';
         if (onComplete) onComplete();
       }
     }
-
-    stepType();
+    nextChar();
   }
 
   /* ------------------------------------------------------------------------
-     4. AUTONOMOUS SCROLL & LAYER TICKER CONTROLLER
+     6. HERO INITIAL CONSTRUCTION SEQUENCE (0 -> 52 LAYERS)
      ------------------------------------------------------------------------ */
-  function updateDockTelemetry(layer) {
-    currentLayer = Math.min(TOTAL_LAYERS, Math.max(1, Math.round(layer)));
-    const layerCurrEl = document.getElementById('dock-layer-curr');
-    const scrubberFill = document.getElementById('dock-scrubber-fill');
-    const scrubberKnob = document.getElementById('dock-scrubber-knob');
+  function buildHeroSequentially(onFinished) {
+    let currentHeroLayer = 0;
+    const heroItems = registeredLayers.filter(l => l.isHero);
 
-    if (layerCurrEl) layerCurrEl.textContent = currentLayer;
+    function updateDock(layerVal) {
+      const elCurr = document.getElementById('dock-layer-curr');
+      const fill = document.getElementById('dock-scrubber-fill');
+      const knob = document.getElementById('dock-scrubber-knob');
+      if (elCurr) elCurr.textContent = layerVal;
+      const pct = (layerVal / TOTAL_LAYERS) * 100;
+      if (fill) fill.style.width = `${pct}%`;
+      if (knob) knob.style.left = `${pct}%`;
+    }
 
-    const pct = (currentLayer / TOTAL_LAYERS) * 100;
-    if (scrubberFill) scrubberFill.style.width = `${pct}%`;
-    if (scrubberKnob) scrubberKnob.style.left = `${pct}%`;
+    let itemIdx = 0;
+
+    function stepHero() {
+      if (itemIdx >= heroItems.length) {
+        isHeroBuilding = false;
+        updateDock(HERO_FINAL_LAYER);
+        // RETREAT CURSORS TO MARGINS IMMEDIATELY!
+        parkCursorsAtMargins();
+        if (onFinished) onFinished();
+        return;
+      }
+
+      const item = heroItems[itemIdx];
+      const el = item.el;
+      const rect = el.getBoundingClientRect();
+
+      // Dispatch 1 or 2 cursors to this element
+      const activeCursor = cursorNodes[itemIdx % cursorNodes.length];
+      activeCursor.isParked = false;
+      activeCursor.tx = rect.left + Math.min(60, rect.width * 0.4);
+      activeCursor.ty = rect.top + Math.min(30, rect.height * 0.5);
+
+      attachFigmaBox(el, `${Math.round(rect.width)} × ${Math.round(rect.height)}`);
+      el.classList.add('is-building');
+
+      currentHeroLayer += item.layerWeight;
+      updateDock(Math.min(HERO_FINAL_LAYER, currentHeroLayer));
+
+      if (item.isTypewriter) {
+        typewriteElement(el, 10, () => {
+          el.classList.remove('is-building', 'unbuilt-wireframe');
+          el.classList.add('is-built');
+          item.isBuilt = true;
+          itemIdx++;
+          setTimeout(stepHero, 70);
+        });
+      } else {
+        setTimeout(() => {
+          el.classList.remove('is-building', 'unbuilt-wireframe');
+          el.classList.add('is-built');
+          item.isBuilt = true;
+          itemIdx++;
+          setTimeout(stepHero, 70);
+        }, 110);
+      }
+    }
+
+    // Start hero construction 250ms after page load
+    setTimeout(stepHero, 250);
   }
 
-  function stepTour() {
-    if (!isTouring) return;
+  /* ------------------------------------------------------------------------
+     7. HUMAN SCROLL-DRIVEN VIEWPORT QUEUE ("AU FUR ET À MESURE")
+     ------------------------------------------------------------------------ */
+  function checkViewportAndEnqueue() {
+    if (isHeroBuilding) return;
 
-    // Advance scroll smoothly
-    const scrollMax = document.body.scrollHeight - window.innerHeight;
-    const nextY = window.scrollY + 1.25 * tourSpeed;
+    const vh = window.innerHeight;
+    const belowHeroLayers = registeredLayers.filter(l => !l.isHero && !l.isBuilt && !l.isEnqueued);
 
-    if (nextY >= scrollMax - 10) {
-      // Reached the end: pause and show completed
-      isTouring = false;
-      const playBtn = document.getElementById('dock-play-pause');
-      if (playBtn) playBtn.textContent = '▶';
-      updateDockTelemetry(TOTAL_LAYERS);
+    belowHeroLayers.forEach(layer => {
+      const r = layer.el.getBoundingClientRect();
+      // Enqueue when element is in viewport or approaching within 140px of bottom
+      if (r.top < vh - 20 && r.bottom > 20) {
+        layer.isEnqueued = true;
+        buildQueue.push(layer);
+      }
+    });
+
+    if (!isQueueWorkerRunning && buildQueue.length > 0) {
+      processBuildQueue();
+    }
+  }
+
+  function processBuildQueue() {
+    if (buildQueue.length === 0) {
+      isQueueWorkerRunning = false;
+      // When done building current viewport, retreat to margins!
+      parkCursorsAtMargins();
       return;
     }
 
-    window.scrollTo({ top: nextY, behavior: 'instant' });
+    isQueueWorkerRunning = true;
+    const layer = buildQueue.shift();
+    const el = layer.el;
+    const r = el.getBoundingClientRect();
 
-    // Update layer count based on scroll progress
-    const scrollProgress = window.scrollY / Math.max(1, scrollMax);
-    const calculatedLayer = 50 + scrollProgress * (TOTAL_LAYERS - 50);
-    updateDockTelemetry(calculatedLayer);
-
-    tourRafId = requestAnimationFrame(stepTour);
-  }
-
-  /* ------------------------------------------------------------------------
-     5. HERO AMBIENT ORBIT & INTERACTION DISPATCH
-     ------------------------------------------------------------------------ */
-  function setupHeroCursorPositions() {
-    // Exact match to frame_04.50s: cursors hover on letters, badges, portrait, HUD
-    const wordmark = document.querySelector('.hero-wordmark-display');
-    const redPlate = document.querySelector('.red-name-plate');
-    const rolePill = document.getElementById('hero-role-pill');
-    const portraitBox = document.getElementById('portrait-stage-box');
-    const hud1 = document.getElementById('hud-card-01');
-    const hud2 = document.getElementById('hud-card-02');
-    const exploreBtn = document.querySelector('.btn-sahir-explore');
-
-    if (wordmark && cursorNodes.length >= 8) {
-      const wmRect = wordmark.getBoundingClientRect();
-
-      // Cursors 0, 1, 2 on PORTFOLIO letters (R, I, O)
-      cursorNodes[0].tx = wmRect.left + wmRect.width * 0.42; // R
-      cursorNodes[0].ty = wmRect.top + 45;
-
-      cursorNodes[1].tx = wmRect.left + wmRect.width * 0.72; // I
-      cursorNodes[1].ty = wmRect.top + 38;
-
-      cursorNodes[2].tx = wmRect.left + wmRect.width * 0.85; // O
-      cursorNodes[2].ty = wmRect.top + 50;
-
-      // Cursor 3 on Subtitle Pill
-      if (rolePill) {
-        const rpRect = rolePill.getBoundingClientRect();
-        cursorNodes[3].tx = rpRect.left + 40;
-        cursorNodes[3].ty = rpRect.top + 10;
+    // If human already scrolled past it above the viewport: instant build
+    if (r.bottom < -20) {
+      if (layer.isTypewriter) {
+        const fullText = el.getAttribute('data-full-text') || '';
+        const contentSpan = el.querySelector('.tw-content');
+        const caretSpan = el.querySelector('.tw-caret');
+        if (contentSpan) contentSpan.textContent = fullText;
+        if (caretSpan) caretSpan.style.display = 'none';
       }
+      el.classList.remove('is-building', 'unbuilt-wireframe');
+      el.classList.add('is-built');
+      layer.isBuilt = true;
+      updateScrollerTelemetry();
+      processBuildQueue();
+      return;
+    }
 
-      // Cursor 4 near Explore Architecture button
-      if (exploreBtn) {
-        const ebRect = exploreBtn.getBoundingClientRect();
-        cursorNodes[4].tx = ebRect.left + 30;
-        cursorNodes[4].ty = ebRect.top + 8;
-      }
+    // Select nearest available cursor
+    const cursor = cursorNodes[Math.floor(Math.random() * cursorNodes.length)];
+    cursor.isParked = false;
+    cursor.tx = r.left + Math.min(80, r.width * 0.3);
+    cursor.ty = r.top + Math.min(40, r.height * 0.5);
 
-      // Cursor 5 on Portrait Chin
-      if (portraitBox) {
-        const pbRect = portraitBox.getBoundingClientRect();
-        cursorNodes[5].tx = pbRect.left + pbRect.width * 0.48;
-        cursorNodes[5].ty = pbRect.top + pbRect.height * 0.62;
-      }
+    attachFigmaBox(el, `${Math.round(r.width)} × ${Math.round(r.height)}`);
+    el.classList.add('is-building');
 
-      // Cursor 6 on HUD Card 01
-      if (hud1) {
-        const h1Rect = hud1.getBoundingClientRect();
-        cursorNodes[6].tx = h1Rect.left + 50;
-        cursorNodes[6].ty = h1Rect.top + 16;
-      }
+    // Update bottom dock layer count based on human scroll position
+    updateScrollerTelemetry();
 
-      // Cursor 7 on HUD Card 02
-      if (hud2) {
-        const h2Rect = hud2.getBoundingClientRect();
-        cursorNodes[7].tx = h2Rect.left + 80;
-        cursorNodes[7].ty = h2Rect.top + 16;
-      }
+    if (layer.isTypewriter) {
+      typewriteElement(el, 8, () => {
+        el.classList.remove('is-building', 'unbuilt-wireframe');
+        el.classList.add('is-built');
+        layer.isBuilt = true;
+
+        // Paced interval between elements: 100ms ("au fur et à mesure")
+        setTimeout(processBuildQueue, 100);
+      });
+    } else {
+      setTimeout(() => {
+        el.classList.remove('is-building', 'unbuilt-wireframe');
+        el.classList.add('is-built');
+        layer.isBuilt = true;
+
+        // Paced interval: 110ms
+        setTimeout(processBuildQueue, 110);
+      }, 130);
     }
   }
 
   /* ------------------------------------------------------------------------
-     6. MAIN RAF LOOP: ANIMATE MULTIPLAYER CURSORS & BOXES
+     8. DOCK TELEMETRY UPDATE (HUMAN SCROLL POSITION)
+     ------------------------------------------------------------------------ */
+  function updateScrollerTelemetry() {
+    if (isHeroBuilding) return;
+
+    const scrollY = window.scrollY || 0;
+    const maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    const scrollRatio = Math.min(1.0, Math.max(0.0, scrollY / maxScroll));
+
+    const currentLayer = Math.round(HERO_FINAL_LAYER + scrollRatio * (TOTAL_LAYERS - HERO_FINAL_LAYER));
+    const elCurr = document.getElementById('dock-layer-curr');
+    const fill = document.getElementById('dock-scrubber-fill');
+    const knob = document.getElementById('dock-scrubber-knob');
+
+    if (elCurr) elCurr.textContent = currentLayer;
+    const pct = (currentLayer / TOTAL_LAYERS) * 100;
+    if (fill) fill.style.width = `${pct}%`;
+    if (knob) knob.style.left = `${pct}%`;
+  }
+
+  /* ------------------------------------------------------------------------
+     9. SPRING ANIMATION LOOP
      ------------------------------------------------------------------------ */
   function animateFrame() {
-    cursorNodes.forEach((c) => {
-      // Gentle harmonic breathing jitter
+    cursorNodes.forEach(c => {
       c.orbitAngle += c.speed;
-      const jx = Math.cos(c.orbitAngle) * 5;
-      const jy = Math.sin(c.orbitAngle * 1.3) * 5;
+      // Harmonic jitter: gentle breathing motion (±2.5px)
+      const jx = Math.cos(c.orbitAngle) * 3;
+      const jy = Math.sin(c.orbitAngle * 1.3) * 3;
 
-      c.x += (c.tx + jx - c.x) * 0.12;
-      c.y += (c.ty + jy - c.y) * 0.12;
+      c.x += (c.tx + jx - c.x) * 0.16;
+      c.y += (c.ty + jy - c.y) * 0.16;
 
       c.el.style.transform = `translate3d(${Math.round(c.x)}px, ${Math.round(c.y)}px, 0)`;
     });
 
-    // Keep active figma box locked to element position on scroll
-    if (activeElementTarget && figmaSelectionBox && figmaSelectionBox.style.opacity === '1') {
-      const r = activeElementTarget.getBoundingClientRect();
-      figmaSelectionBox.style.top = `${r.top + window.scrollY - 3}px`;
-      figmaSelectionBox.style.left = `${r.left + window.scrollX - 4}px`;
-      figmaSelectionBox.style.width = `${r.width + 8}px`;
-      figmaSelectionBox.style.height = `${r.height + 6}px`;
-    }
-
     requestAnimationFrame(animateFrame);
   }
 
   /* ------------------------------------------------------------------------
-     7. SECTION TRIGGERED TYPEWRITING ON SCROLL
+     10. HUMAN SCROLL LISTENERS (ZERO AUTO-SCROLL UNLESS USER CLICKS PLAY)
      ------------------------------------------------------------------------ */
-  let typedPara1 = false;
-  let typedPara2 = false;
-  let typedSovereign = false;
-
-  function checkScrollTriggers() {
-    const vh = window.innerHeight;
-
-    const p1 = document.getElementById('tw-para-1');
-    if (p1 && !typedPara1) {
-      const r = p1.getBoundingClientRect();
-      if (r.top < vh * 0.75 && r.bottom > 0) {
-        typedPara1 = true;
-        typewriteElement(p1, () => {
-          const p2 = document.getElementById('tw-para-2');
-          if (p2 && !typedPara2) {
-            typedPara2 = true;
-            typewriteElement(p2, () => {
-              const sc = document.getElementById('tw-sovereign-desc');
-              if (sc && !typedSovereign) {
-                typedSovereign = true;
-                typewriteElement(sc);
-              }
-            });
-          }
-        });
-      }
-    }
+  function onHumanScroll() {
+    updateScrollerTelemetry();
+    checkViewportAndEnqueue();
   }
 
-  /* ------------------------------------------------------------------------
-     8. DOCK INTERACTION BINDINGS
-     ------------------------------------------------------------------------ */
-  function initDockEvents() {
-    const playBtn = document.getElementById('dock-play-pause');
-    const fwdBtn = document.getElementById('dock-step-fwd');
-    const backBtn = document.getElementById('dock-step-back');
+  function initDockInteractions() {
     const scrubberTrack = document.querySelector('.dock-scrubber-track');
-
-    if (playBtn) {
-      playBtn.addEventListener('click', () => {
-        isTouring = !isTouring;
-        playBtn.textContent = isTouring ? '❚❚' : '▶';
-        if (isTouring) stepTour();
-      });
-    }
-
-    if (fwdBtn) {
-      fwdBtn.addEventListener('click', () => {
-        window.scrollBy({ top: 350, behavior: 'smooth' });
-      });
-    }
-
-    if (backBtn) {
-      backBtn.addEventListener('click', () => {
-        window.scrollBy({ top: -350, behavior: 'smooth' });
-      });
-    }
+    const playBtn = document.getElementById('dock-play-pause');
 
     if (scrubberTrack) {
       scrubberTrack.addEventListener('click', (e) => {
         const rect = scrubberTrack.getBoundingClientRect();
-        const clickRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        const scrollMax = document.body.scrollHeight - window.innerHeight;
-        window.scrollTo({ top: scrollMax * clickRatio, behavior: 'smooth' });
+        const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        window.scrollTo({ top: maxScroll * ratio, behavior: 'smooth' });
       });
     }
 
-    // Manual scroll sync
-    window.addEventListener('scroll', () => {
-      checkScrollTriggers();
-      const scrollMax = document.body.scrollHeight - window.innerHeight;
-      const scrollProgress = window.scrollY / Math.max(1, scrollMax);
-      const calculatedLayer = 50 + scrollProgress * (TOTAL_LAYERS - 50);
-      updateDockTelemetry(calculatedLayer);
-    }, { passive: true });
+    if (playBtn) {
+      playBtn.textContent = '▶'; // human in control by default
+
+      function stepTour() {
+        if (!isAutoTouring) return;
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        if (window.scrollY >= maxScroll - 10) {
+          isAutoTouring = false;
+          playBtn.textContent = '▶';
+          return;
+        }
+        window.scrollBy({ top: 1.2, behavior: 'instant' });
+        autoTourRaf = requestAnimationFrame(stepTour);
+      }
+
+      playBtn.addEventListener('click', () => {
+        isAutoTouring = !isAutoTouring;
+        playBtn.textContent = isAutoTouring ? '❚❚' : '▶';
+        if (isAutoTouring) {
+          stepTour();
+        } else {
+          cancelAnimationFrame(autoTourRaf);
+        }
+      });
+
+      ['wheel', 'touchstart', 'keydown'].forEach(evt => {
+        window.addEventListener(evt, () => {
+          if (isAutoTouring) {
+            isAutoTouring = false;
+            playBtn.textContent = '▶';
+            cancelAnimationFrame(autoTourRaf);
+          }
+        }, { passive: true });
+      });
+    }
   }
 
   /* ------------------------------------------------------------------------
-     9. INITIALIZATION
+     11. INIT
      ------------------------------------------------------------------------ */
   function init() {
     setupMultiplayerLayer();
-    setupHeroCursorPositions();
-    initDockEvents();
+    registerAllElementsAsWireframes();
+    initDockInteractions();
+
+    window.addEventListener('scroll', onHumanScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      parkCursorsAtMargins();
+      updateScrollerTelemetry();
+      checkViewportAndEnqueue();
+    }, { passive: true });
+
     requestAnimationFrame(animateFrame);
 
-    // Initial load: start touring smoothly after 1.5s
-    setTimeout(() => {
-      if (isTouring) stepTour();
-    }, 1500);
+    // Kick off hero sequential construction
+    buildHeroSequentially(() => {
+      checkViewportAndEnqueue();
+    });
   }
 
   if (document.readyState === 'loading') {
