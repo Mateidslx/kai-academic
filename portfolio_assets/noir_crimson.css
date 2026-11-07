@@ -2026,6 +2026,20 @@ body::before {
    ========================================================================== */
 
 /* 1. Sleek Tagless Figma Cursors, Wireframe Boxes & Zero-Reflow Text Typing */
+/* Blank Slate Canvas at Initial Load / Refresh */
+html.hero-blank-slate .hero-wordmark-wrap,
+html.hero-blank-slate .hero-left,
+html.hero-blank-slate .hero-left *,
+html.hero-blank-slate .portrait-stage,
+html.hero-blank-slate .portrait-stage *,
+html.hero-blank-slate .hero-right,
+html.hero-blank-slate .hero-right *,
+html.hero-blank-slate .hero-scroll-strip,
+html.hero-blank-slate #op-art-canvas {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 .builder-cursors-layer {
   position: fixed;
   inset: 0;
@@ -2128,6 +2142,11 @@ html[data-theme="light"] .saai-dim {
   pointer-events: none;
   will-change: transform, opacity;
   z-index: 3;
+}
+
+.saai-cursor.is-idle {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.3s ease;
 }
 
 .saai-cursor-svg {

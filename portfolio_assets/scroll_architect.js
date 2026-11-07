@@ -695,23 +695,21 @@
       if (m.hiddenByFilter) continue;
       visibleCount++;
       sumP += m.currentP;
-      if (m.currentP >= 0.55) builtCount++;
+      if (m.currentP >= 0.85) builtCount++;
     }
 
     const totalPct = visibleCount > 0 ? Math.round((sumP / visibleCount) * 100) : 0;
     const isFr = getLang() === 'fr';
-    const reversingNow = scrollDirection < 0 && (isActivelyScrolling || activeFrameCount > 0);
-    const buildingNow = isActivelyScrolling || activeFrameCount > 0;
+    const buildingNow = activeFrameCount > 0 || (isActivelyScrolling && scrollDirection > 0);
 
-    let mode = 'settled';
-    let label = isFr ? 'ASSEMBLÉ ●' : 'SETTLED ●';
-    if (reversingNow) {
-      mode = 'reverse';
-      label = isFr ? 'DÉCONSTRUCTION ↑' : 'DECONSTRUCTING ↑';
-    } else if (buildingNow) {
-      mode = 'build';
-      label = isFr ? 'CONSTRUCTION ↓' : 'ASSEMBLING ↓';
-    }
+    const mode = buildingNow ? 'build' : 'settled';
+    const label = buildingNow
+      ? isFr
+        ? 'CONSTRUCTION ↓'
+        : 'ASSEMBLING ↓'
+      : isFr
+        ? 'ASSEMBLÉ ●'
+        : 'SETTLED ●';
 
     if (hudPillEl.getAttribute('data-mode') !== mode) {
       hudPillEl.setAttribute('data-mode', mode);
@@ -724,147 +722,258 @@
   }
 
   /* ------------------------------------------------------------------------
-     HERO INITIAL LIVE CONSTRUCTION CHOREOGRAPHY (PUNCHY & CLEAN)
-     Runs fast on refresh (1.4s), then fades out completely to leave the page clean!
+     HERO INITIAL DYNAMIC CONSTRUCTION CHOREOGRAPHY (V14)
+     Starts 100% BLANK / NOIR. Cursors organically construct each element gently,
+     then glide gracefully to the side margins in non-parasitic idle mode!
      ------------------------------------------------------------------------ */
   function initHeroIntroChoreography() {
     const scrollY = window.scrollY || window.pageYOffset || 0;
     if (scrollY >= 60) {
       isHeroIntroActive = false;
+      document.documentElement.classList.remove('hero-blank-slate');
       return;
     }
 
+    const heroWordmark = document.querySelector('.hero-wordmark-wrap');
+    const heroLeft = document.querySelector('.hero-left');
+    const heroScript = document.querySelector('.hero-script');
     const nameEl = document.querySelector('.hero-name-block');
+    const roleWrap = document.querySelector('.role-flip-wrap');
     const roleTextEl = document.getElementById('role-flip-text');
-    const portraitStageEl = document.getElementById('portrait-stage');
+    const bioEl = document.querySelector('.hero-bio');
+    const ctasEl = document.querySelector('.hero-cta-group');
+    const statsEl = document.querySelector('.hero-stats-row');
+
+    const portraitStage = document.getElementById('portrait-stage');
+    const portraitPanel = document.querySelector('.portrait-crimson-panel');
+    const portraitImg = document.querySelector('.portrait-cutout-img');
+    const portraitTag = document.querySelector('.portrait-coord-tag');
+    const portraitBadge = document.getElementById('ability-toggle-btn');
+
     const card1 = document.querySelector('.hero-right .hud-card:nth-child(1)');
     const card2 = document.querySelector('.hero-right .hud-card:nth-child(2)');
     const card3 = document.querySelector('.hero-right .hud-card:nth-child(3)');
+    const techTags = document.querySelector('.tech-tags-row');
+    const scrollStrip = document.querySelector('.hero-scroll-strip');
+    const opArt = document.getElementById('op-art-canvas');
 
-    if (!nameEl || !portraitStageEl) {
+    if (!nameEl || !portraitStage) {
       isHeroIntroActive = false;
+      document.documentElement.classList.remove('hero-blank-slate');
       return;
     }
 
     heroElements = {
+      heroWordmark,
+      heroLeft,
+      heroScript,
       nameEl,
       nameText: nameEl.textContent.trim() || 'MATÉI.',
+      roleWrap,
       roleTextEl,
       roleText: roleTextEl ? roleTextEl.textContent.trim() : '',
-      portraitStageEl,
+      bioEl,
+      ctasEl,
+      statsEl,
+      portraitStage,
+      portraitPanel,
+      portraitImg,
+      portraitTag,
+      portraitBadge,
       card1,
       card2,
-      card3
+      card3,
+      techTags,
+      scrollStrip,
+      opArt
     };
+
+    // 100% Dark Blank Slate: All elements start completely hidden
+    if (heroWordmark) { heroWordmark.style.opacity = '0'; heroWordmark.style.visibility = 'hidden'; }
+    if (heroLeft) { heroLeft.style.opacity = '0'; heroLeft.style.visibility = 'hidden'; }
+    if (heroScript) { heroScript.style.opacity = '0'; heroScript.style.visibility = 'hidden'; }
+    if (nameEl) { nameEl.textContent = ''; nameEl.style.opacity = '0'; nameEl.style.visibility = 'hidden'; }
+    if (roleWrap) { roleWrap.style.opacity = '0'; roleWrap.style.visibility = 'hidden'; }
+    if (roleTextEl) { roleTextEl.textContent = ''; }
+    if (bioEl) { bioEl.style.opacity = '0'; bioEl.style.visibility = 'hidden'; }
+    if (ctasEl) { ctasEl.style.opacity = '0'; ctasEl.style.visibility = 'hidden'; }
+    if (statsEl) { statsEl.style.opacity = '0'; statsEl.style.visibility = 'hidden'; }
+
+    if (portraitStage) { portraitStage.style.opacity = '0'; portraitStage.style.visibility = 'hidden'; }
+    if (portraitPanel) { portraitPanel.style.opacity = '0'; portraitPanel.style.transform = 'scale(0.85)'; }
+    if (portraitImg) { portraitImg.style.opacity = '0'; portraitImg.style.clipPath = 'inset(100% 0 0 0)'; }
+    if (portraitTag) { portraitTag.style.opacity = '0'; }
+    if (portraitBadge) { portraitBadge.style.opacity = '0'; }
+
+    if (card1) { card1.style.opacity = '0'; card1.style.clipPath = 'inset(0 100% 100% 0)'; }
+    if (card2) { card2.style.opacity = '0'; card2.style.clipPath = 'inset(0 100% 100% 0)'; }
+    if (card3) { card3.style.opacity = '0'; card3.style.clipPath = 'inset(0 100% 100% 0)'; }
+    if (techTags) { techTags.style.opacity = '0'; techTags.style.visibility = 'hidden'; }
+    if (scrollStrip) { scrollStrip.style.opacity = '0'; scrollStrip.style.visibility = 'hidden'; }
+    if (opArt) { opArt.style.opacity = '0'; opArt.style.visibility = 'hidden'; }
+
+    // Remove synchronous blanket class now that inline styles safely hold the blank slate
+    document.documentElement.classList.remove('hero-blank-slate');
 
     isHeroIntroActive = true;
     heroIntroStartTs = performance.now();
     heroIntroCleaned = false;
   }
 
-  function cleanHeroIntro() {
+  function cleanHeroIntro(forceInstant) {
     if (heroIntroCleaned || !heroElements) return;
     heroIntroCleaned = true;
     isHeroIntroActive = false;
 
-    if (heroElements.nameEl) {
-      heroElements.nameEl.textContent = heroElements.nameText;
-      heroElements.nameEl.style.opacity = '';
+    document.documentElement.classList.remove('hero-blank-slate');
+
+    const h = heroElements;
+    if (h.heroWordmark) { h.heroWordmark.style.opacity = ''; h.heroWordmark.style.visibility = ''; }
+    if (h.heroLeft) { h.heroLeft.style.opacity = ''; h.heroLeft.style.visibility = ''; }
+    if (h.heroScript) { h.heroScript.style.opacity = ''; h.heroScript.style.visibility = ''; }
+    if (h.nameEl) {
+      h.nameEl.textContent = h.nameText;
+      h.nameEl.style.opacity = '';
+      h.nameEl.style.visibility = '';
     }
-    if (heroElements.roleTextEl) {
-      heroElements.roleTextEl.textContent = heroElements.roleText;
-      heroElements.roleTextEl.style.opacity = '';
+    if (h.roleWrap) { h.roleWrap.style.opacity = ''; h.roleWrap.style.visibility = ''; }
+    if (h.roleTextEl) {
+      h.roleTextEl.textContent = h.roleText;
+      h.roleTextEl.style.opacity = '';
     }
-    if (heroElements.card1) {
-      heroElements.card1.style.clipPath = '';
-      heroElements.card1.style.opacity = '';
-    }
-    if (heroElements.card2) {
-      heroElements.card2.style.clipPath = '';
-      heroElements.card2.style.opacity = '';
-    }
-    if (heroElements.card3) {
-      heroElements.card3.style.clipPath = '';
-      heroElements.card3.style.opacity = '';
-    }
+    if (h.bioEl) { h.bioEl.style.opacity = ''; h.bioEl.style.visibility = ''; }
+    if (h.ctasEl) { h.ctasEl.style.opacity = ''; h.ctasEl.style.visibility = ''; }
+    if (h.statsEl) { h.statsEl.style.opacity = ''; h.statsEl.style.visibility = ''; }
+
+    if (h.portraitStage) { h.portraitStage.style.opacity = ''; h.portraitStage.style.visibility = ''; }
+    if (h.portraitPanel) { h.portraitPanel.style.transform = ''; h.portraitPanel.style.opacity = ''; }
+    if (h.portraitImg) { h.portraitImg.style.clipPath = ''; h.portraitImg.style.opacity = ''; }
+    if (h.portraitTag) { h.portraitTag.style.opacity = ''; }
+    if (h.portraitBadge) { h.portraitBadge.style.opacity = ''; }
+
+    if (h.card1) { h.card1.style.clipPath = ''; h.card1.style.opacity = ''; }
+    if (h.card2) { h.card2.style.clipPath = ''; h.card2.style.opacity = ''; }
+    if (h.card3) { h.card3.style.clipPath = ''; h.card3.style.opacity = ''; }
+    if (h.techTags) { h.techTags.style.opacity = ''; h.techTags.style.visibility = ''; }
+    if (h.scrollStrip) { h.scrollStrip.style.opacity = ''; h.scrollStrip.style.visibility = ''; }
+    if (h.opArt) { h.opArt.style.opacity = ''; h.opArt.style.visibility = ''; }
   }
 
   function getHeroIntroOperations(now) {
     if (!heroElements || !isHeroIntroActive) return null;
     const t = (now - heroIntroStartTs) / 1000;
 
-    if (t > 1.6 || (window.scrollY || 0) > 40) {
-      cleanHeroIntro();
+    if (t > 4.4 || (window.scrollY || 0) > 40) {
+      cleanHeroIntro(false);
       return null;
     }
 
+    const h = heroElements;
     const frameTasks = [];
     const cursorTargets = [];
 
-    // 1. Name "MATÉI." (0.04s -> 0.70s)
-    if (t >= 0.04 && t <= 0.85 && heroElements.nameEl) {
-      const p = smoothstep(clamp01((t - 0.04) / 0.66));
-      const r = heroElements.nameEl.getBoundingClientRect();
-      const chars = Math.max(1, Math.min(heroElements.nameText.length, Math.round(heroElements.nameText.length * p)));
-      heroElements.nameEl.textContent = heroElements.nameText.slice(0, chars);
+    // Phase 1: Name "MATÉI." + Greeting "Salut, moi c'est" (0.15s -> 1.40s)
+    if (t >= 0.15 && t <= 1.45 && h.nameEl) {
+      const p = smoothstep(clamp01((t - 0.15) / 0.95));
+      if (h.heroLeft) {
+        h.heroLeft.style.visibility = 'visible';
+        h.heroLeft.style.opacity = '1';
+      }
+      if (h.heroScript) {
+        h.heroScript.style.visibility = 'visible';
+        h.heroScript.style.opacity = Math.min(1, p * 1.5).toFixed(2);
+      }
+      h.nameEl.style.visibility = 'visible';
+      h.nameEl.style.opacity = '1';
 
+      const chars = Math.max(1, Math.min(h.nameText.length, Math.round(h.nameText.length * p)));
+      h.nameEl.textContent = h.nameText.slice(0, chars);
+
+      const r = h.nameEl.getBoundingClientRect();
+      const curW = Math.max(30, r.width * (0.15 + 0.85 * p));
       frameTasks.push({
         key: 'hero_name_box',
         kind: 'text',
         left: r.left - 4,
         top: r.top - 2,
-        width: r.width + 8,
+        width: curW + 8,
         height: r.height + 4,
-        dimW: Math.round(r.width),
+        dimW: Math.round(curW),
         dimH: Math.round(r.height),
-        cursorX: r.left + r.width * p + 4,
-        cursorY: r.bottom - 4,
+        cursorX: r.left + curW + 4,
+        cursorY: r.bottom - 2,
         crosshair: false,
-        score: -0.95
+        score: -0.96
       });
       cursorTargets.push({
         key: 'hero_name_box_drag',
-        x: r.left + r.width * p + 4,
-        y: r.bottom - 4,
-        crosshair: false
-      });
-    }
-
-    // 2. Role Text (0.25s -> 0.95s)
-    if (t >= 0.25 && t <= 1.10 && heroElements.roleTextEl) {
-      const p = smoothstep(clamp01((t - 0.25) / 0.70));
-      const r = heroElements.roleTextEl.getBoundingClientRect();
-      const chars = Math.max(1, Math.min(heroElements.roleText.length, Math.round(heroElements.roleText.length * p)));
-      heroElements.roleTextEl.textContent = heroElements.roleText.slice(0, chars);
-
-      frameTasks.push({
-        key: 'hero_role_box',
-        kind: 'text',
-        left: r.left - 4,
-        top: r.top - 2,
-        width: r.width + 8,
-        height: r.height + 4,
-        dimW: Math.round(r.width * p),
-        dimH: Math.round(r.height),
-        cursorX: r.left + r.width * p + 3,
-        cursorY: r.bottom - 2,
-        crosshair: false,
-        score: -0.85
-      });
-      cursorTargets.push({
-        key: 'hero_role_box_drag',
-        x: r.left + r.width * p + 3,
+        x: r.left + curW + 4,
         y: r.bottom - 2,
         crosshair: false
       });
     }
 
-    // 3. Portrait Stage Wireframe (0.35s -> 1.35s)
-    if (t >= 0.35 && t <= 1.45 && heroElements.portraitStageEl) {
-      const p = smoothstep(clamp01((t - 0.35) / 1.0));
-      const r = heroElements.portraitStageEl.getBoundingClientRect();
-      const curW = Math.max(40, r.width * (0.08 + 0.92 * p));
-      const curH = Math.max(40, r.height * (0.08 + 0.92 * p));
+    // Phase 2: Role Flip Pad (0.85s -> 1.95s)
+    if (t >= 0.85 && t <= 2.05 && h.roleWrap && h.roleTextEl) {
+      const p = smoothstep(clamp01((t - 0.85) / 0.90));
+      h.roleWrap.style.visibility = 'visible';
+      h.roleWrap.style.opacity = Math.min(1, p * 1.4).toFixed(2);
+
+      const chars = Math.max(1, Math.min(h.roleText.length, Math.round(h.roleText.length * p)));
+      h.roleTextEl.textContent = h.roleText.slice(0, chars);
+
+      const r = h.roleWrap.getBoundingClientRect();
+      const curW = Math.max(35, r.width * (0.20 + 0.80 * p));
+      frameTasks.push({
+        key: 'hero_role_box',
+        kind: 'text',
+        left: r.left - 4,
+        top: r.top - 2,
+        width: curW + 8,
+        height: r.height + 4,
+        dimW: Math.round(curW),
+        dimH: Math.round(r.height),
+        cursorX: r.left + curW + 2,
+        cursorY: r.bottom - 2,
+        crosshair: false,
+        score: -0.88
+      });
+      cursorTargets.push({
+        key: 'hero_role_box_drag',
+        x: r.left + curW + 2,
+        y: r.bottom - 2,
+        crosshair: false
+      });
+    }
+
+    // Phase 3: Centerpiece Noir Portrait Stage (1.35s -> 2.85s)
+    if (t >= 1.35 && t <= 3.00 && h.portraitStage) {
+      const p = smoothstep(clamp01((t - 1.35) / 1.30));
+      h.portraitStage.style.visibility = 'visible';
+      h.portraitStage.style.opacity = '1';
+
+      if (h.opArt) {
+        h.opArt.style.visibility = 'visible';
+        h.opArt.style.opacity = (p * 0.75).toFixed(2);
+      }
+
+      const r = h.portraitStage.getBoundingClientRect();
+      const curW = Math.max(40, r.width * (0.10 + 0.90 * p));
+      const curH = Math.max(40, r.height * (0.10 + 0.90 * p));
+
+      if (h.portraitPanel) {
+        h.portraitPanel.style.opacity = Math.min(1, p * 1.3).toFixed(2);
+        h.portraitPanel.style.transform = `scale(${(0.85 + 0.15 * p).toFixed(3)})`;
+      }
+      if (h.portraitImg) {
+        h.portraitImg.style.opacity = '1';
+        h.portraitImg.style.clipPath = `inset(${((1 - p) * 100).toFixed(1)}% 0 0 0)`;
+      }
+      if (p > 0.65) {
+        const subAlpha = smoothstep((p - 0.65) / 0.35).toFixed(2);
+        if (h.portraitTag) h.portraitTag.style.opacity = subAlpha;
+        if (h.portraitBadge) h.portraitBadge.style.opacity = subAlpha;
+      }
 
       frameTasks.push({
         key: 'hero_portrait_wire',
@@ -877,26 +986,53 @@
         dimH: Math.round(curH),
         cursorX: r.left + curW,
         cursorY: r.top + curH,
-        crosshair: p < 0.85,
-        score: -0.90
+        crosshair: p < 0.82,
+        score: -0.92
       });
       cursorTargets.push({
         key: 'hero_portrait_wire_drag',
         x: r.left + curW,
         y: r.top + curH,
-        crosshair: p < 0.85
+        crosshair: p < 0.82
       });
     }
 
-    // 4. Hero Right KPI Cards (0.50s -> 1.50s)
+    // Phase 4: Bio, CTAs & Stats Row (2.05s -> 3.30s)
+    if (t >= 2.05 && t <= 3.45) {
+      const p = smoothstep(clamp01((t - 2.05) / 1.05));
+      if (h.bioEl) {
+        h.bioEl.style.visibility = 'visible';
+        h.bioEl.style.opacity = Math.min(1, p * 1.4).toFixed(2);
+      }
+      if (h.ctasEl) {
+        h.ctasEl.style.visibility = 'visible';
+        h.ctasEl.style.opacity = Math.min(1, p * 1.4).toFixed(2);
+      }
+      if (h.statsEl) {
+        h.statsEl.style.visibility = 'visible';
+        h.statsEl.style.opacity = Math.min(1, p * 1.4).toFixed(2);
+      }
+
+      if (h.ctasEl && t <= 3.25) {
+        const r = h.ctasEl.getBoundingClientRect();
+        cursorTargets.push({
+          key: 'hero_ctas_drag',
+          x: r.left + r.width * p,
+          y: r.top + r.height * 0.5,
+          crosshair: false
+        });
+      }
+    }
+
+    // Phase 5: Hero Right HUD Cards (2.35s -> 3.95s)
     const cards = [
-      { el: heroElements.card1, start: 0.50, end: 1.25 },
-      { el: heroElements.card2, start: 0.70, end: 1.40 },
-      { el: heroElements.card3, start: 0.90, end: 1.55 }
+      { el: h.card1, start: 2.35, end: 3.20 },
+      { el: h.card2, start: 2.70, end: 3.50 },
+      { el: h.card3, start: 3.00, end: 3.80 }
     ];
 
     cards.forEach((cd, idx) => {
-      if (t >= cd.start && t <= cd.end + 0.05 && cd.el) {
+      if (t >= cd.start && t <= cd.end + 0.12 && cd.el) {
         const p = smoothstep(clamp01((t - cd.start) / (cd.end - cd.start)));
         const r = cd.el.getBoundingClientRect();
         const curW = Math.max(30, r.width * p);
@@ -919,7 +1055,7 @@
           cursorX: r.left + curW,
           cursorY: r.top + curH,
           crosshair: false,
-          score: -0.75 + idx * 0.05
+          score: -0.78 + idx * 0.05
         });
         cursorTargets.push({
           key: `hero_card_${idx}_drag`,
@@ -929,6 +1065,31 @@
         });
       }
     });
+
+    if (t >= 3.35 && h.techTags) {
+      const p = smoothstep(clamp01((t - 3.35) / 0.70));
+      h.techTags.style.visibility = 'visible';
+      h.techTags.style.opacity = p.toFixed(2);
+    }
+
+    // Phase 6: Wordmark & Scroll Cue Strip (3.35s -> 4.35s)
+    if (t >= 3.35 && h.heroWordmark) {
+      const p = smoothstep(clamp01((t - 3.35) / 0.85));
+      h.heroWordmark.style.visibility = 'visible';
+      h.heroWordmark.style.opacity = (p * 0.85).toFixed(2);
+    }
+    if (t >= 3.55 && h.scrollStrip) {
+      const p = smoothstep(clamp01((t - 3.55) / 0.70));
+      h.scrollStrip.style.visibility = 'visible';
+      h.scrollStrip.style.opacity = p.toFixed(2);
+      const r = h.scrollStrip.getBoundingClientRect();
+      cursorTargets.push({
+        key: 'hero_scroll_strip_sweep',
+        x: r.left + r.width * p,
+        y: r.top + r.height * 0.5,
+        crosshair: false
+      });
+    }
 
     return {
       frames: frameTasks.slice(0, MAX_FRAMES),
@@ -1131,18 +1292,17 @@
       ops = collectActiveOperations();
     }
 
-    const reversingVisual = scrollDirection < 0 && (isActivelyScrolling || ops.frames.length > 0);
-
     updateHudPill(scrollY, ops.frames.length);
 
     let animating = false;
     const posLerp = 1 - Math.exp(-dt * 26);
     const glideLerp = 1 - Math.exp(-dt * 18);
-    const fadeLerp = 1 - Math.exp(-dt * 16);
+    const fadeLerp = 1 - Math.exp(-dt * 14);
+    const idleLerp = 1 - Math.exp(-dt * 9.5);
 
     // Update Laser Smart-Alignment Guides on primary frame
     if (guideXEl && guideYEl) {
-      if (ops.frames.length > 0 && (isActivelyScrolling || isHeroIntroActive)) {
+      if (ops.frames.length > 0) {
         const lead = ops.frames[0];
         guideXEl.style.opacity = '0.78';
         guideYEl.style.opacity = '0.78';
@@ -1155,7 +1315,7 @@
       }
     }
 
-    // 1. Assign Frames
+    // 1. Assign Frames (ONLY visible when actively constructing)
     const frameAssign = new Array(framePool.length).fill(null);
     const usedFrames = new Set();
 
@@ -1196,7 +1356,6 @@
         slot.taskKey = ft.key;
         slot.el.classList.toggle('is-wireframe', ft.kind === 'wireframe');
         slot.el.classList.toggle('is-text-box', ft.kind === 'text');
-        slot.el.classList.toggle('is-reversing', reversingVisual);
 
         if (!slot.inited || (!sameTask && slot.alpha < 0.25)) {
           slot.x = ft.left;
@@ -1224,15 +1383,14 @@
         slot.el.style.transform = `translate3d(${slot.x.toFixed(1)}px, ${slot.y.toFixed(1)}px, 0)`;
         slot.el.style.width = `${Math.max(14, slot.w).toFixed(1)}px`;
         slot.el.style.height = `${Math.max(14, slot.h).toFixed(1)}px`;
-        const prefix = reversingVisual ? '↺ ' : '';
-        slot.dimEl.textContent = `${prefix}${Math.max(1, ft.dimW)} × ${Math.max(1, ft.dimH)}`;
+        slot.dimEl.textContent = `${Math.max(1, ft.dimW)} × ${Math.max(1, ft.dimH)}`;
       } else if (slot.alpha <= 0.01) {
         slot.taskKey = null;
         slot.inited = false;
       }
     }
 
-    // 2. Assign Cursors: ONLY ACTIVE CURSORS ARE VISIBLE (Zero parasites when idle!)
+    // 2. Assign Cursors: Active builders snap to work; Idle cursors park on the margins!
     const curAssign = new Array(cursorPool.length).fill(null);
     const usedCursors = new Set();
 
@@ -1254,7 +1412,7 @@
       for (let cIdx = 0; cIdx < cursorPool.length; cIdx++) {
         if (curAssign[cIdx]) continue;
         const c = cursorPool[cIdx];
-        if (c.inited && c.alpha > 0.15) {
+        if (c.inited && c.alpha > 0.25) {
           const dist = Math.hypot(ct.x - c.x, ct.y - c.y);
           if (dist < bestScore) {
             bestScore = dist;
@@ -1271,21 +1429,23 @@
       }
     });
 
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const leftMarginX = Math.max(16, Math.min(32, vw * 0.022));
+    const rightMarginX = vw - Math.max(24, Math.min(42, vw * 0.025));
+    const marginYFractions = [0.18, 0.24, 0.38, 0.44, 0.58, 0.64, 0.78, 0.84];
+
     for (let i = 0; i < cursorPool.length; i++) {
       const c = cursorPool[i];
       const ct = curAssign[i];
-      // Target alpha is 1 when actively assigned, 0 when idle (CLEAN SCREEN!)
-      const targetAlpha = ct ? 1 : 0;
-
-      c.alpha += (targetAlpha - c.alpha) * fadeLerp;
-      if (Math.abs(targetAlpha - c.alpha) > 0.005) {
-        animating = true;
-      } else {
-        c.alpha = targetAlpha;
-      }
-      c.el.style.opacity = c.alpha.toFixed(3);
 
       if (ct) {
+        // ACTIVE CONSTRUCTION TASK
+        const targetAlpha = 1.0;
+        c.alpha += (targetAlpha - c.alpha) * fadeLerp;
+        c.el.style.opacity = c.alpha.toFixed(3);
+        c.el.classList.remove('is-idle');
+
         const sameTask = c.taskKey === ct.key;
         c.taskKey = ct.key;
         if (c.crosshair !== ct.crosshair) {
@@ -1297,8 +1457,8 @@
         const ty = ct.crosshair ? ct.y - 9 : ct.y - 2;
 
         if (!c.inited) {
-          c.x = tx + (i % 2 === 0 ? -28 : 28);
-          c.y = ty + 24;
+          c.x = tx + (i % 2 === 0 ? -24 : 24);
+          c.y = ty + 20;
           c.inited = true;
           animating = true;
         } else {
@@ -1311,9 +1471,37 @@
         }
 
         c.el.style.transform = `translate3d(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px, 0)`;
-      } else if (c.alpha <= 0.01) {
+      } else {
+        // IDLE MARGIN RESTING MODE (Non-parasitic side parking!)
         c.taskKey = null;
-        c.inited = false;
+        c.crosshair = false;
+        c.el.classList.remove('is-crosshair');
+        c.el.classList.add('is-idle');
+
+        const isLeft = i % 2 === 0;
+        const baseSlotX = isLeft ? leftMarginX : rightMarginX;
+        const baseSlotY = vh * marginYFractions[i % marginYFractions.length];
+
+        const floatX = Math.sin(now * 0.0016 + i * 1.5) * 4.0;
+        const floatY = Math.cos(now * 0.0014 + i * 1.8) * 6.5;
+        const idleTx = baseSlotX + floatX;
+        const idleTy = baseSlotY + floatY;
+
+        const targetAlpha = 0.42; // Soft, delicate, non-distracting
+        c.alpha += (targetAlpha - c.alpha) * fadeLerp;
+        c.el.style.opacity = c.alpha.toFixed(3);
+
+        if (!c.inited) {
+          c.x = idleTx;
+          c.y = idleTy;
+          c.inited = true;
+        } else {
+          c.x += (idleTx - c.x) * idleLerp;
+          c.y += (idleTy - c.y) * idleLerp;
+        }
+
+        c.el.style.transform = `translate3d(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px, 0)`;
+        animating = true; // Float gently without hogging CPU
       }
     }
 
@@ -1336,10 +1524,14 @@
 
       const span = Math.max(1, m.endScroll - m.startScroll);
       const raw = clamp01((scrollY - m.startScroll) / span);
-      const targetP = smoothstep(raw);
+      const calculatedP = smoothstep(raw);
+
+      // Monotonic forward-only construction: Scrolling UP does NOT deconstruct!
+      m.maxP = Math.max(m.maxP || 0, calculatedP);
+      const targetP = m.maxP;
       const diff = targetP - m.currentP;
 
-      if (Math.abs(diff) > 0.0009) {
+      if (diff > 0.0009) {
         m.currentP += diff * scrubLerp;
         modulesMoving = true;
       } else {
@@ -1352,7 +1544,13 @@
     applySectionGates();
     const overlayMoving = updateOverlayPool(dt, now);
 
-    if (modulesMoving || overlayMoving || isHeroIntroActive || isActivelyScrolling) {
+    if (
+      modulesMoving ||
+      overlayMoving ||
+      isHeroIntroActive ||
+      isActivelyScrolling ||
+      (window.innerWidth > 660 && !document.hidden)
+    ) {
       rafId = window.requestAnimationFrame(tick);
     } else {
       rafId = null;
@@ -1459,7 +1657,9 @@
     modules.forEach((m) => {
       const span = Math.max(1, m.endScroll - m.startScroll);
       const raw = clamp01((initScrollY - m.startScroll) / span);
-      m.currentP = smoothstep(raw);
+      const initialP = smoothstep(raw);
+      m.maxP = initialP;
+      m.currentP = initialP;
       applyModuleVisual(m, m.currentP);
     });
     applySectionGates();
@@ -1479,7 +1679,7 @@
         }
 
         if (isHeroIntroActive && Math.abs(sy) > 25) {
-          cleanHeroIntro();
+          cleanHeroIntro(true);
         }
 
         prevScrollY = sy;
