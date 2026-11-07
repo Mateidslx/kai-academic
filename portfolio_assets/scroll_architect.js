@@ -1,366 +1,381 @@
 /* ==========================================================================
-   MATÉI DE SAINT LÉGER — AUTONOMOUS CAD / CURSOR ARCHITECT (V15 SOVEREIGN)
-   Strictly aligned with Reference Video (DfWWldaTQTz.mp4) & User Directives:
-   1. Start Pitch Dark / Blank Slate on Page Load or Refresh (scrollY < 60)
-   2. Organic Hero Assembly (1.8s): 8 SVG Cursors draw the 3 pillars, then frames dissolve
-   3. ZERO PARASITES: Cursors glide to lateral margins (Idle Patrol) away from reading areas
-   4. NO WIREFRAMES on tiny text fragments or sub-items
-   5. ZERO DECONSTRUCTION: Scrolling up preserves all created elements 100% intact
-   6. Scroll Frontier: Cursors only activate when scrolling down to reveal new unrevealed cards
-   7. Live Autonomous Tour 1x linked to Bottom Telemetry Dock
+   AUTHENTIC SAHIR (DfWWldaTQTz.mp4) MULTIPLAYER ARCHITECT & TOUR ENGINE
+   1:1 Pixel-level reproduction of the Live Figma / IDE Autonomous Tour:
+   - 8 Multiplayer Cursors with Name Badges (Alex, Soren, Elena, Kai, Axel...)
+   - Thin Blue Figma Selection Frames (#38bdf8) with 4 Corner Handles & Dimensions
+   - Character-by-Character Typewriter Effect with Blinking Caret (|)
+   - Bottom Telemetry Scrubber Dock: 20 agents X / 252 layers — Touring 1x
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  const CURSOR_PROFILES = [
-    { name: 'Alex',  role: 'Lead Architect', color: '#38bdf8' }, // Sky Cyan
-    { name: 'Soren', role: 'Security RedTeam', color: '#ef4444' }, // Crimson
-    { name: 'Elena', role: 'Quant Streamer',   color: '#10b981' }, // Mint Emerald
-    { name: 'Kai',   role: 'Swarm Operator',   color: '#fbbf24' }, // Amber
-    { name: 'Axel',  role: 'C99 Artisan',      color: '#f472b6' }, // Rose
-    { name: 'Iris',  role: 'Mail Watcher',     color: '#22d3ee' }, // Cyan
-    { name: 'Lex',   role: 'Policy Guard',     color: '#fb923c' }, // Orange
-    { name: 'Astra', role: 'Memory Keeper',    color: '#a3e635' }  // Lime
+  const AGENTS = [
+    { name: 'Alex',  color: '#38bdf8' }, // Sky Cyan
+    { name: 'Soren', color: '#ef4444' }, // Crimson
+    { name: 'Elena', color: '#10b981' }, // Emerald
+    { name: 'Kai',   color: '#fbbf24' }, // Amber
+    { name: 'Axel',  color: '#a855f7' }, // Purple
+    { name: 'Iris',  color: '#ec4899' }, // Pink
+    { name: 'Lex',   color: '#fb923c' }, // Orange
+    { name: 'Astra', color: '#22d3ee' }  // Cyan
   ];
 
-  const MAX_CURSORS = 8;
-  const MAX_CAD_FRAMES = 3;
-
-  let cursorElements = [];
-  let cadFrameElements = [];
-  let isTouring = false;
+  const TOTAL_LAYERS = 252;
+  let currentLayer = 52;
+  let isTouring = true;
   let tourSpeed = 1.0;
+  let cursorNodes = [];
+  let figmaSelectionBox = null;
+  let figmaDimTag = null;
+  let activeElementTarget = null;
   let tourRafId = null;
-  let prevScrollY = window.scrollY || 0;
-  let isActivelyScrolling = false;
-  let scrollIdleTimer = null;
-  let hasAssembledHero = false;
-
-  // Reveal Tracking
-  const revealedElements = new WeakSet();
 
   /* ------------------------------------------------------------------------
-     1. CREATE CURSOR & CAD OVERLAYS
+     1. CREATE MULTIPLAYER CURSORS & FIGMA SELECTION OVERLAY
      ------------------------------------------------------------------------ */
-  function initOverlayLayer() {
-    let overlay = document.getElementById('sovereign-cursor-layer');
+  function setupMultiplayerLayer() {
+    let overlay = document.getElementById('sahir-multiplayer-layer');
     if (!overlay) {
       overlay = document.createElement('div');
-      overlay.id = 'sovereign-cursor-layer';
-      overlay.className = 'builder-cursors-layer';
-      overlay.setAttribute('aria-hidden', 'true');
+      overlay.id = 'sahir-multiplayer-layer';
+      overlay.style.position = 'fixed';
+      overlay.style.inset = '0';
+      overlay.style.pointerEvents = 'none';
+      overlay.style.zIndex = '930';
+      overlay.style.overflow = 'hidden';
       document.body.appendChild(overlay);
     }
 
-    // Create 8 Cursors
-    cursorElements = CURSOR_PROFILES.map((profile, i) => {
-      const cur = document.createElement('div');
-      cur.className = 'saai-cursor';
-      cur.style.transform = `translate3d(-100px, -100px, 0)`;
-      cur.innerHTML = `
-        <svg class="saai-cursor-svg" viewBox="0 0 18 18" fill="none">
-          <path d="M2 2L15 8L8.5 10.5L6 17L2 2Z" fill="${profile.color}" stroke="#070709" stroke-width="1.5" stroke-linejoin="round" />
+    // 1. Create Figma Selection Box
+    figmaSelectionBox = document.createElement('div');
+    figmaSelectionBox.className = 'figma-selection-overlay';
+    figmaSelectionBox.style.opacity = '0';
+    figmaSelectionBox.innerHTML = `
+      <span class="fh-handle tl"></span>
+      <span class="fh-handle tr"></span>
+      <span class="fh-handle bl"></span>
+      <span class="fh-handle br"></span>
+      <span class="fh-dim-tag" id="figma-dim-tag">358 × 24</span>
+    `;
+    overlay.appendChild(figmaSelectionBox);
+    figmaDimTag = document.getElementById('figma-dim-tag');
+
+    // 2. Create Multiplayer Cursors
+    cursorNodes = AGENTS.map((agent, i) => {
+      const node = document.createElement('div');
+      node.className = 'figma-agent-cursor';
+      node.innerHTML = `
+        <svg class="cur-arrow-svg" viewBox="0 0 16 16" fill="none">
+          <path d="M1 1L14 6.5L7.5 8.5L5 14.5L1 1Z" fill="${agent.color}" stroke="#070709" stroke-width="1.2" stroke-linejoin="round"/>
         </svg>
+        <span class="cur-nametag" style="background:${agent.color}">${agent.name}</span>
       `;
-      overlay.appendChild(cur);
+      overlay.appendChild(node);
       return {
-        el: cur,
-        profile,
-        x: -100,
-        y: -100,
-        targetX: -100,
-        targetY: -100,
-        idleSide: i % 2 === 0 ? 'left' : 'right',
-        idleAngle: (i / MAX_CURSORS) * Math.PI * 2
+        el: node,
+        agent,
+        x: window.innerWidth * (0.2 + (i % 4) * 0.2),
+        y: 120 + (i % 3) * 150,
+        tx: window.innerWidth * (0.2 + (i % 4) * 0.2),
+        ty: 120 + (i % 3) * 150,
+        orbitAngle: (i / AGENTS.length) * Math.PI * 2,
+        speed: 0.015 + (i % 3) * 0.005
       };
     });
+  }
 
-    // Create CAD Framing Pool
-    cadFrameElements = [];
-    for (let i = 0; i < MAX_CAD_FRAMES; i++) {
-      const f = document.createElement('div');
-      f.className = 'saai-frame is-wireframe';
-      f.style.opacity = '0';
-      f.innerHTML = `
-        <span class="saai-handle tl"></span>
-        <span class="saai-handle tr"></span>
-        <span class="saai-handle bl"></span>
-        <span class="saai-handle br"></span>
-        <span class="saai-dim">FRAME // INIT</span>
-      `;
-      overlay.appendChild(f);
-      cadFrameElements.push({
-        el: f,
-        dimEl: f.querySelector('.saai-dim'),
-        active: false
-      });
+  /* ------------------------------------------------------------------------
+     2. FIGMA SELECTION BOX TARGETING
+     ------------------------------------------------------------------------ */
+  function attachFigmaBox(element, label) {
+    if (!element || !figmaSelectionBox) return;
+    activeElementTarget = element;
+
+    const rect = element.getBoundingClientRect();
+    figmaSelectionBox.style.top = `${rect.top + window.scrollY - 3}px`;
+    figmaSelectionBox.style.left = `${rect.left + window.scrollX - 4}px`;
+    figmaSelectionBox.style.width = `${rect.width + 8}px`;
+    figmaSelectionBox.style.height = `${rect.height + 6}px`;
+    figmaSelectionBox.style.opacity = '1';
+
+    if (figmaDimTag) {
+      figmaDimTag.textContent = label || `${Math.round(rect.width)} × ${Math.round(rect.height)}`;
+    }
+  }
+
+  function detachFigmaBox() {
+    if (figmaSelectionBox) {
+      figmaSelectionBox.style.opacity = '0';
     }
   }
 
   /* ------------------------------------------------------------------------
-     2. ORGANIC HERO ASSEMBLY (1.8s) ON REFRESH
+     3. TYPEWRITER EFFECT WITH BLINKING CARET
      ------------------------------------------------------------------------ */
-  function runOrganicHeroAssembly() {
-    const isAtTop = (window.scrollY || 0) < 60;
-    if (!isAtTop) {
-      // User is deep in the page, reveal hero instantly without animation
-      document.documentElement.classList.remove('hero-blank-slate');
-      hasAssembledHero = true;
-      return;
-    }
+  function typewriteElement(boxEl, onComplete) {
+    if (!boxEl) return;
+    const fullText = boxEl.getAttribute('data-full-text') || '';
+    const contentSpan = boxEl.querySelector('.tw-content');
+    const caretSpan = boxEl.querySelector('.tw-caret');
 
-    const heroLeft = document.querySelector('.hero-left');
-    const portraitStage = document.getElementById('portrait-stage');
-    const heroRight = document.querySelector('.hero-right');
+    if (!contentSpan) return;
 
-    const heroWordmark = document.querySelector('.hero-wordmark-wrap');
-    const canvasEl = document.getElementById('op-art-canvas');
+    attachFigmaBox(boxEl, `${Math.round(boxEl.offsetWidth)} × ${Math.round(boxEl.offsetHeight)}`);
 
-    if (!heroLeft || !portraitStage || !heroRight) {
-      document.documentElement.classList.remove('hero-blank-slate');
-      hasAssembledHero = true;
-      return;
-    }
+    // Dispatch lead cursor Alex to the typing point
+    const leadCursor = cursorNodes[0];
+    let charIdx = 0;
+    const speed = 20; // 20ms per character for snappy authentic typing
 
-    const startTs = performance.now();
-    const duration = 1800; // 1.8 seconds clean assembly
+    function stepType() {
+      if (charIdx <= fullText.length) {
+        contentSpan.textContent = fullText.slice(0, charIdx);
 
-    // Target Rectangles for the 3 Hero Pillars
-    const rectLeft = heroLeft.getBoundingClientRect();
-    const rectCenter = portraitStage.getBoundingClientRect();
-    const rectRight = heroRight.getBoundingClientRect();
-
-    // Assign CAD frames to the 3 main containers
-    const targets = [
-      { rect: rectLeft, label: 'HERO // LEFT OPERATOR' },
-      { rect: rectCenter, label: 'HERO // SOVEREIGN SILICON' },
-      { rect: rectRight, label: 'HERO // HUD ARCHITECTURE' }
-    ];
-
-    targets.forEach((tgt, i) => {
-      if (cadFrameElements[i]) {
-        const f = cadFrameElements[i];
-        f.el.style.left = `${tgt.rect.left}px`;
-        f.el.style.top = `${tgt.rect.top}px`;
-        f.el.style.width = `${tgt.rect.width}px`;
-        f.el.style.height = `${tgt.rect.height}px`;
-        f.dimEl.textContent = `${Math.round(tgt.rect.width)} × ${Math.round(tgt.rect.height)}`;
-        f.el.style.opacity = '1';
-        f.active = true;
-      }
-    });
-
-    function stepHeroAssembly(now) {
-      const elapsed = now - startTs;
-      const progress = Math.min(elapsed / duration, 1.0);
-
-      // Cursors swirl around the 3 targets tracing corners
-      cursorElements.forEach((c, idx) => {
-        const targetObj = targets[idx % targets.length];
-        const r = targetObj.rect;
-        const angle = (elapsed * 0.004) + (idx * (Math.PI / 2));
-        const radiusX = r.width * 0.45;
-        const radiusY = r.height * 0.45;
-        const centerX = r.left + r.width / 2;
-        const centerY = r.top + r.height / 2;
-
-        c.targetX = centerX + Math.cos(angle) * radiusX;
-        c.targetY = centerY + Math.sin(angle) * radiusY;
-
-        c.x += (c.targetX - c.x) * 0.25;
-        c.y += (c.targetY - c.y) * 0.25;
-        c.el.style.transform = `translate3d(${c.x}px, ${c.y}px, 0)`;
-      });
-
-      if (progress >= 0.75 && document.documentElement.classList.contains('hero-blank-slate')) {
-        // Smoothly reveal content as cursors complete tracing
-        document.documentElement.classList.remove('hero-blank-slate');
-        if (heroWordmark) heroWordmark.style.opacity = '1';
-        if (canvasEl) canvasEl.style.opacity = '1';
-      }
-
-      if (progress < 1.0) {
-        requestAnimationFrame(stepHeroAssembly);
-      } else {
-        // Finish: dissolve CAD frames completely
-        cadFrameElements.forEach(f => {
-          f.el.style.transition = 'opacity 0.4s ease';
-          f.el.style.opacity = '0';
-          setTimeout(() => {
-            f.active = false;
-            f.el.style.transition = '';
-          }, 450);
-        });
-
-        hasAssembledHero = true;
-        revealedElements.add(heroLeft);
-        revealedElements.add(portraitStage);
-        revealedElements.add(heroRight);
-
-        // Guide cursors to lateral margins (Idle Patrol)
-        parkCursorsInMargins();
-      }
-    }
-
-    requestAnimationFrame(stepHeroAssembly);
-  }
-
-  /* ------------------------------------------------------------------------
-     3. IDLE PATROL IN LATERAL MARGINS (NO TEXT OBSTRUCTION)
-     ------------------------------------------------------------------------ */
-  function parkCursorsInMargins() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-
-    cursorElements.forEach((c, i) => {
-      const isLeft = c.idleSide === 'left';
-      const marginX = isLeft ? 28 + (i % 2) * 18 : w - (38 + (i % 2) * 18);
-      const marginY = 120 + ((i % 4) * (h / 5));
-
-      c.targetX = marginX;
-      c.targetY = marginY;
-    });
-  }
-
-  /* ------------------------------------------------------------------------
-     4. SCROLL FRONTIER CONSTRUCTION (DOWN ONLY — ZERO REVERSE COLLAPSE)
-     ------------------------------------------------------------------------ */
-  function handleScrollActivity() {
-    const currentScrollY = window.scrollY || 0;
-    const isScrollingDown = currentScrollY > prevScrollY;
-    prevScrollY = currentScrollY;
-
-    isActivelyScrolling = true;
-    clearTimeout(scrollIdleTimer);
-
-    // If scrolling DOWN, inspect incoming cards that are not yet revealed
-    if (isScrollingDown) {
-      const cards = document.querySelectorAll('[data-scroll-build="card"], [data-scroll-build="heading"], .flagship-card, .timeline-item');
-      const vh = window.innerHeight;
-
-      cards.forEach(card => {
-        if (!revealedElements.has(card)) {
-          const rect = card.getBoundingClientRect();
-          // Frontier window: entering bottom 15% of viewport
-          if (rect.top < vh - 40 && rect.bottom > 40) {
-            revealedElements.add(card);
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-
-            // Dispatch 1 or 2 cursors to briefly touch the incoming card
-            const freeCursor = cursorElements[Math.floor(Math.random() * 3)];
-            if (freeCursor) {
-              freeCursor.targetX = rect.left + 24;
-              freeCursor.targetY = rect.top + 20;
-            }
-          }
+        // Move lead cursor along with typing
+        if (leadCursor) {
+          const r = boxEl.getBoundingClientRect();
+          leadCursor.tx = r.left + Math.min(r.width - 20, charIdx * 8.5);
+          leadCursor.ty = r.top + 14;
         }
-      });
+
+        charIdx++;
+        setTimeout(stepType, speed);
+      } else {
+        if (caretSpan) caretSpan.style.display = 'none';
+        if (onComplete) onComplete();
+      }
     }
 
-    // When scrolling stops, cursors return to idle margins
-    scrollIdleTimer = setTimeout(() => {
-      isActivelyScrolling = false;
-      parkCursorsInMargins();
-    }, 400);
+    stepType();
   }
 
   /* ------------------------------------------------------------------------
-     5. MAIN RAF LOOP: SMOOTH SPRING CURSOR INTERPOLATION
+     4. AUTONOMOUS SCROLL & LAYER TICKER CONTROLLER
      ------------------------------------------------------------------------ */
-  function animateCursors(ts) {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+  function updateDockTelemetry(layer) {
+    currentLayer = Math.min(TOTAL_LAYERS, Math.max(1, Math.round(layer)));
+    const layerCurrEl = document.getElementById('dock-layer-curr');
+    const scrubberFill = document.getElementById('dock-scrubber-fill');
+    const scrubberKnob = document.getElementById('dock-scrubber-knob');
 
-    cursorElements.forEach((c, idx) => {
-      // In idle mode, add a gentle harmonic float along the margins
-      if (!isActivelyScrolling && hasAssembledHero) {
-        c.idleAngle += 0.015;
-        const floatX = Math.cos(c.idleAngle) * 6;
-        const floatY = Math.sin(c.idleAngle * 0.8) * 12;
+    if (layerCurrEl) layerCurrEl.textContent = currentLayer;
 
-        const isLeft = c.idleSide === 'left';
-        const baseX = isLeft ? 26 : w - 42;
-        const baseY = 140 + ((idx % 4) * (h / 4.6));
+    const pct = (currentLayer / TOTAL_LAYERS) * 100;
+    if (scrubberFill) scrubberFill.style.width = `${pct}%`;
+    if (scrubberKnob) scrubberKnob.style.left = `${pct}%`;
+  }
 
-        c.targetX = baseX + floatX;
-        c.targetY = baseY + floatY;
+  function stepTour() {
+    if (!isTouring) return;
+
+    // Advance scroll smoothly
+    const scrollMax = document.body.scrollHeight - window.innerHeight;
+    const nextY = window.scrollY + 1.25 * tourSpeed;
+
+    if (nextY >= scrollMax - 10) {
+      // Reached the end: pause and show completed
+      isTouring = false;
+      const playBtn = document.getElementById('dock-play-pause');
+      if (playBtn) playBtn.textContent = '▶';
+      updateDockTelemetry(TOTAL_LAYERS);
+      return;
+    }
+
+    window.scrollTo({ top: nextY, behavior: 'instant' });
+
+    // Update layer count based on scroll progress
+    const scrollProgress = window.scrollY / Math.max(1, scrollMax);
+    const calculatedLayer = 50 + scrollProgress * (TOTAL_LAYERS - 50);
+    updateDockTelemetry(calculatedLayer);
+
+    tourRafId = requestAnimationFrame(stepTour);
+  }
+
+  /* ------------------------------------------------------------------------
+     5. HERO AMBIENT ORBIT & INTERACTION DISPATCH
+     ------------------------------------------------------------------------ */
+  function setupHeroCursorPositions() {
+    // Exact match to frame_04.50s: cursors hover on letters, badges, portrait, HUD
+    const wordmark = document.querySelector('.hero-wordmark-display');
+    const redPlate = document.querySelector('.red-name-plate');
+    const rolePill = document.getElementById('hero-role-pill');
+    const portraitBox = document.getElementById('portrait-stage-box');
+    const hud1 = document.getElementById('hud-card-01');
+    const hud2 = document.getElementById('hud-card-02');
+    const exploreBtn = document.querySelector('.btn-sahir-explore');
+
+    if (wordmark && cursorNodes.length >= 8) {
+      const wmRect = wordmark.getBoundingClientRect();
+
+      // Cursors 0, 1, 2 on PORTFOLIO letters (R, I, O)
+      cursorNodes[0].tx = wmRect.left + wmRect.width * 0.42; // R
+      cursorNodes[0].ty = wmRect.top + 45;
+
+      cursorNodes[1].tx = wmRect.left + wmRect.width * 0.72; // I
+      cursorNodes[1].ty = wmRect.top + 38;
+
+      cursorNodes[2].tx = wmRect.left + wmRect.width * 0.85; // O
+      cursorNodes[2].ty = wmRect.top + 50;
+
+      // Cursor 3 on Subtitle Pill
+      if (rolePill) {
+        const rpRect = rolePill.getBoundingClientRect();
+        cursorNodes[3].tx = rpRect.left + 40;
+        cursorNodes[3].ty = rpRect.top + 10;
       }
 
-      // Spring Interpolation
-      c.x += (c.targetX - c.x) * 0.14;
-      c.y += (c.targetY - c.y) * 0.14;
+      // Cursor 4 near Explore Architecture button
+      if (exploreBtn) {
+        const ebRect = exploreBtn.getBoundingClientRect();
+        cursorNodes[4].tx = ebRect.left + 30;
+        cursorNodes[4].ty = ebRect.top + 8;
+      }
+
+      // Cursor 5 on Portrait Chin
+      if (portraitBox) {
+        const pbRect = portraitBox.getBoundingClientRect();
+        cursorNodes[5].tx = pbRect.left + pbRect.width * 0.48;
+        cursorNodes[5].ty = pbRect.top + pbRect.height * 0.62;
+      }
+
+      // Cursor 6 on HUD Card 01
+      if (hud1) {
+        const h1Rect = hud1.getBoundingClientRect();
+        cursorNodes[6].tx = h1Rect.left + 50;
+        cursorNodes[6].ty = h1Rect.top + 16;
+      }
+
+      // Cursor 7 on HUD Card 02
+      if (hud2) {
+        const h2Rect = hud2.getBoundingClientRect();
+        cursorNodes[7].tx = h2Rect.left + 80;
+        cursorNodes[7].ty = h2Rect.top + 16;
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     6. MAIN RAF LOOP: ANIMATE MULTIPLAYER CURSORS & BOXES
+     ------------------------------------------------------------------------ */
+  function animateFrame() {
+    cursorNodes.forEach((c) => {
+      // Gentle harmonic breathing jitter
+      c.orbitAngle += c.speed;
+      const jx = Math.cos(c.orbitAngle) * 5;
+      const jy = Math.sin(c.orbitAngle * 1.3) * 5;
+
+      c.x += (c.tx + jx - c.x) * 0.12;
+      c.y += (c.ty + jy - c.y) * 0.12;
 
       c.el.style.transform = `translate3d(${Math.round(c.x)}px, ${Math.round(c.y)}px, 0)`;
     });
 
-    requestAnimationFrame(animateCursors);
-  }
-
-  /* ------------------------------------------------------------------------
-     6. AUTONOMOUS TOUR 1x CONTROLLER (BOTTOM DOCK LINK)
-     ------------------------------------------------------------------------ */
-  function initTourController() {
-    const tourBtn = document.getElementById('tour-toggle-btn');
-    const tourIcon = document.getElementById('tour-btn-icon');
-    if (!tourBtn || !tourIcon) return;
-
-    function stepTour() {
-      if (!isTouring) return;
-      window.scrollBy({ top: 1.4 * tourSpeed, behavior: 'instant' });
-
-      // If at page bottom, loop back to top
-      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 20)) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      tourRafId = requestAnimationFrame(stepTour);
+    // Keep active figma box locked to element position on scroll
+    if (activeElementTarget && figmaSelectionBox && figmaSelectionBox.style.opacity === '1') {
+      const r = activeElementTarget.getBoundingClientRect();
+      figmaSelectionBox.style.top = `${r.top + window.scrollY - 3}px`;
+      figmaSelectionBox.style.left = `${r.left + window.scrollX - 4}px`;
+      figmaSelectionBox.style.width = `${r.width + 8}px`;
+      figmaSelectionBox.style.height = `${r.height + 6}px`;
     }
 
-    tourBtn.addEventListener('click', () => {
-      isTouring = !isTouring;
-      if (isTouring) {
-        tourIcon.textContent = '❚❚';
-        tourBtn.classList.add('active');
-        stepTour();
-      } else {
-        tourIcon.textContent = '▶';
-        tourBtn.classList.remove('active');
-        cancelAnimationFrame(tourRafId);
-      }
-    });
-
-    // Pause tour on user manual interaction
-    ['wheel', 'touchstart', 'keydown'].forEach(evt => {
-      window.addEventListener(evt, () => {
-        if (isTouring) {
-          isTouring = false;
-          tourIcon.textContent = '▶';
-          tourBtn.classList.remove('active');
-          cancelAnimationFrame(tourRafId);
-        }
-      }, { passive: true });
-    });
+    requestAnimationFrame(animateFrame);
   }
 
   /* ------------------------------------------------------------------------
-     7. INITIALIZATION LIFECYCLE
+     7. SECTION TRIGGERED TYPEWRITING ON SCROLL
+     ------------------------------------------------------------------------ */
+  let typedPara1 = false;
+  let typedPara2 = false;
+  let typedSovereign = false;
+
+  function checkScrollTriggers() {
+    const vh = window.innerHeight;
+
+    const p1 = document.getElementById('tw-para-1');
+    if (p1 && !typedPara1) {
+      const r = p1.getBoundingClientRect();
+      if (r.top < vh * 0.75 && r.bottom > 0) {
+        typedPara1 = true;
+        typewriteElement(p1, () => {
+          const p2 = document.getElementById('tw-para-2');
+          if (p2 && !typedPara2) {
+            typedPara2 = true;
+            typewriteElement(p2, () => {
+              const sc = document.getElementById('tw-sovereign-desc');
+              if (sc && !typedSovereign) {
+                typedSovereign = true;
+                typewriteElement(sc);
+              }
+            });
+          }
+        });
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     8. DOCK INTERACTION BINDINGS
+     ------------------------------------------------------------------------ */
+  function initDockEvents() {
+    const playBtn = document.getElementById('dock-play-pause');
+    const fwdBtn = document.getElementById('dock-step-fwd');
+    const backBtn = document.getElementById('dock-step-back');
+    const scrubberTrack = document.querySelector('.dock-scrubber-track');
+
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        isTouring = !isTouring;
+        playBtn.textContent = isTouring ? '❚❚' : '▶';
+        if (isTouring) stepTour();
+      });
+    }
+
+    if (fwdBtn) {
+      fwdBtn.addEventListener('click', () => {
+        window.scrollBy({ top: 350, behavior: 'smooth' });
+      });
+    }
+
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        window.scrollBy({ top: -350, behavior: 'smooth' });
+      });
+    }
+
+    if (scrubberTrack) {
+      scrubberTrack.addEventListener('click', (e) => {
+        const rect = scrubberTrack.getBoundingClientRect();
+        const clickRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        const scrollMax = document.body.scrollHeight - window.innerHeight;
+        window.scrollTo({ top: scrollMax * clickRatio, behavior: 'smooth' });
+      });
+    }
+
+    // Manual scroll sync
+    window.addEventListener('scroll', () => {
+      checkScrollTriggers();
+      const scrollMax = document.body.scrollHeight - window.innerHeight;
+      const scrollProgress = window.scrollY / Math.max(1, scrollMax);
+      const calculatedLayer = 50 + scrollProgress * (TOTAL_LAYERS - 50);
+      updateDockTelemetry(calculatedLayer);
+    }, { passive: true });
+  }
+
+  /* ------------------------------------------------------------------------
+     9. INITIALIZATION
      ------------------------------------------------------------------------ */
   function init() {
-    initOverlayLayer();
-    requestAnimationFrame(animateCursors);
+    setupMultiplayerLayer();
+    setupHeroCursorPositions();
+    initDockEvents();
+    requestAnimationFrame(animateFrame);
 
-    // Initial load assembly
+    // Initial load: start touring smoothly after 1.5s
     setTimeout(() => {
-      runOrganicHeroAssembly();
-    }, 150);
-
-    // Scroll listeners
-    window.addEventListener('scroll', handleScrollActivity, { passive: true });
-    window.addEventListener('resize', parkCursorsInMargins, { passive: true });
-
-    initTourController();
+      if (isTouring) stepTour();
+    }, 1500);
   }
 
   if (document.readyState === 'loading') {
