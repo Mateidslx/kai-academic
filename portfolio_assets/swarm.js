@@ -1699,6 +1699,7 @@
       }
       this.makeIntroLogo();
       document.documentElement.appendChild(host);
+      if (typeof window.__swarmUnhide === 'function') { try { window.__swarmUnhide(); } catch(_) {} }
       this.measure();
     }
 
@@ -3754,6 +3755,7 @@
       }
       const finish = () => {
         this.dead = true;
+        if (typeof window.__swarmUnhide === 'function') { try { window.__swarmUnhide(); } catch(_) {} }
         cancelAnimationFrame(this.raf);
         for (const u of this.unbinds || []) u();
         this.view.host.remove();
@@ -3774,6 +3776,7 @@
         this.view.host.style.setProperty("transition", "opacity .25s ease", "important");
         this.view.host.style.setProperty("opacity", "0", "important");
         this.dead = true;
+        if (typeof window.__swarmUnhide === 'function') { try { window.__swarmUnhide(); } catch(_) {} }
         cancelAnimationFrame(this.raf);
         for (const u of this.unbinds || []) u();
         setTimeout(() => this.view.host.remove(), 260);
@@ -3784,6 +3787,7 @@
   // background.js may have hidden everything but media for its screenshot;
   // put the page back once our canvas covers it (or if we bail out early).
   async function unhidePage() {
+    if (typeof window.__swarmUnhide === 'function') { try { window.__swarmUnhide(); } catch(_) {} }
     if (!window.__swarmHidden) return;
     window.__swarmHidden = false;
     try {

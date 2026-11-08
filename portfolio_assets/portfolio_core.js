@@ -423,6 +423,16 @@
           run: () => document.getElementById('matrix')?.scrollIntoView({ behavior: 'smooth' })
         },
         {
+          label: fr ? '📅  Parcours : 8 Jalons Chronologiques (2023–2026)' : '📅  Trajectory: 8 Chronological Milestones (2023–2026)',
+          kbd: '#06',
+          run: () => document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' })
+        },
+        {
+          label: fr ? '✦  ADN & Terrain : Stages HUPI/Marra, Immersion UK & Échecs' : '✦  Experience DNA: HUPI/Marra Internships, UK & Chess',
+          kbd: '#07',
+          run: () => document.getElementById('experience-dna')?.scrollIntoView({ behavior: 'smooth' })
+        },
+        {
           label: fr ? '✉️  Direct Connect : Me Contacter' : '✉️  Direct Connect: Get In Touch',
           kbd: '#06',
           run: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
@@ -594,6 +604,52 @@
     }
   };
 
+
+  /* ------------------------------------------------------------------------
+     10. TIMELINE SCROLL SYNC & ACTIVE ITEM
+     ------------------------------------------------------------------------ */
+  function updateActiveTimelineItem(activeItem) {
+    if (!activeItem) return;
+    const yearEl = document.getElementById('timeline-big-year');
+    const periodEl = document.getElementById('timeline-period-label');
+    const countEl = document.getElementById('timeline-step-count');
+    const fillEl = document.getElementById('timeline-step-fill');
+
+    document.querySelectorAll('.timeline-item').forEach(el => {
+      el.classList.toggle('active', el === activeItem);
+    });
+
+    if (yearEl) yearEl.textContent = activeItem.getAttribute('data-year') || '2026';
+    if (periodEl) {
+      periodEl.textContent = activeItem.getAttribute(currentLang === 'fr' ? 'data-period-fr' : 'data-period-en') || '';
+    }
+    if (countEl) countEl.textContent = activeItem.getAttribute('data-step') || '01 / 08';
+    if (fillEl) fillEl.style.width = activeItem.getAttribute('data-pct') || '12.5%';
+  }
+
+  function initTimelineScrollSync() {
+    const items = Array.from(document.querySelectorAll('.timeline-item'));
+    if (!items.length) return;
+
+    function syncOnScroll() {
+      const targetY = window.innerHeight * 0.48;
+      let best = items[0];
+      let bestDist = Infinity;
+      items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const dist = Math.abs(rect.top - targetY);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = item;
+        }
+      });
+      if (best) updateActiveTimelineItem(best);
+    }
+
+    window.addEventListener('scroll', syncOnScroll, { passive: true });
+    updateActiveTimelineItem(items[0]);
+  }
+
   /* ------------------------------------------------------------------------
      11. INITIALIZE ALL
      ------------------------------------------------------------------------ */
@@ -605,6 +661,7 @@
     initCommandPalette();
     initLanguage();
     initEmailCopy();
+    initTimelineScrollSync();
   }
 
   if (document.readyState === 'loading') {

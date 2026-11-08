@@ -1,491 +1,797 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" class="swarm-booting">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MATÉI — Systems Architect &amp; Autonomous Operator</title>
-  <meta name="description" content="Portfolio de Matéi de Saint Léger — Systems Architect &amp; Autonomous Operator. Polymarket Quant Engine V71-V150, Kai 7-Layer Swarm, BasedHardware/Omi 7 Merged PRs, ISO C99 Valgrind." />
-  <meta name="theme-color" content="#070709" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matéi de Saint Léger — Développeur Backend, Systèmes &amp; IA Autonome</title>
+  <meta name="description" content="Portfolio d'ingénierie logicielle de Matéi de Saint Léger : architectures 24/7, moteurs quantitatifs Polymarket, contributions open-source (Twenty, Omi), et excellence bas-niveau C99/Linux.">
+  <link rel="canonical" href="https://mateidslx.github.io/kai-academic/portfolio.html" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ef4444'/><text x='50' y='68' font-size='50' font-weight='900' font-family='sans-serif' fill='white' text-anchor='middle'>M</text></svg>" />
 
-  <!-- OpenGraph -->
+  <!-- OpenGraph & Twitter -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="MATÉI — Systems Architect &amp; Autonomous Operator" />
-  <meta property="og:description" content="Architecting 24/7 autonomous cognitive ecosystems, multi-agent swarms, and quantitative execution models from first principles." />
-  <meta property="og:image" content="portfolio_assets/matei-cutout.webp" />
+  <meta property="og:site_name" content="Matéi de Saint Léger" />
+  <meta property="og:title" content="Matéi de Saint Léger — Développeur Backend, Systèmes &amp; IA Autonome" />
+  <meta property="og:description" content="Systèmes autonomes 24/7, moteurs quantitatifs prédictifs, 46 PRs open-source fusionnées et rigueur bas-niveau C99." />
+  <meta property="og:url" content="https://mateidslx.github.io/kai-academic/portfolio.html" />
+  <meta property="og:image" content="portfolio_assets/matei-cutout.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Matéi de Saint Léger — Portfolio Haute Ingénierie" />
+  <meta name="twitter:description" content="Développeur Backend, Systèmes &amp; IA Autonome — BUT Informatique Anglet." />
+  <meta name="twitter:image" content="portfolio_assets/matei-cutout.png" />
 
-  <link rel="icon" type="image/svg+xml" href="portfolio_assets/favicon-ms.svg" />
+  <!-- Google Fonts: Bebas Neue, Caveat, Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Typography Quartet: Bebas Neue + Caveat + Plus Jakarta Sans + JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="portfolio_assets/style.css?v=20">
 
-  <link rel="stylesheet" href="portfolio_assets/noir_crimson.css?v=18" />
+  <!-- Zero-Flash Dark Curtain: keeps DOM computed rects valid while screen is 100% black until swarm canvas mounts -->
+  <style>
+    html.swarm-booting body {
+      background: #050505 !important;
+    }
+    html.swarm-booting .page-shell {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  </style>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Matéi de Saint Léger",
-    "alternateName": "Mateidslx",
-    "jobTitle": "Systems Architect & Autonomous Systems Operator",
-    "alumniOf": [
-      "IUT de Bayonne et du Pays Basque (UPPA)",
-      "Lycée Polyvalent Cantau (Anglet)"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Biarritz / Anglet",
-      "addressCountry": "FR"
-    },
+    "url": "https://mateidslx.github.io/kai-academic/portfolio.html",
+    "jobTitle": "Développeur Backend, Systèmes & IA Autonome",
+    "description": "Étudiant en BUT Informatique (IUT de Bayonne et du Pays Basque - Campus d'Anglet), architecte de systèmes autonomes 24/7, moteurs quantitatifs et contributeur open-source.",
+    "email": "matei64200@gmail.com",
     "sameAs": [
-      "https://github.com/Mateidslx"
+      "https://github.com/Mateidslx",
+      "https://www.linkedin.com/in/mat%C3%A9i-de-saint-l%C3%A9ger-24329a32b/"
     ]
   }
   </script>
 </head>
-<body class="sahir-mode">
+<body>
 
-  <!-- TOP COMPACT NAVIGATION BAR (Exact Sahir Video Match) -->
-  <header class="top-nav-bar">
-    <div class="top-nav-inner">
-      <a href="#top" class="top-nav-brand">
-        <span class="brand-sq">MS</span>
-        <span class="brand-txt">MATÉI.</span>
-      </a>
+  <!-- Ambient Noir & Crimson Op-Art Canvas -->
+  <canvas id="aurora-canvas" aria-hidden="true"></canvas>
 
-      <nav class="top-nav-links" aria-label="Navigation principale">
-        <a href="#about" class="nav-item">About</a>
-        <a href="#flagships" class="nav-item">Flagships</a>
-        <a href="#matrix" class="nav-item">Matrix</a>
-        <a href="#contact" class="nav-item">Contact</a>
+  <div class="page-shell">
+    <!-- Floating Glass Navigation Dock -->
+    <header class="dock-container">
+      <nav class="nav-dock" aria-label="Navigation Principale">
+        <a href="#hero" class="nav-brand" aria-label="Accueil Matéi de Saint Léger">
+          <span class="brand-monogram">MS</span>
+          <span class="brand-label">MATÉI<span class="brand-dot">.</span></span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#about" class="nav-item">À Propos</a>
+          <a href="#flagships" class="nav-item">Flagships</a>
+          <a href="#projects" class="nav-item">Matrix</a>
+          <a href="#parcours" class="nav-item">Parcours &amp; ADN</a>
+          <a href="#contact" class="nav-item">Contact</a>
+        </div>
+
+        <div class="dock-right">
+          <button class="nav-item cmdk-trigger-btn" data-cmdk-trigger aria-label="Recherche rapide" title="Palette de commande (⌘K)">
+            <span class="cmdk-kbd">⌘K</span>
+          </button>
+          <div class="dock-status" title="Disponible pour une alternance BUT 2 en septembre 2025/2026">
+            <span class="status-dot"></span>
+            <span class="status-text">Recherche Alternance</span>
+          </div>
+          <a href="#contact" class="dock-cta">ME CONTACTER →</a>
+        </div>
       </nav>
+    </header>
 
-      <div class="top-nav-right">
-        <button type="button" class="nav-pill-btn kbd-btn" id="cmdk-open-btn" title="Ouvrir la palette de commandes (⌘K / Ctrl+K)">
-          <span>⌘K</span>
-        </button>
-        <button type="button" class="nav-pill-btn" id="lang-toggle-btn" title="Changer de langue (Français / English)">
-          <span id="lang-btn-text">FR / EN</span>
-        </button>
-        <span class="nav-pill-btn time-pill" id="live-biarritz-clock" title="Heure locale Côte Basque">
-          <span class="dot-green"></span>
-          <span id="clock-display">Biarritz --:--</span>
-        </span>
-        <a href="#contact" class="btn-top-dispatch" id="top-dispatch-btn">DISPATCH →</a>
-      </div>
-    </div>
-  </header>
+    <main>
+      <!-- Hero Section -->
+      <section id="hero" class="hero-section">
+        <div class="hero-bg-grid" aria-hidden="true">
+          <div class="grid-line line-1"></div>
+          <div class="grid-line line-2"></div>
+          <div class="grid-line line-3"></div>
+        </div>
 
-  <main class="page-shell" id="top">
-
-    <!-- ====================================================================
-         HERO STAGE (EXACT DfWWldaTQTz.mp4 MATCH)
-         Radar Grid + Crimson Wordmark + Left Column + Center Silhouette + Right 3 HUD Cards
-         ==================================================================== -->
-    <section class="hero-stage-sahir" aria-label="Hero Stage">
-      <!-- Radar Background Concentric Circles & Axis -->
-      <div class="radar-bg-wrap" aria-hidden="true">
-        <svg class="radar-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
-          <circle cx="600" cy="300" r="140" fill="none" stroke="rgba(255, 23, 68, 0.12)" stroke-width="1" stroke-dasharray="4 6" />
-          <circle cx="600" cy="300" r="280" fill="none" stroke="rgba(255, 23, 68, 0.10)" stroke-width="1" stroke-dasharray="4 6" />
-          <circle cx="600" cy="300" r="420" fill="none" stroke="rgba(255, 23, 68, 0.08)" stroke-width="1" stroke-dasharray="4 6" />
-          <line x1="100" y1="300" x2="1100" y2="300" stroke="rgba(255, 23, 68, 0.08)" stroke-width="1" />
-          <line x1="600" y1="50" x2="600" y2="550" stroke="rgba(255, 23, 68, 0.08)" stroke-width="1" />
-          <line x1="250" y1="100" x2="950" y2="500" stroke="rgba(255, 23, 68, 0.05)" stroke-width="1" stroke-dasharray="2 4" />
-          <line x1="250" y1="500" x2="950" y2="100" stroke="rgba(255, 23, 68, 0.05)" stroke-width="1" stroke-dasharray="2 4" />
-        </svg>
-      </div>
-
-      <div class="hero-container">
-        <!-- Monumental Crimson Outline Wordmark -->
-        <div class="hero-wordmark-display" aria-hidden="true">
-          <svg class="wordmark-svg" viewBox="0 0 1240 190" preserveAspectRatio="xMidYMid meet">
-            <text x="50%" y="165" text-anchor="middle" textLength="1220" lengthAdjust="spacing">PORTFOLIO</text>
+        <div class="hero-wordmark-svg" aria-hidden="true">
+          <svg viewBox="0 0 1000 215" preserveAspectRatio="xMidYMid meet">
+            <text x="0" y="205" font-size="270" textLength="1000" lengthAdjust="spacingAndGlyphs">PORTFOLIO</text>
           </svg>
         </div>
 
-        <div class="hero-columns-grid">
-          <!-- LEFT COLUMN: GREETING, NAME, SUBTITLE PILL, BIO, CTAs, STATS -->
-          <div class="hero-col-left">
-            <span class="script-greeting" id="hero-greeting">Hello, I'm</span>
-            <div class="red-name-plate" id="hero-name-plate">
-              <h1>MATÉI.</h1>
+        <div class="hero-stage-grid">
+          <!-- Left Flank -->
+          <div class="hero-flank left-flank">
+            <div class="hero-script">Salut, moi c'est</div>
+            <h1 class="hero-name">MATÉI<span class="accent-red-dot">.</span></h1>
+            <div class="hero-role-pill">
+              <span class="pill-dot">●</span>
+              <span>DÉVELOPPEUR BACKEND, SYSTÈMES &amp; IA AUTONOME</span>
             </div>
-
-            <div class="role-pill-sahir" id="hero-role-pill">
-              <span class="pill-dot"></span>
-              <span class="pill-text" id="hero-role-text">SYSTEM ARCHITECT &amp; AUTONOMOUS OPERATOR</span>
-            </div>
-
-            <p class="hero-bio-sahir" id="hero-bio-para">
-              Architecting 24/7 autonomous cognitive ecosystems, multi-agent swarms, and quantitative execution models from first principles — zero frameworks, total autonomy.
+            <p class="hero-desc">
+              Étudiant en <strong>BUT Informatique (Campus d'Anglet)</strong>, j'architecture des <strong>systèmes autonomes 24/7</strong>, des <strong>moteurs quantitatifs prédictifs</strong> et des bases de code C99/Python/TypeScript hermétiques — de l'algorithmique bas-niveau jusqu'à la production.
             </p>
-
-            <div class="hero-btn-group">
-              <a href="#contact" class="btn-sahir-dispatch">INITIATE DISPATCH →</a>
-              <a href="#flagships" class="btn-sahir-explore">EXPLORE ARCHITECTURE</a>
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-crimson">
+                <span>INITIATE DISPATCH</span>
+                <svg class="btn-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <a href="#flagships" class="btn btn-glass">
+                <span>EXPLORE ARCHITECTURE</span>
+              </a>
             </div>
-
-            <div class="hero-stats-trio">
-              <div class="stat-trio-item">
-                <span class="stat-trio-val red">36</span>
-                <span class="stat-trio-lbl">Swarm Agents</span>
+            <div class="hero-stats-row">
+              <div class="hero-stat-box">
+                <span class="stat-val">46</span>
+                <span class="stat-lbl">PRs Open-Source</span>
               </div>
-              <div class="stat-trio-item">
-                <span class="stat-trio-val white">7-Layer</span>
-                <span class="stat-trio-lbl">Core Stack</span>
+              <div class="hero-stat-box">
+                <span class="stat-val">02</span>
+                <span class="stat-lbl">Stages Tech / Audit</span>
               </div>
-              <div class="stat-trio-item">
-                <span class="stat-trio-val white">100%</span>
-                <span class="stat-trio-lbl">Offline-First</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- CENTER COLUMN: CRIMSON STAGE WITH CAD HANDLES + SILHOUETTE + SILICON PILL -->
-          <div class="hero-col-center">
-            <div class="portrait-stage-box" id="portrait-stage-box">
-              <div class="cad-handles-frame" aria-hidden="true">
-                <span class="cad-handle tl"></span>
-                <span class="cad-handle tr"></span>
-                <span class="cad-handle bl"></span>
-                <span class="cad-handle br"></span>
-              </div>
-              <div class="portrait-red-backing"></div>
-              <picture>
-                <source srcset="portfolio_assets/matei-cutout.webp?v=5" type="image/webp" />
-                <img src="portfolio_assets/matei-cutout.png?v=5" alt="Matéi de Saint Léger" class="portrait-img" width="340" height="460" loading="eager" />
-              </picture>
-
-              <div class="silicon-active-pill">
-                <span class="pulse-dot"></span>
-                <span>SOVEREIGN SILICON ACTIVE</span>
+              <div class="hero-stat-box">
+                <span class="stat-val">02 Mois</span>
+                <span class="stat-lbl">Immersion UK</span>
               </div>
             </div>
           </div>
 
-          <!-- RIGHT COLUMN: 3 HUD CARDS + TECH TAGS -->
-          <div class="hero-col-right">
-            <div class="hud-card-sahir" id="hud-card-01">
-              <div class="hud-card-top">
-                <span class="hud-num">01.</span>
-                <span class="hud-tag-red">RUNTIME</span>
+          <!-- Center Column (Portrait Panel) -->
+          <div class="hero-center-col">
+            <div class="hero-cutout-wrap">
+              <div class="hero-portrait-panel" aria-hidden="true"></div>
+              <img src="portfolio_assets/matei-cutout.png" alt="Matéi de Saint Léger" class="hero-cutout-img" width="480" height="480" loading="eager" />
+              <div class="cutout-status-badge">
+                <span class="status-pulse-red">●</span>
+                <span>BUT 1 ANGLET • ALTERNANCE 2025-2026</span>
               </div>
-              <h3 class="hud-title">Autonomous Core</h3>
-              <p class="hud-desc">Kai Swarm • Claude Code • Local Ollama Router. Zero cloud lock-in.</p>
-            </div>
-
-            <div class="hud-card-sahir" id="hud-card-02">
-              <div class="hud-card-top">
-                <span class="hud-num">02.</span>
-                <span class="hud-tag-red">PRODUCTION</span>
-              </div>
-              <h3 class="hud-title">BasedHardware / Omi</h3>
-              <p class="hud-desc">7 merged production security PRs, CLI overflow defense, CWE-209 mitigations.</p>
-            </div>
-
-            <div class="hud-card-sahir" id="hud-card-03">
-              <div class="hud-card-top">
-                <span class="hud-num">03.</span>
-                <span class="hud-tag-red">EXECUTION</span>
-              </div>
-              <h3 class="hud-title">Polymarket Arbitrage</h3>
-              <p class="hud-desc">V71-V150 quantitative execution models &amp; 4-tier local persistent memory.</p>
-            </div>
-
-            <div class="tech-tags-bar">
-              <span class="ttag">Python</span>
-              <span class="ttag">EVM</span>
-              <span class="ttag">FastAPI</span>
-              <span class="ttag">Next.js</span>
-              <span class="ttag">Docker</span>
-              <span class="ttag">Rust</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         SECTION 01: ENGINEER PROFILE // BACKGROUND & PHILOSOPHY
-         (Exact Sahir Match: Coordinate Index + Live Typewritten Paragraphs + Right Card)
-         ==================================================================== -->
-    <section class="section-sahir" id="about">
-      <div class="section-container">
-        <div class="section-index-line">
-          <span>// 01.00 SEC_ABOUT INDEX [01 / 05]</span>
-        </div>
-
-        <span class="section-eyebrow-red">ENGINEER PROFILE</span>
-        <h2 class="section-title-large">Background &amp; Philosophy</h2>
-
-        <div class="about-split-grid">
-          <div class="about-paragraphs-col">
-            <p class="about-p" id="tw-para-1">
-              I am Matéi de Saint Léger — an independent system architect operating from the Basque Coast, France. My formal education began in Computer Science (BUT Informatique) at IUT d'Anglet (UPPA).
-            </p>
-
-            <p class="about-p" id="tw-para-2">
-              However, my defining capabilities were forged in the terminal: completely self-taught in multi-agent swarms, quantitative trading engines on Polymarket, ISO C99 low-level systems, and production AppSec. I view software engineering through first principles — deterministic state, zero bloat, and physical proof.
-            </p>
-          </div>
-
-          <div class="about-card-col">
-            <div class="sovereign-card-sahir" id="card-sovereign-silicon">
-              <div class="sovereign-card-head">
-                <span class="sc-num">01</span>
-                <span class="sc-title">Sovereign Silicon</span>
-              </div>
-              <p class="sc-text" id="tw-sovereign-desc">
-                Zero reliance on third-party cloud lock-in. All core intelligence, SQLite vector memory, and 19 systemd services run 24/7 on private sovereign hardware with encrypted tunnels.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         SECTION 02: ARCHITECTURAL SHOWCASE // FLAGSHIP DEPLOYMENTS
-         (Exact Sahir Match: Master SAAI Card + 7-Layer Tabs + 3 Cards Below)
-         ==================================================================== -->
-    <section class="section-sahir" id="flagships">
-      <div class="section-container">
-        <span class="section-eyebrow-red">ARCHITECTURAL SHOWCASE</span>
-        <h2 class="section-title-large">Flagship Deployments</h2>
-        <p class="section-subtitle-gray">Production-grade systems running 24/7 across local silicon, blockchain mainnets, and commercial endpoints.</p>
-
-        <!-- MASTER FLAGSHIP CARD -->
-        <article class="master-flagship-box">
-          <div class="mf-top-badge">
-            <span class="mf-dot"></span>
-            <span>CORE ECOSYSTEM</span>
-          </div>
-
-          <h3 class="mf-title">Kai — 7-Layer Autonomous AI Ecosystem</h3>
-          <p class="mf-desc">
-            A persistent, self-evolving autonomous intelligence operating 24/7 on local silicon and Oracle VPS. Engineered without external startup frameworks, featuring 36 custom agents across 14 MCP servers, 4-tier redundant memory, and a continuous reflection loop.
-          </p>
-
-          <div class="mf-metrics-row">
-            <div class="mf-metric-cell">
-              <span class="mf-metric-num red">36</span>
-              <span class="mf-metric-lbl">Swarm Agents</span>
-            </div>
-            <div class="mf-metric-cell">
-              <span class="mf-metric-num">14</span>
-              <span class="mf-metric-lbl">MCP Servers</span>
-            </div>
-            <div class="mf-metric-cell">
-              <span class="mf-metric-num">19</span>
-              <span class="mf-metric-lbl">Systemd Daemons</span>
-            </div>
-            <div class="mf-metric-cell">
-              <span class="mf-metric-num red">Router</span>
-              <span class="mf-metric-lbl">Deterministic DAG</span>
             </div>
           </div>
 
-          <!-- 7-LAYER CONSTITUTIONAL STACK INTERACTIVE TABS -->
-          <div class="stack-section-inner">
-            <div class="stack-sec-header">
-              <span class="stack-sec-title">7-LAYER CONSTITUTIONAL STACK</span>
-              <span class="stack-sec-hint">Click a layer to inspect implementation</span>
-            </div>
-
-            <div class="stack-pills-nav" role="tablist">
-              <button type="button" class="s-pill active" data-idx="0">L1: Cognitive Core</button>
-              <button type="button" class="s-pill" data-idx="1">L2: Letta Memory</button>
-              <button type="button" class="s-pill" data-idx="2">L3: Consensus Swarm</button>
-              <button type="button" class="s-pill" data-idx="3">L4: Continuous Loop</button>
-              <button type="button" class="s-pill" data-idx="4">L5: Hardware Bridge</button>
-              <button type="button" class="s-pill" data-idx="5">L6: Proactive Brain</button>
-              <button type="button" class="s-pill" data-idx="6">L7: Self-Evolution</button>
-            </div>
-
-            <!-- Layer Live Inspector Box -->
-            <div class="stack-inspector-panel">
-              <div class="insp-kicker" id="insp-kicker">LAYER 01 // COGNITIVE CORE</div>
-              <h4 class="insp-title" id="insp-title">Hybrid Cognitive Foundation &amp; Fail-Closed Engine</h4>
-              <p class="insp-desc" id="insp-desc">Adaptive contextual routing across Claude 3.7 Sonnet, Gemini 2.5 Pro and local Ollama Jev models. Zero prompt leakage, fail-closed policy gates.</p>
-              
-              <div class="insp-code-header">
-                <div class="insp-code-dots" aria-hidden="true">
-                  <span class="insp-code-dot red"></span>
-                  <span class="insp-code-dot yellow"></span>
-                  <span class="insp-code-dot green"></span>
+          <!-- Right Flank (HUD Stack) -->
+          <div class="hero-flank right-flank">
+            <div class="hud-stack">
+              <div class="hud-card">
+                <div class="hud-card-header">
+                  <span class="hud-idx">01.</span>
+                  <span class="hud-tag">OPEN-SOURCE</span>
                 </div>
-                <span class="insp-code-file" id="insp-code-file">kai_layer_01_cognitive_core.py</span>
-                <button type="button" class="btn-copy-code" id="btn-copy-code">Copy Code</button>
-              </div>
-              <div class="insp-code-shell">
-                <pre class="insp-code" id="insp-code"></pre>
+                <div class="hud-card-title">Twenty (40k★) &amp; Omi (8k★)</div>
+                <div class="hud-card-desc">Correctifs sécurité RBAC, suppression de fuites internes CWE-209 et tests Vitest hermétiques fusionnés en production.</div>
               </div>
 
-              <div class="insp-pills-row" id="insp-pills"></div>
+              <div class="hud-card">
+                <div class="hud-card-header">
+                  <span class="hud-idx">02.</span>
+                  <span class="hud-tag">QUANTITATIF</span>
+                </div>
+                <div class="hud-card-title">Moteur Prédictif Polymarket</div>
+                <div class="hud-card-desc">Arbitrage probabiliste 24/7 sur VPS Oracle Cloud, carnets d'ordres WebSockets en direct et Trade Ledger immuable.</div>
+              </div>
+
+              <div class="hud-card">
+                <div class="hud-card-header">
+                  <span class="hud-idx">03.</span>
+                  <span class="hud-tag">BAS-NIVEAU</span>
+                </div>
+                <div class="hud-card-title">C99 &amp; Valgrind Hermétique</div>
+                <div class="hud-card-desc">Structures de données pures d'excellence IUT Anglet (Allman, tripartition, 0 fuite mémoire sous -Wall -Wextra -Werror).</div>
+              </div>
+
+              <div class="hud-tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">C99</span>
+                <span class="tech-tag">Linux</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Valgrind</span>
+              </div>
             </div>
           </div>
-        </article>
+        </div>
+      </section>
 
-        <!-- 3 FLAGSHIP CARDS BELOW SIDE-BY-SIDE (Exact Sahir Layout) -->
-        <div class="trio-cards-grid">
-          <!-- Card 1: Quant Trading -->
-          <div class="trio-card" id="trio-quant">
-            <span class="trio-badge">DEFI // HIGH-FREQUENCY</span>
-            <h4 class="trio-title">Polymarket — Arbitrage &amp; Nowcast Engine</h4>
-            <p class="trio-desc">V71-V150 quantitative execution models and Bayesian nowcasting on prediction markets. WebSockets orderbook depth, slippage modeling, and Kelly criterion capital sizing.</p>
-            <ul class="trio-bullets">
-              <li>• Polygon Mainnet / EVM Integration</li>
-              <li>• Live WebSockets Orderbook Depth Ticker</li>
-              <li>• SHA-256 Idempotent Trade Ledger</li>
-            </ul>
-          </div>
+      <!-- Technical Section Divider -->
+      <div class="section-divider-bar" aria-hidden="true">
+        <span class="divider-coord">// 01.00 SEC_ABOUT</span>
+        <span class="divider-line"></span>
+        <span class="divider-index">INDEX [01 / 05]</span>
+      </div>
 
-          <!-- Card 2: Production OSS -->
-          <div class="trio-card" id="trio-oss">
-            <span class="trio-badge">OPEN SOURCE // PRODUCTION</span>
-            <h4 class="trio-title">BasedHardware / Omi (8k★)</h4>
-            <p class="trio-desc">7 verified production contributions: Reflected XSS elimination, integer overflow defenses, CWE-209 raw exception masking, and idempotent token synchronization.</p>
-            <ul class="trio-bullets">
-              <li>• 7 Merged PRs Reviewed by Core Maintainers</li>
-              <li>• OWASP Top 10 &amp; RFC 9116 Audited</li>
-              <li>• Core Token Sync Cherry-Picked with Credit</li>
-            </ul>
-          </div>
+      <!-- Background, Bio & Philosophy Section -->
+      <section id="about" class="section">
+        <div class="section-header">
+          <div class="section-tag">ENGINEER PROFILE</div>
+          <h2 class="section-title">Background &amp; Philosophie</h2>
+        </div>
 
-          <!-- Card 3: C99 Valgrind Systems -->
-          <div class="trio-card" id="trio-systems">
-            <span class="trio-badge">LOW-LEVEL // SYSTEMS</span>
-            <h4 class="trio-title">AlgoForge Pro Studio &amp; ISO C99</h4>
-            <p class="trio-desc">AST syntax tree generator and dynamic data structure explorer. Strict ANSI/ISO C99 compliance (-Wall -Wextra -Werror), Allman style, and zero-leak Valgrind certified memory.</p>
-            <ul class="trio-bullets">
-              <li>• HEAP SUMMARY: 0 bytes in 0 blocks</li>
-              <li>• ERROR SUMMARY: 0 errors from 0 contexts</li>
-              <li>• Strict Pointer &amp; Memory Bounds Invariant</li>
-            </ul>
+        <div class="about-container">
+          <div class="glass-card about-grid">
+            <div class="about-text-col">
+              <p class="about-text">
+                Je suis <strong>Matéi de Saint Léger</strong> — étudiant en BUT Informatique à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet / UPPA). Après une scolarité scientifique au Lycée René Cassin de Bayonne (Spécialités Mathématiques &amp; NSI), j'ai plongé dans le code avec une exigence absolue de compréhension des couches profondes.
+              </p>
+              <p class="about-text">
+                Mes capacités déterminantes ont été forgées dans le terminal : auto-formation poussée en modèles d'IA autonomes, architectures C99 sans garbage-collector, moteurs quantitatifs de prédiction et protocoles réseau. Je ne conçois pas l'ingénierie logicielle comme un simple assemblage de dépendances npm, mais comme l'orchestration déterministe de la mémoire, de la complexité algorithmique et des garanties formelles.
+              </p>
+              <div class="quote-box">
+                "Je conçois et déploie des systèmes autonomes opérant 24/7 avec mémoire persistante, orchestration multi-agents et validation hermétique — bâtis sur les premiers principes, pas sur des frameworks superficiels."
+              </div>
+            </div>
+
+            <div class="about-principles-col">
+              <ul class="principles-list">
+                <li class="principle-item">
+                  <span class="principle-num">01</span>
+                  <div>
+                    <div class="principle-title">Ingénierie Premier-Principe</div>
+                    <div class="principle-desc">Zéro dépendance inutile ou boîte noire. Chaque composant est construit avec une nécessité claire, jusqu'aux syscalls et aux pointeurs C99.</div>
+                  </div>
+                </li>
+                <li class="principle-item">
+                  <span class="principle-num">02</span>
+                  <div>
+                    <div class="principle-title">Preuve par le Réel (Ground Truth)</div>
+                    <div class="principle-desc">Aucune affirmation sans test hermétique : 0 fuite mémoire sous Valgrind et 46 Pull Requests fusionnées en production sous revue d'ingénieurs seniors.</div>
+                  </div>
+                </li>
+                <li class="principle-item">
+                  <span class="principle-num">03</span>
+                  <div>
+                    <div class="principle-title">Autonomie &amp; Détermination 24/7</div>
+                    <div class="principle-desc">Capacité à concevoir, déployer et maintenir des infrastructures complexes tournant sans interruption sur serveur cloud dédié.</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+      </section>
+
+      <!-- Technical Section Divider -->
+      <div class="section-divider-bar" aria-hidden="true">
+        <span class="divider-coord">// 02.00 SEC_FLAGSHIPS</span>
+        <span class="divider-line"></span>
+        <span class="divider-index">INDEX [02 / 05]</span>
       </div>
-    </section>
 
-    <!-- ====================================================================
-         SECTION 03: THE SYSTEMS MATRIX (Exact Sahir Match)
-         ==================================================================== -->
-    <section class="section-sahir" id="matrix">
-      <div class="section-container">
-        <span class="section-eyebrow-red">ENGINEERING INDEX</span>
-        <h2 class="section-title-large">The Systems Matrix</h2>
-        <p class="section-subtitle-gray">Specialized architectures spanning multi-LLM cognitive assemblies, quantitative prediction engines, and low-level C99 runtimes.</p>
+      <!-- Flagships Deep Dive Section -->
+      <section id="flagships" class="section">
+        <div class="section-header">
+          <div class="section-tag">ARCHITECTURAL SHOWCASE</div>
+          <h2 class="section-title">Flagship Deployments</h2>
+          <p class="section-desc">Systèmes de production tournant 24/7 sur serveurs cloud dédiés, dépôts open-source majeurs et architectures matérielles.</p>
+        </div>
 
-        <!-- Category Filters -->
+        <div class="flagship-container">
+
+          <!-- Flagship 1: Polymarket Quantitative & Kai Autonomous Multi-Agent -->
+          <article class="glass-card flagship-card highlighted-card">
+            <div class="card-glow-red"></div>
+
+            <div class="flagship-header">
+              <div class="flagship-badge">
+                <span>●</span> CORE ECOSYSTEM
+              </div>
+              <div class="flagship-meta">Infrastructure : Oracle Cloud Ubuntu VPS • Daemons 24/7 • Sub-50ms Latency</div>
+            </div>
+
+            <div class="flagship-body">
+              <div class="flagship-main-info">
+                <h3 class="flagship-title">Polymarket Quantitative Engine &amp; Kai Autonomous AI</h3>
+                <p class="flagship-desc">
+                  Moteur quantitatif d'arbitrage prédictif et écosystème d'agents autonomes opérant 24/7 sur serveur cloud dédié. Conçu sans frameworks d'abstraction lourds, intégrant une collecte de carnets d'ordres WebSockets en direct, un grand livre de transactions (Trade Ledger) immuable et un réseau de mémoire hiérarchique à 4 paliers.
+                </p>
+
+                <div class="flagship-metrics-row">
+                  <div class="metric-pill">
+                    <div class="metric-num">10</div>
+                    <div class="metric-desc">Services Daemon</div>
+                  </div>
+                  <div class="metric-pill">
+                    <div class="metric-num">&lt;50ms</div>
+                    <div class="metric-desc">Boucle d'Événements</div>
+                  </div>
+                  <div class="metric-pill">
+                    <div class="metric-num">100%</div>
+                    <div class="metric-desc">Hermétique</div>
+                  </div>
+                  <div class="metric-pill">
+                    <div class="metric-num">0 Leak</div>
+                    <div class="metric-desc">Mémoire C99/Python</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive 7-Layer Architecture Explorer -->
+              <div class="saai-architecture-explorer">
+                <div class="explorer-header">
+                  <div class="explorer-title">7-LAYER CONSTITUTIONAL STACK</div>
+                  <div class="explorer-sub">Cliquez sur une couche pour inspecter l'implémentation technique</div>
+                </div>
+
+                <div class="layer-tabs" role="tablist">
+                  <button class="layer-tab active" data-layer="1" role="tab" aria-selected="true">L1: WebSockets</button>
+                  <button class="layer-tab" data-layer="2" role="tab" aria-selected="false">L2: Modélisation Météo</button>
+                  <button class="layer-tab" data-layer="3" role="tab" aria-selected="false">L3: Trade Ledger</button>
+                  <button class="layer-tab" data-layer="4" role="tab" aria-selected="false">L4: Boucle 24/7</button>
+                  <button class="layer-tab" data-layer="5" role="tab" aria-selected="false">L5: Mémoire 4 Paliers</button>
+                  <button class="layer-tab" data-layer="6" role="tab" aria-selected="false">L6: Sécurité &amp; Sandbox</button>
+                  <button class="layer-tab" data-layer="7" role="tab" aria-selected="false">L7: Auto-Évolution</button>
+                </div>
+
+                <div class="layer-inspector-pane">
+                  <div id="layer-content">
+                    <div class="layer-inspect-badge" id="layer-inspect-id">LAYER 01 // DATA INGESTION &amp; WEBSOCKETS</div>
+                    <h4 class="layer-inspect-title" id="layer-inspect-title">Carnets d'Ordres &amp; WebSockets Temps Réel</h4>
+                    <p class="layer-inspect-desc" id="layer-inspect-desc">
+                      Flux asynchrones connectés aux WebSockets de Binance et au CLOB Polymarket. Ingestion et parsing des variations de liquidité avec temps de traitement sous 50ms sur VPS Oracle Cloud.
+                    </p>
+                    <div class="tech-tags-group" id="layer-inspect-tags">
+                      <span class="tech-tag">WebSockets Low-Latency</span>
+                      <span class="tech-tag">Asyncio Python</span>
+                      <span class="tech-tag">CLOB Polymarket</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Flagships Grid (Twenty, Omi, AlgoForge C99, Biller) -->
+          <div class="flagship-subgrid">
+
+            <!-- Flagship 2: Twenty & Omi Open Source -->
+            <article class="glass-card subgrid-card">
+              <div class="subgrid-top">
+                <div class="subgrid-badge-row">
+                  <div class="flagship-badge">OPEN-SOURCE // 46 PRs FUSIONNÉES</div>
+                </div>
+                <h3 class="subgrid-title">Twenty CRM (40k★) &amp; BasedHardware/omi (8k★)</h3>
+                <p class="subgrid-desc">
+                  Contributions régulières en production sur de grands dépôts TypeScript (NestJS, React, Vitest) et Python (FastAPI) : contrôle strict des permissions RBAC sur les mutations metadata, élimination de fuites d'exceptions internes (CWE-209), et correctifs de concurrence batch.
+                </p>
+                <ul class="spec-list">
+                  <li class="spec-item">Twenty #26490 : Contrôle strict RBAC VIEWS &amp; LAYOUTS</li>
+                  <li class="spec-item">Twenty #26502 : Capture complète suppressions par lot ORM</li>
+                  <li class="spec-item">Omi #19637 &amp; #17272 : Élimination fuites internes &amp; sanitisation XSS</li>
+                </ul>
+              </div>
+              <div class="subgrid-footer">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">NestJS</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Vitest</span>
+              </div>
+            </article>
+
+            <!-- Flagship 3: AlgoForge C99 -->
+            <article class="glass-card subgrid-card">
+              <div class="subgrid-top">
+                <div class="subgrid-badge-row">
+                  <div class="flagship-badge">SYSTEMS // C99 PUR &amp; VALGRIND</div>
+                </div>
+                <h3 class="subgrid-title">AlgoForge C99 — Data Structures &amp; Allocators</h3>
+                <p class="subgrid-desc">
+                  Bibliothèque système en C99 pur implémentant des structures de données dynamiques hermétiques : arbres équilibrés (BST/AVL), tables de hachage à adressage ouvert, et simulateurs d'allocation mémoire avec audit Valgrind à zéro fuite.
+                </p>
+                <ul class="spec-list">
+                  <li class="spec-item">Compilation stricte : -Wall -Wextra -Werror -pedantic</li>
+                  <li class="spec-item">Discipline Allman &amp; tripartition canonique IUT Anglet</li>
+                  <li class="spec-item">Validation mémoire hermétique Valgrind (0 bytes lost)</li>
+                </ul>
+              </div>
+              <div class="subgrid-footer">
+                <span class="tech-tag">C99</span>
+                <span class="tech-tag">Valgrind</span>
+                <span class="tech-tag">GCC</span>
+                <span class="tech-tag">Linux</span>
+              </div>
+            </article>
+
+            <!-- Flagship 4: Security Scanner MCP -->
+            <article class="glass-card subgrid-card">
+              <div class="subgrid-top">
+                <div class="subgrid-badge-row">
+                  <div class="flagship-badge">INFRA // RFC 9116 &amp; MODEL CONTEXT PROTOCOL</div>
+                </div>
+                <h3 class="subgrid-title">Security Scanner MCP — Protocol Auditor</h3>
+                <p class="subgrid-desc">
+                  Serveur Model Context Protocol (MCP) open-source publié pour l'audit automatisé de sécurité web et réseau : vérification RFC 9116 (security.txt), analyse des en-têtes CSP/HSTS et détection de surface d'attaque pour agents autonomes.
+                </p>
+                <ul class="spec-list">
+                  <li class="spec-item">Publication Smithery &amp; Glama MCP Registries</li>
+                  <li class="spec-item">Conformité stricte RFC 9116 &amp; OWASP Top 10</li>
+                  <li class="spec-item">Exécution en sandbox hermétique sans dépendances lourdes</li>
+                </ul>
+              </div>
+              <div class="subgrid-footer">
+                <span class="tech-tag">MCP Protocol</span>
+                <span class="tech-tag">Python 3.12</span>
+                <span class="tech-tag">RFC 9116</span>
+              </div>
+            </article>
+
+            <!-- Flagship 5: Biller Offline-First -->
+            <article class="glass-card subgrid-card">
+              <div class="subgrid-top">
+                <div class="subgrid-badge-row">
+                  <div class="flagship-badge">MOBILE // PRODUIT COMMERCIAL</div>
+                </div>
+                <h3 class="subgrid-title">Biller — Système d'Encaissement Offline-First</h3>
+                <p class="subgrid-desc">
+                  Application mobile d'encaissement et de gestion d'inventaire opérant en déconnexion réseau totale avec synchronisation différentielle SQLite, impression thermique ESC/POS Bluetooth et calcul temps réel du P&amp;L.
+                </p>
+                <ul class="spec-list">
+                  <li class="spec-item">Base de données SQLite hermétique avec Repository Pattern</li>
+                  <li class="spec-item">Protocole d'impression thermique Bluetooth ESC/POS</li>
+                  <li class="spec-item">Zéro dépendance cloud pour l'encaissement critique</li>
+                </ul>
+              </div>
+              <div class="subgrid-footer">
+                <span class="tech-tag">Flutter</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">ESC/POS</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Section Divider -->
+      <div class="section-divider-bar" aria-hidden="true">
+        <span class="divider-coord">// 03.00 SEC_MATRIX</span>
+        <span class="divider-line"></span>
+        <span class="divider-index">INDEX [03 / 05]</span>
+      </div>
+
+      <!-- The Systems Matrix (Bento Filterable Grid) -->
+      <section id="projects" class="section">
+        <div class="section-header">
+          <div class="section-tag">ENGINEERING INDEX</div>
+          <h2 class="section-title">The Systems Matrix</h2>
+          <p class="section-desc">Index exhaustif des architectures logicielles : IA autonome, finance quantitative, systèmes C99 et open-source.</p>
+        </div>
+
+        <!-- Filter Bar -->
         <div class="matrix-filter-bar">
-          <button type="button" class="mf-btn active" data-filter="all">All Systems (6)</button>
-          <button type="button" class="mf-btn" data-filter="ai">Autonomous AI</button>
-          <button type="button" class="mf-btn" data-filter="quant">Quant &amp; Markets</button>
-          <button type="button" class="mf-btn" data-filter="core">Core Engineering</button>
+          <button class="filter-btn active" data-filter="all">Tous (06)</button>
+          <button class="filter-btn" data-filter="ai">IA Autonome</button>
+          <button class="filter-btn" data-filter="quant">Finance Quantitative</button>
+          <button class="filter-btn" data-filter="oss">Open-Source PRs</button>
+          <button class="filter-btn" data-filter="systems">Systèmes &amp; C99</button>
         </div>
 
-        <div class="matrix-cards-grid">
-          <div class="matrix-item" data-cat="ai">
-            <span class="mi-kicker">Autonomous AI</span>
-            <h4 class="mi-title">Multi-LLM Parliament Architecture</h4>
-            <p class="mi-desc">Cognitive assembly model comprising 36 specialized agent shards engaging in structured debate, cross-verification, and voting protocols before execution.</p>
-            <div class="mi-tags"><span>Multi-Agent</span><span>Consensus Protocol</span></div>
+        <div class="bento-grid">
+
+          <!-- Project 1: Polymarket Engine -->
+          <div class="glass-card bento-card" data-category="quant ai">
+            <div class="bento-top">
+              <span class="category-chip">Finance Quantitative</span>
+              <span class="bento-id">#SYS-01</span>
+            </div>
+            <h3 class="bento-title">Polymarket Predictive Arbitrage Engine</h3>
+            <p class="bento-desc">
+              Moteur quantitatif d'arbitrage météorologique et de prédictions sur Polymarket CLOB. Collecte de données en streaming asynchrone, modélisation de probabilités conditionnelles et exécution sous 50ms sur VPS Oracle.
+            </p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">Polymarket CLOB</span>
+                <span class="tag">Python Asyncio</span>
+              </div>
+            </div>
           </div>
 
-          <div class="matrix-item" data-cat="quant">
-            <span class="mi-kicker">Machine Learning</span>
-            <h4 class="mi-title">Polymarket Weather &amp; Event Nowcaster</h4>
-            <p class="mi-desc">Live streaming Bayesian probabilistic nowcasting comparing implied market odds with external meteorological and telemetry ground-truth.</p>
-            <div class="mi-tags"><span>FastAPI</span><span>WebSockets</span><span>Kelly Sizing</span></div>
+          <!-- Project 2: Twenty CRM Core -->
+          <div class="glass-card bento-card" data-category="oss">
+            <div class="bento-top">
+              <span class="category-chip">Open-Source</span>
+              <a href="https://github.com/twentyhq/twenty" target="_blank" rel="noopener noreferrer" class="bento-link" aria-label="Twenty GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+            <h3 class="bento-title">Twenty CRM (40k★) — RBAC &amp; ORM Mutations</h3>
+            <p class="bento-desc">
+              Contributions majeures fusionnées sur le CRM open-source n°1 mondial : enforcement des permissions RBAC sur les mutations metadata et intégrité transactionnelle lors des suppressions par lot dans l'ORM.
+            </p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">TypeScript</span>
+                <span class="tag">NestJS</span>
+                <span class="tag">Vitest</span>
+              </div>
+            </div>
           </div>
 
-          <div class="matrix-item" data-cat="core">
-            <span class="mi-kicker">Systems Engineering</span>
-            <h4 class="mi-title">Zero-Leak ISO C99 Data Engine</h4>
-            <p class="mi-desc">High-performance algorithms, binary trees, dynamic graphs, and memory-safe structures compiled without warnings and audited under Valgrind.</p>
-            <div class="mi-tags"><span>ISO C99</span><span>Valgrind</span><span>Allman Style</span></div>
+          <!-- Project 3: Omi Wearable -->
+          <div class="glass-card bento-card" data-category="oss ai">
+            <div class="bento-top">
+              <span class="category-chip">Wearable AI</span>
+              <a href="https://github.com/BasedHardware/omi" target="_blank" rel="noopener noreferrer" class="bento-link" aria-label="Omi GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+            <h3 class="bento-title">BasedHardware/omi (8k★) — Security &amp; DevKit</h3>
+            <p class="bento-desc">
+              Série de correctifs critiques fusionnés sur le système de collier &amp; lunettes connectées open-source : neutralisation des fuites d'exceptions internes (CWE-209), assainissement XSS et intégration matérielle.
+            </p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">Python</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">CWE-209</span>
+              </div>
+            </div>
           </div>
 
-          <div class="matrix-item" data-cat="ai">
-            <span class="mi-kicker">AppSec &amp; Tooling</span>
-            <h4 class="mi-title">Security Scanner MCP Server</h4>
-            <p class="mi-desc">Model Context Protocol server published on Smithery &amp; Glama: automated inspection of HTTP security headers, server banner leaks, and RFC 9116.</p>
-            <div class="mi-tags"><span>MCP Protocol</span><span>RFC 9116</span><span>AppSec</span></div>
+          <!-- Project 4: AlgoForge C99 -->
+          <div class="glass-card bento-card" data-category="systems">
+            <div class="bento-top">
+              <span class="category-chip">Systèmes &amp; Mémoire</span>
+              <span class="bento-id">#SYS-04</span>
+            </div>
+            <h3 class="bento-title">AlgoForge C99 — Moteur de Structures Pures</h3>
+            <p class="bento-desc">
+              Implémentation de structures de données en C99 avec gestion mémoire chirurgicale : tables de hachage, listes chaînées canoniques et arbres de recherche, 100% validé sans fuite sous Valgrind.
+            </p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">C99</span>
+                <span class="tag">Valgrind Clean</span>
+              </div>
+            </div>
           </div>
 
-          <div class="matrix-item" data-cat="core">
-            <span class="mi-kicker">Infrastructure</span>
-            <h4 class="mi-title">Oracle Cloud 24/7 Insomnia VPS</h4>
-            <p class="mi-desc">19 systemd daemons running continuous supervisor loops, auto-healing watchdogs, encrypted Cloudflare tunnels, and automated nightly backups.</p>
-            <div class="mi-tags"><span>Ubuntu 24.04</span><span>Systemd</span><span>Cloudflare</span></div>
+          <!-- Project 5: Security Scanner MCP -->
+          <div class="glass-card bento-card" data-category="systems ai">
+            <div class="bento-top">
+              <span class="category-chip">Protocoles &amp; Audit</span>
+              <span class="bento-id">#SYS-05</span>
+            </div>
+            <h3 class="bento-title">Security Scanner MCP (RFC 9116)</h3>
+            <p class="bento-desc">
+              Serveur Model Context Protocol fournissant aux agents IA des outils d'audit d'infrastructure web, d'analyse security.txt (RFC 9116) et d'inspection des directives de transport sécurisé.
+            </p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">MCP Tool</span>
+                <span class="tag">RFC 9116</span>
+              </div>
+            </div>
           </div>
 
-          <div class="matrix-item" data-cat="quant">
-            <span class="mi-kicker">EVM &amp; Smart Contracts</span>
-            <h4 class="mi-title">Polygon Orderbook &amp; Liquidity Flow</h4>
-            <p class="mi-desc">High-throughput event streaming monitoring orderbook depth, market maker spread dynamics, and transaction settlement idempotence.</p>
-            <div class="mi-tags"><span>Polygon</span><span>EVM</span><span>Trade Ledger</span></div>
+          <!-- Project 6: V-Bot Chess Engine -->
+          <div class="glass-card bento-card" data-category="systems ai">
+            <div class="bento-top">
+              <span class="category-chip">Algorithmique &amp; Jeu</span>
+              <span class="bento-id">#SYS-06</span>
+            </div>
+            <h3 class="bento-title">V-Bot — Stockfish UCI &amp; Analyse Tactique</h3>
+            <p class="bento-desc">
+              Pont logiciel asynchrone connecté au protocole universel d'échecs (UCI) de Stockfish : évaluation d'arbres minimax, élagage alpha-bêta et analyse de positions critiques pour la compétition (~1500 Elo).
+            </p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">UCI Protocol</span>
+                <span class="tag">Stockfish Engine</span>
+              </div>
+            </div>
           </div>
+
         </div>
+      </section>
+
+      <!-- Technical Section Divider -->
+      <div class="section-divider-bar" aria-hidden="true">
+        <span class="divider-coord">// 04.00 SEC_PARCOURS</span>
+        <span class="divider-line"></span>
+        <span class="divider-index">INDEX [04 / 05]</span>
       </div>
-    </section>
 
-    <!-- ====================================================================
-         SECTION 04: DIRECT CONNECT (Exact Sahir Match)
-         ==================================================================== -->
-    <section class="section-sahir" id="contact">
-      <div class="section-container text-center">
-        <span class="section-eyebrow-red">DIRECT CONNECT</span>
-        <h2 class="section-title-large">Let's Architect Something Extraordinary.</h2>
-        <p class="section-subtitle-gray max-w-lead">Available for production autonomous AI system design, quantitative trading infrastructure, and apprentice systems engineering worldwide.</p>
-
-        <div class="direct-email-box">
-          <span class="email-str">matei64200@gmail.com</span>
-          <button type="button" class="btn-copy-email-sahir" id="btn-copy-sahir">Copy Email Address</button>
+      <!-- Parcours & Field Experience Section -->
+      <section id="parcours" class="section">
+        <div class="section-header">
+          <div class="section-tag">PARCOURS &amp; ADN TERRAIN</div>
+          <h2 class="section-title">Trajectoire Chronologique &amp; Ancrage Professionnel</h2>
+          <p class="section-desc">De la rigueur académique du BUT 1 Informatique jusqu'aux immersions en entreprise et à l'international.</p>
         </div>
 
-        <div class="direct-social-pills">
-          <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="ds-pill">
-            <span>⌘</span><span>github.com/Mateidslx</span>
-          </a>
-          <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" download class="ds-pill">
-            <span>↓</span><span>Télécharger CV Français (PDF)</span>
-          </a>
-          <a href="portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf" download class="ds-pill">
-            <span>↓</span><span>Download English Resume (PDF)</span>
-          </a>
-        </div>
+        <div class="parcours-grid">
 
-        <footer class="sahir-footer">
-          <p>© 2026 Matéi de Saint Léger. Designed with Noir &amp; Crimson Precision. Built from first principles. Zero corporate fluff.</p>
-        </footer>
+          <!-- Card 1: Stages Entreprise -->
+          <article class="parcours-card">
+            <div class="parcours-top">
+              <div class="parcours-badge-row">
+                <span class="parcours-tag">IMMERSION ENTREPRISE</span>
+                <span class="parcours-period">2023 &amp; 2024</span>
+              </div>
+              <h3 class="parcours-title">Stages Entreprise : HUPI (IA &amp; Tech) &amp; Cabinet Marra (Audit CAC 40)</h3>
+              <p class="parcours-desc">
+                Confrontation précoce aux exigences du monde professionnel à travers deux immersions concrètes et exigeantes sur la Côte Basque et à Paris.
+              </p>
+              <ul class="parcours-highlights">
+                <li class="parcours-highlight-item"><strong>HUPI (Bidart)</strong> : Découverte des architectures de données industrielles, intégration de modèles d'IA et pipelines prédictifs.</li>
+                <li class="parcours-highlight-item"><strong>Cabinet Marra (Bayonne / Paris)</strong> : Rigueur d'audit financier, analyse de procédures comptables et conformité pour des entités CAC 40.</li>
+              </ul>
+            </div>
+            <div class="parcours-footer">
+              <span class="tech-tag">Pipelines IA</span>
+              <span class="tech-tag">Audit Financier</span>
+              <span class="tech-tag">Rigueur Méthodologique</span>
+            </div>
+          </article>
+
+          <!-- Card 2: Immersion UK -->
+          <article class="parcours-card">
+            <div class="parcours-top">
+              <div class="parcours-badge-row">
+                <span class="parcours-tag">INTERNATIONAL &amp; LANGUES</span>
+                <span class="parcours-period">2 Mois • UK</span>
+              </div>
+              <h3 class="parcours-title">Immersion Totale au Royaume-Uni (Brighton &amp; Bournemouth)</h3>
+              <p class="parcours-desc">
+                Deux étés complets vécus en Angleterre en autonomie totale : acquisition d'une aisance bilingue naturelle pour la documentation technique, la communication d'équipe et la veille technologique internationale.
+              </p>
+              <ul class="parcours-highlights">
+                <li class="parcours-highlight-item">Maîtrise courante de l'anglais technique (lecture de specs RFC, revues de code internationales, issues GitHub).</li>
+                <li class="parcours-highlight-item">Autonomie personnelle, adaptation multiculturelle et communication directe sans intermédiaire.</li>
+              </ul>
+            </div>
+            <div class="parcours-footer">
+              <span class="tech-tag">Anglais Courant</span>
+              <span class="tech-tag">Autonomie</span>
+              <span class="tech-tag">International</span>
+            </div>
+          </article>
+
+          <!-- Card 3: Échecs & Tactique -->
+          <article class="parcours-card">
+            <div class="parcours-top">
+              <div class="parcours-badge-row">
+                <span class="parcours-tag">DISCIPLINE TACTIQUE</span>
+                <span class="parcours-period">Compétition</span>
+              </div>
+              <h3 class="parcours-title">Compétition d'Échecs (~1500 Elo) &amp; Moteur V-Bot UCI</h3>
+              <p class="parcours-desc">
+                Pratique assidue du jeu d'échecs en parties rapides et blitz sur Chess.com (~1500 Elo). Une discipline mentale qui irrigue directement ma manière de concevoir des architectures logicielles : calcul de profondeur, sang-froid et anticipations des scénarios d'échec.
+              </p>
+              <ul class="parcours-highlights">
+                <li class="parcours-highlight-item">Développement d'un pont UCI Python pour interagir directement avec les moteurs d'analyse Stockfish.</li>
+                <li class="parcours-highlight-item">Culture du sang-froid sous contrainte de temps et recherche systématique du coup juste.</li>
+              </ul>
+            </div>
+            <div class="parcours-footer">
+              <span class="tech-tag">Calcul de Variantes</span>
+              <span class="tech-tag">UCI Protocol</span>
+              <span class="tech-tag">Gestion du Stress</span>
+            </div>
+          </article>
+
+          <!-- Card 4: BUT Informatique Anglet -->
+          <article class="parcours-card">
+            <div class="parcours-top">
+              <div class="parcours-badge-row">
+                <span class="parcours-tag">FORMATION UNIVERSITAIRE</span>
+                <span class="parcours-period">2024 — 2027</span>
+              </div>
+              <h3 class="parcours-title">BUT Informatique (IUT de Bayonne et du Pays Basque - Campus d'Anglet)</h3>
+              <p class="parcours-desc">
+                Formation universitaire d'excellence (Parcours A - Réalisation d'applications). Acquisition des fondations mathématiques, de la modélisation Merise (MCD/MLD) et du développement système bas-niveau sous la direction des professeurs Patrick Etcheverry et Michel Marquesuzaà.
+              </p>
+              <ul class="parcours-highlights">
+                <li class="parcours-highlight-item">R1.01 Algorithmique &amp; C99 : Discipline Allman, flots de données formalisés, 0 fuite mémoire Valgrind.</li>
+                <li class="parcours-highlight-item">R1.05 Conception de bases de données : Modélisation Merise stricte sans clé étrangère au MCD, SQL ANSI.</li>
+              </ul>
+            </div>
+            <div class="parcours-footer">
+              <span class="tech-tag">IUT Anglet</span>
+              <span class="tech-tag">Merise &amp; SQL</span>
+              <span class="tech-tag">C99 Rigoureux</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Technical Section Divider -->
+      <div class="section-divider-bar" aria-hidden="true">
+        <span class="divider-coord">// 05.00 SEC_CONTACT</span>
+        <span class="divider-line"></span>
+        <span class="divider-index">INDEX [05 / 05]</span>
       </div>
-    </section>
 
-  
-    <!-- SPOTLIGHT COMMAND PALETTE (CTRL+K / CMD+K) -->
-    <div class="cmdk-backdrop" id="cmdk-backdrop" role="dialog" aria-modal="true" aria-label="Palette de commandes">
-      <div class="cmdk-dialog">
-        <div class="cmdk-input-wrap">
-          <span class="cmdk-prompt">&gt;_</span>
-          <input type="text" class="cmdk-input" id="cmdk-input"
-                 data-placeholder-fr="Rechercher une section, projet, rejouer l'animation swarm..."
-                 data-placeholder-en="Search section, project, replay swarm build..."
-                 placeholder="Rechercher une section, projet, rejouer l'animation swarm..."
-                 autocomplete="off" />
-          <span class="cmdk-esc-hint">ESC</span>
+      <!-- Contact & Direct Connect Section -->
+      <section id="contact" class="section">
+        <div class="glass-card contact-card">
+          <div class="contact-glow-red"></div>
+
+          <div class="contact-content">
+            <div class="section-tag">DIRECT CONNECT</div>
+            <h2 class="contact-title">À la Recherche d'une Alternance en 2e Année de BUT Informatique</h2>
+            <p class="contact-subtitle">
+              Vous recrutez un alternant autonome, rigoureux, déjà rodé aux revues de code exigeantes en production (Python, TypeScript, C99, SQL, Linux) et passionné d'architectures robustes ? Échangeons directement.
+            </p>
+
+            <div class="email-action-box">
+              <span class="email-address">matei64200@gmail.com</span>
+              <button class="btn btn-primary copy-btn" data-copy="matei64200@gmail.com" aria-label="Copier l'adresse email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copier l'adresse e-mail</span>
+              </button>
+            </div>
+
+            <!-- CV Download Grid -->
+            <div class="cv-download-grid">
+              <a href="CV_Matei_de_Saint_Leger_FR.pdf" target="_blank" rel="noopener noreferrer" class="cv-download-btn cv-btn-fr">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                <span>Télécharger CV Français (PDF)</span>
+              </a>
+              <a href="Resume_Matei_de_Saint_Leger_EN.pdf" target="_blank" rel="noopener noreferrer" class="cv-download-btn cv-btn-en">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                <span>Download English Resume (PDF)</span>
+              </a>
+            </div>
+
+            <div class="social-links-row">
+              <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                <span>github.com/Mateidslx</span>
+              </a>
+              <a href="https://www.linkedin.com/in/mat%C3%A9i-de-saint-l%C3%A9ger-24329a32b/" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"/></svg>
+                <span>LinkedIn Matéi de Saint Léger</span>
+              </a>
+              <a href="mailto:matei64200@gmail.com" class="social-pill" aria-label="Email direct">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span>matei64200@gmail.com</span>
+              </a>
+            </div>
+
+            <div class="footer-meta">
+              <span>© 2026 Matéi de Saint Léger. Conçu en Noir &amp; Crimson Op-Art.</span>
+              <span>Disponibilité : Alternance dès Septembre 2025/2026 • Côte Basque (BAB / Bidart) &amp; Hybride / Remote.</span>
+            </div>
+          </div>
         </div>
-        <div class="cmdk-list" id="cmdk-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Command Palette Overlay (⌘K) -->
+  <div id="cmdk-overlay" class="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Palette de commandes">
+    <div class="cmdk-dialog">
+      <div class="cmdk-header">
+        <svg class="cmdk-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Rechercher une section, un projet, une technologie..." autocomplete="off" spellcheck="false" />
+        <span class="cmdk-esc">ESC</span>
+        <button id="cmdk-close" style="display:none;" aria-label="Fermer"></button>
       </div>
+      <div id="cmdk-results" class="cmdk-results"></div>
     </div>
-  </main>
+  </div>
 
-  <div class="toast-banner" id="toast-banner" role="status" aria-live="polite"></div>
+  <!-- Floating Toast Notification for Email Copy Feedback -->
+  <div id="toast" class="toast-notification" aria-live="polite">
+    <span class="toast-icon">✓</span>
+    <span class="toast-text" id="toast-message">Adresse email copiée dans le presse-papier !</span>
+  </div>
 
-  <script src="portfolio_assets/portfolio_core.js?v=18" defer></script>
-  <!-- Authentic Swarm Rebuild Engine (Vendored from https://saai.pro/) -->
-  <script src="portfolio_assets/swarm-init.js?v=18" defer></script>
+  <!-- App Core JS -->
+  <script src="portfolio_assets/app.js?v=20" defer></script>
+  <!-- Swarm Rebuild Takeover Engine -->
+  <script src="portfolio_assets/swarm-init.js?v=20" defer></script>
 </body>
 </html>

@@ -24,6 +24,10 @@
 
   var KEY = "__swarmRebuild";
 
+  window.__swarmUnhide = function () {
+    document.documentElement.classList.remove("swarm-booting");
+  };
+
   var opts = {
     auto: true,
     // Settle time after load+fonts before we snapshot the page.
@@ -217,6 +221,10 @@
     } catch (err) {
       console.error("[swarm] boot failed", err);
     }
+  }
+
+  if (disabled() || alreadyDone() || prefersReducedMotion()) {
+    document.documentElement.classList.remove("swarm-booting");
   }
 
   if (document.readyState === "loading") {
