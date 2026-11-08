@@ -102,18 +102,18 @@
         <div class="hero-columns-grid">
           <!-- LEFT COLUMN: GREETING, NAME, SUBTITLE PILL, BIO, CTAs, STATS -->
           <div class="hero-col-left">
-            <span class="script-greeting typewrite-box" id="hero-greeting" data-full-text="Hello, I'm"><span class="tw-content">Hello, I'm</span><span class="tw-caret">|</span></span>
+            <span class="script-greeting" id="hero-greeting">Hello, I'm</span>
             <div class="red-name-plate" id="hero-name-plate">
               <h1>MATÉI.</h1>
             </div>
 
-            <div class="role-pill-sahir typewrite-box" id="hero-role-pill" data-full-text="SYSTEM ARCHITECT & AUTONOMOUS OPERATOR">
+            <div class="role-pill-sahir" id="hero-role-pill">
               <span class="pill-dot"></span>
-              <span class="pill-text" id="hero-role-text"><span class="tw-content">SYSTEM ARCHITECT &amp; AUTONOMOUS OPERATOR</span><span class="tw-caret">|</span></span>
+              <span class="pill-text" id="hero-role-text">SYSTEM ARCHITECT &amp; AUTONOMOUS OPERATOR</span>
             </div>
 
-            <p class="hero-bio-sahir typewrite-box" id="hero-bio-para" data-full-text="Architecting 24/7 autonomous cognitive ecosystems, multi-agent swarms, and quantitative execution models from first principles — zero frameworks, total autonomy.">
-              <span class="tw-content">Architecting 24/7 autonomous cognitive ecosystems, multi-agent swarms, and quantitative execution models from first principles — zero frameworks, total autonomy.</span><span class="tw-caret">|</span>
+            <p class="hero-bio-sahir" id="hero-bio-para">
+              Architecting 24/7 autonomous cognitive ecosystems, multi-agent swarms, and quantitative execution models from first principles — zero frameworks, total autonomy.
             </p>
 
             <div class="hero-btn-group">
@@ -216,13 +216,13 @@
 
         <div class="about-split-grid">
           <div class="about-paragraphs-col">
-            <div class="typewrite-box" id="tw-para-1" data-full-text="I am Matéi de Saint Léger — an independent system architect operating from the Basque Coast, France. My formal education began in Computer Science (BUT Informatique) at IUT d'Anglet (UPPA).">
-              <span class="tw-content"></span><span class="tw-caret">|</span>
-            </div>
+            <p class="about-p" id="tw-para-1">
+              I am Matéi de Saint Léger — an independent system architect operating from the Basque Coast, France. My formal education began in Computer Science (BUT Informatique) at IUT d'Anglet (UPPA).
+            </p>
 
-            <div class="typewrite-box" id="tw-para-2" data-full-text="However, my defining capabilities were forged in the terminal: completely self-taught in multi-agent swarms, quantitative trading engines on Polymarket, ISO C99 low-level systems, and production AppSec. I view software engineering through first principles — deterministic state, zero bloat, and physical proof.">
-              <span class="tw-content"></span><span class="tw-caret">|</span>
-            </div>
+            <p class="about-p" id="tw-para-2">
+              However, my defining capabilities were forged in the terminal: completely self-taught in multi-agent swarms, quantitative trading engines on Polymarket, ISO C99 low-level systems, and production AppSec. I view software engineering through first principles — deterministic state, zero bloat, and physical proof.
+            </p>
           </div>
 
           <div class="about-card-col">
@@ -231,8 +231,8 @@
                 <span class="sc-num">01</span>
                 <span class="sc-title">Sovereign Silicon</span>
               </div>
-              <p class="sc-text" id="tw-sovereign-desc" data-full-text="Zero reliance on third-party cloud lock-in. All core intelligence, SQLite vector memory, and 19 systemd services run 24/7 on private sovereign hardware with encrypted tunnels.">
-                <span class="tw-content"></span><span class="tw-caret">|</span>
+              <p class="sc-text" id="tw-sovereign-desc">
+                Zero reliance on third-party cloud lock-in. All core intelligence, SQLite vector memory, and 19 systemd services run 24/7 on private sovereign hardware with encrypted tunnels.
               </p>
             </div>
           </div>
@@ -451,45 +451,10 @@
 
   </main>
 
-  <!-- ====================================================================
-       AUTHENTIC SAHIR BOTTOM TELEMETRY & TOUR CONTROLLER DOCK
-       [●●●●●] 20 agents 127 / 252 layers — Touring 1x [❚❚ / ▶]
-       ==================================================================== -->
-  <aside class="sahir-bottom-dock" id="sahir-bottom-dock">
-    <div class="dock-agent-dots" aria-hidden="true">
-      <span class="d-dot dot-purple"></span>
-      <span class="d-dot dot-pink"></span>
-      <span class="d-dot dot-green"></span>
-      <span class="d-dot dot-cyan"></span>
-      <span class="d-dot dot-yellow"></span>
-    </div>
-
-    <div class="dock-telemetry-readout">
-      <span class="agent-count-txt"><strong id="dock-agent-num">18</strong> agents</span>
-      <span class="layer-count-txt"><strong id="dock-layer-curr">0</strong> / 252 layers</span>
-    </div>
-
-    <!-- Live Scrubber Slider Track -->
-    <div class="dock-scrubber-track">
-      <div class="scrubber-fill" id="dock-scrubber-fill" style="width: 0%"></div>
-      <div class="scrubber-knob" id="dock-scrubber-knob" style="left: 0%"></div>
-    </div>
-
-    <div class="dock-tour-badge">
-      <span class="tb-badge" id="dock-status-badge">Touring</span>
-      <span class="tb-speed">1x</span>
-    </div>
-
-    <div class="dock-tour-btns">
-      <button type="button" class="btn-dock-step" id="dock-step-back" title="Reculer">◀</button>
-      <button type="button" class="btn-dock-play" id="dock-play-pause" title="Play / Pause">▶</button>
-      <button type="button" class="btn-dock-step" id="dock-step-fwd" title="Avancer">▶</button>
-    </div>
-  </aside>
-
   <div class="toast-banner" id="toast-banner" role="status" aria-live="polite"></div>
 
-  <script src="portfolio_assets/portfolio_core.js?v=16" defer></script>
-  <script src="portfolio_assets/scroll_architect.js?v=16" defer></script>
+  <script src="portfolio_assets/portfolio_core.js?v=17" defer></script>
+  <!-- Authentic Swarm Rebuild Engine (Vendored from https://saai.pro/) -->
+  <script src="portfolio_assets/swarm-init.js?v=17" defer></script>
 </body>
 </html>
