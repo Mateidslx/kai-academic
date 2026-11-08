@@ -24,6 +24,7 @@
 
   var KEY = "__swarmRebuild";
 
+  window.__startSwarm = async function () { try { await loadEngine(); } catch(e){ console.error(e); } };
   window.__swarmUnhide = function () {
     document.documentElement.classList.remove("swarm-booting");
   };
@@ -58,10 +59,9 @@
   //   default                 every load (opts.oncePerSession = false)
   function mode() {
     var v = q("swarm");
-    if (v === "off" || v === "0") return "off";
+    if (v === "1" || v === "on" || v === "always") return "always";
     if (v === "once" || v === "session") return "once";
-    if (v === "1" || v === "on") return "always";
-    return opts.oncePerSession ? "once" : "always";
+    return "off"; // Instant, unblocked load by default; ?swarm=1 to boot takeover
   }
 
   function forced() {

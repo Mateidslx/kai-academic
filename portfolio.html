@@ -71,6 +71,7 @@
         <div class="nav-links">
           <a href="#about" class="nav-item">À Propos</a>
           <a href="#flagships" class="nav-item">Flagships</a>
+          <a href="#exploded-architecture" class="nav-item">Vue 3D</a>
           <a href="#projects" class="nav-item">Matrix</a>
           <a href="#parcours" class="nav-item">Parcours &amp; ADN</a>
           <a href="#contact" class="nav-item">Contact</a>
@@ -456,6 +457,72 @@
       </div>
 
       <!-- The Systems Matrix (Bento Filterable Grid) -->
+      
+      <!-- ====================================================================
+           02.00 SEC_EXPLODED_VIEW — INTERACTIVE 3D / 2.5D EXPLODED STACK
+           ==================================================================== -->
+      <section class="section" id="exploded-architecture">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-tag">// 02.00 ARCHITECTURE_ÉCLATÉE_3D</div>
+            <h2 class="section-title">Sous le Capot : Ma Pile Technique Dissociée en 6 Couches</h2>
+            <p class="section-desc">
+              Déplacez le curseur de dissociation Z ou survolez une plaque 3D : chaque couche s'écarte avec physique de ressort amorti Hooke, lignes de repère vectorielles dynamiques et atténuation des ombres.
+            </p>
+          </div>
+
+          <!-- Manual Explosion Controls -->
+          <div class="exploded-controls-card">
+            <div class="exploded-ctrl-top">
+              <label for="exploded-range" class="exploded-ctrl-label">DISSOCIATION AXE Z</label>
+              <span class="exploded-pct-badge" id="exploded-pct-label">0%</span>
+            </div>
+            <input type="range" id="exploded-range" class="exploded-range-input" min="0" max="100" value="0" aria-label="Niveau d'éclatement 3D" />
+            <div class="exploded-ctrl-actions">
+              <button type="button" class="btn btn-primary" id="exploded-toggle-btn">Éclater la vue 3D (100%)</button>
+              <span class="exploded-physics-hint">Ressort amorti Hooke (k=135, c=18) • Inclinaison 3D gyroscopique</span>
+            </div>
+          </div>
+
+          <!-- 3-Column Interactive 3D Stage + Dynamic SVG Callout Leader Lines -->
+          <div class="exploded-stage" id="exploded-stage">
+            <svg class="exploded-leader-svg" id="exploded-leader-svg" aria-hidden="true"></svg>
+
+            <!-- Left Callouts (L06, L04, L02) -->
+            <div class="exploded-callouts-col left" id="exploded-callouts-left"></div>
+
+            <!-- Center 3D Isometric Extruded Stack -->
+            <div class="exploded-3d-viewport">
+              <div class="exploded-axis-guide" aria-hidden="true">
+                <span>Z+ // UI</span>
+                <i></i>
+                <span>Z0 // KERNEL</span>
+              </div>
+              <div class="exploded-floor-shadow" id="exploded-floor-shadow" aria-hidden="true"></div>
+              <div class="exploded-stack-3d" id="exploded-stack-3d" role="group" aria-label="Couches 3D de l'architecture"></div>
+            </div>
+
+            <!-- Right Callouts (L05, L03, L01) -->
+            <div class="exploded-callouts-col right" id="exploded-callouts-right"></div>
+          </div>
+
+          <!-- Selected Layer Deep Inspector Bar -->
+          <div class="exploded-inspector-bar">
+            <div class="exploded-insp-main">
+              <span class="layer-badge" id="exploded-inspector-tag">COUCHE 06 // INTERFACE &amp; EXPÉRIENCE</span>
+              <h3 class="exploded-insp-title" id="exploded-inspector-title">Interfaces 60 fps, React &amp; Accessibilité WCAG</h3>
+              <p class="exploded-insp-desc" id="exploded-inspector-desc">
+                Applications TypeScript / React / Next.js et interfaces HTML/CSS/JS natives fluides à 60 fps, navigation clavier (⌘K, focus-trap) et contrastes soignés.
+              </p>
+            </div>
+            <div class="exploded-insp-proof-box">
+              <span class="exploded-proof-kicker">VÉRIFICATION CONCRÈTE</span>
+              <p class="exploded-insp-proof" id="exploded-inspector-proof">Preuves : Ce portfolio interactif • Kai Academic • Dashboard Polymarket Live</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="projects" class="section">
         <div class="section-header">
           <div class="section-tag">ENGINEERING INDEX</div>
@@ -623,6 +690,16 @@
                 <li class="parcours-highlight-item"><strong>HUPI (Bidart)</strong> : Découverte des architectures de données industrielles, intégration de modèles d'IA et pipelines prédictifs.</li>
                 <li class="parcours-highlight-item"><strong>Cabinet Marra (Bayonne / Paris)</strong> : Rigueur d'audit financier, analyse de procédures comptables et conformité pour des entités CAC 40.</li>
               </ul>
+              <div class="dna-mini-timeline">
+                <div class="dna-mini-row">
+                  <span class="dna-mini-tag">STAGE 2024 // HUPI (BIDART)</span>
+                  <p>Intégration d'architectures de données industrielles, pipelines de features et modèles prédictifs.</p>
+                </div>
+                <div class="dna-mini-row">
+                  <span class="dna-mini-tag">STAGE 2023 // CABINET MARRA (BAYONNE / PARIS)</span>
+                  <p>Audit financier, contrôles de conformité et rigueur méthodologique appliquée à des comptes CAC 40.</p>
+                </div>
+              </div>
             </div>
             <div class="parcours-footer">
               <span class="tech-tag">Pipelines IA</span>
@@ -646,6 +723,20 @@
                 <li class="parcours-highlight-item">Maîtrise courante de l'anglais technique (lecture de specs RFC, revues de code internationales, issues GitHub).</li>
                 <li class="parcours-highlight-item">Autonomie personnelle, adaptation multiculturelle et communication directe sans intermédiaire.</li>
               </ul>
+              <div class="trait-bars-list">
+                <div class="trait-bar-item">
+                  <div class="trait-bar-head"><span>Rigueur &amp; Standards de Code</span><span>5 / 5</span></div>
+                  <div class="trait-bar-track"><i style="width: 100%"></i></div>
+                </div>
+                <div class="trait-bar-item">
+                  <div class="trait-bar-head"><span>Motivation &amp; Curiosité « Sous le Capot »</span><span>5 / 5</span></div>
+                  <div class="trait-bar-track"><i style="width: 100%"></i></div>
+                </div>
+                <div class="trait-bar-item">
+                  <div class="trait-bar-head"><span>Organisation &amp; Collaboration Git / PRs</span><span>4.8 / 5</span></div>
+                  <div class="trait-bar-track"><i style="width: 96%"></i></div>
+                </div>
+              </div>
             </div>
             <div class="parcours-footer">
               <span class="tech-tag">Anglais Courant</span>
@@ -654,21 +745,51 @@
             </div>
           </article>
 
-          <!-- Card 3: Échecs & Tactique -->
-          <article class="parcours-card">
-            <div class="parcours-top">
-              <div class="parcours-badge-row">
-                <span class="parcours-tag">DISCIPLINE TACTIQUE</span>
-                <span class="parcours-period">Compétition</span>
+          <!-- Card 3: Échecs & Tactique avec Mini-Board Vectoriel -->
+          <article class="parcours-card dna-chess-card">
+            <div class="dna-chess-split">
+              <div class="parcours-top">
+                <div class="parcours-badge-row">
+                  <span class="parcours-tag">DISCIPLINE TACTIQUE</span>
+                  <span class="parcours-period">Compétition</span>
+                </div>
+                <h3 class="parcours-title">Compétition d'Échecs (~1500 Elo) &amp; Moteur V-Bot UCI</h3>
+                <p class="parcours-desc">
+                  Pratique assidue du jeu d'échecs en parties rapides et blitz sur Chess.com (~1500 Elo). Une discipline mentale qui irrigue directement ma conception logicielle : calcul d'arbres de variantes, sang-froid sous pression temporelle et développement d'un pont UCI Python vers Stockfish NNUE.
+                </p>
+                <ul class="parcours-highlights">
+                  <li class="parcours-highlight-item">Pont UCI direct avec Stockfish NNUE : analyse de positions et extraction FEN.</li>
+                  <li class="parcours-highlight-item">Culture du sang-froid sous contrainte de temps et recherche systématique du coup juste.</li>
+                </ul>
               </div>
-              <h3 class="parcours-title">Compétition d'Échecs (~1500 Elo) &amp; Moteur V-Bot UCI</h3>
-              <p class="parcours-desc">
-                Pratique assidue du jeu d'échecs en parties rapides et blitz sur Chess.com (~1500 Elo). Une discipline mentale qui irrigue directement ma manière de concevoir des architectures logicielles : calcul de profondeur, sang-froid et anticipations des scénarios d'échec.
-              </p>
-              <ul class="parcours-highlights">
-                <li class="parcours-highlight-item">Développement d'un pont UCI Python pour interagir directement avec les moteurs d'analyse Stockfish.</li>
-                <li class="parcours-highlight-item">Culture du sang-froid sous contrainte de temps et recherche systématique du coup juste.</li>
-              </ul>
+
+              <!-- Crisp Vector Mini Tactical Board (4x4 Endgame Motif) -->
+              <div class="chess-mini-widget" aria-label="Aperçu tactique Échecs ~1500 Elo">
+                <div class="chess-mini-head">
+                  <span>ELO ~1500</span>
+                  <span>NNUE +2.4</span>
+                </div>
+                <svg class="chess-mini-svg" viewBox="0 0 120 120" aria-hidden="true">
+                  <rect width="120" height="120" fill="#121218" />
+                  <!-- Checkerboard squares -->
+                  <rect x="0" y="0" width="30" height="30" fill="#272732" />
+                  <rect x="60" y="0" width="30" height="30" fill="#272732" />
+                  <rect x="30" y="30" width="30" height="30" fill="#272732" />
+                  <rect x="90" y="30" width="30" height="30" fill="#272732" />
+                  <rect x="0" y="60" width="30" height="30" fill="#272732" />
+                  <rect x="60" y="60" width="30" height="30" fill="#272732" />
+                  <rect x="30" y="90" width="30" height="30" fill="#272732" />
+                  <rect x="90" y="90" width="30" height="30" fill="#272732" />
+                  <!-- Tactical Knight Jump Highlight -->
+                  <rect x="60" y="30" width="30" height="30" fill="rgba(239,68,68,0.28)" stroke="#ef4444" stroke-width="1.2" />
+                  <path d="M45 105 L45 45 L75 45" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 2" />
+                  <circle cx="75" cy="45" r="4" fill="#ef4444" />
+                  <!-- Minimal geometric chess glyphs -->
+                  <text x="45" y="111" text-anchor="middle" fill="#fafafa" font-size="20" font-family="serif">♞</text>
+                  <text x="105" y="22" text-anchor="middle" fill="#a1a1aa" font-size="20" font-family="serif">♚</text>
+                  <text x="15" y="52" text-anchor="middle" fill="#ef4444" font-size="20" font-family="serif">♜</text>
+                </svg>
+              </div>
             </div>
             <div class="parcours-footer">
               <span class="tech-tag">Calcul de Variantes</span>
@@ -764,7 +885,39 @@
           </div>
         </div>
       </section>
-    </main>
+    
+    <!-- ====================================================================
+         INTERACTIVE UNIX CLI TERMINAL DRAWER ("MATÉI SHELL")
+         ==================================================================== -->
+    <button class="terminal-floating-pill" id="terminal-pill-btn" aria-label="Ouvrir le terminal Matéi Shell">
+      <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 8px #22c55e;"></span>
+      <span>Matéi Shell [>_ CLI]</span>
+    </button>
+
+    <div class="terminal-drawer" id="terminal-drawer" role="dialog" aria-modal="true" aria-label="Terminal Unix Matéi Shell">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+        </div>
+        <div class="terminal-title">matei@iut-anglet:~ (bash) — v2.1</div>
+        <button class="terminal-close-btn" id="terminal-close-btn" aria-label="Fermer le terminal">✕</button>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="term-line-output accent">Matéi de Saint Léger — Shell v2.1 (x86_64-pc-linux-gnu)</div>
+        <div class="term-line-output dim">Tapez 'help' pour la liste des commandes, 'valgrind' pour le test mémoire, 'polymarket' pour le flux carnet d'ordres, 'prs' pour les contributions open-source, 'chess' pour l'évaluation NNUE, ou 'cat cv'.</div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="terminal-prompt">matei@anglet:~$</span>
+        <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="Tapez une commande (help, valgrind, polymarket, prs, chess, cat cv)..." />
+      </div>
+    </div>
+
+    <!-- Autonomous Co-Pilot Fleet Reticles (Theo, Elena, Kai, Sarah) -->
+    <div id="copilot-fleet-container" aria-hidden="true"></div>
+
+  </main>
   </div>
 
   <!-- Command Palette Overlay (⌘K) -->
@@ -790,6 +943,7 @@
   </div>
 
   <!-- App Core JS -->
+  <script src="portfolio_assets/exploded_view.js?v=21"></script>
   <script src="portfolio_assets/app.js?v=20" defer></script>
   <!-- Swarm Rebuild Takeover Engine -->
   <script src="portfolio_assets/swarm-init.js?v=20" defer></script>

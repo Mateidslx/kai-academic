@@ -385,12 +385,250 @@
     });
   }
 
+
+  // ==========================================================================
+  // MATÉI SHELL — INTERACTIVE UNIX CLI TERMINAL DRAWER
+  // ==========================================================================
+  function initTerminalDrawer() {
+    const pillBtn = document.getElementById('terminal-pill-btn');
+    const drawer = document.getElementById('terminal-drawer');
+    const closeBtn = document.getElementById('terminal-close-btn');
+    const input = document.getElementById('terminal-input');
+    const body = document.getElementById('terminal-body');
+
+    if (!drawer || !input || !body) return;
+
+    function openDrawer() {
+      drawer.classList.add('is-open');
+      setTimeout(() => input.focus(), 100);
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('is-open');
+    }
+
+    if (pillBtn) pillBtn.addEventListener('click', () => {
+      if (drawer.classList.contains('is-open')) closeDrawer();
+      else openDrawer();
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '`' || e.key === '~') {
+        if (!['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+          e.preventDefault();
+          if (drawer.classList.contains('is-open')) closeDrawer();
+          else openDrawer();
+        }
+      } else if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeDrawer();
+      }
+    });
+
+    function printLine(text, type = '') {
+      const line = document.createElement('div');
+      line.className = 'term-line-output ' + type;
+      line.textContent = text;
+      body.appendChild(line);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    const commandHistory = [];
+    let historyIdx = -1;
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = input.value.trim();
+        if (!cmd) return;
+
+        printLine('matei@anglet:~$ ' + cmd, 'dim');
+        commandHistory.push(cmd);
+        historyIdx = commandHistory.length;
+        input.value = '';
+
+        const lower = cmd.toLowerCase();
+
+        if (lower === 'help') {
+          printLine('COMMANDES DISPONIBLES :');
+          printLine('  valgrind    - Audit mémoire C99 AlgoForge (zéro fuite, zéros octets perdus)');
+          printLine('  polymarket  - Simulation carnet d\'ordres WebSockets en temps réel (<2ms)');
+          printLine('  prs         - Liste des 46 Pull Requests mergées (Twenty CRM, Omi, AlgoForge)');
+          printLine('  chess       - Évaluation position Stockfish 17 NNUE & FEN');
+          printLine('  cat cv      - Résumé du profil & liens de téléchargement CV');
+          printLine('  swarm       - Rejouer l\'animation Swarm Rebuild (takeover)');
+          printLine('  clear       - Nettoyer le terminal');
+          printLine('  exit        - Fermer le terminal');
+        } else if (lower === 'valgrind') {
+          printLine('==19842== Memcheck, a memory error detector', 'accent');
+          printLine('==19842== Command: ./bin/algoforge_c99 --strict --dataset=100k');
+          printLine('[INFO] Heap Allocator: custom memory pool (strict Allman alignment)');
+          printLine('[INFO] Quicksort tripartition + AVL rotation: 100,000 nodes');
+          printLine('[INFO] Verification: all 100,000 elements sorted in 1.42ms');
+          printLine('==19842== HEAP SUMMARY:');
+          printLine('==19842==     in use at exit: 0 bytes in 0 blocks', 'success');
+          printLine('==19842==   total heap usage: 100,000 allocs, 100,000 frees, 4,800,000 bytes allocated');
+          printLine('==19842== All heap blocks were freed -- no leaks are possible', 'success');
+          printLine('==19842== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)', 'success');
+        } else if (lower === 'polymarket') {
+          printLine('[WS] Connecting to wss://ws-subscriptions-clob.polymarket.com/ws/market...', 'accent');
+          printLine('[WS] Subscribed to orderbook: presidential-election-2024 / trump-win');
+          printLine('[TICK +0.4ms] BID: 0.582 (size: 42,000 USDC) | ASK: 0.584 (size: 28,500 USDC)');
+          printLine('[TICK +1.1ms] SPREAD: 0.002 (0.34%) | Imbalance ratio: +1.47');
+          printLine('[EXEC +1.9ms] Market order matched on Polygon PoS (Gas: 24 Gwei, Latency: 1.9ms)', 'success');
+          printLine('[METRIC] Execution speed: p95 < 2.1ms | 0 slippage vs best book', 'success');
+        } else if (lower === 'prs') {
+          printLine('[GITHUB] 46 Production PRs Merged Across Open Source Repositories:', 'accent');
+          printLine('• Twenty CRM (#1428): Fixed relational cascade sync on workspace deletion');
+          printLine('• Twenty CRM (#1504): Optimized GraphQL cursor pagination (94% query speedup)');
+          printLine('• BasedHardware/omi (#892): Hardened BLE packet framing against audio dropouts');
+          printLine('• BasedHardware/omi (#914): Fixed background sync battery drain on iOS daemon');
+          printLine('• AlgoForge (#01-18): C99 Valgrind 0-leak strict algorithmic library');
+        } else if (lower === 'chess') {
+          printLine('  +---+---+---+---+---+---+---+---+');
+          printLine('8 | r | . | b | q | k | b | . | r |');
+          printLine('7 | p | p | p | . | . | p | p | p |');
+          printLine('6 | . | . | n | . | . | n | . | . |');
+          printLine('5 | . | . | . | p | . | . | . | . |');
+          printLine('4 | . | . | B | P | . | . | . | . |');
+          printLine('3 | . | . | N | . | . | N | . | . |');
+          printLine('2 | P | P | P | . | P | P | P | P |');
+          printLine('1 | R | . | B | Q | K | . | . | R |');
+          printLine('  +---+---+---+---+---+---+---+---+');
+          printLine('    a   b   c   d   e   f   g   h');
+          printLine('[Stockfish 17 NNUE] Depth: 24/48 | Eval: +2.41 (White advantage)', 'success');
+          printLine('[Best line] 1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6');
+          printLine('[Player stats] Matéi de Saint Léger: ~1500 Elo (Rapid & Blitz)');
+        } else if (lower === 'cat cv') {
+          printLine('Matéi de Saint Léger — Étudiant BUT 1 Informatique (IUT d\'Anglet)', 'accent');
+          printLine('Recherche: Alternance BUT 2 (Septembre 2025/2026, Côte Basque / Hybride / Remote)');
+          printLine('Email: matei64200@gmail.com | Tél: 06 59 31 16 71');
+          printLine('GitHub: https://github.com/Mateidslx');
+          printLine('LinkedIn: https://linkedin.com/in/matéi-de-saint-léger-24329a32b/');
+          printLine('Téléchargements disponibles : CV Français (PDF) et English Resume (PDF)');
+        } else if (lower === 'swarm') {
+          printLine('[SWARM] Lancement du moteur de rebuild...', 'accent');
+          closeDrawer();
+          if (typeof window.__startSwarm === 'function') {
+            window.__startSwarm();
+          } else {
+            window.location.search = '?swarm=1';
+          }
+        } else if (lower === 'clear') {
+          body.innerHTML = '';
+        } else if (lower === 'exit') {
+          closeDrawer();
+        } else {
+          printLine(`Commande inconnue: '${cmd}'. Tapez 'help' pour la liste.`, 'accent');
+        }
+      } else if (e.key === 'ArrowUp') {
+        if (historyIdx > 0) {
+          historyIdx--;
+          input.value = commandHistory[historyIdx] || '';
+        }
+      } else if (e.key === 'ArrowDown') {
+        if (historyIdx < commandHistory.length - 1) {
+          historyIdx++;
+          input.value = commandHistory[historyIdx] || '';
+        } else {
+          historyIdx = commandHistory.length;
+          input.value = '';
+        }
+      }
+    });
+  }
+
+  // ==========================================================================
+  // AUTONOMOUS CO-PILOT AGENTS (Theo, Elena, Kai, Sarah)
+  // ==========================================================================
+  function initCopilotFleet() {
+    const container = document.getElementById('copilot-fleet-container');
+    if (!container) return;
+
+    const AGENTS = [
+      { id: 'theo', name: 'Theo [C99 / Systèmes]', color: '#ef4444', icon: '⚡' },
+      { id: 'elena', name: 'Elena [AppSec / Valgrind]', color: '#10b981', icon: '🛡️' },
+      { id: 'kai', name: 'Kai [Quant / Polymarket]', color: '#3b82f6', icon: '📈' },
+      { id: 'sarah', name: 'Sarah [UI / Accessibilité]', color: '#a855f7', icon: '🎨' }
+    ];
+
+    const elements = AGENTS.map((agent, i) => {
+      const el = document.createElement('div');
+      el.className = 'agent-reticle';
+      el.id = 'copilot-' + agent.id;
+      el.style.opacity = '0';
+      el.innerHTML = `
+        <svg class="agent-reticle-cursor" viewBox="0 0 24 24" fill="${agent.color}">
+          <path d="M0 0L14 10L8 12L12 20L9 21L5 13L0 17Z" stroke="#000" stroke-width="1.5" />
+        </svg>
+        <div class="agent-reticle-badge" style="background:${agent.color}; border: 1px solid rgba(255,255,255,0.2);">
+          ${agent.icon} ${agent.name}
+        </div>
+      `;
+      container.appendChild(el);
+      return { agent, el, targetX: 100 + i * 200, targetY: 400 + i * 60, currentX: 100, currentY: 400 };
+    });
+
+    // Gentle roaming across interesting sections
+    const targetSelectors = [
+      '.nav-dock',
+      '.hero-card-left',
+      '.hero-card-right',
+      '#exploded-stage',
+      '#flagships .bento-main',
+      '.dna-chess-card',
+      '.contact-card'
+    ];
+
+    let lastInteraction = Date.now();
+    window.addEventListener('scroll', () => { lastInteraction = Date.now(); }, { passive: true });
+    window.addEventListener('mousemove', () => { lastInteraction = Date.now(); }, { passive: true });
+
+    function step() {
+      const isIdle = (Date.now() - lastInteraction) > 2500;
+      
+      elements.forEach((item, idx) => {
+        if (!isIdle) {
+          // Fade out during active user interactions
+          item.el.style.opacity = '0';
+          return;
+        }
+
+        // Periodically pick targets
+        if (Math.random() < 0.02) {
+          const sel = targetSelectors[Math.floor(Math.random() * targetSelectors.length)];
+          const targetDom = document.querySelector(sel);
+          if (targetDom) {
+            const rect = targetDom.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              item.targetX = rect.left + Math.random() * rect.width;
+              item.targetY = rect.top + Math.random() * Math.min(rect.height, 200);
+            }
+          }
+        }
+
+        // Smooth spring physics interpolation
+        item.currentX += (item.targetX - item.currentX) * 0.08;
+        item.currentY += (item.targetY - item.currentY) * 0.08;
+
+        item.el.style.transform = `translate3d(${item.currentX}px, ${item.currentY}px, 0)`;
+        item.el.style.opacity = '0.9';
+      });
+
+      requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
   function init() {
     initAuroraCanvas();
     initLayerInteractive();
     initMatrixFilter();
     initClipboard();
     initCommandPalette();
+    initTerminalDrawer();
+    initCopilotFleet();
   }
 
   if (document.readyState === 'loading') {
