@@ -1,12 +1,13 @@
 /* ==========================================================================
-   MATÉI DE SAINT LÉGER — AUTONOMOUS MULTIPLAYER ARCHITECT ENGINE (v16)
+   MATÉI DE SAINT LÉGER — AUTONOMOUS MULTIPLAYER ARCHITECT ENGINE (v16.1)
    Strictly aligned with DfWWldaTQTz.mp4 & Explicit User Directives:
    1. On load/refresh: Screen starts dark with delicate blue wireframes and 0 layers.
    2. Hero construction: Multiplayer cursors spawn, attach Figma boxes, type text,
       and assemble hero sequentially (0 -> 52 layers).
-   3. ZERO PARASITIC CURSORS: Once a section is built, cursors smoothly glide to
-      parking stations on the far left/right margins and idle gently. They NEVER
-      obstruct text, buttons, or cards!
+   3. ZERO PARASITIC CURSORS: As soon as an element finishes building, the active cursor
+      IMMEDIATELY glides back to its margin parking sanctuary. When idle, ALL cursors
+      stay parked on the outer margins (x < 50px or x > width - 50px).
+      THEY NEVER HOVER OR FREEZE ON TOP OF CONTENT!
    4. Human scroll-driven build: Below the fold, elements stay unbuilt wireframes.
       As the human scrolls down, incoming elements queue and assemble steadily
       one-by-one ("au fur et à mesure, pas en accéléré ni rien").
@@ -34,6 +35,7 @@
   let cursorNodes = [];
   let figmaSelectionBox = null;
   let figmaDimTag = null;
+  let activeTargetElement = null;
 
   let isHeroBuilding = true;
   let isQueueWorkerRunning = false;
@@ -86,10 +88,10 @@
       `;
       overlay.appendChild(node);
 
-      // Start position offscreen or at edges
+      // Start position offscreen in margins
       const isLeft = i < 4;
-      const startX = isLeft ? -50 : window.innerWidth + 50;
-      const startY = 120 + i * 80;
+      const startX = isLeft ? 24 + (i % 2) * 16 : window.innerWidth - (48 + (i % 2) * 16);
+      const startY = 160 + (i % 4) * (window.innerHeight * 0.17);
 
       return {
         el: node,
@@ -99,32 +101,35 @@
         tx: startX,
         ty: startY,
         orbitAngle: (i / AGENTS.length) * Math.PI * 2,
-        speed: 0.018 + (i % 3) * 0.005,
+        speed: 0.016 + (i % 3) * 0.004,
         isParked: true
       };
     });
   }
 
   /* ------------------------------------------------------------------------
-     2. PARKING MARGINS (ZERO PARASITIC CURSORS ON IDLE)
+     2. PARKING MARGINS SANCTUARY (ZERO PARASITIC CURSORS ON IDLE)
      ------------------------------------------------------------------------ */
-  function parkCursorsAtMargins() {
+  function parkSingleCursor(cursor, i) {
+    if (!cursor) return;
     const w = window.innerWidth;
     const h = window.innerHeight;
+    cursor.isParked = true;
+    if (i < 4) {
+      // Left margin: x between 20px and 45px
+      cursor.tx = 24 + (i % 2) * 16;
+      cursor.ty = 160 + i * (h * 0.17);
+    } else {
+      // Right margin: x between w-55px and w-30px
+      cursor.tx = w - (48 + (i % 2) * 16);
+      cursor.ty = 180 + (i - 4) * (h * 0.17);
+    }
+  }
 
+  function parkCursorsAtMargins() {
     cursorNodes.forEach((c, i) => {
-      c.isParked = true;
-      if (i < 4) {
-        // Left margin: x between 20px and 45px
-        c.tx = 24 + (i % 2) * 16;
-        c.ty = 160 + i * (h * 0.17);
-      } else {
-        // Right margin: x between w-55px and w-30px
-        c.tx = w - (48 + (i % 2) * 16);
-        c.ty = 180 + (i - 4) * (h * 0.17);
-      }
+      parkSingleCursor(c, i);
     });
-
     detachFigmaBox();
   }
 
@@ -133,6 +138,7 @@
      ------------------------------------------------------------------------ */
   function attachFigmaBox(element, customLabel) {
     if (!element || !figmaSelectionBox) return;
+    activeTargetElement = element;
     const r = element.getBoundingClientRect();
 
     figmaSelectionBox.style.top = `${r.top + window.scrollY - 3}px`;
@@ -147,6 +153,7 @@
   }
 
   function detachFigmaBox() {
+    activeTargetElement = null;
     if (figmaSelectionBox) {
       figmaSelectionBox.style.opacity = '0';
     }
@@ -246,7 +253,7 @@
     }
 
     let charIdx = 0;
-    const charDelay = speed || 14;
+    const charDelay = speed || 10;
 
     function nextChar() {
       if (charIdx <= fullText.length) {
@@ -284,7 +291,7 @@
       if (itemIdx >= heroItems.length) {
         isHeroBuilding = false;
         updateDock(HERO_FINAL_LAYER);
-        // RETREAT CURSORS TO MARGINS IMMEDIATELY!
+        // RETREAT ALL CURSORS TO MARGINS IMMEDIATELY!
         parkCursorsAtMargins();
         if (onFinished) onFinished();
         return;
@@ -294,8 +301,9 @@
       const el = item.el;
       const rect = el.getBoundingClientRect();
 
-      // Dispatch 1 or 2 cursors to this element
-      const activeCursor = cursorNodes[itemIdx % cursorNodes.length];
+      // Dispatch active cursor to this element
+      const cursorIdx = itemIdx % cursorNodes.length;
+      const activeCursor = cursorNodes[cursorIdx];
       activeCursor.isParked = false;
       activeCursor.tx = rect.left + Math.min(60, rect.width * 0.4);
       activeCursor.ty = rect.top + Math.min(30, rect.height * 0.5);
@@ -307,26 +315,30 @@
       updateDock(Math.min(HERO_FINAL_LAYER, currentHeroLayer));
 
       if (item.isTypewriter) {
-        typewriteElement(el, 10, () => {
+        typewriteElement(el, 5, () => {
           el.classList.remove('is-building', 'unbuilt-wireframe');
           el.classList.add('is-built');
           item.isBuilt = true;
+          detachFigmaBox();
+          parkSingleCursor(activeCursor, cursorIdx);
           itemIdx++;
-          setTimeout(stepHero, 70);
+          setTimeout(stepHero, 40);
         });
       } else {
         setTimeout(() => {
           el.classList.remove('is-building', 'unbuilt-wireframe');
           el.classList.add('is-built');
           item.isBuilt = true;
+          detachFigmaBox();
+          parkSingleCursor(activeCursor, cursorIdx);
           itemIdx++;
-          setTimeout(stepHero, 70);
-        }, 110);
+          setTimeout(stepHero, 40);
+        }, 70);
       }
     }
 
-    // Start hero construction 250ms after page load
-    setTimeout(stepHero, 250);
+    // Start hero construction 150ms after page load
+    setTimeout(stepHero, 150);
   }
 
   /* ------------------------------------------------------------------------
@@ -355,7 +367,7 @@
   function processBuildQueue() {
     if (buildQueue.length === 0) {
       isQueueWorkerRunning = false;
-      // When done building current viewport, retreat to margins!
+      detachFigmaBox();
       parkCursorsAtMargins();
       return;
     }
@@ -368,7 +380,7 @@
     // If human already scrolled past it above the viewport: instant build
     if (r.bottom < -20) {
       if (layer.isTypewriter) {
-        const fullText = el.getAttribute('data-full-text') || '';
+        const fullText = el.getAttribute('data-full-text') || el.querySelector('[data-full-text]')?.getAttribute('data-full-text') || '';
         const contentSpan = el.querySelector('.tw-content');
         const caretSpan = el.querySelector('.tw-caret');
         if (contentSpan) contentSpan.textContent = fullText;
@@ -382,8 +394,9 @@
       return;
     }
 
-    // Select nearest available cursor
-    const cursor = cursorNodes[Math.floor(Math.random() * cursorNodes.length)];
+    // Select builder cursor (alternating between agent 0 Alex and agent 1 Soren)
+    const cursorIdx = buildQueue.length % 2;
+    const cursor = cursorNodes[cursorIdx];
     cursor.isParked = false;
     cursor.tx = r.left + Math.min(80, r.width * 0.3);
     cursor.ty = r.top + Math.min(40, r.height * 0.5);
@@ -391,7 +404,6 @@
     attachFigmaBox(el, `${Math.round(r.width)} × ${Math.round(r.height)}`);
     el.classList.add('is-building');
 
-    // Update bottom dock layer count based on human scroll position
     updateScrollerTelemetry();
 
     if (layer.isTypewriter) {
@@ -399,19 +411,23 @@
         el.classList.remove('is-building', 'unbuilt-wireframe');
         el.classList.add('is-built');
         layer.isBuilt = true;
+        detachFigmaBox();
+        parkSingleCursor(cursor, cursorIdx);
 
-        // Paced interval between elements: 100ms ("au fur et à mesure")
-        setTimeout(processBuildQueue, 100);
+        // Paced interval between elements: 90ms ("au fur et à mesure")
+        setTimeout(processBuildQueue, 90);
       });
     } else {
       setTimeout(() => {
         el.classList.remove('is-building', 'unbuilt-wireframe');
         el.classList.add('is-built');
         layer.isBuilt = true;
+        detachFigmaBox();
+        parkSingleCursor(cursor, cursorIdx);
 
-        // Paced interval: 110ms
-        setTimeout(processBuildQueue, 110);
-      }, 130);
+        // Paced interval: 100ms
+        setTimeout(processBuildQueue, 100);
+      }, 120);
     }
   }
 
@@ -442,15 +458,24 @@
   function animateFrame() {
     cursorNodes.forEach(c => {
       c.orbitAngle += c.speed;
-      // Harmonic jitter: gentle breathing motion (±2.5px)
-      const jx = Math.cos(c.orbitAngle) * 3;
-      const jy = Math.sin(c.orbitAngle * 1.3) * 3;
+      // Harmonic jitter: gentle breathing motion (±2px)
+      const jx = Math.cos(c.orbitAngle) * 2.5;
+      const jy = Math.sin(c.orbitAngle * 1.3) * 2.5;
 
       c.x += (c.tx + jx - c.x) * 0.16;
       c.y += (c.ty + jy - c.y) * 0.16;
 
       c.el.style.transform = `translate3d(${Math.round(c.x)}px, ${Math.round(c.y)}px, 0)`;
     });
+
+    // Update active Figma selection frame position with scroll
+    if (activeTargetElement && figmaSelectionBox && figmaSelectionBox.style.opacity === '1') {
+      const r = activeTargetElement.getBoundingClientRect();
+      figmaSelectionBox.style.top = `${r.top + window.scrollY - 3}px`;
+      figmaSelectionBox.style.left = `${r.left + window.scrollX - 4}px`;
+      figmaSelectionBox.style.width = `${Math.max(40, r.width + 8)}px`;
+      figmaSelectionBox.style.height = `${Math.max(20, r.height + 6)}px`;
+    }
 
     requestAnimationFrame(animateFrame);
   }
