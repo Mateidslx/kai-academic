@@ -44,7 +44,7 @@
     "Ida", "Yukihiro", "Shafi", "Leslie", "Jean", "Vint", "Lynn", "Bram",
   ];
   const COLORS = [
-    "#F24E1E", "#A259FF", "#1ABCFE", "#0ACF83", "#FF7262", "#FFC700",
+    "#ef4444", "#38bdf8", "#A259FF", "#1ABCFE", "#0ACF83", "#FF7262", "#FFC700",
     "#9747FF", "#E8467C", "#14AE5C", "#0D99FF", "#FF8A00", "#00B5CE",
   ];
   const BLUE = "#0D99FF";
@@ -1538,8 +1538,8 @@
 .intro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.92);opacity:0;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:none}
 .intro.on{opacity:1;transform:translate(-50%,-50%)}
 .intro.gone{opacity:0;transform:translate(-50%,-50%) scale(.9)}
-.intro img{display:block;width:60px;height:60px;object-fit:contain;filter:grayscale(1);opacity:.42;border-radius:14px}
-.intro .mono{width:60px;height:60px;border-radius:16px;background:#D7DADE;color:#fff;font:700 30px/60px Inter,system-ui,sans-serif;text-align:center}
+.intro img{display:block;width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 0 25px rgba(239,68,68,0.85));opacity:1;border-radius:14px;transition:transform .4s ease}
+.intro .mono{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#ef4444 0%,#991b1b 100%);color:#fff;font:800 28px/64px "JetBrains Mono",monospace;text-align:center;box-shadow:0 0 30px rgba(239,68,68,0.65)}
 .hud{position:absolute;left:50%;bottom:20px;transform:translate(-50%,18px);opacity:0;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 10px;background:rgba(30,30,30,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.07);font:500 12px/1 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;pointer-events:auto;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1);white-space:nowrap;user-select:none;z-index:5}
 .hud.on{opacity:1;transform:translate(-50%,0)}
 .hud .dots{display:flex;padding-left:5px}
@@ -1548,11 +1548,11 @@
 .hud .txt b{color:#fff;font-weight:600}
 .hud .sep{width:1px;height:12px;background:#444}
 .hud .bar{width:64px;height:3px;border-radius:2px;background:#3a3a3a;overflow:hidden}
-.hud .bar i{display:block;height:100%;width:0;background:#0D99FF;transition:width .35s ease}
+.hud .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ef4444,#ff5252);box-shadow:0 0 8px rgba(239,68,68,0.6);transition:width .35s ease}
 .hud button{all:unset;cursor:pointer;padding:7px 10px;border-radius:8px;background:#2c2c2c;color:#fff;font:500 12px/1 Inter,system-ui,-apple-system,sans-serif;transition:background .15s}
 .hud button:hover{background:#3a3a3a}
-.hud button.pri{background:#0D99FF}
-.hud button.pri:hover{background:#2aa6ff}
+.hud button.pri{background:#ef4444}
+.hud button.pri:hover{background:#dc2626}
 .hud button.on{background:rgba(13,153,255,.22);color:#8fd0ff}
 .hud button[hidden]{display:none}
 .hud .x{padding:7px 9px;color:#aaa}
@@ -1713,7 +1713,7 @@
         this.intro.innerHTML = "";
         const d = document.createElement("div");
         d.className = "mono";
-        d.textContent = (label[0] || "?").toUpperCase();
+        d.textContent = "MS";
         this.intro.appendChild(d);
       };
       const href = sized.length ? sized[0].href : location.origin + "/favicon.ico";

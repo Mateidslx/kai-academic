@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="portfolio_assets/noir_crimson.css?v=16" />
+  <link rel="stylesheet" href="portfolio_assets/noir_crimson.css?v=18" />
 
   <script type="application/ld+json">
   {
@@ -62,11 +62,17 @@
       </nav>
 
       <div class="top-nav-right">
-        <span class="avail-badge">
+        <button type="button" class="nav-pill-btn kbd-btn" id="cmdk-open-btn" title="Ouvrir la palette de commandes (⌘K / Ctrl+K)">
+          <span>⌘K</span>
+        </button>
+        <button type="button" class="nav-pill-btn" id="lang-toggle-btn" title="Changer de langue (Français / English)">
+          <span id="lang-btn-text">FR / EN</span>
+        </button>
+        <span class="nav-pill-btn time-pill" id="live-biarritz-clock" title="Heure locale Côte Basque">
           <span class="dot-green"></span>
-          <span class="avail-txt">Available</span>
+          <span id="clock-display">Biarritz --:--</span>
         </span>
-        <a href="#contact" class="btn-top-dispatch">DISPATCH →</a>
+        <a href="#contact" class="btn-top-dispatch" id="top-dispatch-btn">DISPATCH →</a>
       </div>
     </div>
   </header>
@@ -304,6 +310,15 @@
               <h4 class="insp-title" id="insp-title">Hybrid Cognitive Foundation &amp; Fail-Closed Engine</h4>
               <p class="insp-desc" id="insp-desc">Adaptive contextual routing across Claude 3.7 Sonnet, Gemini 2.5 Pro and local Ollama Jev models. Zero prompt leakage, fail-closed policy gates.</p>
               
+              <div class="insp-code-header">
+                <div class="insp-code-dots" aria-hidden="true">
+                  <span class="insp-code-dot red"></span>
+                  <span class="insp-code-dot yellow"></span>
+                  <span class="insp-code-dot green"></span>
+                </div>
+                <span class="insp-code-file" id="insp-code-file">kai_layer_01_cognitive_core.py</span>
+                <button type="button" class="btn-copy-code" id="btn-copy-code">Copy Code</button>
+              </div>
               <div class="insp-code-shell">
                 <pre class="insp-code" id="insp-code"></pre>
               </div>
@@ -449,12 +464,28 @@
       </div>
     </section>
 
+  
+    <!-- SPOTLIGHT COMMAND PALETTE (CTRL+K / CMD+K) -->
+    <div class="cmdk-backdrop" id="cmdk-backdrop" role="dialog" aria-modal="true" aria-label="Palette de commandes">
+      <div class="cmdk-dialog">
+        <div class="cmdk-input-wrap">
+          <span class="cmdk-prompt">&gt;_</span>
+          <input type="text" class="cmdk-input" id="cmdk-input"
+                 data-placeholder-fr="Rechercher une section, projet, rejouer l'animation swarm..."
+                 data-placeholder-en="Search section, project, replay swarm build..."
+                 placeholder="Rechercher une section, projet, rejouer l'animation swarm..."
+                 autocomplete="off" />
+          <span class="cmdk-esc-hint">ESC</span>
+        </div>
+        <div class="cmdk-list" id="cmdk-list"></div>
+      </div>
+    </div>
   </main>
 
   <div class="toast-banner" id="toast-banner" role="status" aria-live="polite"></div>
 
-  <script src="portfolio_assets/portfolio_core.js?v=17" defer></script>
+  <script src="portfolio_assets/portfolio_core.js?v=18" defer></script>
   <!-- Authentic Swarm Rebuild Engine (Vendored from https://saai.pro/) -->
-  <script src="portfolio_assets/swarm-init.js?v=17" defer></script>
+  <script src="portfolio_assets/swarm-init.js?v=18" defer></script>
 </body>
 </html>
