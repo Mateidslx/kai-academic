@@ -375,16 +375,38 @@
               </div>
             </article>
 
-            <!-- Flagship 3: AlgoForge C99 -->
-            <article class="glass-card subgrid-card">
+            <!-- Flagship 3: AlgoForge C99 with Interactive Code Switcher -->
+            <article class="glass-card subgrid-card algoforge-card">
               <div class="subgrid-top">
                 <div class="subgrid-badge-row">
                   <div class="flagship-badge">SYSTEMS // C99 PUR &amp; VALGRIND</div>
                 </div>
                 <h3 class="subgrid-title">AlgoForge C99 — Data Structures &amp; Allocators</h3>
                 <p class="subgrid-desc">
-                  Bibliothèque système en C99 pur implémentant des structures de données dynamiques hermétiques : arbres équilibrés (BST/AVL), tables de hachage à adressage ouvert, et simulateurs d'allocation mémoire avec audit Valgrind à zéro fuite.
+                  Bibliothèque système en C99 pur implémentant des structures de données dynamiques hermétiques : arbres équilibrés (BST/AVL), tables de hachage et allocateurs mémoire vérifiés à zéro fuite.
                 </p>
+
+                <!-- Interactive Code Switcher UI Component -->
+                <div class="code-switcher-widget">
+                  <div class="code-switcher-tabs" role="tablist">
+                    <button type="button" class="code-tab-btn active" data-code="c99">C99 Allman</button>
+                    <button type="button" class="code-tab-btn" data-code="valgrind">Valgrind Log</button>
+                    <button type="button" class="code-tab-btn" data-code="merise">Merise SQL</button>
+                  </div>
+                  <pre class="code-switcher-pre"><code class="code-switcher-body" id="algoforge-code-view">/* Tripartition canonique IUT Anglet (P. Etcheverry) */
+Status_t tree_insert(Node_t** root, const int val)
+{
+    if (*root == NULL)
+    {
+        *root = node_allocate(val);
+        return (*root != NULL) ? STATUS_OK : STATUS_OOM;
+    }
+    return (val < (*root)->value)
+        ? tree_insert(&amp;(*root)->left, val)
+        : tree_insert(&amp;(*root)->right, val);
+}</code></pre>
+                </div>
+
                 <ul class="spec-list">
                   <li class="spec-item">Compilation stricte : -Wall -Wextra -Werror -pedantic</li>
                   <li class="spec-item">Discipline Allman &amp; tripartition canonique IUT Anglet</li>
@@ -393,8 +415,8 @@
               </div>
               <div class="subgrid-footer">
                 <span class="tech-tag">C99</span>
-                <span class="tech-tag">Valgrind</span>
-                <span class="tech-tag">GCC</span>
+                <span class="tech-tag">Valgrind 0-Leak</span>
+                <span class="tech-tag">GCC Strict</span>
                 <span class="tech-tag">Linux</span>
               </div>
             </article>

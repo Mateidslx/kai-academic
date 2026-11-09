@@ -59,9 +59,10 @@
   //   default                 every load (opts.oncePerSession = false)
   function mode() {
     var v = q("swarm");
-    if (v === "1" || v === "on" || v === "always") return "always";
+    if (v === "off" || v === "0") return "off";
     if (v === "once" || v === "session") return "once";
-    return "off"; // Instant, unblocked load by default; ?swarm=1 to boot takeover
+    if (v === "1" || v === "on") return "always";
+    return opts.oncePerSession ? "once" : "always";
   }
 
   function forced() {
@@ -188,35 +189,12 @@
     try {
       await loadEngine();
       markDone();
-      // Auto-start Tour: visitors get the smooth scroll-driven build
-      // from the first paint instead of a static half-built page.
-      // Cancelled by any real user scroll, so it never fights the wheel.
-      if (window[KEY] && window[KEY].app && !window[KEY].app.tour) {
-        var started = false;
-        var start = function () {
-          if (started) return;
-          started = true;
-          setTimeout(function () {
-            try {
-              var host = document.querySelector("swarm-rebuild");
-              var btn = host && host.shadowRoot && host.shadowRoot.querySelector('[data-a="tour"]');
-              if (btn && !btn.hidden) btn.click();
-            } catch (_) {}
-          }, 350);
-        };
-        var cancel = function () {
-          if (!window[KEY] || !window[KEY].app) return;
-          try { window[KEY].app.tour = false; } catch (_) {}
-        };
-        if (document.readyState === "complete") start();
-        else window.addEventListener("load", start, { once: true });
-        window.addEventListener("wheel", cancel, { passive: true });
-        window.addEventListener("touchstart", cancel, { passive: true });
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "ArrowDown" || e.key === "ArrowUp" ||
-              e.key === "PageDown" || e.key === "PageUp" ||
-              e.key === " " || e.key === "Home" || e.key === "End") cancel();
-        });
+      // Scroll-driven interactive build mode:
+      // Site builds dynamically as the human scrolls down.
+      // If the visitor does not scroll, the viewport stays as is.
+      // Tour can be initiated on-demand by clicking the Tour button on the HUD.
+      if (window[KEY] && window[KEY].app) {
+        window[KEY].app.tour = false;
       }
     } catch (err) {
       console.error("[swarm] boot failed", err);

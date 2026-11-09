@@ -304,12 +304,13 @@
     const commands = [
       { id: 'about', title: 'À Propos & Philosophie', desc: 'Background, premier-principe et formation', href: '#about', tag: 'Section' },
       { id: 'flagships', title: 'Flagships & Écosystème 7-Layer', desc: 'Moteur quantitatif Polymarket & 46 PRs open-source', href: '#flagships', tag: 'Projets' },
+      { id: 'exploded', title: 'Vue 3D Éclatée (6 Couches Hooke)', desc: 'Pile technique dissociée sur l\'axe Z avec ressort amorti', href: '#exploded-architecture', tag: '3D Stack' },
       { id: 'matrix', title: 'The Systems Matrix', desc: 'Bento index : IA, C99, Valgrind, Web & Cloud', href: '#projects', tag: 'Index' },
-      { id: 'parcours', title: 'Parcours & ADN Terrain', desc: 'IUT Anglet, Stages HUPI/Marra, UK, Échecs', href: '#parcours', tag: 'Parcours' },
-      { id: 'contact', title: 'Contact & Recrutement Alternance', desc: 'Discuter d\'une alternance 2e année BUT Informatique', href: '#contact', tag: 'Contact' },
-      { id: 'github', title: 'GitHub de Matéi (@Mateidslx)', desc: 'Inspecter les 46 PRs et dépôts publics', href: 'https://github.com/Mateidslx', external: true, tag: 'Lien' },
-      { id: 'cv-fr', title: 'Télécharger CV Français (PDF)', desc: 'Format officiel BUT Informatique 2026', href: 'CV_Matei_de_Saint_Leger_FR.pdf', external: true, tag: 'Fichier' },
-      { id: 'cv-en', title: 'Download English Resume (PDF)', desc: 'Software Engineering / Systems Resume', href: 'Resume_Matei_de_Saint_Leger_EN.pdf', external: true, tag: 'File' }
+      { id: 'parcours', title: 'Parcours & ADN Terrain (Échecs ~1500 Elo)', desc: 'IUT Anglet, Stages HUPI/Marra, UK, Échecs tactiques', href: '#parcours', tag: 'Parcours' },
+      { id: 'terminal', title: 'Matéi Shell [>_ CLI Terminal]', desc: 'Exécuter valgrind, polymarket, chess, prs, cat cv', action: () => { const btn = document.getElementById('terminal-pill-btn'); if(btn) btn.click(); }, tag: 'CLI' },
+      { id: 'cv-fr', title: 'Télécharger CV Français (PDF)', desc: 'Curriculum Vitae officiel Matéi de Saint Léger (FR)', href: 'portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf', tag: 'Document' },
+      { id: 'cv-en', title: 'Download English Resume (PDF)', desc: 'Official Engineering Resume Matéi de Saint Léger (EN)', href: 'portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf', tag: 'Document' },
+      { id: 'contact', title: 'Contact & Recrutement Alternance', desc: 'Discuter d\'une alternance 2e année BUT Informatique', href: '#contact', tag: 'Contact' }
     ];
 
     function openPalette() {
@@ -541,6 +542,58 @@
   // ==========================================================================
   // AUTONOMOUS CO-PILOT AGENTS (Theo, Elena, Kai, Sarah)
   // ==========================================================================
+  
+  // ==========================================================================
+  // INTERACTIVE CODE SWITCHER LOGIC (ALGOFORGE C99)
+  // ==========================================================================
+  function initCodeSwitcher() {
+    const tabs = document.querySelectorAll('.code-tab-btn');
+    const view = document.getElementById('algoforge-code-view');
+    if (!tabs.length || !view) return;
+
+    const SNIPPETS = {
+      c99: `/* Tripartition canonique IUT Anglet (P. Etcheverry) */
+Status_t tree_insert(Node_t** root, const int val)
+{
+    if (*root == NULL)
+    {
+        *root = node_allocate(val);
+        return (*root != NULL) ? STATUS_OK : STATUS_OOM;
+    }
+    return (val < (*root)->value)
+        ? tree_insert(&(*root)->left, val)
+        : tree_insert(&(*root)->right, val);
+}`,
+      valgrind: `==19842== Memcheck, a memory error detector (Valgrind-3.22)
+==19842== Command: ./bin/algoforge_c99 --strict --test=all
+==19842== HEAP SUMMARY:
+==19842==     in use at exit: 0 bytes in 0 blocks
+==19842==   total heap usage: 100,000 allocs, 100,000 frees, 4.8MB
+==19842== All heap blocks were freed -- no leaks are possible
+==19842== ERROR SUMMARY: 0 errors from 0 contexts (0 suppressed)`,
+      merise: `/* MLD Relationnel 3NF — Michel Marquesuzaà (R1.05) */
+CREATE TABLE OrdreExecution (
+    id_ordre INT PRIMARY KEY,
+    timestamp_nano BIGINT NOT NULL,
+    ticker VARCHAR(16) NOT NULL,
+    quantite NUMERIC(18, 4) CHECK (quantite > 0),
+    prix_limite NUMERIC(18, 6) NOT NULL,
+    statut_execution VARCHAR(8) CHECK (statut_execution IN ('FILLED','PENDING'))
+);`
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        const key = tab.getAttribute('data-code');
+        if (SNIPPETS[key]) {
+          view.textContent = SNIPPETS[key];
+        }
+      });
+    });
+  }
+
   function initCopilotFleet() {
     const container = document.getElementById('copilot-fleet-container');
     if (!container) return;
@@ -629,6 +682,7 @@
     initCommandPalette();
     initTerminalDrawer();
     initCopilotFleet();
+    initCodeSwitcher();
   }
 
   if (document.readyState === 'loading') {
