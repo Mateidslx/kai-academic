@@ -59,10 +59,9 @@
   //   default                 every load (opts.oncePerSession = false)
   function mode() {
     var v = q("swarm");
-    if (v === "off" || v === "0") return "off";
+    if (v === "1" || v === "on" || v === "always") return "always";
     if (v === "once" || v === "session") return "once";
-    if (v === "1" || v === "on") return "always";
-    return opts.oncePerSession ? "once" : "always";
+    return "off";
   }
 
   function forced() {

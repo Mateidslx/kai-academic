@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="swarm-booting">
+<html lang="fr" >
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,18 +25,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="portfolio_assets/style.css?v=22">
+  <link rel="stylesheet" href="portfolio_assets/style.css?v=23">
 
-  <!-- Zero-Flash Dark Curtain: keeps DOM computed rects valid while screen is 100% black until swarm canvas mounts -->
-  <style>
-    html.swarm-booting body {
-      background: #050505 !important;
-    }
-    html.swarm-booting .page-shell {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-  </style>
+  
 
   <script type="application/ld+json">
   {
@@ -487,28 +478,50 @@ Status_t tree_insert(Node_t** root, const int val)
         <div class="container">
           <div class="section-header">
             <div class="section-tag">// 02.00 ARCHITECTURE_ÉCLATÉE_3D</div>
-            <h2 class="section-title">Sous le Capot : Ma Pile Technique Dissociée en 6 Couches</h2>
+            <h2 class="section-title">Topologie Système Dissociée en 6 Couches</h2>
             <p class="section-desc">
-              Déplacez le curseur de dissociation Z ou survolez une plaque 3D : chaque couche s'écarte avec physique de ressort amorti Hooke, lignes de repère vectorielles dynamiques et atténuation des ombres.
+              Dissociation géométrique en 3D isométrique : du noyau standard ISO C99 jusqu'aux interfaces réactives 60 fps. Survolez ou cliquez chaque couche pour isoler son flux de données et ses garanties formelles de production.
             </p>
           </div>
 
-          <!-- Manual Explosion Controls -->
+          <!-- CAD Architecture Controls HUD -->
           <div class="exploded-controls-card">
-            <div class="exploded-ctrl-top">
-              <label for="exploded-range" class="exploded-ctrl-label">DISSOCIATION AXE Z</label>
-              <span class="exploded-pct-badge" id="exploded-pct-label">0%</span>
+            <div class="exploded-ctrl-header">
+              <div class="exploded-ctrl-title-group">
+                <span class="cad-indicator-led"></span>
+                <span class="exploded-ctrl-label">TOPOLOGIE SYSTÈME 3D // DISSOCIATION AXE Z</span>
+                <span class="exploded-pct-badge" id="exploded-pct-label">100% CAD</span>
+              </div>
+              <div class="exploded-preset-group">
+                <button type="button" class="cad-preset-btn" data-preset="0">0% Compact</button>
+                <button type="button" class="cad-preset-btn" data-preset="55">55% Écarté</button>
+                <button type="button" class="cad-preset-btn active" data-preset="100">100% Éclaté</button>
+              </div>
             </div>
-            <input type="range" id="exploded-range" class="exploded-range-input" min="0" max="100" value="0" aria-label="Niveau d'éclatement 3D" />
-            <div class="exploded-ctrl-actions">
-              <button type="button" class="btn btn-primary" id="exploded-toggle-btn">Éclater la vue 3D (100%)</button>
-              <span class="exploded-physics-hint">Ressort amorti Hooke (k=135, c=18) • Inclinaison 3D gyroscopique</span>
+            <div class="exploded-slider-wrapper">
+              <span class="slider-end-label">KERNEL (Z0)</span>
+              <input type="range" id="exploded-range" class="exploded-range-input" min="0" max="100" value="100" aria-label="Niveau d'éclatement 3D" />
+              <span class="slider-end-label">UI (Z+)</span>
+            </div>
+            <div class="exploded-ctrl-status">
+              <span class="cad-hint-text">Survolez ou cliquez une plaque pour isoler sa couche technique et ses garanties de production.</span>
+              <button type="button" class="btn btn-crimson-sm" id="exploded-toggle-btn">Rassembler la vue (0%)</button>
             </div>
           </div>
 
-          <!-- 3-Column Interactive 3D Stage + Dynamic SVG Callout Leader Lines -->
+          <!-- 3-Column Bilateral Architecture Stage + Glowing Dynamic SVG Laser Lines -->
           <div class="exploded-stage" id="exploded-stage">
-            <svg class="exploded-leader-svg" id="exploded-leader-svg" aria-hidden="true"></svg>
+            <svg class="exploded-leader-svg" id="exploded-leader-svg" aria-hidden="true">
+              <defs>
+                <filter id="laser-glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="3.5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+            </svg>
 
             <!-- Left Callouts (L06, L04, L02) -->
             <div class="exploded-callouts-col left" id="exploded-callouts-left"></div>
@@ -531,15 +544,19 @@ Status_t tree_insert(Node_t** root, const int val)
           <!-- Selected Layer Deep Inspector Bar -->
           <div class="exploded-inspector-bar">
             <div class="exploded-insp-main">
-              <span class="layer-badge" id="exploded-inspector-tag">COUCHE 06 // INTERFACE &amp; EXPÉRIENCE</span>
-              <h3 class="exploded-insp-title" id="exploded-inspector-title">Interfaces 60 fps, React &amp; Accessibilité WCAG</h3>
+              <div class="exploded-insp-header">
+                <span class="layer-badge" id="exploded-inspector-tag">COUCHE 06 // INTERFACE &amp; EXPÉRIENCE</span>
+                <span class="exploded-insp-status-pill">● ACTIF &amp; VÉRIFIÉ EN PRODUCTION</span>
+              </div>
+              <h3 class="exploded-insp-title" id="exploded-inspector-title">Interfaces 60 fps, WebSockets &amp; Accessibilité WCAG</h3>
               <p class="exploded-insp-desc" id="exploded-inspector-desc">
-                Applications TypeScript / React / Next.js et interfaces HTML/CSS/JS natives fluides à 60 fps, navigation clavier (⌘K, focus-trap) et contrastes soignés.
+                Applications TypeScript et interfaces HTML/CSS/JS natives fluides à 60 fps, navigation clavier (⌘K, focus-trap) et contrastes soignés.
               </p>
             </div>
             <div class="exploded-insp-proof-box">
-              <span class="exploded-proof-kicker">VÉRIFICATION CONCRÈTE</span>
+              <span class="exploded-proof-kicker">VÉRIFICATION CONCRÈTE &amp; CODE SOURCE</span>
               <p class="exploded-insp-proof" id="exploded-inspector-proof">Preuves : Ce portfolio interactif • Kai Academic • Dashboard Polymarket Live</p>
+              <a href="#projects" class="insp-action-btn" id="exploded-inspector-action">Consulter le projet associé →</a>
             </div>
           </div>
         </div>
@@ -967,9 +984,9 @@ Status_t tree_insert(Node_t** root, const int val)
   </div>
 
   <!-- App Core JS -->
-  <script src="portfolio_assets/exploded_view.js?v=22"></script>
-  <script src="portfolio_assets/app.js?v=22" defer></script>
+  <script src="portfolio_assets/exploded_view.js?v=23"></script>
+  <script src="portfolio_assets/app.js?v=23" defer></script>
   <!-- Swarm Rebuild Takeover Engine -->
-  <script src="portfolio_assets/swarm-init.js?v=22" defer></script>
+  <script src="portfolio_assets/swarm-init.js?v=23" defer></script>
 </body>
 </html>

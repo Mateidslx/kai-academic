@@ -1,6 +1,6 @@
 /* ==========================================================================
-   MATÉI DE SAINT LÉGER — INTERACTIVE 3D / 2.5D EXPLODED ARCHITECTURE VIEW
-   Spring-Damped Axis Dissociation | SVG Leader Callouts | Attenuating Shadows
+   MATÉI DE SAINT LÉGER — CAD ARCHITECTURE TOPOLOGY & 3D ISOMETRIC STACK
+   Bilateral Symmetry | Glowing Neon Laser Traces | CAD Inspector HUD
    ========================================================================== */
 
 (function () {
@@ -24,6 +24,9 @@
         'Responsive vanilla interfaces at 60fps: full keyboard navigation (⌘K, modal focus-traps), real-time orderbook depth streams, and high contrast.',
       proofFr: 'Preuves : Ce portfolio interactif • Kai Academic • Dashboard Polymarket Live',
       proofEn: 'Proof: This interactive portfolio • Kai Academic • Live Polymarket Dashboard',
+      actionHref: '#hero',
+      actionFr: 'Tester la navigation 60 fps ↑',
+      actionEn: 'Test 60fps navigation ↑',
       svgIcon: `<rect x="18" y="22" width="64" height="44" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="18" y1="33" x2="82" y2="33" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="27.5" r="2" fill="#ef4444"/><circle cx="32" cy="27.5" r="2" fill="currentColor"/><path d="M30 50 L42 42 L52 52 L70 39" fill="none" stroke="#ef4444" stroke-width="2.5"/>`
     },
     {
@@ -43,6 +46,9 @@
         'Published Model Context Protocol servers, multi-agent consensus swarms (36 specialized agents), Polymarket prediction arbitrage, and Bayesian models.',
       proofFr: 'Preuves : security-scanner-mcp • Moteur Polymarket V71-V150 • Swarm Kai',
       proofEn: 'Proof: security-scanner-mcp • Polymarket Engine V71-V150 • Kai Swarm',
+      actionHref: '#flagships',
+      actionFr: 'Explorer le moteur Polymarket →',
+      actionEn: 'Explore Polymarket Engine →',
       svgIcon: `<circle cx="30" cy="32" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="30" cy="58" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="54" cy="45" r="7" fill="none" stroke="#ef4444" stroke-width="2.5"/><circle cx="75" cy="45" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><line x1="36" y1="34" x2="47" y2="42" stroke="currentColor" stroke-width="1.8"/><line x1="36" y1="56" x2="47" y2="48" stroke="currentColor" stroke-width="1.8"/><line x1="61" y1="45" x2="69" y2="45" stroke="#ef4444" stroke-width="2.2"/>`
     },
     {
@@ -62,6 +68,9 @@
         'Strict mutation authorization checks, input sanitization, internal stack trace leak elimination, and RFC 9116 security.txt verification.',
       proofFr: 'Preuves : 7 PRs fusionnées sur BasedHardware/omi • Audits de sécurité',
       proofEn: 'Proof: 7 merged PRs on BasedHardware/omi • AppSec code audits',
+      actionHref: '#projects',
+      actionFr: 'Voir les PRs de sécurité fusionnées →',
+      actionEn: 'View merged security PRs →',
       svgIcon: `<path d="M50 18 L76 30 V50 C76 66 50 82 50 82 C50 82 24 66 24 50 V30 Z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M50 36 V62 M38 49 H62" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>`
     },
     {
@@ -81,6 +90,9 @@
         'Normalized relational schemas (Merise MCD/MLD, 3NF SQL), high-performance vector databases, and immutable transaction ledger architecture.',
       proofFr: 'Preuves : Letta Memory OS • Trade Ledger SHA-256 • Projets R1.05 IUT',
       proofEn: 'Proof: Letta Memory OS • SHA-256 Trade Ledger • IUT R1.05 SQL Labs',
+      actionHref: '#parcours',
+      actionFr: 'Consulter l\'ADN Données & SQL →',
+      actionEn: 'View Data & SQL DNA →',
       svgIcon: `<ellipse cx="50" cy="28" rx="28" ry="10" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M22 28 V50 C22 56 34 60 50 60 C66 60 78 56 78 50 V28" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M22 50 V72 C22 78 34 82 50 82 C66 82 78 78 78 72 V50" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M40 45 L50 53 L62 39" fill="none" stroke="#38bdf8" stroke-width="2.5"/>`
     },
     {
@@ -100,13 +112,16 @@
         'Ubuntu 24.04 server orchestration without proprietary cloud locks: self-healing systemd services, encrypted Cloudflare tunnels, and continuous daemons.',
       proofFr: 'Preuves : VPS Oracle Cloud 88.96.47.180 • Uptime 99.98% • Sentinelles actives',
       proofEn: 'Proof: Oracle Cloud VPS 88.96.47.180 • 99.98% uptime • Active sentinels',
+      actionHref: '#flagships',
+      actionFr: 'Inspecter l\'infrastructure Cloud 24/7 →',
+      actionEn: 'Inspect 24/7 Cloud Infrastructure →',
       svgIcon: `<rect x="20" y="24" width="60" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="28" cy="34" r="2.5" fill="#f59e0b"/><line x1="36" y1="34" x2="68" y2="34" stroke="currentColor" stroke-width="2"/><rect x="20" y="52" width="60" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="28" cy="62" r="2.5" fill="#10b981"/><line x1="36" y1="62" x2="56" y2="62" stroke="currentColor" stroke-width="2"/>`
     },
     {
       code: 'L01',
       side: 'right',
       slot: 2,
-      accent: '#38bdf8',
+      accent: '#10b981',
       tagFr: 'COUCHE 01 // BAS NIVEAU, C99 & INTÉGRITÉ MÉMOIRE',
       tagEn: 'LAYER 01 // SYSTEMS, ISO C99 & MEMORY INTEGRITY',
       titleFr: 'ISO C99 Stricte, Arbres AST & Valgrind Zéro Fuite',
@@ -119,7 +134,10 @@
         'ANSI/ISO C99 systems programming compiled under -Wall -Wextra -Werror, Allman bracing style, strict prototyping, and Valgrind verification (0 bytes leaked).',
       proofFr: 'Preuves : AlgoForge Pro Studio • Katas algorithmiques IUT Anglet (R1.01)',
       proofEn: 'Proof: AlgoForge Pro Studio • IUT Anglet algorithmic katas (R1.01)',
-      svgIcon: `<rect x="26" y="26" width="48" height="48" rx="6" fill="none" stroke="currentColor" stroke-width="2.3"/><line x1="34" y1="18" x2="34" y2="26" stroke="#38bdf8" stroke-width="2.5"/><line x1="50" y1="18" x2="50" y2="26" stroke="#38bdf8" stroke-width="2.5"/><line x1="66" y1="18" x2="66" y2="26" stroke="#38bdf8" stroke-width="2.5"/><line x1="34" y1="74" x2="34" y2="82" stroke="#38bdf8" stroke-width="2.5"/><line x1="50" y1="74" x2="50" y2="82" stroke="#38bdf8" stroke-width="2.5"/><line x1="66" y1="74" x2="66" y2="82" stroke="#38bdf8" stroke-width="2.5"/><text x="50" y="55" font-family="monospace" font-size="14" font-weight="bold" fill="currentColor" text-anchor="middle">C99</text>`
+      actionHref: '#flagships',
+      actionFr: 'Tester AlgoForge & Valgrind dans le terminal →',
+      actionEn: 'Test AlgoForge & Valgrind in terminal →',
+      svgIcon: `<rect x="26" y="26" width="48" height="48" rx="6" fill="none" stroke="currentColor" stroke-width="2.3"/><line x1="34" y1="18" x2="34" y2="26" stroke="#10b981" stroke-width="2.5"/><line x1="50" y1="18" x2="50" y2="26" stroke="#10b981" stroke-width="2.5"/><line x1="66" y1="18" x2="66" y2="26" stroke="#10b981" stroke-width="2.5"/><line x1="34" y1="74" x2="34" y2="82" stroke="#10b981" stroke-width="2.5"/><line x1="50" y1="74" x2="50" y2="82" stroke="#10b981" stroke-width="2.5"/><line x1="66" y1="74" x2="66" y2="82" stroke="#10b981" stroke-width="2.5"/><text x="50" y="55" font-family="monospace" font-size="14" font-weight="bold" fill="currentColor" text-anchor="middle">C99</text>`
     }
   ];
 
@@ -137,25 +155,27 @@
     const slider = document.getElementById('exploded-range');
     const pctLabel = document.getElementById('exploded-pct-label');
     const toggleBtn = document.getElementById('exploded-toggle-btn');
+    const presetBtns = document.querySelectorAll('.cad-preset-btn');
 
     const inspTag = document.getElementById('exploded-inspector-tag');
     const inspTitle = document.getElementById('exploded-inspector-title');
     const inspDesc = document.getElementById('exploded-inspector-desc');
     const inspProof = document.getElementById('exploded-inspector-proof');
+    const inspAction = document.getElementById('exploded-inspector-action');
 
     if (!stage || !stackContainer || !calloutsLeft || !calloutsRight) return;
 
     let selectedIdx = 0;
-    let currentE = 0.0;
-    let targetE = 0.0;
-    let currentRotX = 57;
-    let targetRotX = 57;
-    let currentRotZ = -38;
-    let targetRotZ = -38;
+    let currentE = 1.0;
+    let targetE = 1.0;
+    let currentRotX = 58;
+    let targetRotX = 58;
+    let currentRotZ = -36;
+    let targetRotZ = -36;
     let manualOverride = false;
     let isTicking = false;
 
-    // Build slabs and callout elements
+    // Slabs and callouts references
     const slabs = [];
     const callouts = [];
 
@@ -165,7 +185,7 @@
     calloutsRight.innerHTML = '';
 
     EXPLODED_LAYERS.forEach((data, index) => {
-      // 3D Slab
+      // 3D CAD Slab
       const slab = document.createElement('div');
       slab.className = `exploded-slab slab-${data.code.toLowerCase()}`;
       slab.setAttribute('data-index', String(index));
@@ -175,11 +195,18 @@
 
       slab.innerHTML = `
         <div class="slab-face top">
-          <div class="slab-chip">
-            <span class="slab-badge">${data.code}</span>
-            <span class="slab-name">${data.shortFr}</span>
+          <div class="slab-header">
+            <span class="slab-badge-pill" style="background: ${data.accent}22; color: ${data.accent}; border: 1px solid ${data.accent}55;">${data.code}</span>
+            <span class="slab-category">${data.shortFr}</span>
+            <span class="slab-indicator" style="background: ${data.accent}; box-shadow: 0 0 8px ${data.accent};"></span>
           </div>
-          <svg class="slab-glyph" viewBox="0 0 100 100">${data.svgIcon}</svg>
+          <div class="slab-center">
+            <div class="slab-title">${data.titleFr}</div>
+          </div>
+          <div class="slab-footer">
+            <span class="slab-tag-badge">${data.tagFr.split('//')[1].trim()}</span>
+            <svg class="slab-glyph" viewBox="0 0 100 100">${data.svgIcon}</svg>
+          </div>
         </div>
         <div class="slab-face side-x"></div>
         <div class="slab-face side-y"></div>
@@ -193,10 +220,19 @@
       callout.className = `exploded-callout callout-${data.side}`;
       callout.setAttribute('data-index', String(index));
       callout.innerHTML = `
-        <span class="callout-code">${data.code}</span>
-        <div class="callout-body">
-          <strong class="callout-title">${data.titleFr}</strong>
-          <span class="callout-meta">${data.shortFr}</span>
+        <div class="callout-indicator-bar" style="background: ${data.accent};"></div>
+        <div class="callout-inner">
+          <div class="callout-top">
+            <span class="callout-code" style="color: ${data.accent}; background: ${data.accent}18; border: 1px solid ${data.accent}44;">${data.code}</span>
+            <span class="callout-domain">${data.shortFr}</span>
+          </div>
+          <div class="callout-body">
+            <strong class="callout-title">${data.titleFr}</strong>
+            <p class="callout-desc">${data.descFr}</p>
+          </div>
+          <div class="callout-footer">
+            <span class="callout-proof-pill">Garantie : ${data.proofFr.split('•')[0].replace('Preuves :', '').trim()}</span>
+          </div>
         </div>
       `;
 
@@ -211,7 +247,8 @@
       function triggerSelect() {
         selectLayer(index);
         manualOverride = true;
-        if (targetE < 0.35) targetE = 0.75;
+        if (targetE < 0.4) targetE = 0.8;
+        updatePresetActive();
         requestTick();
       }
 
@@ -237,13 +274,25 @@
       if (inspTitle) inspTitle.textContent = lang === 'en' ? data.titleEn : data.titleFr;
       if (inspDesc) inspDesc.textContent = lang === 'en' ? data.descEn : data.descFr;
       if (inspProof) inspProof.textContent = lang === 'en' ? data.proofEn : data.proofFr;
+      if (inspAction) {
+        inspAction.setAttribute('href', data.actionHref);
+        inspAction.textContent = lang === 'en' ? data.actionEn : data.actionFr;
+      }
+    }
+
+    function updatePresetActive() {
+      const pct = Math.round(targetE * 100);
+      presetBtns.forEach((btn) => {
+        const p = parseInt(btn.getAttribute('data-preset') || '-1', 10);
+        btn.classList.toggle('active', Math.abs(p - pct) < 15);
+      });
     }
 
     function computeScrollExplosion() {
       const rect = stage.getBoundingClientRect();
       const vh = window.innerHeight || 800;
-      const start = vh * 0.85;
-      const end = vh * 0.15;
+      const start = vh * 0.9;
+      const end = vh * 0.2;
       const progress = (start - rect.top) / (start - end);
       return Math.max(0, Math.min(1, progress));
     }
@@ -252,26 +301,26 @@
       const e = currentE;
       const pct = Math.round(e * 100);
       if (slider && !manualOverride) slider.value = String(pct);
-      if (pctLabel) pctLabel.textContent = `${pct}%`;
+      if (pctLabel) pctLabel.textContent = `${pct}% CAD`;
 
       const lang = getLang();
       if (toggleBtn) {
-        if (e > 0.55) {
-          toggleBtn.textContent = lang === 'en' ? 'Contract 3D View (0%)' : 'Rassembler la vue (0%)';
+        if (e > 0.5) {
+          toggleBtn.textContent = lang === 'en' ? 'Contract View (0%)' : 'Rassembler la vue (0%)';
         } else {
-          toggleBtn.textContent = lang === 'en' ? 'Explode 3D View (100%)' : 'Éclater la vue (100%)';
+          toggleBtn.textContent = lang === 'en' ? 'Explode View (100%)' : 'Éclater la vue (100%)';
         }
       }
 
-      // Position Slabs along Z axis
+      // Position Slabs along Z axis with isometric elevation
       const n = slabs.length;
       slabs.forEach((slab, i) => {
         const orderFromBottom = n - 1 - i;
-        const baseZ = orderFromBottom * 18;
-        const expandedZ = orderFromBottom * 82;
+        const baseZ = orderFromBottom * 16;
+        const expandedZ = orderFromBottom * 76;
         const z = baseZ + (expandedZ - baseZ) * e;
         const isSelected = i === selectedIdx;
-        const lift = isSelected ? 12 : 0;
+        const lift = isSelected ? 14 : 0;
 
         slab.style.transform = `translate3d(0, 0, ${z + lift}px)`;
         slab.style.opacity = '1';
@@ -279,21 +328,21 @@
 
       // Floor Shadow
       if (floorShadow) {
-        const shadowScale = 1 - e * 0.28;
-        const shadowOpacity = 0.75 - e * 0.45;
+        const shadowScale = 1 - e * 0.25;
+        const shadowOpacity = 0.85 - e * 0.45;
         floorShadow.style.transform = `scale(${shadowScale})`;
         floorShadow.style.opacity = String(shadowOpacity);
       }
 
-      // Animate Callouts Opacity & Drift
+      // Animate Callouts Opacity & Position
       callouts.forEach((callout, i) => {
         const isLeft = EXPLODED_LAYERS[i].side === 'left';
-        const slideX = isLeft ? (1 - e) * -16 : (1 - e) * 16;
-        callout.style.opacity = String(0.4 + e * 0.6);
+        const slideX = isLeft ? (1 - e) * -12 : (1 - e) * 12;
+        callout.style.opacity = String(0.65 + e * 0.35);
         callout.style.transform = `translateX(${slideX}px)`;
       });
 
-      // Draw SVG Leader Lines
+      // Draw Glowing SVG Leader Lines
       drawLeaderLines();
     }
 
@@ -304,7 +353,19 @@
       const h = stageRect.height;
 
       leaderSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-      let paths = '';
+      let defs = `
+        <defs>
+          <filter id="laser-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+      `;
+
+      let paths = defs;
 
       slabs.forEach((slab, i) => {
         const callout = callouts[i];
@@ -317,35 +378,57 @@
         const startX = isLeft ? calloutRect.right - stageRect.left : calloutRect.left - stageRect.left;
         const startY = calloutRect.top + calloutRect.height / 2 - stageRect.top;
 
-        const endX = isLeft ? slabRect.left + slabRect.width * 0.2 - stageRect.left : slabRect.right - slabRect.width * 0.2 - stageRect.left;
+        const endX = isLeft ? slabRect.left + 22 - stageRect.left : slabRect.right - 22 - stageRect.left;
         const endY = slabRect.top + slabRect.height / 2 - stageRect.top;
 
         const isSelected = i === selectedIdx;
-        const strokeColor = isSelected ? '#ff1744' : 'rgba(255, 255, 255, 0.2)';
-        const strokeWidth = isSelected ? 2 : 1;
-        const dash = isSelected ? '' : 'stroke-dasharray="3 3"';
-
+        const accent = EXPLODED_LAYERS[i].accent || '#ef4444';
         const midX = (startX + endX) / 2;
 
-        paths += `
-          <path d="M${startX},${startY} C${midX},${startY} ${midX},${endY} ${endX},${endY}"
-                fill="none" stroke="${strokeColor}" stroke-width="${strokeWidth}" ${dash} opacity="${currentE > 0.15 ? 0.85 : 0.2}" />
-        `;
+        if (isSelected) {
+          // Selected Active Layer: Glowing Crimson Laser Beam with Radar Ping circles
+          paths += `
+            <g class="leader-laser-group active">
+              <path d="M${startX},${startY} C${midX},${startY} ${midX},${endY} ${endX},${endY}"
+                    fill="none" stroke="${accent}" stroke-width="2.6" filter="url(#laser-glow)" />
+              <circle cx="${startX}" cy="${startY}" r="4.5" fill="${accent}" />
+              <circle cx="${startX}" cy="${startY}" r="8" fill="none" stroke="${accent}" stroke-width="1.5" opacity="0.6">
+                <animate attributeName="r" values="4.5;11;4.5" dur="1.8s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.8;0;0.8" dur="1.8s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="${endX}" cy="${endY}" r="4.5" fill="${accent}" />
+              <circle cx="${endX}" cy="${endY}" r="8" fill="none" stroke="${accent}" stroke-width="1.5" opacity="0.6">
+                <animate attributeName="r" values="4.5;11;4.5" dur="1.8s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.8;0;0.8" dur="1.8s" repeatCount="indefinite" />
+              </circle>
+            </g>
+          `;
+        } else {
+          // Inactive Layer: Crisp structural architectural dash line
+          paths += `
+            <g class="leader-laser-group inactive">
+              <path d="M${startX},${startY} C${midX},${startY} ${midX},${endY} ${endX},${endY}"
+                    fill="none" stroke="rgba(255, 255, 255, 0.25)" stroke-width="1.2" stroke-dasharray="4 4" opacity="${currentE > 0.15 ? 0.75 : 0.3}" />
+              <circle cx="${startX}" cy="${startY}" r="2.5" fill="rgba(255, 255, 255, 0.45)" />
+              <circle cx="${endX}" cy="${endY}" r="2.5" fill="rgba(255, 255, 255, 0.45)" />
+            </g>
+          `;
+        }
       });
 
       leaderSvg.innerHTML = paths;
     }
 
     function tick() {
-      // Spring physics toward targetE
+      // Smooth spring damping
       const diffE = targetE - currentE;
-      currentE += diffE * 0.14;
+      currentE += diffE * 0.15;
 
       const diffRotX = targetRotX - currentRotX;
-      currentRotX += diffRotX * 0.14;
+      currentRotX += diffRotX * 0.15;
 
       const diffRotZ = targetRotZ - currentRotZ;
-      currentRotZ += diffRotZ * 0.14;
+      currentRotZ += diffRotZ * 0.15;
 
       if (stackContainer) {
         stackContainer.style.transform = `rotateX(${currentRotX}deg) rotateZ(${currentRotZ}deg)`;
@@ -375,6 +458,7 @@
       function () {
         if (!manualOverride) {
           targetE = computeScrollExplosion();
+          updatePresetActive();
         } else {
           const rect = stage.getBoundingClientRect();
           if (rect.bottom < 0 || rect.top > window.innerHeight) {
@@ -392,14 +476,28 @@
       slider.addEventListener('input', function () {
         manualOverride = true;
         targetE = Math.max(0, Math.min(1, parseFloat(slider.value || '0') / 100));
+        updatePresetActive();
         requestTick();
       });
     }
 
+    presetBtns.forEach((btn) => {
+      btn.addEventListener('click', function () {
+        manualOverride = true;
+        const val = parseFloat(btn.getAttribute('data-preset') || '100') / 100;
+        targetE = val;
+        if (slider) slider.value = String(Math.round(val * 100));
+        updatePresetActive();
+        requestTick();
+      });
+    });
+
     if (toggleBtn) {
       toggleBtn.addEventListener('click', function () {
         manualOverride = true;
-        targetE = targetE > 0.55 ? 0.0 : 1.0;
+        targetE = targetE > 0.5 ? 0.0 : 1.0;
+        if (slider) slider.value = String(Math.round(targetE * 100));
+        updatePresetActive();
         requestTick();
       });
     }
@@ -410,22 +508,24 @@
         const r = stage.getBoundingClientRect();
         const nx = (ev.clientX - r.left) / Math.max(1, r.width) - 0.5;
         const ny = (ev.clientY - r.top) / Math.max(1, r.height) - 0.5;
-        targetRotX = 57 - ny * 8;
-        targetRotZ = -38 + nx * 10;
+        targetRotX = 58 - ny * 8;
+        targetRotZ = -36 + nx * 10;
         requestTick();
       },
       { passive: true }
     );
 
     stage.addEventListener('mouseleave', function () {
-      targetRotX = 57;
-      targetRotZ = -38;
+      targetRotX = 58;
+      targetRotZ = -36;
       requestTick();
     });
 
+    // Initial setup: start at 100% CAD explosion
     selectLayer(0);
-    targetE = computeScrollExplosion();
-    currentE = targetE;
+    targetE = 1.0;
+    currentE = 1.0;
+    updatePresetActive();
     applyVisuals();
   }
 
