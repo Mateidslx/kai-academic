@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matéi de Saint Léger — Prototype Atelier &amp; Bibliothèque</title>
+  <meta name="description" content="Prototype expérimental : minimalisme de la toile blanche, goutte d'encre de Chine, réalisme tactile et univers de vieille bibliothèque d'ingénieur.">
+
+  <!-- Google Fonts: Newsreader (Editorial Serif), Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="prototype_assets/prototype.css">
+</head>
+<body>
+
+  <!-- Subtle Washi / Cotton Paper Grain Filter -->
+  <div class="paper-grain-overlay" aria-hidden="true"></div>
+
+  <!-- Silk Ribbon Bookmark ("Le Signet en Soie Rouge") -->
+  <div class="silk-ribbon-bookmark" id="silk-ribbon" title="Retourner en haut du folio (Signet en soie)"></div>
+
+  <!-- Top Tactile Navigation Dock -->
+  <header class="atelier-nav-container">
+    <nav class="atelier-nav" aria-label="Navigation Principale">
+      <a href="#hero" class="atelier-brand">
+        <svg class="brand-seal-icon" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M8 8 L16 16 M16 8 L8 16" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>MATÉI.</span>
+      </a>
+
+      <div class="atelier-nav-links">
+        <a href="#catalogue" class="atelier-nav-item">Fichier 3x5</a>
+        <a href="#traite" class="atelier-nav-item">Traité &amp; Marginalia</a>
+        <a href="#colophon" class="atelier-nav-item">Colophon</a>
+      </div>
+
+      <!-- Dual Aesthetic Switcher Button -->
+      <button type="button" class="theme-switch-btn" id="btn-toggle-theme" aria-label="Basculer d'ambiance">
+        <span class="theme-dot"></span>
+        <span id="theme-label">Toile Blanche &amp; Encre</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         HERO — TOILE BLANCHE & GOUTTE D'ENCRE
+         ==================================================================== -->
+    <section class="hero-atelier" id="hero">
+      <!-- Interactive Ink Drop Canvas -->
+      <div class="ink-canvas-wrapper">
+        <canvas id="ink-canvas"></canvas>
+      </div>
+
+      <div class="hero-content">
+        <div class="ex-libris-pill">
+          <span>● EX-LIBRIS MMXXVI • BUT 1 ANGLET</span>
+        </div>
+
+        <h1 class="hero-title">
+          Le Code comme un <em>Traité Classique.</em>
+        </h1>
+
+        <p class="hero-lead">
+          Je suis <strong>Matéi de Saint Léger</strong> — étudiant en BUT Informatique (Campus d'Anglet). J'architecture des <strong>systèmes autonomes 24/7</strong>, des <strong>moteurs quantitatifs prédictifs</strong> et des structures de données <strong>C99 pures</strong> sous Valgrind : avec la rigueur d'un copiste ancien et la précision des premiers principes.
+        </p>
+
+        <div class="ink-toolbar">
+          <button type="button" class="btn-ink-action" id="btn-drop-ink">
+            💧 Laisser tomber une goutte d'encre
+          </button>
+          <button type="button" class="btn-ink-action" id="btn-clear-canvas">
+            Nettoyer la toile
+          </button>
+        </div>
+
+        <span class="canvas-hint">
+          Astuce : Cliquez ou touchez n'importe où sur la toile pour voir l'encre noire se diffuser dans le papier.
+        </span>
+      </div>
+    </section>
+
+    <!-- Chapter Divider I -->
+    <div class="chapter-divider container">
+      <span class="chapter-line"></span>
+      <span class="chapter-number">I. Le Fichier des Archives</span>
+      <span class="chapter-line"></span>
+    </div>
+
+    <!-- ====================================================================
+         SECTION I — LE CARD CATALOG 3x5 (FICHIER DE BIBLIOTHÈQUE)
+         ==================================================================== -->
+    <section class="section" id="catalogue">
+      <div class="container">
+        <div class="section-editorial-header">
+          <div class="section-eyebrow">SYSTÈMES &amp; ARCHIVES LOGICIELLES</div>
+          <h2 class="section-editorial-title">Le Catalogue sur Fiches 3x5</h2>
+          <p class="section-editorial-desc">
+            Chaque architecture est classifiée selon la rigueur bibliothécaire : cotes universelles, garanties formelles et intégrité de production.
+          </p>
+        </div>
+
+        <div class="card-catalog-grid">
+          <!-- Card 1: AlgoForge C99 -->
+          <article class="library-card">
+            <div>
+              <div class="card-top-tab">
+                <span class="dewey-call-number">QA 76.73 .C15</span>
+                <span class="card-archive-date">RECUEIL 2024–2026</span>
+              </div>
+              <h3 class="card-title">AlgoForge : Arbres AST &amp; ISO C99 Strict</h3>
+              <p class="card-abstract">
+                Développement système bas-niveau sans ramasse-miettes (garbage collector). Algorithmes de tri par tripartition, arbres équilibrés AVL et vérification dynamique Valgrind : 0 fuite, 0 octet résiduel sous -Wall -Wextra -Werror.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="card-tags">
+                <span class="archive-tag">ISO C99</span>
+                <span class="archive-tag">Valgrind 0-Leak</span>
+                <span class="archive-tag">Allman Rigor</span>
+              </div>
+              <span class="card-stamp">● CONFORME</span>
+            </div>
+          </article>
+
+          <!-- Card 2: Polymarket Engine -->
+          <article class="library-card">
+            <div>
+              <div class="card-top-tab">
+                <span class="dewey-call-number">HG 6024 .P7</span>
+                <span class="card-archive-date">DÉPÔT ACTIF 24/7</span>
+              </div>
+              <h3 class="card-title">Moteur Quantitatif Polymarket CLOB</h3>
+              <p class="card-abstract">
+                Arbitrage probabiliste en direct sur carnet d'ordres centralisé (CLOB). Collecte asynchrone WebSockets sous 50ms, modèles bayésiens et Trade Ledger immuable tournant sans interruption sur serveur cloud dédié Oracle.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="card-tags">
+                <span class="archive-tag">Python Asyncio</span>
+                <span class="archive-tag">WebSockets</span>
+                <span class="archive-tag">Oracle VPS</span>
+              </div>
+              <span class="card-stamp">● EN DIRECT</span>
+            </div>
+          </article>
+
+          <!-- Card 3: Twenty CRM & Omi -->
+          <article class="library-card">
+            <div>
+              <div class="card-top-tab">
+                <span class="dewey-call-number">QA 76.76 .A65</span>
+                <span class="card-archive-date">46 PRS MERGÉES</span>
+              </div>
+              <h3 class="card-title">Twenty (40k★) &amp; Omi : AppSec &amp; Hardening</h3>
+              <p class="card-abstract">
+                Contributions de sécurité sur des dépôts majeurs : colmatage de vulnérabilités XSS (CWE-79), masquage d'erreurs internes (CWE-209), intégrité relationnelle en cascade et tests unitaires hermétiques Vitest.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="card-tags">
+                <span class="archive-tag">TypeScript</span>
+                <span class="archive-tag">NestJS</span>
+                <span class="archive-tag">Vitest</span>
+              </div>
+              <span class="card-stamp">● FUSIONNÉ</span>
+            </div>
+          </article>
+
+          <!-- Card 4: Letta Memory OS -->
+          <article class="library-card">
+            <div>
+              <div class="card-top-tab">
+                <span class="dewey-call-number">Z 665 .K34</span>
+                <span class="card-archive-date">SYSTÈME KAI</span>
+              </div>
+              <h3 class="card-title">Architecture de Mémoire Hiérarchique Letta</h3>
+              <p class="card-abstract">
+                Système d'exploitation mémoriel autonome inspiré de MemGPT : partitionnement en Core Memory vivante, Recall Memory chronologique et Archival Memory vectorielle adossée à SQLite WAL et SQL relationnel en 3e Forme Normale.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="card-tags">
+                <span class="archive-tag">SQLite WAL</span>
+                <span class="archive-tag">SQL 3NF</span>
+                <span class="archive-tag">Multi-Agents</span>
+              </div>
+              <span class="card-stamp">● ACTIF</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter Divider II -->
+    <div class="chapter-divider container">
+      <span class="chapter-line"></span>
+      <span class="chapter-number">II. Traité de Méthode</span>
+      <span class="chapter-line"></span>
+    </div>
+
+    <!-- ====================================================================
+         SECTION II — TRAITÉ DE MÉTHODE & MARGINALIA ÉDITORIALE
+         ==================================================================== -->
+    <section class="section" id="traite">
+      <div class="container">
+        <div class="folio-reading-layout">
+          <!-- Main Reading Column -->
+          <div class="folio-main-column">
+            <blockquote class="folio-quote">
+              « Je ne conçois pas l'ingénierie logicielle comme un empilement fébrile de bibliothèques éphémères, mais comme la recherche déterministe de la vérité du silicium et de l'élégance de la pensée. »
+            </blockquote>
+
+            <p class="folio-text">
+              Mon apprentissage a été forgé loin des tutoriels préfabriqués : dans la rigueur des structures de données C99 sans filet, l'analyse tactique de positions d'échecs calculées à cinq coups d'avance, et la mise en production de démons Linux continus sur serveur dédié.
+            </p>
+
+            <p class="folio-text">
+              Tout comme un manuscrit enluminé exige que chaque mot soit pesé et chaque blanc respecté, une base de code solide exige des contrats formels : allocation mémoire contrôlée à l'octet près, schémas relationnels normalisés en 3NF et vérification hermétique en intégration continue.
+            </p>
+          </div>
+
+          <!-- Marginalia Sidebar (Notes de Marge) -->
+          <aside class="marginalia-sidebar" aria-label="Notes de marge">
+            <div class="marginalia-note">
+              <span class="marginalia-label">GLOSE 01 // BAS-NIVEAU</span>
+              Le C99 impose la maîtrise de l'arène : pointeurs, alignement mémoire, zéro fuite avec Valgrind.
+            </div>
+
+            <div class="marginalia-note">
+              <span class="marginalia-label">GLOSE 02 // TACTIQUE</span>
+              Échecs (~1500 Elo) : l'élagage Alpha-Bêta appliqué à la résolution de bugs complexes.
+            </div>
+
+            <div class="marginalia-note">
+              <span class="marginalia-label">GLOSE 03 // ACADÉMIQUE</span>
+              Campus d'Anglet (IUT UPPA), Lycée Cantau : la rigueur mathématique alliée au terrain.
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION III — L'EX-LIBRIS OFFICIEL & COLOPHON
+         ==================================================================== -->
+    <section class="section" id="colophon">
+      <div class="container">
+        <div class="ex-libris-colophon">
+          <svg class="ex-libris-seal-symbol" viewBox="0 0 100 100">
+            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="currentColor" stroke-width="4"/>
+            <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 3"/>
+            <text x="50" y="58" font-family="'Newsreader', serif" font-size="26" font-weight="bold" fill="currentColor" text-anchor="middle">MS</text>
+          </svg>
+          <h3 class="ex-libris-title">Ex-Libris Matéi de Saint Léger</h3>
+          <p class="ex-libris-sub">
+            BUT 1 Informatique — Campus d'Anglet / UPPA<br>
+            À la recherche d'une alternance BUT 2 d'excellence (Septembre 2025/2026)<br>
+            Côte Basque (BAB) &amp; Hybride / Remote
+          </p>
+          <p class="ex-libris-sub" style="margin-top: 14px; font-weight: 700;">
+            <a href="mailto:matei64200@gmail.com" style="color: inherit; text-decoration: underline;">matei64200@gmail.com</a> • 
+            <a href="https://github.com/Mateidslx" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">GitHub</a> • 
+            <a href="https://www.linkedin.com/in/mat%C3%A9i-de-saint-l%C3%A9ger-24329a32b/" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="prototype_assets/ink_canvas.js"></script>
+  <script src="prototype_assets/prototype_app.js"></script>
+</body>
+</html>
