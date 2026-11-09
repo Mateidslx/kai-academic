@@ -503,7 +503,7 @@
         } else if (lower === 'cat cv') {
           printLine('Matéi de Saint Léger — Étudiant BUT 1 Informatique (IUT d\'Anglet)', 'accent');
           printLine('Recherche: Alternance BUT 2 (Septembre 2025/2026, Côte Basque / Hybride / Remote)');
-          printLine('Email: matei64200@gmail.com | Tél: 06 59 31 16 71');
+          printLine('Email: matei64200@gmail.com ');
           printLine('GitHub: https://github.com/Mateidslx');
           printLine('LinkedIn: https://linkedin.com/in/matéi-de-saint-léger-24329a32b/');
           printLine('Téléchargements disponibles : CV Français (PDF) et English Resume (PDF)');
