@@ -1396,12 +1396,42 @@ main {
 }
 
 .akaru-visual-stage {
-  height: 196px;
+  height: 232px;
   width: 100%;
   flex-shrink: 0;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
+  background: #08090d;
+}
+
+.akaru-visual-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 9, 13, 0.72) 0%,
+    rgba(8, 9, 13, 0.08) 42%,
+    rgba(8, 9, 13, 0.16) 62%,
+    rgba(8, 9, 13, 0.84) 100%
+  );
+}
+
+.akaru-stage-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.06) saturate(0.95);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+}
+
+.akaru-panel.is-active:hover .akaru-stage-img {
+  transform: scale(1.035);
+  filter: contrast(1.1) saturate(1.04);
 }
 
 .stage-hud-top {
@@ -1868,7 +1898,7 @@ main {
   }
 
   .akaru-visual-stage {
-    height: 165px;
+    height: 196px;
   }
 
   .akaru-meta-strip {
