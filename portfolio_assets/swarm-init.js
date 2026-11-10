@@ -32,7 +32,7 @@
   var opts = {
     auto: true,
     // Settle time after load+fonts before we snapshot the page.
-    delayMs: 350,
+    delayMs: 450,
     // Wait for webfonts before capturing, otherwise headings get captured with
     // a fallback font and the rebuilt page renders in the wrong typeface.
     waitFonts: true,
@@ -59,9 +59,10 @@
   //   default                 every load (opts.oncePerSession = false)
   function mode() {
     var v = q("swarm");
-    if (v === "1" || v === "on" || v === "always") return "always";
+    if (v === "off" || v === "0") return "off";
     if (v === "once" || v === "session") return "once";
-    return "off";
+    if (v === "1" || v === "on" || v === "always") return "always";
+    return opts.oncePerSession ? "once" : "always";
   }
 
   function forced() {
@@ -197,8 +198,12 @@
       }
     } catch (err) {
       console.error("[swarm] boot failed", err);
+      window.__swarmUnhide();
     }
   }
+
+  // Failsafe curtain removal so slow networks never trap the page blank
+  setTimeout(function () { window.__swarmUnhide(); }, 3000);
 
   if (disabled() || alreadyDone() || prefersReducedMotion()) {
     document.documentElement.classList.remove("swarm-booting");

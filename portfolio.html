@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" >
+<html lang="fr" class="swarm-booting">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,9 +23,20 @@
   <!-- Google Fonts: Bebas Neue, Caveat, Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="portfolio_assets/style.css?v=23">
+    <link rel="stylesheet" href="portfolio_assets/style.css?v=24">
+
+  <!-- Zero-Flash Dark Curtain: keeps DOM computed rects valid until swarm canvas mounts -->
+  <style>
+    html.swarm-booting body {
+      background: #050505 !important;
+    }
+    html.swarm-booting .page-shell {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  </style>
 
   
 
@@ -62,7 +73,7 @@
         <div class="nav-links">
           <a href="#about" class="nav-item">À Propos</a>
           <a href="#flagships" class="nav-item">Flagships</a>
-          <a href="#exploded-architecture" class="nav-item">Vue 3D</a>
+          <a href="#exploded-architecture" class="nav-item">Totem 3D</a>
           <a href="#projects" class="nav-item">Matrix</a>
           <a href="#parcours" class="nav-item">Parcours &amp; ADN</a>
           <a href="#contact" class="nav-item">Contact</a>
@@ -462,6 +473,110 @@ Status_t tree_insert(Node_t** root, const int val)
         </div>
       </section>
 
+
+      <!-- ====================================================================
+           02.00 SEC_EXPLODED_VIEW — INTERACTIVE 3D / 2.5D EXPLODED STACK
+           ==================================================================== -->
+      <section class="section totem-section" id="exploded-architecture">
+        <div class="totem-eyebrow-bar">
+          <div class="section-tag">// 02.00 MONOLITH_SERVICE_TOTEM</div>
+          <span class="totem-eyebrow-hint">6 COUCHES D'INGÉNIERIE • CLIQUEZ UN BLOC OU UTILISEZ ← / →</span>
+        </div>
+
+        <!-- Giant Top Kinetic Marquee Strip (Solid Crimson + Hollow Stroke) -->
+        <div class="totem-marquee-banner" aria-hidden="true">
+          <div class="totem-marquee-track">
+            <span class="marquee-word is-stroke">ARCHITECTURE</span>
+            <span class="marquee-word is-solid">ARCHITECTURE</span>
+            <span class="marquee-word is-stroke">ARCHITECTURE</span>
+            <span class="marquee-word is-solid">ARCHITECTURE</span>
+            <span class="marquee-word is-stroke">ARCHITECTURE</span>
+            <span class="marquee-word is-solid">ARCHITECTURE</span>
+          </div>
+        </div>
+
+        <div class="totem-stage-container">
+          <!-- Halftone Op-Art Radial Glow Backdrop -->
+          <div class="totem-halftone-bg" aria-hidden="true"></div>
+
+          <!-- 3D Isometric WebGL Monolith Canvas -->
+          <div class="totem-webgl-wrap">
+            <canvas id="totem-webgl-canvas" aria-label="Totem architectural 3D interactif à 6 étages"></canvas>
+          </div>
+
+          <!-- Floating Brutalist Editorial Alabaster Card (Left Overlap) -->
+          <div class="totem-card" role="region" aria-label="Détails de l'étage technique sélectionné">
+            <div class="totem-card-head">
+              <div class="totem-card-number" id="totem-card-number"></div>
+              <h2 class="totem-card-title" id="totem-card-title">SYSTÈMES &amp;<br/>ISO C99</h2>
+            </div>
+
+            <div class="totem-card-divider"></div>
+
+            <div class="totem-card-body-row">
+              <div class="totem-card-copy-wrap">
+                <p class="totem-card-desc" id="totem-card-desc"></p>
+                <div class="totem-card-proof-row">
+                  <span class="totem-proof-tag" id="totem-card-proof"></span>
+                  <button type="button" class="totem-cta-btn" id="totem-card-cta">AUDITER VALGRIND ↗</button>
+                </div>
+              </div>
+              <div class="totem-telem-col" aria-hidden="true">
+                <span class="totem-telem-sq active"></span>
+                <span class="totem-telem-sq"></span>
+                <span class="totem-telem-sq"></span>
+              </div>
+            </div>
+
+            <div class="totem-card-nav">
+              <button type="button" class="totem-arrow-btn" id="totem-btn-prev" aria-label="Étage précédent">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <svg class="pixel-arrow-svg" viewBox="0 0 64 40" width="44" height="28" fill="currentColor" aria-hidden="true">
+                  <rect x="24" y="4" width="6" height="6" />
+                  <rect x="18" y="10" width="6" height="6" />
+                  <rect x="12" y="16" width="6" height="6" />
+                  <rect x="24" y="16" width="6" height="6" />
+                  <rect x="34" y="16" width="6" height="6" />
+                  <rect x="44" y="16" width="6" height="6" />
+                  <rect x="54" y="16" width="6" height="6" />
+                  <rect x="18" y="22" width="6" height="6" />
+                  <rect x="24" y="28" width="6" height="6" />
+                </svg>
+              </button>
+
+              <div class="totem-counter" id="totem-card-counter">01/06</div>
+
+              <button type="button" class="totem-arrow-btn" id="totem-btn-next" aria-label="Étage suivant">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <svg class="pixel-arrow-svg" viewBox="0 0 64 40" width="44" height="28" fill="currentColor" aria-hidden="true">
+                  <rect x="34" y="4" width="6" height="6" />
+                  <rect x="40" y="10" width="6" height="6" />
+                  <rect x="4" y="16" width="6" height="6" />
+                  <rect x="14" y="16" width="6" height="6" />
+                  <rect x="24" y="16" width="6" height="6" />
+                  <rect x="34" y="16" width="6" height="6" />
+                  <rect x="46" y="16" width="6" height="6" />
+                  <rect x="40" y="22" width="6" height="6" />
+                  <rect x="34" y="28" width="6" height="6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Dark Capsule Index Selector -->
+          <div class="totem-bottom-capsule" role="tablist" aria-label="Navigation directe des couches du Totem">
+            <button type="button" class="totem-capsule-btn active" data-layer="0"><i class="cap-sq"></i><span>01 C99</span></button>
+            <button type="button" class="totem-capsule-btn" data-layer="1"><i class="cap-sq"></i><span>02 IA/QUANT</span></button>
+            <button type="button" class="totem-capsule-btn" data-layer="2"><i class="cap-sq"></i><span>03 APPSEC</span></button>
+            <button type="button" class="totem-capsule-btn" data-layer="3"><i class="cap-sq"></i><span>04 LINUX</span></button>
+            <button type="button" class="totem-capsule-btn" data-layer="4"><i class="cap-sq"></i><span>05 DATA</span></button>
+            <button type="button" class="totem-capsule-btn" data-layer="5"><i class="cap-sq"></i><span>06 UI 60FPS</span></button>
+          </div>
+        </div>
+      </section>
+
       <!-- Technical Section Divider -->
       <div class="section-divider-bar" aria-hidden="true">
         <span class="divider-coord">// 03.00 SEC_MATRIX</span>
@@ -470,97 +585,6 @@ Status_t tree_insert(Node_t** root, const int val)
       </div>
 
       <!-- The Systems Matrix (Bento Filterable Grid) -->
-      
-      <!-- ====================================================================
-           02.00 SEC_EXPLODED_VIEW — INTERACTIVE 3D / 2.5D EXPLODED STACK
-           ==================================================================== -->
-      <section class="section" id="exploded-architecture">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-tag">// 02.00 ARCHITECTURE_ÉCLATÉE_3D</div>
-            <h2 class="section-title">Topologie Système Dissociée en 6 Couches</h2>
-            <p class="section-desc">
-              Dissociation géométrique en 3D isométrique : du noyau standard ISO C99 jusqu'aux interfaces réactives 60 fps. Survolez ou cliquez chaque couche pour isoler son flux de données et ses garanties formelles de production.
-            </p>
-          </div>
-
-          <!-- CAD Architecture Controls HUD -->
-          <div class="exploded-controls-card">
-            <div class="exploded-ctrl-header">
-              <div class="exploded-ctrl-title-group">
-                <span class="cad-indicator-led"></span>
-                <span class="exploded-ctrl-label">TOPOLOGIE SYSTÈME 3D // DISSOCIATION AXE Z</span>
-                <span class="exploded-pct-badge" id="exploded-pct-label">100% CAD</span>
-              </div>
-              <div class="exploded-preset-group">
-                <button type="button" class="cad-preset-btn" data-preset="0">0% Compact</button>
-                <button type="button" class="cad-preset-btn" data-preset="55">55% Écarté</button>
-                <button type="button" class="cad-preset-btn active" data-preset="100">100% Éclaté</button>
-              </div>
-            </div>
-            <div class="exploded-slider-wrapper">
-              <span class="slider-end-label">KERNEL (Z0)</span>
-              <input type="range" id="exploded-range" class="exploded-range-input" min="0" max="100" value="100" aria-label="Niveau d'éclatement 3D" />
-              <span class="slider-end-label">UI (Z+)</span>
-            </div>
-            <div class="exploded-ctrl-status">
-              <span class="cad-hint-text">Survolez ou cliquez une plaque pour isoler sa couche technique et ses garanties de production.</span>
-              <button type="button" class="btn btn-crimson-sm" id="exploded-toggle-btn">Rassembler la vue (0%)</button>
-            </div>
-          </div>
-
-          <!-- 3-Column Bilateral Architecture Stage + Glowing Dynamic SVG Laser Lines -->
-          <div class="exploded-stage" id="exploded-stage">
-            <svg class="exploded-leader-svg" id="exploded-leader-svg" aria-hidden="true">
-              <defs>
-                <filter id="laser-glow" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="3.5" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-            </svg>
-
-            <!-- Left Callouts (L06, L04, L02) -->
-            <div class="exploded-callouts-col left" id="exploded-callouts-left"></div>
-
-            <!-- Center 3D Isometric Extruded Stack -->
-            <div class="exploded-3d-viewport">
-              <div class="exploded-axis-guide" aria-hidden="true">
-                <span>Z+ // UI</span>
-                <i></i>
-                <span>Z0 // KERNEL</span>
-              </div>
-              <div class="exploded-floor-shadow" id="exploded-floor-shadow" aria-hidden="true"></div>
-              <div class="exploded-stack-3d" id="exploded-stack-3d" role="group" aria-label="Couches 3D de l'architecture"></div>
-            </div>
-
-            <!-- Right Callouts (L05, L03, L01) -->
-            <div class="exploded-callouts-col right" id="exploded-callouts-right"></div>
-          </div>
-
-          <!-- Selected Layer Deep Inspector Bar -->
-          <div class="exploded-inspector-bar">
-            <div class="exploded-insp-main">
-              <div class="exploded-insp-header">
-                <span class="layer-badge" id="exploded-inspector-tag">COUCHE 06 // INTERFACE &amp; EXPÉRIENCE</span>
-                <span class="exploded-insp-status-pill">● ACTIF &amp; VÉRIFIÉ EN PRODUCTION</span>
-              </div>
-              <h3 class="exploded-insp-title" id="exploded-inspector-title">Interfaces 60 fps, WebSockets &amp; Accessibilité WCAG</h3>
-              <p class="exploded-insp-desc" id="exploded-inspector-desc">
-                Applications TypeScript et interfaces HTML/CSS/JS natives fluides à 60 fps, navigation clavier (⌘K, focus-trap) et contrastes soignés.
-              </p>
-            </div>
-            <div class="exploded-insp-proof-box">
-              <span class="exploded-proof-kicker">VÉRIFICATION CONCRÈTE &amp; CODE SOURCE</span>
-              <p class="exploded-insp-proof" id="exploded-inspector-proof">Preuves : Ce portfolio interactif • Kai Academic • Dashboard Polymarket Live</p>
-              <a href="#projects" class="insp-action-btn" id="exploded-inspector-action">Consulter le projet associé →</a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section id="projects" class="section">
         <div class="section-header">
@@ -984,9 +1008,10 @@ Status_t tree_insert(Node_t** root, const int val)
   </div>
 
   <!-- App Core JS -->
-  <script src="portfolio_assets/exploded_view.js?v=23"></script>
-  <script src="portfolio_assets/app.js?v=23" defer></script>
+  <script src="portfolio_assets/vendor/three.min.js?v=24" defer></script>
+  <script src="portfolio_assets/totem_3d.js?v=24" defer></script>
+  <script src="portfolio_assets/app.js?v=24" defer></script>
   <!-- Swarm Rebuild Takeover Engine -->
-  <script src="portfolio_assets/swarm-init.js?v=23" defer></script>
+  <script src="portfolio_assets/swarm-init.js?v=24" defer></script>
 </body>
 </html>

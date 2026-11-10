@@ -304,7 +304,7 @@
     const commands = [
       { id: 'about', title: 'À Propos & Philosophie', desc: 'Background, premier-principe et formation', href: '#about', tag: 'Section' },
       { id: 'flagships', title: 'Flagships & Écosystème 7-Layer', desc: 'Moteur quantitatif Polymarket & 46 PRs open-source', href: '#flagships', tag: 'Projets' },
-      { id: 'exploded', title: 'Vue 3D Éclatée (6 Couches Hooke)', desc: 'Pile technique dissociée sur l\'axe Z avec ressort amorti', href: '#exploded-architecture', tag: '3D Stack' },
+      { id: 'exploded', title: 'Totem Architecture 3D (WebGL Monolithe)', desc: 'Monolithe 3D isométrique à 6 étages avec shaders GLSL et torsion élastique', href: '#exploded-architecture', tag: '3D WebGL' },
       { id: 'matrix', title: 'The Systems Matrix', desc: 'Bento index : IA, C99, Valgrind, Web & Cloud', href: '#projects', tag: 'Index' },
       { id: 'parcours', title: 'Parcours & ADN Terrain (Échecs ~1500 Elo)', desc: 'IUT Anglet, Stages HUPI/Marra, UK, Échecs tactiques', href: '#parcours', tag: 'Parcours' },
       { id: 'terminal', title: 'Matéi Shell [>_ CLI Terminal]', desc: 'Exécuter valgrind, polymarket, chess, prs, cat cv', action: () => { const btn = document.getElementById('terminal-pill-btn'); if(btn) btn.click(); }, tag: 'CLI' },
@@ -627,7 +627,7 @@ CREATE TABLE OrdreExecution (
       '.nav-dock',
       '.hero-card-left',
       '.hero-card-right',
-      '#exploded-stage',
+      '.totem-stage-container',
       '#flagships .bento-main',
       '.dna-chess-card',
       '.contact-card'
