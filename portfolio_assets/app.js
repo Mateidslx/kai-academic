@@ -144,7 +144,7 @@
     if (!overlay || !input) return;
 
     const commands = [
-      { id: 'about', title: 'Matéi derrière le code (Chapitres & Principes)', desc: 'Pays Basque, Escalade, Échecs, Méthode 00-03 & IUT Anglet', href: '#about', tag: 'Portrait' },
+      { id: 'about', title: 'Matéi derrière le code (Chapitres)', desc: 'Pays Basque, Escalade, Échecs, Projets & IUT Anglet', href: '#about', tag: 'Portrait' },
       { id: 'case-quant', title: 'Étude #01 — Moteur Quantitatif Polymarket V1→V211', desc: 'PyTorch GMM-MDN, TCN 30×32, Kill-Switch V43 & PBO/CSCV', href: '#case-quant', tag: 'Quant' },
       { id: 'case-oss', title: 'Étude #02 — Omi (7 PRs), Twenty CRM & SafePath-Lint', desc: 'PRs #14604..#20168, #26490/#26502, AST SPL001..SPL004', href: '#case-oss', tag: 'AppSec' },
       { id: 'case-c99', title: 'Étude #03 — Cache LRU O(1), Dijkstra C99 & AlgoForge Pro', desc: 'Code ISO C99 strict -Wall -Werror, Valgrind & Transpiler', href: '#case-c99', tag: 'ISO C99' },
@@ -337,7 +337,7 @@
           printLine('• omi #16025 / #17258 / #17272: Stopped CWE-209 detail=str(exc) & OAuth traceback leaks');
           printLine('• omi #19637 / #16029->#20168: Search regex guards + concurrent token refresh lock');
           printLine('• twenty #26490 & #26502: NestJS RBAC guards (VIEWS/LAYOUTS) & ORM batch deletes');
-          printLine('• Dupdap & Moistello (38 PRs): stellarUri USD/Crypto precision & 401 retry lock', 'success');
+          printLine('• dupdab/dupdap-frontend (37 PRs) & cocor-tech/moistello-frontend (#1): stellarUri & 401 lock', 'success');
         } else if (lower === 'safepath') {
           printLine('$ safepath-lint ./routes/ --format=summary', 'accent');
           printLine('[SPL001] routes/export.py:42 -> Unsanitized f-string passed to send_file()');
@@ -418,13 +418,13 @@
 #17272 (desktop)  : Sanitisation exceptions stream chat (3 routes)
 #19637 (search)   : Guards ValueError/re.error ("Good hygiene")
 #16029 -> #20168  : Lock race condition token refresh (main)`,
-      twenty: `/* twentyhq/twenty (40k★) & Dupdap/Moistello (40 PRs) */
+      twenty: `/* twentyhq/twenty (2 PRs) + dupdab & moistello (38 PRs) */
 twenty #26490 : Gardes RBAC stricts (VIEWS / LAYOUTS) sur metadata
 twenty #26502 : Capture suppressions batch dans twenty-orm + Vitest
-Dupdap/Moistello (38 PRs TS) :
-  - Précision montants USD <-> Crypto (stellarUri)
-  - Intercepteur HTTP 401 concurrent idempotent (lock unique)
-  - Tests accessibilité clavier & focus-trap modales Vitest`,
+dupdab/dupdap-frontend (#429..#459, 37 PRs) & moistello-frontend :
+  - #433 : Précision montants USD <-> Crypto (stellarUri)
+  - #431 : Intercepteur HTTP 401 concurrent idempotent (redirectToLogin)
+  - #437..#458 : Suites Vitest focus-trap modales, auth & webhooks`,
       safepath: `# SafePath-Lint (MIT AST) — CWE-22 / CWE-23 / CWE-36
 [SPL001] Injection binaire / f-string dans open() / send_file()
 [SPL003] path.startswith("/var/data") -> bypass /var/data_forbidden
@@ -496,7 +496,7 @@ if fmt == "pdf":
       academic: `/* Kai Academic — Indexation locale SQLite FTS5 BM25 */
 - Base : academic_vault.db (2 018+ entités indexées sur 20 modules S1 IUT)
 - Contrainte stricte : zéro contenu inventé hors supports officiels UPPA
-- Ergonomie dyslexie (a11y_audit_pro/scotopic.py + Lexend) :
+- Ergonomie cognitive (a11y_audit_pro/scotopic.py + Lexend) :
   * Alignement strict à gauche (zéro texte justifié en rivières)
   * Zéro italique sur blocs longs, palettes scoptiques douces`
     };
@@ -518,7 +518,7 @@ if fmt == "pdf":
   }
 
   // ==========================================================================
-  // AKARU-KINETIC BIOGRAPHY CHAPTER STAGE & HAIRLINE PRINCIPLES CONTROLLER
+  // AKARU-KINETIC BIOGRAPHY CHAPTER STAGE CONTROLLER
   // ==========================================================================
   function initAkaruStory() {
     const panels = Array.from(document.querySelectorAll('#akaru-accordion .akaru-panel'));
@@ -528,7 +528,6 @@ if fmt == "pdf":
     const stageIdxEl = document.getElementById('akaru-stage-idx');
     const prevBtn = document.getElementById('akaru-prev-btn');
     const nextBtn = document.getElementById('akaru-next-btn');
-    const principlesList = document.getElementById('akaru-principles-list');
     const aboutSection = document.getElementById('about');
 
     const CHAPTER_LABELS = [
@@ -585,7 +584,6 @@ if fmt == "pdf":
       if (!panels.length) return;
       const safeIdx = ((index % panels.length) + panels.length) % panels.length;
       if (safeIdx === currentIdx && panels[safeIdx]?.classList.contains('is-active')) return;
-      // Immediately update rail buttons & counter for zero perceived lag
       navButtons.forEach((btn, i) => {
         const isActive = i === safeIdx;
         btn.classList.toggle('is-active', isActive);
@@ -628,7 +626,6 @@ if fmt == "pdf":
       nextBtn.addEventListener('click', () => activateChapter(currentIdx + 1, true));
     }
 
-    // Akaru Scroll-Reveal Observer (Triggers vertical curtain once + self-drawing hairlines)
     if ('IntersectionObserver' in window) {
       let curtainPlayedOnce = false;
       const observer = new IntersectionObserver(
@@ -642,79 +639,12 @@ if fmt == "pdf":
                 setTimeout(() => curtainLayer.classList.remove('is-wiping'), 540);
               }
             }
-            if (entry.target === principlesList) {
-              principlesList.classList.add('is-inview');
-            }
           });
         },
         { threshold: 0.16 }
       );
       if (aboutSection) observer.observe(aboutSection);
-      if (principlesList) observer.observe(principlesList);
-    } else if (principlesList) {
-      principlesList.classList.add('is-inview');
     }
-
-    const hairlineItems = Array.from(document.querySelectorAll('#akaru-principles-list .akaru-hairline-item'));
-    const plates = Array.from(document.querySelectorAll('.akaru-visual-stack .akaru-stack-plate'));
-    const proofCodeEl = document.getElementById('akaru-proof-code');
-    const proofMetricEl = document.getElementById('akaru-proof-metric');
-    const proofBodyEl = document.getElementById('akaru-proof-body');
-
-    const PRINCIPLE_PROOFS = [
-      {
-        code: 'PREUVE 00 // ERGONOMIE & CLARTÉ',
-        metric: '79 PAGES • 2 018 ENTITÉS FTS5',
-        body: 'Ma dyslexie m\'a poussé à bâtir <strong>Kai Academic</strong> et <strong>a11y_audit_pro</strong> : typographie <code>Lexend</code> sans italique ni justification artificielle, interlettrage scoptique mesuré, et base locale <code>academic_vault.db</code> indexée sous SQLite FTS5 BM25 — sans inventer une seule ligne hors des supports officiels de mes enseignants.'
-      },
-      {
-        code: 'PREUVE 01 // ARTISANAT C99 & ALLMAN',
-        metric: '-WALL -WEXTRA -WERROR • 0 LEAK',
-        body: 'Chaque structure critique (<code>lru_cache.c</code>, <code>dijkstra_graph.c</code>) est écrite avec accolades Allman, décomposition claire et sentinelles O(1), puis passée au crible Valgrind (<code>0 bytes in 0 blocks</code>). Le transpileur Electron <strong>AlgoForge Pro</strong> automatise ces mêmes garde-fous pour les étudiants.'
-      },
-      {
-        code: 'PREUVE 02 // AUDIT ADVERSARIAL',
-        metric: 'KILL-SWITCH V43 • 735 TESTS B2B',
-        body: 'Un chiffre flatteur sans validation hors échantillon ne vaut rien : j\'ai volontairement coupé <strong>V43</strong> (+117k$ simulés) dès détection d\'un biais look-ahead pré-12h UTC, purgé 47% d\'étiquettes METAR corrompues et imposé un ancrage mot-à-mot sur nos <strong>735 tests unitaires B2B</strong>.'
-      },
-      {
-        code: 'PREUVE 03 // VÉRIFICATION PHYSIQUE',
-        metric: 'STATE VERIFIER • UBUNTU 24/7',
-        body: 'Dans <code>core/state_verifier.py</code>, un statut <code>HTTP 200</code> ou <code>exit 0</code> n\'est jamais suffisant : le contrôleur vérifie physiquement les octets <code>%PDF-</code>, les tables SQLite WAL, les binaires compilés et les services <code>systemd</code> sur Ubuntu Oracle Cloud.'
-      }
-    ];
-
-    function selectPrinciple(idx) {
-      const targetPlate = hairlineItems[idx]?.getAttribute('data-principle') ?? '0';
-      hairlineItems.forEach((item, i) => {
-        item.classList.toggle('is-selected', i === idx);
-      });
-      plates.forEach((plate) => {
-        plate.classList.toggle('is-highlighted', plate.getAttribute('data-principle') === targetPlate);
-      });
-      const proof = PRINCIPLE_PROOFS[idx];
-      if (proof && proofCodeEl && proofMetricEl && proofBodyEl) {
-        proofCodeEl.textContent = proof.code;
-        proofMetricEl.textContent = proof.metric;
-        proofBodyEl.innerHTML = proof.body;
-      }
-    }
-
-    hairlineItems.forEach((item, idx) => {
-      item.addEventListener('mouseenter', () => selectPrinciple(idx));
-      item.addEventListener('click', () => selectPrinciple(idx));
-      item.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          selectPrinciple(idx);
-        }
-      });
-    });
-
-    plates.forEach((plate, idx) => {
-      plate.addEventListener('mouseenter', () => selectPrinciple(idx));
-      plate.addEventListener('click', () => selectPrinciple(idx));
-    });
   }
 
   function init() {

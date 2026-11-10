@@ -39,9 +39,9 @@
       titleEn: 'AI SWARMS &\nPOLYMARKET',
       ribbon: 'POLYMARKET QUANT & IA ',
       descFr:
-        'Pipeline quantitatif météo & carnet d\'ordres temps réel, réseaux PyTorch probabilistes et essaim autonome de 36 agents Kai.',
+        'Pipeline quantitatif météo (GMM-MDN) & carnet d\'ordres temps réel, calibration isotone PAV et validation adversariale PBO/CSCV.',
       descEn:
-        'Real-time weather & orderbook quant pipeline, probabilistic PyTorch nets and 36-agent autonomous Kai swarm.',
+        'Real-time weather & orderbook quant pipeline (GMM-MDN), PAV isotonic calibration and adversarial PBO/CSCV gating.',
       buildsFr: 'GMM-MDN (466k prév.) • TCN BTC 30×32 • Kill-Switch V43 Look-Ahead',
       buildsEn: 'GMM-MDN (466k forecasts) • TCN BTC 30×32 • V43 Look-Ahead Kill-Switch',
       proofFr: 'RMSE 0.677°C • ECE PAV 1.43% • PBO/CSCV PASS • Flat Sizing 1,00 $',
@@ -658,7 +658,7 @@
       if (tagsEl && Array.isArray(layer.tags)) {
         tagsEl.innerHTML = layer.tags
           .map((tag) => `<span class="totem-tag-pill">${tag}</span>`)
-          .join('');
+          .join(' ');
       }
 
       if (ctaEl) {
