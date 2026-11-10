@@ -1778,40 +1778,16 @@ main {
    ========================================================================== */
 
 #exploded-architecture {
-  scroll-margin-top: 76px !important;
+  scroll-margin-top: 72px !important;
 }
 
 .totem-section {
   position: relative !important;
-  padding: 22px 0 38px !important;
+  padding: 76px 0 32px !important;
   background: #050505 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
-}
-
-.totem-eyebrow-bar {
-  max-width: 1380px;
-  margin: 0 auto 6px;
-  padding: 0 36px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-  position: relative;
-  z-index: 4;
-}
-
-.totem-eyebrow-hint {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: #71717a;
-  letter-spacing: 0.08em;
-}
-
-@media (max-width: 720px) {
-  .totem-eyebrow-hint { display: none; }
 }
 
 /* Giant Background Kinetic Marquee Strip */
@@ -1838,7 +1814,7 @@ main {
 
 .marquee-word {
   font-family: 'Archivo Black', 'Bebas Neue', sans-serif;
-  font-size: clamp(60px, 8.8vw, 122px);
+  font-size: clamp(58px, 8.2vw, 118px);
   font-weight: 900;
   line-height: 0.88;
   letter-spacing: -0.02em;
@@ -1855,35 +1831,22 @@ main {
   -webkit-text-stroke: 1.5px rgba(239, 68, 68, 0.34);
 }
 
-/* Main Stage */
+/* Compact Centered Stage */
 .totem-stage-container {
   position: relative;
-  max-width: 1380px;
+  max-width: 1340px;
   margin: -34px auto 0;
-  min-height: 550px;
-  padding: 10px 36px 62px;
+  min-height: 510px;
+  padding: 12px 36px 58px;
   display: flex;
   align-items: center;
 }
 
-/* Halftone Op-Art Radial Glow Backdrop */
-.totem-halftone-bg {
-  position: absolute;
-  inset: -40px 0 0 18%;
-  background-image: radial-gradient(rgba(239, 68, 68, 0.34) 1.35px, transparent 1.35px);
-  background-size: 7px 7px;
-  -webkit-mask-image: radial-gradient(circle at 60% 52%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0) 68%);
-  mask-image: radial-gradient(circle at 60% 52%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0) 68%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Three.js Canvas Overlay Stage */
 .totem-webgl-wrap {
   position: absolute;
-  inset: -40px 0 0 0;
+  inset: -42px 0 0 0;
   width: 100%;
-  height: calc(100% + 40px);
+  height: calc(100% + 42px);
   z-index: 3;
   display: flex;
   align-items: center;
@@ -1896,34 +1859,34 @@ main {
   display: block;
 }
 
-/* Floating Alabaster Editorial Control Card (Left Overlap) */
+/* Compact Swiss Brutalist Editorial Card (Matching SCRIB3 height) */
 .totem-card {
   position: relative;
   z-index: 5;
-  width: min(530px, 100%);
+  width: min(468px, 100%);
   background: #ededf0;
   color: #09090b;
-  border-radius: 18px;
-  padding: 26px 28px 22px;
-  box-shadow: 0 30px 75px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 22px 24px 18px;
+  box-shadow: 0 30px 75px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
 .totem-card-head {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .totem-numeral-svg {
-  width: 142px;
-  height: 80px;
+  width: 132px;
+  height: 74px;
   display: block;
 }
 
 .totem-card-number.is-flipping .totem-numeral-svg {
-  animation: totemNumPop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: totemNumPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes totemNumPop {
@@ -1933,9 +1896,9 @@ main {
 
 .totem-card-title {
   font-family: var(--font-sans);
-  font-size: clamp(19px, 2.2vw, 24px);
+  font-size: clamp(18px, 2vw, 22px);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.06;
   letter-spacing: -0.02em;
   text-align: right;
   text-transform: uppercase;
@@ -1947,73 +1910,34 @@ main {
   width: 100%;
   height: 1px;
   background: #18181b;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .totem-card-body-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 16px;
-  min-height: 112px;
-  margin-bottom: 18px;
-}
-
-.totem-card-copy-wrap {
-  flex: 1;
+  gap: 14px;
+  min-height: 62px;
+  margin-bottom: 14px;
 }
 
 .totem-card-desc {
+  flex: 1;
   font-family: var(--font-mono);
   font-size: 11px;
-  line-height: 1.6;
+  line-height: 1.55;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #18181b;
-  margin: 0 0 12px;
-}
-
-.totem-card-proof-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.totem-proof-tag {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  color: #52525b;
-  background: rgba(0, 0, 0, 0.06);
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.totem-cta-btn {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 800;
-  color: #ffffff;
-  background: #09090b;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.totem-cta-btn:hover {
-  background: #ef4444;
-  transform: translateY(-1px);
+  margin: 0;
 }
 
 .totem-telem-col {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding-top: 4px;
+  padding-top: 3px;
 }
 
 .totem-telem-sq {
@@ -2028,18 +1952,17 @@ main {
   background: #09090b;
 }
 
-/* Viewfinder Navigation Controls */
 .totem-card-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
 }
 
 .totem-arrow-btn {
   position: relative;
-  width: 128px;
-  height: 74px;
+  width: 122px;
+  height: 70px;
   background: transparent;
   border: none;
   color: #09090b;
@@ -2084,7 +2007,14 @@ main {
 }
 
 .totem-arrow-btn.is-boundary {
-  opacity: 0.26;
+  opacity: 0.25;
+}
+
+.totem-center-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
 .totem-counter {
@@ -2095,17 +2025,37 @@ main {
   letter-spacing: 0.06em;
 }
 
-/* Bottom Capsule Pill Selector (SCRIB3 Floating Bar Signature) */
+.totem-inline-cta {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #09090b;
+  background: rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.totem-inline-cta:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+/* Bottom Dark Capsule Index Selector */
 .totem-bottom-capsule {
   position: absolute;
-  bottom: 14px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 6;
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 8px 18px;
+  padding: 7px 16px;
   background: rgba(10, 10, 14, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -2137,13 +2087,8 @@ main {
   transition: all 0.2s ease;
 }
 
-.totem-capsule-btn:hover {
-  color: #ffffff;
-}
-
-.totem-capsule-btn.active {
-  color: #ffffff;
-}
+.totem-capsule-btn:hover { color: #ffffff; }
+.totem-capsule-btn.active { color: #ffffff; }
 
 .totem-capsule-btn.active .cap-sq {
   background: #ef4444;
@@ -2152,13 +2097,13 @@ main {
 }
 
 @media (max-width: 980px) {
-  .totem-eyebrow-bar {
-    padding: 0 18px;
+  .totem-section {
+    padding: 68px 0 28px !important;
   }
   .totem-stage-container {
     flex-direction: column;
     margin-top: -12px;
-    padding: 8px 16px 24px;
+    padding: 8px 16px 20px;
     min-height: auto;
   }
   .totem-webgl-wrap {
@@ -2172,15 +2117,15 @@ main {
     order: 2;
     width: 100%;
     margin-top: -8px;
-    padding: 20px 18px 18px;
+    padding: 18px 16px 16px;
   }
   .totem-numeral-svg {
-    width: 112px;
-    height: 64px;
+    width: 108px;
+    height: 60px;
   }
   .totem-arrow-btn {
-    width: 96px;
-    height: 60px;
+    width: 90px;
+    height: 58px;
   }
   .totem-bottom-capsule {
     position: static !important;
@@ -2188,7 +2133,7 @@ main {
     order: 3;
     width: 100%;
     max-width: 100%;
-    margin: 16px auto 0;
+    margin: 14px auto 0;
     padding: 10px 12px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

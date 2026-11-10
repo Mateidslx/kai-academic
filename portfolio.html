@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="portfolio_assets/style.css?v=24">
+    <link rel="stylesheet" href="portfolio_assets/style.css?v=25">
 
   <!-- Zero-Flash Dark Curtain: keeps DOM computed rects valid until swarm canvas mounts -->
   <style>
@@ -478,11 +478,6 @@ Status_t tree_insert(Node_t** root, const int val)
            02.00 SEC_EXPLODED_VIEW — INTERACTIVE 3D / 2.5D EXPLODED STACK
            ==================================================================== -->
       <section class="section totem-section" id="exploded-architecture">
-        <div class="totem-eyebrow-bar">
-          <div class="section-tag">// 02.00 MONOLITH_SERVICE_TOTEM</div>
-          <span class="totem-eyebrow-hint">6 COUCHES D'INGÉNIERIE • CLIQUEZ UN BLOC OU UTILISEZ ← / →</span>
-        </div>
-
         <!-- Giant Top Kinetic Marquee Strip (Solid Crimson + Hollow Stroke) -->
         <div class="totem-marquee-banner" aria-hidden="true">
           <div class="totem-marquee-track">
@@ -496,15 +491,12 @@ Status_t tree_insert(Node_t** root, const int val)
         </div>
 
         <div class="totem-stage-container">
-          <!-- Halftone Op-Art Radial Glow Backdrop -->
-          <div class="totem-halftone-bg" aria-hidden="true"></div>
-
-          <!-- 3D Isometric WebGL Monolith Canvas -->
+          <!-- WebGL Fissured Retro Monolith + Live 8x8 Bayer Halftone Dither Canvas -->
           <div class="totem-webgl-wrap">
-            <canvas id="totem-webgl-canvas" aria-label="Totem architectural 3D interactif à 6 étages"></canvas>
+            <canvas id="totem-webgl-canvas" aria-label="Totem architectural 3D fissuré interactif à 6 étages"></canvas>
           </div>
 
-          <!-- Floating Brutalist Editorial Alabaster Card (Left Overlap) -->
+          <!-- Compact Brutalist Alabaster Editorial Card (SCRIB3 proportions) -->
           <div class="totem-card" role="region" aria-label="Détails de l'étage technique sélectionné">
             <div class="totem-card-head">
               <div class="totem-card-number" id="totem-card-number"></div>
@@ -514,13 +506,7 @@ Status_t tree_insert(Node_t** root, const int val)
             <div class="totem-card-divider"></div>
 
             <div class="totem-card-body-row">
-              <div class="totem-card-copy-wrap">
-                <p class="totem-card-desc" id="totem-card-desc"></p>
-                <div class="totem-card-proof-row">
-                  <span class="totem-proof-tag" id="totem-card-proof"></span>
-                  <button type="button" class="totem-cta-btn" id="totem-card-cta">AUDITER VALGRIND ↗</button>
-                </div>
-              </div>
+              <p class="totem-card-desc" id="totem-card-desc"></p>
               <div class="totem-telem-col" aria-hidden="true">
                 <span class="totem-telem-sq active"></span>
                 <span class="totem-telem-sq"></span>
@@ -532,7 +518,7 @@ Status_t tree_insert(Node_t** root, const int val)
               <button type="button" class="totem-arrow-btn" id="totem-btn-prev" aria-label="Étage précédent">
                 <span class="corner tl"></span><span class="corner tr"></span>
                 <span class="corner bl"></span><span class="corner br"></span>
-                <svg class="pixel-arrow-svg" viewBox="0 0 64 40" width="44" height="28" fill="currentColor" aria-hidden="true">
+                <svg class="pixel-arrow-svg" viewBox="0 0 64 40" width="46" height="28" fill="currentColor" aria-hidden="true">
                   <rect x="24" y="4" width="6" height="6" />
                   <rect x="18" y="10" width="6" height="6" />
                   <rect x="12" y="16" width="6" height="6" />
@@ -545,12 +531,15 @@ Status_t tree_insert(Node_t** root, const int val)
                 </svg>
               </button>
 
-              <div class="totem-counter" id="totem-card-counter">01/06</div>
+              <div class="totem-center-meta">
+                <div class="totem-counter" id="totem-card-counter">01/06</div>
+                <button type="button" class="totem-inline-cta" id="totem-card-cta">TEST VALGRIND ↗</button>
+              </div>
 
               <button type="button" class="totem-arrow-btn" id="totem-btn-next" aria-label="Étage suivant">
                 <span class="corner tl"></span><span class="corner tr"></span>
                 <span class="corner bl"></span><span class="corner br"></span>
-                <svg class="pixel-arrow-svg" viewBox="0 0 64 40" width="44" height="28" fill="currentColor" aria-hidden="true">
+                <svg class="pixel-arrow-svg" viewBox="0 0 64 40" width="46" height="28" fill="currentColor" aria-hidden="true">
                   <rect x="34" y="4" width="6" height="6" />
                   <rect x="40" y="10" width="6" height="6" />
                   <rect x="4" y="16" width="6" height="6" />
@@ -1008,10 +997,10 @@ Status_t tree_insert(Node_t** root, const int val)
   </div>
 
   <!-- App Core JS -->
-  <script src="portfolio_assets/vendor/three.min.js?v=24" defer></script>
-  <script src="portfolio_assets/totem_3d.js?v=24" defer></script>
-  <script src="portfolio_assets/app.js?v=24" defer></script>
+  <script src="portfolio_assets/vendor/three.min.js?v=25" defer></script>
+  <script src="portfolio_assets/totem_3d.js?v=25" defer></script>
+  <script src="portfolio_assets/app.js?v=25" defer></script>
   <!-- Swarm Rebuild Takeover Engine -->
-  <script src="portfolio_assets/swarm-init.js?v=24" defer></script>
+  <script src="portfolio_assets/swarm-init.js?v=25" defer></script>
 </body>
 </html>

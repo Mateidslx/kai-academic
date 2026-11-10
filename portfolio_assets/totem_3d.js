@@ -1,6 +1,6 @@
 /* ==========================================================================
-   MATÉI DE SAINT LÉGER — MONOLITHIC WEBGL SERVICE TOTEM (STUDIO FREIGHT / SCRIB3 INSPIRED)
-   Orthographic Isometric 3D Monolith | GLSL Kinetic Ribbon Shader | Elastic Wave Ripple
+   MATÉI DE SAINT LÉGER — FISSURED RETRO MONOLITH TOTEM (WEBGL BAYER DITHER + 3D)
+   Chamfered Octagonal Fault-Shifted Slabs | Retro 8x8 Bayer Stain | Elastic Ripple
    ========================================================================== */
 
 (function () {
@@ -14,132 +14,111 @@
       titleEn: 'SYSTEMS &\nISO C99',
       ribbon: 'SYSTÈMES & ISO C99 ',
       descFr:
-        'DÉVELOPPEMENT BAS-NIVEAU ANSI/ISO C99 SOUS -WALL -WEXTRA -WERROR. ARCHITECTURE ALLMAN STRICTE, POINTEURS SÉCURISÉS ET ZÉRO FUITE MÉMOIRE VÉRIFIÉE SOUS VALGRIND.',
+        'BAS-NIVEAU ISO C99 STRICT (-WALL -WEXTRA -WERROR). POINTEURS DURCIS, ARBRES AST ET ZÉRO FUITE SOUS VALGRIND.',
       descEn:
-        'STRICT ANSI/ISO C99 SYSTEMS ENGINEERING UNDER -WALL -WEXTRA -WERROR. ALLMAN ARCHITECTURE, HARDENED POINTERS AND ZERO MEMORY LEAKS VERIFIED BY VALGRIND.',
-      proofFr: 'PREUVE // ALGOFORGE C99 • 100K ALLOCS = 100K FREES (0 OCTET PERDU)',
-      proofEn: 'PROOF // ALGOFORGE C99 • 100K ALLOCS = 100K FREES (0 BYTES LOST)',
-      ctaFr: 'AUDITER VALGRIND ↗',
-      ctaEn: 'AUDIT VALGRIND ↗',
+        'STRICT ISO C99 SYSTEMS (-WALL -WEXTRA -WERROR). HARDENED POINTERS, AST TREES & ZERO MEMORY LEAKS VIA VALGRIND.',
+      ctaFr: 'TEST VALGRIND ↗',
+      ctaEn: 'VALGRIND TRACE ↗',
       actionType: 'terminal',
-      actionPayload: 'valgrind'
+      actionPayload: 'valgrind',
+      faultOffset: { x: 0.04, z: -0.03, rotY: 0.015 }
     },
     {
       num: '02',
       label: 'IA/QUANT',
-      titleFr: 'SWARMS IA &\nPOLYMARKET QUANT',
-      titleEn: 'AI SWARMS &\nPOLYMARKET QUANT',
+      titleFr: 'SWARMS IA &\nPOLYMARKET',
+      titleEn: 'AI SWARMS &\nPOLYMARKET',
       ribbon: 'POLYMARKET QUANT & IA ',
       descFr:
-        'MOTEUR PRÉDICTIF D\'ARBITRAGE POLYMARKET TOURNANT 24/7 SUR VPS ORACLE. CARNETS D\'ORDRES WEBSOCKETS TEMPS RÉEL (<50MS) ET ESSAIM DE 36 AGENTS AUTONOMES KAI.',
+        'ARBITRAGE PROBABILISTE 24/7 SUR VPS ORACLE, WEBSOCKETS <50MS ET ESSAIM DE 36 AGENTS AUTONOMES KAI.',
       descEn:
-        '24/7 POLYMARKET PREDICTIVE ARBITRAGE ENGINE ON ORACLE VPS. REAL-TIME WEBSOCKET ORDERBOOKS (<50MS) AND 36-AGENT AUTONOMOUS KAI SWARM ORCHESTRATION.',
-      proofFr: 'PREUVE // VPS 88.96.47.180 • EXÉCUTION < 50MS • TRADE LEDGER SHA-256',
-      proofEn: 'PROOF // VPS 88.96.47.180 • <50MS EXECUTION • IMMUTABLE SHA-256 LEDGER',
-      ctaFr: 'FLUX POLYMARKET ↗',
-      ctaEn: 'POLYMARKET FEED ↗',
+        '24/7 QUANT ARBITRAGE ON ORACLE VPS, <50MS ORDERBOOK WEBSOCKETS & 36-AGENT AUTONOMOUS KAI SWARM.',
+      ctaFr: 'FLUX CLOB ↗',
+      ctaEn: 'CLOB STREAM ↗',
       actionType: 'terminal',
-      actionPayload: 'polymarket'
+      actionPayload: 'polymarket',
+      faultOffset: { x: -0.07, z: 0.05, rotY: -0.025 }
     },
     {
       num: '03',
       label: 'APPSEC',
       titleFr: 'APPSEC &\nOPEN-SOURCE',
       titleEn: 'APPSEC &\nOPEN-SOURCE',
-      ribbon: 'APPSEC & OPEN-SOURCE ',
+      ribbon: 'APPSEC & 46 PRS ',
       descFr:
-        '46 PULL REQUESTS FUSIONNÉES EN PRODUCTION SUR DES RÉPOS MAJEURS. DURCISSEMENT RBAC SUR MUTATIONS METADATA, SUPPRESSION DE FAILLES XSS CWE-79 ET MASQUAGE CWE-209.',
+        '46 PRS FUSIONNÉES SUR TWENTY (40K★) ET OMI (8K★) : VERROUILLAGE RBAC, ASSAINISSEMENT XSS CWE-79 & CWE-209.',
       descEn:
-        '46 PRODUCTION PRS MERGED ACROSS FLAGSHIP REPOSITORIES. STRICT RBAC MUTATION CHECKS, CWE-79 XSS SANITIZATION AND CWE-209 STACK TRACE MASKING.',
-      proofFr: 'PREUVE // 46 PRS FUSIONNÉES (TWENTY 40K★ & OMI 8K★)',
-      proofEn: 'PROOF // 46 MERGED PRS (TWENTY 40K★ & OMI 8K★)',
-      ctaFr: 'LISTER LES PRS ↗',
-      ctaEn: 'LIST MERGED PRS ↗',
+        '46 MERGED PRS ON TWENTY (40K★) & OMI (8K★): RBAC HARDENING, CWE-79 XSS SANITIZATION & CWE-209 MASKING.',
+      ctaFr: 'VOIR PRS ↗',
+      ctaEn: 'VIEW PRS ↗',
       actionType: 'terminal',
-      actionPayload: 'prs'
+      actionPayload: 'prs',
+      faultOffset: { x: 0.08, z: 0.04, rotY: 0.03 }
     },
     {
       num: '04',
       label: 'LINUX',
-      titleFr: 'DÉMONS LINUX &\nCLOUD 24/7',
-      titleEn: 'LINUX DAEMONS &\nCLOUD 24/7',
-      ribbon: 'LINUX DAEMONS & 24/7 ',
+      titleFr: 'LINUX &\nCLOUD 24/7',
+      titleEn: 'LINUX &\nCLOUD 24/7',
+      ribbon: 'SYSTEMD & CLOUD 24/7 ',
       descFr:
-        'ORCHESTRATION D\'INFRASTRUCTURE SOUVERAINE LINUX SANS VERROU PROPRIÉTAIRE : 19 SERVICES SYSTEMD AUTO-GUÉRIS, WATCHDOGS ACTIFS ET TUNNELS CLOUDFLARE CHIFFRÉS.',
+        'INFRASTRUCTURE UBUNTU 24.04 SOUVERAINE : 19 DÉMONS SYSTEMD AUTO-GUÉRIS, WATCHDOGS ET TUNNELS CLOUDFLARE.',
       descEn:
-        'SOVEREIGN UBUNTU 24.04 INFRASTRUCTURE WITHOUT VENDOR LOCK-IN: 19 SELF-HEALING SYSTEMD DAEMONS, ACTIVE WATCHDOGS AND ENCRYPTED CLOUDFLARE TUNNELS.',
-      proofFr: 'PREUVE // UPTIME 99.98% • ORACLE CLOUD DEDICATED UBUNTU',
-      proofEn: 'PROOF // 99.98% UPTIME • ORACLE CLOUD DEDICATED UBUNTU',
-      ctaFr: 'VOIR INFRASTRUCTURE ↓',
-      ctaEn: 'VIEW INFRASTRUCTURE ↓',
+        'SOVEREIGN UBUNTU 24.04 INFRASTRUCTURE: 19 SELF-HEALING SYSTEMD DAEMONS, WATCHDOGS & ENCRYPTED TUNNELS.',
+      ctaFr: 'INFRA CLOUD ↓',
+      ctaEn: 'CLOUD INFRA ↓',
       actionType: 'scroll',
-      actionPayload: '#flagships'
+      actionPayload: '#flagships',
+      faultOffset: { x: -0.06, z: -0.06, rotY: -0.02 }
     },
     {
       num: '05',
       label: 'DATA',
       titleFr: 'SQLITE WAL &\nMERISE 3NF',
-      titleEn: 'SQLITE WAL &\n3NF MODELING',
-      ribbon: 'SQLITE WAL & MERISE 3NF ',
+      titleEn: 'SQLITE WAL &\nMERISE 3NF',
+      ribbon: 'SQLITE WAL & 3NF ',
       descFr:
-        'MODÉLISATION RELATIONNELLE NORMALISÉE 3NF (MÉTHODE MERISE R1.05), BASES VECTORIELLES DE MÉMOIRE HIÉRARCHIQUE LETTA ET JOURNAL DES TRANSACTIONS IMMUABLE SHA-256.',
+        'MODÉLISATION RELATIONNELLE 3NF, BASES VECTORIELLES LETTA MEMORY OS ET GRAND LIVRE IMMUABLE SHA-256.',
       descEn:
-        'NORMALIZED 3NF RELATIONAL ARCHITECTURE (MERISE MCD/MLD), LETTA HIERARCHICAL MEMORY VECTOR STORES AND APPEND-ONLY SHA-256 TRANSACTION LEDGERS.',
-      proofFr: 'PREUVE // LETTA MEMORY OS • SCHÉMAS SQL 3NF IUT ANGLET',
-      proofEn: 'PROOF // LETTA MEMORY OS • IUT ANGLET SQL 3NF LABS',
-      ctaFr: 'VOIR PARCOURS & ADN ↓',
-      ctaEn: 'VIEW DNA & SQL LABS ↓',
+        'NORMALIZED 3NF SCHEMAS, LETTA MEMORY VECTOR STORES & APPEND-ONLY SHA-256 IMMUTABLE TRADE LEDGER.',
+      ctaFr: 'ADN & SQL ↓',
+      ctaEn: 'SQL & DNA ↓',
       actionType: 'scroll',
-      actionPayload: '#parcours'
+      actionPayload: '#parcours',
+      faultOffset: { x: 0.05, z: -0.05, rotY: 0.02 }
     },
     {
       num: '06',
       label: 'UI 60FPS',
-      titleFr: 'INTERFACES 60FPS &\nACCESSIBILITÉ',
-      titleEn: '60FPS INTERFACES &\nACCESSIBILITY',
-      ribbon: 'INTERFACES 60FPS & ⌘K ',
+      titleFr: 'UI 60FPS &\nSHELL CLI',
+      titleEn: '60FPS UI &\nSHELL CLI',
+      ribbon: 'UI 60FPS & ⌘K ',
       descFr:
-        'INTERFACES VANILLA ET TYPESCRIPT HAUTE FRÉQUENCE À 60 FPS CONSTANT : PALETTE DE COMMANDE ⌘K, TERMINAL UNIX INTÉGRÉ, THÈME OP-ART NOIR & CRIMSON SUR MESURE.',
+        'INTERFACES VANILLA & TYPESCRIPT HAUTE FRÉQUENCE, PALETTE CLAVIER ⌘K, TERMINAL UNIX ET DESIGN NOIR & CRIMSON.',
       descEn:
-        'HIGH-FREQUENCY VANILLA & TYPESCRIPT INTERFACES AT LOCKED 60 FPS: ⌘K COMMAND PALETTE, INTEGRATED UNIX CLI SHELL AND BESPOKE NOIR & CRIMSON OP-ART DESIGN.',
-      proofFr: 'PREUVE // CE PORTFOLIO INTERACTIF • KAI ACADEMIC DASHBOARD',
-      proofEn: 'PROOF // THIS INTERACTIVE PORTFOLIO • KAI ACADEMIC DASHBOARD',
-      ctaFr: 'OUVRIR TERMINAL ⌘K ↗',
-      ctaEn: 'OPEN TERMINAL ⌘K ↗',
+        'HIGH-FREQUENCY VANILLA & TYPESCRIPT INTERFACES, ⌘K PALETTE, UNIX TERMINAL SHELL & NOIR CRIMSON UI.',
+      ctaFr: 'SHELL ⌘K ↗',
+      ctaEn: 'SHELL ⌘K ↗',
       actionType: 'terminal',
-      actionPayload: 'cat cv'
+      actionPayload: 'cat cv',
+      faultOffset: { x: -0.03, z: 0.06, rotY: -0.015 }
     }
   ];
 
   // Studio Freight Stencil Brutalist Vector Numerals ("01" .. "06")
-  // Chunky geometric squares with crisp circular/squircle negative eyes matching SCRIB3
   function getBrutalistNumberSVG(numStr) {
-    // 0: big chunky square block with center eye hole
     const digit0 = `<g transform="translate(0,0)">
-      <path d="M4,4 H78 V92 H4 Z" fill="#08080b" rx="4"/>
+      <path d="M4,4 H78 V92 H4 Z" fill="#08080b" />
       <rect x="31" y="34" width="20" height="28" rx="10" fill="#ededf0"/>
     </g>`;
 
     const digitsRight = {
-      '1': `<g transform="translate(88,0)">
-        <path d="M12,4 H56 V92 H24 V30 H8 V12 Z" fill="#08080b"/>
-      </g>`,
-      '2': `<g transform="translate(88,0)">
-        <path d="M4,4 H76 V54 H30 V66 H76 V92 H4 V34 H48 V26 H4 Z" fill="#08080b"/>
-      </g>`,
-      '3': `<g transform="translate(88,0)">
-        <path d="M4,4 H76 V92 H4 V66 H48 V56 H22 V38 H48 V28 H4 Z" fill="#08080b"/>
-      </g>`,
-      '4': `<g transform="translate(88,0)">
-        <path d="M4,4 H32 V38 H48 V4 H76 V92 H48 V62 H4 Z" fill="#08080b"/>
-      </g>`,
-      '5': `<g transform="translate(88,0)">
-        <path d="M4,4 H76 V28 H30 V36 H76 V92 H4 V66 H48 V58 H4 Z" fill="#08080b"/>
-      </g>`,
-      '6': `<g transform="translate(88,0)">
-        <path d="M4,4 H72 V26 H32 V36 H76 V92 H4 Z" fill="#08080b"/>
-        <rect x="30" y="54" width="20" height="18" rx="9" fill="#ededf0"/>
-      </g>`
+      '1': `<g transform="translate(88,0)"><path d="M12,4 H56 V92 H24 V30 H8 V12 Z" fill="#08080b"/></g>`,
+      '2': `<g transform="translate(88,0)"><path d="M4,4 H76 V54 H30 V66 H76 V92 H4 V34 H48 V26 H4 Z" fill="#08080b"/></g>`,
+      '3': `<g transform="translate(88,0)"><path d="M4,4 H76 V92 H4 V66 H48 V56 H22 V38 H48 V28 H4 Z" fill="#08080b"/></g>`,
+      '4': `<g transform="translate(88,0)"><path d="M4,4 H32 V38 H48 V4 H76 V92 H48 V62 H4 Z" fill="#08080b"/></g>`,
+      '5': `<g transform="translate(88,0)"><path d="M4,4 H76 V28 H30 V36 H76 V92 H4 V66 H48 V58 H4 Z" fill="#08080b"/></g>`,
+      '6': `<g transform="translate(88,0)"><path d="M4,4 H72 V26 H32 V36 H76 V92 H4 Z" fill="#08080b"/><rect x="30" y="54" width="20" height="18" rx="9" fill="#ededf0"/></g>`
     };
 
     const secondDigit = numStr.charAt(1) || '1';
@@ -153,13 +132,13 @@
   function elasticOut(t) {
     if (t <= 0) return 0;
     if (t >= 1) return 1;
-    const p = 0.72;
+    const p = 0.75;
     const s = p / 4;
     return Math.pow(2, -10 * t) * Math.sin(((t - s) * (2 * Math.PI)) / p) + 1;
   }
 
-  // Create continuous high-DPI scrolling CanvasTexture for active slice faces
-  function createKineticRibbonTexture(text) {
+  // Full-Bleed Monumental Ribbon CanvasTexture + Subtle Dark Fracture Veins
+  function createKineticRibbonTexture(text, seed) {
     const canvas = document.createElement('canvas');
     canvas.width = 4096;
     canvas.height = 256;
@@ -168,14 +147,14 @@
     ctx.fillStyle = '#060609';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Bold brutalist uppercase crimson typography filling vertical face height (matching SCRIB3 Pack marquee)
-    const fontStr = '900 176px "Archivo Black", "Bebas Neue", "Impact", sans-serif';
+    // Massive Full-Height Retro Block Typography (94% vertical fill just like SCRIB3)
+    const fontStr = '900 206px "Archivo Black", "Bebas Neue", "Impact", sans-serif';
     ctx.font = fontStr;
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#ef4444';
 
     const cleanText = text.trim().toUpperCase() + '  •  ';
-    const w = Math.max(100, ctx.measureText(cleanText).width || 1200);
+    const w = Math.max(120, ctx.measureText(cleanText).width || 1400);
     const numCopies = Math.max(1, Math.round(canvas.width / w));
     const scale = canvas.width / (numCopies * w);
 
@@ -186,6 +165,22 @@
     }
     ctx.restore();
 
+    // Etch crisp dark obsidian micro-fissure hairline cuts across letters
+    ctx.strokeStyle = '#060609';
+    ctx.lineWidth = 4;
+    for (let k = 0; k < 5; k++) {
+      let cx = ((k * 819 + seed * 313) % 3900) + 80;
+      let cy = 0;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      for (let step = 0; step < 5; step++) {
+        cx += ((step + seed + k) % 2 === 0 ? 18 : -16);
+        cy += 52;
+        ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+    }
+
     const tex = new THREE.CanvasTexture(canvas);
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.ClampToEdgeWrapping;
@@ -195,7 +190,52 @@
     return tex;
   }
 
-  // Crossed Engineering Spanners / Wrenches on top face of Top Monolith (matching SCRIB3 crown mark)
+  // Procedural Seismic Fissure Crack Map for Dark Inactive & Stone Faces
+  function createFissureVeinsTexture(seed) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 2048;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 3.5;
+
+    for (let k = 0; k < 8; k++) {
+      let cx = ((k * 257 + seed * 173) % 1920) + 60;
+      let cy = (k % 2 === 0) ? 0 : 256;
+      const dy = (k % 2 === 0) ? 46 : -46;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      for (let step = 0; step < 5; step++) {
+        cx += ((step + k + seed) % 2 === 0 ? 22 : -18);
+        cy += dy;
+        ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+
+      // Secondary branching micro-fissure
+      if (k % 2 === 0) {
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx - 12, cy - dy * 1.5);
+        ctx.lineTo(cx + 38, cy - dy * 2.5);
+        ctx.stroke();
+        ctx.lineWidth = 3.5;
+      }
+    }
+
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.ClampToEdgeWrapping;
+    tex.minFilter = THREE.LinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    tex.needsUpdate = true;
+    return tex;
+  }
+
+  // Crossed Engineering Wrenches on top beveled octagon of Slice 01
   function createCrownMarkTexture() {
     const canvas = document.createElement('canvas');
     canvas.width = 512;
@@ -212,22 +252,18 @@
       octx.rotate(angle);
       octx.fillStyle = '#ef4444';
 
-      // Main shaft + collar
       octx.beginPath();
       octx.roundRect(-142, -22, 284, 44, 6);
       octx.fill();
 
-      // Left open crescent jaw outer circle
       octx.beginPath();
       octx.arc(-155, 0, 52, 0, Math.PI * 2);
       octx.fill();
 
-      // Right open crescent jaw outer circle
       octx.beginPath();
       octx.arc(155, 0, 52, 0, Math.PI * 2);
       octx.fill();
 
-      // Transparent cutouts using destination-out so both wrenches cross cleanly
       octx.globalCompositeOperation = 'destination-out';
       octx.beginPath();
       octx.roundRect(-220, -18, 72, 36, 4);
@@ -240,7 +276,6 @@
     }
 
     ctx.drawImage(renderSingleWrench(Math.PI / 4), 0, 0);
-    // Subtle dark halo separation where top wrench crosses bottom wrench
     ctx.save();
     ctx.globalCompositeOperation = 'destination-out';
     ctx.translate(256, 256);
@@ -256,46 +291,84 @@
     return tex;
   }
 
-  // Folded 4-wall continuous perimeter strip wrapping smoothly around vertical spine corner
-  function createPerimeterRibbonGeometry(w, h, d) {
+  // Octagonal Chamfered 2D Points (eliminating flat square corners -> chiseled monolithic slab)
+  function getOctagonPoints(w, d, chamfer) {
     const hw = w * 0.5;
     const hd = d * 0.5;
+    const sw = hw - chamfer;
+    const sd = hd - chamfer;
+
+    // Ordered clockwise from viewer-left wall across front beveled center spine
+    return [
+      [-sw, hd],   // Front-Left start
+      [sw, hd],    // Front-Left end -> Center Front Chamfer!
+      [hw, sd],    // Front-Right start
+      [hw, -sd],   // Front-Right end -> Right Chamfer
+      [sw, -hd],   // Back-Right start
+      [-sw, -hd],  // Back-Right end -> Back Left Chamfer
+      [-hw, -sd],  // Back-Left start
+      [-hw, sd]    // Back-Left end
+    ];
+  }
+
+  // Sculpted Extruded Chamfered Octagonal Monolith Geometry
+  function createOctagonSlabGeometry(w, h, d, chamfer, bevelSize = 0.0) {
+    const pts = getOctagonPoints(w, d, chamfer);
+    const shape = new THREE.Shape();
+    shape.moveTo(pts[0][0], -pts[0][1]);
+    for (let i = 1; i < pts.length; i++) {
+      shape.lineTo(pts[i][0], -pts[i][1]);
+    }
+    shape.closePath();
+
+    const extrudeDepth = h - (bevelSize * 2);
+    const geo = new THREE.ExtrudeGeometry(shape, {
+      depth: extrudeDepth,
+      bevelEnabled: bevelSize > 0,
+      bevelSegments: 1,
+      steps: 1,
+      bevelSize: bevelSize,
+      bevelThickness: bevelSize
+    });
+    geo.rotateX(-Math.PI / 2);
+    geo.translate(0, -extrudeDepth * 0.5, 0);
+    return geo;
+  }
+
+  // 8-Segment Seamless Perimeter Ribbon Wrapping Around Octagonal Walls & Front Chamfer Spine
+  function createOctagonRibbonGeometry(w, h, d, chamfer) {
+    const pts = getOctagonPoints(w, d, chamfer);
+    const ring = [...pts, pts[0]];
     const hh = h * 0.5;
 
-    // Points flowing viewer-left -> center-front-spine -> viewer-right -> back -> left
-    // In rotated -45deg space: +Z faces front-left, +X faces front-right!
-    const corners = [
-      [-hw, hd],  // Far Left
-      [hw, hd],   // Front Center Spine (facing camera)
-      [hw, -hd],  // Far Right
-      [-hw, -hd], // Back Spine
-      [-hw, hd]   // Loop closed
-    ];
+    // Arc-length normalized UVs so chamfer face has ZERO horizontal texture squashing
+    const cumLen = [0];
+    let totalLen = 0;
+    for (let i = 0; i < 8; i++) {
+      const dx = ring[i + 1][0] - ring[i][0];
+      const dz = ring[i + 1][1] - ring[i][1];
+      totalLen += Math.hypot(dx, dz);
+      cumLen.push(totalLen);
+    }
 
     const positions = [];
     const uvs = [];
     const indices = [];
 
-    for (let i = 0; i < 4; i++) {
-      const [x0, z0] = corners[i];
-      const [x1, z1] = corners[i + 1];
-      const u0 = i * 0.25;
-      const u1 = (i + 1) * 0.25;
+    for (let i = 0; i < 8; i++) {
+      const [x0, z0] = ring[i];
+      const [x1, z1] = ring[i + 1];
+      const u0 = cumLen[i] / totalLen;
+      const u1 = cumLen[i + 1] / totalLen;
 
       const base = i * 4;
-      // Top-left, Bottom-left, Bottom-right, Top-right
       positions.push(
         x0, hh, z0,
         x0, -hh, z0,
         x1, -hh, z1,
         x1, hh, z1
       );
-      uvs.push(
-        u0, 1.0,
-        u0, 0.0,
-        u1, 0.0,
-        u1, 1.0
-      );
+      uvs.push(u0, 1.0, u0, 0.0, u1, 0.0, u1, 1.0);
       indices.push(base, base + 1, base + 2, base, base + 2, base + 3);
     }
 
@@ -304,15 +377,22 @@
     geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
     geo.setIndex(indices);
     geo.computeVertexNormals();
-    return geo;
+    return { geo, perimeter: totalLen };
   }
 
-  function createKineticRibbonMaterial(texture) {
+  // Retro Bayer 4x4 + Fissure Crack + Full-Height Kinetic Ribbon Fragment Shader
+  function createKineticRibbonMaterial(textTex, fissureTex, perimeter, bandHeight) {
+    const texRatio = 4096 / 256;
+    const worldRatio = perimeter / bandHeight;
+    const repeatFactor = worldRatio / texRatio;
+
     return new THREE.ShaderMaterial({
       uniforms: {
-        uMap: { value: texture },
+        uMap: { value: textTex },
+        uFissure: { value: fissureTex },
         uTime: { value: 0 },
         uActive: { value: 0 },
+        uRepeatX: { value: repeatFactor },
         uAccent: { value: new THREE.Color('#ef4444') }
       },
       vertexShader: `
@@ -325,29 +405,146 @@
       fragmentShader: `
         varying vec2 vUv;
         uniform sampler2D uMap;
+        uniform sampler2D uFissure;
         uniform float uTime;
         uniform float uActive;
+        uniform float uRepeatX;
         uniform vec3 uAccent;
 
+        float bayer4x4(vec2 p) {
+          int x = int(mod(p.x, 4.0));
+          int y = int(mod(p.y, 4.0));
+          int idx = x + y * 4;
+          if (idx == 0) return 0.0/16.0;
+          if (idx == 1) return 8.0/16.0;
+          if (idx == 2) return 2.0/16.0;
+          if (idx == 3) return 10.0/16.0;
+          if (idx == 4) return 12.0/16.0;
+          if (idx == 5) return 4.0/16.0;
+          if (idx == 6) return 14.0/16.0;
+          if (idx == 7) return 6.0/16.0;
+          if (idx == 8) return 3.0/16.0;
+          if (idx == 9) return 11.0/16.0;
+          if (idx == 10) return 1.0/16.0;
+          if (idx == 11) return 9.0/16.0;
+          if (idx == 12) return 15.0/16.0;
+          if (idx == 13) return 7.0/16.0;
+          if (idx == 14) return 13.0/16.0;
+          return 5.0/16.0;
+        }
+
         void main() {
-          // Scroll across wrapped 4-wall loop with natural unstretched aspect ratio (~1.24 across 4096x256 canvas)
-          vec2 scrolledUv = vec2(fract(vUv.x * 1.24 + uTime), vUv.y);
-          vec4 tex = texture2D(uMap, scrolledUv);
+          vec2 scrolledUv = vec2(fract(vUv.x * uRepeatX + uTime), vUv.y);
+          vec4 textSample = texture2D(uMap, scrolledUv);
+          float crack = texture2D(uFissure, vec2(fract(vUv.x * 1.4), vUv.y)).r;
 
-          // Pitch black obsidian inactive base
-          vec3 darkBase = vec3(0.023, 0.023, 0.035);
-          vec3 activeColor = mix(darkBase, tex.rgb, 1.0);
+          // Retro Bayer dithered obsidian texture & glowing tectonic fissures on inactive slabs
+          vec2 pix = floor(gl_FragCoord.xy / 3.0);
+          float d = bayer4x4(pix);
+          float pulse = 0.55 + 0.45 * sin(uTime * 12.0 + vUv.x * 8.0);
+          float ditherCrack = step(d, crack * 0.65 * pulse);
 
-          // Crisp hairline top/bottom border inside slice
-          if (vUv.y < 0.015 || vUv.y > 0.985) {
-            activeColor = mix(darkBase, uAccent * 0.55, uActive);
-          }
+          vec3 darkBase = vec3(0.022, 0.022, 0.032);
+          // Subtle retro pixel grain on obsidian stone + red tectonic hairline veins
+          vec3 inactiveStone = darkBase + vec3(0.02, 0.02, 0.026) * step(d, 0.14);
+          vec3 inactiveFissure = mix(inactiveStone, uAccent * 0.48, ditherCrack);
 
-          vec3 finalCol = mix(darkBase, activeColor, uActive);
+          // Active full-height kinetic typography darkened along carved fracture veins
+          vec3 activeCol = textSample.rgb;
+          activeCol = mix(activeCol, darkBase, crack * 0.72);
+
+          vec3 finalCol = mix(inactiveFissure, activeCol, uActive);
           gl_FragColor = vec4(finalCol, 1.0);
         }
       `,
       side: THREE.DoubleSide
+    });
+  }
+
+  // Genuine SCRIB3-Inspired Background WebGL Retro Bayer 8x8 Dithered Simplex-Noise Stain Shader
+  function createRetroStainMaterial() {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uResolution: { value: new THREE.Vector2(1440, 620) },
+        uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+        uColor: { value: new THREE.Color('#ef4444') }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = vec4(position.xy, 0.99, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform vec2 uResolution;
+        uniform vec2 uMouse;
+        uniform vec3 uColor;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(
+            mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+            mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+            u.y
+          );
+        }
+
+        // Exact 8x8 Bayer Ordered Dithering Matrix (Retro 1-bit CRT Aesthetics)
+        float bayer8(vec2 pos) {
+          int x = int(mod(pos.x, 8.0));
+          int y = int(mod(pos.y, 8.0));
+          int m[64];
+          // Quick deterministic hierarchical Bayer calculation
+          float val = 0.0;
+          int xi = x; int yi = y;
+          val += float(((xi ^ yi) & 1) * 2 + (yi & 1)) * 16.0;
+          xi >>= 1; yi >>= 1;
+          val += float(((xi ^ yi) & 1) * 2 + (yi & 1)) * 4.0;
+          xi >>= 1; yi >>= 1;
+          val += float(((xi ^ yi) & 1) * 2 + (yi & 1)) * 1.0;
+          return val / 64.0;
+        }
+
+        void main() {
+          float gran = 5.0; // Retro CRT block granularity
+          vec2 pixCoord = floor(gl_FragCoord.xy / gran);
+          vec2 uvPix = (pixCoord * gran) / uResolution;
+
+          float aspect = uResolution.x / max(1.0, uResolution.y);
+          vec2 p = vec2((uvPix.x - 0.62) * aspect, uvPix.y - 0.48);
+
+          // Interactive cursor gravity ripple on the retro halftone noise wave
+          vec2 m = vec2((uMouse.x - 0.62) * aspect, uMouse.y - 0.48);
+          float mouseDist = length(p - m);
+          float mouseRipple = exp(-mouseDist * 4.5) * 0.42;
+
+          float n1 = noise(p * 3.2 + vec2(uTime * 0.14, -uTime * 0.1));
+          float n2 = noise(p * 6.5 - vec2(uTime * 0.09, uTime * 0.15));
+          float field = (n1 * 0.6 + n2 * 0.4);
+
+          float radialFade = clamp(1.0 - length(p) * 1.15, 0.0, 1.0);
+          radialFade = smoothstep(0.0, 0.9, radialFade);
+
+          float intensity = clamp((field * 0.72 + mouseRipple) * radialFade, 0.0, 0.75);
+          float threshold = bayer8(pixCoord);
+          float dotMask = step(threshold, intensity);
+
+          gl_FragColor = vec4(uColor * 0.65, dotMask * 0.52);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      depthTest: false
     });
   }
 
@@ -357,7 +554,6 @@
     const numberEl = document.getElementById('totem-card-number');
     const titleEl = document.getElementById('totem-card-title');
     const descEl = document.getElementById('totem-card-desc');
-    const proofEl = document.getElementById('totem-card-proof');
     const ctaEl = document.getElementById('totem-card-cta');
     const counterEl = document.getElementById('totem-card-counter');
     const telemetryDots = document.querySelectorAll('.totem-telem-sq');
@@ -370,10 +566,7 @@
     let currentIndex = 0;
     let scrambleRaf = 0;
 
-    // ---------------------------------------------------------
-    // 1. Editorial Card Update + Studio Freight Kinetic Scramble
-    // ---------------------------------------------------------
-    function scrambleText(el, targetText, durationMs = 240) {
+    function scrambleText(el, targetText, durationMs = 200) {
       if (!el) return;
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/•<>#';
       const start = performance.now();
@@ -385,18 +578,12 @@
         let out = '';
         for (let i = 0; i < len; i++) {
           const ch = targetText[i];
-          if (ch === ' ' || ch === '\n' || i < revealCount) {
-            out += ch;
-          } else {
-            out += chars[Math.floor(Math.random() * chars.length)];
-          }
+          if (ch === ' ' || ch === '\n' || i < revealCount) out += ch;
+          else out += chars[Math.floor(Math.random() * chars.length)];
         }
         el.textContent = out;
-        if (p < 1) {
-          scrambleRaf = requestAnimationFrame(frame);
-        } else {
-          el.textContent = targetText;
-        }
+        if (p < 1) scrambleRaf = requestAnimationFrame(frame);
+        else el.textContent = targetText;
       }
       cancelAnimationFrame(scrambleRaf);
       scrambleRaf = requestAnimationFrame(frame);
@@ -421,15 +608,8 @@
 
       const targetDesc = lang === 'en' ? layer.descEn : layer.descFr;
       if (descEl) {
-        if (animate) {
-          scrambleText(descEl, targetDesc, 240);
-        } else {
-          descEl.textContent = targetDesc;
-        }
-      }
-
-      if (proofEl) {
-        proofEl.textContent = lang === 'en' ? layer.proofEn : layer.proofFr;
+        if (animate) scrambleText(descEl, targetDesc, 200);
+        else descEl.textContent = targetDesc;
       }
 
       if (ctaEl) {
@@ -452,35 +632,31 @@
         };
       }
 
-      if (counterEl) {
-        counterEl.textContent = `${layer.num}/06`;
-      }
+      if (counterEl) counterEl.textContent = `${layer.num}/06`;
 
-      // 3-square vertical telemetry progress indicator
       telemetryDots.forEach((sq, i) => {
         const mapped = Math.floor((idx / 5) * 2.99);
         sq.classList.toggle('active', i === mapped);
       });
 
-      // Boundary dimming matching SCRIB3 viewfinder aesthetic (still wraps or clicks cleanly)
       if (prevBtn) prevBtn.classList.toggle('is-boundary', idx === 0);
       if (nextBtn) nextBtn.classList.toggle('is-boundary', idx === TOTEM_LAYERS.length - 1);
 
-      // Update Bottom Capsule Pills
       bottomPills.forEach((btn, i) => {
         btn.classList.toggle('active', i === idx);
       });
     }
 
     // ---------------------------------------------------------
-    // 2. Three.js WebGL Orthographic Isometric Monolith
+    // 2. Three.js WebGL Fissured Monolith + Retro Bayer Shader
     // ---------------------------------------------------------
     let webglReady = false;
     let sliceObjects = [];
     let raycaster = null;
     let pointer = { x: 0, y: 0 };
-    let camera, scene, renderer, totemRoot;
+    let camera, scene, stainScene, stainCam, renderer, totemRoot, stainMat;
     let hoverTilt = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let scrollTwist = 0;
 
     function initWebGL() {
       if (typeof THREE === 'undefined') return false;
@@ -493,69 +669,83 @@
           preserveDrawingBuffer: true
         });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.autoClear = false;
 
         scene = new THREE.Scene();
 
-        // Orthographic camera ensures crisp architectural CAD/Isometric lines (zero perspective warp)
         camera = new THREE.OrthographicCamera(-4, 4, 4, -4, 0.1, 100);
-        camera.position.set(0, 0, 12);
+        camera.position.set(0, 0, 14);
         camera.lookAt(0, 0, 0);
 
-        // Monolith container rotated into Studio Freight's exact isometric angle
+        // Separate Pass 1 Background Scene for Retro 8x8 Bayer Stain (never clips over Totem!)
+        stainScene = new THREE.Scene();
+        stainCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        stainMat = createRetroStainMaterial();
+        const stainPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), stainMat);
+        stainPlane.frustumCulled = false;
+        stainScene.add(stainPlane);
+
+        // Main Chamfered Monolith Group (Bigger & Sculpted!)
         totemRoot = new THREE.Group();
-        totemRoot.rotation.set(Math.PI / 6.2, -Math.PI / 4, 0);
+        totemRoot.rotation.set(Math.PI / 6.3, -Math.PI / 4, 0);
         scene.add(totemRoot);
 
-        const W = 2.65;
-        const D = 2.65;
-        const H = 0.62;
-        const gap = 0.032;
+        const W = 3.12;
+        const D = 3.12;
+        const H = 0.78;
+        const chamfer = 0.42;
+        const gap = 0.065; // Deeper fractured shadow gaps between strata
         const step = H + gap;
         const topStartY = ((TOTEM_LAYERS.length - 1) * step) / 2;
 
-        const coreGeo = new THREE.BoxGeometry(W - 0.02, H - 0.015, D - 0.02);
+        const coreGeo = createOctagonSlabGeometry(W - 0.05, H, D - 0.05, chamfer, 0.0);
         const coreMat = new THREE.MeshBasicMaterial({ color: 0x060609 });
 
-        const edgesGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(W + 0.028, H, D + 0.028));
-        const ribbonGeo = createPerimeterRibbonGeometry(W + 0.02, H * 0.88, D + 0.02);
+        const edgesGeo = new THREE.EdgesGeometry(
+          createOctagonSlabGeometry(W + 0.016, H + 0.008, D + 0.016, chamfer, 0.012),
+          14
+        );
+        const bandH = H * 0.94;
+        const { geo: ribbonGeo, perimeter } = createOctagonRibbonGeometry(W, bandH, D, chamfer);
 
         TOTEM_LAYERS.forEach((layer, idx) => {
           const sliceGroup = new THREE.Group();
-          sliceGroup.position.set(0, topStartY - idx * step, 0);
+          const fault = layer.faultOffset;
+          sliceGroup.position.set(fault.x, topStartY - idx * step, fault.z);
+          sliceGroup.userData = { baseRotY: fault.rotY, baseY: sliceGroup.position.y };
+          sliceGroup.rotation.y = fault.rotY;
 
-          // 1. Solid obsidian core
+          // 1. Chamfered Octagonal Obsidian Core
           const coreMesh = new THREE.Mesh(coreGeo, coreMat);
           coreMesh.userData = { layerIndex: idx };
           sliceGroup.add(coreMesh);
 
-          // 2. Crisp wireframe edge borders
+          // 2. Razor-Sharp Chamfer Wireframes
           const edgeMat = new THREE.LineBasicMaterial({
             color: idx === 0 ? 0xef4444 : 0xffffff,
             transparent: true,
-            opacity: idx === 0 ? 0.85 : 0.24
+            opacity: idx === 0 ? 0.9 : 0.25
           });
           const edgeLines = new THREE.LineSegments(edgesGeo, edgeMat);
           sliceGroup.add(edgeLines);
 
-          // 3. Folded 4-wall kinetic marquee ribbon
-          const tex = createKineticRibbonTexture(layer.ribbon);
-          const ribbonMat = createKineticRibbonMaterial(tex);
+          // 3. Full-Bleed Kinetic Ribbon + Retro Bayer Cracks Shader
+          const textTex = createKineticRibbonTexture(layer.ribbon, idx + 1);
+          const fissTex = createFissureVeinsTexture(idx + 3);
+          const ribbonMat = createKineticRibbonMaterial(textTex, fissTex, perimeter, bandH);
           ribbonMat.uniforms.uActive.value = idx === 0 ? 1.0 : 0.0;
           const ribbonMesh = new THREE.Mesh(ribbonGeo, ribbonMat);
           ribbonMesh.userData = { layerIndex: idx };
           sliceGroup.add(ribbonMesh);
 
-          // 4. Crossed Engineering Wrenches on top face of Block 0
+          // 4. Crossed Engineering Wrenches Crown Emblem on Slice 01
           if (idx === 0) {
             const markTex = createCrownMarkTexture();
-            const markGeo = new THREE.PlaneGeometry(W * 0.62, D * 0.62);
-            const markMat = new THREE.MeshBasicMaterial({
-              map: markTex,
-              transparent: true
-            });
+            const markGeo = new THREE.PlaneGeometry(W * 0.58, D * 0.58);
+            const markMat = new THREE.MeshBasicMaterial({ map: markTex, transparent: true });
             const markMesh = new THREE.Mesh(markGeo, markMat);
             markMesh.rotation.x = -Math.PI / 2;
-            markMesh.position.y = H * 0.5 + 0.006;
+            markMesh.position.y = H * 0.5 + 0.015;
             sliceGroup.add(markMesh);
           }
 
@@ -575,7 +765,7 @@
         resizeCanvas();
         return true;
       } catch (err) {
-        console.warn('[Totem3D] WebGL init fallback:', err);
+        console.warn('[Totem3D] WebGL init error:', err);
         return false;
       }
     }
@@ -584,10 +774,16 @@
       if (!renderer || !camera || !canvas) return;
       const rect = canvas.parentElement.getBoundingClientRect();
       const w = Math.max(300, rect.width);
-      const h = Math.max(400, rect.height);
+      const h = Math.max(380, rect.height);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       renderer.setSize(w, h, false);
 
+      if (stainMat) {
+        stainMat.uniforms.uResolution.value.set(w * dpr, h * dpr);
+      }
+
       const aspect = w / h;
+      // Tighter frustum so monolith slabs look bold, huge and readable!
       const frustumH = 6.2;
       const frustumW = frustumH * aspect;
       camera.left = -frustumW / 2;
@@ -596,27 +792,25 @@
       camera.bottom = -frustumH / 2;
       camera.updateProjectionMatrix();
 
-      // Offset Totem gently right on wide desktop screens so Floating Card overlaps its left edge (SCRIB3 signature)
       if (totemRoot) {
-        totemRoot.position.x = window.innerWidth > 980 ? frustumW * 0.13 : 0;
-        totemRoot.position.y = -0.05;
+        totemRoot.position.x = window.innerWidth > 980 ? frustumW * 0.14 : 0;
+        totemRoot.position.y = -0.04;
       }
     }
 
-    function triggerSliceTwistWave(targetIdx, direction) {
+    function triggerSliceTwistWave(targetIdx, direction, fullPi) {
       const now = performance.now();
       const rotSign = direction >= 0 ? 1 : -1;
+      const angleDelta = rotSign * (fullPi ? Math.PI : Math.PI / 2);
 
       sliceObjects.forEach((s, i) => {
         s.targetActive = i === targetIdx ? 1.0 : 0.0;
         const dist = Math.abs(i - targetIdx);
-        // Active slice makes dramatic 90 deg (+PI/2) snap twist, neighboring slices cascade dynamically
-        const targetAngle = rotSign * (Math.PI / 2);
         s.twistAnim = {
-          startTime: now + dist * 65, // Staggered wave delay in ms
-          duration: 1450,
-          fromY: 0,
-          deltaY: targetAngle
+          startTime: now + dist * 75,
+          duration: fullPi ? 1850 : 1550,
+          fromY: s.group.userData.baseRotY,
+          deltaY: angleDelta
         };
       });
     }
@@ -630,7 +824,7 @@
       currentIndex = wrappedIdx;
       updateCardUI(currentIndex, true);
       if (webglReady) {
-        triggerSliceTwistWave(currentIndex, dir);
+        triggerSliceTwistWave(currentIndex, dir, true);
       }
     }
 
@@ -641,48 +835,81 @@
       document.fonts.ready.then(() => {
         sliceObjects.forEach((s, idx) => {
           const oldTex = s.ribbonMat.uniforms.uMap.value;
-          const freshTex = createKineticRibbonTexture(TOTEM_LAYERS[idx].ribbon);
+          const freshTex = createKineticRibbonTexture(TOTEM_LAYERS[idx].ribbon, idx + 1);
           s.ribbonMat.uniforms.uMap.value = freshTex;
           if (oldTex && oldTex.dispose) oldTex.dispose();
         });
       });
     }
 
+    // Dramatic SCRIB3 Scroll-Entrance Cascade on Viewport Intersection
+    let entrancePlayed = false;
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !entrancePlayed && webglReady) {
+              entrancePlayed = true;
+              triggerSliceTwistWave(currentIndex, 1, true);
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(section);
+    }
+
+    // Track gentle scroll-linked monolith yaw angle (real continuous feedback as user scrolls!)
+    window.addEventListener(
+      'scroll',
+      () => {
+        const rect = section.getBoundingClientRect();
+        const centerDist = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
+        scrollTwist = Math.max(-0.4, Math.min(0.4, centerDist * 0.35));
+      },
+      { passive: true }
+    );
+
     // ---------------------------------------------------------
-    // 3. Animation Render Loop (60fps GLSL & Elastic Physics)
+    // 3. 60fps Shader & Continuous Breathing + Twist Loop
     // ---------------------------------------------------------
     let lastTime = performance.now();
     function animate(now) {
       const dt = Math.min(0.05, (now - lastTime) / 1000);
       lastTime = now;
+      const tSec = now * 0.001;
 
       if (webglReady && renderer && scene && camera) {
-        // Gentle gyroscope mouse tilt
-        hoverTilt.x += (hoverTilt.targetX - hoverTilt.x) * 0.08;
-        hoverTilt.y += (hoverTilt.targetY - hoverTilt.y) * 0.08;
-        if (totemRoot) {
-          totemRoot.rotation.x = Math.PI / 6.2 + hoverTilt.y * 0.06;
-          totemRoot.rotation.y = -Math.PI / 4 + hoverTilt.x * 0.09;
+        if (stainMat) {
+          stainMat.uniforms.uTime.value = tSec;
         }
 
-        sliceObjects.forEach((s, i) => {
-          // Scroll continuous marquee text horizontally across active face perimeter
-          s.ribbonMat.uniforms.uTime.value += dt * 0.14;
+        hoverTilt.x += (hoverTilt.targetX - hoverTilt.x) * 0.08;
+        hoverTilt.y += (hoverTilt.targetY - hoverTilt.y) * 0.08;
 
-          // Smooth active band illumination blend
+        if (totemRoot) {
+          // Continuous gentle organic hover & scroll-linked angle so Totem feels perpetually alive!
+          const idleFloatY = Math.sin(tSec * 1.15) * 0.045;
+          const idleBreathRot = Math.sin(tSec * 0.7) * 0.04;
+          totemRoot.position.y = -0.04 + idleFloatY;
+          totemRoot.rotation.x = Math.PI / 6.3 + hoverTilt.y * 0.07;
+          totemRoot.rotation.y = -Math.PI / 4 + hoverTilt.x * 0.14 + scrollTwist + idleBreathRot;
+        }
+
+        sliceObjects.forEach((s, idx) => {
+          s.ribbonMat.uniforms.uTime.value += dt * 0.14;
           s.activeVal += (s.targetActive - s.activeVal) * Math.min(1, dt * 10);
           s.ribbonMat.uniforms.uActive.value = s.activeVal;
 
-          // Edge glow intensity shift
-          const targetOp = 0.22 + s.activeVal * 0.65;
-          s.edgeMat.opacity += (targetOp - s.edgeMat.opacity) * 0.15;
-          if (s.activeVal > 0.35) {
-            s.edgeMat.color.setHex(0xef4444);
-          } else {
-            s.edgeMat.color.setHex(0xffffff);
-          }
+          // Subtle micro levitation breathing per fractured strata
+          const waveY = Math.sin(tSec * 1.6 + idx * 0.8) * 0.012;
+          s.group.position.y = s.group.userData.baseY + waveY;
 
-          // Elastic Overshoot Y-Axis Twist
+          const targetOp = 0.24 + s.activeVal * 0.68;
+          s.edgeMat.opacity += (targetOp - s.edgeMat.opacity) * 0.15;
+          if (s.activeVal > 0.35) s.edgeMat.color.setHex(0xef4444);
+          else s.edgeMat.color.setHex(0xffffff);
+
           if (s.twistAnim) {
             const elapsed = now - s.twistAnim.startTime;
             if (elapsed >= 0) {
@@ -690,13 +917,18 @@
               const eased = elasticOut(p);
               s.group.rotation.y = s.twistAnim.fromY + s.twistAnim.deltaY * eased;
               if (p >= 1) {
-                s.group.rotation.y = 0; // Seamless 90-degree square symmetry lock
+                s.group.rotation.y = s.group.userData.baseRotY;
                 s.twistAnim = null;
               }
             }
           }
         });
 
+        renderer.clear();
+        if (stainScene && stainCam) {
+          renderer.render(stainScene, stainCam);
+          renderer.clearDepth();
+        }
         renderer.render(scene, camera);
       }
 
@@ -705,9 +937,6 @@
 
     requestAnimationFrame(animate);
 
-    // ---------------------------------------------------------
-    // 4. Interaction Event Bindings (Arrows, Click Raycaster, Pills, Scroll)
-    // ---------------------------------------------------------
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
         if (currentIndex > 0) selectSlice(currentIndex - 1, -1);
@@ -730,15 +959,20 @@
 
     canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
-      pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      const nx = (e.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (e.clientY - rect.top) / rect.height;
+      pointer.x = nx * 2 - 1;
+      pointer.y = ny * 2 - 1;
       hoverTilt.targetX = pointer.x;
       hoverTilt.targetY = pointer.y;
 
+      if (stainMat) {
+        stainMat.uniforms.uMouse.value.set(nx, ny);
+      }
+
       if (raycaster && camera) {
         raycaster.setFromCamera(pointer, camera);
-        const pickables = sliceObjects.map((s) => s.core);
-        const hits = raycaster.intersectObjects(pickables, false);
+        const hits = raycaster.intersectObjects(sliceObjects.map((s) => s.core), false);
         canvas.style.cursor = hits.length > 0 ? 'pointer' : 'grab';
       }
     });
@@ -754,8 +988,7 @@
       pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(pointer, camera);
-      const pickables = sliceObjects.map((s) => s.core);
-      const hits = raycaster.intersectObjects(pickables, false);
+      const hits = raycaster.intersectObjects(sliceObjects.map((s) => s.core), false);
       if (hits.length > 0) {
         const hitIdx = hits[0].object.userData.layerIndex;
         if (typeof hitIdx === 'number') {
@@ -764,24 +997,20 @@
       }
     });
 
-    // Expose global selection hook for Command Palette / Tests
     window.__totemSelectSlice = function (idx) {
       selectSlice(idx, 1);
     };
 
-    // Keyboard navigation when viewing section
     window.addEventListener('keydown', (e) => {
       const r = section.getBoundingClientRect();
       if (r.top < window.innerHeight * 0.7 && r.bottom > window.innerHeight * 0.3) {
-        if (e.key === 'ArrowRight') {
-          selectSlice(currentIndex + 1, 1);
-        } else if (e.key === 'ArrowLeft') {
-          selectSlice(currentIndex - 1, -1);
-        }
+        if (e.key === 'ArrowRight') selectSlice(currentIndex + 1, 1);
+        else if (e.key === 'ArrowLeft') selectSlice(currentIndex - 1, -1);
       }
     });
 
     window.addEventListener('resize', resizeCanvas, { passive: true });
+    setTimeout(resizeCanvas, 200);
   }
 
   if (document.readyState === 'loading') {

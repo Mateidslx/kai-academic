@@ -3510,6 +3510,7 @@
 
     async run() {
       this.env = detectEnv();
+      this._bootScrollY = this.env.geom().sy;
       const shotP = this.loadShot();
       this.view = new View(this.env);
       this.engine = new Engine(this.view);
@@ -3570,15 +3571,15 @@
       const H = env.scrollHeight();
       if (H <= g.vh * 1.25) return;
       this.view.frozen = { ...this.view.vp };
-      const steps = Math.min(28, Math.ceil(H / (g.vh * 0.85)));
+      const steps = Math.min(18, Math.ceil(H / (g.vh * 0.95)));
       for (let i = 1; i <= steps && !this.dead; i++) {
         env.scrollTo(Math.min(H, (H / steps) * i));
         await nextFrame();
-        await sleep(30);
+        await sleep(16);
       }
       env.scrollTo(g.sy, g.sx);
       await nextFrame();
-      await sleep(750);
+      await sleep(280);
       env.scrollTo(g.sy, g.sx);
       this.view.frozen = null;
     }
@@ -3590,7 +3591,15 @@
       };
       const scrollTarget = this.env.isRoot ? window : this.env.scroller;
       on(scrollTarget, "scroll", () => {
-        if (!this.view.frozen) this.view.syncWorld();
+        if (!this.view.frozen) {
+          this.view.syncWorld();
+          if (this.model && typeof this._bootScrollY === "number" && !this.tour && !this._autoReleased) {
+            if (Math.abs(this.env.geom().sy - this._bootScrollY) > 260) {
+              this._autoReleased = true;
+              stop(true);
+            }
+          }
+        }
       }, { passive: true });
       on(window, "resize", () => this.view.measure());
       on(window, "wheel", () => {
