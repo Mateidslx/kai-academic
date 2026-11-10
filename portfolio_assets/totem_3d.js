@@ -92,7 +92,7 @@
       label: 'UI 60FPS',
       titleFr: 'UI 60FPS &\nSHELL CLI',
       titleEn: '60FPS UI &\nSHELL CLI',
-      ribbon: 'UI 60FPS & ⌘K ',
+      ribbon: 'UI 60FPS • SHELL CLI ',
       descFr:
         'INTERFACES VANILLA & TYPESCRIPT HAUTE FRÉQUENCE, PALETTE CLAVIER ⌘K, TERMINAL UNIX ET DESIGN NOIR & CRIMSON.',
       descEn:
@@ -137,53 +137,39 @@
     return Math.pow(2, -10 * t) * Math.sin(((t - s) * (2 * Math.PI)) / p) + 1;
   }
 
-  // Full-Bleed Monumental Ribbon CanvasTexture + Subtle Dark Fracture Veins
-  function createKineticRibbonTexture(text, seed) {
+  // Full-Bleed Monumental Ribbon CanvasTexture (Seamless Periodic Tiling, Zero Chopped Letters)
+  function createKineticRibbonTexture(text) {
     const canvas = document.createElement('canvas');
-    canvas.width = 4096;
+    canvas.width = 2048;
     canvas.height = 256;
     const ctx = canvas.getContext('2d');
 
     ctx.fillStyle = '#060609';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Massive Full-Height Retro Block Typography (94% vertical fill just like SCRIB3)
-    const fontStr = '900 206px "Archivo Black", "Bebas Neue", "Impact", sans-serif';
+    // Authentic weight 400 Archivo Black (matches Google Fonts static weight -> zero faux-bold bloat)
+    const fontStr = '400 156px "Archivo Black", "Bebas Neue", "Impact", sans-serif';
     ctx.font = fontStr;
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#ef4444';
 
     const cleanText = text.trim().toUpperCase() + '  •  ';
-    const w = Math.max(120, ctx.measureText(cleanText).width || 1400);
-    const numCopies = Math.max(1, Math.round(canvas.width / w));
-    const scale = canvas.width / (numCopies * w);
+    const rawW = Math.max(120, ctx.measureText(cleanText).width || 1100);
+    const numCopies = Math.max(1, Math.round(canvas.width / rawW));
+    const scale = canvas.width / (numCopies * rawW);
 
     ctx.save();
     ctx.scale(scale, 1);
-    for (let i = 0; i < numCopies + 1; i++) {
-      ctx.fillText(cleanText, i * w, canvas.height * 0.54);
+    // Draw clean wrapping copies across exact [0, 2048] boundary so u=1 -> u=0 loops seamlessly
+    for (let i = -1; i <= numCopies + 1; i++) {
+      ctx.fillText(cleanText, i * rawW, canvas.height * 0.54);
     }
     ctx.restore();
-
-    // Etch crisp dark obsidian micro-fissure hairline cuts across letters
-    ctx.strokeStyle = '#060609';
-    ctx.lineWidth = 4;
-    for (let k = 0; k < 5; k++) {
-      let cx = ((k * 819 + seed * 313) % 3900) + 80;
-      let cy = 0;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      for (let step = 0; step < 5; step++) {
-        cx += ((step + seed + k) % 2 === 0 ? 18 : -16);
-        cy += 52;
-        ctx.lineTo(cx, cy);
-      }
-      ctx.stroke();
-    }
 
     const tex = new THREE.CanvasTexture(canvas);
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.ClampToEdgeWrapping;
+    tex.generateMipmaps = false;
     tex.minFilter = THREE.LinearFilter;
     tex.magFilter = THREE.LinearFilter;
     tex.needsUpdate = true;
@@ -382,15 +368,17 @@
 
   // Retro Bayer 4x4 + Fissure Crack + Full-Height Kinetic Ribbon Fragment Shader
   function createKineticRibbonMaterial(textTex, fissureTex, perimeter, bandHeight) {
-    const texRatio = 4096 / 256;
+    const texRatio = 2048 / 256;
     const worldRatio = perimeter / bandHeight;
-    const repeatFactor = worldRatio / texRatio;
+    // Exact integer repeat ensures zero chopped letters or jump glitches across the UV wrap seam
+    const repeatFactor = Math.max(1.0, Math.round(worldRatio / texRatio));
 
     return new THREE.ShaderMaterial({
       uniforms: {
         uMap: { value: textTex },
         uFissure: { value: fissureTex },
-        uTime: { value: 0 },
+        uScroll: { value: 0 },
+        uPulseTime: { value: 0 },
         uActive: { value: 0 },
         uRepeatX: { value: repeatFactor },
         uAccent: { value: new THREE.Color('#ef4444') }
@@ -403,10 +391,12 @@
         }
       `,
       fragmentShader: `
+        precision highp float;
         varying vec2 vUv;
         uniform sampler2D uMap;
         uniform sampler2D uFissure;
-        uniform float uTime;
+        uniform float uScroll;
+        uniform float uPulseTime;
         uniform float uActive;
         uniform float uRepeatX;
         uniform vec3 uAccent;
@@ -434,30 +424,28 @@
         }
 
         void main() {
-          vec2 scrolledUv = vec2(fract(vUv.x * uRepeatX + uTime), vUv.y);
+          vec2 scrolledUv = vec2(fract(vUv.x * uRepeatX + uScroll), vUv.y);
           vec4 textSample = texture2D(uMap, scrolledUv);
-          float crack = texture2D(uFissure, vec2(fract(vUv.x * 1.4), vUv.y)).r;
+          float crack = texture2D(uFissure, vec2(fract(vUv.x * 2.0), vUv.y)).r;
 
           // Retro Bayer dithered obsidian texture & glowing tectonic fissures on inactive slabs
           vec2 pix = floor(gl_FragCoord.xy / 3.0);
           float d = bayer4x4(pix);
-          float pulse = 0.55 + 0.45 * sin(uTime * 12.0 + vUv.x * 8.0);
+          float pulse = 0.55 + 0.45 * sin(uPulseTime * 1.8 + vUv.x * 6.2831853);
           float ditherCrack = step(d, crack * 0.65 * pulse);
 
           vec3 darkBase = vec3(0.022, 0.022, 0.032);
-          // Subtle retro pixel grain on obsidian stone + red tectonic hairline veins
           vec3 inactiveStone = darkBase + vec3(0.02, 0.02, 0.026) * step(d, 0.14);
           vec3 inactiveFissure = mix(inactiveStone, uAccent * 0.48, ditherCrack);
 
-          // Active full-height kinetic typography darkened along carved fracture veins
+          // Unbroken razor-sharp active kinetic typography (no static cracks slicing letters)
           vec3 activeCol = textSample.rgb;
-          activeCol = mix(activeCol, darkBase, crack * 0.72);
 
           vec3 finalCol = mix(inactiveFissure, activeCol, uActive);
           gl_FragColor = vec4(finalCol, 1.0);
         }
       `,
-      side: THREE.DoubleSide
+      side: THREE.FrontSide
     });
   }
 
@@ -730,7 +718,7 @@
           sliceGroup.add(edgeLines);
 
           // 3. Full-Bleed Kinetic Ribbon + Retro Bayer Cracks Shader
-          const textTex = createKineticRibbonTexture(layer.ribbon, idx + 1);
+          const textTex = createKineticRibbonTexture(layer.ribbon);
           const fissTex = createFissureVeinsTexture(idx + 3);
           const ribbonMat = createKineticRibbonMaterial(textTex, fissTex, perimeter, bandH);
           ribbonMat.uniforms.uActive.value = idx === 0 ? 1.0 : 0.0;
@@ -831,15 +819,20 @@
     webglReady = initWebGL();
     updateCardUI(0, false);
 
-    if (webglReady && document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
+    if (webglReady && document.fonts) {
+      const loadFontAndRefresh = async () => {
+        try {
+          await document.fonts.load('400 156px "Archivo Black"');
+          await document.fonts.ready;
+        } catch (_) {}
         sliceObjects.forEach((s, idx) => {
           const oldTex = s.ribbonMat.uniforms.uMap.value;
-          const freshTex = createKineticRibbonTexture(TOTEM_LAYERS[idx].ribbon, idx + 1);
+          const freshTex = createKineticRibbonTexture(TOTEM_LAYERS[idx].ribbon);
           s.ribbonMat.uniforms.uMap.value = freshTex;
           if (oldTex && oldTex.dispose) oldTex.dispose();
         });
-      });
+      };
+      loadFontAndRefresh();
     }
 
     // Dramatic SCRIB3 Scroll-Entrance Cascade on Viewport Intersection
@@ -898,7 +891,8 @@
         }
 
         sliceObjects.forEach((s, idx) => {
-          s.ribbonMat.uniforms.uTime.value += dt * 0.14;
+          s.ribbonMat.uniforms.uScroll.value = (s.ribbonMat.uniforms.uScroll.value + dt * 0.062) % 1.0;
+          s.ribbonMat.uniforms.uPulseTime.value = tSec;
           s.activeVal += (s.targetActive - s.activeVal) * Math.min(1, dt * 10);
           s.ribbonMat.uniforms.uActive.value = s.activeVal;
 

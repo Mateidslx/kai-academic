@@ -3532,10 +3532,10 @@
       await sleep(520);
       await unhidePage();
       mark("blank");
-      if (this.dead) return;
+      if (this.dead || this._destroying) return;
       await this.scan();
       mark("scan");
-      if (this.dead) return;
+      if (this.dead || this._destroying) return;
       try {
         await Promise.race([document.fonts.ready, sleep(1200)]);
       } catch (_) {}
@@ -3554,7 +3554,7 @@
         model = { items: [], tasks: [], groups: [], guides: [], docW: 0, docH: 0 };
       }
       mark("capture");
-      if (this.dead) return;
+      if (this.dead || this._destroying) return;
       this.view.mount(model);
       this.engine.setModel(model);
       this.model = model;
@@ -3566,7 +3566,7 @@
       }
       const wait = 1500 - (performance.now() - this.t0);
       if (wait > 0) await sleep(wait);
-      if (this.dead) return;
+      if (this.dead || this._destroying) return;
       this.engine.start();
     }
 
@@ -3576,21 +3576,36 @@
       const H = env.scrollHeight();
       if (H <= g.vh * 1.25) return;
       this.view.frozen = { ...this.view.vp };
-      const steps = Math.min(10, Math.ceil(H / (g.vh * 0.95)));
+      const maxSy = Math.max(0, H - g.vh);
+      const steps = Math.min(5, Math.ceil(H / (g.vh * 1.4)));
       let aborted = false;
+      this._inProgramScroll = false;
+      this._expectedScanY = g.sy;
       const markAbort = () => { aborted = true; };
+      const checkUnexpectedScroll = () => {
+        if (Math.abs(env.geom().sy - this._expectedScanY) > 180) {
+          aborted = true;
+        }
+      };
+      const progScroll = (y, x) => {
+        const curMax = Math.max(0, env.scrollHeight() - env.geom().vh);
+        this._expectedScanY = Math.min(curMax, Math.max(0, y));
+        env.scrollTo(y, x);
+      };
+      const scrollTarget = env.isRoot ? window : env.scroller;
       window.addEventListener("wheel", markAbort, { passive: true, once: true });
       window.addEventListener("touchstart", markAbort, { passive: true, once: true });
-      for (let i = 1; i <= steps && !this.dead && !aborted; i++) {
-        env.scrollTo(Math.min(H, (H / steps) * i));
+      scrollTarget.addEventListener("scroll", checkUnexpectedScroll, { passive: true });
+      for (let i = 1; i <= steps && !this.dead && !this._destroying && !aborted; i++) {
+        progScroll(Math.min(maxSy, (maxSy / steps) * i));
         await nextFrame();
-        await sleep(16);
       }
-      if (!aborted) env.scrollTo(g.sy, g.sx);
+      if (!aborted && !this._destroying) progScroll(g.sy, g.sx);
       await nextFrame();
-      await sleep(240);
+      await sleep(120);
       window.removeEventListener("wheel", markAbort);
       window.removeEventListener("touchstart", markAbort);
+      scrollTarget.removeEventListener("scroll", checkUnexpectedScroll);
       if (aborted || Math.abs(env.geom().sy - g.sy) > 120) {
         this.view.frozen = null;
         if (!this._autoReleased && (aborted || Math.abs(env.geom().sy - g.sy) > 260)) {
@@ -3599,7 +3614,7 @@
         }
         return;
       }
-      if (!aborted) env.scrollTo(g.sy, g.sx);
+      if (!aborted) progScroll(g.sy, g.sx);
       this.view.frozen = null;
     }
 
@@ -3694,7 +3709,7 @@
     }
 
     frame(now) {
-      if (this.dead) return;
+      if (this.dead || this._destroying) return;
       const dt = Math.min(0.05, (now - this.last) / 1000);
       this.last = now;
       try {
@@ -3776,6 +3791,7 @@
     }
 
     destroy(reveal) {
+      this._destroying = true;
       unhidePage();
       if (this.sfx) {
         if (reveal) this.sfx.release();
