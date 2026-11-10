@@ -302,15 +302,15 @@
     if (!overlay || !input) return;
 
     const commands = [
-      { id: 'about', title: 'À Propos & Philosophie', desc: 'Background, premier-principe et formation', href: '#about', tag: 'Section' },
+      { id: 'about', title: 'Matéi derrière le code (Akaru Bio)', desc: 'Pays Basque, Delta, Escalade, Korrika, Échecs & Projets', href: '#about', tag: 'Histoire' },
       { id: 'flagships', title: 'Flagships & Écosystème 7-Layer', desc: 'Moteur quantitatif Polymarket & 46 PRs open-source', href: '#flagships', tag: 'Projets' },
       { id: 'exploded', title: 'Totem Architecture 3D (WebGL Monolithe)', desc: 'Monolithe 3D isométrique à 6 étages avec shaders GLSL et torsion élastique', href: '#exploded-architecture', tag: '3D WebGL' },
       { id: 'matrix', title: 'The Systems Matrix', desc: 'Bento index : IA, C99, Valgrind, Web & Cloud', href: '#projects', tag: 'Index' },
-      { id: 'parcours', title: 'Parcours & ADN Terrain (Échecs ~1500 Elo)', desc: 'IUT Anglet, Stages HUPI/Marra, UK, Échecs tactiques', href: '#parcours', tag: 'Parcours' },
+      { id: 'parcours', title: 'Parcours & ADN Terrain (Bac 20/20 Grand Oral)', desc: 'IUT Anglet, Stages HUPI/Marra, UK, Échecs ~1500 Elo', href: '#parcours', tag: 'Parcours' },
       { id: 'terminal', title: 'Matéi Shell [>_ CLI Terminal]', desc: 'Exécuter valgrind, polymarket, chess, prs, cat cv', action: () => { const btn = document.getElementById('terminal-pill-btn'); if(btn) btn.click(); }, tag: 'CLI' },
       { id: 'cv-fr', title: 'Télécharger CV Français (PDF)', desc: 'Curriculum Vitae officiel Matéi de Saint Léger (FR)', href: 'portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf', tag: 'Document' },
       { id: 'cv-en', title: 'Download English Resume (PDF)', desc: 'Official Engineering Resume Matéi de Saint Léger (EN)', href: 'portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf', tag: 'Document' },
-      { id: 'contact', title: 'Contact & Recrutement Alternance', desc: 'Discuter d\'une alternance 2e année BUT Informatique', href: '#contact', tag: 'Contact' }
+      { id: 'contact', title: 'Contact & Recrutement Alternance', desc: 'Discuter d\'une alternance BUT 2 dès Septembre 2027', href: '#contact', tag: 'Contact' }
     ];
 
     function openPalette() {
@@ -501,9 +501,10 @@
           printLine('[Best line] 1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6');
           printLine('[Player stats] Matéi de Saint Léger: ~1500 Elo (Rapid & Blitz)');
         } else if (lower === 'cat cv') {
-          printLine('Matéi de Saint Léger — Étudiant BUT 1 Informatique (IUT d\'Anglet)', 'accent');
-          printLine('Recherche: Alternance BUT 2 (Septembre 2025/2026, Côte Basque / Hybride / Remote)');
-          printLine('Email: matei64200@gmail.com ');
+          printLine('Matéi de Saint Léger — Étudiant BUT 1 Informatique (IUT d\'Anglet — TD2/TP4)', 'accent');
+          printLine('Bac 2026 Mention AB (13,75/20) • Grand Oral 20/20 • Mention DNL Basque (14,40/20)');
+          printLine('Recherche: Alternance BUT 2 (Septembre 2027, Côte Basque / Hybride / Remote)');
+          printLine('Email: matei64200@gmail.com');
           printLine('GitHub: https://github.com/Mateidslx');
           printLine('LinkedIn: https://linkedin.com/in/matéi-de-saint-léger-24329a32b/');
           printLine('Téléchargements disponibles : CV Français (PDF) et English Resume (PDF)');
@@ -674,8 +675,94 @@ CREATE TABLE OrdreExecution (
     requestAnimationFrame(step);
   }
 
+  // ==========================================================================
+  // AKARU TWO-ACT BIOGRAPHY ACCORDION & PRINCIPLES CONTROLLER
+  // ==========================================================================
+  function initAkaruStory() {
+    const panels = Array.from(document.querySelectorAll('#akaru-accordion .akaru-panel'));
+    const counterEl = document.getElementById('akaru-deck-counter');
+    const CHAPTER_LABELS = [
+      '01 / 05 — PAYS BASQUE & RACINES',
+      '02 / 05 — HORS ÉCRAN & DELTA',
+      '03 / 05 — ÉCHECS, ALPHAZERO & IA',
+      '04 / 05 — FORGE & LABO QUANT',
+      '05 / 05 — IUT ANGLET & OPEN-SOURCE'
+    ];
+
+    function activateChapter(index) {
+      if (!panels.length) return;
+      const safeIdx = ((index % panels.length) + panels.length) % panels.length;
+      panels.forEach((panel, i) => {
+        const isActive = i === safeIdx;
+        panel.classList.toggle('is-active', isActive);
+        panel.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      });
+      if (counterEl && CHAPTER_LABELS[safeIdx]) {
+        counterEl.textContent = CHAPTER_LABELS[safeIdx];
+      }
+    }
+
+    panels.forEach((panel, idx) => {
+      panel.addEventListener('click', (e) => {
+        if (e.target.closest('.akaru-circle-next')) return;
+        activateChapter(idx);
+      });
+
+      panel.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          if (e.target.closest('.akaru-circle-next')) return;
+          e.preventDefault();
+          activateChapter(idx);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          activateChapter(idx + 1);
+          panels[(idx + 1) % panels.length].focus();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          activateChapter(idx - 1);
+          panels[(idx - 1 + panels.length) % panels.length].focus();
+        }
+      });
+    });
+
+    document.querySelectorAll('.akaru-circle-next').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const nextIdx = parseInt(btn.getAttribute('data-next'), 10);
+        if (!Number.isNaN(nextIdx)) {
+          activateChapter(nextIdx);
+        }
+      });
+    });
+
+    const hairlineItems = Array.from(document.querySelectorAll('#akaru-principles-list .akaru-hairline-item'));
+    const plates = Array.from(document.querySelectorAll('.akaru-visual-stack .akaru-stack-plate'));
+
+    function selectPrinciple(idx) {
+      const targetPlate = hairlineItems[idx]?.getAttribute('data-principle') ?? '0';
+      hairlineItems.forEach((item, i) => {
+        item.classList.toggle('is-selected', i === idx);
+      });
+      plates.forEach((plate) => {
+        plate.classList.toggle('is-highlighted', plate.getAttribute('data-principle') === targetPlate);
+      });
+    }
+
+    hairlineItems.forEach((item, idx) => {
+      item.addEventListener('mouseenter', () => selectPrinciple(idx));
+      item.addEventListener('click', () => selectPrinciple(idx));
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectPrinciple(idx);
+        }
+      });
+    });
+  }
+
   function init() {
     initAuroraCanvas();
+    initAkaruStory();
     initLayerInteractive();
     initMatrixFilter();
     initClipboard();
