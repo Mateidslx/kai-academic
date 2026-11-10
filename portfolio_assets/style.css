@@ -1381,16 +1381,15 @@ main {
 
 .akaru-panel.is-active {
   display: flex;
-  animation: akaruStageFadeIn 0.34s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 1;
+  animation: akaruStageFadeIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes akaruStageFadeIn {
   from {
-    opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
