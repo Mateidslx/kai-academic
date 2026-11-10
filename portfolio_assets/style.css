@@ -2623,8 +2623,10 @@ main {
 
 .totem-webgl-wrap {
   position: absolute;
-  inset: -26px 0 0 0;
-  width: 100%;
+  top: -26px;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: 100vw;
   height: calc(100% + 26px);
   z-index: 3;
   display: flex;
@@ -2638,15 +2640,15 @@ main {
   display: block;
 }
 
-/* Compact Swiss Brutalist Editorial Card (Matching SCRIB3 height) */
+/* Compact Swiss Brutalist Editorial Card (Enriched Spec Edition) */
 .totem-card {
   position: relative;
   z-index: 5;
-  width: min(468px, 100%);
+  width: min(504px, 100%);
   background: #ededf0;
   color: #09090b;
   border-radius: 16px;
-  padding: 22px 24px 18px;
+  padding: 20px 24px 16px;
   box-shadow: 0 30px 75px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
@@ -2655,12 +2657,12 @@ main {
   justify-content: space-between;
   align-items: flex-start;
   gap: 14px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .totem-numeral-svg {
-  width: 132px;
-  height: 74px;
+  width: 118px;
+  height: 66px;
   display: block;
 }
 
@@ -2673,11 +2675,32 @@ main {
   100% { transform: scaleY(1) scaleX(1); opacity: 1; }
 }
 
+.totem-card-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.totem-card-role {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b91c1c;
+  background: rgba(185, 28, 28, 0.09);
+  border: 1px solid rgba(185, 28, 28, 0.28);
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-align: right;
+}
+
 .totem-card-title {
   font-family: var(--font-sans);
-  font-size: clamp(18px, 2vw, 22px);
-  font-weight: 700;
-  line-height: 1.06;
+  font-size: clamp(18px, 1.9vw, 22px);
+  font-weight: 800;
+  line-height: 1.04;
   letter-spacing: -0.02em;
   text-align: right;
   text-transform: uppercase;
@@ -2689,7 +2712,7 @@ main {
   width: 100%;
   height: 1px;
   background: #18181b;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .totem-card-body-row {
@@ -2697,19 +2720,84 @@ main {
   justify-content: space-between;
   align-items: flex-start;
   gap: 14px;
-  min-height: 62px;
-  margin-bottom: 14px;
+  min-height: 54px;
+  margin-bottom: 12px;
 }
 
 .totem-card-desc {
   flex: 1;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.55;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-family: 'Lexend', var(--font-sans);
+  font-size: 12.6px;
+  font-weight: 500;
+  line-height: 1.48;
+  letter-spacing: 0.005em;
   color: #18181b;
   margin: 0;
+  text-align: left;
+}
+
+.totem-spec-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(9, 9, 11, 0.22);
+  border-radius: 8px;
+  background: rgba(9, 9, 11, 0.035);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.totem-spec-row {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(9, 9, 11, 0.14);
+}
+
+.totem-spec-row:last-child {
+  border-bottom: none;
+}
+
+.totem-spec-key {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #52525b;
+  text-transform: uppercase;
+}
+
+.totem-spec-val {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.38;
+  color: #09090b;
+}
+
+.totem-spec-val.is-proof {
+  color: #991b1b;
+}
+
+.totem-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.totem-tag-pill {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #09090b;
+  background: #ffffff;
+  border: 1px solid rgba(9, 9, 11, 0.28);
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 
 .totem-telem-col {
