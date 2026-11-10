@@ -131,7 +131,7 @@
       titleEn: '60FPS UI &\nSHELL CLI',
       ribbon: 'UI 60FPS • SHELL CLI ',
       descFr:
-        'Interfaces Vanilla JS, React et Tauri haute fréquence, adaptées à la dyslexie (Lexend) et pilotables 100 % au clavier.',
+        'Interfaces Vanilla JS, React et Tauri haute fréquence, axées sur la clarté cognitive (Lexend) et pilotables 100 % au clavier.',
       descEn:
         'High-frequency Vanilla JS, React & Tauri interfaces tailored for cognitive clarity and full keyboard navigation.',
       buildsFr: 'Kai Academic (79 pages) • ZenTable Pro (React 19) • Pdf-helper (Tauri)',

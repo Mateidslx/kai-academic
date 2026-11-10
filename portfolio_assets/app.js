@@ -302,7 +302,7 @@
     if (!overlay || !input) return;
 
     const commands = [
-      { id: 'about', title: 'Matéi derrière le code (Chapitres & Principes)', desc: 'Pays Basque, Delta, Escalade, Korrika, Échecs & Projets', href: '#about', tag: 'Histoire' },
+      { id: 'about', title: 'Matéi derrière le code (Chapitres & Principes)', desc: 'Pays Basque, Escalade, Échecs, Projets & IUT Anglet', href: '#about', tag: 'Histoire' },
       { id: 'flagships', title: 'Flagships & Écosystème 7-Layer', desc: 'Moteur quantitatif Polymarket & 46 PRs open-source', href: '#flagships', tag: 'Projets' },
       { id: 'exploded', title: 'Totem Architecture 3D (WebGL Monolithe)', desc: 'Monolithe 3D isométrique à 6 étages avec shaders GLSL et torsion élastique', href: '#exploded-architecture', tag: '3D WebGL' },
       { id: 'matrix', title: 'The Systems Matrix', desc: 'Bento index : IA, C99, Valgrind, Web & Cloud', href: '#projects', tag: 'Index' },
@@ -501,7 +501,7 @@
           printLine('[Best line] 1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6');
           printLine('[Player stats] Matéi de Saint Léger: ~1500 Elo (Rapid & Blitz)');
         } else if (lower === 'cat cv') {
-          printLine('Matéi de Saint Léger — Étudiant BUT 1 Informatique (IUT d\'Anglet — TD2/TP4)', 'accent');
+          printLine('Matéi de Saint Léger — Étudiant BUT Informatique (IUT de Bayonne-Anglet)', 'accent');
           printLine('Bac 2026 Mention AB (13,75/20) • Grand Oral 20/20 • Mention DNL Basque (14,40/20)');
           printLine('Recherche: Alternance BUT 2 (Septembre 2027, Côte Basque / Hybride / Remote)');
           printLine('Email: matei64200@gmail.com');
@@ -690,8 +690,8 @@ CREATE TABLE OrdreExecution (
     const aboutSection = document.getElementById('about');
 
     const CHAPTER_LABELS = [
-      '01 / 05 — PAYS BASQUE & RACINES',
-      '02 / 05 — HORS ÉCRAN & DELTA',
+      '01 / 05 — PAYS BASQUE & FORMATION',
+      '02 / 05 — SPORT, ENDURANCE & MONTAGNE',
       '03 / 05 — ÉCHECS, ALPHAZERO & IA',
       '04 / 05 — FORGE & LABO QUANT',
       '05 / 05 — IUT ANGLET & OPEN-SOURCE'
