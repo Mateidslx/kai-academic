@@ -1,0 +1,44 @@
+// Addition binaire
+// Ecrire les 2 nombres binaires à addionner séparés par un espace.
+// ATTENTION : si l'un des 2 nombres comporte moins de bits que l'autre, il doit être écrit en second
+
+// Table d'états (10 états)
+//-----------------------------------------------------
+//    état	car lu     état suiv   écrit  opération
+//-----------------------------------------------------
+       q0          0           q1        0       D
+       q0          1           q1        1       D
+       q0          .           q0        .       D
+       q1          0           q1        0       D
+       q1          1           q1        1       D
+       q1          Z           q1        Z       D
+       q1          U           q1        U       D
+       q1          .           q2        .       D
+       q2          0           q2        0       D
+       q2          1           q2        1       D
+       q2          .           q3        .       G
+       q3          0           q4        .       G
+       q3          1           q6        .       G
+       q3          .           q9        .       G
+       q4          0           q4        0       G
+       q4          1           q4        1       G
+       q4          .           q5        .       G
+       q5          0           q1        Z       D
+       q5          1           q1        U       D
+       q5          Z           q5        Z       G
+       q5          U           q5        U       G
+       q6          0           q6        0       G
+       q6          1           q6        1       G
+       q6          .           q7        .       G
+       q7          Z           q7        Z       G
+       q7          U           q7        U       G
+       q7          0           q1        U       D
+       q7          1           q8        Z       G
+       q8          0           q1        1       D
+       q8          1           q8        0       G
+       q8          .           q1        1       D
+       q9          0           q0        0       A
+       q9          1           q0        1       A
+       q9          Z           q9        0       G
+       q9          U           q9        1       G
+       q9          .           q0        .       A

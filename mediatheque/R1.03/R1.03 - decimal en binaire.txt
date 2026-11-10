@@ -1,0 +1,124 @@
+//----------------------
+// Décimal vers binaire
+//----------------------
+
+// D'après la solution proposée par :
+// Copyright (c) 2013 Max von Buelow
+// Copyright (c) 2013 kd3x
+// License: CC BY-NC-SA 3.0
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Greetings to the course 'FGdI 1' 
+// at the TU Darmstadt.
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// Modifiée pour écrire le nombre binaire en miroir à la fin
+
+// Table d'états (18 états)
+// état	   car lu  état suiv  écrit  opération
+   qinit     0        qinit     0       D
+   qinit     1        qinit     1       D
+   qinit     2        qinit     2       D
+   qinit     3        qinit     3       D
+   qinit     4        qinit     4       D
+   qinit     5        qinit     5       D
+   qinit     6        qinit     6       D
+   qinit     7        qinit     7       D
+   qinit     8        qinit     8       D
+   qinit     9        qinit     9       D
+   qinit     .        halve     0       G
+// Division par 2 avec ou sans reste
+   halve     0        halve     0       G
+   halve     1        addHalf   0       D
+   halve     2        halve     1       G
+   halve     3        addHalf   1       D
+   halve     4        halve     2       G
+   halve     5        addHalf   2       D
+   halve     6        halve     3       G
+   halve     7        addHalf   3       D
+   halve     8        halve     4       G
+   halve     9        addHalf   4       D
+   halve     .        removezero .      D
+// Ajouter 0.5 à droite si reste
+   addHalf     0      jump      5       G
+   addHalf     1      jump      6       G
+   addHalf     2      jump      7       G
+   addHalf     3      jump      8       G
+   addHalf     4      jump      9       G
+// Reculer
+   jump        0      halve     0       G
+   jump        1      halve     1       G
+   jump        2      halve     2       G
+   jump        3      halve     3       G
+   jump        4      halve     4       G
+// A la fin enlever le zéro
+ removezero     0   removezero  .       D
+ removezero     1     goBack    1       D
+ removezero     2     goBack    2       D
+ removezero     3     goBack    3       D
+ removezero     4     goBack    4       D
+ removezero     5     goBack    5       D
+ removezero     6     goBack    6       D
+ removezero     7     goBack    7       D
+ removezero     8     goBack    8       D
+ removezero     9     goBack    9       D
+ removezero     .     remplace  .       D
+// Retour en arrière sans modification
+   goBack     0       goBack    0       D
+   goBack     1       goBack    1       D
+   goBack     2       goBack    2       D
+   goBack     3       goBack    3       D
+   goBack     4       goBack    4       D
+   goBack     5       goBack    5       D
+   goBack     6       goBack    6       D
+   goBack     7       goBack    7       D
+   goBack     8       goBack    8       D
+   goBack     9       goBack    9       D
+   goBack     .       rest      .       G
+// Reste de la division par 2 -> z (0) ou u (1)
+   rest       0       rest0     .       D
+   rest0      .     setrest0    .       D
+   rest       5       rest1     .       D
+   rest1      .     setrest1    .       D
+ setrest0     0     setrest0    0       D
+ setrest0     1     setrest0    1       D
+ setrest0     z     setrest0    z       D
+ setrest0     u     setrest0    u       D
+ setrest1     0     setrest1    0       D
+ setrest1     1     setrest1    1       D
+ setrest1     z     setrest1    z       D
+ setrest1     u     setrest1    u       D
+ setrest0     .     continue    z       G
+ setrest1     .     continue    u       G
+// continuer
+ continue     z     continue    z       G
+ continue     u     continue    u       G
+ continue     .     continue2   .       G
+// délimiter
+ continue2    .       halve     0       G
+// Miroir de la chaine z/u en 0/1
+   remplace   z      remplace   z       D
+   remplace   u      remplace   u       D
+   remplace   .       marque    .       G
+   marque     0       marque    0       G
+   marque     1       marque    1       G
+   marque     *       marque    *       G
+   marque     z       ecrit0    *       D
+   marque     u       ecrit1    *       D
+   marque     .       efface    .       D
+   ecrit0     0       ecrit0    0       D
+   ecrit0     1       ecrit0    1       D
+   ecrit0     z       ecrit0    z       D
+   ecrit0     u       ecrit0    u       D
+   ecrit0     *       ecrit0    *       D
+   ecrit0     .       marque    0       G
+   ecrit1     0       ecrit1    0       D
+   ecrit1     1       ecrit1    1       D
+   ecrit1     z       ecrit1    z       D
+   ecrit1     u       ecrit1    u       D
+   ecrit1     *       ecrit1    *       D
+   ecrit1     .       marque    1       G
+   efface     *       efface    .       D
+   efface     0       init      0       A
+   efface     1       init      1       A
+   efface     .       init      0       A

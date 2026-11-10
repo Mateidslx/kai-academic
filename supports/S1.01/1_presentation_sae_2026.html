@@ -1,0 +1,1269 @@
+<!doctype html>
+<html>
+
+<head>
+	<base href="https://patrick-etcheverry.github.io/-s1.01-implementation-besoin-client/1_presentation_sae/">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+	<link rel="stylesheet" href="plugin/copycode/copycode.css">
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">SAE 1.01 <br> Implémentation d'un besoin client</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                Présentation générale
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 40px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="15%">
+    </div>
+
+    <p class="text-center" style="font-size:large; margin-top: 70px;">
+        Patrick Etcheverry - Maxime Masson
+    </p>
+    <div>
+
+    </div>
+
+
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4>Plan de la présentation</h4>
+
+    <br />
+    <div style="font-size: 70%; margin-top: -40px;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Introduction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">03</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Compétences visées
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">06</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Constitution des groupes
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">11</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Atelier de Katas
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">15</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Évaluations
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">21</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Chronologie
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">28</span>
+              </td>
+            </tr>
+
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Intro">
+    <!--
+    l'attribut "name" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Introduction" data-transition="convex">
+        <h1>Introduction</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="font-size: 96%; margin-top: 20px;">S1.01 - Implémentation d'un besoin client : Présentation</h4>
+
+        <div style="font-size: 67%; margin-top: 10px; line-height: 1.4;">
+
+            <ul>
+                <li style="margin-top: -7px;">
+                    Cette SAE vous permet de renforcer vos compétences en <strong>conception</strong> et en <strong>programmation</strong>
+                    d'une
+                    solution informatique en réponse à l'<strong>analyse</strong> d'un <strong>besoin</strong> formulé.
+                </li>
+                <li class="fragment fade-left" style="margin-top: 5px;">
+                    Ces besoins seront formulés au travers de plusieurs énoncés d'exercices
+                    organisés sous forme de <strong>katas de programmation.</strong>
+                </li>
+
+                <li class="fragment fade-right" style="margin-top: 5px;">
+                    Ces katas de programmation sont conçus pour vous entraîner à maîtriser
+                    les <strong>modèles d'algorithmes</strong> étudiés dans la première partie du module R1.01 -
+                    Initiation au développement :
+                    <ul>
+                        <li style="margin-top: -2px;">Echange de deux valeurs,</li>
+                        <li style="margin-top: -10px;">Saisie-vérif,</li>
+                        <li style="margin-top: -10px;">Parcours complet avec traitement systématique,</li>
+                        <li style="margin-top: -10px;">Parcours complet avec traitement conditionné,</li>
+                        <li style="margin-top: -10px;">Recherche de première occurrence.</li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 10px;">Qu'est-ce qu'un Kata de programmation ?</h4>
+
+        <div style="font-size: 67%; margin-top: 30px;">
+
+            <p>
+                Le terme, popularisé par David Thomas, s'inspire du concept japonais de kata dans les arts martiaux, où les mouvements sont pratiqués jusqu'à
+                être exécutés à la perfection.
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 90%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/dave_thomas.png"
+                        width="115" style="padding-right: 20px;">
+                        "Un kata de programmation est un ensemble d'exercices qui aident les développeurs à améliorer leurs compétences par la
+                        pratique répétée". 
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top">
+                    David Thomas, Andrew Hunt
+                    <cite title="Source Title"> - The pragmatic programmer: from journeyman to master, 1999</cite>
+                </footer>
+            </blockquote>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Compétences visées">
+    <!--
+    l'attribut "name" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Compétences visées" data-transition="convex">
+        <h1>Compétences visées</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Analyser un besoin</h4>
+
+        <div style="font-size: 70%; ">
+
+            <p style="margin-top: 30px;">L'objectif est de développer vos capacités à :</p>
+            <ul>
+                <li style="margin-top: 0px;"> comprendre un <strong>besoin</strong> exprimé dans un énoncé ;
+                </li>
+                <li style="margin-top: 20px;"> repérer les <strong>caractéristiques</strong> importantes d'un problème qui auront une
+                    répercussion sur la solution à élaborer.
+                </li>
+            </ul>
+
+            <p style="margin-top: 90px;"></p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Concevoir une solution adaptée</h4>
+
+        <div style="font-size: 70%; margin-top: -5px;">
+
+            <p style="margin-top: 30px;">L'objectif est de développer vos capacités à :</p>
+            <ul>
+                <li style="margin-top: 0px;"> identifier un ou plusieurs <strong>modèles d'algorithmes</strong> adaptés pour résoudre
+                    le problème de départ ;
+                </li>
+                <li style="margin-top: 20px;"> <strong>adapter</strong> ces modèles pour produire une solution algorithmique répondant au
+                    besoin du problème de départ.
+                </li>
+            </ul>
+
+            <p style="margin-top: 90px;"></p>
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Développer une solution opérationnelle</h4>
+
+        <div style="font-size: 70%; margin-top: -5px;">
+
+            <p style="margin-top: 30px;">L'objectif est de développer vos capacités à :</p>
+            
+            <ul>
+                <li style="margin-top: 0px;"> <strong>programmer</strong> une solution algorithmique dans un <strong>temps limité</strong> ;
+                </li>
+                <li style="margin-top: 20px;">produire un code respectant des <strong>normes</strong> de qualité professionnelle.
+                </li>
+            </ul>
+
+            <p style="margin-top: 90px;"></p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Apprendre à progresser en équipe</h4>
+
+        <div style="font-size: 70%; margin-top: -5px;">
+
+            <p style="margin-top: 30px;">L'objectif est de développer vos capacités à :</p>
+            <ul>
+                <li style="margin-top: 0px;"><strong>analyser</strong> des solutions algorithmiques et des extraits de codes proposés
+                    par vos coéquipiers ;
+                </li>
+                <li style="margin-top: 20px;"><strong>confronter</strong> vos idées à celles des autres membres de votre équipe ;
+                </li>
+                <li style="margin-top: 20px;"><strong>travailler en équipe</strong> pour produire la meilleure solution algorithmique et
+                    le meilleur code possible dans un temps limité.
+                </li>
+            </ul>
+
+            <p style="margin-top: 70px;"></p>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- ====================================================================== -->
+</section><section name="Groupes">
+    <!--
+    l'attribut "name" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Groupes" data-transition="convex">
+        <h1>Constitution des groupes</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 10px;">Règles pour former les groupes</h4>
+
+        <div style="font-size: 70%;">
+
+            <ul style="margin-bottom: 0px;">
+
+                <li>
+                    Chaque groupe doit être constitué :
+                    <ul style="margin-top: 10px;">
+                        <li>d'<strong>au moins 3</strong> étudiants ;</li>
+                        <li>d'<strong>au plus</strong> 4 étudiants ;</li>
+                    </ul>
+                </li>
+
+                <li style="margin-top: 20px;">Le nombre de groupes de <strong>4 étudiants</strong> doit être
+                    <strong>maximisé</strong>.
+                </li>
+
+                <li style="margin-top: 20px;">Les groupes doivent être composés d'étudiants <strong>du même TP</strong>.
+                </li>
+            </ul>
+
+            <p style="margin-top: 70px;"></p>
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <!-- <section>
+
+        <h4 style="margin-top: 10px;">Répartition des effectifs</h4>
+
+        <div style="font-size: 70%; margin-top: -10px;">
+            <ul style="margin-bottom: 25px;">
+                <li> <span class="text-warning">TP1</span> : 15 étudiants → <strong>3 groupes de 4</strong> étudiants et
+                    <strong>1 groupe de 4</strong> étudiants ;
+                </li>
+
+                <li style="margin-top: 20px;"><span class="text-warning">TP2</span> : 14 étudiants → <strong>2 groupes
+                        de
+                        4</strong> étudiants et <strong>2 groupes de 3</strong> étudiants ;
+                </li>
+
+                <li style="margin-top: 20px;"><span class="text-warning">TP3</span> : 14 étudiants → <strong>2 groupes
+                        de
+                        4</strong> étudiants et <strong>2 groupes de 3</strong> étudiants ;
+                </li>
+
+                <li style="margin-top: 20px;"><span class="text-warning">TP4</span> : 12 étudiants → <strong>3 groupes
+                        de
+                        4</strong> étudiants ;
+                </li>
+
+                <li style="margin-top: 20px;"><span class="text-warning">TP5</span> : 14 étudiants → <strong>2 groupes
+                        de
+                        4</strong> étudiants et <strong>2 groupes de 3</strong> étudiants ;
+                </li>
+            </ul>
+
+        </div>
+    </section> -->
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 10px;">Respect des consignes et des délais</h4>
+
+        <div style="font-size: 70%; margin-top: -10px;">
+
+            <ul style="margin-bottom: -10px;">
+
+                <li>La constitution des groupes commence par une <strong>discussion</strong> entre tous les membres d'un
+                    groupe de TP dans le but de rechercher une répartition <strong>qui convienne à tout le
+                        monde</strong>.</li>
+
+                <li>Après accord global, chaque étudiant s'inscrit dans un groupe en se connectant <strong>sur
+                        Elearn</strong>.</li>
+
+                <li>Deadline pour former les groupes : <span class="text-danger">avant le mercredi 21/10 à 14h</span>.
+                </li>
+
+                <li>Si les règles ne sont pas respectées (constitution des groupes + respect du
+                    délai), <span class="text-danger">les groupes déjà constitués seront
+                        dissous</span> et de nouveaux groupes seront reconstitués aléatoirement par les enseignants.
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 10px;">Collaboration et responsabilités</h4>
+
+        <div style="font-size: 70%; margin-top: 10px;">
+            <ul>
+
+                <li style="margin-top: 30px;">Chaque membre est responsable de la progression du groupe.</li>
+
+                <li style="margin-top: 25px;">La réussite de chacun dépend de la capacité à travailler en équipe et à
+                    s'entraider.
+                </li>
+                <li style="margin-top: 25px;"><strong>L'évaluation du groupe dépendra en partie des résultats
+                        individuels de
+                        chaque membre</strong>. L'entraide est donc primordiale.
+                </li>
+            </ul>
+
+            <p style="margin-top: 80px;"></p>
+
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Atelier de Katas">
+    <!--
+    l'attribut "name" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Atelier de Katas" data-transition="convex">
+        <h1>Atelier de Katas</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Vue d’ensemble de l'atelier de katas</h4>
+
+        <div style="font-size: 70%; margin-top: 20px;">
+
+            <ul>
+                <li style="margin-top: 30px;">
+                    L'atelier de katas se déroule sur une séance de <span>3 heures</span>.
+                </li>
+
+                <li style="margin-top: 25px;">
+                    Chaque groupe doit traiter <strong>un maximum d’exercices</strong> algorithmiques dans ce temps
+                    imparti.
+                </li>
+
+                <li style="margin-top: 25px;">
+                    Le travail en groupe est <strong>essentiel</strong> pour progresser à travers les exercices.
+                </li>
+            </ul>
+
+            <p style="margin-top: 80px;"></p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Réalisation de chaque exercice</h4>
+
+        <div style="font-size: 70%; margin-top: 20px;">
+
+            <ol>
+                <li style="margin-top: 35px;">
+                    Chaque exercice commence par une <strong>analyse</strong> de l’énoncé pour identifier les
+                    <strong>caractéristiques</strong> principales du problème. Le groupe choisit ensuite un ou plusieurs
+                    <strong>modèles d'algorithme</strong> adaptés
+                    pour résoudre cet exercice.
+                </li>
+
+                <li style="margin-top: 40px;">
+                    Le groupe échange pour <strong>concevoir</strong> la solution algorithmique de l'exercice. A cette
+                    étape il est conseillé d'élaborer une <strong>esquisse de l'algorithme</strong> sur brouillon.
+                </li>
+
+                <li style="margin-top: 40px;">
+                    Les membres du groupe collaborent ensuite pour <strong>programmer</strong> la solution algorithmique
+                    retenue en appliquant les <strong>bonnes pratiques de programmation</strong>.
+                </li>
+            </ol>
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4 style="margin-top: 10px;">Ressources à disposition</h4>
+
+        <div style="font-size: 70%; margin-top: 20px;">
+
+            <p>
+                Durant l'atelier, chaque groupe disposera :
+            </p>
+
+            <ul>
+
+                <li style="margin-top: 15px;">
+                    de <strong>deux bureaux virtuels spécialement configurés pour les katas</strong>.
+                    Aucun bureau virtuel supplémentaire ne sera attribué.
+                </li>
+
+                <li style="margin-top: 15px;">
+                    de <strong>feuilles de brouillon</strong> fournies par l'enseignant si besoin ;
+                </li>
+
+                <li style="margin-top: 15px;">
+                  d'un <strong>accès à Internet limité à Elearn</strong>.
+                </li>
+
+                <li style="margin-top: 15px;">
+                    des <strong>ressources papier ou électroniques</strong> que le groupe aura pris soin de
+                    préparer avant l'atelier.
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Progression dans les exercices</h4>
+
+        <div style="font-size: 65%; margin-top: 20px;">
+
+            <p>Les exercices sont de difficulté croissante et organisés en 9 niveaux de progression. Comme dans la
+                plupart
+                des arts martiaux, les niveaux sont représentés par des ceintures de couleur reflétant le niveau de
+                maîtrise atteint
+                :</p>
+
+
+            <div class="row" style="font-size: 80%;">
+                <!-- Première colonne avec le premier tableau -->
+                <div class="col-md-6">
+                    <table class="table table-bordered text-center">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Ceinture</th>
+                                <th scope="col">Couleur</th>
+                                <th scope="col">Note max</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_blanche_jaune.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Blanche - Jaune</td>
+                                <td>7/20</td>
+                            </tr>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_jaune.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Jaune</td>
+                                <td>8/20</td>
+                            </tr>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_jaune_orange.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Jaune - Orange</td>
+                                <td>9/20</td>
+                            </tr>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_orange.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Orange</td>
+                                <td>11/20</td>
+                            </tr>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_orange_verte.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Orange - Verte</td>
+                                <td>13/20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Deuxième colonne avec le second tableau -->
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Ceinture</th>
+                                <th scope="col">Couleur</th>
+                                <th scope="col">Note max</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_verte.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Verte</td>
+                                <td>15/20</td>
+                            </tr>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_bleue.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Bleue</td>
+                                <td>16/20</td>
+                            </tr>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_marron.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Marron</td>
+                                <td>18/20</td>
+                            </tr>
+                            <tr>
+                                <td><img src="presentation/images/ceinture_noire.png" alt="" class="img-fluid"
+                                        width="80"></td>
+                                <td>Noire</td>
+                                <td>20/20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Passage d'un exercice à l'autre</h4>
+
+        <div style="font-size: 65%; margin-top: 20px;">
+
+            <ul>
+                <li style="margin-top: -10px;">
+                    Une fois le code révisé <strong>collectivement</strong>, le groupe doit le déposer <strong>sur
+                        Elearn</strong>.
+                </li>
+
+                <li style="margin-top: 0px;">
+                    Tout code déposé devra commencer par une <strong>documentation</strong> avec les informations
+                    suivantes :
+                    <pre class="cpp"
+                        style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); border: solid 0.05em rgb(172, 172, 172); border-radius:5px;"><code data-trim data-noescape style="font-size: 67%; padding: 10px; line-height: 1.3;">
+                    /*
+                        Numéro du groupe :
+                        Nom du groupe : 
+                        Étudiants :
+                        Numéro de Kata : (1 ou 2)
+                        Numéro de l'exercice : (entre 1 et 9)
+                        But de l'exercice : 
+                        Modèle(s) d'algorithme(s) choisi(s) :
+                        Brève justification du ou des modèles choisis :
+                        Remarques éventuelles :
+                    */           
+                    </code></pre>
+                </li>
+
+                <li style="margin-top: -10px;">
+                    Le dépôt d'un code débloque l’exercice suivant ;
+                </li>
+
+                <li style="margin-top: 0px;">
+                    <span class="text-danger"><i class="fas fa-exclamation-triangle"></i></span> &nbsp;
+                    Attention : tout dépôt est <strong class="text-danger">définitif</strong>, aucun code déposé ne peut
+                    plus être modifié. Il est donc
+                    crucial de <strong>relire attentivement</strong> la solution finale avant soumission.
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Évaluations">
+    <!--
+    l'attribut "name" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Évaluations" data-transition="convex">
+        <h1>Évaluations</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Vue d’ensemble des évaluations</h4>
+
+        <div style="font-size: 68%; margin-top: 10px;">
+
+            <p style="margin-top: 35px;">La SAE donnera lieu à trois évaluations :</p>
+
+            <ol style="margin-top: 45px;">
+
+                <li>
+                    <span class="text-warning">Défense collective :</span> Une note de groupe sera attribuée à l'issue
+                    d'une soutenance où vous devrez défendre les solutions algorithmiques produites durant
+                    l'atelier de Katas.
+                </li>
+
+                <li style="margin-top: 30px;">
+                    <span class="text-warning">Défi individuel :</span> Vous obtiendrez une note
+                    individuelle basée sur une épreuve d'algorithmique consistant à résoudre un
+                    exercice de Kata.
+                </li>
+
+                <li style="margin-top: 30px;">
+                    <span class="text-warning">Note solidaire :</span> Une note de groupe correspondant
+                    à la moyenne des notes obtenues par l'ensemble des membres du groupe lors du
+                        défi individuel sera attribuée.
+                </li>
+
+            </ol>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Défense collective - Déroulement</h4>
+
+        <div style="font-size: 70%;">
+
+            <ul style="margin-top: 0px;">
+                <li>
+                    Suite à l'atelier de Katas, l'enseignant prépare 2 slides <strong>pour chaque groupe</strong> :
+                    <ul>
+                        <li style="margin-top: 20px;">1 slide avec le dernier code déposé par le groupe sur Elearn,</li>
+                        <li style="margin-top: 15px;">1 slide avec un autre code déposé par le groupe sur Elearn. Ce
+                            code
+                            sera choisi par l'enseignant et sera découvert par le groupe le jour de la soutenance.</li>
+                    </ul>
+                </li>
+
+                <li style="margin-top: 15px;">
+                    Durant cette soutenance de <strong>20 minutes</strong>, chaque membre du groupe doit prendre la
+                    parole de <strong>manière équilibrée</strong> pour défendre les deux codes affichés par
+                    l'enseignant.
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Défense collective - Points à défendre</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>Pour chaque code, le groupe devra défendre les points suivants :</p>
+            <ul style="margin-top: -4px;">
+                <li>
+                    Justification du modèle d'algorithme choisi pour résoudre l'exercice ;
+                </li>
+
+                <li style="margin-top: 2px;">
+                    Codage et respect du modèle d'algorithme ;
+                </li>
+
+                <li style="margin-top: 2px;">
+                    Qualité de nommage des variables / constantes ;
+                </li>
+
+                <li style="margin-top: 2px;">
+                    Précision du typage des variables / constantes ;
+                </li>
+
+                <li style="margin-top: 2px;">
+                    Respect des conventions de nommage ;
+                </li>
+
+                <li style="margin-top: 2px;">
+                    Pertinence et plus-value des commentaires ;
+                </li>
+
+                <li style="margin-top: 2px;">
+                    Choix des structures de contrôle ;
+                </li>
+
+                <li style="margin-top: 2px;">
+                    Indentation du code.
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <!-- <section>
+        <h4 style="margin-top: 10px;">Évaluation critique</h4>
+
+        <div style="font-size: 70%;">
+
+            <ul style="margin-top: 10px;">
+                <li>
+                    Durant la soutenance d'un groupe, vous analysez les codes présentés et écoutez les
+                    arguments avancés.
+                </li>
+
+                <li style="margin-top: 30px;">
+                    Vous remplissez <strong>individuellement</strong> une fiche dans laquelle vous donnez votre
+                    évaluation des critères de qualité défendus par le groupe : Justification du modèle d'algorithme
+                    choisi, codage et respect du modèle
+                    d'algorithme, etc.
+                </li>
+
+                <li style="margin-top: 30px;">
+                    La note résultante de ce travail est calculée en comparant votre évaluation à
+                    l'évaluation de l'enseignant : <strong>Plus vos évaluations sont proches des évaluations de
+                        l'enseignant, plus votre note est bonne</strong>.
+                </li>
+
+            </ul>
+
+        </div>
+    </section> -->
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Défi individuel - Déroulement</h4>
+
+        <div style="font-size: 70%;">
+
+            <ul style="margin-top: 10px;">
+                <li>
+                    Vous choisissez un niveau d'exercice compris entre le <strong>niveau 1 et le niveau maximum +
+                        1</strong> que votre
+                    groupe aura atteint durant l'atelier de katas ;
+                </li>
+
+                <li style="margin-top: 10px;">
+                    Plus vous choisissez un niveau élevé, plus la note finale a des chances d'être élevée mais plus
+                    l'exercice à traiter est difficile.
+                </li>
+
+                <li style="margin-top: 10px;">
+                    Durant l'épreuve, l'enseignant vous donne un exercice du niveau demandé. Vous devez
+                    dans un temps limité produire un <strong>algorithme et un dictionnaire des données</strong> qui répond
+                    parfaitement à
+                    l'exercice donné.
+                </li>
+
+                <li style="margin-top: 10px;">
+                    Le temps disponible pour résoudre l'exercice est <strong>le même pour tout le monde</strong>, quel
+                    que soit le niveau
+                    d'exercice traité.
+                </li>
+
+            </ul>
+
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4 style="margin-top: 10px;">Défi individuel - Critères d'évaluation</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-md-6" style="font-size: 95%;">
+                    <ul>
+                        <li>
+                            Choix du bon modèle d'algorithme&nbsp;;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Degré d'opérationnalisation et d'efficacité de la solution ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Respect du formalisme algorithmique ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Décomposition en sous-problèmes avec des noms significatifs ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Structuration de la solution ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Choix des structures de contrôle ;
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6" style="font-size: 95%;">
+                    <ul>
+                        <li style="margin-top: 5px;">
+                            Spécification des données et des résultats ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Dictionnaire des données complet avec toutes les informations ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Noms significatifs des informations manipulées ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Précision du typage (cf. dictionnaire) ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Signification des variables et constantes (cf. dictionnaire) ;
+                        </li>
+
+                        <li style="margin-top: 5px;">
+                            Absence de nombres magiques.
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+   <section>
+
+    <h4 style="margin-top: 10px;">Note solidaire</h4>
+
+    <div style="font-size: 68%; margin-top: 35px;">
+
+        <p></p>
+
+        <ul style="margin-top: 15px;">
+
+            <li>
+                Pour encourager le travail en équipe et l’entraide, vous recevrez une
+                <strong>note correspondant à la moyenne des notes obtenues par l'ensemble des membres
+                du groupe lors du défi individuel</strong>.
+            </li>
+
+            <li style="margin-top: 20px;">
+                L'objectif est d'encourager une dynamique de groupe où chaque membre s’assure,
+                <strong>avant le défi individuel</strong>, que les autres maîtrisent les solutions
+                algorithmiques élaborées durant l'atelier de katas.
+            </li>
+
+            <li style="margin-top: 20px;">
+                Plus vous collaborez et vous vous entraidez au sein du groupe, plus vous augmentez
+                les chances de réussite de <strong>l'ensemble du groupe lors du défi individuel</strong>.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Chronologie">
+    <!--
+    l'attribut "name" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Chronologie" data-transition="convex">
+        <h1>Chronologie</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Déroulement de la SAE (1/3)</h4>
+
+        <div style="font-size: 70%; margin-top: -10px;">
+
+            <p class="text-warning" style="margin-top: 30px;">Semaine du 19/10</p>
+            <ul>
+                <li style="margin-top: 15px;">
+                    1 séance <strong>encadrée</strong> de 1h30 : présentation de la SAE, constitution des groupes et
+                    enregistrement sur
+                    Elearn ;
+                </li>
+
+                <li style="margin-top: 25px;">
+                    1 séance en <strong>autonomie</strong> de 1h30 : préparation de l'atelier de Katas : révision des
+                    modèles
+                    d'algorithmes en groupe (cours R1.01 et feuille de TD7), réflexion sur l'organisation en équipe, 
+                    répartition des rôles durant l'atelier de Katas et test de cette organisation sur un ou deux
+                    exercices du TD7 de R1.01.
+                </li>
+
+            </ul>
+            <p style="margin-top: 70px;"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Déroulement de la SAE (2/3)</h4>
+
+        <div style="font-size: 65%; margin-top: -10px;">
+
+
+            <p class="text-warning" style="margin-top: 30px;">Semaine du 02/11</p>
+            <ul>
+                <li style="margin-top: -15px;">
+                    1 séance <strong>encadrée</strong> de 3h : atelier de Katas. Le groupe démontre sa maîtrise des
+                    modèles d'algorithmes
+                    tout en restant vigilant sur les critères de qualité attendus. &nbsp;<span class="text-danger"><i
+                            class="fas fa-exclamation-triangle"></i></span> Rappel : tout dépôt de
+                    code sur Elearn est définitif et devra être défendu en l'état lors de la défense collective !
+                </li>
+
+                <li class="fragment fade-left" style="margin-top: 10px;">
+                    1 séance en <strong>autonomie</strong> de 1h30 : <strong>Préparation de la défense collective</strong> : Le groupe révise ses codes, répartit
+                            son temps de parole et
+                            prépare une argumentation pour chacun des points de qualité à défendre. Le groupe réalise
+                            ensuite une soutenance blanche pour s'assurer de la clarté du
+                            discours et du respect du temps de parole de chacun.
+                    <!-- <ul>
+                        <li><strong>Préparation de la défense collective</strong> : Le groupe révise ses codes, répartit
+                            son temps de parole et
+                            prépare une argumentation pour chacun des points de qualité à défendre. Le groupe réalise
+                            ensuite une soutenance blanche pour s'assurer de la clarté du
+                            discours et du respect du temps de parole de chacun.
+                        </li>
+                        <li style="margin-top: -15px;">
+                            <strong>Préparation de l'évaluation critique</strong> : chaque groupe propose aux autres
+                            groupes de son TP de
+                            relire les codes déposés sur Elearn. Objectif : faire une pré-évaluation des différentes
+                            productions pour s'entraîner et être prêt lors de l'évaluation critique.
+                        </li>
+                    </ul> -->
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Déroulement de la SAE (3/3)</h4>
+
+        <div style="font-size: 68%; margin-top: -10px;">
+            <p class="text-warning">Semaine du 09/11</p>
+            <ul>
+                <li style="margin-top: -15px;">
+                    1 séance <strong>encadrée</strong> de 1h30 : <strong>Défense collective</strong> : L'enseignant présente, pour
+                    chaque groupe, deux codes qu'ils ont produits. Chaque groupe défend ces deux codes pendant 20
+                    minutes sur l'ensemble des 8 critères précédemment listés. 
+                </li>
+
+                <li style="margin-top: 5px;">
+                    1 séance en <strong>autonomie</strong> de 1h30 : Le groupe s'entraide pour <strong>préparer
+                        le défi individuel</strong> : révision des modèles d'algorithmes, réalisation d'algorithmes de
+                    1 ou plusieurs exercices de Katas dans un temps limité, révision des algorithmes produits
+                    par les autres membres du groupe ;
+                </li>
+
+                <li style="margin-top: 5px;">
+                    1 séance <strong>encadrée</strong> de 1h30 : <strong>Défi individuel</strong>. Réalisation d'un
+                    algorithme sur papier, dans un temps limité, répondant à un exercice de Kata d'un niveau choisi par
+                    l'étudiant.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<!-- Pour faire fonctionner le plugin copyecode il faut utiliser clipboard.min.js : -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<script src="plugin/copycode/copycode.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    copycode: {
+      plaintextonly: true,
+      copy: "Copier",
+      copied: "Copié!",
+      timeout: 1000,
+      copybg: "#dadada",
+      copiedbg: "#35a3e5",
+      copycolor: "#636363",
+      copiedcolor: "white"
+    },
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu, CopyCode],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    countdown: { defaultTime: 600, autostart: "no", tDelta: 10, timeIsUpSound: "presentation/sons/fin_timer.mp3"},
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' },{ src: "plugin/countdown/countdown.js" }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+
+
+</body>
+
+</html>
