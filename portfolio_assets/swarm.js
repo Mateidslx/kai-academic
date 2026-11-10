@@ -3559,6 +3559,11 @@
       this.engine.setModel(model);
       this.model = model;
       mark("mount");
+      if (typeof this._bootScrollY === "number" && !this.tour && !this._autoReleased && Math.abs(this.env.geom().sy - this._bootScrollY) > 260) {
+        this._autoReleased = true;
+        stop(true);
+        return;
+      }
       const wait = 1500 - (performance.now() - this.t0);
       if (wait > 0) await sleep(wait);
       if (this.dead) return;
@@ -3571,16 +3576,30 @@
       const H = env.scrollHeight();
       if (H <= g.vh * 1.25) return;
       this.view.frozen = { ...this.view.vp };
-      const steps = Math.min(18, Math.ceil(H / (g.vh * 0.95)));
-      for (let i = 1; i <= steps && !this.dead; i++) {
+      const steps = Math.min(10, Math.ceil(H / (g.vh * 0.95)));
+      let aborted = false;
+      const markAbort = () => { aborted = true; };
+      window.addEventListener("wheel", markAbort, { passive: true, once: true });
+      window.addEventListener("touchstart", markAbort, { passive: true, once: true });
+      for (let i = 1; i <= steps && !this.dead && !aborted; i++) {
         env.scrollTo(Math.min(H, (H / steps) * i));
         await nextFrame();
         await sleep(16);
       }
-      env.scrollTo(g.sy, g.sx);
+      if (!aborted) env.scrollTo(g.sy, g.sx);
       await nextFrame();
-      await sleep(280);
-      env.scrollTo(g.sy, g.sx);
+      await sleep(240);
+      window.removeEventListener("wheel", markAbort);
+      window.removeEventListener("touchstart", markAbort);
+      if (aborted || Math.abs(env.geom().sy - g.sy) > 120) {
+        this.view.frozen = null;
+        if (!this._autoReleased && (aborted || Math.abs(env.geom().sy - g.sy) > 260)) {
+          this._autoReleased = true;
+          stop(true);
+        }
+        return;
+      }
+      if (!aborted) env.scrollTo(g.sy, g.sx);
       this.view.frozen = null;
     }
 
@@ -3593,7 +3612,7 @@
       on(scrollTarget, "scroll", () => {
         if (!this.view.frozen) {
           this.view.syncWorld();
-          if (this.model && typeof this._bootScrollY === "number" && !this.tour && !this._autoReleased) {
+          if (typeof this._bootScrollY === "number" && !this.tour && !this._autoReleased) {
             if (Math.abs(this.env.geom().sy - this._bootScrollY) > 260) {
               this._autoReleased = true;
               stop(true);

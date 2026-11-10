@@ -783,8 +783,8 @@
       }
 
       const aspect = w / h;
-      // Tighter frustum so monolith slabs look bold, huge and readable!
-      const frustumH = 6.2;
+      // Full-frame orthographic clearance so bottom slab (06) always floats cleanly above pill dock
+      const frustumH = window.innerWidth <= 980 ? 7.0 : 7.45;
       const frustumW = frustumH * aspect;
       camera.left = -frustumW / 2;
       camera.right = frustumW / 2;
@@ -794,7 +794,7 @@
 
       if (totemRoot) {
         totemRoot.position.x = window.innerWidth > 980 ? frustumW * 0.14 : 0;
-        totemRoot.position.y = -0.04;
+        totemRoot.position.y = window.innerWidth > 980 ? 0.34 : 0.04;
       }
     }
 
@@ -889,9 +889,10 @@
 
         if (totemRoot) {
           // Continuous gentle organic hover & scroll-linked angle so Totem feels perpetually alive!
+          const baseRootY = window.innerWidth > 980 ? 0.34 : 0.04;
           const idleFloatY = Math.sin(tSec * 1.15) * 0.045;
           const idleBreathRot = Math.sin(tSec * 0.7) * 0.04;
-          totemRoot.position.y = -0.04 + idleFloatY;
+          totemRoot.position.y = baseRootY + idleFloatY;
           totemRoot.rotation.x = Math.PI / 6.3 + hoverTilt.y * 0.07;
           totemRoot.rotation.y = -Math.PI / 4 + hoverTilt.x * 0.14 + scrollTwist + idleBreathRot;
         }
