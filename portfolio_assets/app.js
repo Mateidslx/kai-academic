@@ -836,6 +836,11 @@ CREATE TABLE OrdreExecution (
         }
       });
     });
+
+    plates.forEach((plate, idx) => {
+      plate.addEventListener('mouseenter', () => selectPrinciple(idx));
+      plate.addEventListener('click', () => selectPrinciple(idx));
+    });
   }
 
   function init() {
