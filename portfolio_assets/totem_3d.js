@@ -19,10 +19,10 @@
         'Développement ISO C99 strict (-Wall -Wextra -Werror) avec pointeurs durcis, arbres syntaxiques AST et gestion mémoire manuelle.',
       descEn:
         'Strict ISO C99 engineering (-Wall -Wextra -Werror) with hardened pointers, AST trees and manual heap lifecycle.',
-      buildsFr: 'AlgoForge C99 • MathBallBattle BigMath • Analyseur CLI',
-      buildsEn: 'AlgoForge C99 • MathBallBattle BigMath • CLI Parser',
-      proofFr: 'Valgrind : 0 fuite / 0 erreur sur 100k allocs • Style Allman strict',
-      proofEn: 'Valgrind: 0 leaks / 0 errors across 100k allocs • Strict Allman',
+      buildsFr: 'lru_cache.c O(1) • dijkstra_graph.c • Transpileur AlgoForge Pro',
+      buildsEn: 'lru_cache.c O(1) • dijkstra_graph.c • AlgoForge Pro Transpiler',
+      proofFr: 'Valgrind : 0 octet perdu / 0 erreur • Flags -Wall -Wextra -Werror',
+      proofEn: 'Valgrind: 0 bytes lost / 0 errors • Flags -Wall -Wextra -Werror',
       tags: ['ISO C99', 'VALGRIND', 'GDB / MAKEFILE'],
       ctaFr: 'TEST VALGRIND ↗',
       ctaEn: 'VALGRIND TRACE ↗',
@@ -42,10 +42,10 @@
         'Pipeline quantitatif météo & carnet d\'ordres temps réel, réseaux PyTorch probabilistes et essaim autonome de 36 agents Kai.',
       descEn:
         'Real-time weather & orderbook quant pipeline, probabilistic PyTorch nets and 36-agent autonomous Kai swarm.',
-      buildsFr: 'Moteur Polymarket 24/7 • PyTorch GMM-MDN • Essaim Kai (36 agents)',
-      buildsEn: '24/7 Polymarket Engine • PyTorch GMM-MDN • Kai Swarm (36 agents)',
-      proofFr: '466 572 prévisions • RMSE 0.677°C • Flux CLOB <50ms • PBO/CSCV',
-      proofEn: '466,572 forecasts • RMSE 0.677°C • <50ms CLOB WS • PBO/CSCV',
+      buildsFr: 'GMM-MDN (466k prév.) • TCN BTC 30×32 • Kill-Switch V43 Look-Ahead',
+      buildsEn: 'GMM-MDN (466k forecasts) • TCN BTC 30×32 • V43 Look-Ahead Kill-Switch',
+      proofFr: 'RMSE 0.677°C • ECE PAV 1.43% • PBO/CSCV PASS • Flat Sizing 1,00 $',
+      proofEn: 'RMSE 0.677°C • ECE PAV 1.43% • PBO/CSCV PASS • Strict $1 Flat Sizing',
       tags: ['PYTORCH', 'WEBSOCKET CLOB', 'WALK-FORWARD'],
       ctaFr: 'FLUX CLOB ↗',
       ctaEn: 'CLOB STREAM ↗',
@@ -65,8 +65,8 @@
         'Audit statique de vulnérabilités, verrouillage strict RBAC, assainissement des entrées et revues quotidiennes en production.',
       descEn:
         'Static vulnerability analysis, strict RBAC enforcement, input sanitization and production upstream engineering.',
-      buildsFr: 'SafePath-Lint (MIT AST) • PRs Twenty CRM (40k★) & Omi (8k★)',
-      buildsEn: 'SafePath-Lint (MIT AST) • PRs Twenty CRM (40k★) & Omi (8k★)',
+      buildsFr: 'SafePath-Lint (SPL001..004) • Omi 7 PRs (#14604..#20168) • Twenty #26490',
+      buildsEn: 'SafePath-Lint (SPL001..004) • Omi 7 PRs (#14604..#20168) • Twenty #26490',
       proofFr: '46 PRs fusionnées • Neutralisation CWE-22, CWE-79 (XSS) & CWE-209',
       proofEn: '46 Merged PRs • CWE-22, CWE-79 (XSS) & CWE-209 Mitigated',
       tags: ['AST PYTHON', 'CWE-22 / RBAC', 'TYPESCRIPT'],
@@ -79,24 +79,24 @@
     {
       num: '04',
       label: 'LINUX',
-      roleFr: 'SYSADMIN • PRODUCTION 24/7',
-      roleEn: 'SYSADMIN • 24/7 PRODUCTION',
-      titleFr: 'LINUX &\nCLOUD 24/7',
-      titleEn: 'LINUX &\nCLOUD 24/7',
-      ribbon: 'SYSTEMD & CLOUD 24/7 ',
+      roleFr: 'SYSADMIN • VÉRIFICATION PHYSIQUE',
+      roleEn: 'SYSADMIN • PHYSICAL STATE CHECKS',
+      titleFr: 'LINUX &\nKAI CORE OS',
+      titleEn: 'LINUX &\nKAI CORE OS',
+      ribbon: 'SYSTEMD & KAI CORE OS ',
       descFr:
-        'Exploitation souveraine sur Ubuntu 24.04 avec services auto-guéris, surveillance matérielle et pipelines d\'extraction B2B.',
+        'Exploitation Ubuntu 24.04 avec vérificateur d\'état physique post-action (StateVerifier), daemons systemd auto-guéris et pipelines B2B.',
       descEn:
-        'Sovereign Ubuntu 24.04 operations with self-healing systemd units, watchdogs and hardened B2B document pipelines.',
-      buildsFr: 'Oracle VPS 24/7 • Watchdogs Systemd • Extracteur B2B FastAPI/OCR',
-      buildsEn: 'Oracle VPS 24/7 • Systemd Watchdogs • FastAPI/OCR B2B Extractor',
-      proofFr: '19 démons supervisés • 735 tests unitaires B2B sans hallucination',
-      proofEn: '19 supervised daemons • 735 B2B unit tests with zero hallucination',
-      tags: ['UBUNTU 24.04', 'SYSTEMD', 'VPS ORACLE'],
-      ctaFr: 'INFRA CLOUD ↓',
-      ctaEn: 'CLOUD INFRA ↓',
+        'Ubuntu 24.04 operations with deterministic post-action verification (StateVerifier), self-healing systemd units and B2B pipelines.',
+      buildsFr: 'StateVerifier (%PDF-/SQLite/ADB) • Extracteur B2B sans hallucination',
+      buildsEn: 'StateVerifier (%PDF-/SQLite/ADB) • Zero-Hallucination B2B Extractor',
+      proofFr: '735 tests unitaires B2B ancrés mot-à-mot • Services Ubuntu 24/7',
+      proofEn: '735 word-grounded B2B unit tests • Ubuntu 24/7 systemd services',
+      tags: ['UBUNTU 24.04', 'STATE VERIFIER', 'VPS ORACLE'],
+      ctaFr: 'VOIR ÉTUDE #04 ↓',
+      ctaEn: 'CASE STUDY #04 ↓',
       actionType: 'scroll',
-      actionPayload: '#flagships',
+      actionPayload: '#case-kai',
       faultOffset: { x: -0.06, z: -0.06, rotY: -0.02 }
     },
     {
@@ -108,18 +108,18 @@
       titleEn: 'SQLITE WAL &\nMERISE 3NF',
       ribbon: 'SQLITE WAL & 3NF ',
       descFr:
-        'Modélisation conceptuelle MCD/MLD en 3e forme normale, mémoire agentique Letta OS et registre comptable immuable.',
+        'Modélisation conceptuelle MCD/MLD en 3e forme normale, indexation plein texte FTS5 BM25 et journaux d\'audit cryptographiques SHA-256.',
       descEn:
-        'Conceptual MCD/MLD 3NF database modeling, hierarchical Letta Memory OS and cryptographically verifiable ledgers.',
-      buildsFr: 'Letta Memory OS • Provenance SQL • Registre Audit SHA-256',
-      buildsEn: 'Letta Memory OS • SQL Provenance • SHA-256 Audit Ledger',
-      proofFr: 'SQLite WAL ACID • Normalisation 3NF stricte • Hachage SHA-256',
-      proofEn: 'SQLite WAL ACID • Strict 3NF Normalization • SHA-256 Provenance',
-      tags: ['MERISE 3NF', 'SQLITE WAL', 'SHA-256'],
-      ctaFr: 'ADN & SQL ↓',
-      ctaEn: 'SQL & DNA ↓',
-      actionType: 'scroll',
-      actionPayload: '#parcours',
+        'Conceptual MCD/MLD 3NF database modeling, FTS5 BM25 indexing and cryptographically chained SHA-256 audit ledgers.',
+      buildsFr: 'academic_vault.db (2 018+ entités) • Registre Audit SHA-256 & SPRT',
+      buildsEn: 'academic_vault.db (2,018+ entities) • SHA-256 Ledger & SPRT Drift',
+      proofFr: 'SQLite WAL ACID • Normalisation 3NF stricte • Parité live/replay 0.00',
+      proofEn: 'SQLite WAL ACID • Strict 3NF Normalization • 0.00 Live/Replay Parity',
+      tags: ['MERISE 3NF', 'FTS5 BM25', 'SHA-256'],
+      ctaFr: 'AUDIT ÉTAT ↗',
+      ctaEn: 'STATE VERIFY ↗',
+      actionType: 'terminal',
+      actionPayload: 'verify',
       faultOffset: { x: 0.05, z: -0.05, rotY: 0.02 }
     },
     {
@@ -491,15 +491,13 @@
     });
   }
 
-  // Genuine SCRIB3 / Studio Freight Fluid 16-Node Cursor Wake + Bayer 8x8 Halftone Matrix Shader
+  // Clean Ordered 8x8 Bayer Halftone Nebula Shader (V29 Crisp Look + Smooth Cursor Ripple)
   function createRetroStainMaterial() {
-    const trailArray = Array.from({ length: 16 }, () => new THREE.Vector3(-5.0, -5.0, 0.0));
     return new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
         uResolution: { value: new THREE.Vector2(1440, 620) },
-        uMouse: { value: new THREE.Vector2(0.66, 0.5) },
-        uTrail: { value: trailArray },
+        uMouse: { value: new THREE.Vector2(0.64, 0.48) },
         uColor: { value: new THREE.Color('#ef4444') }
       },
       vertexShader: `
@@ -514,7 +512,6 @@
         uniform float uTime;
         uniform vec2 uResolution;
         uniform vec2 uMouse;
-        uniform vec3 uTrail[16];
         uniform vec3 uColor;
 
         float hash(vec2 p) {
@@ -532,7 +529,7 @@
           );
         }
 
-        // Exact 8x8 Bayer Ordered Dithering Matrix (Retro 1-bit CRT Halftone Aesthetics)
+        // Exact 8x8 Bayer Ordered Dithering Matrix (Crisp 1-bit CRT Halftone Grid)
         float bayer8(vec2 pos) {
           int x = int(mod(pos.x, 8.0));
           int y = int(mod(pos.y, 8.0));
@@ -547,49 +544,30 @@
         }
 
         void main() {
-          float gran = 4.0;
+          float gran = 5.0; // Clean uniform Bayer matrix spacing
           vec2 pixCoord = floor(gl_FragCoord.xy / gran);
           vec2 uvPix = (pixCoord * gran) / max(uResolution, vec2(1.0));
 
           float aspect = uResolution.x / max(1.0, uResolution.y);
-          vec2 p = vec2(uvPix.x * aspect, uvPix.y);
-          vec2 center = vec2(0.66 * aspect, 0.50);
+          vec2 p = vec2((uvPix.x - 0.62) * aspect, uvPix.y - 0.48);
 
-          // Curl-warped organic noise field + subtle architectural interference behind totem
-          float n1 = noise(p * 3.8 + vec2(uTime * 0.16, -uTime * 0.11));
-          float n2 = noise(p * 8.2 - vec2(uTime * 0.12, uTime * 0.19));
-          vec2 warp = vec2(n1 - 0.5, n2 - 0.5) * 0.16;
+          // Gentle localized cursor gravity modulation confined strictly inside the radial halo
+          vec2 m = vec2((uMouse.x - 0.62) * aspect, uMouse.y - 0.48);
+          float mouseDist = length(p - m);
+          float mouseRipple = exp(-mouseDist * 4.5) * 0.34;
 
-          float distCenter = length((p - center) * vec2(0.85, 1.05));
-          float radialHalo = smoothstep(0.95, 0.08, distCenter);
-          float baseField = (n1 * 0.55 + n2 * 0.45) * 0.44 * radialHalo;
+          float n1 = noise(p * 3.2 + vec2(uTime * 0.14, -uTime * 0.1));
+          float n2 = noise(p * 6.5 - vec2(uTime * 0.09, uTime * 0.15));
+          float field = (n1 * 0.6 + n2 * 0.4);
 
-          // Subtle full-bleed ordered Bayer dotfloor across entire stage (Studio Freight CRT matrix)
+          float radialFade = clamp(1.0 - length(p) * 1.15, 0.0, 1.0);
+          radialFade = smoothstep(0.0, 0.9, radialFade);
+
+          float intensity = clamp((field * 0.72 + mouseRipple) * radialFade, 0.0, 0.75);
           float threshold = bayer8(pixCoord);
-          float microDot = step(0.92, threshold) * 0.22;
+          float dotMask = step(threshold, intensity);
 
-          // 16-node Fluid Velocity Cursor Wake (jagged pixelated splash trail)
-          float trailEnergy = 0.0;
-          for (int i = 0; i < 16; i++) {
-            vec3 node = uTrail[i];
-            if (node.z > 0.01) {
-              vec2 np = vec2(node.x * aspect, node.y);
-              float d = length((p + warp * (0.5 + 0.65 * node.z)) - np);
-              float radius = 0.085 + node.z * 0.12;
-              float splat = smoothstep(radius, 0.0, d) * node.z;
-              trailEnergy = max(trailEnergy, splat);
-            }
-          }
-
-          float totalField = clamp(baseField + trailEnergy * 1.05, 0.0, 0.99);
-          float ditherMask = step(threshold, totalField);
-
-          vec3 gridCol = vec3(0.24, 0.25, 0.30);
-          vec3 rubyCore = mix(uColor * 0.52, vec3(1.0, 0.42, 0.42), smoothstep(0.35, 0.92, trailEnergy));
-          vec3 finalRgb = mix(gridCol * microDot, rubyCore, ditherMask);
-          float finalAlpha = max(microDot * 0.45, ditherMask * (0.40 + trailEnergy * 0.58));
-
-          gl_FragColor = vec4(finalRgb, finalAlpha);
+          gl_FragColor = vec4(uColor * 0.65, dotMask * 0.52);
         }
       `,
       transparent: true,
@@ -947,20 +925,10 @@
     );
 
     // ---------------------------------------------------------
-    // 3. 60fps Fluid Cursor Trail + Shader & Continuous Breathing Loop
+    // 3. 60fps Shader & Continuous Smooth Breathing + Twist Loop
     // ---------------------------------------------------------
     let lastTime = performance.now();
-    let hasUserMoved = false;
-    let lastTrailSpawn = { x: 0.67, y: 0.5 };
-    let trailHead = 0;
-
-    function pushTrailNode(nx, ny, strength) {
-      if (!stainMat || !stainMat.uniforms || !stainMat.uniforms.uTrail) return;
-      const arr = stainMat.uniforms.uTrail.value;
-      trailHead = (trailHead + 1) % arr.length;
-      arr[trailHead].set(nx, ny, Math.min(1.0, Math.max(0.2, strength)));
-      stainMat.uniforms.uMouse.value.set(nx, ny);
-    }
+    let smoothMouse = { x: 0.62, y: 0.48, targetX: 0.62, targetY: 0.48 };
 
     function animate(now) {
       const dt = Math.min(0.05, (now - lastTime) / 1000);
@@ -970,36 +938,22 @@
       if (webglReady && renderer && scene && camera) {
         if (stainMat) {
           stainMat.uniforms.uTime.value = tSec;
-          const arr = stainMat.uniforms.uTrail.value;
-          for (let i = 0; i < arr.length; i++) {
-            if (arr[i].z > 0.004) {
-              arr[i].z *= Math.exp(-dt * 1.9);
-            } else {
-              arr[i].z = 0.0;
-            }
-          }
-          // Subtle ambient motion before first pointer sweep so background stays alive
-          if (!hasUserMoved) {
-            const ox = 0.68 + Math.cos(tSec * 0.65) * 0.09;
-            const oy = 0.50 + Math.sin(tSec * 0.85) * 0.14;
-            if (Math.hypot(ox - lastTrailSpawn.x, oy - lastTrailSpawn.y) > 0.025) {
-              pushTrailNode(ox, oy, 0.52);
-              lastTrailSpawn.x = ox;
-              lastTrailSpawn.y = oy;
-            }
-          }
+          const lerpFactor = Math.min(1, dt * 6.5);
+          smoothMouse.x += (smoothMouse.targetX - smoothMouse.x) * lerpFactor;
+          smoothMouse.y += (smoothMouse.targetY - smoothMouse.y) * lerpFactor;
+          stainMat.uniforms.uMouse.value.set(smoothMouse.x, smoothMouse.y);
         }
 
-        hoverTilt.x += (hoverTilt.targetX - hoverTilt.x) * 0.09;
-        hoverTilt.y += (hoverTilt.targetY - hoverTilt.y) * 0.09;
+        hoverTilt.x += (hoverTilt.targetX - hoverTilt.x) * 0.08;
+        hoverTilt.y += (hoverTilt.targetY - hoverTilt.y) * 0.08;
 
         if (totemRoot) {
           const baseRootY = window.innerWidth > 980 ? 0.34 : 0.04;
-          const idleFloatY = Math.sin(tSec * 1.15) * 0.042;
-          const idleBreathRot = Math.sin(tSec * 0.7) * 0.038;
+          const idleFloatY = Math.sin(tSec * 1.15) * 0.045;
+          const idleBreathRot = Math.sin(tSec * 0.7) * 0.04;
           totemRoot.position.y = baseRootY + idleFloatY;
-          totemRoot.rotation.x = Math.PI / 6.3 + hoverTilt.y * 0.09;
-          totemRoot.rotation.y = -Math.PI / 4 + hoverTilt.x * 0.18 + scrollTwist + idleBreathRot;
+          totemRoot.rotation.x = Math.PI / 6.3 + hoverTilt.y * 0.07;
+          totemRoot.rotation.y = -Math.PI / 4 + hoverTilt.x * 0.14 + scrollTwist + idleBreathRot;
         }
 
         sliceObjects.forEach((s, idx) => {
@@ -1008,9 +962,8 @@
           s.activeVal += (s.targetActive - s.activeVal) * Math.min(1, dt * 10);
           s.ribbonMat.uniforms.uActive.value = s.activeVal;
 
-          // Subtle cursor-linked harmonic wave + levitation per stratum
-          const pointerProximity = Math.exp(-Math.abs((hoverTilt.y * -0.5 + 0.5) - (idx / 5)) * 2.2);
-          const waveY = Math.sin(tSec * 1.6 + idx * 0.8) * 0.012 + pointerProximity * Math.abs(hoverTilt.x) * 0.028;
+          // Smooth micro levitation breathing per stratum (no abrupt cursor jumps)
+          const waveY = Math.sin(tSec * 1.6 + idx * 0.8) * 0.012;
           s.group.position.y = s.group.userData.baseY + waveY;
 
           const targetOp = 0.24 + s.activeVal * 0.68;
@@ -1065,8 +1018,7 @@
       });
     });
 
-    // Listen across the entire section so moving over marquee, gutters or cards feeds the fluid dither trail
-    section.addEventListener('pointermove', (e) => {
+    canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
       const nx = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
@@ -1075,26 +1027,22 @@
       pointer.y = ny * 2 - 1;
       hoverTilt.targetX = pointer.x;
       hoverTilt.targetY = pointer.y;
-      hasUserMoved = true;
 
-      const stepDist = Math.hypot(nx - lastTrailSpawn.x, ny - lastTrailSpawn.y);
-      if (stepDist > 0.008) {
-        const velBoost = Math.min(1.0, 0.65 + stepDist * 6.5);
-        pushTrailNode(nx, ny, velBoost);
-        lastTrailSpawn.x = nx;
-        lastTrailSpawn.y = ny;
-      }
+      smoothMouse.targetX = nx;
+      smoothMouse.targetY = ny;
 
-      if (raycaster && camera && e.target === canvas) {
+      if (raycaster && camera) {
         raycaster.setFromCamera(pointer, camera);
         const hits = raycaster.intersectObjects(sliceObjects.map((s) => s.core), false);
         canvas.style.cursor = hits.length > 0 ? 'pointer' : 'grab';
       }
     }, { passive: true });
 
-    section.addEventListener('pointerleave', () => {
+    canvas.addEventListener('mouseleave', () => {
       hoverTilt.targetX = 0;
       hoverTilt.targetY = 0;
+      smoothMouse.targetX = 0.62;
+      smoothMouse.targetY = 0.48;
     });
 
     canvas.addEventListener('click', (e) => {

@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="portfolio_assets/style.css?v=34">
+    <link rel="stylesheet" href="portfolio_assets/style.css?v=35">
 
   <!-- Zero-Flash Dark Curtain: keeps DOM computed rects valid until swarm canvas mounts -->
   <style>
@@ -58,9 +58,6 @@
 </head>
 <body>
 
-  <!-- Ambient Noir & Crimson Op-Art Canvas -->
-  <canvas id="aurora-canvas" aria-hidden="true"></canvas>
-
   <div class="page-shell">
     <!-- Floating Glass Navigation Dock -->
     <header class="dock-container">
@@ -72,16 +69,19 @@
 
         <div class="nav-links">
           <a href="#about" class="nav-item">À Propos</a>
-          <a href="#flagships" class="nav-item">Flagships</a>
+          <a href="#flagships" class="nav-item">Études de Cas</a>
           <a href="#exploded-architecture" class="nav-item">Totem 3D</a>
-          <a href="#projects" class="nav-item">Matrix</a>
-          <a href="#parcours" class="nav-item">Parcours &amp; ADN</a>
+          <a href="#parcours" class="nav-item">Parcours</a>
           <a href="#contact" class="nav-item">Contact</a>
         </div>
 
         <div class="dock-right">
           <button class="nav-item cmdk-trigger-btn" data-cmdk-trigger aria-label="Recherche rapide" title="Palette de commande (⌘K)">
             <span class="cmdk-kbd">⌘K</span>
+          </button>
+          <button class="nav-item cmdk-trigger-btn cli-dock-btn" id="terminal-pill-btn" aria-label="Ouvrir le terminal Matéi Shell" title="Terminal CLI (`)">
+            <span class="cli-dot" aria-hidden="true"></span>
+            <span class="cmdk-kbd">&gt;_ CLI</span>
           </button>
           <div class="dock-status" title="Disponible pour une alternance BUT 2 dès septembre 2027 (Côte Basque & Remote)">
             <span class="status-dot"></span>
@@ -114,34 +114,34 @@
             <h1 class="hero-name">MATÉI<span class="accent-red-dot">.</span></h1>
             <div class="hero-role-pill">
               <span class="pill-dot">●</span>
-              <span>DÉVELOPPEUR BACKEND, SYSTÈMES &amp; IA AUTONOME</span>
+              <span>DÉVELOPPEUR BACKEND, SYSTÈMES &amp; IA</span>
             </div>
             <p class="hero-desc">
-              Étudiant en <strong>BUT Informatique (Campus d'Anglet)</strong>, j'architecture des <strong>systèmes autonomes 24/7</strong>, des <strong>moteurs quantitatifs prédictifs</strong> et des bases de code C99/Python/TypeScript hermétiques — de l'algorithmique bas-niveau jusqu'à la production.
+              Étudiant en <strong>BUT Informatique (IUT de Bayonne–Anglet)</strong>. Je conçois des <strong>backends Python/TypeScript éprouvés en production</strong>, des <strong>structures C99 sans fuite sous Valgrind</strong> et des moteurs quantitatifs audités par tests adversariaux.
             </p>
             <div class="hero-actions">
-              <a href="#contact" class="btn btn-crimson">
-                <span>INITIATE DISPATCH</span>
+              <a href="#flagships" class="btn btn-crimson">
+                <span>ÉTUDES DE CAS TECHNIQUES</span>
                 <svg class="btn-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </a>
-              <a href="#flagships" class="btn btn-glass">
-                <span>EXPLORE ARCHITECTURE</span>
+              <a href="#contact" class="btn btn-glass">
+                <span>CV &amp; ALTERNANCE</span>
               </a>
             </div>
             <div class="hero-stats-row">
               <div class="hero-stat-box">
-                <span class="stat-val">46</span>
-                <span class="stat-lbl">PRs Open-Source</span>
+                <span class="stat-val">46 PRs</span>
+                <span class="stat-lbl">Open-Source Fusionnées</span>
               </div>
               <div class="hero-stat-box">
-                <span class="stat-val">02</span>
-                <span class="stat-lbl">Stages Tech / Audit</span>
+                <span class="stat-val">735</span>
+                <span class="stat-lbl">Tests Unitaires B2B</span>
               </div>
               <div class="hero-stat-box">
-                <span class="stat-val">02 Mois</span>
-                <span class="stat-lbl">Immersion UK</span>
+                <span class="stat-val">20/20</span>
+                <span class="stat-lbl">Grand Oral • Bac 2026</span>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@
               <img src="portfolio_assets/matei-cutout.png" alt="Matéi de Saint Léger" class="hero-cutout-img" width="480" height="480" loading="eager" />
               <div class="cutout-status-badge">
                 <span class="status-pulse-red">●</span>
-                <span>BUT 1 ANGLET • OBJECTIF ALTERNANCE</span>
+                <span>IUT ANGLET • ALTERNANCE SEPT. 2027</span>
               </div>
             </div>
           </div>
@@ -164,39 +164,39 @@
               <div class="hud-card">
                 <div class="hud-card-header">
                   <span class="hud-idx">01.</span>
-                  <span class="hud-tag">OPEN-SOURCE</span>
+                  <span class="hud-tag">UPSTREAM &amp; APPSEC</span>
                 </div>
-                <div class="hud-card-title">Twenty (40k★) &amp; Omi (8k★)</div>
-                <div class="hud-card-desc">Correctifs sécurité RBAC, suppression de fuites internes CWE-209 et tests Vitest hermétiques fusionnés en production.</div>
+                <div class="hud-card-title">Omi (7 PRs), Twenty (#26490) &amp; SafePath AST</div>
+                <div class="hud-card-desc">Correctifs XSS (#14604), OverflowError (#15974), masquage CWE-209 (#16025/#17272), RBAC NestJS et analyseur AST CWE-22.</div>
               </div>
 
               <div class="hud-card">
                 <div class="hud-card-header">
                   <span class="hud-idx">02.</span>
-                  <span class="hud-tag">QUANTITATIF</span>
+                  <span class="hud-tag">QUANT &amp; FALSIFICATION</span>
                 </div>
-                <div class="hud-card-title">Moteur Prédictif Polymarket</div>
-                <div class="hud-card-desc">Arbitrage probabiliste 24/7 sur VPS Oracle Cloud, carnets d'ordres WebSockets en direct et Trade Ledger immuable.</div>
+                <div class="hud-card-title">PyTorch GMM-MDN &amp; Carnet L2 Polymarket</div>
+                <div class="hud-card-desc">466 572 prévisions (RMSE 0,677°C, ECE PAV 1,43%) + TCN 30×32 Binance, avec coupure volontaire V43 après détection de biais.</div>
               </div>
 
               <div class="hud-card">
                 <div class="hud-card-header">
                   <span class="hud-idx">03.</span>
-                  <span class="hud-tag">BAS-NIVEAU</span>
+                  <span class="hud-tag">C99 &amp; SYSTÈMES</span>
                 </div>
-                <div class="hud-card-title">C99 &amp; Valgrind Hermétique</div>
-                <div class="hud-card-desc">Structures de données pures d'excellence IUT Anglet (Allman, tripartition, 0 fuite mémoire sous -Wall -Wextra -Werror).</div>
+                <div class="hud-card-title">AlgoForge Pro, LRU C99 &amp; Kai Core OS</div>
+                <div class="hud-card-desc">Cache LRU O(1) et Dijkstra (-Wall -Werror, 0 fuite Valgrind), transpileur C Allman IUT, et vérificateur d'état physique post-action.</div>
               </div>
 
               <div class="hud-tech-tags">
-                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Python 3.12+</span>
                 <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">C99</span>
-                <span class="tech-tag">Linux</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">ISO C99 / C++</span>
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">FastAPI / SQLite</span>
+                <span class="tech-tag">Ubuntu / Systemd</span>
                 <span class="tech-tag">Valgrind</span>
+                <span class="tech-tag">AST / AppSec</span>
               </div>
             </div>
           </div>
@@ -222,10 +222,10 @@
           </p>
         </div>
 
-        <!-- ACT I: Noir & Crimson Split Chapter Deck with Akaru Vertical Bar-Curtain Wipe -->
+        <!-- ACT I: Noir & Crimson Split Chapter Deck -->
         <div class="akaru-deck-shell" id="akaru-deck-shell" role="region" aria-label="Chapitres biographiques interactifs — cliquez ou naviguez avec les flèches">
           <div class="akaru-deck-toolbar">
-            <span class="akaru-deck-hint">CHAPITRES RÉELS // TRANSITION PAR VOLET AKARU</span>
+            <span class="akaru-deck-hint">CHAPITRES RÉELS // TRAJECTOIRE DE TERRAIN</span>
             <div class="akaru-deck-counter" id="akaru-deck-counter">01 / 05 — PAYS BASQUE &amp; FORMATION</div>
           </div>
 
@@ -513,102 +513,106 @@
               <li class="akaru-hairline-item" data-principle="3" tabindex="0">
                 <span class="hairline-idx">03</span>
                 <div class="hairline-meta">
-                  <span class="hairline-title">DISCIPLINE TERRAIN &amp; DÉMONS 24/7</span>
-                  <span class="hairline-sub">Escalade, endurance &amp; 19 services Ubuntu auto-guéris</span>
+                  <span class="hairline-title">VÉRIFICATION PHYSIQUE &amp; DÉMONS 24/7</span>
+                  <span class="hairline-sub">StateVerifier post-action • Services systemd auto-guéris</span>
                 </div>
               </li>
             </ul>
 
-            <p class="akaru-closing-statement">
-              Apprendre en démontant la mécanique réelle — sans raccourcis ni vernis artificiel. Du premier stage en bureau d'études jusqu'aux systèmes autonomes en BUT Informatique à Anglet, chaque projet répond à une même exigence : être utile, lisible et prouvé sur le terrain.
-            </p>
+            <div class="akaru-proof-drawer" id="akaru-principle-detail" aria-live="polite">
+              <div class="akaru-proof-head">
+                <span class="akaru-proof-code" id="akaru-proof-code">PREUVE 00 // ERGONOMIE &amp; CLARTÉ</span>
+                <span class="akaru-proof-metric" id="akaru-proof-metric">79 PAGES • 2 018 ENTITÉS FTS5</span>
+              </div>
+              <p class="akaru-proof-body" id="akaru-proof-body">
+                Ma dyslexie m'a poussé à bâtir <strong>Kai Academic</strong> et <strong>a11y_audit_pro</strong> : typographie <code>Lexend</code> sans italique ni justification artificielle, interlettrage scoptique mesuré, et base locale <code>academic_vault.db</code> indexée sous SQLite FTS5 BM25 — sans inventer une seule ligne hors des supports officiels de mes enseignants.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Technical Section Divider -->
       <div class="section-divider-bar" aria-hidden="true">
-        <span class="divider-coord">// 02.00 SEC_FLAGSHIPS</span>
+        <span class="divider-coord">// 02.00 SEC_CASE_STUDIES</span>
         <span class="divider-line"></span>
         <span class="divider-index">INDEX [02 / 05]</span>
       </div>
 
-      <!-- Flagships Deep Dive Section -->
+      <!-- Flagships Engineering Case Studies Section -->
       <section id="flagships" class="section">
         <div class="section-header">
-          <div class="section-tag">ARCHITECTURAL SHOWCASE</div>
-          <h2 class="section-title">Flagship Deployments</h2>
-          <p class="section-desc">Systèmes de production tournant 24/7 sur serveurs cloud dédiés, dépôts open-source majeurs et architectures matérielles.</p>
+          <div class="section-tag">ÉTUDES DE CAS APPROFONDIES</div>
+          <h2 class="section-title">Architectures, Pièges Évités &amp; Preuves</h2>
+          <p class="section-desc">Au-delà des slogans : les contraintes réelles, les bugs ou biais découverts en audit, et l'implémentation vérifiable derrière chaque système.</p>
         </div>
 
         <div class="flagship-container">
 
-          <!-- Flagship 1: Polymarket Quantitative & Kai Autonomous Multi-Agent -->
-          <article class="glass-card flagship-card highlighted-card">
+          <!-- Case Study 01: Polymarket Quantitative & Adversarial Audits -->
+          <article class="glass-card flagship-card highlighted-card" id="case-quant">
             <div class="card-glow-red"></div>
 
             <div class="flagship-header">
               <div class="flagship-badge">
-                <span>●</span> CORE ECOSYSTEM
+                <span>●</span> ÉTUDE #01 — QUANT &amp; FALSIFICATION
               </div>
-              <div class="flagship-meta">Infrastructure : Oracle Cloud Ubuntu VPS • Daemons 24/7 • Sub-50ms Latency</div>
+              <div class="flagship-meta">V1 → V211 • PyTorch GMM-MDN &amp; TCN • Oracle Cloud Ubuntu</div>
             </div>
 
             <div class="flagship-body">
               <div class="flagship-main-info">
-                <h3 class="flagship-title">Polymarket Quantitative Engine &amp; Kai Autonomous AI</h3>
+                <h3 class="flagship-title">Moteur Quantitatif Polymarket &amp; Audit Adversarial</h3>
                 <p class="flagship-desc">
-                  Moteur quantitatif d'arbitrage prédictif et écosystème d'agents autonomes opérant 24/7 sur serveur cloud dédié. Conçu sans frameworks d'abstraction lourds, intégrant une collecte de carnets d'ordres WebSockets en direct, un grand livre de transactions (Trade Ledger) immuable et un réseau de mémoire hiérarchique à 4 paliers.
+                  <strong>Problème :</strong> comment construire des modèles prédictifs météo et crypto L2 fiables sous contrainte de micro-capital, sans tomber dans le piège des backtests sur-ajustés ? Réponse : séparer l'ingestion temps réel de la validation causale, puis soumettre chaque stratégie à une batterie de tests destructifs avant tout passage en réel.
                 </p>
 
                 <div class="flagship-metrics-row">
                   <div class="metric-pill">
-                    <div class="metric-num">10</div>
-                    <div class="metric-desc">Services Daemon</div>
+                    <div class="metric-num">466 572</div>
+                    <div class="metric-desc">Prévisions Replay 5 Ans</div>
                   </div>
                   <div class="metric-pill">
-                    <div class="metric-num">&lt;50ms</div>
-                    <div class="metric-desc">Boucle d'Événements</div>
+                    <div class="metric-num">0.677°C</div>
+                    <div class="metric-desc">RMSE 5-Gaussian MDN</div>
                   </div>
                   <div class="metric-pill">
-                    <div class="metric-num">100%</div>
-                    <div class="metric-desc">Hermétique</div>
+                    <div class="metric-num">1.43%</div>
+                    <div class="metric-desc">ECE après Calibration PAV</div>
                   </div>
                   <div class="metric-pill">
-                    <div class="metric-num">0 Leak</div>
-                    <div class="metric-desc">Mémoire C99/Python</div>
+                    <div class="metric-num">1.00 $</div>
+                    <div class="metric-desc">Flat Sizing Anti-Ruine</div>
                   </div>
                 </div>
               </div>
 
-              <!-- Interactive 7-Layer Architecture Explorer -->
+              <!-- Deep 5-Step Technical Teardown -->
               <div class="saai-architecture-explorer">
                 <div class="explorer-header">
-                  <div class="explorer-title">7-LAYER CONSTITUTIONAL STACK</div>
-                  <div class="explorer-sub">Cliquez sur une couche pour inspecter l'implémentation technique</div>
+                  <div class="explorer-title">DOSSIER TECHNIQUE EN 5 PHASES</div>
+                  <div class="explorer-sub">Cliquez sur chaque étape pour voir la décision d'architecture ou le bug critique attrapé</div>
                 </div>
 
                 <div class="layer-tabs" role="tablist">
-                  <button class="layer-tab active" data-layer="1" role="tab" aria-selected="true">L1: WebSockets</button>
-                  <button class="layer-tab" data-layer="2" role="tab" aria-selected="false">L2: Modélisation Météo</button>
-                  <button class="layer-tab" data-layer="3" role="tab" aria-selected="false">L3: Trade Ledger</button>
-                  <button class="layer-tab" data-layer="4" role="tab" aria-selected="false">L4: Boucle 24/7</button>
-                  <button class="layer-tab" data-layer="5" role="tab" aria-selected="false">L5: Mémoire 4 Paliers</button>
-                  <button class="layer-tab" data-layer="6" role="tab" aria-selected="false">L6: Sécurité &amp; Sandbox</button>
-                  <button class="layer-tab" data-layer="7" role="tab" aria-selected="false">L7: Auto-Évolution</button>
+                  <button type="button" class="layer-tab active" data-layer="1" role="tab" aria-selected="true">01. Ingestion &amp; Parité L2</button>
+                  <button type="button" class="layer-tab" data-layer="2" role="tab" aria-selected="false">02. GMM-MDN &amp; TCN 30×32</button>
+                  <button type="button" class="layer-tab" data-layer="3" role="tab" aria-selected="false">03. Kill-Switch V43 &amp; Audits</button>
+                  <button type="button" class="layer-tab" data-layer="4" role="tab" aria-selected="false">04. Risque &amp; Flat Sizing</button>
+                  <button type="button" class="layer-tab" data-layer="5" role="tab" aria-selected="false">05. Infra OCI &amp; Dérive SPRT</button>
                 </div>
 
                 <div class="layer-inspector-pane">
                   <div id="layer-content">
-                    <div class="layer-inspect-badge" id="layer-inspect-id">LAYER 01 // DATA INGESTION &amp; WEBSOCKETS</div>
-                    <h4 class="layer-inspect-title" id="layer-inspect-title">Carnets d'Ordres &amp; WebSockets Temps Réel</h4>
+                    <div class="layer-inspect-badge" id="layer-inspect-id">PHASE 01 // PARITÉ BIT-À-BIT &amp; CARNETS L2</div>
+                    <h4 class="layer-inspect-title" id="layer-inspect-title">Collecteur Binance WS &amp; Polymarket CLOB (0.00000000 écart live/replay)</h4>
                     <p class="layer-inspect-desc" id="layer-inspect-desc">
-                      Flux asynchrones connectés aux WebSockets de Binance et au CLOB Polymarket. Ingestion et parsing des variations de liquidité avec temps de traitement sous 50ms sur VPS Oracle Cloud.
+                      Flux asynchrones branchés sur <code>depth@100ms</code> / <code>aggTrade</code> et le CLOB Polymarket (extraction exacte <code>min(asks)</code>), persistés dans SQLite en mode WAL (<code>btc_raw_microstructure.db</code> &amp; <code>weather_trading.db</code> ~60k lignes). Les unités Fahrenheit/Celsius et horodatages 1970 défaillants sont normalisés avec une parité mathématique exacte de <code>0.00000000</code> entre flux live et replay SQL.
                     </p>
                     <div class="tech-tags-group" id="layer-inspect-tags">
-                      <span class="tech-tag">WebSockets Low-Latency</span>
-                      <span class="tech-tag">Asyncio Python</span>
-                      <span class="tech-tag">CLOB Polymarket</span>
+                      <span class="tech-tag">depth@100ms WS</span>
+                      <span class="tech-tag">SQLite WAL</span>
+                      <span class="tech-tag">min(asks) CLOB</span>
                     </div>
                   </div>
                 </div>
@@ -616,122 +620,147 @@
             </div>
           </article>
 
-          <!-- Flagships Grid (Twenty, Omi, AlgoForge C99, Biller) -->
+          <!-- Case Studies Grid: 02 Open-Source & AppSec, 03 ISO C99 & AlgoForge, 04 Kai Core OS & B2B -->
           <div class="flagship-subgrid">
 
-            <!-- Flagship 2: Twenty & Omi Open Source -->
-            <article class="glass-card subgrid-card">
+            <!-- Case Study 02: Open-Source & AppSec -->
+            <article class="glass-card subgrid-card case-study-card" id="case-oss">
               <div class="subgrid-top">
                 <div class="subgrid-badge-row">
-                  <div class="flagship-badge">OPEN-SOURCE // 46 PRs FUSIONNÉES</div>
+                  <div class="flagship-badge">ÉTUDE #02 // UPSTREAM &amp; APPSEC</div>
                 </div>
-                <h3 class="subgrid-title">Twenty CRM (40k★) &amp; BasedHardware/omi (8k★)</h3>
+                <h3 class="subgrid-title">BasedHardware/omi, Twenty CRM &amp; SafePath-Lint</h3>
                 <p class="subgrid-desc">
-                  Contributions régulières en production sur de grands dépôts TypeScript (NestJS, React, Vitest) et Python (FastAPI) : contrôle strict des permissions RBAC sur les mutations metadata, élimination de fuites d'exceptions internes (CWE-209), et correctifs de concurrence batch.
+                  <strong>46 Pull Requests fusionnées</strong> sur dépôts industriels (Python FastAPI &amp; TypeScript NestJS/Vitest) complétées par deux outils de sécurité défensive livrés en Python pur.
                 </p>
+
+                <div class="code-switcher-widget">
+                  <div class="code-switcher-tabs" role="tablist">
+                    <button type="button" class="code-tab-btn active" data-target="oss-code-view" data-code="omi">Omi (7 PRs)</button>
+                    <button type="button" class="code-tab-btn" data-target="oss-code-view" data-code="twenty">Twenty &amp; TS</button>
+                    <button type="button" class="code-tab-btn" data-target="oss-code-view" data-code="safepath">SafePath AST</button>
+                  </div>
+                  <pre class="code-switcher-pre"><code class="code-switcher-body" id="oss-code-view">/* BasedHardware/omi — 7 Correctifs Production Fusionnés */
+#14604 (whoop)    : XSS réfléchie OAuth -> encodage HTML strict (5/5)
+#15974 (CLI)      : OverflowError expiry -> bornage epoch (#15913)
+#16025 (tasks)    : Fuite CWE-209 detail=str(exc) ORM -> masquage
+#17258 (cal)      : Masquage tracebacks refresh OAuth exposés
+#17272 (desktop)  : Sanitisation exceptions stream chat (3 routes)
+#19637 (search)   : Guards ValueError/re.error ("Good hygiene")
+#16029 -> #20168  : Lock race condition token refresh (main)</code></pre>
+                </div>
+
                 <ul class="spec-list">
-                  <li class="spec-item">Twenty #26490 : Contrôle strict RBAC VIEWS &amp; LAYOUTS</li>
-                  <li class="spec-item">Twenty #26502 : Capture complète suppressions par lot ORM</li>
-                  <li class="spec-item">Omi #19637 &amp; #17272 : Élimination fuites internes &amp; sanitisation XSS</li>
+                  <li class="spec-item"><strong>SafePath-Lint (MIT)</strong> : AST Python détectant <code>SPL001</code>, <code>SPL003</code> (bypass <code>/var/data_forbidden</code>) et <code>SPL004</code> (<code>....//</code>)</li>
+                  <li class="spec-item"><strong>Sec-Headers-Sentinel</strong> : audit HSTS/CSP/cookies &amp; génération gabarits Nginx, Caddy et FastAPI</li>
                 </ul>
               </div>
               <div class="subgrid-footer">
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">NestJS</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">Vitest</span>
+                <span class="tech-tag">Omi #14604..#20168</span>
+                <span class="tech-tag">Twenty #26490/#26502</span>
+                <span class="tech-tag">AST CWE-22</span>
               </div>
             </article>
 
-            <!-- Flagship 3: AlgoForge C99 with Interactive Code Switcher -->
-            <article class="glass-card subgrid-card algoforge-card">
+            <!-- Case Study 03: ISO C99 & AlgoForge Pro -->
+            <article class="glass-card subgrid-card algoforge-card" id="case-c99">
               <div class="subgrid-top">
                 <div class="subgrid-badge-row">
-                  <div class="flagship-badge">SYSTEMS // C99 PUR &amp; VALGRIND</div>
+                  <div class="flagship-badge">ÉTUDE #03 // ISO C99 &amp; COMPILATEUR</div>
                 </div>
-                <h3 class="subgrid-title">AlgoForge C99 — Data Structures &amp; Allocators</h3>
+                <h3 class="subgrid-title">Cache LRU O(1), Dijkstra C99 &amp; AlgoForge Pro</h3>
                 <p class="subgrid-desc">
-                  Bibliothèque système en C99 pur implémentant des structures de données dynamiques hermétiques : arbres équilibrés (BST/AVL), tables de hachage et allocateurs mémoire vérifiés à zéro fuite.
+                  Implémentation manuelle de structures bas-niveau compilées sous <code>-Wall -Wextra -Werror</code> et outillage Electron générant du C strict conforme aux spécifications IUT d'Anglet (R1.01).
                 </p>
 
-                <!-- Interactive Code Switcher UI Component -->
                 <div class="code-switcher-widget">
                   <div class="code-switcher-tabs" role="tablist">
-                    <button type="button" class="code-tab-btn active" data-code="c99">C99 Allman</button>
-                    <button type="button" class="code-tab-btn" data-code="valgrind">Valgrind Log</button>
-                    <button type="button" class="code-tab-btn" data-code="merise">Merise SQL</button>
+                    <button type="button" class="code-tab-btn active" data-target="algoforge-code-view" data-code="lru">lru_cache.c O(1)</button>
+                    <button type="button" class="code-tab-btn" data-target="algoforge-code-view" data-code="transpiler">Transpiler IUT</button>
+                    <button type="button" class="code-tab-btn" data-target="algoforge-code-view" data-code="valgrind">Valgrind Trace</button>
+                    <button type="button" class="code-tab-btn" data-target="algoforge-code-view" data-code="merise">Merise 3NF SQL</button>
                   </div>
-                  <pre class="code-switcher-pre"><code class="code-switcher-body" id="algoforge-code-view">/* Tripartition canonique IUT Anglet (P. Etcheverry) */
-Status_t tree_insert(Node_t** root, const int val)
+                  <pre class="code-switcher-pre"><code class="code-switcher-body" id="algoforge-code-view">/* IUT/c_tests/lru_cache.c — Hash O(1) + Sentinelles */
+static size_t hash_func(int key, size_t table_size)
 {
-    if (*root == NULL)
-    {
-        *root = node_allocate(val);
-        return (*root != NULL) ? STATUS_OK : STATUS_OOM;
-    }
-    return (val < (*root)->value)
-        ? tree_insert(&amp;(*root)->left, val)
-        : tree_insert(&amp;(*root)->right, val);
+    uint32_t h = (uint32_t)key;
+    h ^= h >> 16;
+    h *= 0x85ebca6b;
+    h ^= h >> 13;
+    h *= 0xc2b2ae35;
+    h ^= h >> 16;
+    return h % table_size;
+}
+
+static void move_to_head(LRUCache* cache, Node* node)
+{
+    list_remove(node);
+    list_insert_head(cache, node);
 }</code></pre>
                 </div>
 
                 <ul class="spec-list">
-                  <li class="spec-item">Compilation stricte : -Wall -Wextra -Werror -pedantic</li>
-                  <li class="spec-item">Discipline Allman &amp; tripartition canonique IUT Anglet</li>
-                  <li class="spec-item">Validation mémoire hermétique Valgrind (0 bytes lost)</li>
+                  <li class="spec-item"><strong>AlgoForge Pro (Electron)</strong> : éditeur d'arbres graphiques → Pseudo-code IUT → C Allman strict &amp; simulateur</li>
+                  <li class="spec-item"><strong>dijkstra_graph.c &amp; lru_cache.c</strong> : zéro octet perdu et zéro accès hors bornes sous Valgrind</li>
                 </ul>
               </div>
               <div class="subgrid-footer">
-                <span class="tech-tag">C99</span>
-                <span class="tech-tag">Valgrind 0-Leak</span>
-                <span class="tech-tag">GCC Strict</span>
-                <span class="tech-tag">Linux</span>
+                <span class="tech-tag">ISO C99 Allman</span>
+                <span class="tech-tag">Murmur3 O(1)</span>
+                <span class="tech-tag">Electron / AST</span>
               </div>
             </article>
 
-            <!-- Flagship 4: Security Scanner MCP -->
-            <article class="glass-card subgrid-card">
+            <!-- Case Study 04: Kai Core OS, Kai Academic & B2B Forge -->
+            <article class="glass-card subgrid-card subgrid-card-wide" id="case-kai">
               <div class="subgrid-top">
                 <div class="subgrid-badge-row">
-                  <div class="flagship-badge">INFRA // RFC 9116 &amp; MODEL CONTEXT PROTOCOL</div>
+                  <div class="flagship-badge">ÉTUDE #04 // SYSTÈMES FIABLES &amp; EXTRACTEUR B2B</div>
                 </div>
-                <h3 class="subgrid-title">Security Scanner MCP — Protocol Auditor</h3>
+                <h3 class="subgrid-title">Kai Core OS (StateVerifier), Kai Academic &amp; Forge B2B (735 Tests)</h3>
                 <p class="subgrid-desc">
-                  Serveur Model Context Protocol (MCP) open-source publié pour l'audit automatisé de sécurité web et réseau : vérification RFC 9116 (security.txt), analyse des en-têtes CSP/HSTS et détection de surface d'attaque pour agents autonomes.
+                  Trois systèmes reliés par le même principe : <strong>ne jamais se contenter d'un retour "OK" apparent</strong>. Que ce soit sur un fichier produit par un script, un cours IUT ou un bon d'intervention B2B extrait par IA, la preuve physique ou l'ancrage source tranche.
                 </p>
-                <ul class="spec-list">
-                  <li class="spec-item">Publication Smithery &amp; Glama MCP Registries</li>
-                  <li class="spec-item">Conformité stricte RFC 9116 &amp; OWASP Top 10</li>
-                  <li class="spec-item">Exécution en sandbox hermétique sans dépendances lourdes</li>
-                </ul>
-              </div>
-              <div class="subgrid-footer">
-                <span class="tech-tag">MCP Protocol</span>
-                <span class="tech-tag">Python 3.12</span>
-                <span class="tech-tag">RFC 9116</span>
-              </div>
-            </article>
 
-            <!-- Flagship 5: Biller Offline-First -->
-            <article class="glass-card subgrid-card">
-              <div class="subgrid-top">
-                <div class="subgrid-badge-row">
-                  <div class="flagship-badge">MOBILE // PRODUIT COMMERCIAL</div>
+                <div class="code-switcher-widget">
+                  <div class="code-switcher-tabs" role="tablist">
+                    <button type="button" class="code-tab-btn active" data-target="kai-code-view" data-code="verifier">StateVerifier (core/)</button>
+                    <button type="button" class="code-tab-btn" data-target="kai-code-view" data-code="b2b">Extracteur B2B (735 Tests)</button>
+                    <button type="button" class="code-tab-btn" data-target="kai-code-view" data-code="academic">Kai Academic FTS5</button>
+                  </div>
+                  <pre class="code-switcher-pre"><code class="code-switcher-body" id="kai-code-view"># Extrait architecture réelle — core/state_verifier.py
+# Élimine le piège classique : "HTTP 200 / exit 0 == succès"
+if fmt == "pdf":
+    with open(p, "rb") as f:
+        entete = f.read(5)
+        if entete != b"%PDF-":
+            return VerificationResult(valide=False, motif="En-tête PDF invalide")
+# Vérifie également : persistance SQLite WAL, binaire ELF compilé, et ADB dumpsys</code></pre>
                 </div>
-                <h3 class="subgrid-title">Biller — Système d'Encaissement Offline-First</h3>
-                <p class="subgrid-desc">
-                  Application mobile d'encaissement et de gestion d'inventaire opérant en déconnexion réseau totale avec synchronisation différentielle SQLite, impression thermique ESC/POS Bluetooth et calcul temps réel du P&amp;L.
-                </p>
-                <ul class="spec-list">
-                  <li class="spec-item">Base de données SQLite hermétique avec Repository Pattern</li>
-                  <li class="spec-item">Protocole d'impression thermique Bluetooth ESC/POS</li>
-                  <li class="spec-item">Zéro dépendance cloud pour l'encaissement critique</li>
-                </ul>
+
+                <div class="kai-three-col">
+                  <div class="kai-col-box">
+                    <span class="kai-col-kicker">01 // KAI CORE OS</span>
+                    <strong>DAG &amp; Vérificateur Physique</strong>
+                    <p>Orchestrateur topologique Python avec politique RBAC fail-closed, mémoire Letta et contrôle binaire réel post-exécution.</p>
+                  </div>
+                  <div class="kai-col-box">
+                    <span class="kai-col-kicker">02 // KAI ACADEMIC</span>
+                    <strong>Index UPPA FTS5 BM25</strong>
+                    <p><code>academic_vault.db</code> (2 018+ entités) + 79 fiches Lexend couvrant 20 modules IUT, zéro contenu hors polycopiés officiels.</p>
+                  </div>
+                  <div class="kai-col-box">
+                    <span class="kai-col-kicker">03 // BTP &amp; REPORTING B2B</span>
+                    <strong>Pdf-helper &amp; 735 Tests</strong>
+                    <p>App desktop Tauri/FastAPI/OCR G.R.E. pour artisans BTP + extracteur documentaire ancré mot-à-mot (310 + 425 tests verts).</p>
+                  </div>
+                </div>
               </div>
               <div class="subgrid-footer">
-                <span class="tech-tag">Flutter</span>
-                <span class="tech-tag">SQLite</span>
-                <span class="tech-tag">ESC/POS</span>
+                <span class="tech-tag">StateVerifier</span>
+                <span class="tech-tag">SQLite FTS5 BM25</span>
+                <span class="tech-tag">Tauri / FastAPI OCR</span>
+                <span class="tech-tag">735 Unit Tests</span>
               </div>
             </article>
 
@@ -740,8 +769,15 @@ Status_t tree_insert(Node_t** root, const int val)
       </section>
 
 
+      <!-- Technical Section Divider -->
+      <div class="section-divider-bar" aria-hidden="true">
+        <span class="divider-coord">// 03.00 SEC_TOTEM_3D</span>
+        <span class="divider-line"></span>
+        <span class="divider-index">INDEX [03 / 05]</span>
+      </div>
+
       <!-- ====================================================================
-           02.00 SEC_EXPLODED_VIEW — INTERACTIVE 3D / 2.5D EXPLODED STACK
+           03.00 SEC_TOTEM — INTERACTIVE 3D MONOLITH
            ==================================================================== -->
       <section class="section totem-section" id="exploded-architecture">
         <!-- Giant Top Kinetic Marquee Strip (Solid Crimson + Hollow Stroke) -->
@@ -854,150 +890,6 @@ Status_t tree_insert(Node_t** root, const int val)
 
       <!-- Technical Section Divider -->
       <div class="section-divider-bar" aria-hidden="true">
-        <span class="divider-coord">// 03.00 SEC_MATRIX</span>
-        <span class="divider-line"></span>
-        <span class="divider-index">INDEX [03 / 05]</span>
-      </div>
-
-      <!-- The Systems Matrix (Bento Filterable Grid) -->
-
-      <section id="projects" class="section">
-        <div class="section-header">
-          <div class="section-tag">ENGINEERING INDEX</div>
-          <h2 class="section-title">The Systems Matrix</h2>
-          <p class="section-desc">Index exhaustif des architectures logicielles : IA autonome, finance quantitative, systèmes C99 et open-source.</p>
-        </div>
-
-        <!-- Filter Bar -->
-        <div class="matrix-filter-bar">
-          <button class="filter-btn active" data-filter="all">Tous (06)</button>
-          <button class="filter-btn" data-filter="ai">IA Autonome</button>
-          <button class="filter-btn" data-filter="quant">Finance Quantitative</button>
-          <button class="filter-btn" data-filter="oss">Open-Source PRs</button>
-          <button class="filter-btn" data-filter="systems">Systèmes &amp; C99</button>
-        </div>
-
-        <div class="bento-grid">
-
-          <!-- Project 1: Polymarket Engine -->
-          <div class="glass-card bento-card" data-category="quant ai">
-            <div class="bento-top">
-              <span class="category-chip">Finance Quantitative</span>
-              <span class="bento-id">#SYS-01</span>
-            </div>
-            <h3 class="bento-title">Polymarket Predictive Arbitrage Engine</h3>
-            <p class="bento-desc">
-              Moteur quantitatif d'arbitrage météorologique et de prédictions sur Polymarket CLOB. Collecte de données en streaming asynchrone, modélisation de probabilités conditionnelles et exécution sous 50ms sur VPS Oracle.
-            </p>
-            <div class="bento-footer">
-              <div class="bento-tags">
-                <span class="tag">Polymarket CLOB</span>
-                <span class="tag">Python Asyncio</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2: Twenty CRM Core -->
-          <div class="glass-card bento-card" data-category="oss">
-            <div class="bento-top">
-              <span class="category-chip">Open-Source</span>
-              <a href="https://github.com/twentyhq/twenty" target="_blank" rel="noopener noreferrer" class="bento-link" aria-label="Twenty GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-              </a>
-            </div>
-            <h3 class="bento-title">Twenty CRM (40k★) — RBAC &amp; ORM Mutations</h3>
-            <p class="bento-desc">
-              Contributions majeures fusionnées sur le CRM open-source n°1 mondial : enforcement des permissions RBAC sur les mutations metadata et intégrité transactionnelle lors des suppressions par lot dans l'ORM.
-            </p>
-            <div class="bento-footer">
-              <div class="bento-tags">
-                <span class="tag">TypeScript</span>
-                <span class="tag">NestJS</span>
-                <span class="tag">Vitest</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3: Omi Wearable -->
-          <div class="glass-card bento-card" data-category="oss ai">
-            <div class="bento-top">
-              <span class="category-chip">Wearable AI</span>
-              <a href="https://github.com/BasedHardware/omi" target="_blank" rel="noopener noreferrer" class="bento-link" aria-label="Omi GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-              </a>
-            </div>
-            <h3 class="bento-title">BasedHardware/omi (8k★) — Security &amp; DevKit</h3>
-            <p class="bento-desc">
-              Série de correctifs critiques fusionnés sur le système de collier &amp; lunettes connectées open-source : neutralisation des fuites d'exceptions internes (CWE-209), assainissement XSS et intégration matérielle.
-            </p>
-            <div class="bento-footer">
-              <div class="bento-tags">
-                <span class="tag">Python</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">CWE-209</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 4: AlgoForge C99 -->
-          <div class="glass-card bento-card" data-category="systems">
-            <div class="bento-top">
-              <span class="category-chip">Systèmes &amp; Mémoire</span>
-              <span class="bento-id">#SYS-04</span>
-            </div>
-            <h3 class="bento-title">AlgoForge C99 — Moteur de Structures Pures</h3>
-            <p class="bento-desc">
-              Implémentation de structures de données en C99 avec gestion mémoire chirurgicale : tables de hachage, listes chaînées canoniques et arbres de recherche, 100% validé sans fuite sous Valgrind.
-            </p>
-            <div class="bento-footer">
-              <div class="bento-tags">
-                <span class="tag">C99</span>
-                <span class="tag">Valgrind Clean</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 5: Security Scanner MCP -->
-          <div class="glass-card bento-card" data-category="systems ai">
-            <div class="bento-top">
-              <span class="category-chip">Protocoles &amp; Audit</span>
-              <span class="bento-id">#SYS-05</span>
-            </div>
-            <h3 class="bento-title">Security Scanner MCP (RFC 9116)</h3>
-            <p class="bento-desc">
-              Serveur Model Context Protocol fournissant aux agents IA des outils d'audit d'infrastructure web, d'analyse security.txt (RFC 9116) et d'inspection des directives de transport sécurisé.
-            </p>
-            <div class="bento-footer">
-              <div class="bento-tags">
-                <span class="tag">MCP Tool</span>
-                <span class="tag">RFC 9116</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 6: V-Bot Chess Engine -->
-          <div class="glass-card bento-card" data-category="systems ai">
-            <div class="bento-top">
-              <span class="category-chip">Algorithmique &amp; Jeu</span>
-              <span class="bento-id">#SYS-06</span>
-            </div>
-            <h3 class="bento-title">V-Bot — Stockfish UCI &amp; Analyse Tactique</h3>
-            <p class="bento-desc">
-              Pont logiciel asynchrone connecté au protocole universel d'échecs (UCI) de Stockfish : évaluation d'arbres minimax, élagage alpha-bêta et analyse de positions critiques pour la compétition (~1500 Elo).
-            </p>
-            <div class="bento-footer">
-              <div class="bento-tags">
-                <span class="tag">UCI Protocol</span>
-                <span class="tag">Stockfish Engine</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Technical Section Divider -->
-      <div class="section-divider-bar" aria-hidden="true">
         <span class="divider-coord">// 04.00 SEC_PARCOURS</span>
         <span class="divider-line"></span>
         <span class="divider-index">INDEX [04 / 05]</span>
@@ -1006,98 +898,81 @@ Status_t tree_insert(Node_t** root, const int val)
       <!-- Parcours & Field Experience Section -->
       <section id="parcours" class="section">
         <div class="section-header">
-          <div class="section-tag">PARCOURS &amp; ADN TERRAIN</div>
-          <h2 class="section-title">Trajectoire Chronologique &amp; Ancrage Professionnel</h2>
-          <p class="section-desc">De la rigueur académique du BUT 1 Informatique jusqu'aux immersions en entreprise et à l'international.</p>
+          <div class="section-tag">PARCOURS &amp; ANCRAGE TERRAIN</div>
+          <h2 class="section-title">Formation, Stages &amp; Engagement</h2>
+          <p class="section-desc">Du bureau d'études et du développement cartographique à l'IUT d'Anglet, adossé à deux mois d'immersion au Royaume-Uni et au jeu combinatoire.</p>
         </div>
 
         <div class="parcours-grid">
 
-          <!-- Card 1: Stages Entreprise -->
+          <!-- Card 1: Stages Entreprise (zero internal repetition!) -->
           <article class="parcours-card">
             <div class="parcours-top">
               <div class="parcours-badge-row">
                 <span class="parcours-tag">IMMERSION ENTREPRISE</span>
                 <span class="parcours-period">2023 &amp; 2024</span>
               </div>
-              <h3 class="parcours-title">Stages : HUPI (IA &amp; Web, Bidart) &amp; Marra (Bureau d'Études)</h3>
+              <h3 class="parcours-title">HUPI (IA &amp; Web, Bidart) &amp; Bureau d'Études Marra</h3>
               <p class="parcours-desc">
-                Confrontation précoce aux exigences réelles de production à travers deux stages sur la Côte Basque, de la géométrie industrielle au développement web cartographique.
+                Découverte concrète du travail d'équipe technique et des livrables en conditions réelles dès le lycée sur la Côte Basque.
               </p>
-              <ul class="parcours-highlights">
-                <li class="parcours-highlight-item"><strong>HUPI (Bidart, Juin 2024)</strong> : Développement de la carte touristique interactive <strong>ADT64 Pays Basque</strong> (HTML/CSS/JS, Bootstrap 5, Leaflet, D3.js v4, switch jour/nuit) et relecture QA de la plateforme Zure Begirada.</li>
-                <li class="parcours-highlight-item"><strong>Marra (Bureau d'études Dessinateur-Projeteur, Janv. 2023)</strong> : Rigueur géométrique, lecture de plans techniques et méthodologie de bureau d'études.</li>
-              </ul>
               <div class="dna-mini-timeline">
                 <div class="dna-mini-row">
-                  <span class="dna-mini-tag">STAGE 2024 // HUPI (BIDART)</span>
-                  <p>Cartographie interactive ADT64 (Leaflet + D3.js v4), modes jour/nuit automatisés et QA bilingue Zure Begirada.</p>
+                  <span class="dna-mini-tag">JUIN 2024 // HUPI (BIDART — IA, DATA &amp; WEB)</span>
+                  <p>Développement de la carte touristique interactive <strong>ADT64 Pays Basque</strong> (Bootstrap 5, Leaflet 1.7.1, D3.js v4, switch jour/nuit automatique) + relecture QA trilingue de la plateforme <em>Zure Begirada</em>.</p>
                 </div>
                 <div class="dna-mini-row">
-                  <span class="dna-mini-tag">STAGE 2023 // MARRA (BUREAU D'ÉTUDES)</span>
-                  <p>Initiation au dessin technique industriel, cotations géométriques et discipline d'équipe en bureau d'études.</p>
+                  <span class="dna-mini-tag">JANV. 2023 // MARRA (BUREAU D'ÉTUDES)</span>
+                  <p>Immersion aux côtés d'un dessinateur-projeteur : lecture de plans techniques, cotations géométriques exactes et discipline documentaire en bureau d'études.</p>
                 </div>
               </div>
             </div>
             <div class="parcours-footer">
-              <span class="tech-tag">Leaflet &amp; D3.js</span>
+              <span class="tech-tag">Leaflet &amp; D3.js v4</span>
               <span class="tech-tag">JavaScript / HTML5</span>
-              <span class="tech-tag">Rigueur Bureau d'Études</span>
+              <span class="tech-tag">Dessin Industriel</span>
             </div>
           </article>
 
-          <!-- Card 2: Immersion UK, Langues & Solidarité -->
+          <!-- Card 2: Cursus Académique, UK & Bilinguisme (zero fake 5/5 bars!) -->
           <article class="parcours-card">
             <div class="parcours-top">
               <div class="parcours-badge-row">
-                <span class="parcours-tag">INTERNATIONAL &amp; ENGAGEMENT</span>
-                <span class="parcours-period">2024 — 2026</span>
+                <span class="parcours-tag">CURSUS &amp; LANGUES</span>
+                <span class="parcours-period">2023 — 2027+</span>
               </div>
-              <h3 class="parcours-title">Immersion Royaume-Uni, Bilinguisme Basque &amp; Bénévolat</h3>
+              <h3 class="parcours-title">IUT d'Anglet (BUT Info), Bac Cantau 2026 &amp; Immersions UK</h3>
               <p class="parcours-desc">
-                Deux étés d'immersion complète en Angleterre — <strong>Bournemouth (2024)</strong> et <strong>Brighton (2025)</strong> — doublés d'un cursus bilingue basque (DNL) et d'actions solidaires locales.
+                Double culture scientifique et linguistique construite entre la filière bilingue basque et deux étés d'immersion complète en Angleterre.
               </p>
               <ul class="parcours-highlights">
-                <li class="parcours-highlight-item"><strong>Anglais B2 &amp; Basque B2 (DNL)</strong> : Lecture courante de RFC/issues GitHub en anglais et parcours Histoire-Géographie enseigné en basque (14,40/20 au Bac).</li>
-                <li class="parcours-highlight-item"><strong>Engagement &amp; Terrain</strong> : Bénévolat aux Restos du Cœur, escalade et course d'endurance (10 km de la Korrika).</li>
+                <li class="parcours-highlight-item"><strong>BUT Informatique — IUT Bayonne–Anglet</strong> : C/C++ algorithmique (R1.01), Unix Shell sur <code>iparla</code> (R1.04), Merise 3NF &amp; SQL (R1.05), Maths discrètes &amp; matrices (R1.06/R1.07).</li>
+                <li class="parcours-highlight-item"><strong>Bac Général 2026 — Lycée Cantau (Anglet)</strong> : Mention AB (13,75/20), <strong>Grand Oral 20/20</strong> (AlphaZero &amp; biais décisionnels), Philo 17/20, Français oral 17/20, <strong>Mention DNL Basque 14,40/20</strong>.</li>
+                <li class="parcours-highlight-item"><strong>Royaume-Uni (EF — 2 mois complets)</strong> : Bournemouth (juil. 2024) &amp; Brighton (juil. 2025) — pratique courante pour les revues de code et RFC anglophones.</li>
               </ul>
-              <div class="trait-bars-list">
-                <div class="trait-bar-item">
-                  <div class="trait-bar-head"><span>Rigueur &amp; Standards de Code (C99/Allman)</span><span>5 / 5</span></div>
-                  <div class="trait-bar-track"><i style="width: 100%"></i></div>
-                </div>
-                <div class="trait-bar-item">
-                  <div class="trait-bar-head"><span>Audit Adversarial &amp; Refus des Raccourcis</span><span>5 / 5</span></div>
-                  <div class="trait-bar-track"><i style="width: 100%"></i></div>
-                </div>
-                <div class="trait-bar-item">
-                  <div class="trait-bar-head"><span>Collaboration Git / Open-Source PRs</span><span>4.9 / 5</span></div>
-                  <div class="trait-bar-track"><i style="width: 98%"></i></div>
-                </div>
-              </div>
             </div>
             <div class="parcours-footer">
-              <span class="tech-tag">Bournemouth &amp; Brighton</span>
+              <span class="tech-tag">Grand Oral 20/20</span>
               <span class="tech-tag">Basque DNL B2</span>
-              <span class="tech-tag">Restos du Cœur</span>
+              <span class="tech-tag">Anglais B2 (UK × 2)</span>
             </div>
           </article>
 
-          <!-- Card 3: Échecs & Tactique avec Mini-Board Vectoriel -->
-          <article class="parcours-card dna-chess-card">
+          <!-- Card 3 (Wide): Échecs, AlphaZero Self-Play & Engagement Local -->
+          <article class="parcours-card dna-chess-card parcours-card-wide">
             <div class="dna-chess-split">
               <div class="parcours-top">
                 <div class="parcours-badge-row">
-                  <span class="parcours-tag">DISCIPLINE TACTIQUE</span>
-                  <span class="parcours-period">Compétition</span>
+                  <span class="parcours-tag">THÉORIE DES JEUX &amp; TERRAIN</span>
+                  <span class="parcours-period">Compétition &amp; Solidarité</span>
                 </div>
-                <h3 class="parcours-title">Compétition d'Échecs (~1500 Elo) &amp; Moteur V-Bot UCI</h3>
+                <h3 class="parcours-title">Échecs (~1500 Elo), AlphaZero 10 000 Parties GPU &amp; Engagement Local</h3>
                 <p class="parcours-desc">
-                  Pratique assidue du jeu d'échecs en parties rapides et blitz sur Chess.com (~1500 Elo). Une discipline mentale qui irrigue directement ma conception logicielle : calcul d'arbres de variantes, sang-froid sous pression temporelle et développement d'un pont UCI Python vers Stockfish NNUE.
+                  La logique combinatoire et le sang-froid sous contrainte de temps nourrissent directement mes choix d'ingénierie : modélisation d'états, recherche élaguée et responsabilité hors écran.
                 </p>
                 <ul class="parcours-highlights">
-                  <li class="parcours-highlight-item">Pont UCI direct avec Stockfish NNUE : analyse de positions et extraction FEN.</li>
-                  <li class="parcours-highlight-item">Culture du sang-froid sous contrainte de temps et recherche systématique du coup juste.</li>
+                  <li class="parcours-highlight-item"><strong>Expérimentation AlphaZero &amp; V-Bot</strong> : entraînement de <strong>10 000 parties en self-play</strong> (2h15 sur GPU Radeon) et <strong>1 000 parties vs Stockfish</strong> pour comprendre l'évaluation positionnelle, plus co-développement de <em>Hexapawn</em> en NSI.</li>
+                  <li class="parcours-highlight-item"><strong>Engagement &amp; Équilibre</strong> : bénévolat local aux <strong>Restos du Cœur</strong>, escalade en salle et en voie sur la Côte Basque, et course d'endurance (10 km de la Korrika).</li>
                 </ul>
               </div>
 
@@ -1105,11 +980,10 @@ Status_t tree_insert(Node_t** root, const int val)
               <div class="chess-mini-widget" aria-label="Aperçu tactique Échecs ~1500 Elo">
                 <div class="chess-mini-head">
                   <span>ELO ~1500</span>
-                  <span>NNUE +2.4</span>
+                  <span>ALPHAZERO</span>
                 </div>
                 <svg class="chess-mini-svg" viewBox="0 0 120 120" aria-hidden="true">
                   <rect width="120" height="120" fill="#121218" />
-                  <!-- Checkerboard squares -->
                   <rect x="0" y="0" width="30" height="30" fill="#272732" />
                   <rect x="60" y="0" width="30" height="30" fill="#272732" />
                   <rect x="30" y="30" width="30" height="30" fill="#272732" />
@@ -1118,11 +992,9 @@ Status_t tree_insert(Node_t** root, const int val)
                   <rect x="60" y="60" width="30" height="30" fill="#272732" />
                   <rect x="30" y="90" width="30" height="30" fill="#272732" />
                   <rect x="90" y="90" width="30" height="30" fill="#272732" />
-                  <!-- Tactical Knight Jump Highlight -->
                   <rect x="60" y="30" width="30" height="30" fill="rgba(239,68,68,0.28)" stroke="#ef4444" stroke-width="1.2" />
                   <path d="M45 105 L45 45 L75 45" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 2" />
                   <circle cx="75" cy="45" r="4" fill="#ef4444" />
-                  <!-- Minimal geometric chess glyphs -->
                   <text x="45" y="111" text-anchor="middle" fill="#fafafa" font-size="20" font-family="serif">♞</text>
                   <text x="105" y="22" text-anchor="middle" fill="#a1a1aa" font-size="20" font-family="serif">♚</text>
                   <text x="15" y="52" text-anchor="middle" fill="#ef4444" font-size="20" font-family="serif">♜</text>
@@ -1130,34 +1002,9 @@ Status_t tree_insert(Node_t** root, const int val)
               </div>
             </div>
             <div class="parcours-footer">
-              <span class="tech-tag">Calcul de Variantes</span>
-              <span class="tech-tag">UCI Protocol</span>
-              <span class="tech-tag">Gestion du Stress</span>
-            </div>
-          </article>
-
-          <!-- Card 4: BUT Informatique & Lycée Cantau Anglet -->
-          <article class="parcours-card">
-            <div class="parcours-top">
-              <div class="parcours-badge-row">
-                <span class="parcours-tag">FORMATION &amp; PARCOURS</span>
-                <span class="parcours-period">2023 — 2029</span>
-              </div>
-              <h3 class="parcours-title">BUT Informatique (IUT d'Anglet) &amp; Baccalauréat Général 2026</h3>
-              <p class="parcours-desc">
-                Cursus scientifique au <strong>Lycée Polyvalent Cantau d'Anglet</strong> (section bilingue basque) couronné par le <strong>Bac 2026 Mention Assez Bien</strong> dont <strong>20/20 au Grand Oral</strong> et la <strong>Mention DNL Basque</strong>, puis intégration du BUT Informatique à l'IUT de Bayonne et du Pays Basque.
-              </p>
-              <ul class="parcours-highlights">
-                <li class="parcours-highlight-item"><strong>Bac 2026 (Lycée Cantau, Anglet)</strong> : Mention AB (13,75/20), Grand Oral <strong>20/20</strong> (IA &amp; probabilités), Philo 17/20, Français oral 17/20, Mention DNL Basque (14,40/20).</li>
-                <li class="parcours-highlight-item"><strong>R1.01 Algorithmique &amp; C++/C99</strong> : Discipline Allman, flots de données formalisés et zéro fuite mémoire Valgrind.</li>
-                <li class="parcours-highlight-item"><strong>R1.05 Bases de données Merise &amp; SQL</strong> : Modélisation conceptuelle stricte 3NF et requêtes relationnelles.</li>
-              </ul>
-            </div>
-            <div class="parcours-footer">
-              <span class="tech-tag">Grand Oral 20/20</span>
-              <span class="tech-tag">Mention DNL Basque</span>
-              <span class="tech-tag">IUT Bayonne-Anglet</span>
-              <span class="tech-tag">C99 / SQL 3NF</span>
+              <span class="tech-tag">10k Self-Play AlphaZero</span>
+              <span class="tech-tag">Restos du Cœur</span>
+              <span class="tech-tag">Escalade &amp; Korrika 10 km</span>
             </div>
           </article>
 
@@ -1229,11 +1076,6 @@ Status_t tree_insert(Node_t** root, const int val)
     <!-- ====================================================================
          INTERACTIVE UNIX CLI TERMINAL DRAWER ("MATÉI SHELL")
          ==================================================================== -->
-    <button class="terminal-floating-pill" id="terminal-pill-btn" aria-label="Ouvrir le terminal Matéi Shell">
-      <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 8px #22c55e;"></span>
-      <span>Matéi Shell [>_ CLI]</span>
-    </button>
-
     <div class="terminal-drawer" id="terminal-drawer" role="dialog" aria-modal="true" aria-label="Terminal Unix Matéi Shell">
       <div class="terminal-header">
         <div class="terminal-dots">
@@ -1246,16 +1088,13 @@ Status_t tree_insert(Node_t** root, const int val)
       </div>
       <div class="terminal-body" id="terminal-body">
         <div class="term-line-output accent">Matéi de Saint Léger — Shell v2.1 (x86_64-pc-linux-gnu)</div>
-        <div class="term-line-output dim">Tapez 'help' pour la liste des commandes, 'valgrind' pour le test mémoire, 'polymarket' pour le flux carnet d'ordres, 'prs' pour les contributions open-source, 'chess' pour l'évaluation NNUE, ou 'cat cv'.</div>
+        <div class="term-line-output dim">Commandes réelles : help • valgrind • polymarket • prs • safepath • verify • chess • cat cv</div>
       </div>
       <div class="terminal-input-row">
         <span class="terminal-prompt">matei@anglet:~$</span>
-        <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="Tapez une commande (help, valgrind, polymarket, prs, chess, cat cv)..." />
+        <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="Tapez help, valgrind, polymarket, prs, safepath, verify..." />
       </div>
     </div>
-
-    <!-- Autonomous Co-Pilot Fleet Reticles (Theo, Elena, Kai, Sarah) -->
-    <div id="copilot-fleet-container" aria-hidden="true"></div>
 
   </main>
   </div>
@@ -1268,7 +1107,7 @@ Status_t tree_insert(Node_t** root, const int val)
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Rechercher une section, un projet, une technologie..." autocomplete="off" spellcheck="false" />
+        <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Rechercher une étude de cas, un projet, une commande..." autocomplete="off" spellcheck="false" />
         <span class="cmdk-esc">ESC</span>
         <button id="cmdk-close" style="display:none;" aria-label="Fermer"></button>
       </div>
@@ -1283,10 +1122,10 @@ Status_t tree_insert(Node_t** root, const int val)
   </div>
 
   <!-- App Core JS -->
-  <script src="portfolio_assets/vendor/three.min.js?v=34" defer></script>
-  <script src="portfolio_assets/totem_3d.js?v=34" defer></script>
-  <script src="portfolio_assets/app.js?v=34" defer></script>
+  <script src="portfolio_assets/vendor/three.min.js?v=35" defer></script>
+  <script src="portfolio_assets/totem_3d.js?v=35" defer></script>
+  <script src="portfolio_assets/app.js?v=35" defer></script>
   <!-- Swarm Rebuild Takeover Engine -->
-  <script src="portfolio_assets/swarm-init.js?v=34" defer></script>
+  <script src="portfolio_assets/swarm-init.js?v=35" defer></script>
 </body>
 </html>

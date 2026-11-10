@@ -7,165 +7,43 @@
   'use strict';
 
   // ==========================================================================
-  // KAI & POLYMARKET 7-LAYER CONSTITUTIONAL ARCHITECTURAL DATA
+  // ÉTUDE #01 — POLYMARKET QUANTITATIVE & ADVERSARIAL AUDITS (5 PHASES)
   // ==========================================================================
   const LAYER_DATA = {
     1: {
-      badge: 'LAYER 01 // DATA INGESTION & WEBSOCKETS',
-      title: 'Carnets d\'Ordres & WebSockets Temps Réel',
-      desc: 'Flux asynchrones connectés aux WebSockets de Binance et au CLOB Polymarket. Ingestion et parsing des variations de liquidité avec temps de traitement sous 50ms sur VPS Oracle Cloud.',
-      tags: ['WebSockets Low-Latency', 'Asyncio Python', 'CLOB Polymarket']
+      badge: 'PHASE 01 // PARITÉ BIT-À-BIT & CARNETS L2',
+      title: 'Collecteur Binance WS & Polymarket CLOB (0.00000000 écart live/replay)',
+      desc: 'Flux asynchrones branchés sur depth@100ms / aggTrade et le CLOB Polymarket (extraction exacte min(asks)), persistés dans SQLite en mode WAL (btc_raw_microstructure.db & weather_trading.db ~60k lignes). Les unités Fahrenheit/Celsius et horodatages 1970 défaillants sont normalisés avec une parité mathématique exacte de 0.00000000 entre flux live et replay SQL.',
+      tags: ['depth@100ms WS', 'SQLite WAL', 'min(asks) CLOB']
     },
     2: {
-      badge: 'LAYER 02 // PROBABILISTIC MODELING',
-      title: 'Modélisation Probabiliste & Arbitrage Météo',
-      desc: 'Moteur d\'arbitrage probabiliste (Phases V71 à V150 / V230). Comparaison des prévisions météorologiques en temps réel aux distributions de prix du marché prédictif pour identifier les écarts d\'espérance mathématique.',
-      tags: ['Calcul d\'Espérance', 'Modèles Météo Nowcast', 'Écart Probabiliste']
+      badge: 'PHASE 02 // RÉSEAUX PROBABILISTES & CALIBRATION',
+      title: '5-Gaussian Residual GMM-MDN (RMSE 0.677°C) & TCN Multi-Task 30×32',
+      desc: 'Réseau PyTorch GMM-MDN entraîné sur 466 572 prévisions / 4,8M mesures (GraphCast 0.25°, ECMWF AIFS, Open-Meteo → RMSE 0,677°C) avec calibration isotone PAV réduisant l\'ECE de 17,14% à 1,43%. En parallèle, TCN séquentiel 30×32 features sur 4 horizons (0m/+5m/+10m/+15m, FocalLoss, Sharpe Walk-Forward 2,45 / Sortino 3,82).',
+      tags: ['PyTorch GMM-MDN', 'Isotonic PAV 1.43%', 'TCN 30×32']
     },
     3: {
-      badge: 'LAYER 03 // IMMUTABLE LEDGER',
-      title: 'Trade Ledger Immuable & Règle des Échanges',
-      desc: 'Grand livre de transactions hermétique enregistrant chaque position, slippage CPMM et règle d\'exécution. Aucun ordre n\'est validé sans audit d\'invariants formels.',
-      tags: ['Trade Ledger Immuable', 'Audit Déterministe', 'CPMM Invariants']
+      badge: 'PHASE 03 // FALSIFICATION ADVERSARIALE & KILL-SWITCH',
+      title: 'Arrêt volontaire de V43 (+117k$ simulés) & Purge de 47% de labels biaisés',
+      desc: 'Plutôt que d\'exploiter des backtests flatteurs, une batterie destructive a exposé : 47% d\'étiquettes METAR corrompues et 13,4x doublons (~69k lignes purgées), ecmwf_ifs04 retournant None sur 79,5% des 984 marchés (V183), et une fuite temporelle sur V43 (0 trade pré-12h UTC). Système gelé volontairement avant tout capital réel + kill-switch auto à Sharpe > 8.0, test permutation (V131.6), Deflated Sharpe & PBO/CSCV.',
+      tags: ['Kill-Switch Sharpe > 8', 'PBO / CSCV', 'Look-Ahead Audit']
     },
     4: {
-      badge: 'LAYER 04 // AGENTIC CYCLE 24/7',
-      title: 'Boucle Autonome 24/7 & Auto-Healing Linux',
-      desc: 'Daemons de surveillance systemd tournant en continu sur serveur Ubuntu dédié. Auto-healing instantané, reprise sur panne réseau et heartbeat toutes les 15 minutes avec alertes Telegram.',
-      tags: ['Daemons Linux 24/7', 'Sentinelle Watchdog', 'Systemd Daemons']
+      badge: 'PHASE 04 // SIMULATION CARNET L2 & FLAT SIZING STRICT',
+      title: 'Lissage de Laplace, Abstention Engine & Contrefeu 1,00 $ / Trade',
+      desc: 'Simulateur CLOB L2 intégrant ~165 ms de latence profilée, lissage bayésien de Laplace (k=5, n0=10) par ville, garde anti-cannibalisation (Single-Bracket Guard) et moteur d\'abstention bloquant les cotes pièges (1€ pour 0,05€). Après 10 000 runs Block-Bootstrap Monte Carlo prouvant le risque de ruine du Kelly composé sous faible capital, règle stricte de flat sizing à 1,00 $.',
+      tags: ['Bootstrap 10k Runs', 'AbstentionEngine', 'Flat Sizing 1.00$']
     },
     5: {
-      badge: 'LAYER 05 // HIERARCHICAL MEMORY',
-      title: 'Mémoire Hiérarchique à 4 Paliers (Letta/MemGPT)',
-      desc: 'Architecture mémoire résiliente combinant Core Memory (profil et invariants), Archival Memory (SQLite FTS5 lexical), vector embeddings et logs append-only. Zéro perte d\'état aux redémarrages.',
-      tags: ['SQLite FTS5 Lexical', 'Mémoire 4 Paliers', 'Letta / MemGPT']
-    },
-    6: {
-      badge: 'LAYER 06 // SECURITY SENTINEL',
-      title: 'Sentinelle Sécurité & Détection d\'Anomalies',
-      desc: 'Auditeur de code et gardien de politique hermétique. Surveillance des fuites de tokens, isolation des processus (CWE-209), et filtrage des mutations non autorisées.',
-      tags: ['Fail-Closed Policy', 'Audit Hermétique', 'CWE-209 Mitigation']
-    },
-    7: {
-      badge: 'LAYER 07 // META-COGNITION & METRICS',
-      title: 'Cycle d\'Auto-Évolution & Benchmarking',
-      desc: 'Couche de méta-cognition effectuant des autopsies automatisées des échecs d\'exécution, l\'optimisation de latence des appels et la consolidation quotidienne des apprentissages.',
-      tags: ['Benchmarking Latence', 'Post-Mortems Automatisés', 'Tuning Itératif']
+      badge: 'PHASE 05 // EXPLOITATION ORACLE OCI & DÉTECTION DE DÉRIVE',
+      title: 'Daemons Systemd 24/7, Chaîne SHA-256 & Test Séquentiel de Wald (SPRT)',
+      desc: 'Pipeline déployé sur VMs Ubuntu Oracle Cloud via unités systemd auto-guéris, journal d\'audit immuable SQLite chaîné par empreintes SHA-256 (audit_chain.py), détecteur de concept drift PSI (concept_drift_detector.py) et test séquentiel SPRT (sprt_monitor.py) pour couper toute stratégie dès dérive OOS.',
+      tags: ['Ubuntu 24.04 Systemd', 'SHA-256 Audit Chain', 'SPRT & PSI']
     }
   };
 
   // ==========================================================================
-  // AMBIENT NOIR & CRIMSON OP-ART CANVAS
-  // ==========================================================================
-  function initAuroraCanvas() {
-    const canvas = document.getElementById('aurora-canvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let animationFrameId = null;
-    let isRunning = false;
-    let mouse = { x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5 };
-    let frame = 0;
-
-    const orbs = [
-      { x: 0.35, y: 0.40, radius: 0.50, vx: 0.0003, vy: 0.0002, color: 'rgba(239, 68, 68, 0.14)' },
-      { x: 0.70, y: 0.45, radius: 0.42, vx: -0.0002, vy: 0.0003, color: 'rgba(185, 28, 28, 0.10)' },
-      { x: 0.50, y: 0.80, radius: 0.48, vx: 0.0002, vy: -0.0002, color: 'rgba(255, 255, 255, 0.03)' }
-    ];
-
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resize, { passive: true });
-    resize();
-
-    window.addEventListener('mousemove', (e) => {
-      mouse.targetX = e.clientX / width;
-      mouse.targetY = e.clientY / height;
-    }, { passive: true });
-
-    function render() {
-      if (!isRunning) return;
-      frame++;
-
-      mouse.x += (mouse.targetX - mouse.x) * 0.04;
-      mouse.y += (mouse.targetY - mouse.y) * 0.04;
-
-      ctx.clearRect(0, 0, width, height);
-
-      orbs.forEach((orb) => {
-        orb.x += orb.vx;
-        orb.y += orb.vy;
-
-        if (orb.x < 0.1 || orb.x > 0.9) orb.vx *= -1;
-        if (orb.y < 0.1 || orb.y > 0.9) orb.vy *= -1;
-
-        const px = (orb.x + (mouse.x - 0.5) * 0.06) * width;
-        const py = (orb.y + (mouse.y - 0.5) * 0.06) * height;
-        const r = orb.radius * Math.min(width, height);
-
-        const gradient = ctx.createRadialGradient(px, py, 0, px, py, r);
-        gradient.addColorStop(0, orb.color);
-        gradient.addColorStop(1, 'transparent');
-
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(px, py, r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      const centerX = width * 0.5 + (mouse.x - 0.5) * 20;
-      const centerY = height * 0.45 + (mouse.y - 0.5) * 20;
-      const baseR = (frame * 0.4) % 120;
-
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 4; i++) {
-        const ringRadius = baseR + i * 140;
-        const alpha = Math.max(0, 0.04 - (ringRadius / (Math.max(width, height) * 0.7)) * 0.04);
-        if (alpha > 0.005) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, ringRadius, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-      }
-
-      animationFrameId = requestAnimationFrame(render);
-    }
-
-    function startLoop() {
-      if (!isRunning) {
-        isRunning = true;
-        render();
-      }
-    }
-
-    function stopLoop() {
-      if (isRunning) {
-        isRunning = false;
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      }
-    }
-
-    const heroSection = document.getElementById('hero');
-    if (heroSection && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) startLoop();
-          else stopLoop();
-        });
-      }, { threshold: 0.05 });
-      observer.observe(heroSection);
-    } else {
-      startLoop();
-    }
-  }
-
-  // ==========================================================================
-  // INTERACTIVE 7-LAYER ARCHITECTURE CONTROLLER
+  // INTERACTIVE 5-PHASE TEARDOWN CONTROLLER (ÉTUDE #01)
   // ==========================================================================
   function initLayerInteractive() {
     const tabs = document.querySelectorAll('.layer-tab, .layer-nav-btn');
@@ -211,42 +89,6 @@
             contentBox.style.transform = 'translateY(0)';
           }, 140);
         }
-      });
-    });
-  }
-
-  // ==========================================================================
-  // SYSTEMS MATRIX BENTO FILTERING
-  // ==========================================================================
-  function initMatrixFilter() {
-    const filterBtns = document.querySelectorAll('.filter-btn, .matrix-filter-btn');
-    const cards = document.querySelectorAll('.bento-card, .matrix-card');
-
-    if (!filterBtns.length || !cards.length) return;
-
-    filterBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const category = btn.getAttribute('data-filter');
-
-        filterBtns.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        cards.forEach((card) => {
-          const cardCat = card.getAttribute('data-category') || '';
-          if (category === 'all' || cardCat.includes(category)) {
-            card.style.display = 'flex';
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'scale(1)';
-            }, 20);
-          } else {
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.96)';
-            setTimeout(() => {
-              card.style.display = 'none';
-            }, 180);
-          }
-        });
       });
     });
   }
@@ -302,14 +144,16 @@
     if (!overlay || !input) return;
 
     const commands = [
-      { id: 'about', title: 'Matéi derrière le code (Chapitres & Principes)', desc: 'Pays Basque, Escalade, Échecs, Projets & IUT Anglet', href: '#about', tag: 'Histoire' },
-      { id: 'flagships', title: 'Flagships & Écosystème 7-Layer', desc: 'Moteur quantitatif Polymarket & 46 PRs open-source', href: '#flagships', tag: 'Projets' },
-      { id: 'exploded', title: 'Totem Architecture 3D (WebGL Monolithe)', desc: 'Monolithe 3D isométrique à 6 étages avec shaders GLSL et torsion élastique', href: '#exploded-architecture', tag: '3D WebGL' },
-      { id: 'matrix', title: 'The Systems Matrix', desc: 'Bento index : IA, C99, Valgrind, Web & Cloud', href: '#projects', tag: 'Index' },
-      { id: 'parcours', title: 'Parcours & ADN Terrain (Bac 20/20 Grand Oral)', desc: 'IUT Anglet, Stages HUPI/Marra, UK, Échecs ~1500 Elo', href: '#parcours', tag: 'Parcours' },
-      { id: 'terminal', title: 'Matéi Shell [>_ CLI Terminal]', desc: 'Exécuter valgrind, polymarket, chess, prs, cat cv', action: () => { const btn = document.getElementById('terminal-pill-btn'); if(btn) btn.click(); }, tag: 'CLI' },
-      { id: 'cv-fr', title: 'Télécharger CV Français (PDF)', desc: 'Curriculum Vitae officiel Matéi de Saint Léger (FR)', href: 'portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf', tag: 'Document' },
-      { id: 'cv-en', title: 'Download English Resume (PDF)', desc: 'Official Engineering Resume Matéi de Saint Léger (EN)', href: 'portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf', tag: 'Document' },
+      { id: 'about', title: 'Matéi derrière le code (Chapitres & Principes)', desc: 'Pays Basque, Escalade, Échecs, Méthode 00-03 & IUT Anglet', href: '#about', tag: 'Portrait' },
+      { id: 'case-quant', title: 'Étude #01 — Moteur Quantitatif Polymarket V1→V211', desc: 'PyTorch GMM-MDN, TCN 30×32, Kill-Switch V43 & PBO/CSCV', href: '#case-quant', tag: 'Quant' },
+      { id: 'case-oss', title: 'Étude #02 — Omi (7 PRs), Twenty CRM & SafePath-Lint', desc: 'PRs #14604..#20168, #26490/#26502, AST SPL001..SPL004', href: '#case-oss', tag: 'AppSec' },
+      { id: 'case-c99', title: 'Étude #03 — Cache LRU O(1), Dijkstra C99 & AlgoForge Pro', desc: 'Code ISO C99 strict -Wall -Werror, Valgrind & Transpiler', href: '#case-c99', tag: 'ISO C99' },
+      { id: 'case-kai', title: 'Étude #04 — Kai Core OS, Kai Academic & Forge B2B', desc: 'StateVerifier, SQLite FTS5 BM25 (79 p.) & 735 tests B2B', href: '#case-kai', tag: 'Systèmes' },
+      { id: 'exploded', title: 'Totem Architecture 3D (WebGL Monolithe)', desc: 'Monolithe 3D isométrique à 6 étages avec shaders Bayer 8×8', href: '#exploded-architecture', tag: '3D WebGL' },
+      { id: 'parcours', title: 'Parcours, Stages & Échecs (HUPI, Marra, Bac 20/20)', desc: 'Stages, IUT Anglet, UK, 10k parties AlphaZero & Restos du Cœur', href: '#parcours', tag: 'Parcours' },
+      { id: 'terminal', title: 'Matéi Shell [>_ CLI Terminal]', desc: 'Exécuter valgrind, polymarket, prs, safepath, verify, chess', action: () => { const btn = document.getElementById('terminal-pill-btn'); if (btn) btn.click(); }, tag: 'CLI' },
+      { id: 'cv-fr', title: 'Télécharger CV Français (PDF)', desc: 'Curriculum Vitae officiel Matéi de Saint Léger (FR)', href: 'portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf', external: true, tag: 'Document' },
+      { id: 'cv-en', title: 'Download English Resume (PDF)', desc: 'Official Engineering Resume Matéi de Saint Léger (EN)', href: 'portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf', external: true, tag: 'Document' },
       { id: 'contact', title: 'Contact & Recrutement Alternance', desc: 'Discuter d\'une alternance BUT 2 dès Septembre 2027', href: '#contact', tag: 'Contact' }
     ];
 
@@ -333,7 +177,7 @@
       }
       list.forEach((item, idx) => {
         const a = document.createElement('a');
-        a.href = item.href;
+        a.href = item.href || '#';
         if (item.external) {
           a.target = '_blank';
           a.rel = 'noopener noreferrer';
@@ -346,7 +190,15 @@
           </div>
           <span class="cmdk-item-tag">${item.tag}</span>
         `;
-        a.addEventListener('click', () => closePalette());
+        a.addEventListener('click', (e) => {
+          if (typeof item.action === 'function') {
+            e.preventDefault();
+            closePalette();
+            item.action();
+            return;
+          }
+          closePalette();
+        });
         resultsContainer.appendChild(a);
       });
     }
@@ -451,40 +303,52 @@
         const lower = cmd.toLowerCase();
 
         if (lower === 'help') {
-          printLine('COMMANDES DISPONIBLES :');
-          printLine('  valgrind    - Audit mémoire C99 AlgoForge (zéro fuite, zéros octets perdus)');
-          printLine('  polymarket  - Simulation carnet d\'ordres WebSockets en temps réel (<2ms)');
-          printLine('  prs         - Liste des 46 Pull Requests mergées (Twenty CRM, Omi, AlgoForge)');
-          printLine('  chess       - Évaluation position Stockfish 17 NNUE & FEN');
-          printLine('  cat cv      - Résumé du profil & liens de téléchargement CV');
-          printLine('  swarm       - Rejouer l\'animation Swarm Rebuild (takeover)');
+          printLine('COMMANDES DISPONIBLES (TRACE RÉELLE DES PROJETS) :');
+          printLine('  valgrind    - Trace gcc -Wall -Wextra -Werror + Valgrind sur lru_cache.c');
+          printLine('  polymarket  - Pipeline GMM-MDN (RMSE 0.677°C) & coupure look-ahead V43');
+          printLine('  prs         - Audit exact des PRs Omi (#14604..#20168) & Twenty (#26490)');
+          printLine('  safepath    - Exécution AST SafePath-Lint (règles CWE-22 SPL001/003/004)');
+          printLine('  verify      - Contrôle d\'état physique StateVerifier (PDF/SQLite/ELF)');
+          printLine('  chess       - Benchmark AlphaZero 10k parties GPU & Stockfish NNUE');
+          printLine('  cat cv      - Synthèse officielle BUT Info Anglet & liens CV');
+          printLine('  swarm       - Rejouer l\'animation Swarm Rebuild');
           printLine('  clear       - Nettoyer le terminal');
           printLine('  exit        - Fermer le terminal');
         } else if (lower === 'valgrind') {
-          printLine('==19842== Memcheck, a memory error detector', 'accent');
-          printLine('==19842== Command: ./bin/algoforge_c99 --strict --dataset=100k');
-          printLine('[INFO] Heap Allocator: custom memory pool (strict Allman alignment)');
-          printLine('[INFO] Quicksort tripartition + AVL rotation: 100,000 nodes');
-          printLine('[INFO] Verification: all 100,000 elements sorted in 1.42ms');
+          printLine('$ gcc -std=c99 -Wall -Wextra -Werror -pedantic lru_cache.c test_lru.c -o lru_test', 'accent');
+          printLine('[BUILD] 0 warning, 0 error (Allman + Murmur3 O(1) hash + double-linked sentinels)');
+          printLine('==19842== Memcheck, a memory error detector');
+          printLine('==19842== Command: ./lru_test && ./test_dijkstra');
           printLine('==19842== HEAP SUMMARY:');
           printLine('==19842==     in use at exit: 0 bytes in 0 blocks', 'success');
-          printLine('==19842==   total heap usage: 100,000 allocs, 100,000 frees, 4,800,000 bytes allocated');
-          printLine('==19842== All heap blocks were freed -- no leaks are possible', 'success');
+          printLine('==19842==   All heap blocks were freed -- no leaks are possible', 'success');
           printLine('==19842== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)', 'success');
         } else if (lower === 'polymarket') {
-          printLine('[WS] Connecting to wss://ws-subscriptions-clob.polymarket.com/ws/market...', 'accent');
-          printLine('[WS] Subscribed to orderbook: presidential-election-2024 / trump-win');
-          printLine('[TICK +0.4ms] BID: 0.582 (size: 42,000 USDC) | ASK: 0.584 (size: 28,500 USDC)');
-          printLine('[TICK +1.1ms] SPREAD: 0.002 (0.34%) | Imbalance ratio: +1.47');
-          printLine('[EXEC +1.9ms] Market order matched on Polygon PoS (Gas: 24 Gwei, Latency: 1.9ms)', 'success');
-          printLine('[METRIC] Execution speed: p95 < 2.1ms | 0 slippage vs best book', 'success');
+          printLine('[PIPELINE] weather_quant_system V211 + BTC 5m TCN (Oracle Ubuntu OCI)', 'accent');
+          printLine('[INGEST] Binance depth@100ms + CLOB min(asks) -> parity delta = 0.00000000');
+          printLine('[MODEL] 5-Gaussian Residual GMM-MDN on 466,572 forecasts -> RMSE 0.677°C');
+          printLine('[CALIB] Isotonic PAV calibration: ECE reduced 17.14% -> 1.43%');
+          printLine('[AUDIT] V43 Look-Ahead Trap (+117k$ sim, 0 pre-12h UTC trade) -> KILLED by Gate', 'accent');
+          printLine('[GATE] PBO/CSCV PASS • Deflated Sharpe verified • Flat Sizing forced at 1.00$', 'success');
         } else if (lower === 'prs') {
-          printLine('[GITHUB] 46 Production PRs Merged Across Open Source Repositories:', 'accent');
-          printLine('• Twenty CRM (#1428): Fixed relational cascade sync on workspace deletion');
-          printLine('• Twenty CRM (#1504): Optimized GraphQL cursor pagination (94% query speedup)');
-          printLine('• BasedHardware/omi (#892): Hardened BLE packet framing against audio dropouts');
-          printLine('• BasedHardware/omi (#914): Fixed background sync battery drain on iOS daemon');
-          printLine('• AlgoForge (#01-18): C99 Valgrind 0-leak strict algorithmic library');
+          printLine('[GITHUB] 46 Pull Requests Fusionnées (BasedHardware/omi, Twenty CRM, FinTech):', 'accent');
+          printLine('• omi #14604 (whoop-app): Reflected XSS in OAuth callback -> HTML escaping (5/5)');
+          printLine('• omi #15974 (CLI #15913): Bounded epoch parsing stopping OverflowError crash');
+          printLine('• omi #16025 / #17258 / #17272: Stopped CWE-209 detail=str(exc) & OAuth traceback leaks');
+          printLine('• omi #19637 / #16029->#20168: Search regex guards + concurrent token refresh lock');
+          printLine('• twenty #26490 & #26502: NestJS RBAC guards (VIEWS/LAYOUTS) & ORM batch deletes');
+          printLine('• Dupdap & Moistello (38 PRs): stellarUri USD/Crypto precision & 401 retry lock', 'success');
+        } else if (lower === 'safepath') {
+          printLine('$ safepath-lint ./routes/ --format=summary', 'accent');
+          printLine('[SPL001] routes/export.py:42 -> Unsanitized f-string passed to send_file()');
+          printLine('[SPL003] routes/files.py:19  -> path.startswith("/var/data") misses trailing slash (sibling bypass /var/data_forbidden)');
+          printLine('[SPL004] utils/clean.py:08   -> .replace("../", "") bypassable via "....//"');
+          printLine('[FIX] Enforce Path(base).resolve().is_relative_to(root) -> 0 findings', 'success');
+        } else if (lower === 'verify') {
+          printLine('[Kai StateVerifier] Auditing physical artifacts instead of trusting HTTP 200:', 'accent');
+          printLine('• PDF Header Check: magic bytes === b"%PDF-" (PASS)');
+          printLine('• SQLite WAL Store: academic_vault.db (2,018+ FTS5 entities indexed) (PASS)');
+          printLine('• B2B Pipeline Tests: 310 reporting + 425 anchored extraction = 735 passed', 'success');
         } else if (lower === 'chess') {
           printLine('  +---+---+---+---+---+---+---+---+');
           printLine('8 | r | . | b | q | k | b | . | r |');
@@ -496,18 +360,15 @@
           printLine('2 | P | P | P | . | P | P | P | P |');
           printLine('1 | R | . | B | Q | K | . | . | R |');
           printLine('  +---+---+---+---+---+---+---+---+');
-          printLine('    a   b   c   d   e   f   g   h');
-          printLine('[Stockfish 17 NNUE] Depth: 24/48 | Eval: +2.41 (White advantage)', 'success');
-          printLine('[Best line] 1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6');
-          printLine('[Player stats] Matéi de Saint Léger: ~1500 Elo (Rapid & Blitz)');
+          printLine('[Research] 10,000 AlphaZero self-play games trained (2h15 Radeon GPU)');
+          printLine('[Benchmark] 1,000 evaluation games vs Stockfish (avg 1.17s/game) + Hexapawn NSI', 'success');
+          printLine('[Player] Matéi de Saint Léger: ~1500 Elo (Rapid & Blitz)');
         } else if (lower === 'cat cv') {
-          printLine('Matéi de Saint Léger — Étudiant BUT Informatique (IUT de Bayonne-Anglet)', 'accent');
-          printLine('Bac 2026 Mention AB (13,75/20) • Grand Oral 20/20 • Mention DNL Basque (14,40/20)');
-          printLine('Recherche: Alternance BUT 2 (Septembre 2027, Côte Basque / Hybride / Remote)');
-          printLine('Email: matei64200@gmail.com');
-          printLine('GitHub: https://github.com/Mateidslx');
-          printLine('LinkedIn: https://linkedin.com/in/matéi-de-saint-léger-24329a32b/');
-          printLine('Téléchargements disponibles : CV Français (PDF) et English Resume (PDF)');
+          printLine('Matéi de Saint Léger — BUT Informatique (IUT de Bayonne–Anglet)', 'accent');
+          printLine('Bac 2026 Cantau Anglet Mention AB (13,75/20) • Grand Oral 20/20 • DNL Basque 14,40/20');
+          printLine('Stages: HUPI (Bidart, Carte ADT64 Leaflet/D3.js) & Bureau d\'Études Marra');
+          printLine('Objectif: Alternance BUT 2 dès Septembre 2027 (Côte Basque / Hybride / Remote)');
+          printLine('Email: matei64200@gmail.com • GitHub: https://github.com/Mateidslx');
         } else if (lower === 'swarm') {
           printLine('[SWARM] Lancement du moteur de rebuild...', 'accent');
           closeDrawer();
@@ -541,38 +402,72 @@
   }
 
   // ==========================================================================
-  // AUTONOMOUS CO-PILOT AGENTS (Theo, Elena, Kai, Sarah)
-  // ==========================================================================
-  
-  // ==========================================================================
-  // INTERACTIVE CODE SWITCHER LOGIC (ALGOFORGE C99)
+  // INTERACTIVE CODE SWITCHERS (C99 / OSS / KAI CASE STUDIES)
   // ==========================================================================
   function initCodeSwitcher() {
     const tabs = document.querySelectorAll('.code-tab-btn');
-    const view = document.getElementById('algoforge-code-view');
-    if (!tabs.length || !view) return;
+    if (!tabs.length) return;
 
     const SNIPPETS = {
-      c99: `/* Tripartition canonique IUT Anglet (P. Etcheverry) */
-Status_t tree_insert(Node_t** root, const int val)
+      // Case #02 — Open-Source & SafePath AST
+      omi: `/* BasedHardware/omi — 7 Correctifs Production Fusionnés */
+#14604 (whoop)    : XSS réfléchie OAuth -> encodage HTML strict (5/5)
+#15974 (CLI)      : OverflowError expiry -> bornage epoch (#15913)
+#16025 (tasks)    : Fuite CWE-209 detail=str(exc) ORM -> masquage
+#17258 (cal)      : Masquage tracebacks refresh OAuth exposés
+#17272 (desktop)  : Sanitisation exceptions stream chat (3 routes)
+#19637 (search)   : Guards ValueError/re.error ("Good hygiene")
+#16029 -> #20168  : Lock race condition token refresh (main)`,
+      twenty: `/* twentyhq/twenty (40k★) & Dupdap/Moistello (40 PRs) */
+twenty #26490 : Gardes RBAC stricts (VIEWS / LAYOUTS) sur metadata
+twenty #26502 : Capture suppressions batch dans twenty-orm + Vitest
+Dupdap/Moistello (38 PRs TS) :
+  - Précision montants USD <-> Crypto (stellarUri)
+  - Intercepteur HTTP 401 concurrent idempotent (lock unique)
+  - Tests accessibilité clavier & focus-trap modales Vitest`,
+      safepath: `# SafePath-Lint (MIT AST) — CWE-22 / CWE-23 / CWE-36
+[SPL001] Injection binaire / f-string dans open() / send_file()
+[SPL003] path.startswith("/var/data") -> bypass /var/data_forbidden
+[SPL004] raw.replace("../", "")      -> bypass "....//" imbriqué
+
+# Garde déterministe imposée :
+resolved = Path(base_dir, user_path).resolve()
+if not resolved.is_relative_to(Path(base_dir).resolve()):
+    raise PermissionError("CWE-22 traversal blocked")`,
+
+      // Case #03 — ISO C99, AlgoForge Pro & Merise
+      lru: `/* IUT/c_tests/lru_cache.c — Hash O(1) + Sentinelles */
+static size_t hash_func(int key, size_t table_size)
 {
-    if (*root == NULL)
-    {
-        *root = node_allocate(val);
-        return (*root != NULL) ? STATUS_OK : STATUS_OOM;
-    }
-    return (val < (*root)->value)
-        ? tree_insert(&(*root)->left, val)
-        : tree_insert(&(*root)->right, val);
+    uint32_t h = (uint32_t)key;
+    h ^= h >> 16;
+    h *= 0x85ebca6b;
+    h ^= h >> 13;
+    h *= 0xc2b2ae35;
+    h ^= h >> 16;
+    return h % table_size;
+}
+
+static void move_to_head(LRUCache* cache, Node* node)
+{
+    list_remove(node);
+    list_insert_head(cache, node);
 }`,
+      transpiler: `/* algoforge_desktop/js/transpiler.js (Electron IDE R1.01) */
+// Génère Pseudo-code IUT -> C Allman strict -> Python 3
+ALGORITHME tri_par_selection
+LEXIQUE
+    tab : tableau[1..N] d'entier // Données structurées
+// Règles vérifiées automatiquement par AlgoForge :
+// - Aucune sortie brutale (break/return) dans boucle TANTQUE
+// - Tripartition C99 : données / données-résultats (&) / résultats`,
       valgrind: `==19842== Memcheck, a memory error detector (Valgrind-3.22)
-==19842== Command: ./bin/algoforge_c99 --strict --test=all
+==19842== Command: ./bin/test_lru && ./bin/test_dijkstra
 ==19842== HEAP SUMMARY:
 ==19842==     in use at exit: 0 bytes in 0 blocks
-==19842==   total heap usage: 100,000 allocs, 100,000 frees, 4.8MB
-==19842== All heap blocks were freed -- no leaks are possible
-==19842== ERROR SUMMARY: 0 errors from 0 contexts (0 suppressed)`,
-      merise: `/* MLD Relationnel 3NF — Michel Marquesuzaà (R1.05) */
+==19842==   All heap blocks were freed -- no leaks are possible
+==19842== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)`,
+      merise: `/* MLD Relationnel 3NF — R1.05 Bases de Données (M. Marquesuzaà) */
 CREATE TABLE OrdreExecution (
     id_ordre INT PRIMARY KEY,
     timestamp_nano BIGINT NOT NULL,
@@ -580,99 +475,46 @@ CREATE TABLE OrdreExecution (
     quantite NUMERIC(18, 4) CHECK (quantite > 0),
     prix_limite NUMERIC(18, 6) NOT NULL,
     statut_execution VARCHAR(8) CHECK (statut_execution IN ('FILLED','PENDING'))
-);`
+);`,
+
+      // Case #04 — Kai Core OS, B2B Forge & Kai Academic
+      verifier: `# Extrait architecture réelle — core/state_verifier.py
+# Élimine le piège classique : "HTTP 200 / exit 0 == succès"
+if fmt == "pdf":
+    with open(p, "rb") as f:
+        entete = f.read(5)
+        if entete != b"%PDF-":
+            return VerificationResult(valide=False, motif="En-tête PDF invalide")
+# Vérifie également : persistance SQLite WAL, binaire ELF compilé, et ADB dumpsys`,
+      b2b: `// Pipeline B2B (735 Tests Unitaires Verts) & Pdf-helper BTP
+1. Reporting Multi-Sources (310 tests) : GA4 + Google Ads + Search Console
+   -> Architecture découplée (collecte / comparaison M-1 & N-1 / export PDF)
+2. Extracteur Documentaire Ancré (425 tests) : Contrats & Bons d'intervention
+   -> Zéro hallucination : chaque champ retourne EXTRAIT | À VÉRIFIER | NON DÉTECTÉ
+3. Pdf-helper BTP (Tauri + React + FastAPI + OCR G.R.E.) :
+   -> Stitching multi-pages et reconstruction de tableaux PDF vers Excel`,
+      academic: `/* Kai Academic — Indexation locale SQLite FTS5 BM25 */
+- Base : academic_vault.db (2 018+ entités indexées sur 20 modules S1 IUT)
+- Contrainte stricte : zéro contenu inventé hors supports officiels UPPA
+- Ergonomie dyslexie (a11y_audit_pro/scotopic.py + Lexend) :
+  * Alignement strict à gauche (zéro texte justifié en rivières)
+  * Zéro italique sur blocs longs, palettes scoptiques douces`
     };
 
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
-        tabs.forEach((t) => t.classList.remove('active'));
-        tab.classList.add('active');
+        const widget = tab.closest('.code-switcher-widget');
+        const targetId = tab.getAttribute('data-target') || 'algoforge-code-view';
+        const view = document.getElementById(targetId);
         const key = tab.getAttribute('data-code');
-        if (SNIPPETS[key]) {
-          view.textContent = SNIPPETS[key];
-        }
+        if (!view || !SNIPPETS[key]) return;
+
+        const siblingTabs = widget ? widget.querySelectorAll('.code-tab-btn') : tabs;
+        siblingTabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        view.textContent = SNIPPETS[key];
       });
     });
-  }
-
-  function initCopilotFleet() {
-    const container = document.getElementById('copilot-fleet-container');
-    if (!container) return;
-
-    const AGENTS = [
-      { id: 'theo', name: 'Theo [C99 / Systèmes]', color: '#ef4444', icon: '⚡' },
-      { id: 'elena', name: 'Elena [AppSec / Valgrind]', color: '#10b981', icon: '🛡️' },
-      { id: 'kai', name: 'Kai [Quant / Polymarket]', color: '#3b82f6', icon: '📈' },
-      { id: 'sarah', name: 'Sarah [UI / Accessibilité]', color: '#a855f7', icon: '🎨' }
-    ];
-
-    const elements = AGENTS.map((agent, i) => {
-      const el = document.createElement('div');
-      el.className = 'agent-reticle';
-      el.id = 'copilot-' + agent.id;
-      el.style.opacity = '0';
-      el.innerHTML = `
-        <svg class="agent-reticle-cursor" viewBox="0 0 24 24" fill="${agent.color}">
-          <path d="M0 0L14 10L8 12L12 20L9 21L5 13L0 17Z" stroke="#000" stroke-width="1.5" />
-        </svg>
-        <div class="agent-reticle-badge" style="background:${agent.color}; border: 1px solid rgba(255,255,255,0.2);">
-          ${agent.icon} ${agent.name}
-        </div>
-      `;
-      container.appendChild(el);
-      return { agent, el, targetX: 100 + i * 200, targetY: 400 + i * 60, currentX: 100, currentY: 400 };
-    });
-
-    // Gentle roaming across interesting sections
-    const targetSelectors = [
-      '.nav-dock',
-      '.hero-card-left',
-      '.hero-card-right',
-      '.totem-stage-container',
-      '#flagships .bento-main',
-      '.dna-chess-card',
-      '.contact-card'
-    ];
-
-    let lastInteraction = Date.now();
-    window.addEventListener('scroll', () => { lastInteraction = Date.now(); }, { passive: true });
-    window.addEventListener('mousemove', () => { lastInteraction = Date.now(); }, { passive: true });
-
-    function step() {
-      const isIdle = (Date.now() - lastInteraction) > 2500;
-      
-      elements.forEach((item, idx) => {
-        if (!isIdle) {
-          // Fade out during active user interactions
-          item.el.style.opacity = '0';
-          return;
-        }
-
-        // Periodically pick targets
-        if (Math.random() < 0.02) {
-          const sel = targetSelectors[Math.floor(Math.random() * targetSelectors.length)];
-          const targetDom = document.querySelector(sel);
-          if (targetDom) {
-            const rect = targetDom.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              item.targetX = rect.left + Math.random() * rect.width;
-              item.targetY = rect.top + Math.random() * Math.min(rect.height, 200);
-            }
-          }
-        }
-
-        // Smooth spring physics interpolation
-        item.currentX += (item.targetX - item.currentX) * 0.08;
-        item.currentY += (item.targetY - item.currentY) * 0.08;
-
-        item.el.style.transform = `translate3d(${item.currentX}px, ${item.currentY}px, 0)`;
-        item.el.style.opacity = '0.9';
-      });
-
-      requestAnimationFrame(step);
-    }
-
-    requestAnimationFrame(step);
   }
 
   // ==========================================================================
@@ -815,6 +657,32 @@ CREATE TABLE OrdreExecution (
 
     const hairlineItems = Array.from(document.querySelectorAll('#akaru-principles-list .akaru-hairline-item'));
     const plates = Array.from(document.querySelectorAll('.akaru-visual-stack .akaru-stack-plate'));
+    const proofCodeEl = document.getElementById('akaru-proof-code');
+    const proofMetricEl = document.getElementById('akaru-proof-metric');
+    const proofBodyEl = document.getElementById('akaru-proof-body');
+
+    const PRINCIPLE_PROOFS = [
+      {
+        code: 'PREUVE 00 // ERGONOMIE & CLARTÉ',
+        metric: '79 PAGES • 2 018 ENTITÉS FTS5',
+        body: 'Ma dyslexie m\'a poussé à bâtir <strong>Kai Academic</strong> et <strong>a11y_audit_pro</strong> : typographie <code>Lexend</code> sans italique ni justification artificielle, interlettrage scoptique mesuré, et base locale <code>academic_vault.db</code> indexée sous SQLite FTS5 BM25 — sans inventer une seule ligne hors des supports officiels de mes enseignants.'
+      },
+      {
+        code: 'PREUVE 01 // ARTISANAT C99 & ALLMAN',
+        metric: '-WALL -WEXTRA -WERROR • 0 LEAK',
+        body: 'Chaque structure critique (<code>lru_cache.c</code>, <code>dijkstra_graph.c</code>) est écrite avec accolades Allman, décomposition claire et sentinelles O(1), puis passée au crible Valgrind (<code>0 bytes in 0 blocks</code>). Le transpileur Electron <strong>AlgoForge Pro</strong> automatise ces mêmes garde-fous pour les étudiants.'
+      },
+      {
+        code: 'PREUVE 02 // AUDIT ADVERSARIAL',
+        metric: 'KILL-SWITCH V43 • 735 TESTS B2B',
+        body: 'Un chiffre flatteur sans validation hors échantillon ne vaut rien : j\'ai volontairement coupé <strong>V43</strong> (+117k$ simulés) dès détection d\'un biais look-ahead pré-12h UTC, purgé 47% d\'étiquettes METAR corrompues et imposé un ancrage mot-à-mot sur nos <strong>735 tests unitaires B2B</strong>.'
+      },
+      {
+        code: 'PREUVE 03 // VÉRIFICATION PHYSIQUE',
+        metric: 'STATE VERIFIER • UBUNTU 24/7',
+        body: 'Dans <code>core/state_verifier.py</code>, un statut <code>HTTP 200</code> ou <code>exit 0</code> n\'est jamais suffisant : le contrôleur vérifie physiquement les octets <code>%PDF-</code>, les tables SQLite WAL, les binaires compilés et les services <code>systemd</code> sur Ubuntu Oracle Cloud.'
+      }
+    ];
 
     function selectPrinciple(idx) {
       const targetPlate = hairlineItems[idx]?.getAttribute('data-principle') ?? '0';
@@ -824,6 +692,12 @@ CREATE TABLE OrdreExecution (
       plates.forEach((plate) => {
         plate.classList.toggle('is-highlighted', plate.getAttribute('data-principle') === targetPlate);
       });
+      const proof = PRINCIPLE_PROOFS[idx];
+      if (proof && proofCodeEl && proofMetricEl && proofBodyEl) {
+        proofCodeEl.textContent = proof.code;
+        proofMetricEl.textContent = proof.metric;
+        proofBodyEl.innerHTML = proof.body;
+      }
     }
 
     hairlineItems.forEach((item, idx) => {
@@ -844,14 +718,11 @@ CREATE TABLE OrdreExecution (
   }
 
   function init() {
-    initAuroraCanvas();
     initAkaruStory();
     initLayerInteractive();
-    initMatrixFilter();
     initClipboard();
     initCommandPalette();
     initTerminalDrawer();
-    initCopilotFleet();
     initCodeSwitcher();
   }
 
