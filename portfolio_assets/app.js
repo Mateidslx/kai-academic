@@ -302,7 +302,7 @@
     if (!overlay || !input) return;
 
     const commands = [
-      { id: 'about', title: 'Matéi derrière le code (Akaru Bio)', desc: 'Pays Basque, Delta, Escalade, Korrika, Échecs & Projets', href: '#about', tag: 'Histoire' },
+      { id: 'about', title: 'Matéi derrière le code (Chapitres & Principes)', desc: 'Pays Basque, Delta, Escalade, Korrika, Échecs & Projets', href: '#about', tag: 'Histoire' },
       { id: 'flagships', title: 'Flagships & Écosystème 7-Layer', desc: 'Moteur quantitatif Polymarket & 46 PRs open-source', href: '#flagships', tag: 'Projets' },
       { id: 'exploded', title: 'Totem Architecture 3D (WebGL Monolithe)', desc: 'Monolithe 3D isométrique à 6 étages avec shaders GLSL et torsion élastique', href: '#exploded-architecture', tag: '3D WebGL' },
       { id: 'matrix', title: 'The Systems Matrix', desc: 'Bento index : IA, C99, Valgrind, Web & Cloud', href: '#projects', tag: 'Index' },
@@ -676,11 +676,19 @@ CREATE TABLE OrdreExecution (
   }
 
   // ==========================================================================
-  // AKARU TWO-ACT BIOGRAPHY ACCORDION & PRINCIPLES CONTROLLER
+  // AKARU-KINETIC BIOGRAPHY CHAPTER STAGE & HAIRLINE PRINCIPLES CONTROLLER
   // ==========================================================================
   function initAkaruStory() {
     const panels = Array.from(document.querySelectorAll('#akaru-accordion .akaru-panel'));
+    const navButtons = Array.from(document.querySelectorAll('#akaru-accordion .akaru-nav-item'));
+    const curtainLayer = document.getElementById('akaru-curtain-layer');
     const counterEl = document.getElementById('akaru-deck-counter');
+    const stageIdxEl = document.getElementById('akaru-stage-idx');
+    const prevBtn = document.getElementById('akaru-prev-btn');
+    const nextBtn = document.getElementById('akaru-next-btn');
+    const principlesList = document.getElementById('akaru-principles-list');
+    const aboutSection = document.getElementById('about');
+
     const CHAPTER_LABELS = [
       '01 / 05 — PAYS BASQUE & RACINES',
       '02 / 05 — HORS ÉCRAN & DELTA',
@@ -689,51 +697,121 @@ CREATE TABLE OrdreExecution (
       '05 / 05 — IUT ANGLET & OPEN-SOURCE'
     ];
 
-    function activateChapter(index) {
-      if (!panels.length) return;
-      const safeIdx = ((index % panels.length) + panels.length) % panels.length;
+    let currentIdx = 0;
+    let wipeMidTimer = null;
+    let wipeEndTimer = null;
+
+    function triggerCurtainWipe(onMidpoint) {
+      if (!curtainLayer) {
+        onMidpoint();
+        return;
+      }
+      if (wipeMidTimer) clearTimeout(wipeMidTimer);
+      if (wipeEndTimer) clearTimeout(wipeEndTimer);
+      curtainLayer.classList.remove('is-wiping');
+      void curtainLayer.offsetWidth;
+      curtainLayer.classList.add('is-wiping');
+      wipeMidTimer = setTimeout(() => {
+        onMidpoint();
+      }, 150);
+      wipeEndTimer = setTimeout(() => {
+        curtainLayer.classList.remove('is-wiping');
+      }, 540);
+    }
+
+    function applyChapterState(safeIdx) {
+      currentIdx = safeIdx;
       panels.forEach((panel, i) => {
         const isActive = i === safeIdx;
         panel.classList.toggle('is-active', isActive);
-        panel.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+      navButtons.forEach((btn, i) => {
+        const isActive = i === safeIdx;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
       if (counterEl && CHAPTER_LABELS[safeIdx]) {
         counterEl.textContent = CHAPTER_LABELS[safeIdx];
       }
+      if (stageIdxEl) {
+        stageIdxEl.textContent = `CHAPITRE 0${safeIdx + 1} / 0${panels.length}`;
+      }
     }
 
-    panels.forEach((panel, idx) => {
-      panel.addEventListener('click', (e) => {
-        if (e.target.closest('.akaru-circle-next')) return;
-        activateChapter(idx);
+    function activateChapter(index, withCurtain = true) {
+      if (!panels.length) return;
+      const safeIdx = ((index % panels.length) + panels.length) % panels.length;
+      if (safeIdx === currentIdx && panels[safeIdx]?.classList.contains('is-active')) return;
+      // Immediately update rail buttons & counter for zero perceived lag
+      navButtons.forEach((btn, i) => {
+        const isActive = i === safeIdx;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
+      if (counterEl && CHAPTER_LABELS[safeIdx]) {
+        counterEl.textContent = CHAPTER_LABELS[safeIdx];
+      }
+      if (stageIdxEl) {
+        stageIdxEl.textContent = `CHAPITRE 0${safeIdx + 1} / 0${panels.length}`;
+      }
+      if (withCurtain) {
+        triggerCurtainWipe(() => applyChapterState(safeIdx));
+      } else {
+        applyChapterState(safeIdx);
+      }
+    }
 
-      panel.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          if (e.target.closest('.akaru-circle-next')) return;
+    navButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => activateChapter(idx, true));
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
           e.preventDefault();
-          activateChapter(idx);
-        } else if (e.key === 'ArrowRight') {
+          const next = (idx + 1) % panels.length;
+          activateChapter(next, true);
+          navButtons[next].focus();
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
           e.preventDefault();
-          activateChapter(idx + 1);
-          panels[(idx + 1) % panels.length].focus();
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          activateChapter(idx - 1);
-          panels[(idx - 1 + panels.length) % panels.length].focus();
+          const prev = (idx - 1 + panels.length) % panels.length;
+          activateChapter(prev, true);
+          navButtons[prev].focus();
         }
       });
     });
 
-    document.querySelectorAll('.akaru-circle-next').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const nextIdx = parseInt(btn.getAttribute('data-next'), 10);
-        if (!Number.isNaN(nextIdx)) {
-          activateChapter(nextIdx);
-        }
-      });
-    });
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => activateChapter(currentIdx - 1, true));
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => activateChapter(currentIdx + 1, true));
+    }
+
+    // Akaru Scroll-Reveal Observer (Triggers vertical curtain once + self-drawing hairlines)
+    if ('IntersectionObserver' in window) {
+      let curtainPlayedOnce = false;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            if (entry.target === aboutSection && !curtainPlayedOnce) {
+              curtainPlayedOnce = true;
+              if (curtainLayer) {
+                curtainLayer.classList.add('is-wiping');
+                setTimeout(() => curtainLayer.classList.remove('is-wiping'), 540);
+              }
+            }
+            if (entry.target === principlesList) {
+              principlesList.classList.add('is-inview');
+            }
+          });
+        },
+        { threshold: 0.16 }
+      );
+      if (aboutSection) observer.observe(aboutSection);
+      if (principlesList) observer.observe(principlesList);
+    } else if (principlesList) {
+      principlesList.classList.add('is-inview');
+    }
 
     const hairlineItems = Array.from(document.querySelectorAll('#akaru-principles-list .akaru-hairline-item'));
     const plates = Array.from(document.querySelectorAll('.akaru-visual-stack .akaru-stack-plate'));

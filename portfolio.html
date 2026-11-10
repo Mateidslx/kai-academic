@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="portfolio_assets/style.css?v=28">
+    <link rel="stylesheet" href="portfolio_assets/style.css?v=29">
 
   <!-- Zero-Flash Dark Curtain: keeps DOM computed rects valid until swarm canvas mounts -->
   <style>
@@ -210,64 +210,120 @@
         <span class="divider-index">INDEX [01 / 05]</span>
       </div>
 
-      <!-- Akaru-Inspired Two-Act Personal Storytelling & Real Life Section -->
-      <section id="about" class="section akaru-bio-section">
+      <!-- Akaru-Inspired Noir & Crimson Kinetic Biography & Storytelling -->
+      <section id="about" class="section akaru-bio-section" data-akaru-section>
         <div class="akaru-head-wrap">
           <div class="akaru-head-left">
             <div class="section-tag">PORTRAIT // HORS TERMINAL &amp; DANS LA VRAIE VIE</div>
             <h2 class="section-title akaru-main-title">Matéi derrière le code</h2>
           </div>
           <p class="akaru-head-lead">
-            Né à Bayonne en 2008 et étudiant en BUT 1 Informatique à Anglet, je passe autant de temps sur le terrain qu'en production : escalade, 10 km de la Korrika, éducation positive de ma chienne Delta, échecs et logiciels construits de zéro sans bruit superflu.
+            Né à Bayonne en 2008 et étudiant en BUT 1 Informatique à Anglet, je passe autant de temps sur le terrain qu'en production : escalade, 10 km de la Korrika, éducation positive de ma chienne Delta, échecs et systèmes conçus de zéro sans bruit superflu.
           </p>
         </div>
 
-        <!-- ACT I: Akaru Horizontal Expandable Spine Deck (01..05) -->
-        <div class="akaru-deck-shell" role="region" aria-label="Chapitres biographiques interactifs — cliquez ou naviguez avec les flèches">
+        <!-- ACT I: Noir & Crimson Split Chapter Deck with Akaru Vertical Bar-Curtain Wipe -->
+        <div class="akaru-deck-shell" id="akaru-deck-shell" role="region" aria-label="Chapitres biographiques interactifs — cliquez ou naviguez avec les flèches">
           <div class="akaru-deck-toolbar">
-            <span class="akaru-deck-hint">CHAPITRES RÉELS // CLIQUEZ SUR UN DOS POUR L'OUVRIR</span>
+            <span class="akaru-deck-hint">CHAPITRES RÉELS // TRANSITION PAR VOLET AKARU</span>
             <div class="akaru-deck-counter" id="akaru-deck-counter">01 / 05 — PAYS BASQUE &amp; RACINES</div>
           </div>
 
-          <div class="akaru-accordion" id="akaru-accordion">
+          <div class="akaru-split-layout" id="akaru-accordion">
+            <!-- Left Navigation Index (Unified Noir & Crimson Rail) -->
+            <nav class="akaru-nav-rail" aria-label="Sélection du chapitre biographique">
+              <button type="button" class="akaru-nav-item is-active" data-chapter="0" aria-pressed="true">
+                <span class="akaru-nav-bar" aria-hidden="true"></span>
+                <span class="akaru-nav-num">01</span>
+                <span class="akaru-nav-meta">
+                  <span class="akaru-nav-title">Pays Basque &amp; Vocation</span>
+                  <span class="akaru-nav-sub">2008–2026 • Lycée Cantau • 20/20</span>
+                </span>
+                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
+              </button>
 
-            <!-- Chapter 01 -->
-            <article class="akaru-panel is-active" data-chapter="0" data-theme="slate" tabindex="0" aria-expanded="true">
-              <div class="akaru-panel-spine" aria-hidden="true">
-                <span class="spine-pill">2008–2026</span>
-                <span class="spine-title">Pays Basque</span>
-                <span class="spine-num">01</span>
+              <button type="button" class="akaru-nav-item" data-chapter="1" aria-pressed="false">
+                <span class="akaru-nav-bar" aria-hidden="true"></span>
+                <span class="akaru-nav-num">02</span>
+                <span class="akaru-nav-meta">
+                  <span class="akaru-nav-title">Hors Écran &amp; Terrain</span>
+                  <span class="akaru-nav-sub">06h00 • Delta • Escalade • Korrika</span>
+                </span>
+                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
+              </button>
+
+              <button type="button" class="akaru-nav-item" data-chapter="2" aria-pressed="false">
+                <span class="akaru-nav-bar" aria-hidden="true"></span>
+                <span class="akaru-nav-num">03</span>
+                <span class="akaru-nav-meta">
+                  <span class="akaru-nav-title">Échecs, Énigmes &amp; IA</span>
+                  <span class="akaru-nav-sub">1500 Elo • AlphaZero 10k GPU</span>
+                </span>
+                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
+              </button>
+
+              <button type="button" class="akaru-nav-item" data-chapter="3" aria-pressed="false">
+                <span class="akaru-nav-bar" aria-hidden="true"></span>
+                <span class="akaru-nav-num">04</span>
+                <span class="akaru-nav-meta">
+                  <span class="akaru-nav-title">Forge &amp; Labo Quant</span>
+                  <span class="akaru-nav-sub">HUPI • Marra • 735 Tests • PyTorch</span>
+                </span>
+                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
+              </button>
+
+              <button type="button" class="akaru-nav-item" data-chapter="4" aria-pressed="false">
+                <span class="akaru-nav-bar" aria-hidden="true"></span>
+                <span class="akaru-nav-num">05</span>
+                <span class="akaru-nav-meta">
+                  <span class="akaru-nav-title">IUT Anglet &amp; Open-Source</span>
+                  <span class="akaru-nav-sub">TD2/TP4 • 46 PRs • Restos du Cœur</span>
+                </span>
+                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
+              </button>
+            </nav>
+
+            <!-- Right Kinetic Stage with Akaru 5-Blade Vertical Curtain Wipe -->
+            <div class="akaru-stage-viewport">
+              <div class="akaru-curtain-layer" id="akaru-curtain-layer" aria-hidden="true">
+                <span class="akaru-curtain-blade"></span>
+                <span class="akaru-curtain-blade"></span>
+                <span class="akaru-curtain-blade"></span>
+                <span class="akaru-curtain-blade"></span>
+                <span class="akaru-curtain-blade"></span>
               </div>
 
-              <div class="akaru-panel-expanded">
-                <div class="akaru-visual-stage akaru-vis-basque" aria-hidden="true">
-                  <svg viewBox="0 0 640 240" preserveAspectRatio="xMidYMid slice">
+              <!-- Slide 01 -->
+              <article class="akaru-panel is-active" data-chapter="0" aria-hidden="false">
+                <div class="akaru-visual-stage" aria-hidden="true">
+                  <svg viewBox="0 0 680 210" preserveAspectRatio="xMidYMid slice">
                     <defs>
-                      <linearGradient id="basqueSky" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#1e293b"/>
-                        <stop offset="100%" stop-color="#334155"/>
+                      <linearGradient id="v29BasqueBg" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#0b0c12"/>
+                        <stop offset="100%" stop-color="#14151e"/>
                       </linearGradient>
                     </defs>
-                    <rect width="640" height="240" fill="url(#basqueSky)"/>
-                    <g stroke="rgba(255,255,255,0.14)" fill="none" stroke-width="1">
-                      <path d="M0 165 Q 110 110, 210 140 T 430 95 T 640 135"/>
-                      <path d="M0 185 Q 130 130, 250 155 T 470 115 T 640 155"/>
-                      <path d="M0 205 Q 140 155, 290 175 T 510 140 T 640 175"/>
+                    <rect width="680" height="210" fill="url(#v29BasqueBg)"/>
+                    <g stroke="rgba(255,255,255,0.08)" fill="none" stroke-width="1">
+                      <path d="M0 150 Q 120 98, 230 128 T 460 84 T 680 122"/>
+                      <path d="M0 172 Q 140 122, 270 144 T 500 105 T 680 144"/>
                     </g>
-                    <path d="M0 240 L0 165 L120 120 L215 148 L335 72 L435 128 L535 104 L640 142 L640 240 Z" fill="rgba(15,23,42,0.58)"/>
-                    <path d="M0 240 L0 190 L160 168 L280 182 L410 142 L560 166 L640 152 L640 240 Z" fill="rgba(239,68,68,0.22)"/>
-                    <circle cx="335" cy="72" r="4" fill="#ef4444"/>
-                    <text x="28" y="38" fill="rgba(255,255,255,0.72)" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5">43.4832° N • 1.5586° W // BAYONNE — CANTAU ANGLET</text>
-                    <text x="352" y="76" fill="#f8fafc" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">GRAND ORAL 20.00 / 20</text>
-                    <rect x="28" y="196" width="218" height="22" rx="4" fill="rgba(9,9,11,0.72)" stroke="rgba(255,255,255,0.2)"/>
-                    <text x="38" y="211" fill="#e2e8f0" font-family="JetBrains Mono, monospace" font-size="10">DNL BASQUE 14.40 • PHILO 17.00</text>
+                    <path d="M0 210 L0 148 L125 104 L230 132 L355 56 L465 114 L565 88 L680 124 L680 210 Z" fill="rgba(17,19,26,0.92)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+                    <path d="M0 210 L0 172 L175 152 L300 166 L435 128 L585 152 L680 138 L680 210 Z" fill="rgba(239,68,68,0.16)" stroke="rgba(239,68,68,0.45)" stroke-width="1.2"/>
+                    <circle cx="355" cy="72" r="4.5" fill="#ef4444"/>
+                    <circle cx="355" cy="72" r="11" fill="none" stroke="rgba(239,68,68,0.45)" stroke-width="1"/>
                   </svg>
+                  <div class="stage-hud-top">43.4832° N • 1.5586° W // BAYONNE — LYCÉE CANTAU ANGLET</div>
+                  <div class="stage-hud-bottom">
+                    <span class="stage-hud-badge">BAC 2026 AB • DNL BASQUE • PHILO 17</span>
+                    <span class="stage-hud-kpi">GRAND ORAL 20.00 / 20</span>
+                  </div>
                 </div>
 
                 <div class="akaru-meta-strip">
                   <span class="akaru-year-pill">2008–2026</span>
                   <span class="akaru-domain-label">RACINES &amp; FORMATION</span>
-                  <span class="akaru-sub-label">LYCÉE CANTAU ANGLET<br/>DNL BASQUE &amp; UK</span>
+                  <span class="akaru-sub-label">LYCÉE CANTAU ANGLET</span>
                 </div>
 
                 <div class="akaru-editorial-body">
@@ -281,45 +337,34 @@
                     <span class="akaru-fact-chip">Anglais B2 (UK × 2 mois)</span>
                   </div>
                 </div>
+              </article>
 
-                <div class="akaru-card-foot">
-                  <span class="akaru-idx">01</span>
-                  <button type="button" class="akaru-circle-next" data-next="1" aria-label="Chapitre suivant : Hors Écran">↗</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Chapter 02 -->
-            <article class="akaru-panel" data-chapter="1" data-theme="sage" tabindex="0" aria-expanded="false">
-              <div class="akaru-panel-spine" aria-hidden="true">
-                <span class="spine-pill">QUOTIDIEN</span>
-                <span class="spine-title">Hors Écran</span>
-                <span class="spine-num">02</span>
-              </div>
-
-              <div class="akaru-panel-expanded">
-                <div class="akaru-visual-stage akaru-vis-terrain" aria-hidden="true">
-                  <svg viewBox="0 0 640 240" preserveAspectRatio="xMidYMid slice">
-                    <rect width="640" height="240" fill="#253127"/>
-                    <g stroke="rgba(255,255,255,0.12)" fill="none" stroke-width="1.2">
-                      <line x1="0" y1="60" x2="640" y2="60"/>
-                      <line x1="0" y1="120" x2="640" y2="120"/>
-                      <line x1="0" y1="180" x2="640" y2="180"/>
-                      <path d="M 30 190 C 120 185, 160 95, 250 110 C 330 124, 385 62, 470 74 C 540 84, 590 48, 630 52" stroke="#d9e5d6" stroke-width="2.4"/>
+              <!-- Slide 02 -->
+              <article class="akaru-panel" data-chapter="1" aria-hidden="true">
+                <div class="akaru-visual-stage" aria-hidden="true">
+                  <svg viewBox="0 0 680 210" preserveAspectRatio="xMidYMid slice">
+                    <rect width="680" height="210" fill="#0d0e13"/>
+                    <g stroke="rgba(255,255,255,0.08)" fill="none" stroke-width="1">
+                      <line x1="0" y1="54" x2="680" y2="54"/>
+                      <line x1="0" y1="108" x2="680" y2="108"/>
+                      <line x1="0" y1="162" x2="680" y2="162"/>
                     </g>
-                    <polygon points="485,180 495,126 510,148 528,148 538,122 552,158 564,180 546,196 496,196" fill="rgba(255,255,255,0.16)" stroke="#e4ece2" stroke-width="1.4"/>
-                    <circle cx="250" cy="110" r="5" fill="#ef4444"/>
-                    <circle cx="470" cy="74" r="5" fill="#d9e5d6"/>
-                    <text x="28" y="38" fill="#d9e5d6" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5">06H00 RÉVEIL // LAC MARION — HAUTS DE SAINTE-CROIX</text>
-                    <rect x="28" y="196" width="278" height="22" rx="4" fill="rgba(12,18,14,0.72)" stroke="rgba(255,255,255,0.2)"/>
-                    <text x="38" y="211" fill="#e4ece2" font-family="JetBrains Mono, monospace" font-size="10">DELTA (BERGER ALLEMAND LOF) • KORRIKA 10 KM</text>
+                    <path d="M 28 168 C 125 164, 175 94, 265 106 C 345 118, 410 66, 505 76 C 570 84, 615 54, 654 58" fill="none" stroke="#e5e7eb" stroke-width="2.2"/>
+                    <polygon points="518,158 528,112 544,132 562,132 572,108 586,142 598,158 580,174 528,174" fill="rgba(239,68,68,0.14)" stroke="#ef4444" stroke-width="1.4"/>
+                    <circle cx="265" cy="106" r="5" fill="#ef4444"/>
+                    <circle cx="505" cy="76" r="4.5" fill="#f5f5f5"/>
                   </svg>
+                  <div class="stage-hud-top">06H00 RÉVEIL // LAC MARION — HAUTS DE SAINTE-CROIX</div>
+                  <div class="stage-hud-bottom">
+                    <span class="stage-hud-badge">DELTA (BERGER ALLEMAND LOF) • KORRIKA 10 KM</span>
+                    <span class="stage-hud-kpi">100 % SOBRE</span>
+                  </div>
                 </div>
 
                 <div class="akaru-meta-strip">
                   <span class="akaru-year-pill">06H00–22H00</span>
                   <span class="akaru-domain-label">SPORT &amp; ÉQUILIBRE</span>
-                  <span class="akaru-sub-label">ESCALADE • KORRIKA<br/>DELTA AU LAC MARION</span>
+                  <span class="akaru-sub-label">ESCALADE • DELTA • KORRIKA</span>
                 </div>
 
                 <div class="akaru-editorial-body">
@@ -333,51 +378,40 @@
                     <span class="akaru-fact-chip">06h00 / 100 % Sobre</span>
                   </div>
                 </div>
+              </article>
 
-                <div class="akaru-card-foot">
-                  <span class="akaru-idx">02</span>
-                  <button type="button" class="akaru-circle-next" data-next="2" aria-label="Chapitre suivant : Stratégie et IA">↗</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Chapter 03 -->
-            <article class="akaru-panel" data-chapter="2" data-theme="mauve" tabindex="0" aria-expanded="false">
-              <div class="akaru-panel-spine" aria-hidden="true">
-                <span class="spine-pill">STRATÉGIE</span>
-                <span class="spine-title">Échecs &amp; IA</span>
-                <span class="spine-num">03</span>
-              </div>
-
-              <div class="akaru-panel-expanded">
-                <div class="akaru-visual-stage akaru-vis-strategy" aria-hidden="true">
-                  <svg viewBox="0 0 640 240" preserveAspectRatio="xMidYMid slice">
-                    <rect width="640" height="240" fill="#2b1e27"/>
-                    <g stroke="rgba(255,255,255,0.16)" stroke-width="1" fill="none">
-                      <line x1="320" y1="36" x2="180" y2="108"/>
-                      <line x1="320" y1="36" x2="460" y2="108"/>
-                      <line x1="180" y1="108" x2="105" y2="178"/>
-                      <line x1="180" y1="108" x2="255" y2="178"/>
-                      <line x1="460" y1="108" x2="385" y2="178"/>
-                      <line x1="460" y1="108" x2="535" y2="178"/>
+              <!-- Slide 03 -->
+              <article class="akaru-panel" data-chapter="2" aria-hidden="true">
+                <div class="akaru-visual-stage" aria-hidden="true">
+                  <svg viewBox="0 0 680 210" preserveAspectRatio="xMidYMid slice">
+                    <rect width="680" height="210" fill="#0d0e13"/>
+                    <g stroke="rgba(255,255,255,0.14)" stroke-width="1" fill="none">
+                      <line x1="340" y1="54" x2="195" y2="108"/>
+                      <line x1="340" y1="54" x2="485" y2="108"/>
+                      <line x1="195" y1="108" x2="115" y2="156"/>
+                      <line x1="195" y1="108" x2="275" y2="156"/>
+                      <line x1="485" y1="108" x2="405" y2="156"/>
+                      <line x1="485" y1="108" x2="565" y2="156"/>
                     </g>
-                    <circle cx="320" cy="36" r="7" fill="#ef4444"/>
-                    <circle cx="180" cy="108" r="6" fill="#e9d5e0"/>
-                    <circle cx="460" cy="108" r="6" fill="#e9d5e0"/>
-                    <circle cx="105" cy="178" r="4" fill="#e9d5e0"/>
-                    <circle cx="255" cy="178" r="5" fill="#ef4444"/>
-                    <circle cx="385" cy="178" r="4" fill="#e9d5e0"/>
-                    <circle cx="535" cy="178" r="4" fill="#e9d5e0"/>
-                    <text x="28" y="38" fill="#e9d5e0" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5">MINIMAX • ALPHAZERO SELF-PLAY (10 000 PARTIES GPU)</text>
-                    <rect x="28" y="196" width="280" height="22" rx="4" fill="rgba(18,12,16,0.78)" stroke="rgba(255,255,255,0.2)"/>
-                    <text x="38" y="211" fill="#f5e6ef" font-family="JetBrains Mono, monospace" font-size="10">COMPLEXITÉ 10¹²⁰ / 10³⁶⁰ • PROSPECT THEORY</text>
+                    <circle cx="340" cy="54" r="7" fill="#ef4444"/>
+                    <circle cx="195" cy="108" r="5.5" fill="#e5e7eb"/>
+                    <circle cx="485" cy="108" r="5.5" fill="#e5e7eb"/>
+                    <circle cx="115" cy="156" r="4" fill="#a1a1aa"/>
+                    <circle cx="275" cy="156" r="5" fill="#ef4444"/>
+                    <circle cx="405" cy="156" r="4" fill="#a1a1aa"/>
+                    <circle cx="565" cy="156" r="4" fill="#a1a1aa"/>
                   </svg>
+                  <div class="stage-hud-top">MINIMAX • ALPHAZERO SELF-PLAY (10 000 PARTIES GPU)</div>
+                  <div class="stage-hud-bottom">
+                    <span class="stage-hud-badge">COMPLEXITÉ 10¹²⁰ / 10³⁶⁰ • PROSPECT THEORY</span>
+                    <span class="stage-hud-kpi">~1500 ELO</span>
+                  </div>
                 </div>
 
                 <div class="akaru-meta-strip">
                   <span class="akaru-year-pill">2025–2026</span>
                   <span class="akaru-domain-label">COGNITION &amp; STRATÉGIE</span>
-                  <span class="akaru-sub-label">ÉCHECS ~1500 ELO<br/>ALPHAZERO &amp; CRYPTO</span>
+                  <span class="akaru-sub-label">ÉCHECS ~1500 ELO</span>
                 </div>
 
                 <div class="akaru-editorial-body">
@@ -391,50 +425,39 @@
                     <span class="akaru-fact-chip">Casse-têtes &amp; Cryptographie</span>
                   </div>
                 </div>
+              </article>
 
-                <div class="akaru-card-foot">
-                  <span class="akaru-idx">03</span>
-                  <button type="button" class="akaru-circle-next" data-next="3" aria-label="Chapitre suivant : Forge et Quant">↗</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Chapter 04 -->
-            <article class="akaru-panel" data-chapter="3" data-theme="sand" tabindex="0" aria-expanded="false">
-              <div class="akaru-panel-spine" aria-hidden="true">
-                <span class="spine-pill">2024–2026</span>
-                <span class="spine-title">Forge &amp; Quant</span>
-                <span class="spine-num">04</span>
-              </div>
-
-              <div class="akaru-panel-expanded">
-                <div class="akaru-visual-stage akaru-vis-quant" aria-hidden="true">
-                  <svg viewBox="0 0 640 240" preserveAspectRatio="xMidYMid slice">
-                    <rect width="640" height="240" fill="#1b1a17"/>
-                    <g stroke="rgba(255,255,255,0.10)" stroke-width="1">
-                      <line x1="40" y1="200" x2="600" y2="200"/>
-                      <line x1="180" y1="40" x2="180" y2="200"/>
-                      <line x1="360" y1="40" x2="360" y2="200"/>
+              <!-- Slide 04 -->
+              <article class="akaru-panel" data-chapter="3" aria-hidden="true">
+                <div class="akaru-visual-stage" aria-hidden="true">
+                  <svg viewBox="0 0 680 210" preserveAspectRatio="xMidYMid slice">
+                    <rect width="680" height="210" fill="#0d0e13"/>
+                    <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+                      <line x1="40" y1="168" x2="640" y2="168"/>
+                      <line x1="190" y1="42" x2="190" y2="168"/>
+                      <line x1="380" y1="42" x2="380" y2="168"/>
                     </g>
-                    <path d="M 40 200 C 90 200, 115 110, 165 110 C 205 110, 225 182, 265 182 C 305 182, 325 68, 365 68 C 405 68, 435 162, 480 162 C 525 162, 550 130, 600 200" fill="rgba(239,68,68,0.20)" stroke="#ef4444" stroke-width="2.2"/>
-                    <path d="M 40 200 C 120 198, 220 140, 340 130 C 440 122, 520 175, 600 200" fill="none" stroke="#e5dec9" stroke-width="1.5" stroke-dasharray="5 4"/>
-                    <circle cx="365" cy="68" r="4.5" fill="#e5dec9"/>
-                    <text x="28" y="38" fill="#e5dec9" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5">PYTORCH GMM-MDN • TCN 30×32 • WALK-FORWARD GATE</text>
-                    <rect x="28" y="196" width="318" height="22" rx="4" fill="rgba(12,12,10,0.85)" stroke="rgba(229,222,201,0.28)"/>
-                    <text x="38" y="211" fill="#e5dec9" font-family="JetBrains Mono, monospace" font-size="10">466 572 PRÉVISIONS • RMSE 0.677°C • 735 TESTS B2B</text>
+                    <path d="M 40 168 C 95 168, 125 98, 175 98 C 220 98, 240 152, 285 152 C 330 152, 355 62, 395 62 C 440 62, 470 138, 520 138 C 570 138, 595 110, 640 168" fill="rgba(239,68,68,0.18)" stroke="#ef4444" stroke-width="2.2"/>
+                    <path d="M 40 168 C 125 166, 235 122, 365 114 C 470 108, 555 148, 640 168" fill="none" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="5 4"/>
+                    <circle cx="395" cy="62" r="4.5" fill="#f5f5f5"/>
                   </svg>
+                  <div class="stage-hud-top">PYTORCH GMM-MDN • TCN 30×32 • WALK-FORWARD GATE</div>
+                  <div class="stage-hud-bottom">
+                    <span class="stage-hud-badge">466 572 PRÉVISIONS • RMSE 0.677°C • 735 TESTS B2B</span>
+                    <span class="stage-hud-kpi">PBO/CSCV PASS</span>
+                  </div>
                 </div>
 
                 <div class="akaru-meta-strip">
-                  <span class="akaru-year-pill">2024–2026</span>
+                  <span class="akaru-year-pill">2023–2026</span>
                   <span class="akaru-domain-label">SYSTÈMES &amp; PRODUITS</span>
-                  <span class="akaru-sub-label">HUPI • PDF BTP • ZENTABLE<br/>MATHBALL &amp; LABO QUANT</span>
+                  <span class="akaru-sub-label">MARRA • HUPI • ZENTABLE • QUANT</span>
                 </div>
 
                 <div class="akaru-editorial-body">
                   <h3 class="akaru-chapter-title">Forge Logicielle &amp; Labo Quantitatif</h3>
                   <p class="akaru-chapter-copy">
-                    Des premières cartes interactives <strong>ADT64 chez HUPI</strong> (Leaflet, D3.js v4, switch jour/nuit) aux applications complètes : <strong>Pdf-helper BTP</strong> (Tauri, FastAPI, moteur OCR G.R.E.), <strong>ZenTable Pro</strong> (tableur React 19/TypeScript), <strong>MathBallBattle</strong> (moteur physique 2D TOI CCD et arithmétique <code>BigMath 10⁹⁹⁹⁹⁹⁹</code>), un <strong>extracteur documentaire B2B sans hallucination</strong> validé par <strong>735 tests unitaires</strong>, et mon laboratoire quantitatif PyTorch (<strong>GMM-MDN sur 466k prévisions</strong>, RMSE 0,677°C, PBO/CSCV).
+                    Du stage en bureau d'études <strong>Marra</strong> aux cartes interactives <strong>ADT64 chez HUPI</strong> (Leaflet, D3.js v4) : <strong>Pdf-helper BTP</strong> (Tauri, FastAPI, moteur OCR G.R.E.), <strong>ZenTable Pro</strong> (tableur React 19/TypeScript), <strong>MathBallBattle</strong> (moteur physique 2D TOI CCD et arithmétique <code>BigMath</code>), un <strong>extracteur documentaire B2B sans hallucination</strong> validé par <strong>735 tests unitaires</strong>, et mon laboratoire PyTorch (<strong>GMM-MDN sur 466k prévisions</strong>, RMSE 0,677°C, PBO/CSCV).
                   </p>
                   <div class="akaru-facts-row">
                     <span class="akaru-fact-chip">735 Tests B2B</span>
@@ -442,48 +465,37 @@
                     <span class="akaru-fact-chip">Physics 2D CCD</span>
                   </div>
                 </div>
+              </article>
 
-                <div class="akaru-card-foot">
-                  <span class="akaru-idx">04</span>
-                  <button type="button" class="akaru-circle-next" data-next="4" aria-label="Chapitre suivant : Cap IUT et Open-Source">↗</button>
-                </div>
-              </div>
-            </article>
-
-            <!-- Chapter 05 -->
-            <article class="akaru-panel" data-chapter="4" data-theme="charcoal" tabindex="0" aria-expanded="false">
-              <div class="akaru-panel-spine" aria-hidden="true">
-                <span class="spine-pill">2026+</span>
-                <span class="spine-title">IUT &amp; Omi</span>
-                <span class="spine-num">05</span>
-              </div>
-
-              <div class="akaru-panel-expanded">
-                <div class="akaru-visual-stage akaru-vis-iut" aria-hidden="true">
-                  <svg viewBox="0 0 640 240" preserveAspectRatio="xMidYMid slice">
-                    <rect width="640" height="240" fill="#101116"/>
-                    <g stroke="rgba(239,68,68,0.28)" stroke-width="1.3" fill="none">
-                      <line x1="130" y1="120" x2="320" y2="75"/>
-                      <line x1="130" y1="120" x2="320" y2="165"/>
-                      <line x1="320" y1="75" x2="500" y2="120"/>
-                      <line x1="320" y1="165" x2="500" y2="120"/>
+              <!-- Slide 05 -->
+              <article class="akaru-panel" data-chapter="4" aria-hidden="true">
+                <div class="akaru-visual-stage" aria-hidden="true">
+                  <svg viewBox="0 0 680 210" preserveAspectRatio="xMidYMid slice">
+                    <rect width="680" height="210" fill="#0d0e13"/>
+                    <g stroke="rgba(239,68,68,0.34)" stroke-width="1.3" fill="none">
+                      <line x1="145" y1="106" x2="340" y2="70"/>
+                      <line x1="145" y1="106" x2="340" y2="142"/>
+                      <line x1="340" y1="70" x2="535" y2="106"/>
+                      <line x1="340" y1="142" x2="535" y2="106"/>
                     </g>
-                    <rect x="78" y="98" width="104" height="44" rx="6" fill="#181920" stroke="#ef4444"/>
-                    <text x="130" y="124" text-anchor="middle" fill="#f4f4f5" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">IUT ANGLET</text>
-                    <rect x="260" y="54" width="120" height="42" rx="6" fill="#181920" stroke="rgba(255,255,255,0.35)"/>
-                    <text x="320" y="79" text-anchor="middle" fill="#e4e4e7" font-family="JetBrains Mono, monospace" font-size="10">KAI ACADEMIC (79 P.)</text>
-                    <rect x="260" y="144" width="120" height="42" rx="6" fill="#181920" stroke="rgba(255,255,255,0.35)"/>
-                    <text x="320" y="169" text-anchor="middle" fill="#e4e4e7" font-family="JetBrains Mono, monospace" font-size="10">SAFEPATH-LINT AST</text>
-                    <rect x="444" y="98" width="112" height="44" rx="6" fill="#181920" stroke="#10b981"/>
-                    <text x="500" y="124" text-anchor="middle" fill="#a7f3d0" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">46 PRs OMI/TWENTY</text>
-                    <text x="28" y="38" fill="#a1a1aa" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5">BUT 1 TD2/TP4 // OPEN-SOURCE &amp; RESTOS DU CŒUR</text>
+                    <circle cx="145" cy="106" r="14" fill="#15161f" stroke="#ef4444" stroke-width="1.5"/>
+                    <circle cx="340" cy="70" r="12" fill="#15161f" stroke="rgba(255,255,255,0.35)"/>
+                    <circle cx="340" cy="142" r="12" fill="#15161f" stroke="rgba(255,255,255,0.35)"/>
+                    <circle cx="535" cy="106" r="14" fill="#15161f" stroke="#22c55e" stroke-width="1.5"/>
+                    <circle cx="145" cy="106" r="4" fill="#ef4444"/>
+                    <circle cx="535" cy="106" r="4" fill="#22c55e"/>
                   </svg>
+                  <div class="stage-hud-top">BUT 1 TD2/TP4 // IUT BAYONNE-ANGLET &amp; OPEN-SOURCE</div>
+                  <div class="stage-hud-bottom">
+                    <span class="stage-hud-badge">KAI ACADEMIC (79 P.) • SAFEPATH-LINT AST • RESTOS DU CŒUR</span>
+                    <span class="stage-hud-kpi stage-hud-green">46 PRs MERGED</span>
+                  </div>
                 </div>
 
                 <div class="akaru-meta-strip">
                   <span class="akaru-year-pill">2026+</span>
                   <span class="akaru-domain-label">BUT INFO &amp; COMMUNAUTÉ</span>
-                  <span class="akaru-sub-label">IUT BAYONNE-ANGLET<br/>SAFEPATH • BÉNÉVOLAT</span>
+                  <span class="akaru-sub-label">IUT BAYONNE-ANGLET</span>
                 </div>
 
                 <div class="akaru-editorial-body">
@@ -497,18 +509,21 @@
                     <span class="akaru-fact-chip">Bénévole Restos du Cœur</span>
                   </div>
                 </div>
+              </article>
 
-                <div class="akaru-card-foot">
-                  <span class="akaru-idx">05</span>
-                  <button type="button" class="akaru-circle-next" data-next="0" aria-label="Revenir au chapitre 01 : Pays Basque">↺</button>
+              <!-- Unified Stage Controls Bar -->
+              <div class="akaru-stage-foot">
+                <span class="akaru-idx" id="akaru-stage-idx">CHAPITRE 01 / 05</span>
+                <div class="akaru-stage-controls">
+                  <button type="button" class="akaru-circle-nav" id="akaru-prev-btn" aria-label="Chapitre précédent">←</button>
+                  <button type="button" class="akaru-circle-nav is-primary" id="akaru-next-btn" aria-label="Chapitre suivant">↗</button>
                 </div>
               </div>
-            </article>
-
+            </div>
           </div>
         </div>
 
-        <!-- ACT II: Akaru Split Visual Column + Warm Alabaster Editorial 00-04 Index -->
+        <!-- ACT II: Unified Noir & Crimson Editorial Index with Akaru Scroll-Drawn Hairline Rules (00-04) -->
         <div class="akaru-act2-grid">
           <div class="akaru-visual-stack" aria-label="Repères visuels du parcours et principes de conception">
             <div class="akaru-stack-plate is-highlighted" data-principle="0">
@@ -538,7 +553,7 @@
 
           <div class="akaru-manifesto-panel">
             <div class="akaru-manifesto-top">
-              <span class="akaru-manifesto-tag">MÉTHODE DE VIE // INDEX 00–04</span>
+              <span class="akaru-manifesto-tag">MÉTHODE DE VIE // LIGNES DIRECTRICES 00–04</span>
               <h3 class="akaru-manifesto-heading">Ce qui guide<br/>chaque ligne</h3>
             </div>
 
@@ -1328,10 +1343,10 @@ Status_t tree_insert(Node_t** root, const int val)
   </div>
 
   <!-- App Core JS -->
-  <script src="portfolio_assets/vendor/three.min.js?v=28" defer></script>
-  <script src="portfolio_assets/totem_3d.js?v=28" defer></script>
-  <script src="portfolio_assets/app.js?v=28" defer></script>
+  <script src="portfolio_assets/vendor/three.min.js?v=29" defer></script>
+  <script src="portfolio_assets/totem_3d.js?v=29" defer></script>
+  <script src="portfolio_assets/app.js?v=29" defer></script>
   <!-- Swarm Rebuild Takeover Engine -->
-  <script src="portfolio_assets/swarm-init.js?v=28" defer></script>
+  <script src="portfolio_assets/swarm-init.js?v=29" defer></script>
 </body>
 </html>
