@@ -3,309 +3,1860 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="theme-color" content="#2B527A">
-    <title>S1.01 — Implémentation d'un Besoin Client (Atelier de Katas — M. Patrick Etcheverry) — KAI Academic</title>
+    <title>S1.01 — SAÉ 1.01 - Implémentation d'un besoin client • BUT 1 Informatique Anglet</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            color-scheme: light;
-            --accent-color: #2B527A;
-            --scotopic-bg: #FAF8F5;
-            --scotopic-card: #FFFFFF;
-            --scotopic-text: #0F172A;
-            --scotopic-border: #E2E8F0;
-        }
-        body {
-            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: var(--scotopic-bg);
-            color: var(--scotopic-text);
-            line-height: 1.85;
-            letter-spacing: 0.03em;
-            word-spacing: 0.08em;
-            min-height: 100vh;
+        body { 
+            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif; 
+            background-color: #f8fafc; 
+            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px); 
+            background-size: 28px 28px; 
+            color: #0f172a; 
         }
         .glass-card {
-            background: var(--scotopic-card);
-            border: 1px solid var(--scotopic-border);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
-            transition: all 180ms ease-out;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.02);
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    <!-- Top Header -->
-    <div class="border-b border-slate-200 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
-                    <i data-lucide="home" class="w-4 h-4"></i>
-                    <span>Hub</span>
-                </a>
-                <span class="text-slate-300">/</span>
-                <a href="index.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
-                    S1.01
-                </a>
-            </div>
-            <div class="flex items-center gap-2">
-                <a href="../revision/S1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>Fiche Révision</span>
-                </a>
-                <a href="https://elearn.univ-pau.fr/course/view.php?id=24184" target="_blank" class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition">
-                    Moodle #24184 ↗
-                </a>
-            </div>
-        </div>
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
+    
+    <!-- Top Back Navigation -->
+    <div class="flex items-center justify-between pb-2">
+        <a href="../index.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-white shadow-2xs hover:bg-slate-50" style="color: #2B527A; border-color: #2B527A44;">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Retour au Hub Académique</span>
+        </a>
+        <span class="text-xs font-mono font-medium text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-2xs">
+            118 documents officiels sanctuarisés
+        </span>
     </div>
 
-    <!-- Official Course Banner -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 w-full">
-        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #2B527A;">
-            <div class="flex items-start justify-between flex-wrap gap-4">
-                <div>
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">
-                            S1.01 • MOODLE #24184
-                        </span>
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono">
-                            Groupe 16 (TP4) — Les Flèches de la Précision (Matei, Nicolas, Jules)
-                        </span>
-                    </div>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">S1.01 — Implémentation d'un Besoin Client (Le Grand Tournoi de Maître Algoshi)</h1>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
-                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
-                        <span>Enseignants Référents : <strong>M. Patrick Etcheverry, M. Thierry Chaterra, M. Constantin Katsis, M. Youssef Alj</strong> — IUT de Bayonne et du Pays Basque (Anglet)</span>
-                    </p>
-                </div>
-                <a href="../supports/S1.01/workspace-atelier-katas-groupe16.zip" download class="px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #2B527A;">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>Télécharger Workspace VS Code Groupe 16 (.zip)</span>
-                </a>
-            </div>
-            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed space-y-2">
-                <p>
-                    <strong>Atelier de Katas d'Algorithmique &amp; Programmation C++ :</strong> Résolution en équipe de 9 exercices progressifs (de la Ceinture Blanche à la Ceinture Noire) mobilisant les <strong>5 modèles d'algorithmes fondamentaux</strong> sur structures à accès direct (échange de deux valeurs, saisie-vérification, parcours complet systématique, parcours complet conditionné, recherche de première occurrence), suivie d'une <strong>Défense Collective</strong>, d'une <strong>Évaluation Critique Croisée</strong> et d'un <strong>Défi Individuel</strong>.
-                </p>
-                <div class="text-xs font-mono text-slate-600 pt-1 border-t border-slate-200/80">
-                    ✅ <strong>Synchronisation Elearn #24184 &amp; GitHub <code>patrick-etcheverry</code> :</strong> Intègre les barèmes officiels (<code>student-algo-skills-analysis</code>), les règles AST C++ (<code>code-explorer</code>), les supports furtifs Semaine 7 (<code>07-modeles-algos-basiques</code>, <code>TD7</code>, <code>TP7</code>) et le Dojo complet des 9 exercices corrigés pour le <strong>Groupe 16</strong>.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+    <!-- Course Header Banner in Subject Color (Maths in Crimson Red) -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 bg-white relative overflow-hidden shadow-sm" style="border-left: 6px solid #2B527A;">
         <div class="flex items-center justify-between flex-wrap gap-4">
-            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
-                <i data-lucide="book-open" class="w-5 h-5" style="color: #2B527A;"></i>
-                <span>Masterclass Officielle S1.01 &amp; Dojo d'Entraînement (3 chapitres)</span>
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono shadow-xs" style="background-color: #2B527A;">
+                        S1.01
+                    </span>
+                    <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full" style="background-color: #2B527A15; color: #2B527A; border: 1px solid #2B527A30;">
+                        SAÉ 1.01 - Implémentation d'un besoin client
+                    </span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">SAÉ 1.01 - Implémentation d'un besoin client</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
+                    <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                    <span>Enseignant Référent : <strong>Équipe BUT Informatique</strong> · BUT 1 Informatique Anglet</span>
+                </p>
+            </div>
+            
+            <button onclick="window.location.href='../index.html'" class="min-h-[44px] px-5 py-2.5 rounded-2xl text-xs font-semibold text-white shadow-xs transition hover:brightness-95 flex items-center gap-2" style="background-color: #2B527A; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+                <span>Ouvrir les Fiches de Révision</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Authentic Raw Documents Table -->
+    <div class="glass-card rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
+        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="folder-check" class="w-4 h-4" style="color: #2B527A;"></i>
+                <span>Documents Sources Authentifiés (Sanctuaire Pédagogique)</span>
             </h2>
-            <div class="flex items-center gap-2 flex-wrap">
-                <a href="S1.01/chap1_cadrage_cahier_charges.html" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-2xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #2B527A;">
-                    <i data-lucide="play" class="w-4 h-4"></i>
-                    <span>Démarrer le Chapitre 1</span>
-                </a>
-                <a href="S1.01/chap3_tests_unitaires_soutenance.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center gap-2 shadow-2xs transition">
-                    <i data-lucide="code-2" class="w-4 h-4 text-blue-600"></i>
-                    <span>Ouvrir les 9 Katas Corrigés (Groupe 16)</span>
-                </a>
-                <a href="../revision/S1.01.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-2 shadow-2xs transition">
-                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
-                    <span>Fiche Révision (3 niveaux)</span>
-                </a>
-            </div>
+            <span class="text-xs text-slate-400 font-mono">Empreintes SHA-256 certifiées</span>
         </div>
-
-        <!-- Chapters Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
-                <div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">CHAPITRE 1</span>
-                        <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
-                    </div>
-                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5">
-                        Le Grand Tournoi de Maître Algoshi : Règlement, Groupe 16 &amp; Barème Secret
-                    </h3>
-                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                        Déroulement de l'atelier de 3h, diagnostic des sections Moodle (#24184), cartouche d'en-tête obligatoire (Note=0 si absent), pondération exacte sur 30 (student-algo-skills-analysis) et seuils de validation des ceintures.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mt-3">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Groupe 16</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Cartouche C++</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Barème /30</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Ceintures</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">code-explorer</span>
-                    </div>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <a href="S1.01/chap1_cadrage_cahier_charges.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
-                        <span>Étudier ce chapitre</span>
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
-                <div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">CHAPITRE 2</span>
-                        <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
-                    </div>
-                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5">
-                        Les 5 Modèles d'Algorithmes Officiels sur Structures à Accès Direct
-                    </h3>
-                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                        Support officiel 07-modeles-algos-basiques &amp; mainProf.cpp : Échange de 2 valeurs, Saisie-vérification (for(;;)+break), Parcours complet systématique, Parcours complet conditionné et Recherche de 1re occurrence.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mt-3">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Swap</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Saisie-vérif</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Parcours systématique</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Parcours conditionné</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">1re occurrence</span>
-                    </div>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <a href="S1.01/chap2_architecture_modulaire_cpp.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
-                        <span>Étudier ce chapitre</span>
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #2B527A;">
-                <div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #E9F0F6; color: #2B527A; border: 1px solid #B5CCDE;">CHAPITRE 3</span>
-                        <span class="text-slate-400 font-mono text-[11px] font-semibold">60 min</span>
-                    </div>
-                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5">
-                        Dojo d'Entraînement Intégral : Les 9 Exercices de Kata Résolus (Groupe 16)
-                    </h3>
-                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                        Les 9 niveaux d'exercices (Ceinture Blanche à Ceinture Noire) résolus en C++ avec le cartouche pré-rempli pour le Groupe 16 (Les Flèches de la Précision), basés sur TD7/TP7 et code-explorer.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mt-3">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">9 Exercices C++</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Ceinture Noire</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">TD7 / TP7 Furtifs</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Palindrome</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tri Pair/Impair</span>
-                    </div>
-                </div>
-                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <a href="S1.01/chap3_tests_unitaires_soutenance.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #2B527A;">
-                        <span>Ouvrir le Dojo (9 Katas)</span>
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                    </a>
-                </div>
-            </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="bg-slate-50/80 text-[11px] font-bold text-slate-500 uppercase border-b border-slate-200">
+                        <th class="p-3.5">Fichier Original</th>
+                        <th class="p-3.5">Format</th>
+                        <th class="p-3.5">Taille</th>
+                        <th class="p-3.5">Empreinte SHA-256</th>
+                        <th class="p-3.5 text-right">Certification</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01 - workspace-atelier-katas-groupe16.zip</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">ARCHIVES</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">29.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">856712081279...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>workspace-atelier-katas-groupe16.zip</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">ARCHIVES</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">27.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">9914307d32ef...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>workspace-atelier-katas.zip</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">ARCHIVES</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">7.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">1f8f617818ed...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>s101_cours.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">57.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">b605b3b4b8bf...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">25.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">3b2fb19aba2f...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>fiche_revision.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">333.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">df23d16f7823...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>chap1_cadrage_cahier_charges.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">43.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">df265031a70d...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>chap3_tests_unitaires_soutenance.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">104.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">36926779d4c9...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>chap2_architecture_modulaire_cpp.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">37.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">cb4640213538...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">333.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">1a1293af40d4...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01_imprimable.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">338.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">d99c4a209cf2...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>mainProf_exemple_officiel.cpp</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f650f249f9fd...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>defi_individuel_tri_pair_impair_etudiants.cpp</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">5.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a1727c29a5ba...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">82.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">357b80757727...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">83.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">0507aec7bb69...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">84.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">685f4e3e0007...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">85.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">381e715a03bf...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">86.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">eb0c97749eaa...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">87.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">4a1d79b18d73...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">88.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">5bd7838948d8...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">89.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">14d6f35f214e...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">90.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">6b0e6bdc2ccd...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">92.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a40b062c4408...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">93.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">dab29725bd46...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">94.1 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">c09785cf1fb5...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">95.1 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">420fe270af63...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">96.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">1453a754098b...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">97.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">12059d2db797...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">98.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">00ef8ba1224e...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">99.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a5a8debb2288...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">100.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">6b334ccd956e...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">101.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">5abcfbc96abe...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">102.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">4977f4facc18...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">103.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">7f66bffe56fa...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">104.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">4d55e774f4da...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">105.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">c5bb64fbb496...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">106.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">836993831fd2...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">107.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">464333ac068b...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">108.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">48a02bdc4538...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">109.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">68ddcd55ecbc...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">111.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">bed38e8fd814...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">112.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">877cadce9749...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">113.1 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">7acd86554ebb...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">114.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">3da09854eff4...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">115.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">46f8c0f09b2b...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">116.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">41ad6c518f80...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">117.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">5c8bdd9e54cb...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">118.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f68a65946f4d...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">119.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">6d01384e8d71...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">120.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">5f35f9815f26...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">121.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">0ab524046b60...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">122.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">fc836e683982...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">123.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">d94cad6a8348...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">124.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">e84bf4c74309...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">125.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a0f0f3600c03...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>s101_cours.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">66.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">ad9c1c40bc3f...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01.html</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">126.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f8f85b50484c...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>README.md</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">DOCUMENTS</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">0.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">07205598c6c6...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>PAGE_Groupe 16 - TP4 - Les Flèches de la Précision Page.md</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">DOCUMENTS</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">2.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">0107c72c5869...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>grille_poids_defense_collective.csv</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">OTHER</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">0.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">98af49dd96e9...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>grille_seuils_ceintures_katas.csv</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">OTHER</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">0.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">70dfd3343ce6...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>S1.01 - modele-objet-code-explorer.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">28.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">9e80831f3df9...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_SA__S1_01___M_thodologie_d_Imp_20261108.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">9.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">e5b86ea50abf...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_SA__S1_01___M_thodologie_d_Imp_20261109.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">10.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">2a8508804043...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation___S1_20261106.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">4.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">e8bf78bce9a5...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261103.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">e7841821dddf...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261102.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">9e1d60a2025b...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_SA__S1_01___M_thodologie_d_Imp_20261030.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">10.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">011695ba9d0d...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_S1_01___Impl_mentation_d_un_be_20261113.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">10.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">40479b630db6...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_S1_01___Impl_mentation_d_un_be_20261106.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">8.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">56cb2666c54c...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261110.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">c6fde9d0efdc...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_SA__S1_01___M_thodologie_d_Imp_20261113.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">10.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">b7793d0a91a2...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Initiation_au_D_veloppement_et_20261108.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">e7e05a3a15a1...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_M_thodologie_du_Projet_Informa_20261106.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">7.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">ff806370f510...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261101.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f74f4c0813e6...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261027.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">c5b0c583578b...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261109.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">66cf1ec80218...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation___Im_20261108.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">5.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">b82a7f370d1b...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation_des_20261113.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">cdfb92b1a7f1...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261112.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">9aa7277cec18...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_M_thodologie_du_Projet_Informa_20261108.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">7.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">6a7a111fc818...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_M_thodologie_du_Projet_Informa_20261114.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">8.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f0cc08d99896...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Introduction_aux_Fondements_du_20261113.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">4.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a365ec2b7467...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Initiation_au_D_veloppement_et_20261114.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">7.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">c8fcdd44207f...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation_des_20261106.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">5.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">4ea92b779e09...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation___Im_20261114.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">9c7ca7a217cc...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation_des_20261114.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">c9053b0ddd01...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261026.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">8deb8912aa87...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_SA__S1_01___M_thodologie_d_Imp_20261106.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">8.2 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f7405f5f08ce...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Introduction_aux_Fondements_du_20261109.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">4.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">8d53af36758b...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation___Im_20261106.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">4.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">ff3791466d1a...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation___Im_20261113.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a67867a92ed4...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation___Im_20261109.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">b089cfbc4714...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261029.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">35e2497c3ec5...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Initiation_au_D_veloppement_et_20261106.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">ba2cb65f5fd4...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation_des_20261108.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.0 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f4ad9acc3bed...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261022.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">983a519b95fc...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_S1_01___Impl_mentation_d_un_be_20261114.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">9.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">0bfd6eb93345...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261104.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">4fc09011476a...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_SA__S1_01___M_thodologie_d_Imp_20261114.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">9.6 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">db30ecda77df...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261105.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">46994d88355a...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_M_thodologie_du_pr_20261101.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">4.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">270cdcfda279...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261113.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">8face6b2c4d7...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261028.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">9eafeba2d9e1...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Initiation_au_D_veloppement_et_20261109.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">7.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">b49eb5ceb2d5...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Introduction_aux_Fondements_du_20261108.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">5.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">21ee17dc31cb...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_S1_01___Impl_mentation_d_un_be_20261108.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">9.5 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">88acf8be53b4...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261023.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a9db825794cf...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Introduction_aux_Fondements_du_20261114.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">5.4 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">522f5b2c521e...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_S1_01___Impl_mentation_d_un_be_20261101.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">4.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">77b071c36806...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261031.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">eded406ac88e...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_et_Consolidation_des_20261109.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">5.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">a77216d2f2ce...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261111.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.8 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">8622fb968550...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Initiation_au_D_veloppement_et_20261113.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">7.1 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">1d4f93e438d5...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Synth_se_D_bruit_e___S1_01_20261030.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">3.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">1e101513e896...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_S1_01___Impl_mentation_d_un_be_20261115.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">11.3 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">915d95a150ad...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_Introduction_aux_Fondements_et_20261115.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">6.9 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">6a3663580d5f...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
+                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                    <span>cours_s1.01_SA__S1_01___M_thodologie_d_Imp_20261115.pdf</span>
+                </td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
+                <td class="p-3.5 font-mono text-slate-500 text-xs">10.7 Ko</td>
+                <td class="p-3.5 font-mono text-slate-400 text-[11px]">43479b388329...</td>
+                <td class="p-3.5 text-right">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                    </span>
+                </td>
+            </tr>
+            
+                </tbody>
+            </table>
         </div>
-
-        <!-- Official Supports & GitHub Repos Section -->
-        <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white shadow-xs">
-            <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
-                <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
-                    <i data-lucide="folder-down" class="w-5 h-5 text-blue-600"></i>
-                    <span>Supports Officiels S1.01 (2026), Extraction OSINT Kata 2 &amp; Défi Individuel (12 fichiers)</span>
-                </h2>
-                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono">
-                    Moodle #24184 &amp; github.com/patrick-etcheverry
-                </span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                <a href="../supports/S1.01/1_presentation_sae_2026.html" target="_blank" class="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/40 hover:border-emerald-500 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-emerald-800">1_presentation_sae_2026.html</h4>
-                        <p class="text-[10px] text-emerald-900 font-mono mt-0.5">DIAPORAMA 2026 • Calendrier Nov 2026 &amp; Règles S1.01</p>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-emerald-600 group-hover:text-emerald-800 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/2_defense_collective_2026.html" target="_blank" class="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/40 hover:border-emerald-500 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-emerald-800">2_defense_collective_2026.html</h4>
-                        <p class="text-[10px] text-emerald-900 font-mono mt-0.5">DIAPORAMA 2026 • Défense &amp; Fiche Optique (2e code)</p>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-emerald-600 group-hover:text-emerald-800 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/workspace-atelier-katas-groupe16.zip" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">workspace-atelier-katas-groupe16.zip</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">ZIP • Kata 2 Réel (OSINT) + Défi Individuel + Dojo</p>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/defi_individuel_tri_pair_impair_etudiants.cpp" download class="p-3.5 rounded-xl border border-amber-300 bg-amber-50/40 hover:border-amber-500 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-amber-800">defi_individuel_tri_pair_impair_etudiants.cpp</h4>
-                        <p class="text-[10px] text-amber-900 font-mono mt-0.5">C++ • Défi Individuel Officiel (Sujets A &amp; B — essai.cpp)</p>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-amber-600 group-hover:text-amber-800 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/07-modeles-algos-basiques.html" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">07-modeles-algos-basiques.html</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">DIAPORAMA • Les 5 Modèles d'Algorithmes</p>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/TD7-algorithmes-parcours-recherche.html" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">TD7 — Algorithmes de parcours et recherche</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">HTML FURTIF #692243 • 9 Exercices Modèles</p>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/TP7-algorithmes-parcours-recherche.html" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">TP7 — Tableaux &amp; Recherche C++</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">HTML FURTIF #692244 • Données C++ fournies</p>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/mainProf_exemple_officiel.cpp" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">mainProf_exemple_officiel.cpp</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">C++ • Code étalon M. Etcheverry (code-explorer)</p>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/grille_poids_defense_collective.csv" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">grille_poids_defense_collective.csv</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">CSV • Coefficients officiels Défense (/30)</p>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/grille_seuils_ceintures_katas.csv" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">grille_seuils_ceintures_katas.csv</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">CSV • Seuils de validation des 9 Ceintures</p>
-                    </div>
-                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/graphe-competences-algo-prog.pdf" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">graphe-competences-algo-prog.pdf</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">PDF • Graphe officiel des compétences R1.01/S1.01</p>
-                    </div>
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-                <a href="../supports/S1.01/modele-objet-code-explorer.pdf" target="_blank" class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs flex items-center justify-between gap-3 transition group">
-                    <div class="overflow-hidden">
-                        <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600">modele-objet-code-explorer.pdf</h4>
-                        <p class="text-[10px] text-slate-500 font-mono mt-0.5">PDF • Modèle d'inspection AST C++ Etcheverry</p>
-                    </div>
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"></i>
-                </a>
-            </div>
-        </div>
-    </main>
+    </div>
 
     <script>
         lucide.createIcons();
