@@ -54,12 +54,15 @@
     const contentBox = document.getElementById('layer-content') || document.getElementById('layer-content-box');
 
     if (!tabs.length || !badgeEl || !titleEl || !descEl || !tagsEl) return;
+    let lastLayer = 1;
 
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         const layerNum = parseInt(tab.getAttribute('data-layer'), 10);
         const data = LAYER_DATA[layerNum];
-        if (!data) return;
+        if (!data || layerNum === lastLayer) return;
+        const dir = layerNum > lastLayer ? 1 : -1;
+        lastLayer = layerNum;
 
         tabs.forEach((t) => {
           t.classList.remove('active');
@@ -70,7 +73,8 @@
 
         if (contentBox) {
           contentBox.style.opacity = '0';
-          contentBox.style.transform = 'translateY(4px)';
+          contentBox.style.filter = 'blur(3px)';
+          contentBox.style.transform = `translateX(${-dir * 18}px)`;
 
           setTimeout(() => {
             badgeEl.textContent = data.badge;
@@ -85,9 +89,14 @@
               tagsEl.appendChild(span);
             });
 
+            contentBox.style.transition = 'none';
+            contentBox.style.transform = `translateX(${dir * 20}px)`;
+            void contentBox.offsetWidth;
+            contentBox.style.transition = '';
             contentBox.style.opacity = '1';
-            contentBox.style.transform = 'translateY(0)';
-          }, 140);
+            contentBox.style.filter = 'blur(0px)';
+            contentBox.style.transform = 'translateX(0)';
+          }, 130);
         }
       });
     });
@@ -509,44 +518,100 @@ if fmt == "pdf":
         const key = tab.getAttribute('data-code');
         if (!view || !SNIPPETS[key]) return;
 
-        const siblingTabs = widget ? widget.querySelectorAll('.code-tab-btn') : tabs;
+        const siblingTabs = Array.from(widget ? widget.querySelectorAll('.code-tab-btn') : tabs);
+        const oldIdx = siblingTabs.findIndex((t) => t.classList.contains('active'));
+        const newIdx = siblingTabs.indexOf(tab);
+        const dir = oldIdx === -1 || newIdx >= oldIdx ? 1 : -1;
+
         siblingTabs.forEach((t) => t.classList.remove('active'));
         tab.classList.add('active');
-        view.textContent = SNIPPETS[key];
+
+        view.style.opacity = '0';
+        view.style.filter = 'blur(2px)';
+        view.style.transform = `translateX(${-dir * 14}px)`;
+        setTimeout(() => {
+          view.textContent = SNIPPETS[key];
+          view.style.transition = 'none';
+          view.style.transform = `translateX(${dir * 14}px)`;
+          void view.offsetWidth;
+          view.style.transition = '';
+          view.style.opacity = '1';
+          view.style.filter = 'blur(0px)';
+          view.style.transform = 'translateX(0)';
+        }, 110);
       });
     });
   }
 
   // ==========================================================================
-  // AKARU-KINETIC BIOGRAPHY CHAPTER STAGE CONTROLLER
+  // AKARU-KINETIC SCROLL-DRIVEN BIOGRAPHY TRAJECTORY CONTROLLER
   // ==========================================================================
   function initAkaruStory() {
-    const panels = Array.from(document.querySelectorAll('#akaru-accordion .akaru-panel'));
-    const navButtons = Array.from(document.querySelectorAll('#akaru-accordion .akaru-nav-item'));
+    const deckShell = document.getElementById('akaru-deck-shell');
+    const steps = Array.from(document.querySelectorAll('#akaru-accordion .akaru-step-card'));
+    const slides = Array.from(document.querySelectorAll('#akaru-stage-media-box .akaru-visual-slide'));
+    const scrubBtns = Array.from(document.querySelectorAll('#akaru-deck-shell .akaru-scrub-btn'));
     const curtainLayer = document.getElementById('akaru-curtain-layer');
     const counterEl = document.getElementById('akaru-deck-counter');
+    const pctEl = document.getElementById('akaru-scroll-pct');
     const stageIdxEl = document.getElementById('akaru-stage-idx');
-    const prevBtn = document.getElementById('akaru-prev-btn');
-    const nextBtn = document.getElementById('akaru-next-btn');
+    const stageYearEl = document.getElementById('akaru-stage-year');
+    const stageDomainEl = document.getElementById('akaru-stage-domain');
+    const stageSubEl = document.getElementById('akaru-stage-sub');
     const aboutSection = document.getElementById('about');
 
-    const CHAPTER_LABELS = [
-      '01 / 05 — PAYS BASQUE & FORMATION',
-      '02 / 05 — SPORT, ENDURANCE & MONTAGNE',
-      '03 / 05 — ÉCHECS, ALPHAZERO & IA',
-      '04 / 05 — FORGE & LABO QUANT',
-      '05 / 05 — IUT ANGLET & OPEN-SOURCE'
+    if (!deckShell || !steps.length) return;
+
+    const CHAPTER_META = [
+      {
+        label: '01 / 05 — PAYS BASQUE & FORMATION',
+        year: '2023–2026',
+        domain: 'FORMATION & LANGUES',
+        sub: 'LYCÉE CANTAU ANGLET'
+      },
+      {
+        label: '02 / 05 — SPORT, ENDURANCE & MONTAGNE',
+        year: 'TERRAIN',
+        domain: 'SPORT & ÉQUILIBRE',
+        sub: 'ESCALADE • TRAIL • LECTURE'
+      },
+      {
+        label: '03 / 05 — ÉCHECS, ALPHAZERO & IA',
+        year: '2025–2026',
+        domain: 'COGNITION & STRATÉGIE',
+        sub: 'ÉCHECS ~1500 ELO'
+      },
+      {
+        label: '04 / 05 — FORGE & LABO QUANT',
+        year: '2023–2026',
+        domain: 'SYSTÈMES & PRODUITS',
+        sub: 'MARRA • HUPI • ZENTABLE • QUANT'
+      },
+      {
+        label: '05 / 05 — IUT ANGLET & OPEN-SOURCE',
+        year: '2026+',
+        domain: 'BUT INFO & COMMUNAUTÉ',
+        sub: 'IUT BAYONNE-ANGLET'
+      }
     ];
 
-    let currentIdx = 0;
+    let currentIdx = -1;
     let wipeMidTimer = null;
     let wipeEndTimer = null;
+    let lastWipeAt = 0;
+    let rafPending = false;
 
     function triggerCurtainWipe(onMidpoint) {
-      if (!curtainLayer) {
+      if (!curtainLayer || curtainLayer.offsetParent === null) {
         onMidpoint();
         return;
       }
+      const now = performance.now();
+      if (now - lastWipeAt < 180) {
+        onMidpoint();
+        return;
+      }
+      lastWipeAt = now;
       if (wipeMidTimer) clearTimeout(wipeMidTimer);
       if (wipeEndTimer) clearTimeout(wipeEndTimer);
       curtainLayer.classList.remove('is-wiping');
@@ -562,69 +627,136 @@ if fmt == "pdf":
 
     function applyChapterState(safeIdx) {
       currentIdx = safeIdx;
-      panels.forEach((panel, i) => {
+      const total = steps.length;
+      const meta = CHAPTER_META[safeIdx];
+
+      steps.forEach((step, i) => {
         const isActive = i === safeIdx;
-        panel.classList.toggle('is-active', isActive);
-        panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        step.classList.toggle('is-active', isActive);
+        step.classList.toggle('is-passed', i < safeIdx);
+        if (isActive) step.setAttribute('aria-current', 'step');
+        else step.removeAttribute('aria-current');
       });
-      navButtons.forEach((btn, i) => {
+
+      slides.forEach((slide, i) => {
+        const isActive = i === safeIdx;
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+
+      scrubBtns.forEach((btn, i) => {
         const isActive = i === safeIdx;
         btn.classList.toggle('is-active', isActive);
+        btn.classList.toggle('is-passed', i < safeIdx);
         btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
-      if (counterEl && CHAPTER_LABELS[safeIdx]) {
-        counterEl.textContent = CHAPTER_LABELS[safeIdx];
-      }
-      if (stageIdxEl) {
-        stageIdxEl.textContent = `CHAPITRE 0${safeIdx + 1} / 0${panels.length}`;
-      }
+
+      if (counterEl && meta) counterEl.textContent = meta.label;
+      if (stageIdxEl) stageIdxEl.textContent = `CHAPITRE 0${safeIdx + 1} / 0${total}`;
+      if (stageYearEl && meta) stageYearEl.textContent = meta.year;
+      if (stageDomainEl && meta) stageDomainEl.textContent = meta.domain;
+      if (stageSubEl && meta) stageSubEl.textContent = meta.sub;
     }
 
-    function activateChapter(index, withCurtain = true) {
-      if (!panels.length) return;
-      const safeIdx = ((index % panels.length) + panels.length) % panels.length;
-      if (safeIdx === currentIdx && panels[safeIdx]?.classList.contains('is-active')) return;
-      navButtons.forEach((btn, i) => {
-        const isActive = i === safeIdx;
-        btn.classList.toggle('is-active', isActive);
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
-      if (counterEl && CHAPTER_LABELS[safeIdx]) {
-        counterEl.textContent = CHAPTER_LABELS[safeIdx];
+    function syncFromScroll(allowCurtain = true) {
+      rafPending = false;
+      const vh = window.innerHeight || 800;
+      const focalY = vh * 0.44;
+
+      const firstRect = steps[0].getBoundingClientRect();
+      const lastRect = steps[steps.length - 1].getBoundingClientRect();
+      const firstCenter = firstRect.top + firstRect.height * 0.4;
+      const lastCenter = lastRect.top + lastRect.height * 0.4;
+      const rawP = (focalY - firstCenter) / Math.max(1, lastCenter - firstCenter);
+      const overallP = Math.max(0, Math.min(1, rawP));
+
+      deckShell.style.setProperty('--akaru-scroll-p', overallP.toFixed(4));
+      if (pctEl) {
+        const pct = Math.round(overallP * 100);
+        pctEl.textContent = `${pct < 10 ? '0' : ''}${pct}%`;
       }
-      if (stageIdxEl) {
-        stageIdxEl.textContent = `CHAPITRE 0${safeIdx + 1} / 0${panels.length}`;
-      }
-      if (withCurtain) {
-        triggerCurtainWipe(() => applyChapterState(safeIdx));
+
+      let bestIdx = 0;
+      let bestDist = Infinity;
+      let bestSigned = 0;
+      let bestHeight = 240;
+
+      if (firstRect.height > 0 && firstRect.top > focalY) {
+        bestIdx = 0;
+        bestSigned = focalY - (firstRect.top + firstRect.height * 0.45);
+        bestHeight = Math.max(140, firstRect.height);
       } else {
-        applyChapterState(safeIdx);
+        steps.forEach((step, i) => {
+          const rect = step.getBoundingClientRect();
+          if (rect.height === 0) return;
+          const center = rect.top + rect.height * 0.45;
+          const dist = Math.abs(center - focalY);
+          if (dist < bestDist) {
+            bestDist = dist;
+            bestIdx = i;
+            bestSigned = focalY - center;
+            bestHeight = Math.max(140, rect.height);
+          }
+        });
+      }
+
+      const localPan = Math.max(-1, Math.min(1, bestSigned / bestHeight));
+      const localZoom = 0.5 + 0.5 * (1 - Math.abs(localPan));
+      deckShell.style.setProperty('--akaru-slide-pan', localPan.toFixed(4));
+      deckShell.style.setProperty('--akaru-slide-zoom', localZoom.toFixed(4));
+
+      if (bestIdx !== currentIdx) {
+        if (allowCurtain && currentIdx !== -1) {
+          // Immediately sync header pills/counter while blades reveal the new visual
+          const meta = CHAPTER_META[bestIdx];
+          if (counterEl && meta) counterEl.textContent = meta.label;
+          scrubBtns.forEach((btn, i) => {
+            btn.classList.toggle('is-active', i === bestIdx);
+            btn.classList.toggle('is-passed', i < bestIdx);
+          });
+          triggerCurtainWipe(() => applyChapterState(bestIdx));
+        } else {
+          applyChapterState(bestIdx);
+        }
       }
     }
 
-    navButtons.forEach((btn, idx) => {
-      btn.addEventListener('click', () => activateChapter(idx, true));
-      btn.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-          e.preventDefault();
-          const next = (idx + 1) % panels.length;
-          activateChapter(next, true);
-          navButtons[next].focus();
-        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          const prev = (idx - 1 + panels.length) % panels.length;
-          activateChapter(prev, true);
-          navButtons[prev].focus();
-        }
+    function scheduleSync() {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(() => syncFromScroll(true));
+    }
+
+    function scrollToChapter(index) {
+      const safeIdx = Math.max(0, Math.min(steps.length - 1, index));
+      const step = steps[safeIdx];
+      if (!step) return;
+      const rect = step.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const targetOffset = Math.max(142, vh * 0.34 - Math.min(rect.height * 0.15, 60));
+      const targetY = Math.max(0, window.scrollY + rect.top - targetOffset);
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+
+    steps.forEach((step, idx) => {
+      step.addEventListener('click', () => {
+        const sel = window.getSelection && window.getSelection().toString();
+        if (sel) return;
+        scrollToChapter(idx);
       });
     });
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => activateChapter(currentIdx - 1, true));
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => activateChapter(currentIdx + 1, true));
-    }
+    scrubBtns.forEach((btn, idx) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        scrollToChapter(idx);
+      });
+    });
+
+    window.addEventListener('scroll', scheduleSync, { passive: true });
+    window.addEventListener('resize', scheduleSync, { passive: true });
+
+    syncFromScroll(false);
 
     if ('IntersectionObserver' in window) {
       let curtainPlayedOnce = false;
@@ -634,7 +766,7 @@ if fmt == "pdf":
             if (!entry.isIntersecting) return;
             if (entry.target === aboutSection && !curtainPlayedOnce) {
               curtainPlayedOnce = true;
-              if (curtainLayer) {
+              if (curtainLayer && curtainLayer.offsetParent !== null) {
                 curtainLayer.classList.add('is-wiping');
                 setTimeout(() => curtainLayer.classList.remove('is-wiping'), 540);
               }
@@ -647,6 +779,166 @@ if fmt == "pdf":
     }
   }
 
+  // ==========================================================================
+  // DAMPED SPRING ROLLING NUMBERS (Cult UI RollingNumber Physics Port)
+  // ==========================================================================
+  function initRollingNumbers() {
+    const els = Array.from(document.querySelectorAll('[data-roll]'));
+    if (!els.length) return;
+
+    const prefersReduced =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || !('IntersectionObserver' in window)) return;
+
+    function formatValue(val, decimals, sep, suffix) {
+      const fixed = decimals > 0 ? val.toFixed(decimals) : String(Math.round(val));
+      if (!sep) return fixed + suffix;
+      const parts = fixed.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+      return parts.join('.') + suffix;
+    }
+
+    function animateSpring(el) {
+      const target = parseFloat(el.getAttribute('data-roll'));
+      if (!Number.isFinite(target)) return;
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const sep = el.getAttribute('data-sep') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+
+      // Cult UI physics constants: crisp damped spring (stiffness=110, damping=18, mass=0.8)
+      const mass = 0.8;
+      const stiffness = 110;
+      const damping = 18;
+      let x = target * 0.45;
+      let v = 0;
+      const startTs = performance.now();
+      let prevTs = startTs;
+
+      const step = (now) => {
+        const dt = Math.min(0.032, Math.max(0.004, (now - prevTs) / 1000));
+        prevTs = now;
+        const accel = (-stiffness * (x - target) - damping * v) / mass;
+        v += accel * dt;
+        x += v * dt;
+
+        el.textContent = formatValue(x, decimals, sep, suffix);
+
+        const tol = Math.max(0.001, Math.abs(target) * 0.0005);
+        if (
+          (now - startTs >= 1150) ||
+          (Math.abs(x - target) <= tol && Math.abs(v) <= 0.01 * Math.max(1, target))
+        ) {
+          el.textContent = formatValue(target, decimals, sep, suffix);
+          return;
+        }
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          if (el.dataset.rollDone === '1') return;
+          el.dataset.rollDone = '1';
+          observer.unobserve(el);
+          animateSpring(el);
+        });
+      },
+      { threshold: 0.25 }
+    );
+    els.forEach((el) => observer.observe(el));
+  }
+
+  // ==========================================================================
+  // FLOATING SCROLL ISLAND (Watermelon UI Conic Progress + Drawer Port)
+  // ==========================================================================
+  function initScrollIsland() {
+    const island = document.getElementById('scroll-island');
+    const trigger = document.getElementById('scroll-island-trigger');
+    const sectionEl = document.getElementById('scroll-island-section');
+    const pctEl = document.getElementById('scroll-island-pct');
+    const links = Array.from(document.querySelectorAll('#scroll-island-drawer .island-link'));
+    if (!island || !trigger) return;
+
+    const SECTIONS = [
+      { id: 'hero', label: '00 / HERO' },
+      { id: 'about', label: '01 / TRAJECTOIRE' },
+      { id: 'flagships', label: '02 / ÉTUDES CAS' },
+      { id: 'exploded-architecture', label: '03 / TOTEM 3D' },
+      { id: 'parcours', label: '04 / PARCOURS' },
+      { id: 'contact', label: '05 / CONTACT' },
+    ];
+
+    let rafId = false;
+    function syncIsland() {
+      rafId = false;
+      const doc = document.documentElement;
+      const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const pct = Math.max(0, Math.min(100, (window.scrollY / maxScroll) * 100));
+      island.classList.toggle('is-visible', window.scrollY > 140);
+      island.style.setProperty('--scroll-island-p', pct.toFixed(1));
+      if (pctEl) {
+        const rounded = Math.round(pct);
+        pctEl.textContent = `${rounded < 10 ? '0' : ''}${rounded}%`;
+      }
+
+      const probeY = window.innerHeight * 0.36;
+      let active = SECTIONS[0];
+      SECTIONS.forEach((sec) => {
+        const node = document.getElementById(sec.id);
+        if (!node) return;
+        const rect = node.getBoundingClientRect();
+        if (rect.top <= probeY) active = sec;
+      });
+
+      if (sectionEl) sectionEl.textContent = active.label;
+      links.forEach((lnk) => {
+        lnk.classList.toggle('is-active', lnk.getAttribute('data-island-target') === active.id);
+      });
+    }
+
+    function onScroll() {
+      if (rafId) return;
+      rafId = true;
+      requestAnimationFrame(syncIsland);
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const opening = !island.classList.contains('is-open');
+      island.classList.toggle('is-open', opening);
+      trigger.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    });
+
+    links.forEach((lnk) => {
+      lnk.addEventListener('click', () => {
+        island.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!island.contains(e.target) && island.classList.contains('is-open')) {
+        island.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && island.classList.contains('is-open')) {
+        island.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    syncIsland();
+  }
+
   function init() {
     initAkaruStory();
     initLayerInteractive();
@@ -654,6 +946,8 @@ if fmt == "pdf":
     initCommandPalette();
     initTerminalDrawer();
     initCodeSwitcher();
+    initRollingNumbers();
+    initScrollIsland();
   }
 
   if (document.readyState === 'loading') {

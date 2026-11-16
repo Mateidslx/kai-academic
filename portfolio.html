@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="portfolio_assets/style.css?v=36">
+    <link rel="stylesheet" href="portfolio_assets/style.css?v=38">
 
   <!-- Zero-Flash Dark Curtain: keeps DOM computed rects valid until swarm canvas mounts -->
   <style>
@@ -132,11 +132,11 @@
             </div>
             <div class="hero-stats-row">
               <div class="hero-stat-box">
-                <span class="stat-val">46 PRs</span>
+                <span class="stat-val" data-roll="46" data-suffix=" PRs">46 PRs</span>
                 <span class="stat-lbl">Open-Source Fusionnées</span>
               </div>
               <div class="hero-stat-box">
-                <span class="stat-val">735</span>
+                <span class="stat-val" data-roll="735">735</span>
                 <span class="stat-lbl">Tests Unitaires B2B</span>
               </div>
               <div class="hero-stat-box">
@@ -222,233 +222,260 @@
           </p>
         </div>
 
-        <!-- ACT I: Noir & Crimson Split Chapter Deck -->
-        <div class="akaru-deck-shell" id="akaru-deck-shell" role="region" aria-label="Chapitres biographiques interactifs — cliquez ou naviguez avec les flèches">
+        <!-- ACT I: Noir & Crimson Scroll-Driven Kinetic Trajectory -->
+        <div class="akaru-deck-shell" id="akaru-deck-shell" role="region" aria-label="Chapitres biographiques synchronisés au défilement">
           <div class="akaru-deck-toolbar">
-            <span class="akaru-deck-hint">CHAPITRES RÉELS // TRAJECTOIRE DE TERRAIN</span>
-            <div class="akaru-deck-counter" id="akaru-deck-counter">01 / 05 — PAYS BASQUE &amp; FORMATION</div>
+            <span class="akaru-deck-hint">CHAPITRES RÉELS // TRAJECTOIRE AU SCROLL</span>
+            <div class="akaru-toolbar-right">
+              <div class="akaru-deck-counter" id="akaru-deck-counter">01 / 05 — PAYS BASQUE &amp; FORMATION</div>
+              <span class="akaru-scroll-pct" id="akaru-scroll-pct">00%</span>
+            </div>
+            <div class="akaru-toolbar-progress" aria-hidden="true">
+              <span class="akaru-toolbar-progress-fill" id="akaru-progress-fill"></span>
+            </div>
           </div>
 
           <div class="akaru-split-layout" id="akaru-accordion">
-            <!-- Left Navigation Index (Unified Noir & Crimson Rail) -->
-            <nav class="akaru-nav-rail" aria-label="Sélection du chapitre biographique">
-              <button type="button" class="akaru-nav-item is-active" data-chapter="0" aria-pressed="true">
-                <span class="akaru-nav-bar" aria-hidden="true"></span>
-                <span class="akaru-nav-num">01</span>
-                <span class="akaru-nav-meta">
-                  <span class="akaru-nav-title">Pays Basque &amp; Formation</span>
-                  <span class="akaru-nav-sub">Lycée Cantau • Bac 20/20 • UK</span>
-                </span>
-                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
-              </button>
-
-              <button type="button" class="akaru-nav-item" data-chapter="1" aria-pressed="false">
-                <span class="akaru-nav-bar" aria-hidden="true"></span>
-                <span class="akaru-nav-num">02</span>
-                <span class="akaru-nav-meta">
-                  <span class="akaru-nav-title">Sport &amp; Endurance</span>
-                  <span class="akaru-nav-sub">Escalade • Korrika 10 km • Montagne</span>
-                </span>
-                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
-              </button>
-
-              <button type="button" class="akaru-nav-item" data-chapter="2" aria-pressed="false">
-                <span class="akaru-nav-bar" aria-hidden="true"></span>
-                <span class="akaru-nav-num">03</span>
-                <span class="akaru-nav-meta">
-                  <span class="akaru-nav-title">Échecs, Énigmes &amp; IA</span>
-                  <span class="akaru-nav-sub">1500 Elo • AlphaZero 10k GPU</span>
-                </span>
-                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
-              </button>
-
-              <button type="button" class="akaru-nav-item" data-chapter="3" aria-pressed="false">
-                <span class="akaru-nav-bar" aria-hidden="true"></span>
-                <span class="akaru-nav-num">04</span>
-                <span class="akaru-nav-meta">
-                  <span class="akaru-nav-title">Forge &amp; Labo Quant</span>
-                  <span class="akaru-nav-sub">HUPI • Marra • 735 Tests • PyTorch</span>
-                </span>
-                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
-              </button>
-
-              <button type="button" class="akaru-nav-item" data-chapter="4" aria-pressed="false">
-                <span class="akaru-nav-bar" aria-hidden="true"></span>
-                <span class="akaru-nav-num">05</span>
-                <span class="akaru-nav-meta">
-                  <span class="akaru-nav-title">IUT Anglet &amp; Open-Source</span>
-                  <span class="akaru-nav-sub">BUT Info • 46 PRs • Restos du Cœur</span>
-                </span>
-                <span class="akaru-nav-arrow" aria-hidden="true">→</span>
-              </button>
-            </nav>
-
-            <!-- Right Kinetic Stage with Akaru 5-Blade Vertical Curtain Wipe -->
-            <div class="akaru-stage-viewport">
-              <div class="akaru-curtain-layer" id="akaru-curtain-layer" aria-hidden="true">
-                <span class="akaru-curtain-blade"></span>
-                <span class="akaru-curtain-blade"></span>
-                <span class="akaru-curtain-blade"></span>
-                <span class="akaru-curtain-blade"></span>
-                <span class="akaru-curtain-blade"></span>
+            <!-- Left Scrollable Narrative Track -->
+            <div class="akaru-story-stream" id="akaru-story-stream">
+              <div class="akaru-spine-track" aria-hidden="true">
+                <span class="akaru-spine-fill" id="akaru-spine-fill"></span>
               </div>
 
-              <!-- Slide 01 -->
-              <article class="akaru-panel is-active" data-chapter="0" aria-hidden="false">
-                <div class="akaru-visual-stage" aria-hidden="true">
+              <!-- Step 01 -->
+              <article class="akaru-step-card is-active" data-chapter="0" id="akaru-step-0" aria-current="step">
+                <div class="akaru-step-node" aria-hidden="true">01</div>
+
+                <div class="akaru-step-mobile-visual" aria-hidden="true">
                   <img class="akaru-stage-img" src="portfolio_assets/about_01_basque.webp?v=31" alt="" style="object-position: 50% 42%;" decoding="async" />
                   <div class="stage-hud-top">CÔTE BASQUE // LYCÉE POLYVALENT CANTAU ANGLET</div>
                   <div class="stage-hud-bottom">
-                    <span class="stage-hud-badge">BAC 2026 • SECTION BILINGUE BASQUE (DNL)</span>
+                    <span class="stage-hud-badge">BAC 2026 • DNL BASQUE</span>
                     <span class="stage-hud-kpi">GRAND ORAL 20.00 / 20</span>
                   </div>
                 </div>
 
-                <div class="akaru-meta-strip">
+                <div class="akaru-step-meta">
                   <span class="akaru-year-pill">2023–2026</span>
-                  <span class="akaru-domain-label">FORMATION &amp; LANGUES</span>
-                  <span class="akaru-sub-label">LYCÉE CANTAU ANGLET</span>
+                  <span class="akaru-step-domain">FORMATION &amp; LANGUES</span>
+                  <span class="akaru-step-loc">LYCÉE CANTAU ANGLET</span>
                 </div>
 
-                <div class="akaru-editorial-body">
-                  <h3 class="akaru-chapter-title">Pays Basque &amp; Formation</h3>
-                  <p class="akaru-chapter-copy">
-                    Originaire du Pays Basque, j'ai suivi un cursus scientifique bilingue basque au <strong>Lycée Polyvalent Cantau d'Anglet</strong> (Maths, NSI, Mention <strong>DNL Basque</strong>, <strong>20/20 au Grand Oral</strong> sur les arbres de décision IA et probabilités), complété par deux étés d'immersion complète au Royaume-Uni à Bournemouth (2024) et Brighton (2025).
-                  </p>
-                  <div class="akaru-facts-row">
-                    <span class="akaru-fact-chip">Grand Oral 20/20</span>
-                    <span class="akaru-fact-chip">Basque B2 (DNL)</span>
-                    <span class="akaru-fact-chip">Anglais B2 (UK × 2 mois)</span>
-                  </div>
+                <h3 class="akaru-chapter-title">Pays Basque &amp; Formation</h3>
+                <p class="akaru-chapter-copy">
+                  Originaire du Pays Basque, j'ai suivi un cursus scientifique bilingue basque au <strong>Lycée Polyvalent Cantau d'Anglet</strong> (Maths, NSI, Mention <strong>DNL Basque</strong>, <strong>20/20 au Grand Oral</strong> sur les arbres de décision IA et probabilités), complété par deux étés d'immersion complète au Royaume-Uni à Bournemouth (2024) et Brighton (2025).
+                </p>
+                <div class="akaru-facts-row">
+                  <span class="akaru-fact-chip">Grand Oral 20/20</span>
+                  <span class="akaru-fact-chip">Basque B2 (DNL)</span>
+                  <span class="akaru-fact-chip">Anglais B2 (UK × 2 mois)</span>
                 </div>
               </article>
 
-              <!-- Slide 02 -->
-              <article class="akaru-panel" data-chapter="1" aria-hidden="true">
-                <div class="akaru-visual-stage" aria-hidden="true">
-                  <img class="akaru-stage-img" src="portfolio_assets/about_02_terrain.webp?v=34" alt="" style="object-position: 50% 46%;" decoding="async" />
+              <!-- Step 02 -->
+              <article class="akaru-step-card" data-chapter="1" id="akaru-step-1">
+                <div class="akaru-step-node" aria-hidden="true">02</div>
+
+                <div class="akaru-step-mobile-visual" aria-hidden="true">
+                  <img class="akaru-stage-img" src="portfolio_assets/about_02_terrain.webp?v=34" alt="" style="object-position: 50% 46%;" loading="lazy" decoding="async" />
                   <div class="stage-hud-top">PYRÉNÉES &amp; CÔTE BASQUE // ESCALADE &amp; ENDURANCE</div>
                   <div class="stage-hud-bottom">
-                    <span class="stage-hud-badge">ESCALADE EN VOIE &amp; BLOC • KORRIKA 10 KM</span>
+                    <span class="stage-hud-badge">ESCALADE • KORRIKA 10 KM</span>
                     <span class="stage-hud-kpi">ESPRIT DE CORDÉE</span>
                   </div>
                 </div>
 
-                <div class="akaru-meta-strip">
+                <div class="akaru-step-meta">
                   <span class="akaru-year-pill">TERRAIN</span>
-                  <span class="akaru-domain-label">SPORT &amp; ÉQUILIBRE</span>
-                  <span class="akaru-sub-label">ESCALADE • TRAIL • LECTURE</span>
+                  <span class="akaru-step-domain">SPORT &amp; ÉQUILIBRE</span>
+                  <span class="akaru-step-loc">ESCALADE • TRAIL • LECTURE</span>
                 </div>
 
-                <div class="akaru-editorial-body">
-                  <h3 class="akaru-chapter-title">Sport, Endurance &amp; Montagne</h3>
-                  <p class="akaru-chapter-copy">
-                    La constance physique soutient directement ma concentration sur les projets complexes : pratique régulière de l'<strong>escalade</strong> sur la Côte Basque, course de fond (dont les <strong>10 km de la Korrika</strong>), randonnées en altitude dans les Pyrénées et lecture de fond. Des disciplines qui forgent le sang-froid, la gestion de l'effort et la prise de décision lucide dans la durée.
-                  </p>
-                  <div class="akaru-facts-row">
-                    <span class="akaru-fact-chip">Escalade &amp; Bloc</span>
-                    <span class="akaru-fact-chip">10 km Korrika</span>
-                    <span class="akaru-fact-chip">Randonnées Pyrénées</span>
-                  </div>
+                <h3 class="akaru-chapter-title">Sport, Endurance &amp; Montagne</h3>
+                <p class="akaru-chapter-copy">
+                  La constance physique soutient directement ma concentration sur les projets complexes : pratique régulière de l'<strong>escalade</strong> sur la Côte Basque, course de fond (dont les <strong>10 km de la Korrika</strong>), randonnées en altitude dans les Pyrénées et lecture de fond. Des disciplines qui forgent le sang-froid, la gestion de l'effort et la prise de décision lucide dans la durée.
+                </p>
+                <div class="akaru-facts-row">
+                  <span class="akaru-fact-chip">Escalade &amp; Bloc</span>
+                  <span class="akaru-fact-chip">10 km Korrika</span>
+                  <span class="akaru-fact-chip">Randonnées Pyrénées</span>
                 </div>
               </article>
 
-              <!-- Slide 03 -->
-              <article class="akaru-panel" data-chapter="2" aria-hidden="true">
-                <div class="akaru-visual-stage" aria-hidden="true">
-                  <img class="akaru-stage-img" src="portfolio_assets/about_03_chess.webp?v=31" alt="" style="object-position: 50% 54%;" decoding="async" />
+              <!-- Step 03 -->
+              <article class="akaru-step-card" data-chapter="2" id="akaru-step-2">
+                <div class="akaru-step-node" aria-hidden="true">03</div>
+
+                <div class="akaru-step-mobile-visual" aria-hidden="true">
+                  <img class="akaru-stage-img" src="portfolio_assets/about_03_chess.webp?v=31" alt="" style="object-position: 50% 54%;" loading="lazy" decoding="async" />
                   <div class="stage-hud-top">MINIMAX • ALPHAZERO SELF-PLAY (10 000 PARTIES GPU)</div>
                   <div class="stage-hud-bottom">
-                    <span class="stage-hud-badge">COMPLEXITÉ 10¹²⁰ / 10³⁶⁰ • PROSPECT THEORY</span>
+                    <span class="stage-hud-badge">COMPLEXITÉ 10¹²⁰ / 10³⁶⁰</span>
                     <span class="stage-hud-kpi">~1500 ELO</span>
                   </div>
                 </div>
 
-                <div class="akaru-meta-strip">
+                <div class="akaru-step-meta">
                   <span class="akaru-year-pill">2025–2026</span>
-                  <span class="akaru-domain-label">COGNITION &amp; STRATÉGIE</span>
-                  <span class="akaru-sub-label">ÉCHECS ~1500 ELO</span>
+                  <span class="akaru-step-domain">COGNITION &amp; STRATÉGIE</span>
+                  <span class="akaru-step-loc">ÉCHECS ~1500 ELO</span>
                 </div>
 
-                <div class="akaru-editorial-body">
-                  <h3 class="akaru-chapter-title">Échecs, Énigmes &amp; Théorie des Jeux</h3>
-                  <p class="akaru-chapter-copy">
-                    Passionné de jeux combinatoires (~1500 Elo aux échecs), de <strong>boîtes à secrets mécaniques</strong>, de cryptographie (Vigenère, Morse) et de jeux de gestion exigeants à objectif mesurable (<strong>Dyson Sphere Program</strong>, <strong>Per Aspera</strong>, <strong>The Farmer Was Replaced</strong>), j'ai entraîné <strong>10 000 parties d'AlphaZero en self-play</strong> sur GPU et co-développé <strong>Hexapawn</strong> en NSI avant de décrocher <strong>20/20 au Grand Oral</strong> sur les arbres d'états et la prise de décision humaine face aux probabilités.
-                  </p>
-                  <div class="akaru-facts-row">
-                    <span class="akaru-fact-chip">10 000 Parties AlphaZero GPU</span>
-                    <span class="akaru-fact-chip">V-Bot Stockfish UCI 24/7</span>
-                    <span class="akaru-fact-chip">Casse-têtes &amp; Cryptographie</span>
-                  </div>
+                <h3 class="akaru-chapter-title">Échecs, Énigmes &amp; Théorie des Jeux</h3>
+                <p class="akaru-chapter-copy">
+                  Passionné de jeux combinatoires (~1500 Elo aux échecs), de <strong>boîtes à secrets mécaniques</strong>, de cryptographie (Vigenère, Morse) et de jeux de gestion exigeants à objectif mesurable (<strong>Dyson Sphere Program</strong>, <strong>Per Aspera</strong>, <strong>The Farmer Was Replaced</strong>), j'ai entraîné <strong>10 000 parties d'AlphaZero en self-play</strong> sur GPU et co-développé <strong>Hexapawn</strong> en NSI avant de décrocher <strong>20/20 au Grand Oral</strong> sur les arbres d'états et la prise de décision humaine face aux probabilités.
+                </p>
+                <div class="akaru-facts-row">
+                  <span class="akaru-fact-chip">10 000 Parties AlphaZero GPU</span>
+                  <span class="akaru-fact-chip">V-Bot Stockfish UCI 24/7</span>
+                  <span class="akaru-fact-chip">Casse-têtes &amp; Cryptographie</span>
                 </div>
               </article>
 
-              <!-- Slide 04 -->
-              <article class="akaru-panel" data-chapter="3" aria-hidden="true">
-                <div class="akaru-visual-stage" aria-hidden="true">
-                  <img class="akaru-stage-img" src="portfolio_assets/about_04_quant.webp?v=31" alt="" style="object-position: 50% 48%;" decoding="async" />
+              <!-- Step 04 -->
+              <article class="akaru-step-card" data-chapter="3" id="akaru-step-3">
+                <div class="akaru-step-node" aria-hidden="true">04</div>
+
+                <div class="akaru-step-mobile-visual" aria-hidden="true">
+                  <img class="akaru-stage-img" src="portfolio_assets/about_04_quant.webp?v=31" alt="" style="object-position: 50% 48%;" loading="lazy" decoding="async" />
                   <div class="stage-hud-top">PYTORCH GMM-MDN • TCN 30×32 • WALK-FORWARD GATE</div>
                   <div class="stage-hud-bottom">
-                    <span class="stage-hud-badge">466 572 PRÉVISIONS • RMSE 0.677°C • 735 TESTS B2B</span>
+                    <span class="stage-hud-badge">466 572 PRÉVISIONS • 735 TESTS B2B</span>
                     <span class="stage-hud-kpi">PBO/CSCV PASS</span>
                   </div>
                 </div>
 
-                <div class="akaru-meta-strip">
+                <div class="akaru-step-meta">
                   <span class="akaru-year-pill">2023–2026</span>
-                  <span class="akaru-domain-label">SYSTÈMES &amp; PRODUITS</span>
-                  <span class="akaru-sub-label">MARRA • HUPI • ZENTABLE • QUANT</span>
+                  <span class="akaru-step-domain">SYSTÈMES &amp; PRODUITS</span>
+                  <span class="akaru-step-loc">MARRA • HUPI • QUANT</span>
                 </div>
 
-                <div class="akaru-editorial-body">
-                  <h3 class="akaru-chapter-title">Forge Logicielle &amp; Labo Quantitatif</h3>
-                  <p class="akaru-chapter-copy">
-                    Du stage en bureau d'études <strong>Marra</strong> aux cartes interactives <strong>ADT64 chez HUPI</strong> (Leaflet, D3.js v4) : <strong>Pdf-helper BTP</strong> (Tauri, FastAPI, moteur OCR G.R.E.), <strong>ZenTable Pro</strong> (tableur React 19/TypeScript), <strong>MathBallBattle</strong> (moteur physique 2D TOI CCD et arithmétique <code>BigMath</code>), un <strong>extracteur documentaire B2B sans hallucination</strong> validé par <strong>735 tests unitaires</strong>, et mon laboratoire PyTorch (<strong>GMM-MDN sur 466k prévisions</strong>, RMSE 0,677°C, PBO/CSCV).
-                  </p>
-                  <div class="akaru-facts-row">
-                    <span class="akaru-fact-chip">735 Tests B2B</span>
-                    <span class="akaru-fact-chip">GMM-MDN RMSE 0,677°C</span>
-                    <span class="akaru-fact-chip">Physics 2D CCD</span>
-                  </div>
+                <h3 class="akaru-chapter-title">Forge Logicielle &amp; Labo Quantitatif</h3>
+                <p class="akaru-chapter-copy">
+                  Du stage en bureau d'études <strong>Marra</strong> aux cartes interactives <strong>ADT64 chez HUPI</strong> (Leaflet, D3.js v4) : <strong>Pdf-helper BTP</strong> (Tauri, FastAPI, moteur OCR G.R.E.), <strong>ZenTable Pro</strong> (tableur React 19/TypeScript), <strong>MathBallBattle</strong> (moteur physique 2D TOI CCD et arithmétique <code>BigMath</code>), un <strong>extracteur documentaire B2B sans hallucination</strong> validé par <strong>735 tests unitaires</strong>, et mon laboratoire PyTorch (<strong>GMM-MDN sur 466k prévisions</strong>, RMSE 0,677°C, PBO/CSCV).
+                </p>
+                <div class="akaru-facts-row">
+                  <span class="akaru-fact-chip">735 Tests B2B</span>
+                  <span class="akaru-fact-chip">GMM-MDN RMSE 0,677°C</span>
+                  <span class="akaru-fact-chip">Physics 2D CCD</span>
                 </div>
               </article>
 
-              <!-- Slide 05 -->
-              <article class="akaru-panel" data-chapter="4" aria-hidden="true">
-                <div class="akaru-visual-stage" aria-hidden="true">
-                  <img class="akaru-stage-img" src="portfolio_assets/about_05_anglet.webp?v=31" alt="" style="object-position: 50% 40%;" decoding="async" />
+              <!-- Step 05 -->
+              <article class="akaru-step-card" data-chapter="4" id="akaru-step-4">
+                <div class="akaru-step-node" aria-hidden="true">05</div>
+
+                <div class="akaru-step-mobile-visual" aria-hidden="true">
+                  <img class="akaru-stage-img" src="portfolio_assets/about_05_anglet.webp?v=31" alt="" style="object-position: 50% 40%;" loading="lazy" decoding="async" />
                   <div class="stage-hud-top">BUT INFORMATIQUE // IUT BAYONNE-ANGLET &amp; OPEN-SOURCE</div>
                   <div class="stage-hud-bottom">
-                    <span class="stage-hud-badge">KAI ACADEMIC (79 P.) • SAFEPATH-LINT AST • RESTOS DU CŒUR</span>
+                    <span class="stage-hud-badge">KAI ACADEMIC • SAFEPATH-LINT AST</span>
                     <span class="stage-hud-kpi stage-hud-green">46 PRs MERGED</span>
                   </div>
                 </div>
 
-                <div class="akaru-meta-strip">
+                <div class="akaru-step-meta">
                   <span class="akaru-year-pill">2026+</span>
-                  <span class="akaru-domain-label">BUT INFO &amp; COMMUNAUTÉ</span>
-                  <span class="akaru-sub-label">IUT BAYONNE-ANGLET</span>
+                  <span class="akaru-step-domain">BUT INFO &amp; COMMUNAUTÉ</span>
+                  <span class="akaru-step-loc">IUT BAYONNE-ANGLET</span>
                 </div>
 
-                <div class="akaru-editorial-body">
-                  <h3 class="akaru-chapter-title">IUT d'Anglet, Open-Source &amp; Solidarité</h3>
-                  <p class="akaru-chapter-copy">
-                    Étudiant en <strong>BUT Informatique</strong> à l'IUT de Bayonne et du Pays Basque (Anglet), je développe <strong>Kai Academic</strong> — une bibliothèque de révision structurée axée sur l'accessibilité cognitive (police Lexend, 79 pages indexées sur les polycopiés officiels : C++, Merise 3NF, Linux, Maths). En parallèle, je contribue en production sur <strong>Twenty CRM</strong> et <strong>BasedHardware/omi</strong> (<strong>46 PRs fusionnées</strong>), publie l'analyseur AST <strong>SafePath-Lint (MIT, CWE-22)</strong> et m'engage bénévolement aux <strong>Restos du Cœur</strong>.
-                  </p>
-                  <div class="akaru-facts-row">
-                    <span class="akaru-fact-chip">IUT Anglet (BUT Info)</span>
-                    <span class="akaru-fact-chip">SafePath-Lint (MIT CWE-22)</span>
-                    <span class="akaru-fact-chip">Bénévole Restos du Cœur</span>
-                  </div>
+                <h3 class="akaru-chapter-title">IUT d'Anglet, Open-Source &amp; Solidarité</h3>
+                <p class="akaru-chapter-copy">
+                  Étudiant en <strong>BUT Informatique</strong> à l'IUT de Bayonne et du Pays Basque (Anglet), je développe <strong>Kai Academic</strong> — une bibliothèque de révision structurée axée sur l'accessibilité cognitive (police Lexend, 79 pages indexées sur les polycopiés officiels : C++, Merise 3NF, Linux, Maths). En parallèle, je contribue en production sur <strong>Twenty CRM</strong> et <strong>BasedHardware/omi</strong> (<strong>46 PRs fusionnées</strong>), publie l'analyseur AST <strong>SafePath-Lint (MIT, CWE-22)</strong> et m'engage bénévolement aux <strong>Restos du Cœur</strong>.
+                </p>
+                <div class="akaru-facts-row">
+                  <span class="akaru-fact-chip">IUT Anglet (BUT Info)</span>
+                  <span class="akaru-fact-chip">SafePath-Lint (MIT CWE-22)</span>
+                  <span class="akaru-fact-chip">Bénévole Restos du Cœur</span>
                 </div>
               </article>
+            </div>
 
-              <!-- Unified Stage Controls Bar -->
-              <div class="akaru-stage-foot">
-                <span class="akaru-idx" id="akaru-stage-idx">CHAPITRE 01 / 05</span>
-                <div class="akaru-stage-controls">
-                  <button type="button" class="akaru-circle-nav" id="akaru-prev-btn" aria-label="Chapitre précédent">←</button>
-                  <button type="button" class="akaru-circle-nav is-primary" id="akaru-next-btn" aria-label="Chapitre suivant">↗</button>
+            <!-- Right Pinned Sticky Visual Showcase (Desktop) -->
+            <div class="akaru-stage-sticky-col">
+              <div class="akaru-stage-viewport">
+                <div class="akaru-stage-media-box" id="akaru-stage-media-box">
+                  <div class="akaru-curtain-layer" id="akaru-curtain-layer" aria-hidden="true">
+                    <span class="akaru-curtain-blade"></span>
+                    <span class="akaru-curtain-blade"></span>
+                    <span class="akaru-curtain-blade"></span>
+                    <span class="akaru-curtain-blade"></span>
+                    <span class="akaru-curtain-blade"></span>
+                  </div>
+
+                  <!-- Visual Slide 01 -->
+                  <div class="akaru-visual-slide is-active" data-chapter="0" aria-hidden="false">
+                    <img class="akaru-stage-img" src="portfolio_assets/about_01_basque.webp?v=31" alt="Côte Basque — Lycée Cantau Anglet" style="object-position: 50% 42%;" decoding="async" />
+                    <div class="stage-hud-top">CÔTE BASQUE // LYCÉE POLYVALENT CANTAU ANGLET</div>
+                    <div class="stage-hud-bottom">
+                      <span class="stage-hud-badge">BAC 2026 • SECTION BILINGUE BASQUE (DNL)</span>
+                      <span class="stage-hud-kpi">GRAND ORAL 20.00 / 20</span>
+                    </div>
+                  </div>
+
+                  <!-- Visual Slide 02 -->
+                  <div class="akaru-visual-slide" data-chapter="1" aria-hidden="true">
+                    <img class="akaru-stage-img" src="portfolio_assets/about_02_terrain.webp?v=34" alt="Escalade et randonnée dans les Pyrénées" style="object-position: 50% 46%;" loading="lazy" decoding="async" />
+                    <div class="stage-hud-top">PYRÉNÉES &amp; CÔTE BASQUE // ESCALADE &amp; ENDURANCE</div>
+                    <div class="stage-hud-bottom">
+                      <span class="stage-hud-badge">ESCALADE EN VOIE &amp; BLOC • KORRIKA 10 KM</span>
+                      <span class="stage-hud-kpi">ESPRIT DE CORDÉE</span>
+                    </div>
+                  </div>
+
+                  <!-- Visual Slide 03 -->
+                  <div class="akaru-visual-slide" data-chapter="2" aria-hidden="true">
+                    <img class="akaru-stage-img" src="portfolio_assets/about_03_chess.webp?v=31" alt="Échecs et théorie des jeux AlphaZero" style="object-position: 50% 54%;" loading="lazy" decoding="async" />
+                    <div class="stage-hud-top">MINIMAX • ALPHAZERO SELF-PLAY (10 000 PARTIES GPU)</div>
+                    <div class="stage-hud-bottom">
+                      <span class="stage-hud-badge">COMPLEXITÉ 10¹²⁰ / 10³⁶⁰ • PROSPECT THEORY</span>
+                      <span class="stage-hud-kpi">~1500 ELO</span>
+                    </div>
+                  </div>
+
+                  <!-- Visual Slide 04 -->
+                  <div class="akaru-visual-slide" data-chapter="3" aria-hidden="true">
+                    <img class="akaru-stage-img" src="portfolio_assets/about_04_quant.webp?v=31" alt="Forge logicielle et laboratoire quantitatif PyTorch" style="object-position: 50% 48%;" loading="lazy" decoding="async" />
+                    <div class="stage-hud-top">PYTORCH GMM-MDN • TCN 30×32 • WALK-FORWARD GATE</div>
+                    <div class="stage-hud-bottom">
+                      <span class="stage-hud-badge">466 572 PRÉVISIONS • RMSE 0.677°C • 735 TESTS B2B</span>
+                      <span class="stage-hud-kpi">PBO/CSCV PASS</span>
+                    </div>
+                  </div>
+
+                  <!-- Visual Slide 05 -->
+                  <div class="akaru-visual-slide" data-chapter="4" aria-hidden="true">
+                    <img class="akaru-stage-img" src="portfolio_assets/about_05_anglet.webp?v=31" alt="IUT de Bayonne-Anglet et contributions open-source" style="object-position: 50% 40%;" loading="lazy" decoding="async" />
+                    <div class="stage-hud-top">BUT INFORMATIQUE // IUT BAYONNE-ANGLET &amp; OPEN-SOURCE</div>
+                    <div class="stage-hud-bottom">
+                      <span class="stage-hud-badge">KAI ACADEMIC (79 P.) • SAFEPATH-LINT AST • RESTOS DU CŒUR</span>
+                      <span class="stage-hud-kpi stage-hud-green">46 PRs MERGED</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dynamic Active Telemetry Strip -->
+                <div class="akaru-meta-strip">
+                  <span class="akaru-year-pill" id="akaru-stage-year">2023–2026</span>
+                  <span class="akaru-domain-label" id="akaru-stage-domain">FORMATION &amp; LANGUES</span>
+                  <span class="akaru-sub-label" id="akaru-stage-sub">LYCÉE CANTAU ANGLET</span>
+                </div>
+
+                <!-- Dynamic Scroll Scrubber Bar -->
+                <div class="akaru-stage-foot">
+                  <div class="akaru-foot-status">
+                    <span class="akaru-idx" id="akaru-stage-idx">CHAPITRE 01 / 05</span>
+                    <span class="akaru-scroll-cue">DÉFILER POUR EXPLORER ↓</span>
+                  </div>
+                  <div class="akaru-scrub-pills" role="group" aria-label="Saut rapide par chapitre">
+                    <button type="button" class="akaru-scrub-btn is-active" data-jump="0" aria-label="Aller au chapitre 1">01</button>
+                    <button type="button" class="akaru-scrub-btn" data-jump="1" aria-label="Aller au chapitre 2">02</button>
+                    <button type="button" class="akaru-scrub-btn" data-jump="2" aria-label="Aller au chapitre 3">03</button>
+                    <button type="button" class="akaru-scrub-btn" data-jump="3" aria-label="Aller au chapitre 4">04</button>
+                    <button type="button" class="akaru-scrub-btn" data-jump="4" aria-label="Aller au chapitre 5">05</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -493,15 +520,15 @@
 
                 <div class="flagship-metrics-row">
                   <div class="metric-pill">
-                    <div class="metric-num">466 572</div>
+                    <div class="metric-num" data-roll="466572" data-sep=" ">466 572</div>
                     <div class="metric-desc">Prévisions Replay 5 Ans</div>
                   </div>
                   <div class="metric-pill">
-                    <div class="metric-num">0.677°C</div>
+                    <div class="metric-num" data-roll="0.677" data-decimals="3" data-suffix="°C">0.677°C</div>
                     <div class="metric-desc">RMSE 5-Gaussian MDN</div>
                   </div>
                   <div class="metric-pill">
-                    <div class="metric-num">1.43%</div>
+                    <div class="metric-num" data-roll="1.43" data-decimals="2" data-suffix="%">1.43%</div>
                     <div class="metric-desc">ECE après Calibration PAV</div>
                   </div>
                   <div class="metric-pill">
@@ -1053,6 +1080,27 @@ if fmt == "pdf":
     </div>
   </div>
 
+  <!-- Floating Scroll Island (Watermelon UI conic progress + drawer mechanic) -->
+  <div class="scroll-island" id="scroll-island" aria-label="Progression de lecture et navigation rapide">
+    <nav class="scroll-island-drawer" id="scroll-island-drawer" aria-label="Sections du portfolio">
+      <a href="#hero" class="island-link is-active" data-island-target="hero"><span>00</span>Hero &amp; Synthèse</a>
+      <a href="#about" class="island-link" data-island-target="about"><span>01</span>Trajectoire au Scroll</a>
+      <a href="#flagships" class="island-link" data-island-target="flagships"><span>02</span>Études de Cas</a>
+      <a href="#exploded-architecture" class="island-link" data-island-target="exploded-architecture"><span>03</span>Totem 3D &amp; Méthode</a>
+      <a href="#parcours" class="island-link" data-island-target="parcours"><span>04</span>Parcours &amp; Stages</a>
+      <a href="#contact" class="island-link" data-island-target="contact"><span>05</span>Contact &amp; CV</a>
+    </nav>
+    <button type="button" class="scroll-island-trigger" id="scroll-island-trigger" aria-expanded="false" aria-controls="scroll-island-drawer">
+      <span class="scroll-island-ring" id="scroll-island-ring" aria-hidden="true"></span>
+      <span class="scroll-island-meta">
+        <span class="scroll-island-kicker">INDEX</span>
+        <span class="scroll-island-section" id="scroll-island-section">00 / HERO</span>
+      </span>
+      <span class="scroll-island-pct" id="scroll-island-pct">00%</span>
+      <span class="scroll-island-chevron" aria-hidden="true">⌃</span>
+    </button>
+  </div>
+
   <!-- Floating Toast Notification for Email Copy Feedback -->
   <div id="toast" class="toast-notification" aria-live="polite">
     <span class="toast-icon">✓</span>
@@ -1060,10 +1108,10 @@ if fmt == "pdf":
   </div>
 
   <!-- App Core JS -->
-  <script src="portfolio_assets/vendor/three.min.js?v=36" defer></script>
-  <script src="portfolio_assets/totem_3d.js?v=36" defer></script>
-  <script src="portfolio_assets/app.js?v=36" defer></script>
+  <script src="portfolio_assets/vendor/three.min.js?v=38" defer></script>
+  <script src="portfolio_assets/totem_3d.js?v=38" defer></script>
+  <script src="portfolio_assets/app.js?v=38" defer></script>
   <!-- Swarm Rebuild Takeover Engine -->
-  <script src="portfolio_assets/swarm-init.js?v=36" defer></script>
+  <script src="portfolio_assets/swarm-init.js?v=38" defer></script>
 </body>
 </html>
