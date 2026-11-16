@@ -3,285 +3,860 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>S1.04 — SAÉ 1.04 - Création d'une base de données • BUT 1 Informatique Anglet</title>
+    <meta name="theme-color" content="#4A6B56">
+    <title>S1.04 — Conception d'une Base de Données (Ongi Etorri) — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        body { 
-            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif; 
-            background-color: #f8fafc; 
-            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px); 
-            background-size: 28px 28px; 
-            color: #0f172a; 
+        :root {
+            color-scheme: light;
+            --accent-color: #4A6B56;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
         }
         .glass-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.02);
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
         }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
+<body class="flex flex-col min-h-screen">
+
     
-    <!-- Top Back Navigation -->
-    <div class="flex items-center justify-between pb-2">
-        <a href="../index.html" class="min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 bg-white shadow-2xs hover:bg-slate-50" style="color: #7E4868; border-color: #7E486844;">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            <span>Retour au Hub Académique</span>
-        </a>
-        <span class="text-xs font-mono font-medium text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-2xs">
-            13 documents officiels sanctuarisés
-        </span>
+    <!-- En-tête Allégé & Épuré (Zéro Footer Parasite) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="index.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">
+                    S1.04
+                </a>
+                
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../revision/S1.04.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #EDF3EF; color: #4A6B56; border: 1px solid #C3D8CB;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                    Moodle #25055
+                </span>
+            </div>
+        </div>
     </div>
 
-    <!-- Course Header Banner in Subject Color (Maths in Crimson Red) -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 bg-white relative overflow-hidden shadow-sm" style="border-left: 6px solid #7E4868;">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <div class="flex items-center gap-2">
-                    <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono shadow-xs" style="background-color: #7E4868;">
-                        S1.04
+    <!-- Bannière Officielle Matière / Chapitre -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #4A6B56;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #EDF3EF; color: #4A6B56; border: 1px solid #C3D8CB;">
+                        S1.04 
                     </span>
-                    <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full" style="background-color: #7E486815; color: #7E4868; border: 1px solid #7E486830;">
-                        SAÉ 1.04 - Création d'une base de données
-                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">S1.04 — Conception d'une Base de Données (Ongi Etorri)</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Christophe Marquesuzaà</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
                 </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">SAÉ 1.04 - Création d'une base de données</h1>
-                <p class="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
-                    <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
-                    <span>Enseignant Référent : <strong>M. Marquesuzaà</strong> · BUT 1 Informatique Anglet</span>
+            </div>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Conception intégrale d'une base de données relationnelle pour le projet d'application réel Ongi Etorri : recueil des règles de gestion métier, modélisation MCD sous Looping, dérivation en MLD relationnel, script DDL PostgreSQL avec contraintes d'intégrité et requêtes d'exploitation complexes.
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+
+        <div class="flex items-center justify-between flex-wrap gap-4">
+            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+                <i data-lucide="book-open" class="w-5 h-5" style="color: #4A6B56;"></i>
+                <span>Programme & Chapitres d'Apprentissage (3 chapitres)</span>
+            </h2>
+            <div class="flex items-center gap-2 flex-wrap">
+                <a href="S1.04/chap1_cadrage_mcd_looping.html" class="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-2xs flex items-center gap-2 transition hover:brightness-95" style="background-color: #4A6B56;">
+                    <i data-lucide="play" class="w-4 h-4"></i>
+                    <span>Démarrer le Chapitre 1</span>
+                </a>
+                
+                <a href="../revision/S1.04.html" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-2 shadow-2xs transition">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+                    <span>Fiche Révision (3 niveaux)</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Grille des Chapitres -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #4A6B56;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EDF3EF; color: #4A6B56; border: 1px solid #C3D8CB;">
+                        CHAPITRE 1
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Étude de Cas Ongi Etorri & Modélisation Conceptuelle Merise
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Analyse du cahier des charges de la plateforme d'hébergement au Pays Basque, dictionnaire des données et élaboration du MCD sous Looping.
                 </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Ongi Etorri</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Merise</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">MCD</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Looping</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Règles de gestion</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="S1.04/chap1_cadrage_mcd_looping.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #4A6B56;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #4A6B56;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EDF3EF; color: #4A6B56; border: 1px solid #C3D8CB;">
+                        CHAPITRE 2
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">40 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Dérivation du MLD Relationnel & Formes Normales (3FN/BCNF)
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Règles strictes de dérivation de M. Marquesuzaà, migration des identifiants en clés étrangères, tables associatives et vérification de la 3FN.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">MLD</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Normalisation</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">3FN</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Clés primaires</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Clés étrangères</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="S1.04/chap2_mld_normalisation.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #4A6B56;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #4A6B56;">
+            <div>
+                <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EDF3EF; color: #4A6B56; border: 1px solid #C3D8CB;">
+                        CHAPITRE 3
+                    </span>
+                    <span class="text-slate-400 font-mono text-[11px] font-semibold">45 min</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 group-hover:text-slate-950 transition">
+                    Script DDL PostgreSQL, Contraintes & Requêtes Métier Avancées
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                    Création des tables SQL, contraintes CHECK et FOREIGN KEY ON DELETE RESTRICT, jeu d'essais et requêtes analytiques avec jointures.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">PostgreSQL</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">DDL</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SQL</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Requêtes</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">JOIN</span><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">GROUP BY</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <a href="S1.04/chap3_ddl_postgresql_requetes.html" class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" style="background-color: #4A6B56;">
+                    <span>Étudier ce chapitre</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+        
+        </div>
+
+        
+        <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white shadow-xs">
+            <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+                <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+                    <i data-lucide="folder-down" class="w-5 h-5 text-blue-600"></i>
+                    <span>Documents & Supports Enseignants (35 fichiers vérifiés)</span>
+                </h2>
+                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono">
+                    Supports Officiels Moodle & IUT
+                </span>
             </div>
             
-            <button onclick="window.location.href='../index.html'" class="min-h-[44px] px-5 py-2.5 rounded-2xl text-xs font-semibold text-white shadow-xs transition hover:brightness-95 flex items-center gap-2" style="background-color: #7E4868; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);">
-                <i data-lucide="book-open" class="w-4 h-4"></i>
-                <span>Ouvrir les Fiches de Révision</span>
-            </button>
+                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
+                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full" style="background-color: #4A6B56;"></span>
+                        <span>Travaux Pratiques (TP)</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-normal">(5 documents)</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        
+                <a href="../supports/S1.04/DEVOIR_D%C3%A9p%C3%B4t%20Livrable%204%20-%20Evaluation%20individuelle%20-%20TP1.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP1">DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP1</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/DEVOIR_D%C3%A9p%C3%B4t%20Livrable%204%20-%20Evaluation%20individuelle%20-%20TP2.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP2">DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP2</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/DEVOIR_D%C3%A9p%C3%B4t%20Livrable%204%20-%20Evaluation%20individuelle%20-%20TP3.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP3">DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP3</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/DEVOIR_D%C3%A9p%C3%B4t%20Livrable%204%20-%20Evaluation%20individuelle%20-%20TP4.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP4">DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP4</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/DEVOIR_D%C3%A9p%C3%B4t%20Livrable%204%20-%20Evaluation%20individuelle%20-%20TP5.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP5">DEVOIR Dépôt Livrable 4 - Evaluation individuelle - TP5</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
+                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full" style="background-color: #4A6B56;"></span>
+                        <span>Évaluations, Annales & Corrigés</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-normal">(3 documents)</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        
+                <a href="../supports/S1.04/DEVOIR_D%C3%A9p%C3%B4t%20Livrable%201%20-%20Conception%20de%20donn%C3%A9es.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR Dépôt Livrable 1 - Conception de données">DEVOIR Dépôt Livrable 1 - Conception de données</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/DEVOIR_Espace%20D%C3%A9p%C3%B4t%20pour%20le%20Livrable%203%20-%20Manipulation%20de%20donn%C3%A9es%20%28%C3%A1%20deposer%20avant%20mardi%2013%20Janvier%2023h59%29.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR Espace Dépôt pour le Livrable 3 - Manipulation de données (á deposer avant mardi 13 Janvier 23h59)">DEVOIR Espace Dépôt pour le Livrable 3 - Manipulation de données (á deposer avant mardi 13 Janvier 23h59)</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/DEVOIR_espace%20de%20d%C3%A9p%C3%B4t.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DEVOIR espace de dépôt">DEVOIR espace de dépôt</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
+                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full" style="background-color: #4A6B56;"></span>
+                        <span>Codes Sources, Notebooks & Scripts</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-normal">(13 documents)</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        
+                <a href="../supports/S1.04/S1.04%20-%20script%20sejour%20v2.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - script sejour v2">S1.04 - script sejour v2</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20script%20sejour.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - script sejour">S1.04 - script sejour</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20script%20s%C3%A9jour.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - script séjour">S1.04 - script séjour</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20scripts.zip" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="archive" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - scripts">S1.04 - scripts</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">ZIP</span>
+                                <span>•</span>
+                                <span class="font-mono">10.7 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20scriptsejour.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - scriptsejour">S1.04 - scriptsejour</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/script%20s%C3%A9jour.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="script séjour">script séjour</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/script_sejour.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="script sejour">script sejour</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/script_sejour_v2.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="script sejour v2">script sejour v2</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/script_s%C3%A9jour.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="script séjour">script séjour</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/scripts%202025.zip" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="archive" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="scripts 2025">scripts 2025</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">ZIP</span>
+                                <span>•</span>
+                                <span class="font-mono">10.7 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/scripts2025.zip" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="archive" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="scripts2025">scripts2025</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">ZIP</span>
+                                <span>•</span>
+                                <span class="font-mono">10.7 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/scripts_2025.zip" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="archive" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="scripts 2025">scripts 2025</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">ZIP</span>
+                                <span>•</span>
+                                <span class="font-mono">10.7 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/scriptsejour.sql" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="scriptsejour">scriptsejour</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">SQL</span>
+                                <span>•</span>
+                                <span class="font-mono">0.6 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0">
+                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full" style="background-color: #4A6B56;"></span>
+                        <span>Supports & Ressources Officielles</span>
+                        <span class="text-[10px] font-mono text-slate-400 font-normal">(14 documents)</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        
+                <a href="../supports/S1.04/Dictionnaire%20des%20donn%C3%A9es%20Ongi%20Etorri.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="Dictionnaire des données Ongi Etorri">Dictionnaire des données Ongi Etorri</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">147.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/Dictionnaire_des_donnees_Ongi_Etorri.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="Dictionnaire des donnees Ongi Etorri">Dictionnaire des donnees Ongi Etorri</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">147.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/Dictionnaire_des_donn%C3%A9es_Ongi_Etorri.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="Dictionnaire des données Ongi Etorri">Dictionnaire des données Ongi Etorri</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">147.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/DictionnairedesdonneesOngiEtorri.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="DictionnairedesdonneesOngiEtorri">DictionnairedesdonneesOngiEtorri</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">147.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/Erreurs_fr%C3%A9quentes_et_analyse_des_notes.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="Erreurs fréquentes et analyse des notes">Erreurs fréquentes et analyse des notes</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">308.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/Erreurs_fr%C3%A9quentes_et_analyse_des_notes_2025-2026.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="Erreurs fréquentes et analyse des notes 2025-2026">Erreurs fréquentes et analyse des notes 2025-2026</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">3.97 Mo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/README.md" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="README">README</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">MD</span>
+                                <span>•</span>
+                                <span class="font-mono">0.2 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20Dictionnaire%20des%20donn%C3%A9es%20Ongi%20Etorri.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - Dictionnaire des données Ongi Etorri">S1.04 - Dictionnaire des données Ongi Etorri</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">147.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20Erreurs%20fr%C3%A9quentes%20et%20analyse%20des%20notes%20-.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - Erreurs fréquentes et analyse des notes -">S1.04 - Erreurs fréquentes et analyse des notes -</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">3.97 Mo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20Erreurs%20fr%C3%A9quentes%20et%20analyse%20des%20notes.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - Erreurs fréquentes et analyse des notes">S1.04 - Erreurs fréquentes et analyse des notes</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">308.5 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20SA%C3%89%20-%20Dictionnaire%20des%20Donn%C3%A9es%20de%20la%20R%C3%A9sidence%20Ongi%20Etorri.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - SAÉ - Dictionnaire des Données de la Résidence Ongi Etorri">S1.04 - SAÉ - Dictionnaire des Données de la Résidence Ongi Etorri</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">147.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/S1.04%20-%20SA%C3%89%20-%20Sch%C3%A9ma%20Relationnel%20et%20Mod%C3%A8le%20Logique%20de%20Donn%C3%A9es%20%28v5%29.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="S1.04 - SAÉ - Schéma Relationnel et Modèle Logique de Données (v5)">S1.04 - SAÉ - Schéma Relationnel et Modèle Logique de Données (v5)</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">37.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/SchemaRelationnel_v5.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="SchemaRelationnel v5">SchemaRelationnel v5</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">37.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                <a href="../supports/S1.04/SchemaRelationnelv5.pdf" target="_blank" download class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs flex items-center justify-between gap-3 transition group">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-600 transition">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-xs font-bold text-slate-900 truncate group-hover:text-blue-600 transition" title="SchemaRelationnelv5">SchemaRelationnelv5</h4>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                                <span class="font-mono font-semibold">PDF</span>
+                                <span>•</span>
+                                <span class="font-mono">37.3 Ko</span>
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 transition"></i>
+                </a>
+                
+                    </div>
+                </div>
+                
         </div>
-    </div>
+        
 
-    <!-- Authentic Raw Documents Table -->
-    <div class="glass-card rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
-            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="folder-check" class="w-4 h-4" style="color: #7E4868;"></i>
-                <span>Documents Sources Authentifiés (Sanctuaire Pédagogique)</span>
-            </h2>
-            <span class="text-xs text-slate-400 font-mono">Empreintes SHA-256 certifiées</span>
-        </div>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left">
-                <thead>
-                    <tr class="bg-slate-50/80 text-[11px] font-bold text-slate-500 uppercase border-b border-slate-200">
-                        <th class="p-3.5">Fichier Original</th>
-                        <th class="p-3.5">Format</th>
-                        <th class="p-3.5">Taille</th>
-                        <th class="p-3.5">Empreinte SHA-256</th>
-                        <th class="p-3.5 text-right">Certification</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100">
-                    
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>scripts 2025.zip</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">ARCHIVES</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">10.7 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">5b746b5b2373...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>script séjour.sql</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">CODE</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">0.6 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">fc549df9b21d...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>DEVOIR_Dépôt Livrable 1 - Conception de données.txt</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">DOCUMENTS</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">0.6 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">c48fd94b2ad4...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>DEVOIR_Espace Dépôt pour le Livrable 3 - Manipulation de données (á deposer avant mardi 13 Janvier 23h59).txt</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">DOCUMENTS</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">1.2 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">1a9f57103dfe...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>DEVOIR_Dépôt Livrable 4 - Evaluation individuelle - TP1.txt</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">DOCUMENTS</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">0.4 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">0a59fa4a4388...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>DEVOIR_Dépôt Livrable 4 - Evaluation individuelle - TP2.txt</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">DOCUMENTS</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">0.4 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">daef658a5921...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>Dictionnaire des données Ongi Etorri.pdf</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">147.3 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">3c6cd73ba390...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>SchemaRelationnel_v5.pdf</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">37.3 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">0161a761712a...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>Erreurs fréquentes et analyse des notes.pdf</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">213.4 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">f8816205a722...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>Erreurs fréquentes et analyse des notes.pdf</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">271.1 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">4de541cb4a7e...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>Erreurs fréquentes et analyse des notes.pdf</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">279.8 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">eedcace2d74a...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>Erreurs fréquentes et analyse des notes.pdf</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">308.5 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">9fbfe6c6c8e0...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-            <tr class="hover:bg-slate-50 text-xs sm:text-sm border-b border-slate-100 transition">
-                <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
-                    <span>Erreurs fréquentes et analyse des notes 2025-2026.pdf</span>
-                </td>
-                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold">PDF</span></td>
-                <td class="p-3.5 font-mono text-slate-500 text-xs">4060.4 Ko</td>
-                <td class="p-3.5 font-mono text-slate-400 text-[11px]">0c6d64cf69a3...</td>
-                <td class="p-3.5 text-right">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold inline-flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
-                    </span>
-                </td>
-            </tr>
-            
-                </tbody>
-            </table>
-        </div>
-    </div>
+    </main>
 
     <script>
         lucide.createIcons();
