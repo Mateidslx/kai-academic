@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bibliothèque &amp; Traité des Systèmes — Matéi de Saint Léger</title>
+  <meta name="description" content="Portfolio d'ingénierie logicielle &amp; bibliothèque d'archives de Matéi de Saint Léger : minimalisme radical, rigueur C99, moteurs quantitatifs et réalisme tactile.">
+
+  <!-- Google Fonts: Cormorant Garamond, Cinzel, Newsreader & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="library_assets/style.css">
+</head>
+<body>
+
+  <!-- Signet en Soie Rouge (Bookmark Ribbon) qui suit le défilement -->
+  <div class="silk-ribbon-wrapper" aria-hidden="true">
+    <div class="silk-ribbon" id="silk-ribbon"></div>
+  </div>
+
+  <!-- Barre de Navigation & En-tête Folio -->
+  <header class="folio-header">
+    <a href="#hero" class="folio-brand">
+      <span class="ex-libris-monogram">MS</span>
+      <span class="folio-title">Matéi de Saint Léger</span>
+    </a>
+
+    <nav class="folio-nav-links" aria-label="Navigation des Traités">
+      <a href="#hero" class="folio-nav-item">I. Toile d'Encre</a>
+      <a href="#catalog" class="folio-nav-item">II. Card Catalog</a>
+      <a href="#traite" class="folio-nav-item">III. Traité 3D</a>
+      <a href="#marginalia" class="folio-nav-item">IV. Marginalia</a>
+      <a href="#colophon" class="folio-nav-item">V. Colophon</a>
+    </nav>
+
+    <div class="folio-header-actions">
+      <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Changer l'atmosphère">
+        <span id="current-theme-label">⚪ Toile Blanche &amp; Encre</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION I : LA TOILE BLANCHE & LA GOUTTE D'ENCRE VIVANTE -->
+    <section class="hero-ink-stage" id="hero">
+      <canvas id="ink-canvas" class="hero-canvas-bg" aria-hidden="true"></canvas>
+
+      <div class="hero-content">
+        <div class="hero-super-kicker">ARCHIVES D'INGÉNIERIE // BUT 1 ANGLET</div>
+        <h1 class="hero-author-title">Matéi de Saint Léger</h1>
+        <div class="hero-callout-quote">
+          « Rien n'est plus dense qu'une goutte d'encre noire tombant sur une page blanche. »
+        </div>
+        <p class="hero-desc">
+          Étudiant en <strong>BUT Informatique (Campus d'Anglet)</strong>, j'architecture des <strong>systèmes autonomes 24/7</strong>, des <strong>moteurs quantitatifs prédictifs</strong> et des structures de données pures en <strong>ISO C99</strong> — conçus comme on relie un traité classique, sans artifice ni dépendance superflue.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#catalog" class="btn-book primary">Consulter les Fiches (Card Catalog) ↓</a>
+          <a href="#traite" class="btn-book secondary">Ouvrir le Traité 3D →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION II : LE CARD CATALOG (MEUBLE DES ARCHIVES EN CHÊNE) -->
+    <section class="section-archival" id="catalog">
+      <div class="folio-container">
+        <div class="section-head-book">
+          <div class="section-tag-archive">// CLASSIFICATION UNIVERSELLE</div>
+          <h2 class="section-title-book">The Card Catalog : Meuble des Archives</h2>
+          <p class="section-lead-book">
+            Chaque architecture est répertoriée comme un manuscrit rare, avec sa cote de bibliothèque, ses garanties formelles et ses preuves en production.
+          </p>
+        </div>
+
+        <div class="catalog-cabinet">
+          <!-- Filtres de Rayonnage -->
+          <div class="catalog-tabs">
+            <button type="button" class="catalog-tab-btn active" data-category="all">Toutes les Fiches (06)</button>
+            <button type="button" class="catalog-tab-btn" data-category="c99">QA • C99 &amp; Bas-Niveau</button>
+            <button type="button" class="catalog-tab-btn" data-category="quant">HG • Finance Quantitative</button>
+            <button type="button" class="catalog-tab-btn" data-category="sec">QA76 • AppSec &amp; Open-Source</button>
+            <button type="button" class="catalog-tab-btn" data-category="ai">Z • Systèmes Autonomes</button>
+          </div>
+
+          <!-- Grille des Fiches 3x5 -->
+          <div class="catalog-cards-grid">
+            <!-- Fiche 01: AlgoForge C99 -->
+            <article class="catalog-card" data-cat="c99">
+              <div>
+                <div class="card-callout-strip">
+                  <span class="dewey-code">QA 76.73 .C15</span>
+                  <span class="card-subject-tag">ISO C99 / Valgrind</span>
+                </div>
+                <h3 class="card-title">AlgoForge Studio : Arbres AST &amp; Mémoire Hermétique</h3>
+                <p class="card-desc">
+                  Structures de données rigoureuses en C standard ANSI/ISO C99. Tripartition Quicksort, arbres équilibrés AVL, indentation Allman stricte et 0 fuite mémoire sous Valgrind (-Wall -Wextra -Werror).
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="card-proof-badge">Garantie : 0 octet perdu</span>
+                <a href="#traite" class="card-link-arrow">Feuilleter →</a>
+              </div>
+            </article>
+
+            <!-- Fiche 02: Polymarket CLOB -->
+            <article class="catalog-card" data-cat="quant ai">
+              <div>
+                <div class="card-callout-strip">
+                  <span class="dewey-code">HG 6024 .P7</span>
+                  <span class="card-subject-tag">Finance Quantitative</span>
+                </div>
+                <h3 class="card-title">Moteur Prédictif Polymarket CLOB</h3>
+                <p class="card-desc">
+                  Arbitrage météorologique et prédictions probabilistes 24/7 sur VPS Oracle Cloud. Carnets d'ordres WebSockets en direct, modélisation bayésienne et grand livre SHA-256 immuable.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="card-proof-badge">Uptime : 24/7 Oracle VPS</span>
+                <a href="#traite" class="card-link-arrow">Feuilleter →</a>
+              </div>
+            </article>
+
+            <!-- Fiche 03: Twenty CRM -->
+            <article class="catalog-card" data-cat="sec">
+              <div>
+                <div class="card-callout-strip">
+                  <span class="dewey-code">QA 76.76 .A65</span>
+                  <span class="card-subject-tag">Open-Source (40k★)</span>
+                </div>
+                <h3 class="card-title">Twenty CRM : RBAC &amp; Mutations Métadonnées</h3>
+                <p class="card-desc">
+                  Contributions majeures fusionnées en production : enforcement strict des autorisations RBAC sur les mutations metadata GraphQL et intégrité transactionnelle lors des suppressions en cascade.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="card-proof-badge">Preuve : PR #1428 &amp; #1504</span>
+                <a href="https://github.com/twentyhq/twenty" target="_blank" rel="noopener noreferrer" class="card-link-arrow">GitHub ↗</a>
+              </div>
+            </article>
+
+            <!-- Fiche 04: BasedHardware/omi -->
+            <article class="catalog-card" data-cat="sec">
+              <div>
+                <div class="card-callout-strip">
+                  <span class="dewey-code">TK 5105 .O6</span>
+                  <span class="card-subject-tag">AppSec / Hardening</span>
+                </div>
+                <h3 class="card-title">BasedHardware/omi (8k★) : Correctifs Failles</h3>
+                <p class="card-desc">
+                  Assainissement systématique des injections XSS (CWE-79), masquage étanche des fuites d'erreurs internes (CWE-209) et consolidation des flux audio Bluetooth Low Energy.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="card-proof-badge">Preuve : 7 PRs fusionnées</span>
+                <a href="https://github.com/BasedHardware/omi" target="_blank" rel="noopener noreferrer" class="card-link-arrow">GitHub ↗</a>
+              </div>
+            </article>
+
+            <!-- Fiche 05: Letta Memory OS -->
+            <article class="catalog-card" data-cat="ai">
+              <div>
+                <div class="card-callout-strip">
+                  <span class="dewey-code">Z 665 .K34</span>
+                  <span class="card-subject-tag">Mémoire Vivante / IA</span>
+                </div>
+                <h3 class="card-title">Letta Memory OS &amp; Swarms Autonomes</h3>
+                <p class="card-desc">
+                  Système d'exploitation mémoriel hiérarchique : Core Memory (profil et contraintes), Archival Memory (corpus de cours IUT) et Recall Memory avec consensus déterministe entre agents.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="card-proof-badge">Architecture : SQLite WAL</span>
+                <a href="#traite" class="card-link-arrow">Feuilleter →</a>
+              </div>
+            </article>
+
+            <!-- Fiche 06: Échecs & Minimax -->
+            <article class="catalog-card" data-cat="c99">
+              <div>
+                <div class="card-callout-strip">
+                  <span class="dewey-code">GV 1449 .T3</span>
+                  <span class="card-subject-tag">Échecs &amp; Algorithmes</span>
+                </div>
+                <h3 class="card-title">Vision 5 Coups d'Avance : Échecs &amp; Minimax</h3>
+                <p class="card-desc">
+                  Joueur de compétition (~1500 Elo). L'analyse positionnelle rigoureuse transposée en algorithmique : élagage Alpha-Bêta, réduction de la complexité combinatoire et anticipation absolue des cas limites.
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="card-proof-badge">Tactique : Stockfish 17</span>
+                <a href="#marginalia" class="card-link-arrow">Examiner →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION III : LE TRAITÉ INTERACTIF EN 3D (VOLUME RELIÉ) -->
+    <section class="section-archival" id="traite">
+      <div class="folio-container">
+        <div class="section-head-book">
+          <div class="section-tag-archive">// VOLUME I • RELIURE D'ART</div>
+          <h2 class="section-title-book">Le Traité Interactif en 3D</h2>
+          <p class="section-lead-book">
+            Manipulez le volume physique : cliquez sur la couverture pour l'ouvrir et tournez les pages pour examiner les principes et le code source.
+          </p>
+        </div>
+
+        <div class="book-stage-wrapper">
+          <div class="book-viewport">
+            <div class="interactive-book" id="interactive-book">
+              <!-- Tranche et dos -->
+              <div class="book-spine"></div>
+
+              <!-- Couverture avant -->
+              <div class="book-cover-front">
+                <div class="cover-gold-frame">
+                  <div class="cover-kicker">TRAITÉ DES SYSTÈMES AUTONOMES</div>
+                  <div>
+                    <h3 class="cover-title">Architecture Logicielle &amp; Rigueur C99</h3>
+                    <div class="cover-author">Matéi de Saint Léger</div>
+                  </div>
+                  <div class="cover-seal">MS</div>
+                </div>
+              </div>
+
+              <!-- Page 1 (Spread 1 - Left) -->
+              <div class="book-page" data-spread="1">
+                <div class="page-header-strip">
+                  <span>CHAPITRE I</span>
+                  <span>AXIOMES DE RIGUEUR</span>
+                </div>
+                <div class="page-body-text">
+                  <strong>Axiome 01 — La Mémoire est Sacrée.</strong>
+                  <br><br>
+                  Tout octet alloué doit posséder un propriétaire formel et une libération déterministe. Le ramasse-miettes (GC) masque l'entropie mais ne résout pas la friction temporelle.
+                  <br><br>
+                  <strong>Axiome 02 — Vérification Hermétique.</strong>
+                  <br>
+                  Aucune ligne de code ne rejoint la production sans test unitaire hermétique et zéro fuite sous Valgrind.
+                </div>
+                <div class="page-footer-num">— 01 —</div>
+              </div>
+
+              <!-- Page 2 (Spread 1 - Right) -->
+              <div class="book-page" data-spread="1">
+                <div class="page-header-strip">
+                  <span>EXTRAIT SOURCE</span>
+                  <span>ISO C99 STRICTE</span>
+                </div>
+                <div class="page-body-text">
+                  <pre class="page-code-snippet"><code>/* Arbre AST & Style Allman */
+Status_t ast_insert(Node_t** root, int val)
+{
+    if (*root == NULL)
+    {
+        *root = malloc(sizeof(Node_t));
+        if (!*root) return ERR_NOMEM;
+        (*root)->val = val;
+        (*root)->left = NULL;
+        (*root)->right = NULL;
+        return STATUS_OK;
+    }
+    return (val < (*root)->val)
+        ? ast_insert(&(*root)->left, val)
+        : ast_insert(&(*root)->right, val);
+}</code></pre>
+                </div>
+                <div class="page-footer-num">— 02 —</div>
+              </div>
+
+              <!-- Page 3 (Spread 2 - Left) -->
+              <div class="book-page" data-spread="2">
+                <div class="page-header-strip">
+                  <span>CHAPITRE II</span>
+                  <span>FINANCE QUANTITATIVE</span>
+                </div>
+                <div class="page-body-text">
+                  <strong>Le Carnet d'Ordres Polymarket CLOB.</strong>
+                  <br><br>
+                  Surveillance en continu de carnets d'ordres WebSockets avec exécution d'arbitrage sous 50ms sur instance cloud dédiée Ubuntu 24.04.
+                  <br><br>
+                  Les flux de prix sont validés contre un modèle bayésien pour détecter les inefficiences de liquidité.
+                </div>
+                <div class="page-footer-num">— 03 —</div>
+              </div>
+
+              <!-- Page 4 (Spread 2 - Right) -->
+              <div class="book-page" data-spread="2">
+                <div class="page-header-strip">
+                  <span>TELEMETRIE CLOUD</span>
+                  <span>ORACLE VPS 24/7</span>
+                </div>
+                <div class="page-body-text">
+                  <pre class="page-code-snippet"><code># Supervision Systemd
+[Unit]
+Description=Polymarket Arbitrage
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+RestartSec=3s
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+                </div>
+                <div class="page-footer-num">— 04 —</div>
+              </div>
+
+              <!-- Page 5 (Spread 3 - Left) -->
+              <div class="book-page" data-spread="3">
+                <div class="page-header-strip">
+                  <span>CHAPITRE III</span>
+                  <span>SÉCURITÉ APPLICATIVE</span>
+                </div>
+                <div class="page-body-text">
+                  <strong>46 Pull Requests Fusionnées.</strong>
+                  <br><br>
+                  Contributions de premier plan sur Twenty CRM (40k★) et BasedHardware/omi (8k★) :
+                  <br>
+                  • Élimination des fuites CWE-209.
+                  <br>
+                  • Assainissement strict CWE-79 XSS.
+                  <br>
+                  • Contrôle des rôles et permissions RBAC.
+                </div>
+                <div class="page-footer-num">— 05 —</div>
+              </div>
+
+              <!-- Page 6 (Spread 3 - Right) -->
+              <div class="book-page" data-spread="3">
+                <div class="page-header-strip">
+                  <span>CERTIFICATION</span>
+                  <span>SENIOR MERGE</span>
+                </div>
+                <div class="page-body-text">
+                  <em>« All tests pass cleanly. Merged into production branch. »</em>
+                  <br><br>
+                  Validé sous la revue de code d'ingénieurs seniors internationaux.
+                  <br><br>
+                  <strong>Alternance recherchée :</strong>
+                  <br>
+                  BUT 2 Informatique (Septembre 2025/2026, Côte Basque / BAB / Hybride / Remote).
+                </div>
+                <div class="page-footer-num">— 06 —</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barre de Contrôle du Traité -->
+          <div class="book-controls-bar">
+            <button type="button" class="btn-book secondary" id="book-prev-btn">← Page Précédente</button>
+            <button type="button" class="btn-book primary" id="book-open-btn">Ouvrir le Volume</button>
+            <button type="button" class="btn-book secondary" id="book-next-btn">Tourner la Page →</button>
+            <span class="book-indicator-pill" id="book-page-indicator">Couverture Reliée • Volume Fermé</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION IV : MARGINALIA, PHILOSOPHIE & TACTIQUE D'ÉCHECS -->
+    <section class="section-archival" id="marginalia">
+      <div class="folio-container">
+        <div class="section-head-book">
+          <div class="section-tag-archive">// ESSAI &amp; GLOSES MARGINALES</div>
+          <h2 class="section-title-book">Marginalia : L'Esprit d'Archiviste</h2>
+          <p class="section-lead-book">
+            L'amour des livres sur smartphone, la rigueur de la bibliothèque universitaire et l'anticipation stratégique du joueur d'échecs.
+          </p>
+        </div>
+
+        <div class="marginalia-grid">
+          <!-- Colonne Texte Éditorial -->
+          <div class="editorial-col">
+            <p>
+              <span class="dropped-cap">L</span>a lecture de traités sur un écran de téléphone exige une discipline typographique implacable : chaque mot doit justifier sa présence sur la page. C'est exactement cette économie de moyens que j'applique au code. Quand je conçois un logiciel en ISO C99 ou une API asynchrone, je refuse le gaspillage de cycles processeur et les abstractions superflues.
+            </p>
+            <br>
+            <p>
+              Mon apprentissage a été forgé dans le silence des bibliothèques et la clarté du terminal : après une scolarité scientifique au <strong>Lycée Polyvalent Cantau d'Anglet</strong> (Spécialités Mathématiques &amp; NSI), j'ai rejoint le <strong>BUT Informatique de l'IUT de Bayonne et du Pays Basque (Campus d'Anglet)</strong> pour approfondir la machine au plus près du silicium.
+            </p>
+          </div>
+
+          <!-- Colonne Notes de Marge & Échiquier -->
+          <div class="marginalia-notes-col">
+            <div class="marginalia-note">
+              <strong>Note de marge I :</strong>
+              « Sur mobile comme en architecture serveur, le silence visuel crée l'espace nécessaire à la pensée critique. »
+            </div>
+
+            <!-- Mini Widget Échecs -->
+            <div class="chess-parchment-card">
+              <div class="chess-card-top">
+                <span class="chess-badge">ÉCHECS TACTIQUES (~1500 ELO)</span>
+                <span class="chess-eval" id="chess-eval-badge">+2.41 (Blancs)</span>
+              </div>
+              <div class="chess-ascii-board">
+  a   b   c   d   e   f   g   h
+8 [r] [.] [b] [q] [k] [b] [.] [r] 8
+7 [p] [p] [p] [.] [p] [p] [p] [p] 7
+6 [.] [.] [n] [.] [.] [n] [.] [.] 6
+5 [.] [.] [.] [p] [.] [.] [.] [.] 5
+4 [.] [.] [B] [P] [P] [.] [.] [.] 4
+3 [.] [.] [N] [.] [.] [N] [.] [.] 3
+2 [P] [P] [P] [.] [.] [P] [P] [P] 2
+1 [R] [.] [B] [Q] [K] [.] [.] [R] 1</div>
+              <p class="chess-tactical-text" id="chess-tactical-desc">
+                12. Cxd5! — Sacrifice positionnel temporaire. Gain de tempo sur la dame noire et ouverture immédiate de la colonne c.
+              </p>
+              <button type="button" class="btn-book secondary" id="chess-move-btn" style="width: 100%; justify-content: center;">
+                Avancer le Coup Suivant (Stockfish 17) →
+              </button>
+            </div>
+
+            <div class="marginalia-note">
+              <strong>Note de marge II :</strong>
+              « L'anticipation des cas limites aux échecs est identique à la gestion des pointeurs nuls et des allocations système. »
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION V : LE COLOPHON & CONTACT -->
+    <section class="section-archival" id="colophon">
+      <div class="folio-container">
+        <div class="colophon-card">
+          <div class="colophon-seal-wrap">
+            <div class="ex-libris-seal" id="ex-libris-seal" title="Cliquez pour apposer le sceau et libérer une goutte d'encre">
+              <div class="seal-ring-text">EX-LIBRIS</div>
+              <div class="seal-monogram">MS</div>
+              <div class="seal-subtext">MATÉI DE SAINT LÉGER • MMXXVI</div>
+            </div>
+          </div>
+
+          <h2 class="section-title-book">Colophon &amp; Correspondance</h2>
+          <p class="colophon-meta">
+            Ce prototype a été composé pour Matéi de Saint Léger en caractères Cormorant Garamond, Cinzel et JetBrains Mono sur papier numérique vélin.
+            <br>
+            À la recherche d'une <strong>alternance BUT 2</strong> (Septembre 2025/2026) en backend, systèmes ou intelligence artificielle autonome.
+          </p>
+
+          <div style="margin: 28px 0;">
+            <a href="mailto:matei64200@gmail.com" class="contact-email-link">matei64200@gmail.com</a>
+          </div>
+
+          <div class="hero-actions" style="margin-top: 24px;">
+            <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" target="_blank" class="btn-book primary">Télécharger CV Français (PDF)</a>
+            <a href="portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf" target="_blank" class="btn-book secondary">Download Resume (EN)</a>
+            <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="btn-book secondary">GitHub ↗</a>
+            <a href="https://linkedin.com/in/matéi-de-saint-léger-24329a32b/" target="_blank" rel="noopener noreferrer" class="btn-book secondary">LinkedIn ↗</a>
+          </div>
+
+          <div class="colophon-foot">
+            © 2026 Matéi de Saint Léger • IUT de Bayonne et du Pays Basque (Campus d'Anglet) • Serveur Dédié Ubuntu 24.04
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scripts du Prototype -->
+  <script src="library_assets/ink_canvas.js"></script>
+  <script src="library_assets/book_3d.js"></script>
+  <script src="library_assets/app.js"></script>
+</body>
+</html>

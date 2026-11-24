@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matéi de Saint Léger — Prototype Swarm Cursor Builder (Multiplayer)</title>
+  <meta name="description" content="Prototype d'assemblage en temps réel par des curseurs multi-agents autonomes : écriture caractère par caractère, tracé de cadres et magnétisme physique.">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="prototype_assets/cursor_builder.css">
+</head>
+<body>
+
+  <!-- Background Dot Grid -->
+  <div class="workspace-grid" aria-hidden="true"></div>
+
+  <div class="workbench-shell">
+    <!-- Top Builder Status & Control HUD -->
+    <header class="builder-hud">
+      <div class="builder-hud-left">
+        <div class="builder-engine-badge">
+          <span class="pulse-led"></span>
+          <span>MULTI-AGENT CURSOR BUILDER // LIVE ENGINE</span>
+        </div>
+        <span class="builder-status-text" id="builder-status-text">Initialisation des agents curseurs...</span>
+      </div>
+
+      <div class="builder-hud-controls">
+        <div class="speed-selector" title="Vitesse d'exécution des curseurs">
+          <button type="button" class="speed-opt active" data-speed="1.0">1x</button>
+          <button type="button" class="speed-opt" data-speed="2.0">2x</button>
+          <button type="button" class="speed-opt" data-speed="4.0">4x</button>
+        </div>
+        <button type="button" class="hud-btn" id="btn-skip-build">
+          Passer au Résultat Final ⏭
+        </button>
+        <button type="button" class="hud-btn primary" id="btn-replay-build">
+          ▶ Rejouer la Construction
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Assembly Canvas Area -->
+    <main class="canvas-container">
+      <div class="build-target-frame" id="build-target-frame">
+        <!-- Dragging Selection Marquee -->
+        <div class="selection-marquee" id="selection-marquee">
+          <span class="marquee-dim-badge" id="marquee-dims">1140 × 48px</span>
+        </div>
+
+        <!-- Virtual Agent Cursors Layer -->
+        <div class="cursors-overlay-layer" id="cursors-overlay"></div>
+
+        <!-- 1. The Assembled Navigation Dock -->
+        <div class="assembled-dock" id="assembled-dock">
+          <div class="assembled-dock-brand">
+            <span class="brand-badge">MS</span>
+            <span>MATÉI.</span>
+          </div>
+
+          <div class="assembled-dock-links">
+            <span>À Propos</span>
+            <span>Flagships</span>
+            <span>Vue 3D</span>
+            <span>Matrix</span>
+            <span>Contact</span>
+          </div>
+
+          <div class="assembled-dock-right">
+            <div class="dock-chip">
+              <span class="dock-chip-dot"></span>
+              <span>Recherche Alternance 2025/2026</span>
+            </div>
+            <button type="button" class="assembled-btn red" style="padding: 4px 12px; font-size: 10px;">
+              ME CONTACTER →
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. The Assembled Hero Grid -->
+        <div class="assembled-hero-grid" id="assembled-hero-grid">
+          <!-- Left Flank -->
+          <div class="hero-left-flank">
+            <div class="hero-sub-script" id="hero-sub-script"></div>
+            <h1 class="hero-main-name" id="hero-main-name"></h1>
+            <div class="hero-role-pill" id="hero-role-pill">
+              <span style="color: #ef4444;">●</span>
+              <span>DÉVELOPPEUR BACKEND, SYSTÈMES &amp; IA AUTONOME</span>
+            </div>
+            <p class="hero-desc-text" id="hero-desc-text"></p>
+            <div class="hero-action-buttons" id="hero-action-buttons">
+              <button type="button" class="assembled-btn red">INITIATE DISPATCH</button>
+              <button type="button" class="assembled-btn outline">EXPLORE ARCHITECTURE</button>
+            </div>
+          </div>
+
+          <!-- Center Column (Portrait Cutout) -->
+          <div class="hero-center-col">
+            <div class="portrait-frame" id="portrait-frame">
+              <img src="portfolio_assets/matei-cutout.png" alt="Matéi de Saint Léger" class="portrait-img" id="portrait-img" />
+            </div>
+          </div>
+
+          <!-- Right Flank (Cards Stack) -->
+          <div class="hero-right-flank">
+            <!-- Card 01: Twenty CRM -->
+            <div class="assembled-hud-card" id="card-twenty">
+              <div class="hud-card-header">
+                <span class="hud-card-idx">01.</span>
+                <span class="hud-card-tag">OPEN-SOURCE</span>
+              </div>
+              <div class="hud-card-title">Twenty (40k★) &amp; Omi (8k★)</div>
+              <div class="hud-card-desc">Correctifs sécurité RBAC, suppression de fuites internes CWE-209 et tests Vitest hermétiques en production.</div>
+            </div>
+
+            <!-- Card 02: Polymarket Engine -->
+            <div class="assembled-hud-card" id="card-polymarket">
+              <div class="hud-card-header">
+                <span class="hud-card-idx">02.</span>
+                <span class="hud-card-tag">QUANTITATIF</span>
+              </div>
+              <div class="hud-card-title">Moteur Prédictif Polymarket CLOB</div>
+              <div class="hud-card-desc">Arbitrage probabiliste 24/7 sur VPS Oracle Cloud, carnets d'ordres WebSockets en direct sous 50ms.</div>
+            </div>
+
+            <!-- Card 03: ISO C99 Strict -->
+            <div class="assembled-hud-card" id="card-c99">
+              <div class="hud-card-header">
+                <span class="hud-card-idx">03.</span>
+                <span class="hud-card-tag">BAS-NIVEAU</span>
+              </div>
+              <div class="hud-card-title">C99 &amp; Valgrind Hermétique</div>
+              <div class="hud-card-desc">Structures de données pures d'excellence IUT Anglet (Allman, tripartition, 0 fuite mémoire sous -Werror).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="prototype_assets/cursor_builder.js"></script>
+</body>
+</html>

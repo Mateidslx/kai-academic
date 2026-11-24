@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semaine 4 – Décomposition itérative — R1.01 (Elearn UPPA)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1E293B;
+      --primary: #2563EB;
+      --border: #E2E8F0;
+    }
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      margin: 0;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #EFF6FF;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-top: 0;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .source-meta {
+      font-size: 12px;
+      color: #64748B;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 8px;
+    }
+    pre {
+      padding: 16px;
+      overflow-x: auto;
+    }
+    code {
+      padding: 2px 6px;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: #F1F5F9;
+      font-weight: 700;
+    }
+    blockquote {
+      border-left: 4px solid var(--primary);
+      margin: 16px 0;
+      padding: 8px 16px;
+      background: #F8FAFC;
+      color: #334155;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">R1.01 — Ressource Officielle Elearn</div>
+    <h1>Semaine 4 – Décomposition itérative</h1>
+    <div class="source-meta">
+      Source originale : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=694586" target="_blank" rel="noopener">https://elearn.univ-pau.fr/mod/page/view.php?id=694586</a> — Synchronisé automatiquement par Kai Sentinel
+    </div>
+    <div class="moodle-content">
+      <div role="main"><div class="box py-3 generalbox center clearfix"><div class="no-overflow"><div style="max-width: 900px; margin: 0 auto; padding: 12px 16px 28px; box-sizing: border-box; color: #17233c;"><!-- =========================================================
+       EN-TÊTE DE LA SEMAINE
+       ========================================================= -->
+<div style="display: flex; align-items: center; gap: 14px; max-width: 760px; margin: 0 auto 22px; padding: 13px 17px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 12px; background: #f5f8fd; box-shadow: 0 5px 14px rgba(15, 23, 42, .09);">
+<div style="flex: 0 0 auto; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e3edfc; color: #3673c5; font-size: 19px; font-weight: 800; line-height: 1; box-shadow: 0 2px 6px rgba(15, 23, 42, .08);">04</div>
+<div style="min-width: 0;">
+<div style="margin: 0 0 3px; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.15;">Semaine 04 : Maîtriser la décomposition itérative</div>
+<div style="margin: 0; color: #637083; font-size: 15.5px; line-height: 1.4;">Apprenez à concevoir, formaliser et coder des décompositions itératives.</div>
+</div>
+</div>
+<!-- =========================================================
+       GRILLE DES TUILES
+       ========================================================= -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; gap: 10px; max-width: 620px; margin: 0 auto;"><!-- =====================================================
+         PODCAST
+         ===================================================== --> <a class="r101-tuile-semaine" href="https://elearn.univ-pau.fr/mod/page/view.php?id=692221" style="position: relative; width: 200px; height: 133px; display: block; box-sizing: border-box; overflow: hidden; border: 1px solid rgba(15, 23, 42, .10); border-radius: 11px; background: #fffaf0; color: #071a3d; text-decoration: none; box-shadow: 0 7px 18px rgba(15, 23, 42, .15), 0 2px 5px rgba(15, 23, 42, .08);"> <span style="position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; justify-content: center; min-height: 22px; padding: 3px 9px; box-sizing: border-box; border: 1.4px solid #d79800; border-radius: 999px; background: #fff8dc; color: #d79800; font-size: 10.5px; font-weight: bold; line-height: 1;"> Podcast </span> <span style="position: absolute; left: 0; right: 0; top: 42px; text-align: center; color: #d79800; font-size: 42px; line-height: 1;"> <i aria-hidden="true" class="fa fa-volume-up"> </i> </span> <span style="position: absolute; left: 7px; right: 7px; bottom: 8px; color: #071a3d; font-size: 11.5px; font-weight: bold; line-height: 1.08; text-align: center;"> Parlons concepts </span> </a> <!-- =====================================================
+         COURS
+         ===================================================== --> <a class="r101-tuile-semaine" href="https://elearn.univ-pau.fr/mod/page/view.php?id=692222" style="position: relative; width: 200px; height: 133px; display: block; box-sizing: border-box; overflow: hidden; border: 1px solid rgba(15, 23, 42, .10); border-radius: 11px; background: #f1f6ff; color: #071a3d; text-decoration: none; box-shadow: 0 7px 18px rgba(15, 23, 42, .15), 0 2px 5px rgba(15, 23, 42, .08);"> <span style="position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; justify-content: center; min-height: 22px; padding: 3px 9px; box-sizing: border-box; border: 1.4px solid #397be6; border-radius: 999px; background: #edf4ff; color: #397be6; font-size: 10.5px; font-weight: bold; line-height: 1;"> Cours </span> <span style="position: absolute; left: 0; right: 0; top: 42px; text-align: center; color: #397be6; font-size: 42px; line-height: 1;"> <i aria-hidden="true" class="fa fa-book"> </i> </span> <span style="position: absolute; left: 7px; right: 7px; bottom: 8px; color: #071a3d; font-size: 11.5px; font-weight: bold; line-height: 1.08; text-align: center;"> Support de cours </span> </a> <!-- =====================================================
+         QUIZ
+         ===================================================== --> <a class="r101-tuile-semaine" href="https://elearn.univ-pau.fr/mod/quiz/view.php?id=692224" style="position: relative; width: 200px; height: 133px; display: block; box-sizing: border-box; overflow: hidden; border: 1px solid rgba(15, 23, 42, .10); border-radius: 11px; background: #fff3f5; color: #071a3d; text-decoration: none; box-shadow: 0 7px 18px rgba(15, 23, 42, .15), 0 2px 5px rgba(15, 23, 42, .08);"> <span style="position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; justify-content: center; min-height: 22px; padding: 3px 9px; box-sizing: border-box; border: 1.4px solid #ef6178; border-radius: 999px; background: #ffedf1; color: #ef6178; font-size: 10.5px; font-weight: bold; line-height: 1;"> Quiz </span> <span style="position: absolute; left: 0; right: 0; top: 42px; text-align: center; color: #ef6178; font-size: 42px; line-height: 1;"> <i aria-hidden="true" class="fa fa-question-circle"> </i> </span> <span style="position: absolute; left: 7px; right: 7px; bottom: 8px; color: #071a3d; font-size: 11.5px; font-weight: bold; line-height: 1.08; text-align: center;"> Quiz sur le cours </span> </a> <!-- =====================================================
+         TD
+         ===================================================== --> <a class="r101-tuile-semaine" href="https://elearn.univ-pau.fr/mod/page/view.php?id=692225" style="position: relative; width: 200px; height: 133px; display: block; box-sizing: border-box; overflow: hidden; border: 1px solid rgba(15, 23, 42, .10); border-radius: 11px; background: #f8f2fd; color: #071a3d; text-decoration: none; box-shadow: 0 7px 18px rgba(15, 23, 42, .15), 0 2px 5px rgba(15, 23, 42, .08);"> <span style="position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; justify-content: center; min-height: 22px; padding: 3px 9px; box-sizing: border-box; border: 1.4px solid #8061d6; border-radius: 999px; background: #f1eaff; color: #8061d6; font-size: 10.5px; font-weight: bold; line-height: 1;"> TD </span> <span style="position: absolute; left: 0; right: 0; top: 38px; text-align: center; line-height: 1;"> <img alt="" class="img-fluid" src="https://elearn.univ-pau.fr/pluginfile.php/1471040/mod_label/intro/human-head-silhouette-with-cogwheels-svgrepo-com.svg" style="width: 52px; height: 52px; object-fit: contain; filter: invert(45%) sepia(64%) saturate(1600%) hue-rotate(220deg) brightness(91%) contrast(87%); transform: scaleX(-1);"/> </span> <span style="position: absolute; left: 7px; right: 7px; bottom: 8px; color: #071a3d; font-size: 11.5px; font-weight: bold; line-height: 1.08; text-align: center;"> Activités de conception </span> </a> <!-- =====================================================
+         TP
+         ===================================================== --> <a class="r101-tuile-semaine" href="https://elearn.univ-pau.fr/mod/page/view.php?id=692226" style="position: relative; width: 200px; height: 133px; display: block; box-sizing: border-box; overflow: hidden; border: 1px solid rgba(15, 23, 42, .10); border-radius: 11px; background: #eefaf8; color: #071a3d; text-decoration: none; box-shadow: 0 7px 18px rgba(15, 23, 42, .15), 0 2px 5px rgba(15, 23, 42, .08);"> <span style="position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; justify-content: center; min-height: 22px; padding: 3px 9px; box-sizing: border-box; border: 1.4px solid #19a99d; border-radius: 999px; background: #e7f8f5; color: #19a99d; font-size: 10.5px; font-weight: bold; line-height: 1;"> TP </span> <span style="position: absolute; left: 0; right: 0; top: 42px; text-align: center; color: #19a99d; font-size: 42px; line-height: 1;"> <i aria-hidden="true" class="fa fa-code"> </i> </span> <span style="position: absolute; left: 7px; right: 7px; bottom: 8px; color: #071a3d; font-size: 11.5px; font-weight: bold; line-height: 1.08; text-align: center;"> Activités de programmation </span> </a> <!-- =====================================================
+         RETOUR À L'ACCUEIL DU COURS
+         ===================================================== --> <a class="r101-tuile-semaine" href="https://elearn.univ-pau.fr/course/view.php?id=25021" style="position: relative; width: 200px; height: 133px; display: block; box-sizing: border-box; overflow: hidden; border: 1px solid rgba(15, 23, 42, .10); border-radius: 11px; background: #f3f6fb; color: #071a3d; text-decoration: none; box-shadow: 0 7px 18px rgba(15, 23, 42, .15), 0 2px 5px rgba(15, 23, 42, .08);"> <span style="position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; justify-content: center; min-height: 22px; padding: 3px 9px; box-sizing: border-box; border: 1.4px solid #4777c7; border-radius: 999px; background: #edf3fc; color: #4777c7; font-size: 10.5px; font-weight: bold; line-height: 1;"> Accueil </span> <span style="position: absolute; left: 0; right: 0; top: 42px; text-align: center; color: #4777c7; font-size: 42px; line-height: 1;"> <i aria-hidden="true" class="fa fa-home"> </i> </span> <span style="position: absolute; left: 7px; right: 7px; bottom: 8px; color: #071a3d; font-size: 11.5px; font-weight: bold; line-height: 1.08; text-align: center;"> Retour à l’accueil du cours </span> </a></div>
+</div>
+<!-- =========================================================
+     ANIMATION DES TUILES
+     Le HTML des tuiles reste entièrement éditable dans TinyMCE.
+     Ce script ajoute uniquement les effets interactifs.
+     ========================================================= -->
+<p>
+
+</p></div></div><div class="modified">Modifié le: mercredi 9 septembre 2026, 17:40</div></div>
+    </div>
+  </div>
+</body>
+</html>

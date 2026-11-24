@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Kai Cloud Studio — Télémétrie &amp; UI Astryx 0.7.16</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@astryxdesign/core@0.7.16/src/reset.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@astryxdesign/core@0.7.16/dist/astryx.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@astryxdesign/theme-neutral@0.7.16/dist/theme.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.2.0",
+          "react/jsx-runtime": "https://esm.sh/react@19.2.0/jsx-runtime",
+          "react-dom": "https://esm.sh/react-dom@19.2.0",
+          "react-dom/client": "https://esm.sh/react-dom@19.2.0/client",
+          "htm": "https://esm.sh/htm@3.1.1",
+          "@astryxdesign/core": "https://esm.sh/@astryxdesign/core@0.7.16?external=react,react-dom",
+          "@astryxdesign/theme-neutral": "https://esm.sh/@astryxdesign/theme-neutral@0.7.16?external=react,react-dom"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: var(--font-family-body, 'Figtree', system-ui, sans-serif);
+        min-height: 100dvh;
+      }
+      code, .mono {
+        font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      }
+      #root:empty::after {
+        content: 'Chargement de Meta Astryx 0.7.16 + React 19…';
+        display: block;
+        padding: 2.5rem;
+        font-size: 0.95rem;
+        color: var(--color-text-secondary, #71717a);
+      }
+      @media (max-width: 640px) {
+        .mobile-hide {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import * as React from 'react';
+      import {createRoot} from 'react-dom/client';
+      import htm from 'htm';
+      import {
+        Theme,
+        AppShell,
+        TopNav,
+        SideNav,
+        SideNavHeading,
+        SideNavSection,
+        SideNavItem,
+        Section,
+        Grid,
+        Card,
+        HStack,
+        VStack,
+        Heading,
+        Text,
+        Button,
+        Badge,
+        StatusDot,
+        Table,
+        TabList,
+        Tab,
+        ProgressBar,
+        Spinner,
+        Divider,
+        Link,
+        Code,
+        EmptyState,
+        proportional,
+        pixel,
+      } from '@astryxdesign/core';
+      import {neutralTheme} from '@astryxdesign/theme-neutral';
+
+      const h = htm.bind(React.createElement);
+
+      const UI_STUDIO_STACK = [
+        {
+          id: 'wm-hero',
+          source: 'Watermelon UI',
+          component: 'hero-sections / bento-grids',
+          useCase: 'Vitrine B2B & Landing conversion rapide',
+          command: 'npx shadcn@latest add https://registry.watermelon.sh/r/bento-grid-01.json',
+        },
+        {
+          id: 'wm-scroll',
+          source: 'Watermelon UI',
+          component: 'scroll-island',
+          useCase: 'Navigation contextuelle flottante Portfolio & Docs',
+          command: 'npx shadcn@latest add https://registry.watermelon.sh/r/scroll-island.json',
+        },
+        {
+          id: 'cult-tabs',
+          source: 'Cult UI',
+          component: 'direction-aware-tabs / shift-card / rolling-number',
+          useCase: 'Micro-interactions physiques & métriques animées',
+          command: 'npx shadcn@latest add https://www.cult-ui.com/r/direction-aware-tabs.json',
+        },
+        {
+          id: 'astryx-dash',
+          source: 'Meta Astryx',
+          component: 'AppShell + Table + Theme(seed)',
+          useCase: 'Portails Cloud, tables densifiées & WCAG >= 4.5:1',
+          command: 'npx @astryxdesign/cli@0.7.16 template dashboard',
+        },
+      ];
+
+      function formatBytes(bytes) {
+        const n = Number(bytes || 0);
+        if (!Number.isFinite(n) || n <= 0) return '0 o';
+        if (n < 1024) return `${n} o`;
+        if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} Ko`;
+        return `${(n / (1024 * 1024)).toFixed(2)} Mo`;
+      }
+
+      async function fetchJsonStrict(url) {
+        const res = await fetch(url, {headers: {Accept: 'application/json'}});
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status} sur ${url}`);
+        }
+        return res.json();
+      }
+
+      function KaiAstryxCloudStudio() {
+        const [colorMode, setColorMode] = React.useState('dark');
+        const [activeTab, setActiveTab] = React.useState('telemetry');
+        const [loading, setLoading] = React.useState(true);
+        const [errorMsg, setErrorMsg] = React.useState(null);
+        const [lastSync, setLastSync] = React.useState('');
+
+        const [statusData, setStatusData] = React.useState(null);
+        const [opportunities, setOpportunities] = React.useState([]);
+        const [decisions, setDecisions] = React.useState([]);
+        const [assets, setAssets] = React.useState([]);
+        const [auditLogs, setAuditLogs] = React.useState([]);
+
+        const loadTelemetry = React.useCallback(async () => {
+          setLoading(true);
+          setErrorMsg(null);
+          try {
+            const [st, oppPayload, decPayload, astPayload, logPayload] = await Promise.all([
+              fetchJsonStrict('/api/control_plane/status'),
+              fetchJsonStrict('/api/control_plane/table_data?table=scouted_opportunities'),
+              fetchJsonStrict('/api/control_plane/decisions'),
+              fetchJsonStrict('/api/control_plane/assets'),
+              fetchJsonStrict('/api/control_plane/logs'),
+            ]);
+            setStatusData(st);
+            setOpportunities(Array.isArray(oppPayload?.rows) ? oppPayload.rows : []);
+            setDecisions(Array.isArray(decPayload) ? decPayload : []);
+            setAssets(Array.isArray(astPayload) ? astPayload : []);
+            setAuditLogs(Array.isArray(logPayload) ? logPayload : []);
+            setLastSync(new Date().toLocaleTimeString('fr-FR'));
+          } catch (err) {
+            setErrorMsg(err instanceof Error ? err.message : String(err));
+          } finally {
+            setLoading(false);
+          }
+        }, []);
+
+        React.useEffect(() => {
+          loadTelemetry();
+        }, [loadTelemetry]);
+
+        const counts = statusData?.table_counts || {};
+        const ollama = statusData?.ollama_telemetry || {};
+        const daemons = statusData?.services_systemd_vps || {};
+        const phoneSync = statusData?.phone_sync || {};
+
+        const daemonEntries = Object.entries(daemons).map(([name, state]) => ({
+          id: name,
+          service: name,
+          state: String(state || 'UNKNOWN'),
+        }));
+
+        const maxOppScore = Math.max(
+          100,
+          ...opportunities.map(o => Number(o.craftsmanship_score || 0))
+        );
+
+        const oppColumns = [
+          {key: 'title', header: 'Opportunité', width: proportional(2, {minWidth: 160})},
+          {key: 'niche', header: 'Niche', width: pixel(120)},
+          {
+            key: 'craftsmanship_score',
+            header: 'Score Artisanat',
+            width: proportional(1, {minWidth: 140}),
+            renderCell: item => {
+              const val = Number(item.craftsmanship_score || 0);
+              return h`
+                <${VStack} gap=${1}>
+                  <${ProgressBar}
+                    value=${val}
+                    max=${maxOppScore}
+                    label=${`Score ${item.title || item.id}`}
+                    isLabelHidden=${true}
+                    variant=${val >= 70 ? 'success' : 'accent'} />
+                  <${Text} type="supporting" hasTabularNumbers=${true}>${val.toFixed(1)} / 100</${Text}>
+                </${VStack}>
+              `;
+            },
+          },
+          {
+            key: 'status',
+            header: 'Statut',
+            width: pixel(130),
+            renderCell: item => h`
+              <${Badge}
+                label=${String(item.status || 'UNKNOWN')}
+                variant=${String(item.status).includes('APPROVED') ? 'success' : 'info'} />
+            `,
+          },
+        ];
+
+        const daemonColumns = [
+          {key: 'service', header: 'Démon Systemd', width: proportional(1, {minWidth: 160})},
+          {
+            key: 'state',
+            header: 'État Live',
+            width: proportional(1, {minWidth: 180}),
+            renderCell: item => h`
+              <${HStack} gap=${2} vAlign="center">
+                <${StatusDot}
+                  variant=${item.state.includes('ACTIVE') ? 'success' : 'warning'}
+                  label=${item.state}
+                  isPulsing=${item.state.includes('ACTIVE')} />
+                <${Text} type="supporting">${item.state}</${Text}>
+              </${HStack}>
+            `,
+          },
+        ];
+
+        const decisionColumns = [
+          {key: 'opportunity_id', header: 'Cible', width: pixel(140)},
+          {
+            key: 'verdict',
+            header: 'Verdict Jev',
+            width: pixel(130),
+            renderCell: item => h`
+              <${Badge}
+                label=${String(item.verdict || 'N/A')}
+                variant=${String(item.verdict).toUpperCase().includes('GO') || String(item.verdict).toUpperCase().includes('APPROV') ? 'success' : 'warning'} />
+            `,
+          },
+          {
+            key: 'score_confiance',
+            header: 'Confiance',
+            width: pixel(110),
+            renderCell: item => h`<${Text} hasTabularNumbers=${true}>${Number(item.score_confiance || 0).toFixed(2)}</${Text}>`,
+          },
+          {key: 'cold_critique', header: 'Analyse Froide', width: proportional(2, {minWidth: 200})},
+        ];
+
+        const logColumns = [
+          {key: 'timestamp', header: 'Horodatage', width: pixel(170)},
+          {key: 'component', header: 'Composant', width: pixel(140)},
+          {
+            key: 'level',
+            header: 'Niveau',
+            width: pixel(95),
+            renderCell: item => h`
+              <${Badge}
+                label=${String(item.level || 'INFO')}
+                variant=${String(item.level).toUpperCase() === 'ERROR' ? 'error' : String(item.level).toUpperCase() === 'WARNING' ? 'warning' : 'neutral'} />
+            `,
+          },
+          {key: 'message', header: 'Événement', width: proportional(2, {minWidth: 200})},
+        ];
+
+        const assetColumns = [
+          {key: 'product_id', header: 'Produit', width: pixel(150)},
+          {key: 'title', header: 'Titre', width: proportional(2, {minWidth: 160})},
+          {key: 'niche', header: 'Niche', width: pixel(120)},
+          {
+            key: 'price_eur',
+            header: 'Prix',
+            width: pixel(90),
+            renderCell: item => h`<${Text} hasTabularNumbers=${true}>${Number(item.price_eur || 0).toFixed(2)} EUR</${Text}>`,
+          },
+          {
+            key: 'size_bytes',
+            header: 'Archive',
+            width: pixel(110),
+            renderCell: item => h`<${Text} type="supporting" hasTabularNumbers=${true}>${formatBytes(item.size_bytes)}</${Text}>`,
+          },
+        ];
+
+        const studioColumns = [
+          {
+            key: 'source',
+            header: 'Écosystème',
+            width: pixel(140),
+            renderCell: item => h`
+              <${Badge}
+                label=${item.source}
+                variant=${item.source === 'Meta Astryx' ? 'blue' : item.source === 'Cult UI' ? 'purple' : 'cyan'} />
+            `,
+          },
+          {key: 'component', header: 'Composants', width: proportional(1, {minWidth: 160})},
+          {key: 'useCase', header: 'Usage Agents Cloud / Portfolio', width: proportional(1, {minWidth: 180})},
+          {
+            key: 'command',
+            header: 'Commande CLI Réelle',
+            width: proportional(2, {minWidth: 220}),
+            renderCell: item => h`<${Code}>${item.command}</${Code}>`,
+          },
+        ];
+
+        const topNav = h`
+          <${TopNav}
+            label="Barre supérieure Kai Cloud Studio"
+            heading=${h`
+              <${HStack} gap=${2} vAlign="center">
+                <${StatusDot}
+                  variant=${errorMsg ? 'error' : loading ? 'warning' : 'success'}
+                  label=${errorMsg ? 'Hors-ligne' : loading ? 'Chargement' : 'Connecté'}
+                  isPulsing=${!errorMsg} />
+                <${Heading} level=${4} textWrap="nowrap">KAI<span className="mobile-hide"> CLOUD STUDIO</span></${Heading}>
+                <span className="mobile-hide"><${Badge} label="Astryx 0.7.16" variant="info" /></span>
+              </${HStack}>
+            `}
+            endContent=${h`
+              <${HStack} gap=${2} vAlign="center">
+                <${Button}
+                  label=${colorMode === 'dark' ? 'Clair' : 'Sombre'}
+                  variant="secondary"
+                  size="sm"
+                  onClick=${() => setColorMode(m => (m === 'dark' ? 'light' : 'dark'))} />
+                <${Button}
+                  label="Sync"
+                  variant="primary"
+                  size="sm"
+                  isLoading=${loading}
+                  onClick=${loadTelemetry} />
+                <span className="mobile-hide">
+                  <${Button}
+                    label="Portfolio"
+                    variant="ghost"
+                    size="sm"
+                    href="/portfolio.html" />
+                </span>
+              </${HStack}>
+            `} />
+        `;
+
+        const sideNav = h`
+          <${SideNav}
+            aria-label="Navigation Kai Cloud Studio"
+            collapsible=${true}
+            header=${h`
+              <${SideNavHeading}
+                heading="Kai Control Plane"
+                subheading="Télémétrie Réelle SQLite" />
+            `}
+            footer=${h`
+              <${VStack} gap=${2}>
+                <${Text} type="supporting">Portfolio & Vitrine :</${Text}>
+                <${Link} href="/portfolio.html">Ouvrir portfolio.html</${Link}>
+                <${Link} href="/security-scanner.html">Scanner HTTP B2B</${Link}>
+              </${VStack}>
+            `}>
+            <${SideNavSection} title="Console Opérationnelle">
+              <${SideNavItem}
+                label="Télémétrie VPS"
+                isSelected=${activeTab === 'telemetry'}
+                endContent=${h`<${Badge} label=${String(daemonEntries.length)} variant="neutral" />`}
+                onClick=${() => setActiveTab('telemetry')} />
+              <${SideNavItem}
+                label="Opportunités & Jev"
+                isSelected=${activeTab === 'opportunities'}
+                endContent=${h`<${Badge} label=${String(counts.scouted_opportunities ?? opportunities.length)} variant="info" />`}
+                onClick=${() => setActiveTab('opportunities')} />
+              <${SideNavItem}
+                label="Paquets Vérifiés"
+                isSelected=${activeTab === 'assets'}
+                endContent=${h`<${Badge} label=${String(counts.packaged_assets ?? assets.length)} variant="success" />`}
+                onClick=${() => setActiveTab('assets')} />
+              <${SideNavItem}
+                label="Journaux d'Audit"
+                isSelected=${activeTab === 'logs'}
+                endContent=${h`<${Badge} label=${String(auditLogs.length)} variant="neutral" />`}
+                onClick=${() => setActiveTab('logs')} />
+            </${SideNavSection}>
+            <${SideNavSection} title="Design System Cloud">
+              <${SideNavItem}
+                label="Watermelon · Cult · Astryx"
+                isSelected=${activeTab === 'studio'}
+                endContent=${h`<${Badge} label="3 Libs" variant="blue" />`}
+                onClick=${() => setActiveTab('studio')} />
+            </${SideNavSection}>
+          </${SideNav}>
+        `;
+
+        return h`
+          <${Theme} theme=${neutralTheme} mode=${colorMode}>
+            <${AppShell}
+              height="auto"
+              variant="elevated"
+              contentPadding=${0}
+              topNav=${topNav}
+              sideNav=${sideNav}>
+              <${Section} variant="section" padding=${5}>
+                <${VStack} gap=${5}>
+                  <${HStack} hAlign="between" vAlign="center" wrap="wrap" gap=${3}>
+                    <${VStack} gap=${1}>
+                      <${Heading} level=${1} type="display-3">Dashboard Cloud & UI Studio</${Heading}>
+                      <${Text} type="supporting">
+                        Telemetry zero-facade depuis <${Code}>/api/control_plane/*</${Code}> — rendu natif via Meta Astryx CDN + React 19.
+                      </${Text}>
+                    </${VStack}>
+                    <${HStack} gap=${2} vAlign="center" wrap="wrap">
+                      ${lastSync ? h`<${Badge} label=${`Sync ${lastSync}`} variant="neutral" />` : null}
+                      <${Badge} label=${statusData?.architecture || 'ZERO_FACADE_CHECK'} variant="info" />
+                      <${Badge} label=${ollama?.modele_decision_jev || 'Ollama standby'} variant="purple" />
+                    </${HStack}>
+                  </${HStack}>
+
+                  <${TabList}
+                    value=${activeTab}
+                    onChange=${setActiveTab}
+                    hasDivider=${true}
+                    role="tablist">
+                    <${Tab} value="telemetry" label="Télémétrie VPS" panelId="panel-telemetry" />
+                    <${Tab} value="opportunities" label="Opportunités & Jev" panelId="panel-opportunities" />
+                    <${Tab} value="assets" label="Paquets Vérifiés" panelId="panel-assets" />
+                    <${Tab} value="logs" label="Audit Logs" panelId="panel-logs" />
+                    <${Tab} value="studio" label="Recettes UI Agents" panelId="panel-studio" />
+                  </${TabList}>
+
+                  ${errorMsg ? h`
+                    <${Card} variant="red" elevation="low">
+                      <${VStack} gap=${2}>
+                        <${Heading} level=${3}>Connexion API indisponible (aucune donnée simulée)</${Heading}>
+                        <${Text} type="supporting">${errorMsg}</${Text}>
+                        <${Text} type="supporting">
+                          Lancez via <${Code}>python scripts/web_server.py 8765</${Code}> pour alimenter les endpoints <${Code}>/api/control_plane/*</${Code}>.
+                        </${Text}>
+                      </${VStack}>
+                    </${Card}>
+                  ` : null}
+
+                  ${loading && !statusData ? h`
+                    <${HStack} gap=${3} vAlign="center" padding=${4}>
+                      <${Spinner} size="lg" label="Chargement de la télémétrie SQLite en cours…" />
+                      <${Text}>Lecture directe des endpoints Control Plane…</${Text}>
+                    </${HStack}>
+                  ` : null}
+
+                  <${Grid} columns=${{minWidth: 210, max: 4, repeat: 'fit'}} gap=${4}>
+                    <${Card} elevation="low">
+                      <${VStack} gap=${2}>
+                        <${Text} type="label" color="secondary">Base SQLite Physique</${Text}>
+                        <${Heading} level=${2}>${statusData ? formatBytes(statusData.db_size_bytes) : '—'}</${Heading}>
+                        <${Text} type="supporting" hasTabularNumbers=${true}>
+                          ${counts.autonomous_sessions ?? 0} sessions · ${counts.system_audit_logs ?? 0} logs
+                        </${Text}>
+                      </${VStack}>
+                    </${Card}>
+                    <${Card} elevation="low">
+                      <${VStack} gap=${2}>
+                        <${Text} type="label" color="secondary">Décisions Jev & Signaux</${Text}>
+                        <${Heading} level=${2}>${counts.jev_decisions ?? decisions.length}</${Heading}>
+                        <${Text} type="supporting" hasTabularNumbers=${true}>
+                          ${counts.market_signals ?? 0} signaux · ${counts.scouted_opportunities ?? opportunities.length} opportunités
+                        </${Text}>
+                      </${VStack}>
+                    </${Card}>
+                    <${Card} elevation="low">
+                      <${VStack} gap=${2}>
+                        <${Text} type="label" color="secondary">Paquets Disque Vérifiés</${Text}>
+                        <${Heading} level=${2}>${counts.packaged_assets ?? assets.length}</${Heading}>
+                        <${Text} type="supporting" hasTabularNumbers=${true}>
+                          Coût LLM local : ${Number(ollama.cout_api_eur || 0).toFixed(2)} EUR
+                        </${Text}>
+                      </${VStack}>
+                    </${Card}>
+                    <${Card} elevation="low">
+                      <${VStack} gap=${2}>
+                        <${Text} type="label" color="secondary">Inférence & Relais Mobile</${Text}>
+                        <${Heading} level=${3}>${ollama.statut || 'En attente'}</${Heading}>
+                        <${Text} type="supporting" hasTabularNumbers=${true}>
+                          Cmd mobile en file : ${phoneSync.commandes_en_attente ?? 0}
+                        </${Text}>
+                      </${VStack}>
+                    </${Card}>
+                  </${Grid}>
+
+                  ${activeTab === 'telemetry' ? h`
+                    <div id="panel-telemetry" role="tabpanel">
+                      <${Grid} columns=${{minWidth: 300, max: 2, repeat: 'fit'}} gap=${4}>
+                        <${Card}>
+                          <${VStack} gap=${3}>
+                            <${HStack} hAlign="between" vAlign="center">
+                              <${Heading} level=${3}>Démons VPS Systemd</${Heading}>
+                              <${Badge} label="88.96.47.180" variant="neutral" />
+                            </${HStack}>
+                            ${daemonEntries.length > 0 ? h`
+                              <${Table}
+                                data=${daemonEntries}
+                                columns=${daemonColumns}
+                                idKey="id"
+                                density="compact"
+                                dividers="rows"
+                                hasHover=${true}
+                                textOverflow="wrap" />
+                            ` : h`
+                              <${EmptyState}
+                                title="Aucun statut systemd reçu"
+                                description="Connectez la route /api/control_plane/status." />
+                            `}
+                          </${VStack}>
+                        </${Card}>
+
+                        <${Card}>
+                          <${VStack} gap=${3}>
+                            <${HStack} hAlign="between" vAlign="center">
+                              <${Heading} level=${3}>Relais Appareil & Protection</${Heading}>
+                              <${Badge} label=${phoneSync.vecteur_debloat_actif ? 'Actif' : 'Inactif'} variant="info" />
+                            </${HStack}>
+                            <${Text}><${Text} weight="semibold">Cible :</${Text}> ${phoneSync.target_device || 'Non renseignée'}</${Text}>
+                            <${Text} type="supporting">Relais : <${Code}>${phoneSync.relais_discovery_url || '/api/phone_sync'}</${Code}></${Text}>
+                            <${Divider} />
+                            <${Text} type="label" color="secondary">Packages Whitelist Sacrée :</${Text}>
+                            <${HStack} gap=${2} wrap="wrap">
+                              ${(phoneSync.whitelist_sacree_preservee || []).map(pkg => h`
+                                <${Badge} key=${pkg} label=${pkg} variant="neutral" />
+                              `)}
+                            </${HStack}>
+                          </${VStack}>
+                        </${Card}>
+                      </${Grid}>
+                    </div>
+                  ` : null}
+
+                  ${activeTab === 'opportunities' ? h`
+                    <div id="panel-opportunities" role="tabpanel">
+                      <${VStack} gap=${4}>
+                        <${Card}>
+                          <${VStack} gap=${3}>
+                            <${Heading} level=${3}>Opportunités Scoutées (${opportunities.length})</${Heading}>
+                            ${opportunities.length > 0 ? h`
+                              <${Table}
+                                data=${opportunities}
+                                columns=${oppColumns}
+                                idKey="id"
+                                density="compact"
+                                dividers="rows"
+                                hasHover=${true}
+                                textOverflow="wrap" />
+                            ` : h`
+                              <${EmptyState}
+                                title="Aucune opportunité enregistrée"
+                                description="La table scouted_opportunities est actuellement vide." />
+                            `}
+                          </${VStack}>
+                        </${Card}>
+                        <${Card}>
+                          <${VStack} gap=${3}>
+                            <${Heading} level=${3}>Dernières Décisions Jev (${decisions.length})</${Heading}>
+                            ${decisions.length > 0 ? h`
+                              <${Table}
+                                data=${decisions.slice(0, 15)}
+                                columns=${decisionColumns}
+                                idKey="id"
+                                density="compact"
+                                dividers="rows"
+                                hasHover=${true}
+                                textOverflow="wrap" />
+                            ` : h`
+                              <${EmptyState}
+                                title="Aucune décision Jev"
+                                description="La table jev_decisions est actuellement vide." />
+                            `}
+                          </${VStack}>
+                        </${Card}>
+                      </${VStack}>
+                    </div>
+                  ` : null}
+
+                  ${activeTab === 'assets' ? h`
+                    <div id="panel-assets" role="tabpanel">
+                      <${Card}>
+                        <${VStack} gap=${3}>
+                          <${Heading} level=${3}>Archives & Paquets Vérifiés SHA-256 (${assets.length})</${Heading}>
+                          ${assets.length > 0 ? h`
+                            <${Table}
+                              data=${assets}
+                              columns=${assetColumns}
+                              idKey="product_id"
+                              density="compact"
+                              dividers="rows"
+                              hasHover=${true}
+                              textOverflow="wrap" />
+                          ` : h`
+                            <${EmptyState}
+                              title="Aucun paquet compilé"
+                              description="La table packaged_assets ne contient pas encore d'archive vérifiée." />
+                          `}
+                        </${VStack}>
+                      </${Card}>
+                    </div>
+                  ` : null}
+
+                  ${activeTab === 'logs' ? h`
+                    <div id="panel-logs" role="tabpanel">
+                      <${Card}>
+                        <${VStack} gap=${3}>
+                          <${Heading} level=${3}>Journaux d'Audit Système (${auditLogs.length})</${Heading}>
+                          ${auditLogs.length > 0 ? h`
+                            <${Table}
+                              data=${auditLogs.slice(0, 25)}
+                              columns=${logColumns}
+                              idKey="id"
+                              density="compact"
+                              dividers="rows"
+                              hasHover=${true}
+                              textOverflow="wrap" />
+                          ` : h`
+                            <${EmptyState}
+                              title="Aucun log disponible"
+                              description="La table system_audit_logs ne contient pas d'entrée." />
+                          `}
+                        </${VStack}>
+                      </${Card}>
+                    </div>
+                  ` : null}
+
+                  ${activeTab === 'studio' ? h`
+                    <div id="panel-studio" role="tabpanel">
+                      <${Card}>
+                        <${VStack} gap=${3}>
+                          <${HStack} hAlign="between" vAlign="center" wrap="wrap" gap=${2}>
+                            <${VStack} gap=${1}>
+                              <${Heading} level=${3}>Pile UI Agents Cloud & Refontes B2B</${Heading}>
+                              <${Text} type="supporting">
+                                Watermelon UI (1 178 composants) · Cult UI (307 composants) · Meta Astryx (0.7.16)
+                              </${Text}>
+                            </${VStack}>
+                            <${Badge} label="WCAG >= 4.5:1" variant="success" />
+                          </${HStack}>
+                          <${Table}
+                            data=${UI_STUDIO_STACK}
+                            columns=${studioColumns}
+                            idKey="id"
+                            density="compact"
+                            dividers="rows"
+                            hasHover=${true}
+                            textOverflow="wrap" />
+                        </${VStack}>
+                      </${Card}>
+                    </div>
+                  ` : null}
+                </${VStack}>
+              </${Section}>
+            </${AppShell}>
+          </${Theme}>
+        `;
+      }
+
+      createRoot(document.getElementById('root')).render(h`<${KaiAstryxCloudStudio} />`);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#6E4970">
+    <title>R1.05 — Bases de Données & SQL — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Marked.js Markdown Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    
+    <!-- DOMPurify for Safe Sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #6E4970;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Rich Typography for Rendered Markdown */
+        .revision-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .revision-prose h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .revision-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .revision-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .revision-prose h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #334155;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .revision-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .revision-prose ul {
+            list-style-type: disc;
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .revision-prose ol {
+            list-style-type: decimal;
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .revision-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .revision-prose blockquote {
+            border-left: 5px solid #6E4970;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .revision-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .revision-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            margin: 1.25rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .revision-prose pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: inherit;
+            font-size: inherit;
+        }
+        .revision-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.25rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            font-size: 0.88rem;
+        }
+        .revision-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .revision-prose td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .revision-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .revision-prose tr:hover td {
+            background: #fafbfc;
+        }
+        .revision-prose strong {
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .revision-prose hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        /* Container du diagramme Mermaid avec Vrais Losanges */
+        .mermaid-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- En-tête Allégé & Épuré (Accès Rapide et Direct) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <a href="../index.html#revisions" class="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Retour au Centre de Révision</span>
+            </a>
+            <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-lg text-xs font-mono font-bold" style="background-color: #6E497015; color: #6E4970; border: 1px solid #6E497030;">
+                    R1.05
+                </span>
+                <a href="../index.html" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition" title="Dashboard">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5 flex-1 w-full">
+
+        <!-- Module Header Card avec Description Grande & Équipe Étudiante -->
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #6E4970;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #6E497015; color: #6E4970; border: 1px solid #6E497030;">R1.05</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">R1.05 — Bases de Données & SQL</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Christophe Marquesuzaà / M. Yon Dourisboure</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+                <a href="../courses/R1.05.html" class="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>Ouvrir les chapitres dédiés</span>
+                </a>
+            </div>
+
+            <!-- DESCRIPTION PLUS GRANDE ISSUE DE L'ANCIEN DOC -->
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
+                <div class="text-[11px] font-black uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1.5">
+                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                    <span>Description & Objectifs Officiels :</span>
+                </div>
+                Méthodologie formelle de conception de bases de données relationnelles selon l'école Merise : Dictionnaire des données épuré, Modèle Conceptuel de Données (MCD, entités, associations, règles de double lecture des cardinalités), règles strictes de dérivation vers le Modèle Logique de Données (MLD), théorie de la normalisation (1FN, 2FN, 3FN, Boyce-Codd), implémentation physique en SQL standard sous Oracle/PostgreSQL (DDL avec contraintes, requêtes DQL complexes avec jointures, agrégats GROUP BY, sous-requêtes corrélées) et gestion transactionnelle ACID.
+            </div>
+        </div>
+
+        <!-- Onglets Pédagogiques (Niveau 3 : Fiche Approfondie active par défaut !) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            <button onclick="switchLevel('DETAILED')" id="tabDetailed" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs text-white" style="background-color: #6E4970; border-color: #6E4970;">
+                <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                <span>📖 Fiche Approfondie (Grand Mémo des Partiels)</span>
+            </button>
+            <button onclick="switchLevel('STANDARD')" id="tabStandard" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs bg-white text-slate-700 border-slate-200 hover:bg-slate-50">
+                <i data-lucide="book" class="w-3.5 h-3.5"></i>
+                <span>📘 Révision Standard (Mémo & Exercices)</span>
+            </button>
+            <button onclick="switchLevel('QUICK_REVIEW')" id="tabQuick" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs bg-white text-slate-700 border-slate-200 hover:bg-slate-50">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                <span>⚡ Synthèse Express (Fiche 80/20)</span>
+            </button>
+        </div>
+
+        <!-- Main Content Card with Dynamic Rendered Markdown -->
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div id="revContent" class="revision-prose">
+                <div class="animate-pulse space-y-4">
+                    <div class="h-6 bg-slate-100 rounded w-1/3"></div>
+                    <div class="h-4 bg-slate-100 rounded w-full"></div>
+                    <div class="h-4 bg-slate-100 rounded w-5/6"></div>
+                    <div class="h-32 bg-slate-50 rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Payload JSON contenant les 3 niveaux -->
+    <script>
+        const contentData = {"DETAILED": "# 📖 R1.05 — Synthèse Complète : Bases de Données & Modélisation (MCD)\n> **Enseignants référents** : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne & du Pays Basque (Campus d'Anglet)\n\n## 🎯 Objectifs officiels & Périmètre\nModélisation Conceptuelle Merise (MCD), formalisme rigoureux des entités, associations, identifiants et cardinalités. Strictement conforme aux diapositives 1 à 60 de M. Marquesuzaa.\n\n## 📚 Synthèse des 9 Chapitres & Supports\n\n### Démarche Merise, Dictionnaire des Données & MCD (~19 min · 3527 mots)\n**Plan des notions abordées :**\n- 1. Les Fondements Théoriques de la Conception\n- 2. Le Dictionnaire des Données Épuré\n- 3. Les Composants du Modèle Conceptuel de Données (MCD)\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Démarche Merise, Dictionnaire des Données & MCD\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nComme l'enseigne rigoureusement M. Marquesuzaà à l'IUT d'Anglet, la conception d'un système d'information repose sur deux distinctions épistémologiques capitales :\n\n- Donnée vs Information : Une donnée est un fait brut non interprété (ex: 14). Une information est une donnée contextualisée porteuse de sens pour la décision humaine (ex: 14/20 obtenu par Matéi au partiel de R1.05).\n- Niveau Conceptuel (MCD) : Représente la sémantique métier du monde réel (QUOI), indépendamment de toute considération informatique, logicielle ou matérielle.\n- Niveau Logique (MLD) : Adapte la structure aux contraintes du modèle de données cible (QUI FAIT QUOI, modèle relationnel en tables, colonnes et clés).\n- Niveau Physique (MPD / SQL) : Décrit le stockage physique sur les supports magnétiques/SSD (COMMENT, fichiers disques, index B-Tree, tablespaces sous Oracle/PostgreSQL).\n\n```\n=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.05 — MCD) ===\n• Hypothèse initiale : Donnée vs Information, architecture ANSI/SPARC, dictionnaire des données, entités, associations, ide...\n• Opération principale : Mise en œuvre de Merise combiné à MCD\n• Point clé vérifié : L'Architecture ANSI/SPARC à 3 Niveaux : Niveau Conceptuel (MCD) : Représente la sémantique métier du monde rée\n• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.\n```\n\n### Dérivation Rigoureuse du MCD vers le MLD Relationnel (~18 min · 3395 mots)\n**Plan des notions abordées :**\n- 1. Le Modèle Relationnel d'Edgar F. Codd\n- 2. Les 4 Règles Algorithmiques de Dérivation MCD $\\to$ MLD\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Dérivation Rigoureuse du MCD vers le MLD Relationnel\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n- Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nLe Modèle Logique de Données (MLD) relationnel structure l'information sous forme de relations (tables). Chaque relation est caractérisée par :\n\n- Un nom de table en majuscules (ex: ETUDIANT) ;\n- Une Clé Primaire (Primary Key - PK) : ensemble minimal d'attributs dont la valeur identifie de manière unique chaque tuple (ligne), soulignée dans l'écriture formelle : idEtudiant ;\n- Des Clés Étrangères (Foreign Keys - FK) : attributs faisant référence à la clé primaire d'une autre relation, obligatoirement préfixés par un dièse # dans l'écriture académique de l'IUT : #idGroupe.\n- Identification des données et du cadre théorique : On repère dans l'énoncé les éléments relevant de MLD. Rappel du cours : Un nom de table en majuscules (ex: ETUDIANT ) ;\n\n```\n-- MCD : ETUDIANT (1,1) ------ APPARTENIR ------ (0,n) GROUPE_TD\n-- MLD résultant :\nGROUPE_TD (idGroupe, libelleGroupe)\nETUDIANT (idEtudiant, nom, prenom, #idGroupe)\n```\n\n### Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF (~18 min · 3388 mots)\n**Plan des notions abordées :**\n- 1. Le Rôle Critique de la Normalisation\n- 2. Dépendances Fonctionnelles (DF)\n- 3. Les Formes Normales Expliquées Pas-à-Pas\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nLa normalisation permet de valider mathématiquement qu'un modèle relationnel ne présente aucune redondance inutile. Une base mal normalisée est exposée à trois anomalies graves :\n\n- Anomalie de mise à jour : Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente.\n- Anomalie d'insertion : Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.\n- Anomalie de suppression : Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même !\n- DF Élémentaire : $A \\to B$ est élémentaire si aucune sous-partie de $A$ ne détermine $B$.\n\n```\n=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.05 — 1FN) ===\n• Hypothèse initiale : Dépendances fonctionnelles (DF), élimination rigoureuse des anomalies d'insertion, mise à jour et su...\n• Opération principale : Mise en œuvre de Normalisation combiné à 1FN\n• Point clé vérifié : Anomalie d'insertion : Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande\n• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.\n```\n\n### Implémentation SQL DDL & DML sous Oracle / PostgreSQL (~19 min · 3483 mots)\n**Plan des notions abordées :**\n- 1. Création de Schéma Conforme aux Standards IUT (DDL)\n- 2. Les Actions Référentielles sur les Clés Étrangères\n- 3. Ordres de Manipulation de Données (DML)\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Implémentation SQL DDL & DML sous Oracle / PostgreSQL\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nVoici le script complet inspiré des TP et partiels de M. Marquesuzaà (base de données sportive / restaurant) :\n\n- ON DELETE CASCADE : Si un étudiant est supprimé, toutes ses notes associées sont automatiquement détruites pour préserver l'intégrité.\n- ON DELETE SET NULL : La clé étrangère prend la valeur NULL si l'enregistrement parent est supprimé (exige que la colonne autorise les NULL).\n- ON DELETE RESTRICT (ou comportement par défaut sans clause) : Empêche formellement la suppression d'un parent s'il possède encore des enfants référents.\n- Identification des données et du cadre théorique : On repère dans l'énoncé les éléments relevant de SQL. Rappel du cours : ON DELETE CASCADE : Si un étudiant est supprimé, toutes ses notes associées sont automatiquement détruites pour préserver l'intégrité.\n\n```\n-- Insertion de données valides\nINSERT INTO GroupeTD (idGroupe, codeGroupe, effectifMax) VALUES (1, 'TD2', 26);\nINSERT INTO Etudiant (idEtudiant, nom, prenom, email, dateNaissance, idGroupe) \nVALUES (20260001, 'DE SAINT LEGER', 'Matei', 'matei@univ-pau.fr', TO_DATE('2005-08-15', 'YYYY-MM-DD'), 1);\n\n-- Modification sécurisée avec WHERE\nUPDATE Etudiant \nSET email = 'matei.desaintleger@univ-pau.fr'\nWHERE idEtudiant = 20260001;\n\n-- Suppression ciblée\nDELETE FROM Note WHERE valeurNote < 5.0;\n```\n\n### Interrogation DQL : Jointures, GROUP BY & Sous-Requêtes (~17 min · 3072 mots)\n**Plan des notions abordées :**\n- 1. L'Ordre d'Évaluation Sémantique d'une Requête SQL\n- 2. Les Différents Types de Jointures\n- 3. Agrégation : La Règle d'Or du GROUP BY\n- 4. Analyse des Pièges et Erreurs Fréquentes aux Examens de R1.05\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Interrogation DQL : Jointures, GROUP BY & Sous-Requêtes\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nPour ne jamais se tromper dans la rédaction d'une requête, il faut connaître l'ordre dans lequel le moteur SQL évalue les clauses :\n\n- FROM & JOIN : Construction du produit cartésien et filtrage des jointures.\n- WHERE : Filtrage ligne par ligne (tuples individuels). Les fonctions d'agrégat y sont interdites !\n- GROUP BY : Partitionnement des tuples en groupes disjoints.\n- HAVING : Filtrage global appliqué aux groupes après agrégation.\n\n```\nSELECT e.nom, e.prenom, n.valeurNote\nFROM Etudiant e\nINNER JOIN Note n ON e.idEtudiant = n.idEtudiant;\n```\n\n### Transactions ACID, Vues Relationnelles & Sécurité (~18 min · 3323 mots)\n**Plan des notions abordées :**\n- 1. Les Propriétés ACID des Transactions\n- 2. Commandes de Contrôle des Transactions\n- 3. Vues Relationnelles (CREATE VIEW)\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Transactions ACID, Vues Relationnelles & Sécurité\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nUne transaction est une unité logique de traitement composée d'une suite d'opérations SQL qui doivent s'exécuter de manière atomique.\n\n- Vérification des préconditions : Avant tout calcul ou écriture technique, on contrôle que les contraintes de 1. Les Propriétés ACID des Transactions sont satisfaites sur les données d'entrée.\n- Restauration du cadre rigoureux : On repart de la définition formelle enseignée par M. Christophe Marquesuzaà / M. Yon Dourisboure dans la section 3. Vues Relationnelles (CREATE VIEW).\n- Double contrôle croisé : On valide que chaque contrainte de Transactions, ACID, COMMIT, ROLLBACK est respectée sans effet de bord ni perte d'information.\n- Synthèse pour la copie : On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.\n\n```\n-- Début d'un virement bancaire entre deux comptes\nUPDATE Compte SET solde = solde - 100 WHERE idCompte = 1;\nSAVEPOINT apres_debit;\n\nUPDATE Compte SET solde = solde + 100 WHERE idCompte = 2;\n\n-- Si tout s'est bien déroulé : validation définitive\nCOMMIT;\n\n-- Si une erreur survient : retour à l'état initial\n-- ROLLBACK;\n```\n\n### Verso A4 Manuscrit (~3 min · 481 mots)\n\n### QCM des 5 Premières Minutes : Modèle & Règles Officielles (~3 min · 159 mots)\n**Plan des notions abordées :**\n- Exemple Type de Question de Début de Séance\n\n**Points essentiels du cours :**\nEnseignant : M. Christophe Marquesuzaà • BUT 1 Informatique Anglet\n\n- Le test se déroule pendant les 5 premières minutes de chaque TD et TP.\n- Tout retard = 0/20 non rattrapable.\n- Barème strict : bonne réponse = +1 pt, mauvaise réponse = pénalité négative (-0.5 ou -1 pt), absence de réponse = 0 pt.\n- Validation immédiate des notions du cours précédent (MCD, MLD, SQL DDL).\n\n### TP R1.05 : Un Guide Gastronomique (~15 min · 2842 mots)\n**Plan des notions abordées :**\n- Questions et Requêtes SQL Résolues (Projections & Restrictions)\n- Code Source SQL Intégral (DDL + DML + Requêtes)\n\n**Points essentiels du cours :**\nEnseignant : M. Yon Dourisboure • Manipulation de données, Projections (SELECT), Restrictions (WHERE) et Jointures\nUtilisation du prédicat d'appartenance IN ('Bayonne', 'Biarritz') :\n\n```\nSELECT id, nom, ville\nFROM Restaurant\nWHERE ville IN ('Bayonne', 'Biarritz')\nORDER BY id;\n```\n\n## ⚠️ Pièges d'examen & Réflexes (issu des QCM officiels)\n- **1. Démarche Merise & Dictionnaire des Données** : [\"Ne pas croire que le type de données (nombre/texte) définit l'information.\"]\n- **2. Modèle Conceptuel de Données (MCD)** : [\"Piège d'examen IUT : inverser le sens de lecture en plaçant la cardinalité du mauvais côté de la patte d'association.\"]\n- **3. Dérivation MCD vers MLD Relationnel** : ['Ne pas créer de table intermédiaire inutile pour une relation 1-n !', \"Attention au sens de migration : c'est toujours le côté 1 qui reçoit la clé du côté n.\"]\n- **3. Dérivation MCD vers MLD Relationnel** : [\"Si l'association porte une propriété (ex: 'quantite' dans Commander), celle-ci devient un attribut de la table associative.\"]\n- **4. Théorie de la Normalisation (1FN, 2FN, 3FN)** : [\"Si la clé primaire est constituée d'un seul attribut atomique, toute relation en 1FN est automatiquement en 2FN !\"]\n- **4. Théorie de la Normalisation (1FN, 2FN, 3FN)** : ['Ne pas confondre la 2FN (dépendance partielle par rapport à la clé) et la 3FN (dépendance transitive entre non-clés).']", "STANDARD": "# 📘 R1.05 — Révision Standard : Bases de Données & Modélisation (MCD)\n> **Référent** : M. Christophe Marquesuzaà / M. Yon Dourisboure\n\nModélisation Conceptuelle Merise (MCD), formalisme rigoureux des entités, associations, identifiants et cardinalités. Strictement conforme aux diapositives 1 à 60 de M. Marquesuzaa.\n\n## 📌 Notions clés par chapitre\n\n### Démarche Merise, Dictionnaire des Données & MCD\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Donnée vs Information : Une donnée est un fait brut non interprété (ex: 14). Une information est une donnée contextualisée porteuse de sens pour la décision humaine (ex: 14/20 obtenu par Matéi au partiel de R1.05).\n- Niveau Conceptuel (MCD) : Représente la sémantique métier du monde réel (QUOI), indépendamment de toute considération informatique, logicielle ou matérielle.\n- Niveau Logique (MLD) : Adapte la structure aux contraintes du modèle de données cible (QUI FAIT QUOI, modèle relationnel en tables, colonnes et clés).\n\n### Dérivation Rigoureuse du MCD vers le MLD Relationnel\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Un nom de table en majuscules (ex: ETUDIANT) ;\n- Une Clé Primaire (Primary Key - PK) : ensemble minimal d'attributs dont la valeur identifie de manière unique chaque tuple (ligne), soulignée dans l'écriture formelle : idEtudiant ;\n- Des Clés Étrangères (Foreign Keys - FK) : attributs faisant référence à la clé primaire d'une autre relation, obligatoirement préfixés par un dièse # dans l'écriture académique de l'IUT : #idGroupe.\n\n### Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Anomalie de mise à jour : Pour modifier une adresse client, il faut modifier 200 lignes de commandes. Si une seule ligne échappe à la modification, la base devient incohérente.\n- Anomalie d'insertion : Impossible d'insérer un nouveau produit s'il n'a pas encore fait l'objet d'une commande.\n- Anomalie de suppression : Supprimer la dernière commande d'un client supprime par inadvertance les coordonnées du client lui-même !\n\n### Implémentation SQL DDL & DML sous Oracle / PostgreSQL\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- ON DELETE CASCADE : Si un étudiant est supprimé, toutes ses notes associées sont automatiquement détruites pour préserver l'intégrité.\n- ON DELETE SET NULL : La clé étrangère prend la valeur NULL si l'enregistrement parent est supprimé (exige que la colonne autorise les NULL).\n- ON DELETE RESTRICT (ou comportement par défaut sans clause) : Empêche formellement la suppression d'un parent s'il possède encore des enfants référents.\n\n### Interrogation DQL : Jointures, GROUP BY & Sous-Requêtes\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- FROM & JOIN : Construction du produit cartésien et filtrage des jointures.\n- WHERE : Filtrage ligne par ligne (tuples individuels). Les fonctions d'agrégat y sont interdites !\n- GROUP BY : Partitionnement des tuples en groupes disjoints.\n\n### Transactions ACID, Vues Relationnelles & Sécurité\nEnseignant Référent : M. Christophe Marquesuzaà / M. Yon Dourisboure — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Vérification des préconditions : Avant tout calcul ou écriture technique, on contrôle que les contraintes de 1. Les Propriétés ACID des Transactions sont satisfaites sur les données d'entrée.\n- Restauration du cadre rigoureux : On repart de la définition formelle enseignée par M. Christophe Marquesuzaà / M. Yon Dourisboure dans la section 3. Vues Relationnelles (CREATE VIEW).\n- Double contrôle croisé : On valide que chaque contrainte de Transactions, ACID, COMMIT, ROLLBACK est respectée sans effet de bord ni perte d'information.\n\n### Verso A4 Manuscrit\n\n### QCM des 5 Premières Minutes : Modèle & Règles Officielles\nEnseignant : M. Christophe Marquesuzaà • BUT 1 Informatique Anglet\n- Le test se déroule pendant les 5 premières minutes de chaque TD et TP.\n- Tout retard = 0/20 non rattrapable.\n- Barème strict : bonne réponse = +1 pt, mauvaise réponse = pénalité négative (-0.5 ou -1 pt), absence de réponse = 0 pt.\n\n### TP R1.05 : Un Guide Gastronomique\nEnseignant : M. Yon Dourisboure • Manipulation de données, Projections (SELECT), Restrictions (WHERE) et Jointures\n\n## ⚠️ Points de vigilance\n- [\"Ne pas croire que le type de données (nombre/texte) définit l'information.\"]\n- [\"Piège d'examen IUT : inverser le sens de lecture en plaçant la cardinalité du mauvais côté de la patte d'association.\"]\n- ['Ne pas créer de table intermédiaire inutile pour une relation 1-n !', \"Attention au sens de migration : c'est toujours le côté 1 qui reçoit la clé du côté n.\"]\n- [\"Si l'association porte une propriété (ex: 'quantite' dans Commander), celle-ci devient un attribut de la table associative.\"]", "QUICK_REVIEW": "# ⚡ R1.05 — Fiche Express 80/20 : Bases de Données & Modélisation (MCD)\n> **9 chapitres couverts** · Révision rapide avant contrôle\n\n## ✅ Plan d'attaque 80/20\n- **Démarche Merise, Dictionnaire des Données & MCD** : 1. Les Fondements Théoriques de la Conception · 2. Le Dictionnaire des Données Épuré · 3. Les Composants du Modèle Conceptuel de Données (MCD)\n- **Dérivation Rigoureuse du MCD vers le MLD Relationnel** : 1. Le Modèle Relationnel d'Edgar F. Codd · 2. Les 4 Règles Algorithmiques de Dérivation MCD $\\to$ MLD · Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- **Théorie de la Normalisation : 1FN, 2FN, 3FN & BCNF** : 1. Le Rôle Critique de la Normalisation · 2. Dépendances Fonctionnelles (DF) · 3. Les Formes Normales Expliquées Pas-à-Pas\n- **Implémentation SQL DDL & DML sous Oracle / PostgreSQL** : 1. Création de Schéma Conforme aux Standards IUT (DDL) · 2. Les Actions Référentielles sur les Clés Étrangères · 3. Ordres de Manipulation de Données (DML)\n- **Interrogation DQL : Jointures, GROUP BY & Sous-Requêtes** : 1. L'Ordre d'Évaluation Sémantique d'une Requête SQL · 2. Les Différents Types de Jointures · 3. Agrégation : La Règle d'Or du GROUP BY\n- **Transactions ACID, Vues Relationnelles & Sécurité** : 1. Les Propriétés ACID des Transactions · 2. Commandes de Contrôle des Transactions · 3. Vues Relationnelles (CREATE VIEW)\n- **Verso A4 Manuscrit** : Mémo\n- **QCM des 5 Premières Minutes : Modèle & Règles Officielles** : Exemple Type de Question de Début de Séance\n- **TP R1.05 : Un Guide Gastronomique** : Questions et Requêtes SQL Résolues (Projections & Restrictions) · Code Source SQL Intégral (DDL + DML + Requêtes)\n\n## 🎯 Questions incontournables à savoir justifier\n- **Quelle est la distinction fondamentale entre une « donnée » et une « information » selon le cours de M. Marquesuzaà ?** → Une donnée est brute et sans contexte ; une information est une donnée contextualisée porteuse de sens pour l'utilisateur\n- **Comment applique-t-on la règle formelle de la « double lecture » des cardinalités sur une association binaire entre deux entités A et B ?** → On lit la cardinalité minimale (le nombre minimum de fois qu'une occurrence de A participe à l'association) et maximale (le nombre maximum)\n- **Lors de la dérivation d'une association binaire de cardinalités (1,1) d'un côté et (0,n) de l'autre, comment se traduit le MLD relationnel ?** → L'identifiant de l'entité côté (0,n) migre comme clé étrangère (#) dans la table de l'entité côté (1,1)\n- **Quand dérive-t-on une association sous la forme d'une nouvelle table relationnelle (table de liaison / associative) ?** → Lorsque l'association est de type n-m (cardinalités (0,n)-(0,n) ou (1,n)-(0,n)) ou si l'association porte des attributs propres\n- **Quelle condition stricte une relation doit-elle respecter pour être en 2ème Forme Normale (2FN) ?** → Être en 1FN et tous les attributs non-clés doivent dépendre pleinement de la totalité de la clé primaire (et pas d'une sous-partie)"};
+        const moduleColor = "#6E4970";
+        let currentLevel = 'DETAILED';
+
+        // Initialisation Mermaid 10 avec configuration permissive pour les losanges
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'neutral',
+                securityLevel: 'loose',
+                flowchart: {
+                    curve: 'basis',
+                    htmlLabels: true
+                }
+            });
+        }
+
+        // Moteur de rendu hybride : Markdown + Math KaTeX + Mermaid SVG
+        function renderRevisionMarkdown(mdText) {
+            if (!mdText) return "";
+
+            // 1. Protection des formules mathématiques KaTeX
+            const blockMath = [];
+            const inlineMath = [];
+
+            let text = mdText.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
+                blockMath.push(formula.trim());
+                return `%%%MATH_BLOCK_${blockMath.length - 1}%%%`;
+            });
+
+            text = text.replace(/\$([^$\n]+?)\$/g, (match, formula) => {
+                inlineMath.push(formula.trim());
+                return `%%%MATH_INLINE_${inlineMath.length - 1}%%%`;
+            });
+
+            // 2. Protection et isolation des blocs Mermaid (avec vrais losanges)
+            const mermaidBlocks = [];
+            text = text.replace(/```mermaid\s*([\s\S]*?)\s*```/g, (match, code) => {
+                mermaidBlocks.push(code.trim());
+                return `%%%MERMAID_BLOCK_${mermaidBlocks.length - 1}%%%`;
+            });
+
+            // 3. Conversion Markdown -> HTML avec Marked.js
+            let html = "";
+            if (typeof marked !== 'undefined' && marked.parse) {
+                html = marked.parse(text);
+            } else {
+                html = escapeHtml(text);
+            }
+
+            // 4. Restauration des formules KaTeX
+            html = html.replace(/%%%MATH_BLOCK_(\d+)%%%/g, (match, id) => {
+                const formula = blockMath[parseInt(id, 10)];
+                if (typeof katex !== 'undefined' && katex.renderToString) {
+                    try {
+                        return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center">${katex.renderToString(formula, { displayMode: true, throwOnError: false })}</div>`;
+                    } catch (e) {
+                        return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center font-mono">$$${formula}$$</div>`;
+                    }
+                }
+                return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center font-mono">$$${formula}$$</div>`;
+            });
+
+            html = html.replace(/%%%MATH_INLINE_(\d+)%%%/g, (match, id) => {
+                const formula = inlineMath[parseInt(id, 10)];
+                if (typeof katex !== 'undefined' && katex.renderToString) {
+                    try {
+                        return `<span class="katex-inline px-1">${katex.renderToString(formula, { displayMode: false, throwOnError: false })}</span>`;
+                    } catch (e) {
+                        return `<span class="katex-inline font-mono text-indigo-700">$${formula}$</span>`;
+                    }
+                }
+                return `<span class="katex-inline font-mono text-indigo-700">$${formula}$</span>`;
+            });
+
+            // 5. Restauration des conteneurs Mermaid
+            html = html.replace(/%%%MERMAID_BLOCK_(\d+)%%%/g, (match, id) => {
+                const code = mermaidBlocks[parseInt(id, 10)];
+                return `<div class="mermaid-card my-6"><div class="mermaid flex justify-center overflow-x-auto py-2">${code}</div></div>`;
+            });
+
+            // 6. Assainissement DOMPurify sécurisé
+            if (typeof DOMPurify !== 'undefined' && DOMPurify.sanitize) {
+                html = DOMPurify.sanitize(html, {
+                    ADD_TAGS: ['span', 'div', 'math', 'semantics', 'mrow', 'mi', 'mo', 'mn', 'annotation', 'svg', 'path', 'g', 'polygon', 'text', 'line', 'polyline', 'rect', 'circle', 'ellipse', 'i'],
+                    ADD_ATTR: ['aria-hidden', 'style', 'class', 'role', 'encoding', 'display', 'data-lucide', 'viewBox', 'fill', 'stroke', 'stroke-width', 'd', 'xmlns', 'points', 'x', 'y', 'width', 'height', 'cx', 'cy', 'rx', 'ry', 'x1', 'y1', 'x2', 'y2']
+                });
+            }
+
+            return html;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function renderCurrentContent() {
+            let raw = contentData[currentLevel];
+            if (!raw) {
+                if (currentLevel === 'DETAILED') raw = contentData['mastery'] || contentData['detailed'];
+                else if (currentLevel === 'STANDARD') raw = contentData['standard'];
+                else if (currentLevel === 'QUICK_REVIEW') raw = contentData['quick'] || contentData['quick_review'];
+            }
+            if (!raw) {
+                const keys = Object.keys(contentData);
+                if (keys.length > 0) raw = contentData[keys[0]];
+            }
+            const container = document.getElementById('revContent');
+            if (!container) return;
+            
+            container.innerHTML = renderRevisionMarkdown(raw || "Contenu académique en cours de chargement...");
+            
+            // Re-render Mermaid SVG avec losanges
+            if (typeof mermaid !== 'undefined' && mermaid.run) {
+                const mermaidNodes = container.querySelectorAll('.mermaid');
+                if (mermaidNodes.length > 0) {
+                    try {
+                        mermaid.run({ nodes: mermaidNodes });
+                    } catch(e) {
+                        console.warn("Mermaid error:", e);
+                    }
+                }
+            }
+
+            // Auto-render des éventuels délimiteurs mathématiques restants
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(container, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+            
+            // Recréer les icônes Lucide
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+        }
+
+        function switchLevel(lvl) {
+            currentLevel = lvl;
+            renderCurrentContent();
+            ['tabDetailed', 'tabStandard', 'tabQuick'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.backgroundColor = "white";
+                    el.style.borderColor = "#e2e8f0";
+                    el.style.color = "#334155";
+                }
+            });
+            const activeId = lvl === 'DETAILED' ? 'tabDetailed' : (lvl === 'STANDARD' ? 'tabStandard' : 'tabQuick');
+            const activeEl = document.getElementById(activeId);
+            if (activeEl) {
+                activeEl.style.backgroundColor = moduleColor;
+                activeEl.style.borderColor = moduleColor;
+                activeEl.style.color = "white";
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            switchLevel('DETAILED');
+        });
+        window.addEventListener('load', () => {
+            renderCurrentContent();
+        });
+    </script>
+</body>
+</html>

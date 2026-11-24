@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD Activités de conception — R1.01</title>
+    <link rel="stylesheet" href="../../css/academic_theme.css">
+    <style>
+        body { font-family: 'Lexend', sans-serif; line-height: 1.6; padding: 2rem; background: #0b0f19; color: #e2e8f0; }
+        .header { border-bottom: 2px solid #3b82f6; padding-bottom: 1rem; margin-bottom: 2rem; }
+        h1 { color: #60a5fa; }
+        .content { background: #1e293b; padding: 2rem; border-radius: 8px; border: 1px solid #334155; }
+        a { color: #38bdf8; }
+        code, pre { background: #0f172a; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>R1.01 • TD Activités de conception</h1>
+        <p>Source officielle : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692218">https://elearn.univ-pau.fr/mod/page/view.php?id=692218</a></p>
+    </div>
+    <div class="content">
+        <div role="main">
+ <div class="box py-3 generalbox center clearfix">
+  <div class="no-overflow">
+   <div style="max-width: 930px; margin: 0 auto; padding: 16px 20px 40px; box-sizing: border-box; color: #17233c; font-family: inherit; font-size: 18px; line-height: 1.68;">
+    <!-- =========================================================
+       EN-TÊTE DU TD
+       ========================================================= -->
+    <div style="display: flex; align-items: center; gap: 16px; margin: 0 0 30px; padding: 17px 22px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 5px solid #6e9fe6; border-radius: 13px; background: #f5f8fd; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+     <div style="flex: 0 0 auto; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e3edfc; color: #3673c5; font-size: 18px; font-weight: 800; line-height: 1; box-shadow: 0 2px 7px rgba(15, 23, 42, .08);">
+      TD3
+     </div>
+     <div style="min-width: 0;">
+      <div style="margin: 0 0 4px; color: #356fae; font-size: 24px; font-weight: 800; line-height: 1.25;">
+       Décomposition alternative d’un problème algorithmique
+      </div>
+      <div style="color: #66758a; font-size: 15px; font-weight: 600; line-height: 1.4;">
+       R1.01 - Initiation au développement
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+       À NOTER
+       ========================================================= -->
+    <div style="margin: 0; padding: 19px 22px; box-sizing: border-box; border: 1px solid #f1dfac; border-left: 4px solid #e2a82d; border-radius: 12px; background: #fffaf0; box-shadow: 0 4px 12px rgba(15, 23, 42, .05);">
+     <div style="margin: 0 0 14px;">
+      <span style="display: inline-block; padding: 4px 11px; border: 1.4px solid #d79800; border-radius: 999px; background: #fff8dc; color: #b77d00; font-size: 14px; font-weight: 800; line-height: 1.1;">
+       À noter
+      </span>
+     </div>
+     <p style="margin: 0 0 15px;">
+      Tous les exercices de ce TD ne seront pas abordés pendant la séance. Ils sont volontairement plus nombreux que le temps imparti, afin de vous offrir un panel d’activités variées à travailler en autonomie ou, encore mieux, en groupe.
+     </p>
+     <p style="margin: 0 0 15px;">
+      Aucune correction écrite ne sera distribuée, mais vous pouvez demander un retour oral de votre travail à un enseignant du module.
+     </p>
+     <p style="margin: 0 0 15px; font-weight: 800; color: #29364c;">
+      Un exercice de cette feuille ou des suivantes sera dans le sujet du premier contrôle.
+     </p>
+     <p style="margin: 0 0 12px;">
+      Pour chaque exercice proposé ci-après :
+     </p>
+     <ul style="margin: 0; padding-left: 28px;">
+      <li style="margin: 0 0 12px; padding-left: 3px;">
+       Établissez succinctement les spécifications externes pour clarifier ses caractéristiques ;
+      </li>
+      <li style="margin: 0; padding-left: 3px;">
+       Proposez un algorithme permettant de résoudre le problème et accompagnez votre algorithme d’un dictionnaire décrivant le nom, le type et la signification de chaque information manipulée.
+      </li>
+     </ul>
+    </div>
+    <!-- =========================================================
+       EXERCICE 1
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 1 - Validation d’un module d’enseignement
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0;">
+       Écrivez un algorithme qui permet d’afficher le résultat d’un étudiant à un module sachant que ce module est sanctionné par une note d’oral de coefficient 1 et d’une note d’écrit de coefficient 2. La moyenne obtenue doit être supérieure ou égale à 10 pour valider le module. L’algorithme devra afficher
+       <span style="color: #ed6d22; font-weight: bold;">
+        « reçu »
+       </span>
+       si le module est validé ou
+       <span style="color: #ed6d22; font-weight: bold;">
+        « non reçu »
+       </span>
+       sinon. On considèrera que les notes saisies sont toujours comprises entre
+       <span style="color: #ed6d22; font-weight: bold;">
+        0
+       </span>
+       et
+       <span style="color: #ed6d22; font-weight: bold;">
+        20
+       </span>
+       .
+      </p>
+     </div>
+    </div>
+    <!-- =========================================================
+       EXERCICE 2
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 2 - Signe d’un nombre
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0;">
+       Élaborez un algorithme qui détermine et affiche le signe d’un nombre entré au clavier.
+      </p>
+     </div>
+    </div>
+    <!-- =========================================================
+       EXERCICE 3
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 3 - Numéro de groupe de TD
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0;">
+       Écrivez un algorithme qui demande à un étudiant de l’IUT son numéro de groupe de TP puis qui affiche son numéro de groupe de TD.
+      </p>
+     </div>
+    </div>
+    <!-- =========================================================
+       EXERCICE 4
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 4 - Max de deux nombres
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0;">
+       Élaborez un algorithme qui permet de saisir deux nombres au clavier puis qui affiche le plus grand nombre. Dans cet exercice, on considère que si les deux nombres saisis sont égaux, alors il n’y a pas de max.
+      </p>
+     </div>
+    </div>
+    <!-- =========================================================
+       EXERCICE 5
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 5 - Max de trois nombres
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 14px;">
+       <strong>
+        Version a.
+       </strong>
+       Élaborez un algorithme qui permet de saisir trois nombres au clavier puis qui affiche le plus grand nombre. On considère que les trois nombres saisis ont tous des valeurs différentes.
+      </p>
+      <p style="margin: 0 0 12px; font-weight: 800;">
+       Exemple de comportement à l’écran :
+      </p>
+      <!-- TERMINAL VERSION A -->
+      <div style="width: 100%; max-width: 820px; margin: 0 auto 22px; border: 1px solid #d7dbe3; border-radius: 12px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 12px rgba(15, 23, 42, .05);">
+       <div style="height: 30px; background: #eef1f5; border-bottom: 1px solid #d7dbe3; padding: 0 12px; display: flex; align-items: center; gap: 8px; box-sizing: border-box;">
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block;">
+        </span>
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block;">
+        </span>
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block;">
+        </span>
+       </div>
+       <pre style="margin: 0; padding: 16px 18px; background: #ffffff; color: #0f172a; font-size: 17px; line-height: 1.55; font-family: 'Courier New', Courier, monospace; font-weight: 500; white-space: pre-wrap;">Nombre 1 : 4 ↵
+Nombre 2 : 2.5 ↵
+Nombre 3 : 6 ↵
+Le plus grand nombre est 6</pre>
+      </div>
+      <p style="margin: 0 0 12px;">
+       <strong>
+        Version b.
+       </strong>
+       Adaptez l’algorithme précédent en considérant que l’utilisateur peut saisir des valeurs identiques et en faisant en sorte que l’algorithme soit capable d’identifier le cas où la valeur max n’est pas unique :
+      </p>
+      <!-- TERMINAL VERSION B -->
+      <div style="width: 100%; max-width: 820px; margin: 0 auto; border: 1px solid #d7dbe3; border-radius: 12px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 12px rgba(15, 23, 42, .05);">
+       <div style="height: 30px; background: #eef1f5; border-bottom: 1px solid #d7dbe3; padding: 0 12px; display: flex; align-items: center; gap: 8px; box-sizing: border-box;">
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block;">
+        </span>
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block;">
+        </span>
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block;">
+        </span>
+       </div>
+       <pre style="margin: 0; padding: 16px 18px; background: #ffffff; color: #0f172a; font-size: 17px; line-height: 1.55; font-family: 'Courier New', Courier, monospace; font-weight: 500; white-space: pre-wrap;">Nombre 1 : 6 ↵
+Nombre 2 : 2.5 ↵
+Nombre 3 : 6 ↵
+Le plus grand nombre est 6 mais cette valeur n'est pas unique.</pre>
+      </div>
+     </div>
+    </div>
+    <!-- =========================================================
+       EXERCICE 6
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 6 - Calculette
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       Élaborez un programme qui considère deux nombres
+       <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">
+        val1
+       </span>
+       et
+       <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">
+        val2
+       </span>
+       , un opérateur
+       <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">
+        oper
+       </span>
+       et qui calcule puis affiche le résultat de
+       <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">
+        val1 oper val2
+       </span>
+       . On considèrera que
+       <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">
+        val1
+       </span>
+       ,
+       <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">
+        val2
+       </span>
+       et
+       <span style="color: #ed6d22; font-family: monospace; font-weight: bold;">
+        oper
+       </span>
+       seront saisis au clavier et que les opérations autorisées seront l’addition, la multiplication, la soustraction et la division.
+      </p>
+      <p style="margin: 0 0 12px;">
+       L’algorithme devra considérer les erreurs suivantes et afficher un message
+       <u>
+        adapté
+       </u>
+       :
+      </p>
+      <ul style="margin: 0; padding-left: 28px;">
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        cas où l’utilisateur saisit un opérateur erroné (différent de l’addition, la multiplication, la soustraction ou la division) ;
+       </li>
+       <li style="margin: 0; padding-left: 3px;">
+        cas où l’utilisateur demande à faire une division par zéro.
+       </li>
+      </ul>
+     </div>
+    </div>
+    <!-- =========================================================
+       EXERCICE 7
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 7 - Pierre-Feuille-Ciseaux
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       On souhaite concevoir un algorithme permettant à un arbitre de gérer une manche du jeu
+       <em>
+        pierre–feuille–ciseaux
+       </em>
+       . L’arbitre saisit successivement les choix des deux joueurs ("pierre", "feuille" ou "ciseaux"), puis l’algorithme détermine automatiquement l’issue de la manche. On supposera que la saisie est toujours effectuée en minuscules et sans erreur.
+      </p>
+      <p style="margin: 0;">
+       <strong>
+        Rappel des règles du jeu :
+       </strong>
+       <span style="color: #ed6d22; font-weight: bold;">
+        pierre
+       </span>
+       bat
+       <span style="color: #ed6d22; font-weight: bold;">
+        ciseaux
+       </span>
+       ,
+       <span style="color: #ed6d22; font-weight: bold;">
+        ciseaux
+       </span>
+       coupent
+       <span style="color: #ed6d22; font-weight: bold;">
+        feuille
+       </span>
+       et
+       <span style="color: #ed6d22; font-weight: bold;">
+        feuille
+       </span>
+       recouvre
+       <span style="color: #ed6d22; font-weight: bold;">
+        pierre
+       </span>
+       .
+      </p>
+     </div>
+    </div>
+    <!-- =========================================================
+       EXERCICE 8
+       ========================================================= -->
+    <div style="margin: 50px 0 0;">
+     <div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 11px; background: #f4f8fd; color: #356fae; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">
+      Exercice 8 - Contrôle d’un ascenseur
+     </div>
+     <div style="padding: 0 4px;">
+      <p style="margin: 0 0 19px;">
+       On souhaite concevoir un algorithme qui détermine l’action à effectuer par un ascenseur lorsqu’un utilisateur appuie sur le bouton d’appel. Cette action dépend de l’étage où se trouve actuellement la cabine, de l’étage demandé par l’usager mais aussi du mode de fonctionnement de l’ascenseur.
+      </p>
+      <p style="margin: 0 0 12px;">
+       Les données saisies au clavier sont :
+      </p>
+      <ul style="margin: 0 0 19px; padding-left: 28px;">
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        l’étage courant de la cabine (
+        <span style="color: #ed6d22; font-weight: bold;">
+         0
+        </span>
+        ,
+        <span style="color: #ed6d22; font-weight: bold;">
+         1
+        </span>
+        ,
+        <span style="color: #ed6d22; font-weight: bold;">
+         2
+        </span>
+        ou
+        <span style="color: #ed6d22; font-weight: bold;">
+         3
+        </span>
+        ) ;
+       </li>
+       <li style="margin: 0 0 12px; padding-left: 3px;">
+        l’étage demandé par l’usager (également
+        <span style="color: #ed6d22; font-weight: bold;">
+         0
+        </span>
+        ,
+        <span style="color: #ed6d22; font-weight: bold;">
+         1
+        </span>
+        ,
+        <span style="color: #ed6d22; font-weight: bold;">
+         2
+        </span>
+        ou
+        <span style="color: #ed6d22; font-weight: bold;">
+         3
+        </span>
+        ) ;
+       </li>
+       <li style="margin: 0; padding-left: 3px;">
+        le mode de fonctionnement de l’ascenseur, indiqué par un caractère :
+        <span style="color: #ed6d22; font-weight: bold;">
+         ’n’
+        </span>
+        pour indiquer que l’ascenseur fonctionne normalement,
+        <span style="color: #ed6d22; font-weight: bold;">
+         ’m’
+        </span>
+        pour indiquer qu’il est en maintenance, ou
+        <span style="color: #ed6d22; font-weight: bold;">
+         ’i’
+        </span>
+        pour indiquer qu’il est en mode urgence incendie.
+       </li>
+      </ul>
+      <p style="margin: 0 0 19px;">
+       En fonctionnement normal, l’ascenseur compare l’étage demandé à sa position actuelle pour décider de son déplacement : il peut se déplacer vers le haut en affichant
+       <em>
+        « Je monte »
+       </em>
+       , se déplacer vers le bas en affichant
+       <em>
+        « Je descends »
+       </em>
+       , ou rester sur place et afficher
+       <em>
+        « J’ouvre les portes »
+       </em>
+       si la destination correspond à l’étage courant.
+      </p>
+      <p style="margin: 0 0 19px;">
+       En maintenance, aucun déplacement n’est effectué : l’ascenseur signale simplement
+       <em>
+        « Hors service - En maintenance »
+       </em>
+       .
+      </p>
+      <p style="margin: 0 0 19px;">
+       En cas d’incendie, un appui sur le bouton d’appel provoque une descente immédiate au rez-de-chaussée si la cabine ne s’y trouve pas déjà, afin de limiter le risque qu’un câble endommagé par le feu ne provoque sa chute. Dans cette situation, l’ascenseur affiche le message
+       <em>
+        « Sécurisation : descente au RdC »
+       </em>
+       . Si la cabine est déjà au rez-de-chaussée, l’ascenseur reste immobile et affiche
+       <em>
+        « Hors service - Évacuez l’immeuble »
+       </em>
+       .
+      </p>
+      <p style="margin: 0;">
+       On supposera que les valeurs saisies sont toujours correctes.
+      </p>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+    </div>
+</body>
+</html>

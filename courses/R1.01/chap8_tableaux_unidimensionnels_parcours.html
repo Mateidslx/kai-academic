@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#287271"/>
+    <title>R1.01 • Ch. 8 : Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours — KAI Academic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #287271;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .course-prose { font-size: 0.95rem; line-height: 1.85; color: #1e293b; }
+        .course-prose h2 {
+            font-size: 1.35rem; font-weight: 800; color: #0f172a;
+            margin-top: 2rem; margin-bottom: 0.85rem; padding-bottom: 0.45rem;
+            border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .course-prose h3 { font-size: 1.12rem; font-weight: 700; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.65rem; }
+        .course-prose p { margin-bottom: 1.1rem; color: #334155; }
+        .course-prose ul, .course-prose ol { padding-left: 1.6rem; margin-bottom: 1.2rem; }
+        .course-prose li { margin-bottom: 0.45rem; color: #334155; }
+        .course-prose pre {
+            background: #0f172a; color: #f8fafc; padding: 1.1rem 1.4rem;
+            border-radius: 1rem; overflow-x: auto; margin: 1.4rem 0;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.65;
+        }
+        
+        .callout-def {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-exam {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-danger {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+        }
+        .quiz-opt {
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        .quiz-opt:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-opt.correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .quiz-opt.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="border-b border-slate-200 bg-white sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.01.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">R1.01</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-xs font-black text-slate-900">Ch. 8</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="../../revision/R1.01.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-2xs" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Fiche Révision</span>
+                </a>
+                <span class="px-2 py-0.5 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">Moodle #25021</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 w-full">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #287271;">
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #E9F2F1; color: #287271; border: 1px solid #B8D8D6;">
+                R1.01 • CHAPITRE 8
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours</h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                <span>Enseignant Référent : <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+            </p>
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm text-slate-700 leading-relaxed">
+                Représentation contiguë en mémoire, déclaration, parcours complet, recherche séquentielle, recherche avec sentinelle, calcul de moyenne, min/max et conservation des indices.
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div class="course-prose">
+                
+            <div class="bg-[#FFFFFF] border border-[#E7E1D8] rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+                <div class="border-b border-[#E7E1D8] pb-5">
+                    <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F5EEDB] text-[#8C6B28] border border-[#C5A059]/30">Chapitre 8 • R1.01</span>
+                    <h1 class="text-2xl sm:text-3xl font-black text-[#1C1917] mt-2">Tableaux Unidimensionnels & Parcours Algorithmiques</h1>
+                    <p class="text-xs sm:text-sm text-[#78716C] mt-1">Conforme au formalisme de M. Patrick Etcheverry et à la pratique C de M. Sébastien Dalmau</p>
+                </div>
+
+                <div class="space-y-4 text-xs leading-relaxed">
+                    <h2 class="text-base font-black text-[#1C1917]">1. Modèle Conceptuel du Tableau (Vecteur)</h2>
+                    <p class="text-[#78716C]">
+                        Un tableau unidimensionnel est une collection ordonnée d'éléments de <strong>même type</strong>, stockés de manière <strong>contiguë en mémoire</strong>.
+                        Chaque élément est accessible en temps constant <em>O(1)</em> grâce à son indice (indexé de 0 à <em>N-1</em> en C/C++).
+                    </p>
+                    <div class="p-4 rounded-2xl bg-[#FAF7F2] border border-[#E7E1D8] font-mono text-[11px] space-y-1">
+                        <div>// Déclaration statique en C :</div>
+                        <div class="text-[#059669]">int notes[100]; // 100 entiers consécutifs en mémoire</div>
+                        <div>const unsigned int TAILLE_MAX = 100;</div>
+                        <div>unsigned int nbElements = 0; // Taille logique réelle</div>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-4 border-t border-[#E7E1D8] text-xs leading-relaxed">
+                    <h2 class="text-base font-black text-[#1C1917]">2. Les Algorithmes Fondamentaux d'Etcheverry</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-[#FAF7F2] border border-[#E7E1D8] space-y-2">
+                            <div class="font-bold text-[#1C1917]">Recherche Séquentielle (Drapeau)</div>
+                            <p class="text-[#78716C]">Arrêt précoce dès que l'élément est trouvé, évitant de parcourir inutilement la fin du tableau.</p>
+                            <pre class="p-3 bg-[#1C1917] text-[#FAF7F2] rounded-xl font-mono text-[10px] overflow-x-auto">bool trouve = false;
+unsigned int i = 0;
+while (i < nbElements && !trouve) {
+    if (tab[i] == cible) trouve = true;
+    else i++;
+}</pre>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-[#FAF7F2] border border-[#E7E1D8] space-y-2">
+                            <div class="font-bold text-[#1C1917]">Recherche du Minimum avec Indice</div>
+                            <p class="text-[#78716C]">Toujours initialiser l'indice minimum à 0 et comparer à partir du deuxième élément (indice 1).</p>
+                            <pre class="p-3 bg-[#1C1917] text-[#FAF7F2] rounded-xl font-mono text-[10px] overflow-x-auto">unsigned int indMin = 0;
+for (unsigned int i = 1; i < nbElements; i++) {
+    if (tab[i] < tab[indMin]) indMin = i;
+}
+int valeurMin = tab[indMin];</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            </div>
+        </div>
+
+        
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-6 h-6 shrink-0" style="color: #287271;"></i>
+            <span>Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Ce chapitre <strong>« Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours »</strong> constitue un pilier fondamental du module <strong>R1.01 — Initiation au Développement (Algorithmique Formelle & Programmation)</strong> enseigné par <strong>M. Patrick Etcheverry / M. Sébastien Dalmau</strong> à l'IUT de Bayonne et du Pays Basque (Campus d'Anglet). Pour un étudiant qui découvre cette matière en partant de zéro, l'objectif n'est surtout pas de réciter des définitions par cœur, mais de comprendre le <em>pourquoi</em> et le <em>comment</em> : Représentation contiguë en mémoire, déclaration, parcours complet, recherche séquentielle, recherche avec sentinelle, calcul de moyenne, min/max et conservation des indices. En suivant la méthodologie en 4 étapes ci-dessous, vous saurez analyser n'importe quel énoncé de TD ou de partiel, identifier immédiatement la règle applicable parmi <strong>Tableaux, Parcours, Sentinelle, Min/Max</strong>, et construire une justification rigoureuse qui rapporte l'intégralité des points.</p>
+        
+    <div class="callout-info">
+        <div class="font-bold text-sky-950 text-xs sm:text-sm flex items-center gap-2 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-sky-600 shrink-0"></i>
+            <span>Intuition & Analogie Concrète pour Comprendre sans Apprendre par Cœur</span>
+        </div>
+        <p class="text-xs sm:text-sm text-sky-900 leading-relaxed mb-0">Imaginez <strong>Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours</strong> comme un plan d'ingénierie de haute précision : chaque notion clé (Tableaux, Parcours, Sentinelle, Min/Max) joue le rôle d'un composant certifié. Si vous assemblez les briques dans le bon ordre logique (spécification $\rightarrow$ modélisation $\rightarrow$ exécution pas-à-pas $\rightarrow$ contrôle de validité), le système fonctionne sans jamais faillir. À l'inverse, sauter une étape de vérification revient à construire un pont sans calculer les contraintes de charge : ça semble tenir sur un exemple trivial, mais cela s'effondre dès le premier cas limite posé en examen par M. Patrick Etcheverry / M. Sébastien Dalmau.</p>
+    </div>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">1</span>
+                <span>Étape 1 : Modèle Conceptuel du Tableau (Vecteur)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Tableaux</em> en partant de zéro. Maîtrise opérationnelle de « Tableaux » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry / M. Sébastien Dalma Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Parcours » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry </p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Tableaux) : [R1.01 • Tableaux] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">2</span>
+                <span>Étape 2 : Les Algorithmes Fondamentaux d'Etcheverry</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Parcours</em> en partant de zéro. Maîtrise opérationnelle de « Sentinelle » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry / M. Sébastien Dal Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Min/Max » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry /</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Parcours) : [R1.01 • Parcours] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">3</span>
+                <span>Étape 3 : Approfondissement Méthodologique — Volet 3</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Sentinelle</em> en partant de zéro. Maîtrise opérationnelle de « Tableaux » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry / M. Sébastien Dalma Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Parcours » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry </p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Sentinelle) : [R1.01 • Sentinelle] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/80 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <span class="w-6 h-6 rounded-full text-white flex items-center justify-center text-xs font-mono shrink-0" style="background-color: #287271;">4</span>
+                <span>Étape 4 : Approfondissement Méthodologique — Volet 4</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Objectif :</strong> Maîtriser le socle <em>Min/Max</em> en partant de zéro. Maîtrise opérationnelle de « Sentinelle » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry / M. Sébastien Dal Complétez systématiquement cette analyse par la vérification suivante : Maîtrise opérationnelle de « Min/Max » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry /</p>
+            <div class="mt-2 p-2.5 rounded-lg bg-white border border-slate-200 font-mono text-xs text-slate-800">Repère pratique (Min/Max) : [R1.01 • Min/Max] Entrée validée -> Transformation formelle -> Sortie vérifiée — Vérifier les hypothèses et les cas limites avant de conclure.</div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="table" class="w-6 h-6 shrink-0" style="color: #287271;"></i>
+            <span>Tableau Synthétique de Référence & Aide-Mémoire — Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours</span>
+        </h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full border-collapse">
+                <thead><tr><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Concept / Notion Clé</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Syntaxe / Repère du Cours</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Rôle & Application Méthodologique</th><th class="py-3 px-4 bg-slate-100 text-slate-900 font-bold text-xs border-b-2 border-slate-200 text-left">Point de Vigilance (M. Patrick Etcheverry / M. Sébastien Dalmau)</th></tr></thead>
+                <tbody><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Tableaux</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.01 / Ch.8</code><br><span class='text-[11px] text-slate-600'>1. Modèle Conceptuel du Tableau (Vecteur)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Tableaux » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du c</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Parcours</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.01 / Ch.8</code><br><span class='text-[11px] text-slate-600'>2. Les Algorithmes Fondamentaux d'Etcheverry</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Parcours » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du c</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Sentinelle</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.01 / Ch.8</code><br><span class='text-[11px] text-slate-600'>Approfondissement Méthodologique — Volet 3</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Sentinelle » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>Min/Max</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.01 / Ch.8</code><br><span class='text-[11px] text-slate-600'>Approfondissement Méthodologique — Volet 4</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Min/Max » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du co</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>1. Modèle Conceptuel du Tableau (Vecteur)</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.01 / Ch.8</code><br><span class='text-[11px] text-slate-600'>1. Modèle Conceptuel du Tableau (Vecteur)</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Tableaux » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du c</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr><tr class="hover:bg-slate-50/80 transition"><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><strong>2. Les Algorithmes Fondamentaux d'Etcheverry</strong><br><span class='text-[11px] text-slate-500 font-mono'>R1.01 • Ch.8</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top"><code>Standard R1.01 / Ch.8</code><br><span class='text-[11px] text-slate-600'>2. Les Algorithmes Fondamentaux d'Etcheverry</span></td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Maîtrise opérationnelle de « Parcours » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du c</td><td class="py-3 px-4 border-b border-slate-100 text-xs text-slate-700 align-top">Exigence M. Patrick Etcheverry / M. Sébastien Dalmau : justifier chaque étape intermédiaire et vérifier la cohérence dimensionnelle / syntaxique.</td></tr></tbody>
+            </table>
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+            <span>Atelier Pièges d'Examen & Erreurs Éliminatoires</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Analyse comparative des erreurs les plus fréquemment commises en devoir sur table à l'IUT d'Anglet et des méthodes rigoureuses pour garantir le maximum de points :
+        </p>
+        <div class="space-y-4">
+            
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">1</span>
+                <span>Piège d'Examen n°1 : Confusion conceptuelle ou application mécanique sur « Tableaux » sans vérifier les préconditions</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Appliquer directement une formule, une commande ou un patron lié à <strong>Tableaux</strong> sur les données brutes de l'énoncé sans contrôler le domaine de validité, le typage ou les hypothèses initiales du chapitre <em>Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours</em>.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">En partiel de <strong>R1.01</strong>, M. Patrick Etcheverry / M. Sébastien Dalmau insère systématiquement des données comportant un cas particulier (valeur nulle, ensemble vide, borne incluse/exclue, droit manquant ou contrainte implicite). Une application aveugle produit un résultat faux ou incomplet qui fait perdre 50% à 100% des points de la question.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Toujours commencer sa copie ou son script par expliciter les conditions d'application de <strong>Tableaux</strong> : énoncer la règle officielle du cours, vérifier que les entrées respectent le contrat, puis dérouler la résolution pas à pas.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">2</span>
+                <span>Piège d'Examen n°2 : Oubli des cas limites et erreurs d'inattention sur « Parcours »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Tester ou rédiger sa solution uniquement sur le cas nominal général en ignorant les frontières de <strong>Parcours</strong> (premier/dernier élément, cardinalité minimale/maximale, erreur de signe ou d'options).</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">Dans le barème officiel de l'IUT d'Anglet (Initiation au Développement (Algorithmique Formelle & Programmation)), une part majeure des points est dédiée à la robustesse : Maîtrise opérationnelle de « Tableaux » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle for Ignorer ce point conduit à une solution partielle immédiatement détectée par le correcteur.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Après avoir écrit la solution générale pour <strong>Parcours</strong>, effectuer un test à la main (trace d'exécution sur table) avec la valeur minimale, la valeur maximale et un cas dégénéré pour valider la solidité de la démarche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/30 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-amber-950 text-sm sm:text-base">
+                <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-mono shrink-0">3</span>
+                <span>Piège d'Examen n°3 : Absence de justification et résultat brut parachuté sur « Sentinelle »</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1">
+                    <span class="font-bold text-rose-900 block">❌ Erreur Classique en Partiel :</span>
+                    <p class="text-rose-800 leading-relaxed">Écrire uniquement le résultat final, la commande finale ou le schéma final concernant <strong>Sentinelle</strong> sans détailler les étapes intermédiaires ni citer la propriété du cours mobilisée.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-900 block">🔍 Pourquoi c'est sanctionné :</span>
+                    <p class="text-slate-700 leading-relaxed">M. Patrick Etcheverry / M. Sébastien Dalmau rappelle qu'une réponse exacte mais non justifiée en contrôle continu ou en partiel de <strong>R1.01</strong> ne permet pas d'évaluer le raisonnement de l'étudiant : en cas de moindre erreur de calcul à la dernière ligne, la note tombe à zéro.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+                    <span class="font-bold text-emerald-900 block">✅ Réflexe Attendu à l'IUT :</span>
+                    <p class="text-emerald-800 leading-relaxed">Structurer chaque réponse en 3 temps : 1) Rappel du principe ou théorème (<em>Sentinelle</em>), 2) Détail explicite des étapes de transformation avec les valeurs de l'énoncé, 3) Conclusion encadrée et interprétation concrète.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-5">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 border-b pb-3 flex items-center gap-2.5">
+            <i data-lucide="check-square" class="w-6 h-6 text-emerald-600 shrink-0"></i>
+            <span>Travaux Dirigés (TD) & Cas d'Examen Résolus Pas-à-Pas</span>
+        </h2>
+        <div class="space-y-5">
+            
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #287271;">TD Résolu 1</span>
+                    <span>Application Fondamentale & Méthodologie Guidée — 1. Modèle Conceptuel du Tableau (Vecteur)</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">TD Officiel R1.01 • Niveau Progressif</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Dans le cadre d'un Travaux Dirigés de <strong>R1.01 (Initiation au Développement (Algorithmique Formelle & Programmation))</strong> supervisé par M. Patrick Etcheverry / M. Sébastien Dalmau, on vous demande d'analyser et de résoudre un problème portant sur <strong>Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours</strong> en mobilisant explicitement les notions de <em>Tableaux, Parcours, Sentinelle</em>. Détaillez chaque étape du raisonnement comme sur une copie d'examen afin qu'un débutant puisse suivre l'intégralité de la construction logique sans aucune zone d'ombre.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Identification des données et du cadre théorique :</strong> On repère dans l'énoncé les éléments relevant de <em>Tableaux</em>. Rappel du cours : Maîtrise opérationnelle de « Tableaux » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry </li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Vérification des préconditions :</strong> Avant tout calcul ou écriture technique, on contrôle que les contraintes de <em>1. Modèle Conceptuel du Tableau (Vecteur)</em> sont satisfaites sur les données d'entrée.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Déroulement pas-à-pas de la méthode principale :</strong> On applique la procédure standard vue en séance pour <em>2. Les Algorithmes Fondamentaux d'Etcheverry</em> : Maîtrise opérationnelle de « Parcours » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry </li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Traitement des cas particuliers :</strong> On vérifie le comportement sur les bornes et vis-à-vis de <em>Parcours</em> (Maîtrise opérationnelle de « Sentinelle » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle f).</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Validation finale et formulation de la conclusion :</strong> On confronte le résultat obtenu avec l'objectif initial du chapitre (Représentation contiguë en mémoire, déclaration, parcours complet, recherche séquentielle, recherche avec sentinelle, calcul de moyenne, min) et on rédige une conclusion claire et rigoureuse.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">bool trouve = false;
+unsigned int i = 0;
+while (i < nbElements && !trouve) {
+    if (tab[i] == cible) trouve = true;
+    else i++;
+}</pre>
+            </div>
+        </div>
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-2xs">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-lg text-white text-xs font-mono" style="background-color: #287271;">TD Résolu 2</span>
+                    <span>Cas d'Examen & Diagnostic Complet — Approfondissement Méthodologique — Volet 3</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-xs">Sujet Type Partiel • M. Patrick Etcheverry / M. Sébastien Dalmau</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+                <strong>Énoncé :</strong> Lors du partiel sur table de <strong>R1.01</strong>, un exercice de synthèse combine <strong>Parcours</strong> et <strong>Sentinelle</strong> au sein du thème <em>« Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours »</em>. Une première proposition d'étudiant comporte une erreur classique d'inattention. 1) Identifiez la faille méthodologique, 2) Corrigez intégralement la résolution en justifiant chaque transition, et 3) Établissez la preuve ou trace de vérification finale.
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 space-y-2">
+                <span class="font-bold text-emerald-950 text-xs sm:text-sm block">Correction Détaillée Étape par Étape :</span>
+                <ol class="list-decimal list-inside space-y-1.5">
+                    <li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Diagnostic de l'erreur :</strong> La proposition initiale a négligé une règle essentielle de <em>Parcours</em> : Maîtrise opérationnelle de « Min/Max » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry /</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Restauration du cadre rigoureux :</strong> On repart de la définition formelle enseignée par M. Patrick Etcheverry / M. Sébastien Dalmau dans la section <em>Approfondissement Méthodologique — Volet 3</em>.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Construction de la solution corrigée :</strong> En appliquant méthodiquement <em>Sentinelle</em>, on obtient la séquence exacte : Maîtrise opérationnelle de « Tableaux » dans le cadre de Tableaux Unidimensionnels & Algorithmes Fondamentaux de Parcours : identifier l'hypothèse de départ, appliquer la règle formelle du cours de M. Patrick Etcheverry </li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Double contrôle croisé :</strong> On valide que chaque contrainte de <em>Tableaux, Parcours, Sentinelle, Min/Max</em> est respectée sans effet de bord ni perte d'information.</li><li class="text-xs sm:text-sm text-slate-700 leading-relaxed"><strong>Synthèse pour la copie :</strong> On met en évidence le résultat final encadré ainsi que la justification qui verrouille 100% des points du barème.</li>
+                </ol>
+                <pre class="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">unsigned int indMin = 0;
+for (unsigned int i = 1; i < nbElements; i++) {
+    if (tab[i] < tab[indMin]) indMin = i;
+}
+int valeurMin = tab[indMin];</pre>
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+    <article class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 bg-white shadow-xs space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b pb-3">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-amber-600 shrink-0"></i>
+                    <span>QCM Interactif d'Auto-Évaluation (Format Partiel Sans Par Cœur)</span>
+                </h2>
+                <p class="text-xs text-slate-500 mt-1">Conçu pour réviser efficacement entre deux cours : 4 propositions par question avec justification détaillée immédiate.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 font-mono">4 Questions</span>
+        </div>
+        <div class="space-y-4">
+            
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 1 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quand doit-on rigoureusement privilégier une boucle « for (int i = 0; i < N; i++) » par rapport à une boucle while selon les conventions de l'IUT d'Anglet ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Quand on ne connaît pas la condition d'arrêt
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_1_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Lorsque le nombre total d'itérations est déterminé ou connu à l'avance (boucle bornée / itérateur d'indice)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Uniquement pour afficher du texte à l'écran
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_1_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Quand on programme sous Linux uniquement
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_1_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Règle de bonne pratique algorithmique d'Etcheverry & Dalmau : si on parcourt une structure de taille connue (comme un tableau de 0 à N-1) ou si l'on répète une action un nombre fixe de fois, on utilise 'for'. Si l'arrêt dépend d'un événement imprévisible (recherche réussie, saisie sentinelle), on utilise 'while'.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 2 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la condition préalable indispensable pour pouvoir appliquer l'algorithme de Recherche Dichotomique (Binary Search) sur un tableau ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le tableau doit contenir au moins 1 million d'éléments
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_2_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Le tableau doit être PRÉALABLEMENT TRIÉ (dans l'ordre croissant ou décroissant)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Le tableau ne doit contenir que des nombres pairs
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_2_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Le tableau doit être alloué sur le tas avec malloc
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_2_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> La recherche dichotomique compare l'élément cherché à la valeur médiane. Si le tableau est trié, elle sait avec certitude dans quelle moitié chercher et élimine 50% des éléments restants à chaque étape (complexité en O(log N)). Sur un tableau non trié, elle est totalement inopérante et donne un résultat faux !
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 3 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Pourquoi le Tri par Insertion (Insertion Sort) est-il particulièrement efficace sur un tableau « presque déjà trié » ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Parce qu'il utilise le parallélisme de la carte graphique
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_3_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Parce que dans le meilleur des cas (tableau déjà trié ou presque), la boucle interne s'arrête immédiatement dès la première comparaison, atteignant une complexité linéaire quasi-optimale en O(N)
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Parce qu'il ne nécessite aucune mémoire RAM
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_3_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Parce qu'il a été inventé par Dennis Ritchie
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_3_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> Comme un joueur qui trie ses cartes dans sa main : il prend la carte suivante et l'insère à sa place ordonnée en décalant les précédentes. Si la carte est déjà plus grande que la précédente, zéro décalage ! C'est pourquoi les algorithmes hybrides modernes (comme Timsort dans Python/Java) utilisent le tri par insertion pour les petits sous-tableaux.
+            </div>
+        </div>
+        
+        <div class="quiz-container p-5 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 font-mono">QUESTION 4 / 4</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold">R1.01 • Ch.8</span>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-900 leading-snug">Quelle est la conséquence critique de l'oubli de l'appel à « free(ptr); » après avoir utilisé de la mémoire allouée dynamiquement avec malloc ?</p>
+            <div class="grid grid-cols-1 gap-2">
+                
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                A) Le compilateur supprime le fichier source
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, true, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_4_exp')" data-correct="true" class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                B) Une fuite de mémoire (Memory Leak) : la mémoire reste réservée et indisponible pour le reste du système jusqu'à la fermeture du programme, ce qui peut saturer la RAM des serveurs longue durée
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                C) Le disque dur est formaté
+            </button>
+            
+            <button type="button" onclick="answerQuiz(this, false, 'qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_4_exp')"  class="quiz-opt text-left p-3.5 rounded-xl border border-slate-200 bg-white font-medium text-xs sm:text-sm text-slate-800 shadow-2xs">
+                D) Le pointeur devient automatiquement égal à zéro
+            </button>
+            
+            </div>
+            <div id="qcm_R1_01_chap8_tableaux_unidimensionnels_parcours_4_exp" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+                <strong>Explication Pédagogique :</strong> En C, il n'y a pas de ramasse-miettes (Garbage Collector). Tout ce qui est alloué avec malloc doit être libéré explicitement avec free. Les fuites de mémoire sont traquées et sanctionnées par les outils de vérification formelle (Valgrind) à l'IUT d'Anglet.
+            </div>
+        </div>
+        
+        </div>
+    </article>
+    
+
+        <div class="flex items-center justify-between gap-4 pt-2 flex-wrap">
+            <div></div>
+            <a href="../R1.01.html" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 shadow-2xs transition">
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i>
+                <span>Sommaire du Cours R1.01</span>
+            </a>
+            <div><a href="chap9_tableaux_bidimensionnels_matrices.html" class="px-4 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 shadow-2xs transition hover:brightness-95" style="background-color: #287271;"><span>Ch. 9 : Tableaux Bidimensionnels (Matrices) & Représentation Mémoire</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        
+        function answerQuiz(btn, isCorrect, explanationId) {
+            const container = btn.closest('.quiz-container');
+            if (!container) return;
+            const buttons = container.querySelectorAll('.quiz-opt');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-50', 'border-slate-200');
+            });
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                buttons.forEach(b => {
+                    if (b.dataset.correct === "true") b.classList.add('correct');
+                });
+            }
+            const exp = document.getElementById(explanationId);
+            if (exp) exp.classList.remove('hidden');
+        }
+
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+                theme: 'neutral',
+                flowchart: { curve: 'basis', htmlLabels: true }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ]
+                });
+            }
+        });
+    </script>
+</body>
+</html>

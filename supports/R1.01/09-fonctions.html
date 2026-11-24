@@ -1,0 +1,1862 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Concevoir des sous-programmes <br/> - Partie 2 : les fonctions -</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 30px; margin-bottom: -90px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%; margin-top: -40px;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Rappels
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">03</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Propriétés des fonctions
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">07</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Déclarer une fonction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">14</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Définir une fonction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">16</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Appeler une fonction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">18</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Fonctions et procédures : différences
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">23</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Point de vue algorithmique
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">26</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Bonnes pratiques
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">28</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Rappels">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Rappels" data-transition="convex">
+        <h1>Rappels</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Qu'est-ce qu'un sous-programme ?</h4>
+
+        <div style="font-size: 70%;">
+            <div class="card bg-light border-primary mb-3" style="margin-top: 15px;">
+                <div class="card-header text-primary">
+                    <i class="fas fa-book-reader"></i>
+                    Définition
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Un sous-programme est une portion de programme <strong>réutilisable</strong>
+                        qui peut être exécutée de manière <strong>indépendante</strong> par rapport à un
+                        programme dit principal.
+                    </p>
+                    <p>
+                        A l'instar de n'importe quel traitement, un sous-programme à un
+                        nom et peut :
+                    </p>
+                    <ul>
+                        <li style="margin-top: -10px;">avoir des <strong>données</strong> ;</li>
+                        <li style="margin-top: -7px;">avoir des <strong>résultats</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Déclaration, définition et appel</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                On distingue trois phases distinctes pour construire et utiliser un
+                sous-programme :
+            </p>
+            <ul>
+                <li style="margin-top: -15px;">La <strong class="text-primary">déclaration</strong> du sous-programme : Cette étape, facultative mais
+                    <strong>fortement conseillée</strong>, vise à spécifier le ”mode d'emploi” du
+                    sous-programme en précisant son nom, ses données, ses résultats et
+                    son but ;
+                </li>
+                <li style="margin-top: -4px;">La <strong class="text-primary">définition</strong> du sous-programme : Cette étape consiste à écrire le
+                    corps du sous-programme, à savoir l'ensemble des instructions qui le
+                    composent ;
+                </li>
+                <li style="margin-top: -4px;">L'<strong class="text-primary">appel</strong> du sous-programme : Cette étape consiste à déclencher
+                    l'exécution du sous-programme.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Qu'est-ce qui caractérise une procédure ?</h4>
+
+        <div style="font-size: 70%;">
+            <p> Il existe deux types de sous-programme : </p>
+            <ul>
+                <li style="margin-top: -15px;"> les procédures ; </li>
+                <li style="margin-top: -4px;"> les fonctions.
+                </li>
+            </ul>
+
+            <p>Nous avons vu qu'une procédure est <strong>homogène à une instruction</strong> et peut avoir :</p>
+            <ul>
+                <li style="margin-top: -15px;">de <strong>0 à N données</strong>;</li>
+                <li style="margin-top: -7px;">de <strong>0 à N résultats</strong>.</li>
+            </ul>
+
+            <p class="fragment fade-right">
+                Nous allons voir que les fonctions offrent des fonctions différentes...
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Fonctions : propriétés">
+    <!--
+      l'attribut "id" de section implante les liens du menu du haut
+      l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+      -->
+
+    <section data-menu-title="Fonctions : propriétés" data-transition="convex">
+        <h1>Propriétés des fonctions</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Point de vue mathématique</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Les fonctions trouvent leur origine dans le domaine mathématique...
+            </p>
+            <p style="margin-top: 15px;">
+                En mathématique, une fonction est une opération qui, à partir d'une ou
+                plusieurs valeurs de départ, en calcule une autre <strong>unique</strong>.
+            </p>
+            <div class="fragment fade-right">
+                <p style="margin-top: 15px;">
+                    <em>Exemple</em> : La fonction racine carrée est la fonction qui à tout réel positif
+                    <strong class="text-primary">x</strong>
+                    associe le nombre réel positif noté
+                    <strong class="text-primary">√x</strong>
+                    dont le carré est
+                    <strong class="text-primary">x</strong>.
+                </p>
+                <div class="text-center" style="margin-top: -15px;">
+                    <img class="" src="presentation/images/figure1.png" width="550px">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Point de vue mathematique vs informatique</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center" style="margin-top: -15px;">
+                <img class="" src="presentation/images/figure1.png" width="400px">
+            </div>
+
+            <p style="margin-top: -15px;">
+                En mathématique :
+            </p>
+            <ul>
+                <li style="margin-top: -7px;">les valeurs de départ utilisées par la fonction <strong
+                        class="text-warning">ne sont pas modifiées</strong> ;</li>
+                <li style="margin-top: -7px;">la fonction ne produit qu'<strong class="text-warning">une seule valeur
+                        résultante</strong>.</li>
+            </ul>
+
+            <div class="fragment fade-right" style="margin-top: 35px;">
+                <p>
+                    En informatique...
+                </p>
+                <p>
+                    ...les points de vue divergent...
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Le point de vue des puristes (1/2)...</h4>
+
+        <div style="font-size: 70%;" style="margin-top: 75px;">
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                style="font-size: 85%; margin-top: -20px;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>
+                    [...] les puristes prétendent qu'une fonction doit
+                    seulement retourner une valeur comme le font les
+                    fonctions mathématiques.
+                </p>
+                <p>
+                    Cela signifie qu'une
+                    fonction n'admet que des paramètres d'entrée et
+                    que sa <strong>seule valeur en sortie</strong> est sa valeur de retour.
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -40px; font-size: 70%">
+                    Steve McConnell -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité - Dunod
+                        2005.</cite>
+                </footer>
+            </blockquote>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Le point de vue des puristes (2/2)...</h4>
+
+        <div style="font-size: 70%;" style="margin-top: 75px;">
+
+            <p>
+                Certains langages de programmation implantent les fonctions en
+                reprenant ces propriétés.
+            </p>
+
+            <p>
+                Avec le langage <span class="text-primary">Ada</span> par exemple, une fonction est
+                un sous-programme qui prend uniquement des paramètres d'entrée (des données)
+                et qui retourne un et un seul résultat :
+            </p>
+
+            <div class="text-center" style="margin-top: -15px;">
+                <img class="" src="presentation/images/figure2.png" width="800px">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Le point divergent entre les puristes... et les autres</h4>
+
+        <div style="font-size: 70%;" style="margin-top: 75px;">
+            <ul>
+                <li>Le fait qu'une fonction <strong>retourne</strong> un résultat <strong>unique</strong> est une
+                    propriété
+                    <strong>admise</strong> dans la plupart des langages de programmation.
+                </li>
+                <li>
+                    Toutefois, <strong class="text-warning">peu de langages intègrent le fait qu'une fonction considère
+                        uniquement des
+                        paramètres en donnée.</strong>
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Définition retenue dans ce cours</h4>
+
+        <div style="font-size: 70%;" style="margin-top: 75px;">
+
+            <p>
+                Considérant les points de vue divergents, nous retiendrons la définition suivante :
+            </p>
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                style="font-size: 90%; margin-top: -20px;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>
+                    Une fonction est un sous-programme qui <strong>retourne une valeur</strong>.<sup>[1]</sup>
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -40px; font-size: 70%">
+                    Steve McConnell -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité - Dunod
+                        2005.</cite>
+                </footer>
+            </blockquote>
+
+            <div style="font-size: 80%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> Steve McConnel précise : "Une fonction est un
+                sous-programme qui retourne une valeur; une procédure est un sous-programme qui ne
+                retourne rien."
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Déclaration">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Déclaration d'une fonction" data-transition="convex">
+        <h1>Déclarer une fonction</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Comment déclarer une fonction ?</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Étant donné qu'une fonction est un sous-programme, sa déclaration est
+                constituée d'une <strong>entête</strong> et d'un <strong>but</strong>.
+            </p>
+            <p>
+                L'entête de la fonction spécifie <strong>le type de la valeur retournée</strong> par la fonction, le
+                nom de la fonction ainsi que le nom et le type de ses paramètres formels.<sup>[1]</sup>
+            </p>
+
+            <div class="text-center" style="margin-top: -30px;">
+                <img class="" src="presentation/images/figure3.png" width="650px">
+            </div>
+
+            <div style="font-size: 60%; margin-top: -40px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> Dans la déclaration, le nom des paramètres 
+                formels est facultatif mais fortement conseillé : le fait de nommer chaque paramètre 
+                permet ensuite de spécifier le rôle de chacun d'eux dans le but de la procédure.
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Définition">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Définir une fonction" data-transition="convex">
+        <h1>Définir une fonction</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Eléments constituants la définition d'une fonction</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                La définition d'une fonction est constituée :
+            </p>
+            <ul>
+                <li style="margin-top: -10px;"> de l'entête de la fonction (telle qu'elle apparaît dans la déclaration)</li>
+                <li style="margin-top: -7px;">de l'ensemble des instructions qui composent la fonction.</li>
+                <li style="margin-top: -7px;">d'au moins une instruction <strong class="text-info">return</strong>
+                    chargée de transmettre au programme appelant la valeur résultante
+                    de la fonction.</li>
+            </ul>
+            <div class="text-center" style="margin-top: -15px;">
+                <img src="presentation/images/figure4.png" width="65%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section><section name="Appel">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Appeler une fonction" data-transition="convex">
+        <h1>Appeler une fonction</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Appel d'une procédure et d'une fonction : différences</h4>
+
+        <div style="font-size: 60%; margin-top: -20px;">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        Une procédure est homogène à une <strong class="text-warning">instruction</strong>
+                        → son appel s'écrit comme une instruction :
+                    </p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 135%; line-height: 1.4;">
+                        // Exemple d'appel d'une procédure :
+                        afficherSomme (12.5, 4.25) ; /* L'appel 
+                        de la procédure s'écrit comme une 
+                        instruction. */
+                     </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <div class="fragment fade-left">
+                        <p>
+                            Une fonction est homogène à une <strong class="text-warning">valeur</strong>
+                            → son appel <span class="text-danger">ne peut PAS s'écrire comme une instruction</span> :
+                        </p>
+                        <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 135%; line-height: 1.4;">
+                        /* Appel INCORRECT : une fonction n'est 
+                        pas homogène à une instruction : */
+
+                        max (10, 4);
+                     </code></pre>
+                    </div>
+                </div>
+                <div class="fragment fade-left">
+                    <p>
+                        Une fonction étant homogène à une <strong>valeur</strong>, il faut <strong class="text-success">
+                            prendre en compte sa valeur
+                            de retour</strong> d'une manière ou d'une autre :
+                    </p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers style="font-size: 145%; line-height: 1.4;">
+                    noteMax = max (10, 4); /* Appel correct : la valeur retournée par la fonction 
+                    est enregistrée dans la variable noteMax . */
+                 </code></pre>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Appeler une fonction : plein de possibilités...</h4>
+
+        <div style="font-size: 65%;">
+
+            <p>
+                Une fonction est homogène à une <strong>valeur</strong> → son appel peut être fait
+                partout<sup>[1]</sup> où une valeur est acceptée :
+            </p>
+
+            <div class="row" style="margin-top: 40px;">
+                <div class="col-md-6">
+                    <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                    double maximum = <mark>100</mark>;
+                     </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <div class="fragment fade-left">
+                        <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                        double maximum = <mark>max (100,70)</mark>;
+                     </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="fragment fade-right">
+                        <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                        perimetre = 2 * pi * <mark>rayon</mark>;
+                     </code></pre>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="fragment fade-left">
+                        <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                        perimetre = 2 * pi * <mark>max (rayon1, rayon2)</mark>;
+                     </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="fragment fade-right">
+                        <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                            if (maximum > <mark>100</mark>)
+                            ...
+                     </code></pre>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="fragment fade-left">
+                        <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                            if (maximum > <mark>max (val1, val2)</mark>)
+                            ...
+                     </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="fragment fade-right">
+                        <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                            maximum = max (val1 , <mark>val2</mark>);
+                     </code></pre>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="fragment fade-left">
+                        <pre class="cpp"><code data-trim data-noescape style="font-size: 125%; line-height: 1.4;">
+                            maximum = max (val1 , <mark>max (val2, val3)</mark>);
+                     </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-size: 80%; margin-top: 30px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> à quelques exceptions près...
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <h4>Déclaration, définition, appel : vue d'ensemble</h4>
+
+        <div style="font-size: 70%; margin-top: -20px;">
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+                #include &lt;iostream&gt; 
+                using namespace std;
+                    
+                // Déclaration des sous-programmes
+                <mark>double max (double nb1, double nb2);</mark>
+                <mark>// Retourne la plus grande valeur entre nb1 et nb2.</mark>
+                    
+                int main (void)
+                {
+                    double val1; // valeur à comparer avec val2
+                    double val2; // valeur à comparer avec val1
+                    
+                    // clavier >> Saisie des valeurs à comparer >> val1, val2
+                    cout << "Valeur 1 : "; 
+                    cin >> val1;
+                    cout << "Valeur 2 : "; 
+                    cin >> val2;
+                    
+                    // val1, val2 >> Afficher le max >> écran
+                    <mark>cout << "La valeur la plus grande est " << max(val1, val2) << endl;</mark>
+                    return 0;
+                }
+                    
+                <mark>// Définition des sous-programmes</mark>
+                <mark>double max (double nb1, double nb2</mark>
+                <mark>{</mark>
+                <mark>  return nb1 > nb2 ? nb1 : nb2;</mark>
+                <mark>}</mark>
+             </code></pre>
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+    
+            <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT16/0" 
+               role="button" target="_blank">
+               <i class="fas fa-mobile"></i> &nbsp;
+               Sortez vos smartphones
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </a>
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section><section name="Fonction vs procédure">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Différences avec une procédure" data-transition="convex">
+        <h1>Fonctions et procédures : différences</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Fonctions et procédures : différences essentielles</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <strong>Fonction</strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <strong>Procédure</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Retourne une valeur
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Ne retourne aucune valeur
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Contient au moins une instruction <span class="text-info">return</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Ne contient aucune instruction <span class="text-info">return</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Ne produit qu'un seul résultat<sup>[1]</sup>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Produit de 0 à N résultats
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Est homogène à une valeur
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Est homogène à une instruction
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 40px;">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Les appels peuvent être imbriqués
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        Les appels ne peuvent pas être imbriqués
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div style="font-size: 50%; margin-top: -10px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> selon les puristes.
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Fonction ou procédure ?</h4>
+
+        <div style="font-size: 70%; margin-top: -15px;">
+
+            <p style="font-size: 90%;">
+                Du fait qu'une procédure peut produire de 0 à N résultats, tout sous-programme peut être implanté
+                sous forme de procédure... Mais on privilégiera toujours l'implantation sous forme de fonction
+                lorsque les propriétés requises (<em>cf.</em> transparent précédent) sont réunies.
+            </p>
+
+            <div class="row" style="margin-top: 0px;">
+                <div class="col-md-6">
+                    <em style="font-size: 80%;">Version procédure :</em>
+                    <pre class="cpp" style="line-height: 1.5;"><code data-trim data-noescape data-line-numbers>
+                        void calculerPrixReduit (float prixInitial, 
+                            unsigned short int reduc, 
+                            float& prixReduit);
+                        /* A partir d'un prixInitial et d'un 
+                        pourcentage de reduc, calcule le 
+                        prixReduit correspondant. */
+                     </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <em style="font-size: 80%;">Version fonction (à privilégier ici):</em>
+                    <pre class="cpp" style="line-height: 1.5;"><code data-trim data-noescape data-line-numbers>
+                        float calculerPrixReduit (float prixInitial, 
+                              unsigned short int reduc);
+                        /* A partir d'un prixInitial et d'un 
+                        pourcentage de reduc, rerourne le 
+                        prix réduit correspondant. */
+                     </code></pre>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6">
+                    <em style="font-size: 80%;">Version procédure :</em>
+                    <pre class="cpp" style="line-height: 1.5;"><code data-trim data-noescape data-line-numbers>
+                        void afficherPrixReduit (float prixInitial, 
+                            unsigned short int reduc); 
+                        /* A partir d'un prixInitial et d'un 
+                        pourcentage de reduc, affiche à l'écran 
+                        le prixReduit correspondant. */
+                     </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <p style="font-size: 80%; margin-top: 30px;">
+                        Pas d'équivalent "propre" sous forme de fonction car le sous-programme ne retourne aucune
+                        valeur.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+
+</section><section name="Représentation algorithmique">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Représentation algorithmique" data-transition="convex">
+        <h1>Point de vue algorithmique</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Fonction : Aspects algorithmiques</h4>
+
+        <div style="font-size: 70%;">
+            <ul>
+                <li>
+                    Étant donné qu'une fonction est homogène à une valeur, on notera
+                    le <strong class="text-info">type</strong> de la valeur retournée sous forme de résultat :
+                    <div class="text-center" style="margin-top: -1px;">
+                        <img class="" src="presentation/images/figure5.png" width="560px">
+                    </div>
+                </li>
+                <li>
+                    Étant donné qu'une fonction a pour caractéristique de retourner une
+                    valeur son algorithme comportera toujours au moins
+                    une action <strong class="text-info">retourner</strong>...
+                    <div class="text-center" style="margin-top: -15px;">
+                        <img class="" src="presentation/images/figure6.png" width="450px">
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Bonnes pratiques">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Bonnes pratiques" data-transition="convex">
+        <h1>Bonnes pratiques</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Nombre d'instructions <em>return</em> dans une fonction</h4>
+
+        <div style="font-size: 67%;">
+            <pre class="cpp" style="font-size: 67%; line-height: 1.2;"><code data-trim data-noescape data-line-numbers>
+                string signe (double nbre) ; 
+                // But : Retourne le signe du nombre nbre (" positif " , " nul " ou " negatif ")
+             </code></pre>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6">
+                    <em style="font-size: 80%;">Solution 1</em>
+                    <pre class="cpp" style="line-height: 1.2;"><code data-trim data-noescape data-line-numbers>
+                        string signe (double nbre)
+                        {
+                          if (nbre > 0)
+                          {
+                            return "positif";
+                          }
+                          else if(nbre == 0)
+                          {
+                            return "nul";
+                          }
+                          else
+                          {
+                            return "negatif";
+                          }
+                        }
+                     </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <em style="font-size: 80%;">Solution 2</em>
+                    <pre class="cpp" style="line-height: 1.2;"><code data-trim data-noescape data-line-numbers>
+                        string signe (double nbre)
+                        {
+                          string signeNbre; // Le signe de nbre
+                        
+                          if (nbre > 0)
+                          {
+                            signeNbre = "positif";
+                          }
+                          else if (nbre == 0)   
+                          {
+                            signeNbre = "nul";
+                          }
+                          else
+                          {
+                            signeNbre = "negatif";
+                          }
+
+                          return signeNbre;
+                        }
+                     </code></pre>
+                </div>
+            </div>
+
+            <p style="margin-top: 10px;">
+                <strong>Quel code privilégier entre les deux solutions ?</strong>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Le choix des puristes</h4>
+
+        <div style="font-size: 67%;">
+
+            <p>
+                Les puristes suivront les règles de programmation structurée d'Edsger Dijkstra :
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                style="font-size: 90%; margin-top: 10px;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/edsger_dijkstra.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>
+                    [...] chaque fonction doit posséder une entrée et
+                    une sortie.
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -40px; font-size: 75%">
+                    Dijkstra E.W., Dahl O.J. and Hoare C.A.R -
+                    <cite title="Source Title">Structured programming - Academic Press Ltd.
+                        1972</cite>
+                </footer>
+            </blockquote>
+
+            <p>
+                Selon cette approche, il ne doit y avoir qu'<strong>une seule</strong> instruction <span
+                    class="text-info">return</span> dans une fonction.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Les points de vue plus modérés</h4>
+
+        <div style="font-size: 67%;">
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                style="font-size: 90%; margin-top: 10px;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>
+                    [...] les return multiples peuvent améliorer la lisibilité et
+                    la facilité de maintenance d'un sous-programme; ils
+                    peuvent aussi éviter une logique exagérément
+                    imbriquée. Cependant, ils doivent être utilisés <strong>avec
+                        précaution</strong>.
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -40px; font-size: 75%">
+                    McConnell, Steve -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité - Dunod
+                        2005.</cite>
+                </footer>
+            </blockquote>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Dans le cadre de ce module d'enseignement...</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>... nous adopterons la règle de <em>l'oncle Bob</em> :</p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                style="font-size: 73%; margin-top: -10px;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left"
+                        data-src="presentation/images/robert_cecil_martin.jpg" width="100" style="padding-right: 10px;">
+                <p>
+                    [...] Si vos fonctions restent courtes, les multiples instructions return
+                    occasionnelles ne seront pas vraiment un problème. Elles peuvent même
+                    parfois être plus expressives que la règle une seule entrée et une seule sortie.<sup>1</sup>
+                </p>
+                <p style="margin-top: -7px;">
+                    [...] En revanche, les règles de Dijkstra gardent
+                    tout leur sens lorsque les fonctions sont longues.
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -40px; font-size: 75%">
+                    Martin R.C. (Uncle Bob) -
+                    <cite title="Source Title">Coder proprement - Pearson 2009.</cite>
+                </footer>
+            </blockquote>
+
+            <div style="font-size: 70%; margin-top: 0px; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> Référence à la règle de Dijkstra
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Longueur d'un sous-programme ?</h4>
+
+        <div style="font-size: 67%;">
+
+            <p>
+                La réponse la plus fréquente à cette question : le sous-programme doit
+                tenir sur un écran.
+            </p>
+
+            <p>
+                Si cette règle pouvait avoir un sens il y a quelques années, lorsque les
+                écrans avaient de faibles résolutions, elle n'est plus d'actualité car les
+                écrans peuvent aujourd'hui afficher assez facilement une centaine de
+                lignes...
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Les sous-programmes doivent être courts !</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="row" style="margin-top: 20px;">
+
+                <div class="col-md-6">
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 71%; margin-top: 10px;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded-circle float-left"
+                                data-src="presentation/images/steve_McConnell.jpg" width="100"
+                                style="padding-right: 10px;">
+                        <p>
+                            Les programmes modernes s'orientent vers des
+                            volumes importants de sous-programmes très
+                            courts combinés à quelques sous-programmes
+                            plus longs.
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top"
+                            style="margin-bottom: -40px; font-size: 75%">
+                            McConnell, Steve -
+                            <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité - Dunod
+                                2005.</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+
+                <div class="col-md-6">
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 71%; margin-top: -10px;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded-circle float-left"
+                                data-src="presentation/images/robert_cecil_martin.jpg" width="100"
+                                style="padding-right: 10px;">
+                        <p>
+                            La première règle est d'écrire des fonctions courtes.
+                        </p>
+                        <p>
+                            La deuxième règle est qu'elles doivent être encore plus courtes
+                            que cela.
+                        </p>
+                        <p>
+                            [...] Les fonctions doivent
+                            rarement dépasser 20 lignes.
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top"
+                            style="margin-bottom: -40px; font-size: 75%">
+                            Martin R.C. (Uncle Bob) -
+                            <cite title="Source Title">Coder proprement - Pearson 2009.</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Dans le cadre de ce module d'enseignement...</h4>
+
+        <div style="font-size: 65%;">
+
+            <p>... nous essaierons de produire des sous-programmes qui :</p>
+            <ul>
+                <li style="margin-top: -10px;">font une et une seule chose à la fois et le font bien (un calcul, un
+                    affichage, une
+                    recherche...) ;</li>
+                <li style="margin-top: -7px;">
+                    restent courts (puisqu'ils ne feront qu'une seule chose).
+                </li>
+            </ul>
+
+            <div class="fragment fade-right">
+                <p>
+                    Cependant, la règle visant à produire des sous-programmes courts ne doit
+                    pas devenir une entrave trop forte. Ainsi, la longueur maximale de nos
+                    sous-programmes sera aussi fonction :
+                </p>
+
+                <div class="row" style="margin-top: 20px;">
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li style="margin-top: -7px;">de la cohérence du sous-programme;</li>
+                            <li style="margin-top: -7px;">de sa profondeur d'imbrication;</li>
+                            <li style="margin-top: -7px;">du nombre de variables;</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li style="margin-top: -7px;">du nombre de points de décisions;</li>
+                            <li style="margin-top: -7px;">du nombre de commentaires nécessaires
+                                pour expliquer le sous-programme;</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Comment nommer une fonction ?</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>Le contexte idéal pour créer une fonction est celui qui répond à la
+                définition mathématique d'une fonction : le programmeur a besoin d'un
+                sous-programme qui, à partir d'un ensemble de données, produit un
+                résultat unique sans altérer les données.</p>
+
+            <p style="margin-top: 30px;">
+                Dans un tel contexte, la fonction sera nommée d'après la
+                valeur qu'elle retourne. Ainsi, la fonction s'appelera :
+            </p>
+            <ul>
+                <li style="margin-top: -10px;">
+                    <span class="text-info">max()</span> si elle retourne le max de deux valeurs;
+                </li>
+                <li style="margin-top: -7px;">
+                    <span class="text-info">sin()</span> si elle retourne le sinus d'un nombre;
+                </li>
+                <li style="margin-top: -7px;">...</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Paroles d'experts</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="row" style="margin-top: 20px;">
+
+                <div class="col-md-6">
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 66%; margin-top: 10px;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded-circle float-left"
+                                data-src="presentation/images/steve_McConnell.jpg" width="100"
+                                style="padding-right: 10px;">
+                        <p>
+                            Il faut créer une fonction quand l'objectif principal du
+                            sous-programme est de retourner la valeur indiquée par
+                            le nom de la fonction, et une procédure dans les autres
+                            cas.
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top"
+                            style="margin-bottom: -40px; font-size: 75%">
+                            McConnell, Steve -
+                            <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité - Dunod
+                                2005.</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+
+                <div class="col-md-6">
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 66%; margin-top: 10px;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded-circle float-left"
+                                data-src="presentation/images/robert_cecil_martin.jpg" width="100"
+                                style="padding-right: 10px;">
+                        <p>
+                            Les noms des fonctions doivent indiquer leur rôle.
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top"
+                            style="margin-bottom: -40px; font-size: 75%">
+                            Martin R.C. (Uncle Bob) -
+                            <cite title="Source Title">Coder proprement - Pearson 2009.</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Des fonctions ressemblant à des procédures (1/5)</h4>
+
+        <div style="font-size: 65%;">
+
+            <p>
+                Les règles précédentes impliquent qu'un sous-programme produisant
+                plus d'un résultat sera implanté sous forme de procédure (du fait qu'on ne
+                peut nommer le sous-programme exclusivement par sa valeur résultante).
+                Il existe toutefois une exception tolérée :
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                style="font-size: 85%; margin-top: -10px;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>
+                    Il est <strong>courant</strong> en programmation de définir une
+                    fonction qui travaille comme une procédure et
+                    retourne une valeur d'état.
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -45px; font-size: 70%">
+                    McConnell, Steve -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité - Dunod
+                        2005.</cite>
+                </footer>
+            </blockquote>
+
+            <p>
+                D'un point de vue logique, le sous-programme opère comme une
+                procédure, mais puisqu'il retourne une valeur, c'est officiellement une
+                fonction...
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Des fonctions ressemblant à des procédures (2/5)</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>
+                Considérons le cas d'un sous-programme qui recherche un élément
+                dans un tableau d'entiers ;
+            </p>
+
+            <ul>
+                <li>Ce sous-programme produit un indicateur signalant si l'élément
+                    cherché fait partie du tableau ou pas ;
+                </li>
+                <li>
+                    Dans le cas où l'élément cherché appartient au tableau, le
+                    sous-programme indiquera la position de la 1ère occurrence trouvée.
+                </li>
+            </ul>
+
+            <p>
+                Comment implanter ce sous-programme ?
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Des fonctions ressemblant à des procédures (3/5)</h4>
+
+        <div style="font-size: 70%;">
+
+            <p>
+                D'après la règle donnée par S. McConnell,<sup>1</sup> ce sous-programme sera
+                en priorité implanté sous la forme d'une procédure :
+            </p>
+
+            <pre class="cpp" style="line-height: 1.6; font-size: 65%;"><code data-trim data-noescape data-line-numbers>
+                void rechercherPosition (const int tab[], unsigned int nbCases, int valATrouver, 
+                                         unsigned short int& pos, bool& trouve);     
+                /* Cherche la position pos de l'élément valATrouver dans le tableau 
+                d'entier tab composé de nbCases. L'indicateur trouve prend la 
+                valeur vrai si la recherche est fructueuse, faux sinon */
+             </code></pre>
+        </div>
+        <div style="font-size: 50%; margin-top: 70px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span>
+            <em>"Il faut créer une fonction quand l'objectif principal du sous-programme est de
+                retourner la valeur indiquée par le nom de la fonction, et une procédure dans les autres
+                cas"</em>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Des fonctions ressemblant à des procédures (4/5)</h4>
+
+        <div style="font-size: 67%;">
+            <p>
+                Toutefois, S. McConnell précise aussi qu'il existe <em>“une pratique
+                    <strong>courante</strong> en programmation qui consiste à définir une fonction travaillant
+                    comme une procédure et retournant une valeur d'état”.</em>
+            </p>
+            <p style="margin-top: 30px;">
+                Selon cette pratique courante, nous pourrions considérer que l'indicateur
+                trouve est une valeur d'état indiquant dans quel état la recherche s'est
+                terminée. Nous pourrions alors écrire le sous-programme précédent sous
+                forme d'une fonction de la manière suivante :
+            </p>
+
+            <pre class="cpp" style="line-height: 1.6; font-size: 70%;"><code data-trim data-noescape data-line-numbers>
+                bool rechercherPosition (const int tab[], unsigned int nbCases, 
+                                         int valATrouver, unsigned short int& pos);     
+                /* Cherche la position pos de l'élément valATrouver dans le tableau 
+                d'entier tab composé de nbCases. Le sous-programme retourne la valeur
+                vrai si la recherche est fructueuse, faux sinon */
+             </code></pre>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Des fonctions ressemblant à des procédures (5/5)</h4>
+
+        <div style="font-size: 65%;">
+
+            <pre class="cpp" style="line-height: 1.6; font-size: 65%;"><code data-trim data-noescape data-line-numbers>
+                bool rechercherPosition (const int tab[], unsigned int nbCases, 
+                                         int valATrouver, unsigned short int& pos);     
+                /* Cherche la position pos de l'élément valATrouver dans le tableau 
+                d'entier tab composé de nbCases. Le sous-programme retourne la valeur
+                vrai si la recherche est fructueuse, faux sinon */
+             </code></pre>
+
+            <p style="font-size: 95%;">
+                La déclaration précédente respecte la pratique courante qui consiste à définir
+                une fonction travaillant comme une procédure et retournant une valeur d'état.
+                Par contre, la déclaration ci-dessous ne cadrerait pas avec cette pratique
+                courante car la position retournée n'est pas considérée comme une valeur d'état :
+            </p>
+
+            <pre class="cpp" style="line-height: 1.6; font-size: 65%;"><code data-trim data-noescape data-line-numbers>
+                unsigned short int positionDe (const int tab[], unsigned int nbCases, 
+                int valATrouver, bool& trouve);                 
+               /* Retourne la position pos de l'élément valATrouver dans le tableau 
+               d'entier tab composé de nbCases. Le sous-programme produit un 
+               indicateur trouve qui prend la valeur vrai si la recherche 
+               est fructueuse, faux sinon */
+             </code></pre>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Quand créer une fonction plutôt qu'une procédure ?</h4>
+
+        <div style="font-size: 70%;">
+            <p><strong>Résumons :</strong></p>
+            <ol>
+                <li>
+                    un sous-programme produisant un résultat unique à partir d'un
+                    ensemble de données non modifiées sera implanté sous forme
+                    d'une fonction;
+                </li>
+                <li style="margin-top: 20px;">
+                    un sous-programme produisant un résultat ainsi qu'une valeur
+                    d'état pourra être implanté :
+                    <ul>
+                        <li>sous forme d'une procédure,</li>
+                        <li style="margin-top: -15px;">sous forme d'une fonction, à condition que la valeur retournée
+                            soit la valeur d'état;</li>
+                    </ul>
+                </li>
+                <li style="margin-top: 15px;">
+                    Pour tous les autres cas de figure, le sous-programme sera
+                    implanté sous forme d'une procédure.
+                </li>
+            </ol>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+    
+            <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT17/0" 
+               role="button" target="_blank">
+               <i class="fas fa-mobile"></i> &nbsp;
+               Sortez vos smartphones
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </a>
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,616 @@
+{
+  "module": "R1.01",
+  "titre": "Algorithmique & Programmation C",
+  "professeur": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+  "couleur": "#287271",
+  "description": "Spécifications externes/internes, contrat (pré/postconditions), SFD, boucles (for, while, do-while), tableaux et débordements, recherche séquentielle et dichotomique O(log N), tris (sélection, bulles, insertion), pointeurs, malloc/free",
+  "count": 25,
+  "questions": [
+    {
+      "id": "r101_q01",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "1. Définition d'un Algorithme & Spécifications",
+      "question": "Quelle est la définition formelle d'un algorithme enseignée par M. Etcheverry et M. Dalmau ?",
+      "options": [
+        "Un programme écrit en langage C avec des accolades",
+        "Une suite finie, ordonnée et non ambiguë d'opérations élémentaires s'appliquant à des données d'entrée pour produire un résultat déterminé en un temps fini",
+        "Un composant électronique à l'intérieur du processeur",
+        "Une formule mathématique contenant une intégrale"
+      ],
+      "correct_index": 1,
+      "explication": "Critères canoniques : 1. Finitude (l'exécution doit s'arrêter après un nombre fini d'étapes), 2. Déterminisme et absence d'ambiguïté (chaque action est strictement définie), 3. Données d'entrée (0 ou plusieurs), 4. Résultats produits (au moins un résultat garanti conforme aux postconditions).",
+      "pieges": [
+        "Un algorithme est indépendant de tout langage de programmation particulier (il peut s'écrire en pseudo-code, en SFD ou en C)."
+      ],
+      "tags": [
+        "Algorithme",
+        "Définition formelle",
+        "Finitude",
+        "Déterminisme"
+      ]
+    },
+    {
+      "id": "r101_q02",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "1. Définition d'un Algorithme & Spécifications",
+      "question": "Dans le Schéma Fonctionnel de Décomposition (SFD), quel est le rôle d'une « spécification formelle » (Entrées, Sorties, Préconditions, Postconditions) ?",
+      "options": [
+        "Remplacer les commentaires du code",
+        "Définir rigoureusement le contrat de la fonction : ce qu'elle exige impérativement avant exécution (Préconditions) et ce qu'elle garantit formellement après exécution (Postconditions)",
+        "Donner le nom de l'auteur et la date",
+        "Indiquer la couleur de l'écran"
+      ],
+      "correct_index": 1,
+      "explication": "Le concept de programmation par contrat (conçu par Bertrand Meyer et enseigné rigoureusement à l'IUT d'Anglet) stipule que si l'appelant respecte les Préconditions (ex: tableau non vide, indice valide), la fonction s'engage à garantir les Postconditions (ex: tableau trié par ordre croissant).",
+      "pieges": [
+        "Si les préconditions ne sont pas satisfaites lors de l'appel, l'algorithme n'a plus aucune obligation de fonctionner correctement."
+      ],
+      "tags": [
+        "SFD",
+        "Spécification formelle",
+        "Contrat",
+        "Préconditions",
+        "Postconditions"
+      ]
+    },
+    {
+      "id": "r101_q03",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "2. Structures de Contrôle Conditionnelles",
+      "question": "En langage C, comment s'effectue l'évaluation des expressions logiques utilisant les opérateurs && (ET) et || (OU) ?",
+      "options": [
+        "Toutes les sous-expressions sont toujours évaluées de gauche à droite sans exception",
+        "Par évaluation en court-circuit (Short-Circuit Evaluation) : pour A && B, si A est faux, B n'est JAMAIS évalué ; pour A || B, si A est vrai, B n'est JAMAIS évalué",
+        "L'expression de droite est évaluée en premier",
+        "L'ordre d'évaluation est tiré au sort par le compilateur"
+      ],
+      "correct_index": 1,
+      "explication": "Propriété vitale en C pour la sécurité mémoire : cela permet d'écrire sans risque 'if (ptr != NULL && *ptr == 42)'. Si ptr est NULL, le premier test est faux, donc *ptr n'est pas évalué et le programme évite un crash immédiat (Segmentation Fault) !",
+      "pieges": [
+        "Piège d'examen redoutable : mettre une fonction ayant des effets de bord dans le deuxième opérande (ex: if (x > 0 && f(&compteur))). Si x <= 0, f() ne sera jamais appelée !"
+      ],
+      "tags": [
+        "Court-circuit",
+        "Short-Circuit",
+        "&& et ||",
+        "Sécurité pointeur"
+      ]
+    },
+    {
+      "id": "r101_q04",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "2. Structures de Contrôle Conditionnelles",
+      "question": "Que se passe-t-il si l'on oublie l'instruction « break; » à la fin d'un bloc « case » dans une structure switch en C ?",
+      "options": [
+        "Le compilateur signale une erreur de syntaxe fatale et refuse de compiler",
+        "Le programme continue son exécution en cascade séquentielle dans le case suivant (Fall-Through), exécutant son code même si la condition n'est pas vérifiée",
+        "L'ordinateur redémarre",
+        "Le switch recommence depuis le début"
+      ],
+      "correct_index": 1,
+      "explication": "En C, le switch est une instruction de saut (jump table). Les étiquettes 'case' ne sont que des points d'entrée. Sans 'break;', l'exécution se poursuit tout droit dans le case situé en-dessous jusqu'à rencontrer un break ou la fin du switch.",
+      "pieges": [
+        "Ce piège du Fall-Through est l'une des causes historiques de bugs les plus célèbres en programmation système C."
+      ],
+      "tags": [
+        "switch",
+        "case",
+        "break",
+        "Fall-Through",
+        "Piège classique C"
+      ]
+    },
+    {
+      "id": "r101_q05",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "3. Structures Itératives (Boucles)",
+      "question": "Quelle est la différence fondamentale d'exécution entre une boucle « while (condition) » et une boucle « do { ... } while (condition); » en C ?",
+      "options": [
+        "while teste la condition AVANT chaque itération (0 itération possible si la condition est fausse au départ) ; do-while teste la condition APRÈS, garantissant au moins 1 itération obligatoire",
+        "do-while est deux fois plus rapide que while",
+        "while s'exécute toujours exactement 10 fois",
+        "Il n'y a aucune différence, ce sont deux écritures strictement synonymes"
+      ],
+      "correct_index": 0,
+      "explication": "Dans 'do ... while', le corps de boucle s'exécute au moins une fois avant le premier test. C'est la structure idéale pour la saisie utilisateur avec contrôle de validité (ex: saisir une note entre 0 et 20 jusqu'à ce qu'elle soit correcte).",
+      "pieges": [
+        "Ne pas oublier le point-virgule obligatoire à la fin de 'while (condition);' dans une boucle do-while !"
+      ],
+      "tags": [
+        "while",
+        "do-while",
+        "Test pré/post",
+        "Itération garantie"
+      ]
+    },
+    {
+      "id": "r101_q06",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "3. Structures Itératives (Boucles)",
+      "question": "Quand doit-on rigoureusement privilégier une boucle « for (int i = 0; i < N; i++) » par rapport à une boucle while selon les conventions de l'IUT d'Anglet ?",
+      "options": [
+        "Quand on ne connaît pas la condition d'arrêt",
+        "Lorsque le nombre total d'itérations est déterminé ou connu à l'avance (boucle bornée / itérateur d'indice)",
+        "Uniquement pour afficher du texte à l'écran",
+        "Quand on programme sous Linux uniquement"
+      ],
+      "correct_index": 1,
+      "explication": "Règle de bonne pratique algorithmique d'Etcheverry & Dalmau : si on parcourt une structure de taille connue (comme un tableau de 0 à N-1) ou si l'on répète une action un nombre fixe de fois, on utilise 'for'. Si l'arrêt dépend d'un événement imprévisible (recherche réussie, saisie sentinelle), on utilise 'while'.",
+      "pieges": [
+        "Modifier la variable d'indice 'i' à l'intérieur du corps d'une boucle 'for' est considéré comme une grave hérésie de style à l'IUT !"
+      ],
+      "tags": [
+        "Boucle for",
+        "Itération bornée",
+        "Conventions IUT",
+        "Lisibilité"
+      ]
+    },
+    {
+      "id": "r101_q07",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "4. Tableaux & Gestion des Bornes",
+      "question": "Que se passe-t-il si un programme en langage C tente d'accéder à l'élément tab[10] dans un tableau déclaré par « int tab[10]; » ?",
+      "options": [
+        "Le compilateur lève une exception 'IndexOutOfBoundsException'",
+        "C'est un comportement indéfini (Undefined Behavior) / débordement de tampon : tab[10] accède à la 11ème case qui n'appartient pas au tableau (les indices valides vont de 0 à 9), risquant de corrompre la mémoire ou provoquer un crash (Segmentation Fault)",
+        "Le tableau s'agrandit automatiquement pour accueillir l'élément",
+        "Le programme affiche 0 par défaut"
+      ],
+      "correct_index": 1,
+      "explication": "Le langage C ne fait AUCUNE vérification de bornes à l'exécution. En C, les indices d'un tableau de taille N vont strictement de 0 à N-1. Accéder à tab[N] est un hors-limite (Off-By-One error) extrêmement dangereux.",
+      "pieges": [
+        "C'est le classique bug 'Off-By-One' : déclarer int tab[10] et faire une boucle for (int i=0; i <= 10; i++)."
+      ],
+      "tags": [
+        "Tableaux C",
+        "Indices 0 à N-1",
+        "Hors-limite",
+        "Undefined Behavior"
+      ]
+    },
+    {
+      "id": "r101_q08",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "4. Tableaux & Gestion des Bornes",
+      "question": "Lorsqu'on passe un tableau à une fonction en C, pourquoi doit-on obligatoirement passer également sa taille en paramètre (ex: void afficher(int tab[], int taille)) ?",
+      "options": [
+        "Parce que le C est un langage verbeux",
+        "Parce que dans les paramètres d'une fonction, le tableau se dégrade automatiquement en un simple pointeur vers son premier élément (Array Decay), perdant ainsi toute notion de sa taille en mémoire",
+        "Pour obliger l'étudiant à écrire plus de code",
+        "Parce que la fonction en a besoin pour changer la couleur du tableau"
+      ],
+      "correct_index": 1,
+      "explication": "En C, 'sizeof(tab)' à l'intérieur de la fonction ne renvoie pas la taille du tableau, mais la taille d'un pointeur (8 octets sur architecture 64 bits) ! Le paramètre 'taille' explicite est donc strictement indispensable.",
+      "pieges": [
+        "L'opérateur 'sizeof' ne donne la taille réelle en octets d'un tableau que dans le bloc où il a été initialement alloué statiquement."
+      ],
+      "tags": [
+        "Array Decay",
+        "Dégradation en pointeur",
+        "Passage de tableau",
+        "Taille explicite"
+      ]
+    },
+    {
+      "id": "r101_q09",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "5. Algorithmes de Recherche",
+      "question": "Quelle est la condition préalable indispensable pour pouvoir appliquer l'algorithme de Recherche Dichotomique (Binary Search) sur un tableau ?",
+      "options": [
+        "Le tableau doit contenir au moins 1 million d'éléments",
+        "Le tableau doit être PRÉALABLEMENT TRIÉ (dans l'ordre croissant ou décroissant)",
+        "Le tableau ne doit contenir que des nombres pairs",
+        "Le tableau doit être alloué sur le tas avec malloc"
+      ],
+      "correct_index": 1,
+      "explication": "La recherche dichotomique compare l'élément cherché à la valeur médiane. Si le tableau est trié, elle sait avec certitude dans quelle moitié chercher et élimine 50% des éléments restants à chaque étape (complexité en O(log N)). Sur un tableau non trié, elle est totalement inopérante et donne un résultat faux !",
+      "pieges": [
+        "Piège d'examen : tenter d'appliquer la dichotomie sur un tableau non trié. Sur un tableau non ordonné, seule la recherche séquentielle (en O(N)) est possible."
+      ],
+      "tags": [
+        "Dichotomie",
+        "Précondition de tri",
+        "O(log N)",
+        "Recherche binaire"
+      ]
+    },
+    {
+      "id": "r101_q10",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "5. Algorithmes de Recherche",
+      "question": "Dans le pire des cas, combien d'itérations au maximum la recherche dichotomique effectue-t-elle sur un tableau trié de 1 000 000 d'éléments ?",
+      "options": [
+        "1 000 000 d'itérations",
+        "Environ 20 itérations (puisque 2^20 = 1 048 576)",
+        "500 000 itérations",
+        "10 000 itérations"
+      ],
+      "correct_index": 1,
+      "explication": "Complexité logarithmique O(log2(N)) : comme chaque test divise l'espace de recherche par 2, log2(1 000 000) ≈ 19.93. Au plus 20 comparaisons suffisent pour localiser n'importe quel élément parmi un million ! C'est la puissance spectaculaire de la dichotomie.",
+      "pieges": [
+        "La recherche séquentielle aurait quant à elle nécessité jusqu'à 1 000 000 de comparaisons dans le pire des cas !"
+      ],
+      "tags": [
+        "Complexité O(log N)",
+        "Dichotomie",
+        "20 comparaisons",
+        "Puissance algorithmique"
+      ]
+    },
+    {
+      "id": "r101_q11",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "6. Algorithmes de Tri Fondamentaux",
+      "question": "Quel est le principe de l'algorithme du Tri par Sélection (Selection Sort) ?",
+      "options": [
+        "Sélectionner des éléments au hasard et espérer qu'ils soient triés",
+        "À chaque étape i, rechercher l'élément minimum dans la sous-partie non triée du tableau (de l'indice i à N-1) et l'échanger avec l'élément à la position i",
+        "Couper le tableau en deux morceaux égaux récursivement",
+        "Trier les chiffres en utilisant la table ASCII"
+      ],
+      "correct_index": 1,
+      "explication": "Tri par sélection : à l'étape 0, on met le plus petit élément en tab[0] ; à l'étape 1, le deuxième plus petit en tab[1], etc. Sa complexité temporelle est quadratique O(N^2) dans tous les cas (même si le tableau est déjà trié au départ).",
+      "pieges": [
+        "Le tri par sélection effectue toujours le même nombre de comparaisons N*(N-1)/2, mais effectue au plus N échanges."
+      ],
+      "tags": [
+        "Tri sélection",
+        "Minimum",
+        "O(N^2)",
+        "Échange"
+      ]
+    },
+    {
+      "id": "r101_q12",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "6. Algorithmes de Tri Fondamentaux",
+      "question": "Quel est le principe de fonctionnement du Tri à Bulles (Bubble Sort) ?",
+      "options": [
+        "Faire chauffer la mémoire RAM pour faire monter les données",
+        "Parcourir le tableau en comparant successivement les paires d'éléments adjacents consécutifs et les échanger s'ils sont dans le mauvais ordre, faisant ainsi 'remonter' les plus grands éléments vers la fin du tableau comme des bulles",
+        "Ajouter des zéros entre chaque nombre",
+        "Trier les données en les envoyant sur le réseau"
+      ],
+      "correct_index": 1,
+      "explication": "À chaque passe complète, le plus grand élément restant remonte à sa position finale à droite. Si lors d'une passe entière aucun échange n'a été effectué, on peut s'arrêter prématurément car le tableau est déjà trié (optimisation avec un booléen permut).",
+      "pieges": [
+        "Bien que très facile à comprendre, le tri à bulles est l'un des algorithmes de tri les plus lents en pratique O(N^2)."
+      ],
+      "tags": [
+        "Tri à bulles",
+        "Bubble sort",
+        "Paires adjacentes",
+        "Optimisation permut"
+      ]
+    },
+    {
+      "id": "r101_q13",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "6. Algorithmes de Tri Fondamentaux",
+      "question": "Pourquoi le Tri par Insertion (Insertion Sort) est-il particulièrement efficace sur un tableau « presque déjà trié » ?",
+      "options": [
+        "Parce qu'il utilise le parallélisme de la carte graphique",
+        "Parce que dans le meilleur des cas (tableau déjà trié ou presque), la boucle interne s'arrête immédiatement dès la première comparaison, atteignant une complexité linéaire quasi-optimale en O(N)",
+        "Parce qu'il ne nécessite aucune mémoire RAM",
+        "Parce qu'il a été inventé par Dennis Ritchie"
+      ],
+      "correct_index": 1,
+      "explication": "Comme un joueur qui trie ses cartes dans sa main : il prend la carte suivante et l'insère à sa place ordonnée en décalant les précédentes. Si la carte est déjà plus grande que la précédente, zéro décalage ! C'est pourquoi les algorithmes hybrides modernes (comme Timsort dans Python/Java) utilisent le tri par insertion pour les petits sous-tableaux.",
+      "pieges": [
+        "Dans le pire des cas (tableau trié en ordre strictement inverse), sa complexité retombe à O(N^2)."
+      ],
+      "tags": [
+        "Tri insertion",
+        "Complexité linéaire O(N)",
+        "Tableau presque trié",
+        "Timsort"
+      ]
+    },
+    {
+      "id": "r101_q14",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "7. Pointeurs & Adresses Mémoire en C",
+      "question": "Que contiennent respectivement les opérateurs & et * en langage C appliqués à une variable ?",
+      "options": [
+        "& effectue une multiplication et * une division",
+        "& (opérateur d'adresse) fournit l'adresse mémoire où réside la variable ; * (opérateur d'indirection / déréférencement) accède à la valeur stockée à l'adresse pointée",
+        "& sert à déclarer un pointeur et * à le supprimer",
+        "Ce sont des opérateurs de concaténation de texte"
+      ],
+      "correct_index": 1,
+      "explication": "Règle de syntaxe fondamentale : si int a = 5; et int *p = &a; alors p contient l'adresse mémoire de a (ex: 0x7ffd80). L'expression *p évalue le contenu de la boîte pointée par p, c'est-à-dire 5. Modifier *p = 10 modifie directement la variable a !",
+      "pieges": [
+        "Attention au double rôle du symbole '*' : lors de la déclaration (int *p;), il indique le type pointeur. Dans une expression (*p = 10;), c'est l'opérateur de déréférencement."
+      ],
+      "tags": [
+        "Pointeurs",
+        "Opérateur &",
+        "Opérateur *",
+        "Déréférencement",
+        "Adresse mémoire"
+      ]
+    },
+    {
+      "id": "r101_q15",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "7. Pointeurs & Adresses Mémoire en C",
+      "question": "En C, comment une fonction peut-elle modifier une variable déclarée dans la fonction appelante (passage par référence simulé) ?",
+      "options": [
+        "En passant le nom de la variable entre guillemets",
+        "En recevant en paramètre l'ADRESSE de la variable (un pointeur), et en modifiant son contenu via l'opérateur de déréférencement *",
+        "Toutes les variables sont modifiables par défaut en C",
+        "En utilisant l'instruction return deux fois"
+      ],
+      "correct_index": 1,
+      "explication": "Le C ne pratique STRICTEMENT QUE le passage par valeur (copie des arguments). Pour modifier une variable externe (ex: la fameuse fonction swap(int *a, int *b)), on passe une copie de son ADRESSE mémoire. La fonction sait alors exactement où aller écrire dans la RAM de l'appelant.",
+      "pieges": [
+        "Si on écrit void swap(int a, int b) { int tmp=a; a=b; b=tmp; }, les variables extérieures ne sont absolument PAS modifiées !"
+      ],
+      "tags": [
+        "Passage par adresse",
+        "swap",
+        "Passage par valeur",
+        "Pointeurs"
+      ]
+    },
+    {
+      "id": "r101_q16",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "7. Pointeurs & Adresses Mémoire en C",
+      "question": "Que vaut la constante NULL en langage C et que se passe-t-il si l'on tente de la déréférencer (*ptr où ptr == NULL) ?",
+      "options": [
+        "NULL vaut 1 et son déréférencement renvoie zéro",
+        "NULL est l'adresse zéro ((void*)0) représentant un pointeur qui ne pointe vers aucune case mémoire valide ; tenter de déréférencer NULL provoque un arrêt immédiat du programme par violation d'accès mémoire (Segmentation Fault / SIGSEGV)",
+        "NULL affiche un avertissement et continue l'exécution",
+        "NULL alloue automatiquement 10 octets"
+      ],
+      "correct_index": 1,
+      "explication": "La première page mémoire (adresse 0x0) est protégée par le système d'exploitation et la MMU. Toute tentative de lecture ou d'écriture à travers un pointeur NULL déclenche un trap matériel de l'OS qui tue immédiatement le processus.",
+      "pieges": [
+        "Toujours vérifier 'if (ptr != NULL)' avant de déréférencer un pointeur renvoyé par malloc ou une fonction de recherche !"
+      ],
+      "tags": [
+        "NULL",
+        "Segmentation Fault",
+        "SIGSEGV",
+        "Sécurité mémoire"
+      ]
+    },
+    {
+      "id": "r101_q17",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "8. Allocation Dynamique de Mémoire (malloc / free)",
+      "question": "Comment alloue-t-on dynamiquement un tableau de N entiers en langage C sur le Tas (Heap) ?",
+      "options": [
+        "int tab = new Array(N);",
+        "int *tab = (int *) malloc(N * sizeof(int));",
+        "int tab[N] = allocate(N);",
+        "malloc(tab, N);"
+      ],
+      "correct_index": 1,
+      "explication": "La fonction malloc(taille_en_octets) de <stdlib.h> réserve un bloc d'octets contigus sur le Tas. Comme la taille d'un int dépend de l'architecture (souvent 4 octets), on multiplie toujours N par sizeof(int).",
+      "pieges": [
+        "malloc renvoie un pointeur générique void*, ou NULL si la machine n'a plus assez de mémoire RAM disponible. Il faut impérativement tester if (tab == NULL) !"
+      ],
+      "tags": [
+        "malloc",
+        "sizeof",
+        "Tas",
+        "Heap",
+        "Allocation dynamique"
+      ]
+    },
+    {
+      "id": "r101_q18",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "8. Allocation Dynamique de Mémoire (malloc / free)",
+      "question": "Quelle est la conséquence critique de l'oubli de l'appel à « free(ptr); » après avoir utilisé de la mémoire allouée dynamiquement avec malloc ?",
+      "options": [
+        "Le compilateur supprime le fichier source",
+        "Une fuite de mémoire (Memory Leak) : la mémoire reste réservée et indisponible pour le reste du système jusqu'à la fermeture du programme, ce qui peut saturer la RAM des serveurs longue durée",
+        "Le disque dur est formaté",
+        "Le pointeur devient automatiquement égal à zéro"
+      ],
+      "correct_index": 1,
+      "explication": "En C, il n'y a pas de ramasse-miettes (Garbage Collector). Tout ce qui est alloué avec malloc doit être libéré explicitement avec free. Les fuites de mémoire sont traquées et sanctionnées par les outils de vérification formelle (Valgrind) à l'IUT d'Anglet.",
+      "pieges": [
+        "Après avoir fait free(ptr), le pointeur conserve son ancienne adresse mémoire (Dangling Pointer / pointeur fou). Bonne pratique : faire ptr = NULL immédiatement après free."
+      ],
+      "tags": [
+        "free",
+        "Memory Leak",
+        "Fuite de mémoire",
+        "Valgrind",
+        "Dangling Pointer"
+      ]
+    },
+    {
+      "id": "r101_q19",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "8. Allocation Dynamique de Mémoire (malloc / free)",
+      "question": "Quelle est la différence fondamentale entre la mémoire « Pile » (Stack) et la mémoire « Tas » (Heap) lors de l'exécution d'un programme C ?",
+      "options": [
+        "La Pile gère automatiquement la création et la libération des variables locales lors de l'entrée et la sortie des fonctions (très rapide mais taille limitée) ; le Tas permet des allocations dynamiques manuelles de taille arbitraire qui survivent à la fin de la fonction",
+        "La Pile est stockée sur disque, le Tas sur clé USB",
+        "La Pile ne contient que des flottants, le Tas des entiers",
+        "Il n'y a aucune différence, ce sont deux noms pour la RAM"
+      ],
+      "correct_index": 0,
+      "explication": "Stack : gérée par le processeur via le registre SP (LIFO), ultra-rapide mais risque de Stack Overflow si trop de récursion. Heap : gérée par l'allocateur de l'OS (malloc/free), immense mais gestion manuelle de la durée de vie sous l'entière responsabilité du programmeur.",
+      "pieges": [
+        "Retourner l'adresse d'une variable locale allouée sur la pile (&x) depuis une fonction est une faute fatale : la case mémoire est détruite dès le retour de la fonction !"
+      ],
+      "tags": [
+        "Pile vs Tas",
+        "Stack vs Heap",
+        "Durée de vie",
+        "Variables locales"
+      ]
+    },
+    {
+      "id": "r101_q20",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "9. Chaînes de Caractères en C",
+      "question": "Comment une chaîne de caractères (string) est-elle représentée et délimitée en mémoire en langage C standard ?",
+      "options": [
+        "Par un objet avec un attribut .length",
+        "Par un tableau de caractères (char[]) terminé impérativement par le caractère sentinelle nul '\\0' (valeur binaire 0)",
+        "Par deux accolades au début et à la fin",
+        "Par une suite de chiffres hexadécimaux"
+      ],
+      "correct_index": 1,
+      "explication": "En C, les chaînes sont des chaînes terminées par zéro (Null-Terminated Strings). Toutes les fonctions de <string.h> (strlen, strcpy, strcmp) parcourent la mémoire octet par octet jusqu'à tomber sur '\\0'.",
+      "pieges": [
+        "Pour stocker un mot de 5 lettres comme 'SALUT', il faut allouer au minimum un tableau de 6 caractères (5 lettres + 1 octet pour le '\\0') !"
+      ],
+      "tags": [
+        "Chaînes C",
+        "\\0",
+        "Caractère sentinelle",
+        "strlen"
+      ]
+    },
+    {
+      "id": "r101_q21",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "9. Chaînes de Caractères en C",
+      "question": "Pourquoi la fonction standard « strcpy(dest, src) » est-elle considérée comme dangereuse et déconseillée en sécurité informatique ?",
+      "options": [
+        "Parce qu'elle efface la chaîne source",
+        "Parce qu'elle ne vérifie pas la taille du tampon de destination dest : si la chaîne source src est plus longue que l'espace alloué à dest, elle déborde en mémoire (Buffer Overflow), faille de sécurité majeure",
+        "Parce qu'elle ne fonctionne pas avec les majuscules",
+        "Parce qu'elle est réservée aux fichiers binaires"
+      ],
+      "correct_index": 1,
+      "explication": "Le débordement de tampon provoqué par strcpy ou gets permet à des attaquants d'écraser l'adresse de retour sur la pile et d'exécuter du code malveillant arbitraire. On doit toujours lui préférer 'strncpy' ou 'snprintf'.",
+      "pieges": [
+        "Plus de 50% des failles de sécurité historiques dans les systèmes d'exploitation C provenaient d'un Buffer Overflow lié à l'absence de vérification de taille."
+      ],
+      "tags": [
+        "strcpy",
+        "Buffer Overflow",
+        "Sécurité C",
+        "strncpy",
+        "snprintf"
+      ]
+    },
+    {
+      "id": "r101_q22",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "10. Structures de Données (struct)",
+      "question": "En langage C, comment accède-t-on à un champ 'age' d'une structure lorsque l'on manipule un POINTEUR vers cette structure (ex: Personne *p) ?",
+      "options": [
+        "p.age",
+        "p->age (qui est la notation raccourcie de (*p).age)",
+        "p::age",
+        "p[age]"
+      ],
+      "correct_index": 1,
+      "explication": "L'opérateur flèche '->' est le sucre syntaxique standard en C pour déréférencer un pointeur de structure puis accéder à son membre. Écrire '*p.age' sans parenthèses provoquerait une erreur car la priorité de l'opérateur point '.' est supérieure à celle de l'étoile '*' !",
+      "pieges": [
+        "Sur une variable de structure directe (Personne p;), on utilise le point (p.age). Sur un pointeur (Personne *p;), on utilise la flèche (p->age)."
+      ],
+      "tags": [
+        "struct",
+        "Opérateur flèche ->",
+        "Opérateur point .",
+        "Pointeur de structure"
+      ]
+    },
+    {
+      "id": "r101_q23",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "7. Pointeurs & Adresses Mémoire en C",
+      "question": "Qu'est-ce que « l'arithmétique des pointeurs » en langage C lorsque l'on écrit « ptr + 1 » où ptr est un pointeur de type int* (sur une architecture où sizeof(int) = 4 octets) ?",
+      "options": [
+        "L'adresse mémoire est incrémentée de exactement 1 octet",
+        "L'adresse mémoire est incrémentée de 4 octets (1 * sizeof(int)), pointant ainsi automatiquement sur l'entier suivant dans le tableau",
+        "L'entier pointé est additionné de 1",
+        "Le programme affiche une erreur arithmétique"
+      ],
+      "correct_index": 1,
+      "explication": "Le compilateur C adapte automatiquement les calculs d'adresses au type pointé : ajouter k à un pointeur 'Type *p' décale l'adresse de k * sizeof(Type) octets. C'est pourquoi tab[i] est strictement synonyme de *(tab + i) !",
+      "pieges": [
+        "Ne pas confondre 'ptr + 1' (qui avance à l'adresse de l'entier suivant) et '(*ptr) + 1' (qui ajoute 1 à la valeur stockée) !"
+      ],
+      "tags": [
+        "Arithmétique des pointeurs",
+        "sizeof(Type)",
+        "tab[i] == *(tab+i)"
+      ]
+    },
+    {
+      "id": "r101_q24",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "1. Définition d'un Algorithme & Spécifications",
+      "question": "Dans le style de programmation rigoureux exigé à l'IUT d'Anglet par M. Etcheverry, quelle est la règle d'or concernant l'utilisation des variables globales ?",
+      "options": [
+        "Les variables globales doivent être utilisées pour tout afin de simplifier le code",
+        "Les variables globales sont FORMELLEMENT PROSCRITES : toutes les données doivent être déclarées localement et transmises explicitement aux fonctions par paramètres (entrées, sorties) pour préserver la pureté, la modularité et l'indépendance des composants",
+        "On a le droit aux variables globales si elles s'appellent toutes avec une majuscule",
+        "Elles sont obligatoires pour les boucles for"
+      ],
+      "correct_index": 1,
+      "explication": "Les variables globales détruisent l'encapsulation, rendent les fonctions impossibles à tester unitairement et créent des effets de bord invisibles catastrophiques en cas de parallélisme. Zéro variable globale en BUT 1 !",
+      "pieges": [
+        "Mettre une variable globale dans un TP à l'IUT d'Anglet est sanctionné d'un retrait direct de points."
+      ],
+      "tags": [
+        "Variables globales interdites",
+        "Modularité",
+        "Style académique IUT",
+        "Effets de bord"
+      ]
+    },
+    {
+      "id": "r101_q25",
+      "module": "R1.01",
+      "prof": "M. Patrick Etcheverry / M. Sébastien Dalmau",
+      "chapitre": "1. Définition d'un Algorithme & Spécifications",
+      "question": "En synthèse des enseignements de R1.01, qu'est-ce qui distingue un véritable développeur d'un simple 'bricoleur de code' ?",
+      "options": [
+        "La vitesse à laquelle il tape sur le clavier mécanique",
+        "La capacité à concevoir, décomposer (SFD) et spécifier rigoureusement un algorithme AVANT de coder, en maîtrisant les structures de données, la complexité algorithmique et l'intégrité de la mémoire",
+        "Le fait d'utiliser toujours le dernier framework à la mode",
+        "Le nombre d'écrans allumés sur son bureau"
+      ],
+      "correct_index": 1,
+      "explication": "C'est la philosophie fondatrice du département Informatique de l'IUT d'Anglet : 'Réfléchir d'abord, spécifier ensuite, coder enfin'. Coder sans spécification préalable produit du code fragile et buggé.",
+      "pieges": [
+        "L'étudiant qui se jette sur son éditeur sans feuille ni crayon perd dix fois plus de temps à déboguer qu'à concevoir."
+      ],
+      "tags": [
+        "Synthèse",
+        "M. Etcheverry",
+        "M. Dalmau",
+        "Rigueur algorithmique",
+        "Esprit ingénieur"
+      ]
+    }
+  ]
+}

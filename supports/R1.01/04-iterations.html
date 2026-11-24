@@ -1,0 +1,1858 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Décomposition itérative d'un problème algorithmique</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 30px; margin-bottom: -80px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Principe de la décomposition itérative
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">3</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Formalisme de la décomposition itérative
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">5</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Itérations avec nombre de répétitions connu
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">9</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Itérations avec nombre de répétitions inconnu
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">19</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Bonnes pratiques
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">35</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Principe">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Itérations : principe" data-transition="convex">
+        <h1>Principe de la décomposition itérative</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition itérative - Définition</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Une décomposition itérative<sup>[1]</sup> exprime le fait que la résolution d'un
+                problème <strong>P</strong> de nature complexe équivaut à
+                <strong class="text-primary">répéter</strong> plusieurs fois
+                la résolution d'un ou plusieurs sous-problèmes.
+            </p>
+
+            <p>
+                Les décompositions itératives permettent de décrire des solutions
+                algorithmiques du type :
+            </p>
+            <ul>
+                <li style="margin-top: -20px;"><em>faire ceci tant de fois</em> ou encore,</li>
+                <li style="margin-top: -7px;"><em>faire ceci jusqu'à ce que telle condition soit vérifiée</em> ou encore,</li> 
+                <li style="margin-top: -7px;"><em>tant que telle condition n'est pas vérifiée faire cela</em>.</li>
+            </ul>
+            <p class="fragment fade-right">
+                <i class="far fa-bookmark"></i>
+                Vocabulaire : Dans le jargon informatique, une structure itérative au
+                sein d'un code est appelée une <strong>boucle</strong>.
+            </p>
+        </div>
+        <div style="font-size: 50%; padding-top: -15px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> nommée aussi décomposition répétitive. <br />
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Formalisme">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Itérations : formalisme" data-transition="convex">
+        <h1>Formalisme de la décomposition itérative </h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Formalisme général</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center" style="margin-top: -14px;">
+                <img src="presentation/images/iteration1.svg" width="12%">
+            </div>
+
+            <p>
+                Signification : Le problème <strong>P</strong> se résout
+                en <strong class="text-primary">répétant un certain nombre de fois</strong>
+                la résolution du sous-problème <strong>SP</strong>.
+            </p>
+            <p>
+                Bien sûr, les conditions de répétition devront être précisées pour lever
+                l'ambiguı̈té du terme <strong>"un certain nombre de fois"</strong>...
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exemple général</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row" style="margin-top: -10px;">
+                <div class="col-md-8">
+                    <p>
+                        <strong> Afficher le contenu d'un tableau</strong> consiste à répéter plusieurs fois l'action
+                        <strong>Afficher le contenu d'une case</strong>.
+                    </p>
+                    <p>
+                        En fait, l'action <strong>Afficher le contenu d'une case</strong> sera répétée autant de fois
+                        qu'il y a de cases dans le tableau considéré.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <img src="presentation/images/iteration2.svg" width="60%">
+                    </div>
+                </div>
+            </div>
+
+            <p class="fragment fade-right">
+                Reste à voir comment
+                préciser ces conditions de répétition dans l'algorithme...
+            </p>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Deux familles de décompositions itératives</h4>
+
+        <div style="font-size: 65%; margin-top: -30px;">
+            <ul>
+                <li>
+                    <p>les décompositions itératives où <strong class="text-warning">le nombre de répétitions est connu ou calculable
+                        à l'avance</strong> : on sait précisément le nombre de fois où un traitement doit être
+                        répété pour résoudre le problème global.</p>
+
+                    <div style="font-size: 80%;" class="fragment fade-right">
+                        <div class="card bg-secondary mb-3">
+                            <div class="card-header" style="font-size: smaller;">
+                                <i class="far fa-hand-point-right"></i>
+                                Exemple
+                            </div>
+                            <div class="card-body bg-white">
+                                <p class="card-text" style="margin-top: -15px; margin-bottom: -10px;">
+                                    Afficher le contenu d'un tableau de 5 cases → il faudra répéter 5 fois le
+                                    traitement <em class="text-primary">Afficher une case</em>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+                <li style="margin-top: -30px;" class="fragment fade-right">
+                    <p>
+                        les décompositions itératives où <strong class="text-warning">le nombre de 
+                        répétitions est inconnu</strong> : on
+                        ne sait pas à l'avance combien de fois un traitement doit être répété pour
+                        que le problème soit résolu.</p>
+
+                    <div style="font-size: 80%;" class="fragment fade-right">
+                        <div class="card bg-secondary mb-3">
+                            <div class="card-header" style="font-size: smaller;">
+                                <i class="far fa-hand-point-right"></i>
+                                Exemple
+                            </div>
+                            <div class="card-body bg-white">
+                                <p class="card-text" style="margin-top: -15px; margin-bottom: -10px;">
+                                    Demander à l'utilisateur de saisir un numéro de mois tant que la valeur
+                                    saisie n'est pas comprise entre 1 et 12 → on ne sait pas quand l'utilisateur
+                                    va saisir une valeur valide, on ne sait donc pas combien de fois le
+                                    traitement de saisie devra être répété.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+</section><section name="Nbre de répét. connu">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Nbre de répét. connu" data-transition="convex">
+        <h1>Itérations avec nombre de répétitions connu</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Formalime général</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/iteration3.svg" width="17%">
+            </div>
+
+            <p style="margin-top: -5px;">
+                On définit au niveau de la boucle le nombre de fois où la résolution du
+                sous problème SP doit être répétée en précisant
+                un point de départ (<strong class="text-info">A</strong>) et
+                un point d'arrivée à atteindre (<strong class="text-info">B</strong>).
+            </p>
+            <p>
+                <strong class="text-info">i</strong> représente le numéro de la répétition courante.
+                Sa valeur varie de la valeur <strong class="text-info">A</strong> jusqu'à la
+                valeur <strong class="text-info">B</strong>.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exemples</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <img src="presentation/images/iteration4.svg" width="80%">
+                    </div>
+                </div>
+                <div class="col-md-4 fragment fade-left">
+                    <div class="text-center">
+                        <img src="presentation/images/iteration5.svg" width="80%">
+                    </div>
+                </div>
+                <div class="col-md-4 fragment fade-left">
+                    <div class="text-center">
+                        <img src="presentation/images/iteration6.svg" width="80%">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Syntaxe générale</h4>
+
+        <div style="font-size: 65%;">
+
+            <p>
+                Une décomposition itérative avec nombre de répétitions connu se code au
+                moyen de l'instruction <strong class="text-info">for</strong> en respectant la syntaxe suivante :
+            </p>
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+  for (initialisation ; condition de continuation ; progression)
+  {
+    Liste des instructions à répéter
+  }
+             </code></pre>
+            <ul style="margin-top: 8px;">
+                <li class="fragment fade-right">
+                    <strong class="text-primary">initialisation</strong> : On précise le numéro de la 1ère répétition
+                    qui peut être
+                    égal à 1 ou à une autre valeur.
+                </li>
+                <li class="fragment fade-right" style="margin-top: -8px;">
+                    <strong class="text-primary">condition de continuation</strong> : Expression booléenne précisant la
+                    <span class="text-warning">condition de <u>continuation</u></span> de la répétition.
+                    <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> Attention</span> :
+                    dans les algorithmes on
+                    exprime la <span class="text-warning">condition d'<u>arrêt</u></span> de la répétition → il faudra
+                    donc
+                    <strong>inverser</strong> cette condition d'arrêt au moment du codage.
+                </li>
+                <li class="fragment fade-right" style="margin-top: -8px;">
+                    <strong class="text-primary">progression</strong> : opération déterminant le numéro de la prochaine
+                    répétition.
+                    On ajoute généralement 1 au numéro de répétition courante mais pas
+                    forcément.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Codage</h4>
+
+        <div style="font-size: 65%;">
+
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-7">
+                    <p>Pour coder ce type d'itération on distinguera les boucles
+                        <strong class="text-primary">croissantes</strong> et
+                        <strong class="text-primary">décroissantes</strong>.
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <div class="text-center" style="margin-top: -50px;">
+                        <img src="presentation/images/iteration3.svg" width="40%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: -20px;">
+                <div class="col-md-6 fragment fade-right">
+                    <p>Cas où <strong class="text-primary">A < B</strong> →
+                                Boucle <strong class="text-primary">croissante</strong></p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+  for (i = A ; i <= B ; i = i + 1)
+  {
+    // Code résolvant le sous-problème SP
+    ...
+  }
+                     </code></pre>
+                    <p>ou plus couramment :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+  for (i = A ; i <= B ; i++)
+  {
+    // Code résolvant le sous-problème SP
+    ...
+  }
+                     </code></pre>
+                </div>
+                <div class="col-md-6 fragment fade-left">
+                    <p>Cas où <strong class="text-primary">A > B</strong> →
+                        Boucle <strong class="text-primary">décroissante</strong></p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+  for (i = A ; i >= B ; i = i - 1)
+  {
+    // Code résolvant le sous-problème SP
+    ...
+  }
+                     </code></pre>
+                    <p>ou plus couramment :</p>
+                    <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+  for (i = A ; i >= B ; i--)
+  {
+    // Code résolvant le sous-problème SP
+    ...
+  }
+                     </code></pre>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Petite parenthèse sur les opérateurs d'affectation composés</h4>
+
+        <div style="font-size: 65%;">
+
+            <p>
+                A l'instar de <strong class="text-info">i++</strong> et <strong class="text-info">i--</strong> qui sont
+                très utilisés dans les structures de type <strong class="text-info">for</strong>,
+                C++<sup>[1]</sup> propose d'autres opérateurs d'affectation composés. Les
+                tableaux ci-dessous en listent quelques un :
+            </p>
+
+            <div style="font-size: 62%;">
+
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-6">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="table-warning">
+                                    <th scope="col" class="text-center">Forme décomposée</th>
+                                    <th scope="col" class="text-center">Forme composée équivalente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" style="font-size: x-large;">i = i + 1</td>
+                                    <td class="text-center" style="font-size: x-large;">i++</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="font-size: x-large;">i = i - 1</td>
+                                    <td class="text-center" style="font-size: x-large;">i--</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="font-size: x-large;">i = i + 2</td>
+                                    <td class="text-center" style="font-size: x-large;">i += 2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="table-warning">
+                                    <th scope="col" class="text-center">Forme décomposée</th>
+                                    <th scope="col" class="text-center">Forme composée équivalente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" style="font-size: x-large;">i = i - 2</td>
+                                    <td class="text-center" style="font-size: x-large;">i -= 2</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="font-size: x-large;">i = i * 2</td>
+                                    <td class="text-center" style="font-size: x-large;">i *= 2</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="font-size: x-large;">i = i / 2</td>
+                                    <td class="text-center" style="font-size: x-large;">i /= 2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-size: 85%;" class="fragment fade-right">
+                <i class="far fa-bookmark"></i> Remarque : Même si l'affectation composée
+                <strong>i += 1</strong> existe on lui préfèrera toujours l'instruction créée spécifiquement
+                pour traiter ce cas de figure, à savoir <strong>i++</strong>.
+                Même remarque pour <strong>i -= 1</strong>
+            </p>
+        </div>
+
+        <div style="font-size: 50%; padding-top: -20px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> mais aussi Python, C, Java, PHP... <br />
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Calculer le nombre de répétitions d'une boucle for</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-7">
+                    <p>
+                        Lorsqu'on souhaite mesurer les performances d'un algorithme, il peut être intéressant
+                        de calculer le nombre d'itérations réalisées avant d'obtenir le résultat final.
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <div class="text-center" style="margin-top: -20px;">
+                        <img src="presentation/images/iteration3.svg" width="40%">
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: -5px;">
+                Lorsque l'algorithme utilise une structure itérative de type <strong class="text-info">for</strong>, le
+                nombre de
+                répétitions est obtenu via l'une des formules ci-dessous :
+            </p>
+            <ul>
+                <li style="margin-top: -15px;">
+                    boucle <strong>croissante</strong> (cas où A < B) : &nbsp; &nbsp; <strong class="text-warning">
+                        nbRepet = B - A + 1</strong>
+                </li>
+                <li style="margin-top: -7px;">
+                    boucle <strong>décroissante</strong> (cas où A > B) :
+                    <strong class="text-warning">nbRepet = A - B + 1</strong>
+                </li>
+            </ul>
+            <p>
+                <i class="far fa-bookmark"></i> A retenir : Si la formule de calcul produit un résultat négatif ou nul,
+                cela
+                signifie que l'algorithme ne réalisera aucune répétition.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Calculer le nombre de répétitions d'une boucle for</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-4">
+                    <div class="text-center" style="margin-top: -20px;">
+                        <img src="presentation/images/iteration7.svg" width="60%">
+                    </div>
+                    <pre class="fragment fade-right"><code data-trim data-noescape style="font-size: x-large; line-height: 1.5;">
+  nbRepet = B  - A + 1
+  = 11 - 3 + 1 
+  = 9
+                     </code></pre>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center fragment fade-right" style="margin-top: -20px;">
+                        <img src="presentation/images/iteration8.svg" width="60%">
+                    </div>
+                    <pre class="fragment fade-right"><code data-trim data-noescape style="font-size: x-large; line-height: 1.5;">
+  nbRepet = A  - B + 1
+  = 12 - 0 + 1 
+  = 13
+                     </code></pre>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center fragment fade-right" style="margin-top: -20px;">
+                        <img src="presentation/images/iteration9.svg" width="60%">
+                    </div>
+                    <pre class="fragment fade-right"><code data-trim data-noescape style="font-size: x-large; line-height: 1.5;">
+  nbRepet = A - B + 1
+  = B - A + 1
+  = 0 - 0 + 1 
+  = 1
+                     </code></pre>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Comprendre le mécanisme de la boucle for</h4>
+
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe
+                src="//mediakiosque.univ-pau.fr/video_priv/11272/560eab01f9677e5d8970a42cf6511e24b7b20882afc877383b0329496fe963f9/?is_iframe=true&amp;size=720"
+                style="padding: 0; margin: 0; border:0" allowfullscreen="" width="1280" height="720"></iframe>
+        </div>
+
+    </section>
+
+   <!-- ====================================================================== -->
+
+
+   <section>
+
+    <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+
+
+        <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT9/0" 
+           role="button" target="_blank">
+           Sortez vos smartphones
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+
+</section>
+
+
+<!-- ====================================================================== -->
+
+
+
+
+</section><section name="Nbre de répét. inconnu">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Nbre de répét. inconnu" data-transition="convex">
+        <h1>Itérations avec nombre de répétitions inconnu</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Les questions à se poser</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Les problèmes dont la solution se base sur une décomposition itérative
+                avec nombre de répétitions inconnu sont fréquents.
+            </p>
+            <p>
+                Pour mettre en place ce type de décomposition itérative, deux questions
+                essentielles doivent être traitées :
+            </p>
+            <ul>
+                <li style="margin-top: -17px;"> <strong class="text-warning">Quelle est la condition</strong> à
+                    satisfaire pour que la répétition prenne fin ? </li>
+                <li style="margin-top: -7px;"> <strong class="text-warning">A quel moment</strong> doit-on se préoccuper
+                    de savoir si cette condition est
+                    satisfaite ?</li>
+            </ul>
+            <div class="card" style="margin-top: 5px;">
+                <div class="card-body" style="margin-top: -8px; margin-bottom: -8px;">
+                    <h5 class="card-title"><i class="fas fa-bookmark"></i> A retenir</h5>
+                    <p class="card-text" style="margin-top: -17px;">Les erreurs de programmation sur les structures
+                        répétitives sont
+                        souvent dues au fait que le programmeur a mal répondu à
+                        l'une ou l'autre de ces questions...</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exemple</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Proposer un algorithme qui demande à l'utilisateur de saisir un
+                numéro de mois <strong>numMois</strong> tant que la valeur saisie n'est pas comprise
+                entre 1 et 12.
+            </p>
+            <p>
+                <i class="fas fa-long-arrow-alt-right"></i> On ne sait pas quand l'utilisateur va saisir une valeur
+                valide, on ne sait
+                donc pas combien de fois l'action de saisie devra être répétée.
+            </p>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 42px;">
+                    Mise en place de la structure répétitive :
+                </p>
+
+                <ul>
+                    <li style="margin-top: -17px;">
+                        Quelle est la condition à satisfaire pour que la répétition prenne fin ? <br />
+                        <i class="fas fa-long-arrow-alt-right"></i> <span class="text-warning">numMois &#8712;
+                            [1..12]</span>
+                    </li>
+                    <li style="margin-top: -7px;">
+                        A quel moment doit-on se préoccuper de savoir si cette condition est
+                        satisfaite ? <br />
+                        <i class="fas fa-long-arrow-alt-right"></i> <span class="text-warning">Après la saisie de
+                            numMois</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Points de repère</h4>
+
+        <div style="font-size: 68%;">
+            <p>
+                Y a t'il des points de repère permettant de répondre aux questions précédentes ?
+            </p>
+            <ul>
+                <li>
+                    <strong class="text-warning">Quelle est la condition à satisfaire pour que la répétition prenne fin
+                        ?</strong> <br />
+                    <p>
+                        <i class="fas fa-long-arrow-alt-right"></i> La réponse à cette question dépend
+                        du problème à traiter : il n'y a pas de réponse type.
+                    </p>
+                </li>
+                <li class="fragment fade-right">
+                    <strong class="text-warning">A quel moment doit-on se préoccuper de savoir si cette condition est
+                        satisfaite ?</strong> <br />
+                    <p>
+                        <i class="fas fa-long-arrow-alt-right"></i> On peut ici dégager des configurations
+                        typiques qu'on retrouve régulièrement lors de la résolution de problèmes...
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Quel est le bon moment pour s'arrêter ?</h4>
+
+        <div style="font-size: 68%;">
+            <p>
+                Choisir le moment opportun pour évaluer une condition d'arrêt est une question fondamentale
+                pour réussir à mettre en place une structure itérative.
+            </p>
+            <div class="text-center" style="margin-top: -50px;">
+                <img src="presentation/images/differenceWhileDoWhile.jpg" width="40%">
+            </div>
+
+            <p style="margin-top: -15px;">
+                Il existe des configurations algorithmiques connues qui permettent d'établir une base de réflexion...
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Evaluer la condition d'arrêt <strong>avant</strong> chaque répétition</h4>
+
+        <div class="row" style="margin-top: -10px;">
+            <div class="col-md-8">
+                <div style="font-size: 55%;">
+                    <p> Dans cette configuration, l'algorithme : </p>
+                    <ul>
+                        <li style="margin-top: -17px;">évalue d'abord si la condition d'arrêt est vérifiée ;</li>
+                        <li style="margin-top: -7px;">si elle n'est pas vérifiée, traite P1 puis P2 ;</li>
+                        <li style="margin-top: -7px;"> - - - fin de la 1ère répétition - - - </li>
+                        <li style="margin-top: -7px;">évalue si la condition d'arrêt est vérifiée ;</li>
+                        <li style="margin-top: -7px;">si elle n'est pas vérifiée, traite P1 puis P2 ;</li>
+                        <li style="margin-top: -7px;"> - - - fin de la 2ème répétition - - -</li>
+                        <li style="margin-top: -7px;"> ... </li>
+                        <li style="margin-top: -7px;"> - - - fin de la Nème répétition - - -</li>
+                        <li style="margin-top: -7px;">évalue si la condition d'arrêt est vérifiée ;</li>
+                        <li style="margin-top: -7px;">si elle est vérifiée, stoppe la répétition.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center" style="margin-top: 40px;">
+                    <img src="presentation/images/iteration10.svg" width="90%">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Evaluer la condition d'arrêt <strong>en cours</strong> de répétition</h4>
+
+        <div class="row" style="margin-top: -10px;">
+            <div class="col-md-8">
+                <div style="font-size: 50%; margin-top: -20px" ;">
+                    <p> Dans cette configuration, l'algorithme : </p>
+                    <ul>
+                        <li style="margin-top: -17px;">traite P1</li>
+                        <li style="margin-top: -9px;">évalue si la condition d'arrêt est vérifiée ;</li>
+                        <li style="margin-top: -9px;">si elle n'est pas vérifiée traite P2 ;</li>
+                        <li style="margin-top: -9px;"> - - - fin de la 1ère répétition - - - </li>
+                        <li style="margin-top: -9px;">traite P1</li>
+                        <li style="margin-top: -9px;">évalue si la condition d'arrêt est vérifiée ;</li>
+                        <li style="margin-top: -9px;">si elle n'est pas vérifiée traite P2 ;</li>
+                        <li style="margin-top: -9px;"> - - - fin de la 2ème répétition - - - </li>
+                        <li style="margin-top: -9px;"> ... </li>
+                        <li style="margin-top: -9px;"> - - - fin de la Nème répétition - - -</li>
+                        <li style="margin-top: -9px;">traite P1</li>
+                        <li style="margin-top: -9px;">évalue si la condition d'arrêt est vérifiée ;</li>
+                        <li style="margin-top: -9px;">si elle est vérifiée stoppe la répétition (P2 n'est pas traité).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center" style="margin-top: 40px;">
+                    <img src="presentation/images/iteration11.svg" width="90%">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Evaluer la condition d'arrêt <strong>après</strong> chaque répétition</h4>
+
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-md-8">
+                <div style="font-size: 50%;">
+                    <p> Dans cette configuration, l'algorithme : </p>
+                    <ul>
+                        <li style="margin-top: -17px;">traite P1 puis P2 ;</li>
+                        <li style="margin-top: -9px;">évalue si la condition d'arrêt est vérifiée (on suppose que non) ;
+                        </li>
+                        <li style="margin-top: -9px;"> - - - fin de la 1ère répétition - - - </li>
+                        <li style="margin-top: -5px;">traite P1 puis P2 ;</li>
+                        <li style="margin-top: -9px;">évalue si la condition d'arrêt est vérifiée (on suppose que non) ;
+                        </li>
+                        <li style="margin-top: -9px;"> - - - fin de la 2ème répétition - - -</li>
+                        <li style="margin-top: -9px;"> ... </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center" style="margin-top: 40px;">
+                    <img src="presentation/images/iteration12.svg" width="90%">
+                </div>
+            </div>
+        </div>
+        <div style="font-size: 55%;">
+            <ul>
+                <li style="margin-top: -9px;"> - - - fin de la Nème répétition - - -</li>
+                <li style="margin-top: -5px;">traite P1 puis P2 ;</li>
+                <li style="margin-top: -9px;">évalue si la condition d'arrêt est vérifiée (on suppose que oui) ;</li>
+                <li style="margin-top: -9px;">stoppe la répétition.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Autres cas de figure</h4>
+
+        <div style="font-size: 68%;">
+            <p>
+                Les autres cas de figure concernent les structures répétitives intégrant
+                <strong class="text-warning">plusieurs conditions d'arrêt non évaluables en même temps.</strong>
+            </p>
+            <div class="row">
+                <div class="col-md-7">
+                    <p>
+                        Ces cas sont nombreux et sont les plus complexes.
+                    </p>
+                    <p>
+                        Toutefois, l'élaboration de telles
+                        structures répétitives est similaire aux précédentes. Pour chaque condition d'arrêt, on
+                        se préoccupera :
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <div class="text-center" style="margin-top: -10px;">
+                        <img src="presentation/images/iteration13.svg" width="90%">
+                    </div>
+                </div>
+            </div>
+
+            <ul style="margin-top: -10px;">
+                <li>
+                    de formaliser précisément chaque condition d'arrêt ;
+                </li>
+                <li style="margin-top: -7px;">de savoir à quel moment chaque condition d'arrêt doit être évaluée.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition d'arrêt <strong>avant</strong> chaque répétition : codage</h4>
+
+        <div class="row" style="margin-top: -10px;">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img src="presentation/images/iteration10.svg" width="60%">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="font-size: 90%;">
+                    <pre class="cpp" style="margin-top: 30px;"><code data-trim data-noescape data-line-numbers>
+  while ( ! (condition d'arrêt) )
+  {
+    // code de P1
+    ...
+
+    // code de P2
+    ...
+  }
+                 </code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition d'arrêt <strong>après</strong> chaque répétition : codage</h4>
+
+        <div class="row" style="margin-top: -10px;">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img src="presentation/images/iteration12.svg" width="60%">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="font-size: 90%;">
+                    <pre class="cpp" style="margin-top: 30px;"><code data-trim data-noescape data-line-numbers>
+  do
+  {
+    // code de P1
+    ...
+
+    // code de P2
+    ...
+  }
+  while ( ! (condition d'arrêt) ) ;
+                 </code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Condition d'arrêt évaluée <strong>en cours</strong> de répétition</h4>
+
+        <div class="row" style="margin-top: -10px;">
+            <div class="col-md-4">
+                <div class="text-center" style="margin-top: 20px;">
+                    <img src="presentation/images/iteration11.svg" width="75%">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div style="font-size: 70%;">
+                    <pre class="cpp" style="margin-top: 30px;"><code data-trim data-noescape data-line-numbers>
+ while (true)
+ {
+   // code de P1
+   ...
+     
+   if (condition d'arrêt)
+   {
+     break;
+   }
+     
+   // code de P2
+   ...
+ }
+                 </code></pre>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div style="font-size: 70%;">
+                    <pre class="cpp" style="margin-top: 30px;"><code data-trim data-noescape data-line-numbers>
+ for ( ; ; )
+ {
+   // code de P1
+   ...
+        
+   if (condition d'arrêt)
+   {
+     break;
+   }
+        
+   // code de P2
+   ...
+ }
+                 </code></pre>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Conditions d'arrêt multiples non évaluables en même temps (1/2)</h4>
+ 
+        <div class="row" style="margin-top: -10px;">
+            <div class="col-md-6">
+                <div class="text-center" style="margin-top: 20px;">
+                    <img src="presentation/images/iteration13.svg" width="75%">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="font-size: 70%;">
+                    <pre class="cpp" style="margin-top: 30px;"><code data-trim data-noescape data-line-numbers>
+ while (true)
+ {
+   // code de P1
+   ...
+        
+   if (condition d'arrêt 1)
+   {
+     break;
+   }
+        
+   // code de P2
+   ...
+
+   if (condition d'arrêt 2)
+   {
+     break;
+   }     
+ }
+                 </code></pre>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Conditions d'arrêt multiples non évaluables en même temps (2/2)</h4>
+ 
+        <div class="row" style="margin-top: -10px;">
+            <div class="col-md-6">
+                <div class="text-center" style="margin-top: 20px;">
+                    <img src="presentation/images/iteration13.svg" width="75%">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="font-size: 70%;">
+                    <p>Autre possibilité :</p>
+                    <pre class="cpp" style="margin-top: -10px;"><code data-trim data-noescape data-line-numbers>
+ for ( ; ; )
+ {
+   // code de P1
+   ...
+        
+   if (condition d'arrêt 1)
+   {
+     break;
+   }
+        
+   // code de P2
+   ...
+
+   if (condition d'arrêt 2)
+   {
+     break;
+   }    
+ }
+                 </code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Concevoir une structure itérative : résumé</h4>
+ 
+        <div class="text-center" style="margin-top: -30px;">
+            <img src="presentation/images/methodoChoixStructRepetitive.jpg" width="90%">
+        </div>
+    </section>
+
+   <!-- ====================================================================== -->
+
+
+   <section>
+
+    <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+
+
+        <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT10/0" 
+           role="button" target="_blank">
+           Sortez vos smartphones
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+
+</section>
+
+
+<!-- ====================================================================== -->
+
+
+
+</section><section name="Bonnes pratiques">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Bonnes pratiques" data-transition="convex">
+        <h1>Bonnes pratiques</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Délimiter les actions répétées avec des accolades</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row" style="margin-top: -10px;">
+                <div class="col-md-6">
+                    <p>
+                        Que ce soit pour une boucle for, une boucle while ou une boucle do-while, il
+                        est possible de se dispenser d'utiliser des accolades s'il n'y a qu'une seule
+                        instruction répétée.
+                    </p>
+
+                    <p>
+                        Toutefois, pour appliquer les bonnes pratiques vues précédemment, nous
+                        emploierons toujours des accolades pour délimiter les instructions
+                        répétées, même s'il n'y en n'a qu'une.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div style="font-size: 90%;">
+                        <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                            style="font-size: 75%;">
+                            <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                    class="fa fa-quote-left text-white"></i></div>
+                            <p class="mb-0 mt-2 font-italic">
+                                <img class="img-fluid rounded-circle float-left"
+                                    data-src="presentation/images/erik_nyquist.jpg" width="100"
+                                    style="padding-right: 10px;">
+                            <p>"All flow control primitives (if, else, while, for, do,
+                                switch and case) should be followed by a block,
+                                even if it is empty."
+                            </p>
+                            <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                                Mats Henricson and Erik Nyquist -
+                                <cite title="Source Title">Industrial Strength C++, 1997, p. 27</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: -2px;">
+                Cette bonne pratique améliore la lisibilité du code, sa maintenabilité (possibilité
+                d'ajouter / supprimer des instructions répétées sans soucis) et évite des cas
+                d'erreurs fastidieux à déceler.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Prendre le temps d'identifier la structure itérative la plus adaptée (1/4)</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Cas où la condition d'arrêt est évaluée en <strong>début</strong> de boucle.
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 100%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>"Pour créer une boucle dont le test se trouve <strong class="text-warning">au
+                        début</strong>, employez une <strong class="text-warning">boucle while</strong> en C++, C#,
+                    Java, Visual Basic et de nombreux autres
+                    langages."
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                    Steve McConnell -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les
+                        langages, 2005, page 395.</cite>
+                </footer>
+            </blockquote>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Prendre le temps d'identifier la structure itérative la plus adaptée (2/4)</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Cas où la condition d'arrêt est évaluée en <strong>fin</strong> de boucle.
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 90%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>"Vous rencontrerez de temps en temps des situations dans
+                    lesquelles la boucle doit être souple, mais où le code doit
+                    être exécuté <strong class="text-warning">au moins une fois</strong>. Dans un tel cas,
+                    employez une boucle <strong class="text-warning">do-while</strong> en C++, C# et Java
+                    et do-loop-while en Visual Basic."
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                    Steve McConnell -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les
+                        langages, 2005, page 395.</cite>
+                </footer>
+            </blockquote>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Prendre le temps d'identifier la structure itérative la plus adaptée (3/4)</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Cas où la condition d'arrêt est évaluée en <strong>cours</strong> de répétition.
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 80%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm" style="margin-top: -30px;">
+                    <i class="fa fa-quote-left text-white"></i>
+                </div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>"Une boucle loop-with-exit est une boucle dans laquelle
+                    la condition de sortie apparaı̂t au milieu de la boucle
+                    plutôt qu'au début ou à la fin. Ce type de boucle existe
+                    de manière explicite en Visual Basic<sup>[1]</sup>; vous
+                    pouvez l'emuler à l'aide de <strong class="text-warning">while(true)</strong> et de
+                    <strong class="text-warning">break</strong><sup>[2]</sup> en C++ [...]."
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                    Steve McConnell -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les
+                        langages, 2005, page 395.</cite>
+                </footer>
+            </blockquote>
+        </div>
+        <div style="font-size: 50%; padding-top: -15px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> existe également en Ada avec loop - end loop. <br />
+            <span style="color: #35a3e5">[2]</span> ou for ( ; ; ) et break. <br />
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Prendre le temps d'identifier la structure itérative la plus adaptée (4/4)</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Cas où le nombre de répétitions est connu.
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 80%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm" style="margin-top: -30px;">
+                    <i class="fa fa-quote-left text-white"></i>
+                </div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>"La boucle <strong class="text-warning">for</strong> est le choix idéal si vous avez
+                    besoin d'une boucle qui s'exécute <strong class="text-warning">un certain
+                        nombre de fois</strong><sup>[1]</sup>."
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                    Steve McConnell -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les
+                        langages, 2005, page 398.</cite>
+                </footer>
+            </blockquote>
+        </div>
+        <div style="font-size: 50%; padding-top: -15px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> ce nombre de fois étant connu ou calculable. <br />
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Utiliser correctement chaque structure de contrôle (1/2)</h4>
+
+        <div style="font-size: 65%;">
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 80%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm" style="margin-top: -30px;">
+                    <i class="fa fa-quote-left text-white"></i>
+                </div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/steve_McConnell.jpg"
+                        width="100" style="padding-right: 10px;">
+                <p>"La caractéristique d'une boucle for, c'est qu'elle est définie au début
+                    de la boucle et que vous l'oubliez ensuite. Il n'y aucun contrôle à
+                    installer à l'intérieur de la boucle. Par contre, s'il existe une
+                    condition de sortie pour laquelle l'exécution doit se poursuivre
+                    à l'extérieur d'une boucle, utilisez une boucle while<sup>[1]</sup>."
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                    Steve McConnell -
+                    <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les
+                        langages, 2005, page 398.</cite>
+                </footer>
+            </blockquote>
+        </div>
+        <div style="font-size: 50%; padding-top: -15px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> ou do...while selon la position de la condition d'arrêt. <br />
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Conseil d'expert</h4>
+
+        <div style="font-size: 65%; margin-top: 55px;">
+            <div class="text-center" style="margin-top: -50px;">
+                <img src="presentation/images/pas_de_break_dans_for.png" width="100%">
+            </div>
+
+            <p style="font-size: 80%;">
+               Extrait de <span class="font-italic"> McConnell, S. (2004). Code Complete, Second Edition. Redmond, WA, USA: Microsoft Press. ISBN: 0735619670 - Page 372.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Exemple de pratique à éviter</h4>
+
+        <div style="font-size: 65%;">
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ for ( i = 1 ; i <= 10 ; i++ )
+ {
+   cout < < " Entrez un nombre " ; 
+   cin > > nbre ;
+
+   if ( nbre < 0 )
+   {
+     break ;
+   }
+ }
+             </code></pre>
+
+            <p style="line-height: 2;">
+                Dans cet exemple, lorsque le nombre saisi est négatif la répétitition prend fin :<br />
+                <i class="fas fa-long-arrow-alt-right"></i> Le nombre de saisies à effectuer n'est donc pas connu <br />
+                <i class="fas fa-long-arrow-alt-right"></i> L'usage d'une boucle for n'est donc pas approprié <br />
+            </p>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Utiliser correctement chaque structure de contrôle (2/2)</h4>
+
+        <div style="font-size: 65%;">
+
+            <p>
+                Ne modifiez <strong>jamais</strong> l'indice d'une boucle for au sein des actions répétées : Si
+                vous utilisez une boucle for, laissez la gérer elle-même l'évolution de son
+                indice, sinon changez de type de boucle.
+            </p>
+
+            <div class="row" style="margin-top: -15px;">
+                <div class="col-md-6">
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 72%;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded-circle float-left"
+                                data-src="presentation/images/steve_McConnell.jpg" width="100"
+                                style="padding-right: 10px;">
+                        <p>"Ne trafiquez pas l'indice d'une boucle for pour
+                            l'obliger à se terminer."
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                            Steve McConnell -
+                            <cite title="Source Title">Tout sur le code - Pour concevoir du logiciel de qualité, dans tous les
+                                langages, 2005, page 403.</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="col-md-6">
+                    <div style="font-size: 90%;">
+                        <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                            style="font-size: 72%;">
+                            <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                    class="fa fa-quote-left text-white"></i></div>
+                            <p class="mb-0 mt-2 font-italic">
+                                <img class="img-fluid rounded-circle float-left"
+                                    data-src="presentation/images/erik_nyquist.jpg" width="100"
+                                    style="padding-right: 10px;">
+                            <p>"Do not change a loop variable inside a for-loop
+                                block."
+                            </p>
+                            <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -50px;">
+                                Mats Henricson and Erik Nyquist -
+                                <cite title="Source Title">Industrial Strength C++, 1997, p. 26-27</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+   
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Exemple de pratique à proscrire</h4>
+
+        <div style="font-size: 75%;">
+            <pre class="cpp"><code data-trim data-noescape data-line-numbers>
+ for ( i = 1 ; i < 100 ; i++ )
+ {
+   // du code 
+   ...
+
+   if ( ... )
+   {
+     i = 100 ;
+   }
+
+   // encore du code
+   ...
+ }
+             </code></pre>
+
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#B85042">
+    <title>R1.06 • Simulateur de Partiel Blanc & Calculateurs Pas-à-Pas — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #B85042;
+            --accent-light: #F5EBE4;
+            --accent-border: #E6BFB8;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.8;
+            letter-spacing: 0.025em;
+            word-spacing: 0.07em;
+            text-align: left;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+        }
+        .tab-btn-active {
+            background-color: #B85042 !important;
+            color: #FFFFFF !important;
+            border-color: #B85042 !important;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Règle de lecture dyslexie optionnelle */
+        #readingRuler {
+            pointer-events: none;
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 38px;
+            background: rgba(184, 80, 66, 0.09);
+            border-top: 1.5px solid rgba(184, 80, 66, 0.35);
+            border-bottom: 1.5px solid rgba(184, 80, 66, 0.35);
+            z-index: 9999;
+            display: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div id="readingRuler"></div>
+
+    <!-- Top Navigation Bar -->
+    <div class="border-b border-slate-200 bg-white sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="../../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Hub</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../R1.06.html" class="text-xs font-bold text-slate-700 hover:text-slate-900 transition font-mono">R1.06</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-xs font-black text-slate-900">Simulateur Partiel Blanc</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="toggleRuler()" id="rulerBtn" class="px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 transition">
+                    <i data-lucide="scan-line" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">Règle de lecture</span>
+                </button>
+                <a href="../../revision/R1.06.html" class="px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                    <span>Grand Mémo Partiel</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 w-full">
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white" style="border-left: 6px solid #B85042;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                            SPÉCIAL PARTIEL R1.06
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                            100% Supports Mme Marie Bruyère (11 PDF Officiels)
+                        </span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">
+                        Simulateur de Partiel Blanc & Calculateurs Pas-à-Pas
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+                        Entraînement intensif aux 3 parties du partiel : <strong>Partie 1 (Ensembles & Cardinaux)</strong> • <strong>Partie 2 (Logique & Prédicats)</strong> • <strong>Partie 3 (Arithmétique, Euclide Étendu, Bézout & $\mathbb{Z}/n\mathbb{Z}$)</strong>
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="../R1.06.html" class="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-1.5">
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                        <span>6 Chapitres de Cours</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+
+        <!-- Interactive Navigation Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            <button onclick="switchMainTab('qcm')" id="tabBtn-qcm" class="tab-btn-active min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 transition flex items-center gap-2 shrink-0 shadow-2xs">
+                <i data-lucide="award" class="w-4 h-4"></i>
+                <span>🏆 1. Partiel Blanc Interactif (30 Questions Corrigées)</span>
+            </button>
+            <button onclick="switchMainTab('euclide')" id="tabBtn-euclide" class="min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 transition flex items-center gap-2 shrink-0 shadow-2xs">
+                <i data-lucide="table-2" class="w-4 h-4"></i>
+                <span>🧮 2. Tableau d'Euclide Étendu, Bézout & Équations $\mathbb{Z}/n\mathbb{Z}$</span>
+            </button>
+            <button onclick="switchMainTab('arith')" id="tabBtn-arith" class="min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 transition flex items-center gap-2 shrink-0 shadow-2xs">
+                <i data-lucide="divide" class="w-4 h-4"></i>
+                <span>➗ 3. Division dans $\mathbb{Z}$ (Négatifs), Diviseurs $\prod(k_i+1)$ & $\varphi(n)$</span>
+            </button>
+            <button onclick="switchMainTab('ensembles')" id="tabBtn-ensembles" class="min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 transition flex items-center gap-2 shrink-0 shadow-2xs">
+                <i data-lucide="git-merge" class="w-4 h-4"></i>
+                <span>🎲 4. Pièges $\in / \subset / \mathcal{P}(E)$ & Crible 3 Ensembles</span>
+            </button>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 1 : PARTIEL BLANC INTERACTIF (30 QUESTIONS OFFICIELLES)           -->
+        <!-- ===================================================================== -->
+        <section id="panel-qcm" class="space-y-5">
+            <div class="glass-card rounded-2xl p-5 sm:p-6 border border-slate-200 bg-white">
+                <div class="flex items-center justify-between flex-wrap gap-4">
+                    <div>
+                        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-5 h-5" style="color: #B85042;"></i>
+                            <span>Examen Blanc R1.06 — Entraînement Chronométré ou Libre</span>
+                        </h2>
+                        <p class="text-xs text-slate-600 mt-0.5">
+                            Sélectionne une partie du programme ou fais le sujet complet (30 questions issues des TDs et PDFs de Mme Bruyère). Chaque réponse affiche la démonstration exacte attendue sur ta copie.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <div class="px-3.5 py-2 rounded-xl border font-mono text-xs font-bold" style="background-color: #F5EBE4; color: #B85042; border-color: #E6BFB8;">
+                            Score : <span id="qcmScore">0</span> / <span id="qcmTotalAnswered">0</span> (<span id="qcmNote20">--</span>/20)
+                        </div>
+                        <button onclick="resetQuiz()" class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition">
+                            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                            <span>Réinitialiser</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter pills -->
+                <div class="flex items-center gap-2 flex-wrap mt-4 pt-4 border-t border-slate-100">
+                    <span class="text-xs font-bold text-slate-500 mr-1">Filtrer par thème :</span>
+                    <button onclick="filterQuiz('ALL')" id="qFilter-ALL" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white transition" style="background-color: #B85042;">
+                        Tout le Partiel (30)
+                    </button>
+                    <button onclick="filterQuiz('ENSEMBLES')" id="qFilter-ENSEMBLES" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        Partie 1 : Ensembles, Partitions & Cardinaux (10)
+                    </button>
+                    <button onclick="filterQuiz('LOGIQUE')" id="qFilter-LOGIQUE" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        Partie 2 : Logique & Prédicats $\forall/\exists$ (10)
+                    </button>
+                    <button onclick="filterQuiz('ARITHMETIQUE')" id="qFilter-ARITHMETIQUE" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        Partie 3 : Arithmétique, Bézout & $\mathbb{Z}/n\mathbb{Z}$ (10)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Container for Quiz Cards -->
+            <div id="quizContainer" class="space-y-4"></div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 2 : TABLEAU D'EUCLIDE ÉTENDU, BÉZOUT & ÉQUATIONS Z/nZ             -->
+        <!-- ===================================================================== -->
+        <section id="panel-euclide" class="space-y-6 hidden">
+            <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white space-y-5">
+                <div class="flex items-start justify-between flex-wrap gap-4">
+                    <div>
+                        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                            MÉTHODE OFFICIELLE DOC4 & DOC5 — MME BRUYÈRE
+                        </span>
+                        <h2 class="text-lg font-extrabold text-slate-900 mt-1">
+                            Générateur & Entraîneur du Tableau d'Euclide Étendu ($au + bv = \text{pgcd}(a,b)$)
+                        </h2>
+                        <p class="text-xs text-slate-600 mt-1">
+                            Calcule le PGCD, les coefficients de Bézout par récurrence ($u_i = u_{i-2} - q_i u_{i-1}$ et $v_i = v_{i-2} - q_i v_{i-1}$) et l'inverse modulaire dans $\mathbb{Z}/n\mathbb{Z}$.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Presets from course PDFs -->
+                <div class="flex items-center gap-2 flex-wrap text-xs">
+                    <span class="font-bold text-slate-500">Exemples officiels du cours :</span>
+                    <button onclick="setEuclidePreset(963, 657)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono font-semibold text-slate-700">963 et 657 (Doc4)</button>
+                    <button onclick="setEuclidePreset(25, 9)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono font-semibold text-slate-700">25 et 9 (Inverse de 9 mod 25 - Doc5)</button>
+                    <button onclick="setEuclidePreset(120, 23)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono font-semibold text-slate-700">120 et 23 (Inverse mod 120)</button>
+                    <button onclick="setEuclidePreset(35, 15)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono font-semibold text-slate-700">35 et 15 (Doc5)</button>
+                    <button onclick="setEuclidePreset(160, 29)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono font-semibold text-slate-700">160 et 29 (Clé RSA)</button>
+                </div>
+
+                <!-- Inputs -->
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end pt-2">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Entier $a$ (ou module $n$) :</label>
+                        <input type="number" id="eucA" value="963" min="1" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 font-mono text-sm focus:outline-none focus:border-slate-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Entier $b$ (ou élément $p$) :</label>
+                        <input type="number" id="eucB" value="657" min="1" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 font-mono text-sm focus:outline-none focus:border-slate-500">
+                    </div>
+                    <div>
+                        <button onclick="computeEuclide(false)" class="w-full min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white transition hover:brightness-95" style="background-color: #B85042;">
+                            Afficher le Tableau Complet
+                        </button>
+                    </div>
+                    <div>
+                        <button onclick="computeEuclide(true)" class="w-full min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold border transition hover:bg-slate-50" style="background-color: #F5EBE4; color: #B85042; border-color: #E6BFB8;">
+                            🎯 Mode Entraînement (Cacher $u_i, v_i$)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Output Table & Bézout Summary -->
+                <div id="euclideOutput" class="space-y-4 pt-2"></div>
+            </div>
+
+            <!-- Solveur d'Équation Modulaire ax ≡ b (mod n) -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white space-y-4">
+                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                    ÉQUATIONS MODULAIRES — DOC5 INVERSIBILITÉ DANS Z/nZ
+                </span>
+                <h2 class="text-lg font-extrabold text-slate-900">
+                    Résolveur Pas-à-Pas de $a \cdot x \equiv b \pmod n$ dans $\mathbb{Z}/n\mathbb{Z}$
+                </h2>
+                <div class="flex items-center gap-2 flex-wrap text-xs">
+                    <span class="font-bold text-slate-500">Cas types d'examen :</span>
+                    <button onclick="setModEqPreset(9, 1, 25)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono">9x ≡ 1 (mod 25)</button>
+                    <button onclick="setModEqPreset(15, 10, 35)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono">15x ≡ 10 (mod 35) [pgcd=5]</button>
+                    <button onclick="setModEqPreset(6, 5, 15)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono">6x ≡ 5 (mod 15) [Impossible]</button>
+                    <button onclick="setModEqPreset(7, 4, 26)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 font-mono">7x ≡ 4 (mod 26)</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Coefficient $a$ :</label>
+                        <input type="number" id="modA" value="15" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 font-mono text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Second membre $b$ :</label>
+                        <input type="number" id="modB" value="10" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 font-mono text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Modulo $n$ ($n \ge 2$) :</label>
+                        <input type="number" id="modN" value="35" min="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 font-mono text-sm">
+                    </div>
+                    <div>
+                        <button onclick="solveModularEquation()" class="w-full min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white transition hover:brightness-95" style="background-color: #B85042;">
+                            Résoudre dans $\mathbb{Z}/n\mathbb{Z}$
+                        </button>
+                    </div>
+                </div>
+                <div id="modEqOutput" class="pt-2"></div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 3 : DIVISION EUCLIDIENNE (NÉGATIFS) & NOMBRES PREMIERS (DOC1/DOC3)-->
+        <!-- ===================================================================== -->
+        <section id="panel-arith" class="space-y-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Division Euclidienne dans Z -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white space-y-4">
+                    <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                        PIÈGE N°1 DU PARTIEL — DOC1 DIVISION EUCLIDIENNE
+                    </span>
+                    <h2 class="text-lg font-extrabold text-slate-900">
+                        Division Euclidienne dans $\mathbb{Z}$ ($0 \le r < |b|$)
+                    </h2>
+                    <p class="text-xs text-slate-600">
+                        Rappel de Mme Bruyère : Le reste $r$ est <strong>TOUJOURS positif ou nul</strong> ($0 \le r < |b|$), même quand $a$ est négatif !
+                    </p>
+                    <div class="flex items-center gap-2 flex-wrap text-xs">
+                        <button onclick="setDivPreset(-58, 7)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 font-mono">-58 ÷ 7 (Doc1)</button>
+                        <button onclick="setDivPreset(-23, 5)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 font-mono">-23 ÷ 5</button>
+                        <button onclick="setDivPreset(-100, 13)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 font-mono">-100 ÷ 13</button>
+                        <button onclick="randomNegativeDiv()" class="px-2.5 py-1 rounded-lg border font-bold" style="background-color: #F5EBE4; color: #B85042; border-color: #E6BFB8;">🎲 Tirer au hasard</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 items-end">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Dividende $a \in \mathbb{Z}$ :</label>
+                            <input type="number" id="divA" value="-58" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Diviseur $b \in \mathbb{Z}^*$ :</label>
+                            <input type="number" id="divB" value="7" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-sm">
+                        </div>
+                        <div>
+                            <button onclick="computeDivZ()" class="w-full min-h-[40px] px-3 py-2 rounded-xl text-xs font-bold text-white" style="background-color: #B85042;">Calculer $(q, r)$</button>
+                        </div>
+                    </div>
+                    <div id="divZOutput" class="pt-2"></div>
+                </div>
+
+                <!-- Décomposition en facteurs premiers, Valuation p-adique, Diviseurs & Euler -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white space-y-4">
+                    <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                        DOC3 & DOC5 — FACTEURS PREMIERS, DIVISEURS & EULER
+                    </span>
+                    <h2 class="text-lg font-extrabold text-slate-900">
+                        Valuation $p$-adique, Nombre de Diviseurs & $\varphi(n)$
+                    </h2>
+                    <p class="text-xs text-slate-600">
+                        Si $n = p_1^{k_1} p_2^{k_2} \cdots p_r^{k_r}$, alors $n$ possède exactement $\prod_{i=1}^r (k_i + 1)$ diviseurs positifs et $\varphi(n) = \prod_{i=1}^r (p_i - 1) p_i^{k_i - 1}$ inversibles dans $\mathbb{Z}/n\mathbb{Z}$.
+                    </p>
+                    <div class="flex items-center gap-2 flex-wrap text-xs">
+                        <button onclick="setPrimePreset(600)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 font-mono">n = 600 (Doc3)</button>
+                        <button onclick="setPrimePreset(360)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 font-mono">n = 360</button>
+                        <button onclick="setPrimePreset(25)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 font-mono">n = 25 (Doc5)</button>
+                        <button onclick="setPrimePreset(1260)" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 font-mono">n = 1260</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 items-end">
+                        <div class="col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Entier $n \ge 2$ :</label>
+                            <input type="number" id="primeN" value="600" min="2" max="10000000" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-sm">
+                        </div>
+                        <div>
+                            <button onclick="computePrimeDecomp()" class="w-full min-h-[40px] px-3 py-2 rounded-xl text-xs font-bold text-white" style="background-color: #B85042;">Analyser $n$</button>
+                        </div>
+                    </div>
+                    <div id="primeOutput" class="pt-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 4 : ATELIER ENSEMBLES (PIÈGES ∈/⊂/P(E) & CRIBLE 3 ENSEMBLES)      -->
+        <!-- ===================================================================== -->
+        <section id="panel-ensembles" class="space-y-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Crible de Poincaré à 3 ensembles -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white space-y-4">
+                    <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                        ENSEMBLES DOC4 — FORMULES DES CARDINAUX
+                    </span>
+                    <h2 class="text-lg font-extrabold text-slate-900">
+                        Résolveur du Crible de Poincaré à 3 Ensembles ($A, B, C$)
+                    </h2>
+                    <p class="text-xs text-slate-600">
+                        Calcule automatiquement $|A \cup B \cup C|$, $|\overline{A \cup B \cup C}|$, $|A \cap \bar{B} \cap C| = |A \cap C| - |A \cap B \cap C|$, et les cardinaux exclusifs (« uniquement $A$ »).
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <div>
+                            <label class="font-bold text-slate-700">Univers $|E|$ :</label>
+                            <input type="number" id="crE" value="100" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">$|A|$ :</label>
+                            <input type="number" id="crA" value="45" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">$|B|$ :</label>
+                            <input type="number" id="crB" value="40" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">$|C|$ :</label>
+                            <input type="number" id="crC" value="35" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">$|A \cap B|$ :</label>
+                            <input type="number" id="crAB" value="15" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">$|A \cap C|$ :</label>
+                            <input type="number" id="crAC" value="12" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">$|B \cap C|$ :</label>
+                            <input type="number" id="crBC" value="10" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">$|A \cap B \cap C|$ :</label>
+                            <input type="number" id="crABC" value="5" class="w-full mt-1 px-2.5 py-1.5 rounded-lg border border-slate-300 font-mono">
+                        </div>
+                    </div>
+                    <button onclick="computeCrible3()" class="w-full min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold text-white" style="background-color: #B85042;">
+                        Calculer toutes les formules de Cardinaux
+                    </button>
+                    <div id="cribleOutput" class="pt-2"></div>
+                </div>
+
+                <!-- Mémo Interactif des Pièges ∈ vs ⊂ vs P(E) -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-200 bg-white space-y-4">
+                    <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                        ENSEMBLES DOC1 — TABLEAU DE VÉRITÉ ∈ / ⊂ / P(S)
+                    </span>
+                    <h2 class="text-lg font-extrabold text-slate-900">
+                        Les Équivalences Fondamentales de Mme Bruyère
+                    </h2>
+                    <p class="text-xs text-slate-600">
+                        Soit $S = \{1, 2, 3\}$. Voici le tableau de référence absolu tiré de <code>MathsDiscretesEnsembleDoc1.pdf</code> pour ne jamais perdre de points sur $\in$, $\subset$ et $\mathcal{P}(S)$ :
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs border border-slate-200 rounded-xl overflow-hidden">
+                            <thead class="bg-slate-50 font-bold text-slate-800 border-b border-slate-200">
+                                <tr>
+                                    <th class="p-2.5">Assertion</th>
+                                    <th class="p-2.5">Valeur</th>
+                                    <th class="p-2.5">Justification officielle (Mme Bruyère)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-2.5 font-mono font-bold">$2 \in S$</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">VRAI</td>
+                                    <td class="p-2.5">$2$ est un élément de l'ensemble $S$.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono font-bold">$\{2\} \subset S$</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">VRAI</td>
+                                    <td class="p-2.5">Le singleton $\{2\}$ est un sous-ensemble de $S$ ($2 \in S \iff \{2\} \subset S$).</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono font-bold">$\{2\} \in \mathcal{P}(S)$</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">VRAI</td>
+                                    <td class="p-2.5">Les éléments de $\mathcal{P}(S)$ sont les sous-ensembles de $S$ ($A \subset S \iff A \in \mathcal{P}(S)$).</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono font-bold">$2 \in \mathcal{P}(S)$</td>
+                                    <td class="p-2.5 text-rose-700 font-bold">FAUX</td>
+                                    <td class="p-2.5">$2$ est un entier, pas un sous-ensemble de $S$.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono font-bold">$\{2\} \subset \mathcal{P}(S)$</td>
+                                    <td class="p-2.5 text-rose-700 font-bold">FAUX</td>
+                                    <td class="p-2.5">Car $2 \notin \mathcal{P}(S)$. En revanche, $\{\{2\}\} \subset \mathcal{P}(S)$ est <strong>VRAI</strong> !</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono font-bold">$\emptyset \subset S$ et $\emptyset \in \mathcal{P}(S)$</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">VRAI</td>
+                                    <td class="p-2.5">L'ensemble vide est inclus dans tout ensemble, donc appartient à $\mathcal{P}(S)$.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono font-bold">$\emptyset \subset \mathcal{P}(S)$</td>
+                                    <td class="p-2.5 text-emerald-700 font-bold">VRAI</td>
+                                    <td class="p-2.5">$\emptyset$ est inclus dans n'importe quel ensemble, y compris dans $\mathcal{P}(S)$ !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // =========================================================================
+        // BANQUE DES 30 QUESTIONS OFFICIELLES DU PARTIEL BLANC R1.06 (MME BRUYÈRE)
+        // =========================================================================
+        const QUIZ_QUESTIONS = [
+            // --- PARTIE 1 : ENSEMBLES, PARTITIONS, SIMPLIFICATIONS & CARDINAUX (10) ---
+            {
+                id: 1,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsembleDoc1.pdf",
+                question: "Soit $S = \\{1, 2, 3\\}$ et $\\mathcal{P}(S)$ l'ensemble des parties de $S$. Laquelle de ces affirmations est <strong>FAUSSE</strong> ?",
+                options: [
+                    "$\\{2\\} \\in \\mathcal{P}(S)$",
+                    "$\\{\\{2\\}\\} \\subset \\mathcal{P}(S)$",
+                    "$\\{2\\} \\subset \\mathcal{P}(S)$",
+                    "$\\emptyset \\in \\mathcal{P}(S)$ et $\\emptyset \\subset \\mathcal{P}(S)$"
+                ],
+                correct: 2,
+                explanation: "D'après <code>EnsembleDoc1.pdf</code> : $2 \\in S \\iff \\{2\\} \\subset S \\iff \\{2\\} \\in \\mathcal{P}(S) \\iff \\{\\{2\\}\\} \\subset \\mathcal{P}(S)$. En revanche, $\\{2\\} \\subset \\mathcal{P}(S)$ signifierait que l'entier $2$ est un élément de $\\mathcal{P}(S)$, ce qui est FAUX car $\\mathcal{P}(S)$ ne contient que des ensembles !"
+            },
+            {
+                id: 2,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsembleDoc1.pdf",
+                question: "Soit $E = \\{a, b, c, d\\}$. Quel est le cardinal de $\\mathcal{P}(\\mathcal{P}(E))$ ?",
+                options: [
+                    "$16$",
+                    "$32$",
+                    "$256$",
+                    "$65\\,536$ (soit $2^{16}$)"
+                ],
+                correct: 3,
+                explanation: "Si $|E| = 4$, alors $|\\mathcal{P}(E)| = 2^4 = 16$. Par conséquent, l'ensemble des parties de $\\mathcal{P}(E)$ a pour cardinal $2^{|\\mathcal{P}(E)|} = 2^{16} = 65\\,536$."
+            },
+            {
+                id: 3,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsembleDoc2.pdf",
+                question: "En Python (vu dans <code>EnsembleDoc2.pdf</code>), quelle structure permet de créer un ensemble d'ensembles (comme $\\mathcal{P}(E)$) ?",
+                options: [
+                    "Un <code>set</code> contenant des objets <code>set</code> classiques",
+                    "Un <code>set</code> contenant des objets immuables <code>frozenset</code>",
+                    "Un dictionnaire <code>{ {} }</code>",
+                    "C'est impossible en Python"
+                ],
+                correct: 1,
+                explanation: "En Python, les éléments d'un <code>set</code> doivent être immuables (hachables). Un <code>set</code> mutuel ne peut pas appartenir à un autre <code>set</code> ; il faut utiliser <code>frozenset</code> (ensemble figé immuable) et initialiser l'ensemble vide avec <code>set()</code> (car <code>{}</code> crée un dictionnaire vide)."
+            },
+            {
+                id: 4,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsemblesDoc3.pdf",
+                question: "Soit $E = \\{1, 2, 3, 4, 5\\}$. Laquelle de ces familles constitue une <strong>partition</strong> valide de $E$ ?",
+                options: [
+                    "$\\{\\{1, 2\\}, \\{3, 4, 5\\}, \\emptyset\\}$",
+                    "$\\{\\{1, 2, 3\\}, \\{3, 4, 5\\}\\}$",
+                    "$\\{\\{1, 4\\}, \\{2\\}, \\{3, 5\\}\\}$",
+                    "$\\{\\{1, 2\\}, \\{4, 5\\}\\}$"
+                ],
+                correct: 2,
+                explanation: "D'après <code>EnsemblesDoc3.pdf</code>, une partition exige 3 axiomes : (1) aucune partie n'est vide (élimine A), (2) parties deux à deux disjointes $A_i \\cap A_j = \\emptyset$ (élimine B car $3$ est commun), (3) l'union vaut $E$ (élimine D où il manque $3$). Seule $\\{\\{1,4\\}, \\{2\\}, \\{3,5\\}\\}$ vérifie les 3 conditions."
+            },
+            {
+                id: 5,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsemblesDoc3.pdf",
+                question: "Comment s'écrit la différence ensembliste $A - B$ (ou $A \\setminus B$) à l'aide de l'intersection et du complémentaire ?",
+                options: [
+                    "$A \\cap \\overline{B}$",
+                    "$A \\cup \\overline{B}$",
+                    "$\\overline{A} \\cap B$",
+                    "$\\overline{A \\cap B}$"
+                ],
+                correct: 0,
+                explanation: "Par définition ($x \\in A \\text{ et } x \\notin B$), on a $A - B = A \\cap \\overline{B}$. C'est la transformation indispensable pour simplifier algébriquement toute expression contenant un signe $-$."
+            },
+            {
+                id: 6,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsemblesDoc3.pdf",
+                question: "Simplifier algébriquement l'expression $X = \\overline{\\overline{A} \\cup B} \\cup (A \\cap B)$ :",
+                options: [
+                    "$X = B$",
+                    "$X = A$",
+                    "$X = A \\cup B$",
+                    "$X = E$"
+                ],
+                correct: 1,
+                explanation: "Par la loi de De Morgan : $\\overline{\\overline{A} \\cup B} = \\overline{\\overline{A}} \\cap \\overline{B} = A \\cap \\overline{B}$ (involution). Puis par distributivité : $X = (A \\cap \\overline{B}) \\cup (A \\cap B) = A \\cap (\\overline{B} \\cup B) = A \\cap E = A$."
+            },
+            {
+                id: 7,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsemblesDoc3.pdf",
+                question: "Que dit Mme Bruyère à propos des diagrammes de Venn lors d'une question « Démontrer ou simplifier une égalité ensembliste » ?",
+                options: [
+                    "Un diagramme de Venn colorié suffit comme preuve complète",
+                    "Un diagramme de Venn aide à conjecturer mais ne constitue JAMAIS une démonstration (il faut citer les lois algébriques à chaque ligne)",
+                    "Les diagrammes de Venn sont interdits au brouillon",
+                    "Il faut uniquement faire une table de vérité"
+                ],
+                correct: 1,
+                explanation: "Consigne explicite de <code>EnsemblesDoc3.pdf</code> : un diagramme de Venn ne remplace jamais une preuve algébrique. Il faut détailler chaque étape en citant De Morgan, distributivité, complémentarité ou élément neutre."
+            },
+            {
+                id: 8,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsemblesDoc4.pdf",
+                question: "Quelle est la formule exacte du cardinal de $A \\cap \\overline{B} \\cap C$ (éléments appartenant à $A$ et $C$, mais pas à $B$) ?",
+                options: [
+                    "$\\text{card}(A) + \\text{card}(C) - \\text{card}(B)$",
+                    "$\\text{card}(A \\cap C) - \\text{card}(A \\cap B \\cap C)$",
+                    "$\\text{card}(A \\cup C) - \\text{card}(B)$",
+                    "$\\text{card}(A \\cap C) - \\text{card}(B)$"
+                ],
+                correct: 1,
+                explanation: "Les ensembles $(A \\cap B \\cap C)$ et $(A \\cap \\overline{B} \\cap C)$ forment une partition de $A \\cap C$. Donc $\\text{card}(A \\cap \\overline{B} \\cap C) = \\text{card}(A \\cap C) - \\text{card}(A \\cap B \\cap C)$ (<code>EnsemblesDoc4.pdf</code>)."
+            },
+            {
+                id: 9,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsemblesDoc4.pdf",
+                question: "On donne $|A|=30, |B|=25, |C|=20, |A\\cap B|=10, |A\\cap C|=8, |B\\cap C|=7$ et $|A\\cap B\\cap C|=3$. Que vaut $|A \\cup B \\cup C|$ ?",
+                options: [
+                    "$47$",
+                    "$50$",
+                    "$53$",
+                    "$75$"
+                ],
+                correct: 2,
+                explanation: "Par la formule du crible à 3 ensembles : $|A \\cup B \\cup C| = (30 + 25 + 20) - (10 + 8 + 7) + 3 = 75 - 25 + 3 = 53$."
+            },
+            {
+                id: 10,
+                part: "ENSEMBLES",
+                source: "MathsDiscretesEnsemblesDoc4.pdf",
+                question: "Si $|A| = 4$ et $|B| = 3$, quel est le cardinal du produit cartésien $|A \\times B|$ et le nombre de sous-ensembles $|\\mathcal{P}(A \\times B)|$ ?",
+                options: [
+                    "$|A \\times B| = 7$ et $|\\mathcal{P}(A \\times B)| = 2^7 = 128$",
+                    "$|A \\times B| = 12$ et $|\\mathcal{P}(A \\times B)| = 2^{12} = 4096$",
+                    "$|A \\times B| = 12$ et $|\\mathcal{P}(A \\times B)| = 24$",
+                    "$|A \\times B| = 64$ et $|\\mathcal{P}(A \\times B)| = 2^{64}$"
+                ],
+                correct: 1,
+                explanation: "$\\text{card}(A \\times B) = \\text{card}(A) \\times \\text{card}(B) = 4 \\times 3 = 12$. Puis $\\text{card}(\\mathcal{P}(A \\times B)) = 2^{12} = 4096$."
+            },
+
+            // --- PARTIE 2 : LOGIQUE PROPOSITIONNELLE & PRÉDICATS QUANTIFIÉS (10) ---
+            {
+                id: 11,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_DOCUMENT5.pdf",
+                question: "Dans quel unique cas l'implication logique $A \\rightarrow B$ est-elle <strong>FAUSSE</strong> ?",
+                options: [
+                    "Quand $A$ est faux et $B$ est faux",
+                    "Quand $A$ est faux et $B$ est vrai",
+                    "Quand $A$ est vrai et $B$ est faux",
+                    "Quand $A$ et $B$ ont des valeurs différentes"
+                ],
+                correct: 2,
+                explanation: "Par définition de la table de vérité de l'implication ($A \\rightarrow B \\equiv \\neg A \\vee B$), elle n'est fausse ($0$) que lorsque l'hypothèse $A$ est vraie ($1$) et la conclusion $B$ est fausse ($0$). Si $A$ est faux, $A \\rightarrow B$ est toujours VRAI !"
+            },
+            {
+                id: 12,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_DOCUMENT5.pdf",
+                question: "Quelle est la <strong>négation</strong> exacte de l'implication $A \\rightarrow B$ ?",
+                options: [
+                    "$\\neg A \\rightarrow \\neg B$",
+                    "$A \\rightarrow \\neg B$",
+                    "$A \\wedge \\neg B$",
+                    "$\\neg A \\vee B$"
+                ],
+                correct: 2,
+                explanation: "Attention piège majeur signalé dans <code>MD_LOGIQUE_DOCUMENT5.pdf</code> : la négation d'une implication N'EST PAS une implication ! Comme $A \\rightarrow B \\equiv \\neg A \\vee B$, par De Morgan : $\\neg(A \\rightarrow B) \\equiv \\neg(\\neg A \\vee B) \\equiv A \\wedge \\neg B$."
+            },
+            {
+                id: 13,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_DOCUMENT5.pdf",
+                question: "Soit l'énoncé : <em>« S'il pleut, alors je prends mon parapluie »</em> ($P \\rightarrow Q$). Quelle est sa <strong>contraposée</strong> (qui lui est logiquement équivalente) ?",
+                options: [
+                    "Si je prends mon parapluie, alors il pleut ($Q \\rightarrow P$)",
+                    "S'il ne pleut pas, alors je ne prends pas mon parapluie ($\\neg P \\rightarrow \\neg Q$)",
+                    "Si je ne prends pas mon parapluie, alors il ne pleut pas ($\\neg Q \\rightarrow \\neg P$)",
+                    "Il pleut et je ne prends pas mon parapluie ($P \\wedge \\neg Q$)"
+                ],
+                correct: 2,
+                explanation: "La contraposée de $P \\rightarrow Q$ est $\\neg Q \\rightarrow \\neg P$ (« Si je ne prends pas mon parapluie, alors il ne pleut pas »). Elle a exactement la même table de vérité que $P \\rightarrow Q$. La proposition $Q \\rightarrow P$ est la réciproque (non équivalente)."
+            },
+            {
+                id: 14,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_DOCUMENT5.pdf",
+                question: "Qu'est-ce qu'un ensemble de formules <strong>consistant</strong> (ou satisfaisable) selon <code>MD_LOGIQUE_DOCUMENT5.pdf</code> ?",
+                options: [
+                    "Toutes les formules sont des tautologies",
+                    "Il existe au moins une ligne de la table de vérité (une interprétation) où toutes les formules de l'ensemble sont simultanément VRAIES",
+                    "La somme des formules vaut 1",
+                    "Aucune formule ne contient de négation"
+                ],
+                correct: 1,
+                explanation: "Un ensemble de formules $\\{F_1, F_2, \\dots, F_k\\}$ est consistant s'il existe au moins une affectation des variables propositionnelles qui rend $F_1 \\wedge F_2 \\wedge \\dots \\wedge F_k$ vraie. S'il n'en existe aucune, le système est inconsistant (contradictoire)."
+            },
+            {
+                id: 15,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_DOCUMENT5.pdf",
+                question: "À quoi est logiquement équivalente la formule $A \\rightarrow (B \\rightarrow C)$ ?",
+                options: [
+                    "$(A \\rightarrow B) \\rightarrow C$",
+                    "$(A \\wedge B) \\rightarrow C$",
+                    "$(A \\vee B) \\rightarrow C$",
+                    "$A \\wedge B \\wedge C$"
+                ],
+                correct: 1,
+                explanation: "$A \\rightarrow (B \\rightarrow C) \\equiv \\neg A \\vee (\\neg B \\vee C) \\equiv (\\neg A \\vee \\neg B) \\vee C \\equiv \\neg(A \\wedge B) \\vee C \\equiv (A \\wedge B) \\rightarrow C$."
+            },
+            {
+                id: 16,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_PREDICATS.pdf",
+                question: "Soient $E(x)$ : « $x$ est étudiant » et $M(x)$ : « $x$ aime les maths ». Comment formalise-t-on : <em>« Tous les étudiants aiment les maths »</em> ?",
+                options: [
+                    "$\\forall x \\, (E(x) \\wedge M(x))$",
+                    "$\\forall x \\, (E(x) \\rightarrow M(x))$",
+                    "$\\exists x \\, (E(x) \\rightarrow M(x))$",
+                    "$\\forall x \\, (M(x) \\rightarrow E(x))$"
+                ],
+                correct: 1,
+                explanation: "Règle d'or de <code>MD_LOGIQUE_PREDICATS.pdf</code> : avec un quantificateur universel $\\forall$ restreint à une catégorie, on utilise l'<strong>implication</strong> $\\forall x (E(x) \\rightarrow M(x))$ (« Pour tout individu $x$, SI $x$ est étudiant ALORS il aime les maths »). Écrire $\\forall x (E(x) \\wedge M(x))$ voudrait dire que tout le monde dans l'univers est étudiant ET aime les maths !"
+            },
+            {
+                id: 17,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_PREDICATS.pdf",
+                question: "Avec les mêmes prédicats $E(x)$ et $M(x)$, comment formalise-t-on : <em>« Il existe un étudiant qui aime les maths »</em> ?",
+                options: [
+                    "$\\exists x \\, (E(x) \\rightarrow M(x))$",
+                    "$\\exists x \\, (E(x) \\wedge M(x))$",
+                    "$\\forall x \\, (E(x) \\wedge M(x))$",
+                    "$\\exists x \\, (E(x) \\vee M(x))$"
+                ],
+                correct: 1,
+                explanation: "Règle d'or de <code>MD_LOGIQUE_PREDICATS.pdf</code> : avec le quantificateur existentiel $\\exists$, on utilise la <strong>conjonction</strong> $\\exists x (E(x) \\wedge M(x))$ (« Il existe un individu $x$ qui est étudiant ET qui aime les maths »). Ne jamais mettre $\\rightarrow$ après $\\exists$ !"
+            },
+            {
+                id: 18,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_PREDICATS.pdf",
+                question: "Quelle est la négation formelle de $\\forall x \\, \\exists y \\, (P(x) \\rightarrow Q(x,y))$ ?",
+                options: [
+                    "$\\exists x \\, \\forall y \\, (P(x) \\wedge \\neg Q(x,y))$",
+                    "$\\exists x \\, \\forall y \\, (\\neg P(x) \\rightarrow \\neg Q(x,y))$",
+                    "$\\forall x \\, \\exists y \\, (P(x) \\wedge \\neg Q(x,y))$",
+                    "$\\exists x \\, \\exists y \\, (P(x) \\wedge \\neg Q(x,y))$"
+                ],
+                correct: 0,
+                explanation: "On inverse chaque quantificateur ($\\forall x$ devient $\\exists x$, $\\exists y$ devient $\\forall y$) et on nie l'implication $\\neg(P(x) \\rightarrow Q(x,y)) \\equiv P(x) \\wedge \\neg Q(x,y)$. Résultat : $\\exists x \\, \\forall y \\, (P(x) \\wedge \\neg Q(x,y))$."
+            },
+            {
+                id: 19,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_PREDICATS.pdf",
+                question: "Sur $\\mathbb{Z}$, que valent les assertions $A_1 : (\\forall x \\in \\mathbb{Z}, \\exists y \\in \\mathbb{Z}, x + y = 0)$ et $A_2 : (\\exists y \\in \\mathbb{Z}, \\forall x \\in \\mathbb{Z}, x + y = 0)$ ?",
+                options: [
+                    "$A_1$ est Vraie et $A_2$ est Vraie",
+                    "$A_1$ est Vraie et $A_2$ est Fausse",
+                    "$A_1$ est Fausse et $A_2$ est Vraie",
+                    "$A_1$ est Fausse et $A_2$ est Fausse"
+                ],
+                correct: 1,
+                explanation: "Dans $A_1$, $y$ dépend de $x$ : pour tout $x$, on choisit $y = -x$, donc $A_1$ est VRAIE. Dans $A_2$, le même $y$ devrait marcher pour tous les entiers $x$ simultanément, ce qui est impossible : $A_2$ est FAUSSE. On a toujours $\\exists y \\forall x P(x,y) \\implies \\forall x \\exists y P(x,y)$, mais la réciproque est fausse !"
+            },
+            {
+                id: 20,
+                part: "LOGIQUE",
+                source: "MD_LOGIQUE_PREDICATS.pdf",
+                question: "Dans l'expression $\\forall x \\, (P(x, y) \\rightarrow \\exists z \\, Q(x, z))$, quelle est la nature des variables $x, y, z$ ?",
+                options: [
+                    "$x, y, z$ sont toutes liées (muettes)",
+                    "$x$ et $z$ sont liées (quantifiées), tandis que $y$ est une variable libre",
+                    "$y$ est liée et $x, z$ sont libres",
+                    "$x$ est libre et $y, z$ sont liées"
+                ],
+                correct: 1,
+                explanation: "$x$ est quantifiée par $\\forall x$ et $z$ par $\\exists z$ : ce sont des variables liées (muettes). En revanche, $y$ n'est sous la portée d'aucun quantificateur : c'est une variable libre."
+            },
+
+            // --- PARTIE 3 : ARITHMÉTIQUE, EUCLIDE ÉTENDU, BÉZOUT & Z/nZ (10) ---
+            {
+                id: 21,
+                part: "ARITHMETIQUE",
+                source: "Doc1-Divisioneuclidienne.pdf",
+                question: "Quel est le couple $(q, r)$ (quotient et reste) de la division euclidienne de $a = -58$ par $b = 7$ ?",
+                options: [
+                    "$q = -8$ et $r = -2$",
+                    "$q = -9$ et $r = 5$",
+                    "$q = -8$ et $r = 2$",
+                    "$q = 8$ et $r = -2$"
+                ],
+                correct: 1,
+                explanation: "Exemple officiel de <code>Doc1-Divisioneuclidienne.pdf</code> : Le reste $r$ doit impérativement vérifier $0 \\le r < |b|$ (donc $0 \\le r < 7$). Comme $-58 = 7 \\times (-8) - 2 = 7 \\times (-9) + 5$, le quotient est $q = -9$ et le reste est $r = 5$."
+            },
+            {
+                id: 22,
+                part: "ARITHMETIQUE",
+                source: "Doc3-Nombrespremiers-PGCD.pdf",
+                question: "Soit $n = 600 = 2^3 \\times 3^1 \\times 5^2$. Que vaut la valuation $2$-adique $v_2(600)$ et quel est le nombre total de diviseurs positifs de $600$ ?",
+                options: [
+                    "$v_2(600) = 3$ et $600$ possède $6$ diviseurs",
+                    "$v_2(600) = 3$ et $600$ possède $(3+1)(1+1)(2+1) = 24$ diviseurs",
+                    "$v_2(600) = 8$ et $600$ possède $12$ diviseurs",
+                    "$v_2(600) = 2$ et $600$ possède $18$ diviseurs"
+                ],
+                correct: 1,
+                explanation: "D'après <code>Doc3-Nombrespremiers-PGCD.pdf</code> : la valuation $p$-adique $v_p(n)$ est l'exposant de $p$ dans la décomposition en facteurs premiers, donc $v_2(600) = 3$. Le nombre de diviseurs positifs est $\\prod (k_i + 1) = (3+1)(1+1)(2+1) = 4 \\times 2 \\times 3 = 24$."
+            },
+            {
+                id: 23,
+                part: "ARITHMETIQUE",
+                source: "Doc4-Euclideetendu.pdf",
+                question: "Dans le tableau de l'algorithme d'Euclide étendu de Mme Bruyère (<code>Doc4</code>), avec $u_0 = 1, u_1 = 0$ et $v_0 = 0, v_1 = 1$, quelle est la formule de récurrence à l'étape $n$ (où $r_n = r_{n-2} - q_n r_{n-1}$) ?",
+                options: [
+                    "$u_n = u_{n-2} + q_n u_{n-1}$",
+                    "$u_n = u_{n-2} - q_n u_{n-1}$ et $v_n = v_{n-2} - q_n v_{n-1}$",
+                    "$u_n = q_n u_{n-1} - u_{n-2}$",
+                    "$u_n = u_{n-1} - q_n u_{n-2}$"
+                ],
+                correct: 1,
+                explanation: "Formule fondamentale de <code>Doc4-Euclideetendu.pdf</code> : puisque $r_n = r_{n-2} - q_n r_{n-1}$, par linéarité les suites $(u_n)$ et $(v_n)$ vérifient exactement la même relation : $u_n = u_{n-2} - q_n u_{n-1}$ et $v_n = v_{n-2} - q_n v_{n-1}$."
+            },
+            {
+                id: 24,
+                part: "ARITHMETIQUE",
+                source: "Doc4-Euclideetendu.pdf",
+                question: "Pour $a = 963$ et $b = 657$ (exemple de <code>Doc4</code>), que donne l'algorithme d'Euclide étendu ?",
+                options: [
+                    "$\\text{pgcd}(963, 657) = 9$ avec $963 \\times (-15) + 657 \\times 22 = 9$",
+                    "$\\text{pgcd}(963, 657) = 1$ avec $963 \\times 22 - 657 \\times 15 = 1$",
+                    "$\\text{pgcd}(963, 657) = 3$ avec $963 \\times (-5) + 657 \\times 7 = 3$",
+                    "$\\text{pgcd}(963, 657) = 9$ avec $963 \\times 15 - 657 \\times 22 = 9$"
+                ],
+                correct: 0,
+                explanation: "Divisions : $963 = 657 \\times 1 + 306$ ; $657 = 306 \\times 2 + 45$ ; $306 = 45 \\times 6 + 36$ ; $45 = 36 \\times 1 + 9$ ; $36 = 9 \\times 4 + 0$. Le PGCD est $9$, et le tableau donne $u = -15, v = 22$ : $963 \\times (-15) + 657 \\times 22 = -14445 + 14454 = 9$."
+            },
+            {
+                id: 25,
+                part: "ARITHMETIQUE",
+                source: "Doc4-Euclideetendu.pdf",
+                question: "Attention au sens du <strong>Théorème de Bézout</strong> (piège souligné dans <code>Doc4</code>) : si l'on trouve $u, v \\in \\mathbb{Z}$ tels que $au + bv = 3$, que peut-on conclure sur $\\text{pgcd}(a, b)$ ?",
+                options: [
+                    "On a obligatoirement $\\text{pgcd}(a, b) = 3$",
+                    "L'équivalence n'est vraie QUE pour $d = 1$ ! Pour $au + bv = 3$, on sait seulement que $\\text{pgcd}(a, b)$ divise $3$ (donc vaut $1$ ou $3$)",
+                    "$\\text{pgcd}(a, b)$ est un multiple de $3$",
+                    "$a$ et $b$ sont premiers entre eux"
+                ],
+                correct: 1,
+                explanation: "Piège classique de Mme Bruyère (<code>Doc4</code>) : $\\exists u, v, au + bv = 1 \\iff \\text{pgcd}(a,b) = 1$. Mais pour $d > 1$, $\\text{pgcd}(a,b) = d \\implies \\exists u, v, au+bv=d$ n'est PAS une équivalence (ex: $2 \\times 1 + 1 \\times 1 = 3$ alors que $\\text{pgcd}(2,1) = 1 \\neq 3$). On sait seulement que $\\text{pgcd}(a,b) \\mid d$."
+            },
+            {
+                id: 26,
+                part: "ARITHMETIQUE",
+                source: "Doc4-Euclideetendu.pdf",
+                question: "Que stipule le <strong>Théorème de Gauss</strong> (<code>Doc4</code>) ?",
+                options: [
+                    "Si $a \\mid b$ et $b \\mid c$, alors $a \\mid c$",
+                    "Si $a$ divise le produit $bc$ et si $\\text{pgcd}(a, b) = 1$, alors $a$ divise $c$",
+                    "Si $a$ divise $b + c$, alors $a$ divise $b$ et $a$ divise $c$",
+                    "Tout entier supérieur à 2 est produit de nombres premiers"
+                ],
+                correct: 1,
+                explanation: "Théorème de Gauss : $(a \\mid bc \\text{ et } \\text{pgcd}(a,b) = 1) \\implies a \\mid c$. L'hypothèse $\\text{pgcd}(a,b) = 1$ est indispensable (ex: $6 \\mid 4 \\times 3$, mais $6 \\nmid 4$ et $6 \\nmid 3$)."
+            },
+            {
+                id: 27,
+                part: "ARITHMETIQUE",
+                source: "Doc5-Inversbilite.pdf",
+                question: "À quelle condition la classe de $p$ est-elle inversible dans $\\mathbb{Z}/n\mathbb{Z}$, et quel est l'inverse de $9$ dans $\\mathbb{Z}/25\mathbb{Z}$ ?",
+                options: [
+                    "Si $p < n$ ; l'inverse de $9$ est $3$",
+                    "Si $\\text{pgcd}(p, n) = 1$ ; comme $25 \\times (-4) + 9 \\times 11 = -1$ (soit $25 \\times 4 + 9 \\times (-11) = 1$), l'inverse de $9$ modulo $25$ est $-11 \\equiv 14 \\pmod{25}$",
+                    "Si $p$ est premier ; l'inverse de $9$ n'existe pas",
+                    "Si $\\text{pgcd}(p, n) = 1$ ; l'inverse de $9$ modulo $25$ est $11$"
+                ],
+                correct: 1,
+                explanation: "Dans $\\mathbb{Z}/25\\mathbb{Z}$, $9 \\times 14 = 126 = 25 \\times 5 + 1 \\equiv 1 \\pmod{25}$. Par Bézout : $25 = 9 \\times 2 + 7$, $9 = 7 \\times 1 + 2$, $7 = 2 \\times 3 + 1$, ce qui donne $25 \\times 4 + 9 \\times (-11) = 1$. Modulo $25$, $-11 \\equiv 14 \\pmod{25}$."
+            },
+            {
+                id: 28,
+                part: "ARITHMETIQUE",
+                source: "Doc5-Inversbilite.pdf",
+                question: "Combien y a-t-il d'éléments inversibles dans $\\mathbb{Z}/25\\mathbb{Z}$ et dans $\\mathbb{Z}/600\\mathbb{Z}$ grâce à l'indicatrice d'Euler $\\varphi(n)$ ?",
+                options: [
+                    "$\\varphi(25) = 24$ et $\\varphi(600) = 599$",
+                    "$\\varphi(25) = (5-1)\\times 5^1 = 20$ et $\\varphi(600) = 160$",
+                    "$\\varphi(25) = 5$ et $\\varphi(600) = 24$",
+                    "$\\varphi(25) = 20$ et $\\varphi(600) = 200$"
+                ],
+                correct: 1,
+                explanation: "D'après <code>Doc5-Inversbilite.pdf</code> : $\\varphi(25) = \\varphi(5^2) = (5-1) \\times 5^{2-1} = 20$. Et pour $600 = 2^3 \\times 3^1 \\times 5^2$, $\\varphi(600) = (2-1)2^2 \\times (3-1)3^0 \\times (5-1)5^1 = 4 \\times 2 \\times 20 = 160$."
+            },
+            {
+                id: 29,
+                part: "ARITHMETIQUE",
+                source: "Doc5-Inversbilite.pdf",
+                question: "Résoudre l'équation $15x \\equiv 10 \\pmod{35}$ dans $\\mathbb{Z}$ (exemple officiel de <code>Doc5</code>) :",
+                options: [
+                    "Aucune solution car $\\text{pgcd}(15, 35) = 5 \\neq 1$",
+                    "On divise par $\\text{pgcd}(15, 35) = 5$ : $3x \\equiv 2 \\pmod 7$. Comme $3^{-1} \\equiv 5 \\pmod 7$, on obtient $x \\equiv 10 \\equiv 3 \\pmod 7$ (soit $x \\in \\{3, 10, 17, 24, 31\\}$ modulo $35$)",
+                    "$x \\equiv 3 \\pmod{35}$ uniquement",
+                    "$x \\equiv 2 \\pmod 5$"
+                ],
+                correct: 1,
+                explanation: "Méthode de <code>Doc5</code> : $\\text{pgcd}(15, 35) = 5$. Comme $5$ divise $10$, l'équation admet des solutions ! En divisant toute la congruence (y compris le module !) par $5$, on a $15x \\equiv 10 \\pmod{35} \\iff 3x \\equiv 2 \\pmod 7$. L'inverse de $3$ mod $7$ est $5$ ($3 \\times 5 = 15 \\equiv 1 \\pmod 7$), donc $x \\equiv 5 \\times 2 = 10 \\equiv 3 \\pmod 7$."
+            },
+            {
+                id: 30,
+                part: "ARITHMETIQUE",
+                source: "Doc5-Inversbilite.pdf",
+                question: "Pourquoi l'équation $15x \\equiv 12 \\pmod{35}$ n'admet-elle <strong>aucune solution</strong> dans $\\mathbb{Z}$ ?",
+                options: [
+                    "Parce que $12$ est pair et $15$ est impair",
+                    "Parce que $\\text{pgcd}(15, 35) = 5$ et $5$ ne divise pas $12$ (si $15x - 35k = 12$, alors $5$ diviserait le membre de gauche sans diviser $12$)",
+                    "Parce que $35$ n'est pas un nombre premier",
+                    "Parce que $12 < 15$"
+                ],
+                correct: 1,
+                explanation: "$15x \\equiv 12 \\pmod{35} \\iff \\exists k \\in \\mathbb{Z}, 15x + 35k = 12$. Or $\\text{pgcd}(15, 35) = 5$ divise $15x + 35k$, mais $5 \\nmid 12$. C'est donc impossible : $S = \\emptyset$."
+            }
+        ];
+
+        let currentFilter = 'ALL';
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            const filtered = currentFilter === 'ALL'
+                ? QUIZ_QUESTIONS
+                : QUIZ_QUESTIONS.filter(q => q.part === currentFilter);
+
+            container.innerHTML = filtered.map((q, idx) => {
+                const answered = userAnswers[q.id];
+                const isAnswered = answered !== undefined;
+                const badgeColor = q.part === 'ENSEMBLES' ? 'Partie 1 • Ensembles & Cardinaux' :
+                                  (q.part === 'LOGIQUE' ? 'Partie 2 • Logique & Prédicats' : 'Partie 3 • Arithmétique & Z/nZ');
+
+                const optionsHtml = q.options.map((opt, oIdx) => {
+                    let btnStyle = "border-slate-200 bg-slate-50/70 hover:bg-slate-100 text-slate-800";
+                    let iconHtml = `<span class="w-6 h-6 rounded-lg border border-slate-300 bg-white flex items-center justify-center text-xs font-mono font-bold shrink-0">${String.fromCharCode(65 + oIdx)}</span>`;
+                    if (isAnswered) {
+                        if (oIdx === q.correct) {
+                            btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold";
+                            iconHtml = `<span class="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>`;
+                        } else if (oIdx === answered && answered !== q.correct) {
+                            btnStyle = "border-rose-400 bg-rose-50 text-rose-950";
+                            iconHtml = `<span class="w-6 h-6 rounded-lg bg-rose-600 text-white flex items-center justify-center text-xs font-bold shrink-0">✗</span>`;
+                        } else {
+                            btnStyle = "border-slate-200 bg-white text-slate-400 opacity-75";
+                        }
+                    }
+                    return `<button onclick="answerQuestion(${q.id}, ${oIdx})" ${isAnswered ? 'disabled' : ''} class="w-full text-left p-3.5 rounded-xl border ${btnStyle} transition flex items-start gap-3 text-xs sm:text-sm">
+                        ${iconHtml}
+                        <span class="pt-0.5 leading-relaxed">${opt}</span>
+                    </button>`;
+                }).join('');
+
+                const explanationHtml = isAnswered ? `
+                    <div class="mt-4 p-4 rounded-xl border ${answered === q.correct ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950' : 'bg-amber-50/80 border-amber-200 text-slate-900'} text-xs sm:text-sm space-y-1.5">
+                        <div class="font-bold flex items-center gap-2">
+                            <span>${answered === q.correct ? '✅ Bonne réponse !' : '⚠️ Attention au piège — Correction détaillée :'}</span>
+                            <span class="px-2 py-0.5 rounded bg-white/80 border border-slate-200 font-mono text-[10px] text-slate-600">Source : ${q.source}</span>
+                        </div>
+                        <p class="leading-relaxed">${q.explanation}</p>
+                    </div>
+                ` : '';
+
+                return `
+                <div class="glass-card rounded-2xl p-5 sm:p-6 border border-slate-200 bg-white" style="border-left: 5px solid #B85042;">
+                    <div class="flex items-center justify-between flex-wrap gap-2 mb-2.5">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-black font-mono" style="background-color: #F5EBE4; color: #B85042; border: 1px solid #E6BFB8;">
+                                QUESTION #${q.id}
+                            </span>
+                            <span class="text-xs font-bold text-slate-500">${badgeColor}</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-slate-400">${q.source}</span>
+                    </div>
+                    <div class="text-sm sm:text-base font-bold text-slate-900 mb-4 leading-relaxed">
+                        ${q.question}
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                        ${optionsHtml}
+                    </div>
+                    ${explanationHtml}
+                </div>`;
+            }).join('');
+
+            updateScoreDisplay();
+            renderKaTeXIn(container);
+        }
+
+        function answerQuestion(qId, optIdx) {
+            if (userAnswers[qId] !== undefined) return;
+            userAnswers[qId] = optIdx;
+            renderQuiz();
+        }
+
+        function updateScoreDisplay() {
+            const answeredIds = Object.keys(userAnswers).map(Number);
+            let correctCount = 0;
+            answeredIds.forEach(id => {
+                const q = QUIZ_QUESTIONS.find(x => x.id === id);
+                if (q && userAnswers[id] === q.correct) correctCount++;
+            });
+            document.getElementById('qcmScore').textContent = correctCount;
+            document.getElementById('qcmTotalAnswered').textContent = answeredIds.length;
+            document.getElementById('qcmNote20').textContent = answeredIds.length > 0
+                ? ((correctCount / answeredIds.length) * 20).toFixed(1)
+                : '--';
+        }
+
+        function filterQuiz(part) {
+            currentFilter = part;
+            ['ALL', 'ENSEMBLES', 'LOGIQUE', 'ARITHMETIQUE'].forEach(p => {
+                const btn = document.getElementById('qFilter-' + p);
+                if (p === part) {
+                    btn.style.backgroundColor = '#B85042';
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-white transition";
+                } else {
+                    btn.style.backgroundColor = '';
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+                }
+            });
+            renderQuiz();
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            renderQuiz();
+        }
+
+        // =========================================================================
+        // OUTIL 2 : TABLEAU D'EUCLIDE ÉTENDU & SOLVEUR MODULAIRE (DOC4 & DOC5)
+        // =========================================================================
+        function setEuclidePreset(a, b) {
+            document.getElementById('eucA').value = a;
+            document.getElementById('eucB').value = b;
+            computeEuclide(false);
+        }
+
+        function computeEuclide(trainingMode) {
+            let a = Math.abs(parseInt(document.getElementById('eucA').value, 10) || 963);
+            let b = Math.abs(parseInt(document.getElementById('eucB').value, 10) || 657);
+            if (b === 0) b = 1;
+
+            const rows = [
+                { step: 0, div: "Initialisation ligne 0", r: a, q: "—", u: 1, v: 0, formulaU: "u_0 = 1", formulaV: "v_0 = 0" },
+                { step: 1, div: "Initialisation ligne 1", r: b, q: "—", u: 0, v: 1, formulaU: "u_1 = 0", formulaV: "v_1 = 1" }
+            ];
+
+            let r_prev2 = a, r_prev1 = b;
+            let u_prev2 = 1, u_prev1 = 0;
+            let v_prev2 = 0, v_prev1 = 1;
+            let step = 2;
+
+            while (r_prev1 !== 0 && step < 50) {
+                const q = Math.floor(r_prev2 / r_prev1);
+                const r = r_prev2 % r_prev1;
+                if (r === 0) {
+                    rows.push({
+                        step: step,
+                        div: `${r_prev2} = ${r_prev1} \\times ${q} + 0`,
+                        r: 0,
+                        q: q,
+                        u: "—",
+                        v: "—",
+                        formulaU: "Fin (reste nul)",
+                        formulaV: "PGCD = dernier reste non nul"
+                    });
+                    break;
+                }
+                const u = u_prev2 - q * u_prev1;
+                const v = v_prev2 - q * v_prev1;
+                rows.push({
+                    step: step,
+                    div: `${r_prev2} = ${r_prev1} \\times ${q} + ${r}`,
+                    r: r,
+                    q: q,
+                    u: u,
+                    v: v,
+                    formulaU: `${u_prev2} - (${q}) \\times (${u_prev1}) = ${u}`,
+                    formulaV: `${v_prev2} - (${q}) \\times (${v_prev1}) = ${v}`
+                });
+                r_prev2 = r_prev1; r_prev1 = r;
+                u_prev2 = u_prev1; u_prev1 = u;
+                v_prev2 = v_prev1; v_prev1 = v;
+                step++;
+            }
+
+            const pgcd = r_prev2;
+            const bezoutU = u_prev2;
+            const bezoutV = v_prev2;
+
+            let tableHtml = `
+            <div class="overflow-x-auto border border-slate-200 rounded-2xl">
+                <table class="w-full text-xs text-left">
+                    <thead class="bg-slate-50 text-slate-800 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-3">Étape $i$</th>
+                            <th class="p-3">Division Euclidienne ($r_{i-2} = r_{i-1} q_i + r_i$)</th>
+                            <th class="p-3">Quotient $q_i$</th>
+                            <th class="p-3">Reste $r_i$</th>
+                            <th class="p-3">$u_i = u_{i-2} - q_i u_{i-1}$</th>
+                            <th class="p-3">$v_i = v_{i-2} - q_i v_{i-1}$</th>
+                            <th class="p-3">Vérification $a u_i + b v_i = r_i$</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${rows.map((row, idx) => {
+                            const isPgcdRow = (idx === rows.length - 2) || (rows.length === 2 && idx === 1);
+                            const rowBg = isPgcdRow ? 'style="background-color: #F5EBE4;" class="font-bold"' : '';
+                            const hideUV = trainingMode && row.step >= 2 && row.r !== 0;
+                            const cellU = hideUV
+                                ? `<button onclick="this.outerHTML='<span class=\\'font-mono font-bold text-slate-900\\'>${row.u} <span class=\\'text-[10px] text-slate-500\\'>(${row.formulaU})</span></span>'" class="px-2 py-1 rounded bg-amber-100 text-amber-900 font-bold text-[11px]">👁️ Révéler u_${row.step}</button>`
+                                : `<span class="font-mono font-bold">${row.u}</span> <span class="text-[10px] text-slate-500 ml-1">${row.step >= 2 && row.r !== 0 ? `(${row.formulaU})` : ''}</span>`;
+                            const cellV = hideUV
+                                ? `<button onclick="this.outerHTML='<span class=\\'font-mono font-bold text-slate-900\\'>${row.v} <span class=\\'text-[10px] text-slate-500\\'>(${row.formulaV})</span></span>'" class="px-2 py-1 rounded bg-amber-100 text-amber-900 font-bold text-[11px]">👁️ Révéler v_${row.step}</button>`
+                                : `<span class="font-mono font-bold">${row.v}</span> <span class="text-[10px] text-slate-500 ml-1">${row.step >= 2 && row.r !== 0 ? `(${row.formulaV})` : ''}</span>`;
+                            const verif = row.r === 0 ? '—' : `$${a}\\times(${row.u}) + ${b}\\times(${row.v}) = ${row.r}$`;
+                            return `<tr ${rowBg}>
+                                <td class="p-3 font-mono font-bold">${row.step}</td>
+                                <td class="p-3 font-mono">$${row.div}$</td>
+                                <td class="p-3 font-mono font-bold">${row.q}</td>
+                                <td class="p-3 font-mono font-bold ${isPgcdRow ? 'text-rose-800 underline' : ''}">${row.r} ${isPgcdRow ? ' (PGCD)' : ''}</td>
+                                <td class="p-3">${cellU}</td>
+                                <td class="p-3">${cellV}</td>
+                                <td class="p-3 font-mono text-[11px]">${hideUV ? '<em>Masqué</em>' : verif}</td>
+                            </tr>`;
+                        }).join('')}
+                    </tbody>
+                </table>
+            </div>`;
+
+            let invHtml = '';
+            if (pgcd === 1) {
+                const invModA = ((bezoutV % a) + a) % a;
+                invHtml = `
+                <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-xs sm:text-sm space-y-1">
+                    <div class="font-bold">✅ Inversibilité dans $\\mathbb{Z}/${a}\\mathbb{Z}$ (Doc5) :</div>
+                    <p>Comme $\\text{pgcd}(${a}, ${b}) = 1$, la classe de $${b}$ est <strong>inversible</strong> modulo $${a}$.</p>
+                    <p>En passant l'égalité de Bézout ($${a} \\times (${bezoutU}) + ${b} \\times (${bezoutV}) = 1$) modulo $${a}$, on obtient :</p>
+                    <p class="font-mono font-bold">$${b} \\times (${bezoutV}) \\equiv 1 \\pmod{${a}} \\implies ${b}^{-1} \\equiv ${bezoutV} \\equiv ${invModA} \\pmod{${a}}$</p>
+                </div>`;
+            } else {
+                invHtml = `
+                <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 text-xs sm:text-sm">
+                    <strong>⚠️ Non-inversibilité dans $\\mathbb{Z}/${a}\\mathbb{Z}$ :</strong> Comme $\\text{pgcd}(${a}, ${b}) = ${pgcd} \\neq 1$, la classe de $${b}$ <strong>n'est pas inversible</strong> dans $\\mathbb{Z}/${a}\\mathbb{Z}$.
+                </div>`;
+            }
+
+            const out = document.getElementById('euclideOutput');
+            out.innerHTML = `
+                ${tableHtml}
+                <div class="p-4 rounded-xl border text-xs sm:text-sm space-y-1" style="background-color: #F5EBE4; border-color: #E6BFB8; color: #0F172A;">
+                    <div class="font-extrabold" style="color: #B85042;">📌 Conclusion & Identité de Bézout à encadrer sur ta copie :</div>
+                    <p>$$\\text{pgcd}(${a}, ${b}) = ${pgcd} \\qquad \\text{et} \\qquad ${a} \\times (${bezoutU}) + ${b} \\times (${bezoutV}) = ${pgcd}$$</p>
+                </div>
+                ${invHtml}
+            `;
+            renderKaTeXIn(out);
+        }
+
+        function setModEqPreset(a, b, n) {
+            document.getElementById('modA').value = a;
+            document.getElementById('modB').value = b;
+            document.getElementById('modN').value = n;
+            solveModularEquation();
+        }
+
+        function egcd(a, b) {
+            let u0 = 1, u1 = 0, v0 = 0, v1 = 1;
+            let r0 = a, r1 = b;
+            while (r1 !== 0) {
+                const q = Math.floor(r0 / r1);
+                const r = r0 % r1;
+                const u = u0 - q * u1;
+                const v = v0 - q * v1;
+                r0 = r1; r1 = r;
+                u0 = u1; u1 = u;
+                v0 = v1; v1 = v;
+            }
+            return { d: r0, u: u0, v: v0 };
+        }
+
+        function solveModularEquation() {
+            const aRaw = parseInt(document.getElementById('modA').value, 10) || 0;
+            const bRaw = parseInt(document.getElementById('modB').value, 10) || 0;
+            const n = Math.max(2, Math.abs(parseInt(document.getElementById('modN').value, 10) || 35));
+            const a = ((aRaw % n) + n) % n;
+            const b = ((bRaw % n) + n) % n;
+
+            const { d } = egcd(n, a);
+            const out = document.getElementById('modEqOutput');
+
+            if (b % d !== 0) {
+                out.innerHTML = `
+                <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-950 text-xs sm:text-sm space-y-1.5">
+                    <div class="font-bold">❌ Aucune solution dans $\\mathbb{Z}/${n}\\mathbb{Z}$ ($S = \\emptyset$) :</div>
+                    <p>Étape 1 : On calcule $\\text{pgcd}(${a}, ${n}) = ${d}$.</p>
+                    <p>Étape 2 : Or $${d}$ <strong>ne divise pas</strong> le second membre $${b}$ ($${b} \\div ${d}$ ne tombe pas juste). D'après le cours (<code>Doc5</code>), l'équation $${aRaw}x \\equiv ${bRaw} \\pmod{${n}}$ n'admet aucune solution.</p>
+                </div>`;
+                renderKaTeXIn(out);
+                return;
+            }
+
+            const aPrime = a / d;
+            const bPrime = b / d;
+            const nPrime = n / d;
+            const bez = egcd(nPrime, aPrime);
+            const invA = ((bez.v % nPrime) + nPrime) % nPrime;
+            const x0 = (invA * bPrime) % nPrime;
+
+            const allSols = [];
+            for (let k = 0; k < d; k++) {
+                allSols.push(x0 + k * nPrime);
+            }
+
+            out.innerHTML = `
+            <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 text-xs sm:text-sm space-y-2.5">
+                <div class="font-extrabold text-slate-900">✅ Rédaction complète type Partiel (Méthode <code>Doc5-Inversbilite.pdf</code>) :</div>
+                <p><strong>Étape 1 (PGCD & Condition d'existence) :</strong> On calcule $d = \\text{pgcd}(${a}, ${n}) = ${d}$. Comme $${d}$ divise $${b}$, l'équation admet des solutions !</p>
+                <p><strong>Étape 2 (Simplification par $d = ${d}$) :</strong> En divisant l'équation <em>et le modulo</em> par $${d}$, on obtient l'équation équivalente :
+                $$${aPrime}x \\equiv ${bPrime} \\pmod{${nPrime}} \\qquad \\text{avec } \\text{pgcd}(${aPrime}, ${nPrime}) = 1$$</p>
+                <p><strong>Étape 3 (Inverse modulaire via Bézout) :</strong> Par l'algorithme d'Euclide étendu entre $${nPrime}$ et $${aPrime}$, on a $${nPrime}\\times(${bez.u}) + ${aPrime}\\times(${bez.v}) = 1$, donc l'inverse de $${aPrime}$ modulo $${nPrime}$ est $${invA}$.</p>
+                <p><strong>Étape 4 (Multiplication par l'inverse) :</strong>
+                $$x \\equiv ${invA} \\times ${bPrime} = ${invA * bPrime} \\equiv ${x0} \\pmod{${nPrime}}$$
+                Dans $\\mathbb{Z}$, les solutions sont $x = ${x0} + ${nPrime}k \\; (k \\in \\mathbb{Z})$. Dans $\\mathbb{Z}/${n}\\mathbb{Z}$, cela donne exactement $${d}$ classes solutions : $\\mathcal{S} = \\{${allSols.join(', ')}\\}$.</p>
+            </div>`;
+            renderKaTeXIn(out);
+        }
+
+        // =========================================================================
+        // OUTIL 3 : DIVISION EUCLIDIENNE DANS Z & FACTEURS PREMIERS
+        // =========================================================================
+        function setDivPreset(a, b) {
+            document.getElementById('divA').value = a;
+            document.getElementById('divB').value = b;
+            computeDivZ();
+        }
+
+        function randomNegativeDiv() {
+            const b = Math.floor(Math.random() * 11) + 3;
+            const a = -(Math.floor(Math.random() * 90) + 15);
+            setDivPreset(a, b);
+        }
+
+        function computeDivZ() {
+            const a = parseInt(document.getElementById('divA').value, 10) || 0;
+            let b = parseInt(document.getElementById('divB').value, 10) || 7;
+            if (b === 0) b = 7;
+            const absB = Math.abs(b);
+            const r = ((a % absB) + absB) % absB;
+            const q = (a - r) / b;
+
+            const naiveQ = Math.trunc(a / b);
+            const naiveR = a - b * naiveQ;
+
+            const out = document.getElementById('divZOutput');
+            out.innerHTML = `
+            <div class="p-4 rounded-xl border space-y-2 text-xs sm:text-sm" style="background-color: #F5EBE4; border-color: #E6BFB8;">
+                <div class="font-extrabold" style="color: #B85042;">Résultat Officiel ($a = bq + r$ avec $0 \\le r < |b|$) :</div>
+                <p class="font-mono text-base font-bold text-slate-900">$$${a} = ${b} \\times (${q}) + ${r} \\qquad \\text{avec } 0 \\le ${r} < ${absB}$$</p>
+                <p>Quotient : <strong>$q = ${q}$</strong> • Reste positif : <strong>$r = ${r}$</strong>.</p>
+                ${a < 0 && naiveR < 0 ? `<p class="text-rose-800 text-xs pt-1 border-t border-rose-200">⚠️ <strong>Piège évité :</strong> La calculatrice donne naïvement $${a} = ${b} \\times (${naiveQ}) + (${naiveR})$, mais un reste négatif ($${naiveR} < 0$) vaut <strong>0 point</strong> au partiel ! Il faut retrancher $1$ au quotient (si $b>0$) pour ajouter $${absB}$ au reste.</p>` : ''}
+            </div>`;
+            renderKaTeXIn(out);
+        }
+
+        function setPrimePreset(n) {
+            document.getElementById('primeN').value = n;
+            computePrimeDecomp();
+        }
+
+        function computePrimeDecomp() {
+            let n = Math.max(2, Math.min(10000000, Math.abs(parseInt(document.getElementById('primeN').value, 10) || 600)));
+            const origN = n;
+            const factors = [];
+            let d = 2;
+            while (d * d <= n) {
+                if (n % d === 0) {
+                    let count = 0;
+                    while (n % d === 0) {
+                        count++;
+                        n = Math.floor(n / d);
+                    }
+                    factors.push({ p: d, k: count });
+                }
+                d = (d === 2) ? 3 : d + 2;
+            }
+            if (n > 1) factors.push({ p: n, k: 1 });
+
+            const decompLatex = factors.map(f => `${f.p}^{${f.k}}`).join(' \\times ');
+            const valuations = factors.map(f => `$v_{${f.p}}(${origN}) = ${f.k}$`).join(', ');
+            const nbDivProd = factors.map(f => `(${f.k}+1)`).join(' \\times ');
+            const nbDiv = factors.reduce((acc, f) => acc * (f.k + 1), 1);
+            const phiProd = factors.map(f => `(${f.p}-1)\\times ${f.p}^{${f.k-1}}`).join(' \\times ');
+            const phiVal = factors.reduce((acc, f) => acc * (f.p - 1) * Math.pow(f.p, f.k - 1), 1);
+
+            const out = document.getElementById('primeOutput');
+            out.innerHTML = `
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs sm:text-sm">
+                <p><strong>1. Décomposition en facteurs premiers :</strong> $$${origN} = ${decompLatex}$$</p>
+                <p><strong>2. Valuations $p$-adiques (<code>Doc3</code>) :</strong> ${valuations} (et $v_p(${origN}) = 0$ pour tout autre premier $p$).</p>
+                <p><strong>3. Nombre exact de diviseurs positifs (<code>Doc3</code>) :</strong> $$\\prod (k_i + 1) = ${nbDivProd} = \\mathbf{${nbDiv} \\text{ diviseurs}}$$</p>
+                <p><strong>4. Indicatrice d'Euler $\\varphi(${origN})$ (<code>Doc5</code> — nombre d'inversibles dans $\\mathbb{Z}/${origN}\\mathbb{Z}$) :</strong> $$\\varphi(${origN}) = ${phiProd} = \\mathbf{${phiVal}}$$</p>
+            </div>`;
+            renderKaTeXIn(out);
+        }
+
+        // =========================================================================
+        // OUTIL 4 : CRIBLE DE POINCARÉ À 3 ENSEMBLES (DOC4 ENSEMBLES)
+        // =========================================================================
+        function computeCrible3() {
+            const E = parseInt(document.getElementById('crE').value, 10) || 100;
+            const A = parseInt(document.getElementById('crA').value, 10) || 0;
+            const B = parseInt(document.getElementById('crB').value, 10) || 0;
+            const C = parseInt(document.getElementById('crC').value, 10) || 0;
+            const AB = parseInt(document.getElementById('crAB').value, 10) || 0;
+            const AC = parseInt(document.getElementById('crAC').value, 10) || 0;
+            const BC = parseInt(document.getElementById('crBC').value, 10) || 0;
+            const ABC = parseInt(document.getElementById('crABC').value, 10) || 0;
+
+            const unionABC = A + B + C - (AB + AC + BC) + ABC;
+            const noneABC = E - unionABC;
+            const A_notB_C = AC - ABC;
+            const A_B_notC = AB - ABC;
+            const notA_B_C = BC - ABC;
+            const onlyA = A - AB - AC + ABC;
+            const onlyB = B - AB - BC + ABC;
+            const onlyC = C - AC - BC + ABC;
+
+            const out = document.getElementById('cribleOutput');
+            out.innerHTML = `
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs sm:text-sm">
+                <p><strong>1. Réunion $|A \\cup B \\cup C|$ (au moins un des trois) :</strong>
+                $$|A \\cup B \\cup C| = (${A}+${B}+${C}) - (${AB}+${AC}+${BC}) + ${ABC} = \\mathbf{${unionABC}}$$</p>
+                <p><strong>2. Aucun des trois $|\\overline{A \\cup B \\cup C}| = |\\overline{A} \\cap \\overline{B} \\cap \\overline{C}|$ :</strong>
+                $$|E| - |A \\cup B \\cup C| = ${E} - ${unionABC} = \\mathbf{${noneABC}}$$</p>
+                <p><strong>3. Formules d'intersections partielles (<code>EnsemblesDoc4.pdf</code>) :</strong></p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>$|A \\cap \\overline{B} \\cap C| = |A \\cap C| - |A \\cap B \\cap C| = ${AC} - ${ABC} = \\mathbf{${A_notB_C}}$</li>
+                    <li>$|A \\cap B \\cap \\overline{C}| = |A \\cap B| - |A \\cap B \\cap C| = ${AB} - ${ABC} = \\mathbf{${A_B_notC}}$</li>
+                    <li>$|\\overline{A} \\cap B \\cap C| = |B \\cap C| - |A \\cap B \\cap C| = ${BC} - ${ABC} = \\mathbf{${notA_B_C}}$</li>
+                </ul>
+                <p><strong>4. Éléments appartenant à UN SEUL ensemble :</strong></p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Uniquement $A$ ($|A \\cap \\overline{B} \\cap \\overline{C}|$) : $${A} - ${AB} - ${AC} + ${ABC} = \\mathbf{${onlyA}}$$</li>
+                    <li>Uniquement $B$ ($|\\overline{A} \\cap B \\cap \\overline{C}|$) : $${B} - ${AB} - ${BC} + ${ABC} = \\mathbf{${onlyB}}$$</li>
+                    <li>Uniquement $C$ ($|\\overline{A} \\cap \\overline{B} \\cap C|$) : $${C} - ${AC} - ${BC} + ${ABC} = \\mathbf{${onlyC}}$$</li>
+                </ul>
+            </div>`;
+            renderKaTeXIn(out);
+        }
+
+        // =========================================================================
+        // NAVIGATION ENTRE LES ONGLETS & UTILITAIRES
+        // =========================================================================
+        function switchMainTab(tab) {
+            ['qcm', 'euclide', 'arith', 'ensembles'].forEach(t => {
+                const panel = document.getElementById('panel-' + t);
+                const btn = document.getElementById('tabBtn-' + t);
+                if (t === tab) {
+                    panel.classList.remove('hidden');
+                    btn.classList.add('tab-btn-active');
+                } else {
+                    panel.classList.add('hidden');
+                    btn.classList.remove('tab-btn-active');
+                }
+            });
+            if (tab === 'euclide') {
+                computeEuclide(false);
+                solveModularEquation();
+            } else if (tab === 'arith') {
+                computeDivZ();
+                computePrimeDecomp();
+            } else if (tab === 'ensembles') {
+                computeCrible3();
+            }
+        }
+
+        function renderKaTeXIn(el) {
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(el, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+
+        let rulerActive = false;
+        function toggleRuler() {
+            rulerActive = !rulerActive;
+            const ruler = document.getElementById('readingRuler');
+            ruler.style.display = rulerActive ? 'block' : 'none';
+        }
+        window.addEventListener('mousemove', (e) => {
+            if (rulerActive) {
+                const ruler = document.getElementById('readingRuler');
+                ruler.style.top = (e.clientY - 19) + 'px';
+            }
+        });
+
+        window.addEventListener('load', () => {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            renderQuiz();
+            renderKaTeXIn(document.body);
+        });
+    </script>
+</body>
+</html>

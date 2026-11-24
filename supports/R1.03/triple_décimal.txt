@@ -1,0 +1,58 @@
+//Titre : droite   
+
+// Cette table d'états permet de calculer le triple d'un nombre décimal quelconque.
+// Elle utilise 4 états.
+// L'état 'droite' va tout à droite du nombre, c'est l'état initial.
+// Puis on passe dans l'état 'triple' et on lit le nombre de droite à gauche. 
+// L'état 'triple' remplace chaque chiffre par son triple puis passe au chiffre précédent et, selon le cas :
+// - S'il n'y a pas de retenue, reste dans le même état
+// - S'il y a 1 de retenue, passe dans l'état 'retenue1' qui fonctionne comme l'état 'triple' mais calcule le triple+1 
+// - S'il y a 2 de retenue, passe dans l'état 'retenue2' qui fonctionne comme l'état 'triple' mais calcule le triple+2 
+// On s'arrête quand on arrive à gauche du nombre où on écrit la retenue finale s'il y en a une.
+
+// Table d'états (4 états)
+// état	   car lu  état suiv  écrit  opération
+   droite     0     droite      0       D
+   droite     1     droite      1       D
+   droite     2     droite      2       D
+   droite     3     droite      3	D
+   droite     4     droite      4       D
+   droite     5     droite      5       D
+   droite     6     droite      6       D
+   droite     7     droite      7       D
+   droite     8     droite      8       D
+   droite     9     droite      9       D
+   droite     .     triple      .       G
+   triple     0     triple      0       G
+   triple     1     triple      3       G
+   triple     2     triple      6       G
+   triple     3     triple      9	G
+   triple     4     retenue1    2       G
+   triple     5     retenue1    5       G
+   triple     6     retenue1    8       G
+   triple     7     retenue2    1       G
+   triple     8     retenue2    4       G
+   triple     9     retenue2    7       G
+   triple     .     droite      .       A
+   retenue1   0     triple      1       G
+   retenue1   1     triple      4       G
+   retenue1   2     triple      7       G
+   retenue1   3     retenue1    0       G
+   retenue1   4     retenue1    3       G
+   retenue1   5     retenue1    6       G
+   retenue1   6     retenue1    9       G
+   retenue1   7     retenue2    2       G
+   retenue1   8     retenue2    5       G
+   retenue1   9     retenue2    8       G
+   retenue1   .     droite      1       A
+   retenue2   0     triple      2       G
+   retenue2   1     triple      5       G
+   retenue2   2     triple      8       G
+   retenue2   3     retenue1    1       G
+   retenue2   4     retenue1    4       G
+   retenue2   5     retenue1    7       G
+   retenue2   6     retenue2    0       G
+   retenue2   7     retenue2    3       G
+   retenue2   8     retenue2    6       G
+   retenue2   9     retenue2    9       G
+   retenue2   .     droite      2       A

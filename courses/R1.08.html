@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" data-theme="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="theme-color" content="#367357"/>
+    <title>R1.08 — Introduction à la gestion des organisations — KAI Academic</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono, Lexend -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #367357;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            color: #0f172a;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .font-dyslexic {
+            font-family: 'Lexend', system-ui, sans-serif !important;
+            letter-spacing: 0.03em !important;
+            word-spacing: 0.09em !important;
+            line-height: 1.85 !important;
+            background-color: #faf8f2 !important;
+            background-image: none !important;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 150ms ease-out;
+        }
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.2rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-slate-500">
+        <a class="hover:text-slate-900 flex items-center gap-1" href="../index.html">
+            <i class="w-3.5 h-3.5" data-lucide="home"></i>
+            <span>Hub Académique</span>
+        </a>
+        <span>/</span>
+        <a class="hover:text-slate-900" href="index.html">Matières</a>
+        <span>/</span>
+        <span class="font-bold text-slate-900 font-mono">R1.08</span>
+    </nav>
+
+    <!-- Header Banner -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 bg-white relative overflow-hidden shadow-xs" style="border-left: 6px solid #367357;">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-xl text-xs font-black text-white font-mono shadow-2xs" style="background-color: #367357;">
+                        R1.08
+                    </span>
+                    <span class="badge-pill font-mono text-[10px] font-bold" style="background-color: #EAEDE6; color: #367357; border: 1px solid #36735730;">
+                        Moodle UPPA #17477
+                    </span>
+                    <span class="badge-pill font-mono text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                        8 Chapitres Complets
+                    </span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Introduction à la gestion des organisations</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
+                    <i class="w-4 h-4 text-slate-400" data-lucide="user-check"></i>
+                    <span>Enseignant Référent : <strong>M. Moulin</strong> · BUT 1 Informatique Anglet</span>
+                </p>
+                <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-3xl leading-relaxed">
+                    Action collective, mécanismes de coordination de Mintzberg, typologies d'organisations, calculs de gestion (TVA, CA, VA, taux de variation), structures, démarche stratégique (PESTEL, Porter, SWOT).
+                </p>
+            </div>
+
+            <div class="flex items-center flex-wrap gap-2">
+                <a class="min-h-[44px] px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-2xs hover:brightness-95 transition flex items-center gap-2" href="R1.08/chap1_action_collective.html" style="background-color: #367357;">
+                    <i class="w-4 h-4" data-lucide="play"></i>
+                    <span>Démarrer le cours</span>
+                </a>
+                <a class="min-h-[44px] px-4 py-2.5 rounded-2xl text-xs font-semibold border flex items-center gap-2 shadow-2xs hover:brightness-95 transition" href="../revision/R1.08.html" style="border-color: #36735740; color: #367357; background-color: #EAEDE6;">
+                    <i class="w-4 h-4" data-lucide="sparkles"></i>
+                    <span>Fiches de Révision</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- SPECIAL EXAM TOOLS BOX (FICHE A4 + ANNALES) -->
+        <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <a href="R1.08/fiche_partiel_a4_autorisee.html" class="p-4 rounded-2xl border-2 border-emerald-600/30 bg-emerald-50/40 hover:bg-emerald-50/70 transition flex items-start justify-between group">
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0 mt-0.5" style="background-color: #367357;">
+                        <i class="w-5 h-5" data-lucide="file-check"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-900 group-hover:text-emerald-900 transition">Feuille A4 Recto-Verso Autorisée</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold text-emerald-800 bg-emerald-100">AUTORISÉ AU PARTIEL</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Fiche d'examen recto-verso condensée : définitions formelles du tableau de caractérisation, formules de calcul, Mintzberg, PESTEL, Porter. Prête à imprimer.
+                        </p>
+                    </div>
+                </div>
+                <i class="w-5 h-5 text-emerald-700 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
+            </a>
+
+            <a href="R1.08/annales_partiels_corriges.html" class="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-slate-100/70 transition flex items-start justify-between group">
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white shrink-0 mt-0.5">
+                        <i class="w-5 h-5" data-lucide="award"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-900 group-hover:text-slate-950 transition">Annales & Corrigés Officiels</span>
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-700 bg-slate-200">2023 à 2025</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Cas réels traités en amphi : Telerad (2024-2025, Anglet) et Chocolaterie de Puyricard (2023-2024). Barèmes détaillés et corrigés types.
+                        </p>
+                    </div>
+                </div>
+                <i class="w-5 h-5 text-slate-500 shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" data-lucide="arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- PROGRAMME OFFICIEL EN 3 PARTIES (8 CHAPITRES) -->
+    <!-- ========================================================================= -->
+    <section class="space-y-6">
+
+        <!-- PARTIE 1 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #367357;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 1 : Les Différentes Organisations (Chapitres 1 à 5)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Fondements & Caractérisation</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Chapitre 1 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 1</span>
+                            <span class="text-slate-400 font-mono text-[11px]">20 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            L'Action Collective & la Coordination
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Définition d'une organisation, 5 mécanismes de coordination de Mintzberg, les 4 grandes catégories d'organisations.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Mintzberg</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Coordination</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">4 Types</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap1_action_collective.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 2 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 2</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les Caractéristiques de l'Entreprise
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Tableau de caractérisation officiel, finalités (économique, sociale, sociétale), formes juridiques (EI, SARL, SAS, SA), tailles UE.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Caractérisation</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Statuts SARL/SAS</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Tailles PME</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap2_caracteristiques_entreprise.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 3 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 3</span>
+                            <span class="text-slate-400 font-mono text-[11px]">20 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les Administrations Publiques
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Admin centrales, collectivités territoriales, sécurité sociale. 3 principes de Rolland (égalité, continuité, mutabilité). Calculs de TVA.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Service Public</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Rolland</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">TVA Décaissée</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap3_administrations_publiques.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 4 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 4</span>
+                            <span class="text-slate-400 font-mono text-[11px]">20 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les OBNL & Associations (Loi 1901)
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Organisations à but non lucratif, associations déclarées vs de fait, ONG, mutuelles, fondations et ressources bénévoles/subventions.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Loi 1901</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">OBNL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Bénévolat</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap4_obnl_associations.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 5 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 5</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Fonctions & Chaîne de Valeur
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Les 3 rôles de Mintzberg, la Chaîne de valeur de Porter (activités principales vs de soutien), focus sur la fonction GSI (Systèmes d'Information).
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Chaîne de Valeur</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">GSI (Informatique)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">3 Rôles</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap5_fonctions_chaine_valeur.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTIE 2 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #367357;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 2 : L'Organisation, Structure, Culture et Pouvoir (Chapitre 6)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Fonctionnement Interne</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Chapitre 6 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 6</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Structures, Culture & Pouvoir
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Structures classique (Taylor/Fayol), Staff and Line, divisionnelle, matricielle. Culture d'entreprise et relations de pouvoir.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Staff & Line</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Matricielle</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Culture</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap6_structures_culture_pouvoir.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTIE 3 -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #367357;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 3 : La Démarche Stratégique (Chapitres 7 & 8)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Diagnostic & Choix Stratégiques</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Chapitre 7 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 7</span>
+                            <span class="text-slate-400 font-mono text-[11px]">30 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Le Diagnostic Stratégique
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Modèle PESTEL (macro), 5 forces de Porter (micro), diagnostic interne (ressources/compétences distinctives) et matrice SWOT.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">PESTEL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">5 Forces Porter</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">SWOT</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap7_diagnostic_strategique.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Chapitre 8 -->
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">CHAPITRE 8</span>
+                            <span class="text-slate-400 font-mono text-[11px]">25 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-950 transition">
+                            Les Stratégies d'Entreprise
+                        </h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                            Stratégies globales Corporate (spécialisation, diversification, intégration, externalisation) et stratégies de domaine de Porter (coûts, différenciation, niche).
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Domaine (Porter)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Corporate</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-mono">Différenciation</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap8_strategies_globales_domaine.html" style="background-color: #367357;">
+                            <span>Étudier ce chapitre</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTIE 4 : APPROFONDISSEMENTS COMPTABLES, FISCAUX & RSE (MASTERCLASSES COMPLÉMENTAIRES) -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full" style="background-color: #367357;"></span>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                        Partie 4 : Masterclasses Thématiques Approfondies (TVA, Bilan, FRNG/BFR, RSE & Gouvernance)
+                    </h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Dossiers Complets + QCM</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">DOSSIER A</span>
+                            <span class="text-slate-400 font-mono text-[11px]">40 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5">Typologie des Organisations, Parties Prenantes & RSE</h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Approfondissement Freeman (parties prenantes primaires/secondaires), RSE et lois de Rolland.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap1_typologie_formes_juridiques.html" style="background-color: #367357;">
+                            <span>Étudier ce dossier</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">DOSSIER B</span>
+                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5">Structures Organisationnelles & Configurations de Mintzberg</h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">6 composantes de Mintzberg, mécanismes de coordination, structures fonctionnelle, divisionnelle et matricielle.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap2_structures_et_mintzberg.html" style="background-color: #367357;">
+                            <span>Étudier ce dossier</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">DOSSIER C</span>
+                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5">Mécanismes Fiscaux : Calculs de TVA, HT/TTC & Déclaration CA3</h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">TVA collectée, déductible sur achats et immobilisations, crédit de TVA et cas chiffrés résolus.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap3_fiscalite_et_mecanismes_tva.html" style="background-color: #367357;">
+                            <span>Étudier ce dossier</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">DOSSIER D</span>
+                            <span class="text-slate-400 font-mono text-[11px]">50 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5">Bilan Comptable, Compte de Résultat, SIG, FRNG, BFR & Trésorerie</h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Équilibre Actif/Passif, calcul du résultat net et analyse fonctionnelle FRNG - BFR = TN.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap4_analyse_financiere_bilan_sig.html" style="background-color: #367357;">
+                            <span>Étudier ce dossier</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 hover:border-slate-300 flex flex-col justify-between shadow-2xs group bg-white" style="border-left: 4px solid #367357;">
+                    <div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="px-2.5 py-0.5 rounded-full font-mono font-bold" style="background-color: #EAEDE6; color: #367357;">DOSSIER E</span>
+                            <span class="text-slate-400 font-mono text-[11px]">45 min</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mt-2.5">Synthèse Stratégique : PESTEL, 5 Forces de Porter & Matrice SWOT</h3>
+                        <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">Diagnostic macro et micro-environnemental, chaîne de valeur et avantage concurrentiel durable.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <a class="min-h-[38px] px-4 py-1.5 rounded-xl text-xs font-semibold text-white shadow-2xs flex items-center gap-1.5 hover:brightness-95 transition" href="R1.08/chap5_diagnostic_strategique_pestel_porter.html" style="background-color: #367357;">
+                            <span>Étudier ce dossier</span>
+                            <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- TD / TP / EXERCICES PRATIQUES SECTION -->
+    <section class="glass-card rounded-3xl p-6 border border-slate-200 bg-white shadow-xs my-6" id="exercices">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i class="w-4 h-4" data-lucide="dumbbell" style="color: #367357;"></i>
+                <span>Travaux Dirigés & Cas Pratiques Officiels (M. Moulin)</span>
+            </h2>
+            <span class="text-xs font-mono text-slate-400">Cas réels d'amphi & TD</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between text-xs transition">
+                <div class="flex items-center gap-2.5">
+                    <i class="w-4 h-4 text-emerald-700" data-lucide="file-check"></i>
+                    <div>
+                        <strong class="text-slate-900">TD1 : Savonnerie de l'Atlantique</strong>
+                        <span class="text-slate-500 text-[11px] block">Caractérisation, calculs de TVA, CA, VA et marges.</span>
+                    </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] font-semibold">TD 1</span>
+            </div>
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between text-xs transition">
+                <div class="flex items-center gap-2.5">
+                    <i class="w-4 h-4 text-emerald-700" data-lucide="file-check"></i>
+                    <div>
+                        <strong class="text-slate-900">TD2 : Gestion de l'Eau</strong>
+                        <span class="text-slate-500 text-[11px] block">Service public, régie directe vs délégation de service public.</span>
+                    </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] font-semibold">TD 2</span>
+            </div>
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between text-xs transition">
+                <div class="flex items-center gap-2.5">
+                    <i class="w-4 h-4 text-emerald-700" data-lucide="file-check"></i>
+                    <div>
+                        <strong class="text-slate-900">TD3 : Diagnostic Stratégique</strong>
+                        <span class="text-slate-500 text-[11px] block">Matrices PESTEL, Porter et SWOT appliquées à un cas d'entreprise.</span>
+                    </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] font-semibold">TD 3</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENTS SOURCES AUTHENTIFIÉS -->
+    <section class="glass-card rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xs" id="sources">
+        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i class="w-4 h-4" data-lucide="folder-check" style="color: #367357;"></i>
+                <span>Documents Sources Authentifiés (Archive OneDrive 10/10/2026 M. Moulin)</span>
+            </h2>
+            <span class="text-xs text-slate-400 font-mono">12 documents vérifiés SHA-256</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="bg-slate-50/80 text-[10px] font-bold text-slate-500 uppercase border-b border-slate-200">
+                        <th class="p-3.5">Fichier Original</th>
+                        <th class="p-3.5">Format</th>
+                        <th class="p-3.5">Taille</th>
+                        <th class="p-3.5">Empreinte SHA-256</th>
+                        <th class="p-3.5 text-right">Certification</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <span>cours_management_info_v2026.docx</span>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">POLYCOPIÉ</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">157.1 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">b3bc860c9d7b...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <span>synthese1_questions_flash_reponse.docx</span>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">21.8 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">e143150c2324...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <span>synthese2_questions_flash_reponse.docx</span>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">24.0 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">0ed37a972af6...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <span>synthese3_questions_flash_reponse.docx</span>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">22.2 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">1bb1ac1a2db8...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <span>synthese4_questions_flash_reponse.docx</span>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">22.0 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">d07a0f009e8b...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 text-xs border-b border-slate-100 transition">
+                        <td class="p-3.5 font-semibold text-slate-900 flex items-center gap-2">
+                            <i class="w-4 h-4 text-slate-400 shrink-0" data-lucide="file-text"></i>
+                            <span>synthese5_questions_flash_reponse.docx</span>
+                        </td>
+                        <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-bold">SYNTHÈSE</span></td>
+                        <td class="p-3.5 font-mono text-slate-500 text-xs">25.4 Ko</td>
+                        <td class="p-3.5 font-mono text-slate-400 text-[10px]">c42c81d2f104...</td>
+                        <td class="p-3.5 text-right">
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> AUTHENTIQUE
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Upcoming Deadlines Section -->
+    <section class="glass-card rounded-3xl p-6 border border-slate-200 bg-white shadow-xs my-6">
+        <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2 mb-3">
+            <i class="w-4 h-4" data-lucide="calendar" style="color: #367357;"></i>
+            <span>Échéances & Évaluation Partiel R1.08</span>
+        </h2>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between flex-wrap gap-3 text-xs mb-2">
+            <div>
+                <p class="font-bold text-slate-900">Partiel Écrit R1.08 Gestion des organisations</p>
+                <p class="text-slate-500 text-[11px] mt-0.5">Durée 1h30 (2h tiers-temps). <strong>Autorisé : Calculatrice + 1 feuille A4 recto-verso</strong>.</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="font-mono text-slate-500 text-[11px]">Semestre 1</span>
+                <span class="px-2.5 py-0.5 rounded-full font-mono font-bold text-[10px] bg-emerald-100 text-emerald-800">COEFF IMPORTANT</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

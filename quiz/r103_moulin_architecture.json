@@ -1,0 +1,1457 @@
+{
+  "module": "R1.03",
+  "titre": "Architecture des Ordinateurs",
+  "professeur": "M. Moulin / M. Roose",
+  "couleur": "#8A5A44",
+  "description": "Modèle Von Neumann, UT/UC, mémoires & caches (SRAM/DRAM, localité), registres (PC, RI, ACC, SP, Flags), bus, cycle d'instruction (Fetch-Decode-Execute), CISC/RISC, pipeline, multicœurs, Babbage & Turing",
+  "count": 60,
+  "questions": [
+    {
+      "id": "r103_q01",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "1. Introduction : Qu'est-ce qu'un ordinateur ?",
+      "question": "Selon la définition canonique de M. Moulin, qu'est-ce qui caractérise fondamentalement un ordinateur par rapport à un automate ou une calculatrice ?",
+      "options": [
+        "Il possède un écran graphique couleur et un système de fichiers",
+        "C'est une machine universelle capable d'exécuter n'importe quel algorithme en modifiant son programme enregistré en mémoire",
+        "Il ne fonctionne qu'avec des nombres entiers naturels exprimés en base 10",
+        "Il nécessite obligatoirement un système d'exploitation multitâche pour fonctionner"
+      ],
+      "correct_index": 1,
+      "explication": "Un ordinateur est une machine universelle (au sens de Turing/Von Neumann) : les instructions et les données partagent la même mémoire, permettant d'exécuter tout algorithme programmable sans modifier le câblage matériel.",
+      "pieges": [
+        "Une calculatrice effectue des calculs mais son programme est figé dans ses circuits.",
+        "L'écran et l'OS sont des éléments périphériques ou logiciels, pas la définition intrinsèque."
+      ],
+      "tags": [
+        "Machine universelle",
+        "Turing",
+        "Von Neumann"
+      ]
+    },
+    {
+      "id": "r103_q02",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "1. Introduction : Qu'est-ce qu'un ordinateur ?",
+      "question": "Quelle est la différence fondamentale entre la compilation et l'interprétation d'un code source ?",
+      "options": [
+        "La compilation traduit tout le code source en langage machine avant exécution, tandis que l'interprète traduit et exécute ligne par ligne",
+        "La compilation s'effectue uniquement en mémoire vive, l'interprétation sur disque",
+        "La compilation produit du code Python, l'interprétation produit du binaire natif",
+        "L'interprétation est toujours 10 fois plus rapide que la compilation à l'exécution"
+      ],
+      "correct_index": 0,
+      "explication": "Le compilateur (ex: gcc) produit un fichier binaire autonome directement exécutable par le processeur. L'interpréteur (ex: python) traduit chaque instruction au moment où elle doit être exécutée.",
+      "pieges": [
+        "L'interprétation est plus lente que l'exécution de code compilé natif en raison du travail d'analyse à la volée."
+      ],
+      "tags": [
+        "Compilation",
+        "Interprétation",
+        "Langage machine"
+      ]
+    },
+    {
+      "id": "r103_q03",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "1. Introduction : Qu'est-ce qu'un ordinateur ?",
+      "question": "Qu'appelle-t-on la « compilation croisée » (cross-compilation) ?",
+      "options": [
+        "Compiler un même programme simultanément sous Windows et Linux",
+        "Compiler sur une machine hôte un binaire destiné à s'exécuter sur une architecture de processeur cible différente (ex: compiler sur PC x86 pour une carte ARM)",
+        "Mélanger du code C et du code C++ dans le même projet",
+        "Compiler deux fonctions qui s'appellent mutuellement"
+      ],
+      "correct_index": 1,
+      "explication": "La compilation croisée utilise la puissance de calcul d'une machine hôte (PC) pour générer du code machine adapté à une architecture différente (ex: microcontrôleur embarqué ARM, RISC-V).",
+      "pieges": [
+        "Ne pas confondre la portabilité logicielle avec la génération de jeux d'instructions machines distincts."
+      ],
+      "tags": [
+        "Compilation croisée",
+        "Architecture cible",
+        "Assembleur"
+      ]
+    },
+    {
+      "id": "r103_q04",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'information",
+      "question": "Combien de valeurs distinctes peut-on coder sur un mot binaire de N bits ?",
+      "options": [
+        "2 * N valeurs",
+        "N^2 valeurs",
+        "2^N valeurs",
+        "2^(N-1) valeurs",
+        "10^N valeurs"
+      ],
+      "correct_index": 2,
+      "explication": "Chaque bit ayant 2 états possibles (0 ou 1), N bits indépendants permettent de représenter exactement 2^N combinaisons distinctes (ex: 8 bits = 256 valeurs).",
+      "pieges": [
+        "Ne pas confondre 2^N avec 2*N (erreur de débutant fréquente).",
+        "2^(N-1) est le nombre de valeurs strictement positives en complément à deux."
+      ],
+      "tags": [
+        "Binaire",
+        "Combinatoire",
+        "Puissance de deux"
+      ]
+    },
+    {
+      "id": "r103_q05",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'information",
+      "question": "Quelle est la valeur hexadécimale correspondant à l'octet binaire 1101 1010 ?",
+      "options": [
+        "0xDA",
+        "0xD5",
+        "0xCA",
+        "0xBA",
+        "0xEA"
+      ],
+      "correct_index": 0,
+      "explication": "On découpe l'octet en deux quartets de 4 bits : 1101_2 = 8 + 4 + 1 = 13 = 0xD ; 1010_2 = 8 + 2 = 10 = 0xA. L'octet vaut donc 0xDA.",
+      "pieges": [
+        "1101 vaut 13 (D) et non 12 (C).",
+        "Table hexadécimale : 10=A, 11=B, 12=C, 13=D, 14=E, 15=F."
+      ],
+      "tags": [
+        "Hexadécimal",
+        "Conversion binaire",
+        "Quartets"
+      ]
+    },
+    {
+      "id": "r103_q06",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'information",
+      "question": "Comment calcule-t-on l'opposé d'un entier en complément à deux sur N bits ?",
+      "options": [
+        "On inverse simplement le bit de poids fort (MSB)",
+        "On inverse tous les bits (~X) puis on ajoute 1",
+        "On décale tous les bits d'une position vers la gauche",
+        "On soustrait 256 à la valeur absolue du nombre"
+      ],
+      "correct_index": 1,
+      "explication": "La négation en complément à deux s'obtient par la règle : -X = ~X + 1. Cela permet au processeur d'effectuer des soustractions en utilisant le même circuit matériel que pour l'addition.",
+      "pieges": [
+        "La simple inversion du bit de signe produit une représentation signe/valeur absolue avec un double zéro (+0 et -0), bannie dans les ordinateurs modernes."
+      ],
+      "tags": [
+        "Complément à deux",
+        "Entiers signés",
+        "Arithmétique binaire"
+      ]
+    },
+    {
+      "id": "r103_q07",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'information",
+      "question": "Sur 8 bits signés en complément à deux, quel est l'intervalle exact des entiers représentables ?",
+      "options": [
+        "[-128 ; +127]",
+        "[-127 ; +128]",
+        "[-256 ; +255]",
+        "[0 ; 255]",
+        "[-127 ; +127]"
+      ],
+      "correct_index": 0,
+      "explication": "Sur N bits signés, l'intervalle est [-2^(N-1) ; +2^(N-1) - 1]. Pour N=8, on a [-128 ; +127]. Il y a une valeur négative de plus que de valeurs positives car le zéro consomme une combinaison positive.",
+      "pieges": [
+        "[0 ; 255] est le domaine des entiers non signés (unsigned char en C).",
+        "[-127 ; +127] correspondrait à un codage avec deux zéros."
+      ],
+      "tags": [
+        "Complément à deux",
+        "Bornes",
+        "Overflow"
+      ]
+    },
+    {
+      "id": "r103_q08",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'information",
+      "question": "Dans la norme IEEE 754 simple précision (32 bits), comment est découpé le mot flottant ?",
+      "options": [
+        "1 bit de signe, 8 bits d'exposant décalé (biais +127), 23 bits de mantisse fractionnaire",
+        "1 bit de signe, 11 bits d'exposant, 20 bits de mantisse",
+        "2 bits de signe, 6 bits d'exposant, 24 bits de mantisse",
+        "8 bits de signe, 8 bits d'exposant, 16 bits de mantisse"
+      ],
+      "correct_index": 0,
+      "explication": "Le format 32 bits IEEE 754 alloue 1 bit pour le signe S, 8 bits pour l'exposant E (valeur réelle = E - 127) et 23 bits pour la mantisse fractionnaire M (avec le 1 implicite : 1.M).",
+      "pieges": [
+        "11 bits d'exposant et 52 bits de mantisse correspondent à la double précision (double 64 bits en C)."
+      ],
+      "tags": [
+        "IEEE 754",
+        "Flottants",
+        "Exposant",
+        "Mantisse"
+      ]
+    },
+    {
+      "id": "r103_q09",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'information",
+      "question": "Pourquoi l'encodage UTF-8 est-il rétrocompatible avec le standard ASCII historique ?",
+      "options": [
+        "Les caractères ASCII (codes 0 à 127) sont codés sur exactement 1 octet avec leur bit de poids fort à 0",
+        "UTF-8 utilise toujours 4 octets pour chaque caractère",
+        "UTF-8 remplace les lettres accentuées par des espaces",
+        "ASCII a été inventé après UTF-8 pour le simplifier"
+      ],
+      "correct_index": 0,
+      "explication": "UTF-8 est un encodage à longueur variable (1 à 4 octets). Pour les points de code de 0 à 127 (la table ASCII), UTF-8 utilise un seul octet débutant par 0 (0xxxxxxx), ce qui garantit une rétrocompatibilité octet par octet parfaite.",
+      "pieges": [
+        "UTF-8 ne prend pas 4 octets pour tout le monde : les caractères courants prennent 1 ou 2 octets."
+      ],
+      "tags": [
+        "UTF-8",
+        "ASCII",
+        "Encodage texte"
+      ]
+    },
+    {
+      "id": "r103_q10",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann",
+      "question": "Quels sont les 4 composants majeurs constituant le modèle canonique de John von Neumann ?",
+      "options": [
+        "Unité de Traitement (UT), Unité de Contrôle (UC), Mémoire principale, Unité d'Entrées/Sorties (E/S)",
+        "Disque dur, Écran, Clavier, Carte graphique",
+        "Compilateur, Système d'exploitation, RAM, Registres",
+        "Microprocesseur, Cache L1, Cache L2, Cache L3"
+      ],
+      "correct_index": 0,
+      "explication": "Le modèle de Von Neumann repose sur 4 blocs : l'Unité de Traitement (UAL, calcul), l'Unité de Contrôle (orchestration, décodeur), la Mémoire (données et instructions) et l'Unité d'E/S (périphériques).",
+      "pieges": [
+        "Disque et écran sont des périphériques reliés à l'unité d'E/S, pas les composants de base du modèle théorique.",
+        "Compilateur et OS sont des logiciels, pas des unités architecturales matérielles."
+      ],
+      "tags": [
+        "Von Neumann",
+        "UT",
+        "UC",
+        "Mémoire",
+        "E/S"
+      ]
+    },
+    {
+      "id": "r103_q11",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann",
+      "question": "Quel est le rôle précis des trois bus système (Données, Adresses, Contrôle) ?",
+      "options": [
+        "Bus d'adresses : où chercher (unidirectionnel) ; Bus de données : ce qu'on transporte (bidirectionnel) ; Bus de contrôle : ordres R/W et synchronisation",
+        "Bus d'adresses : stocke les calculs ; Bus de données : choisit le programme ; Bus de contrôle : alimente le CPU en électricité",
+        "Les trois bus sont identiques et transportent indifféremment adresses et données pour aller trois fois plus vite",
+        "Le bus de données sert uniquement pour le réseau"
+      ],
+      "correct_index": 0,
+      "explication": "Le bus d'adresses indique la case mémoire ciblée (unidirectionnel émis par le CPU). Le bus de données transporte la valeur (bidirectionnel). Le bus de contrôle transporte les signaux de commande (Lecture/Écriture, Horloge, Reset).",
+      "pieges": [
+        "Le bus d'adresses est unidirectionnel (du CPU vers la mémoire en fonctionnement standard). Le bus de données est bidirectionnel."
+      ],
+      "tags": [
+        "Bus système",
+        "Bus d'adresses",
+        "Bus de données",
+        "Bus de contrôle"
+      ]
+    },
+    {
+      "id": "r103_q12",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann",
+      "question": "Qu'appelle-t-on le « goulot d'étranglement de Von Neumann » (Von Neumann Bottleneck) ?",
+      "options": [
+        "La limitation du débit entre le processeur et la mémoire, car données et instructions transitent par le même bus partagé",
+        "La surchauffe thermique du processeur quand la fréquence dépasse 4 GHz",
+        "L'impossibilité de brancher plus de 2 disques durs en SATA",
+        "Le temps d'attente lors de l'allumage par le BIOS"
+      ],
+      "correct_index": 0,
+      "explication": "La puissance de calcul du processeur progresse plus vite que la bande passante du bus mémoire. Les transferts d'instructions et de données sur un même bus partagé brident les performances globales.",
+      "pieges": [
+        "L'architecture Harvard sépare les bus instructions et données pour réduire ce goulot dans les DSP et microcontrôleurs."
+      ],
+      "tags": [
+        "Goulot Von Neumann",
+        "Bande passante",
+        "Mémoire partagée"
+      ]
+    },
+    {
+      "id": "r103_q13",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann",
+      "question": "Dans l'Unité de Traitement (UT), à quoi servent les registres OP1, OP2 et Res ?",
+      "options": [
+        "OP1 et OP2 reçoivent les deux opérandes de calcul, et Res reçoit le résultat produit par l'UAL",
+        "OP1 stocke l'adresse du saut, OP2 le mot de passe, et Res la date",
+        "Ce sont des registres de sauvegarde sur disque dur",
+        "Ils gèrent l'affichage des couleurs à l'écran"
+      ],
+      "correct_index": 0,
+      "explication": "L'Unité Arithmétique et Logique (UAL) prend les opérandes chargés dans les registres d'entrée OP1 et OP2, applique l'opération demandée (ex: addition), et dépose le résultat dans le registre Res.",
+      "pieges": [
+        "Le registre d'adresse d'instruction suivante est le PC (Program Counter), pas OP1.",
+        "Ce sont des registres internes ultra-rapides au cœur de la puce."
+      ],
+      "tags": [
+        "UAL",
+        "Registres",
+        "OP1",
+        "OP2",
+        "Res"
+      ]
+    },
+    {
+      "id": "r103_q14",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann",
+      "question": "Quand un composant très rapide (CPU) communique avec un composant lent (clavier/disque), quel mécanisme assure la synchronisation sans perte ?",
+      "options": [
+        "L'utilisation d'une mémoire tampon (buffer) et d'un protocole d'accusé de réception (handshaking)",
+        "L'accélération de la vitesse de la lumière dans les câbles",
+        "L'interdiction absolue de frapper au clavier pendant un calcul",
+        "Le redémarrage du processeur après chaque frappe de touche"
+      ],
+      "correct_index": 0,
+      "explication": "Le cours de M. Moulin insiste sur ce point : un buffer (tampon FIFO) stocke les octets en attente et le handshaking (signaux 'prêt à émettre / bien reçu') synchronise des entités aux fréquences asynchrones.",
+      "pieges": [
+        "Le processeur ne se bloque pas : il traite les entrées via des interruptions matérielles ou du polling temporisé."
+      ],
+      "tags": [
+        "Buffer",
+        "Handshaking",
+        "Synchronisation",
+        "E/S"
+      ]
+    },
+    {
+      "id": "r103_q15",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Quels sont les deux grands principes de localité justifiant l'efficacité des mémoires caches ?",
+      "options": [
+        "Localité temporelle (une donnée récemment accédée risque d'être réutilisée bientôt) et spatiale (les données d'adresses voisines seront bientôt accédées)",
+        "Localité magnétique et localité optique",
+        "Localité interne au processeur et localité cloud",
+        "Localité binaire et localité hexadécimale"
+      ],
+      "correct_index": 0,
+      "explication": "La localité temporelle (boucles de code, variables récurrentes) et la localité spatiale (tableaux parcourus en mémoire, instructions consécutives) permettent aux caches de deviner avec plus de 95% de réussite les données nécessaires.",
+      "pieges": [
+        "La nature physique des mémoires (SRAM, DRAM, flash) est distincte des principes algorithmiques de localité d'accès."
+      ],
+      "tags": [
+        "Caches",
+        "Localité temporelle",
+        "Localité spatiale"
+      ]
+    },
+    {
+      "id": "r103_q16",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Quelle est la hiérarchie correcte des mémoires, de la plus rapide (mais plus petite) à la plus lente (mais plus grande) ?",
+      "options": [
+        "Registres CPU -> Cache L1 -> Cache L2 -> Cache L3 -> RAM -> SSD / Disque dur",
+        "Disque dur -> RAM -> Cache L3 -> Cache L2 -> Cache L1 -> Registres",
+        "RAM -> Registres -> Cache L1 -> SSD -> Cache L2",
+        "Cache L3 -> Cache L2 -> Cache L1 -> Registres -> RAM"
+      ],
+      "correct_index": 0,
+      "explication": "La pyramide de mémoire classe par vitesse décroissante : Registres (1 cycle) -> Cache L1 (quelques cycles) -> Cache L2 -> Cache L3 -> Mémoire vive RAM (dizaines de ns) -> Stockage secondaire SSD/HDD (ms).",
+      "pieges": [
+        "Le cache L1 est le plus proche des cœurs et le plus rapide, L3 est partagé et plus volumineux."
+      ],
+      "tags": [
+        "Hiérarchie mémoire",
+        "Registres",
+        "L1",
+        "L2",
+        "L3",
+        "RAM"
+      ]
+    },
+    {
+      "id": "r103_q17",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Que se passe-t-il lors d'un « défaut de cache » (Cache Miss) ?",
+      "options": [
+        "Le processeur suspend le calcul et va chercher la ligne complète en mémoire de niveau inférieur (L2, L3 ou RAM), ce qui engendre une pénalité de cycles",
+        "Le processeur affiche un écran bleu et s'éteint immédiatement",
+        "La donnée est définitivement effacée de la mémoire vive",
+        "Le compilateur doit recompiler le programme à la volée"
+      ],
+      "correct_index": 0,
+      "explication": "Un cache miss est un événement matériel normal : le contrôleur de cache constate l'absence du bloc demandé, bloque temporairement le pipeline (stall) et rapatrie toute la ligne de cache depuis la RAM.",
+      "pieges": [
+        "Un défaut de cache n'est pas une panne matérielle ni une erreur de segmentation."
+      ],
+      "tags": [
+        "Cache miss",
+        "Pénalité de cache",
+        "Ligne de cache"
+      ]
+    },
+    {
+      "id": "r103_q18",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "5. L'Unité de Contrôle & Cycle d'Instruction",
+      "question": "Quel est le rôle exact du registre PC (Program Counter, ou Compteur Ordinal / IP) ?",
+      "options": [
+        "Contenir l'adresse mémoire de la prochaine instruction à charger et exécuter",
+        "Compter le nombre de fois où l'ordinateur a été démarré",
+        "Stocker l'instruction en cours de décodage par l'Unité de Contrôle",
+        "Mesurer la fréquence d'horloge du processeur en GHz"
+      ],
+      "correct_index": 0,
+      "explication": "Le Program Counter (PC) contient toujours l'adresse de la prochaine instruction. Il s'incrémente automatiquement après chaque chargement (ou prend l'adresse de saut lors d'un JUMP ou CALL).",
+      "pieges": [
+        "Le registre RI (Registre d'Instruction) contient le CODE de l'instruction, tandis que le PC contient son ADRESSE.",
+        "Ce n'est pas un compteur de statistiques d'allumage."
+      ],
+      "tags": [
+        "Program Counter",
+        "PC",
+        "Registre d'instruction",
+        "Cycle d'instruction"
+      ]
+    },
+    {
+      "id": "r103_q19",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "5. L'Unité de Contrôle & Cycle d'Instruction",
+      "question": "Quelles sont les 3 phases fondamentales du cycle d'exécution d'une instruction par le processeur ?",
+      "options": [
+        "Chargement (Fetch) -> Décodage (Decode) -> Exécution (Execute)",
+        "Allumage -> Formatage -> Extinction",
+        "Écriture -> Impression -> Sauvegarde",
+        "Compilation -> Débogage -> Exécution"
+      ],
+      "correct_index": 0,
+      "explication": "Le cycle d'instruction classique Von Neumann comprend : 1. Fetch (recherche de l'instruction pointée par PC et transfert dans RI), 2. Decode (analyse du code opération et des opérandes par l'UC), 3. Execute (calcul par l'UAL et écriture du résultat).",
+      "pieges": [
+        "Compilation et débogage sont des étapes du développement logiciel, pas le cycle d'horloge matériel du CPU."
+      ],
+      "tags": [
+        "Fetch Decode Execute",
+        "Cycle d'instruction",
+        "Horloge"
+      ]
+    },
+    {
+      "id": "r103_q20",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "5. L'Unité de Contrôle & Cycle d'Instruction",
+      "question": "Pourquoi les instructions et les données sont-elles indiscernables physiquement en mémoire dans l'architecture Von Neumann ?",
+      "options": [
+        "Parce que les deux ne sont que des suites de bits (zéros et uns) stockées dans les mêmes cases mémoire",
+        "Parce que les instructions sont toujours écrites en anglais",
+        "Parce que le processeur ne sait pas faire la différence entre un nombre et une lettre",
+        "Parce que les câbles électriques ne peuvent transporter qu'un seul type de signal"
+      ],
+      "correct_index": 0,
+      "explication": "C'est l'essence même de Von Neumann : au niveau physique, une instruction ou un entier n'est qu'un mot binaire dans la RAM. C'est l'Unité de Contrôle qui donne le sens selon qu'elle lit à travers le PC (instruction) ou un pointeur de données.",
+      "pieges": [
+        "Conséquence remarquable vue en cours : un programme peut fabriquer ou modifier ses propres instructions (compilateurs, virus, JIT)."
+      ],
+      "tags": [
+        "Programme enregistré",
+        "Von Neumann",
+        "Homogénéité mémoire"
+      ]
+    },
+    {
+      "id": "r103_q21",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "Quel est le principe fondamental du « pipeline » d'instructions dans un processeur ?",
+      "options": [
+        "Découper l'exécution d'une instruction en plusieurs étages pour traiter simultanément plusieurs instructions à des stades différents",
+        "Augmenter la taille physique du processeur pour faire passer plus de fils de cuivre",
+        "Remplacer l'électricité par un fluide liquide refroidissant",
+        "Supprimer totalement les registres pour écrire directement en RAM"
+      ],
+      "correct_index": 0,
+      "explication": "Comme une chaîne de montage automobile (cours M. Moulin), le pipeline permet d'exécuter l'instruction N pendant qu'on décode N+1 et qu'on charge N+2. Cela augmente le débit sans réduire le temps unitaire d'une instruction.",
+      "pieges": [
+        "Le pipeline ne réduit pas la latence d'une instruction individuelle (qui prend toujours autant d'étages), mais augmente le nombre d'instructions terminées par seconde."
+      ],
+      "tags": [
+        "Pipeline",
+        "Parallélisme d'instructions",
+        "Débit"
+      ]
+    },
+    {
+      "id": "r103_q22",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "Qu'appelle-t-on un « aléa de contrôle » (Branch Hazard) dans un pipeline de processeur ?",
+      "options": [
+        "Le pipeline ne sait pas quelle instruction charger tant qu'un saut conditionnel (ex: IF) n'a pas été évalué",
+        "Une coupure de courant sur la ligne d'alimentation",
+        "Deux instructions qui veulent écrire en même temps sur le même registre",
+        "Une division par zéro sur l'UAL"
+      ],
+      "correct_index": 0,
+      "explication": "Lors d'un saut conditionnel, la prochaine instruction à charger dépend du résultat du test. Si la prédiction de branchement échoue, toutes les instructions chargées par anticipation dans le pipeline doivent être vidées (Pipeline Flush).",
+      "pieges": [
+        "Deux instructions qui veulent le même registre constituent un « aléa de données » (Data Hazard), pas un aléa de contrôle."
+      ],
+      "tags": [
+        "Aléa de contrôle",
+        "Saut conditionnel",
+        "Pipeline Flush"
+      ]
+    },
+    {
+      "id": "r103_q23",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "Quelle est la différence fondamentale entre les architectures CISC (ex: x86) et RISC (ex: ARM) ?",
+      "options": [
+        "CISC possède des instructions complexes de longueurs variables avec accès direct à la mémoire ; RISC possède des instructions simples à taille fixe et architecture Load/Store",
+        "CISC ne fonctionne que sur Mac, RISC sur Windows",
+        "RISC n'a pas d'Unité Arithmétique et Logique",
+        "CISC consomme toujours 10 fois moins d'énergie que RISC"
+      ],
+      "correct_index": 0,
+      "explication": "CISC (Complex Instruction Set Computer) privilégie la compacité du code avec des instructions très riches. RISC (Reduced Instruction Set Computer) simplifie au maximum les instructions pour qu'elles s'exécutent en 1 cycle dans un pipeline régulier (seules les instructions LOAD et STORE touchent la mémoire).",
+      "pieges": [
+        "RISC (ARM, Apple Silicon) est réputé pour sa haute efficacité énergétique, alors que le x86 CISC historique était plus gourmand en énergie."
+      ],
+      "tags": [
+        "CISC",
+        "RISC",
+        "x86",
+        "ARM",
+        "Load/Store"
+      ]
+    },
+    {
+      "id": "r103_q24",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "Annexes : Babbage & Turing",
+      "question": "Dans la machine analytique de Charles Babbage (décrite par Menabrea en 1842), quels termes correspondaient respectivement à l'Unité de Traitement et à la Mémoire ?",
+      "options": [
+        "Le « moulin » (mill) pour le calcul et le « magasin » (store) pour le stockage",
+        "La « chaudière » et le « tiroir »",
+        "L'« engrenage » et la « bibliothèque »",
+        "Le « levier » et la « bobine »"
+      ],
+      "correct_index": 0,
+      "explication": "Babbage utilisait la métaphore industrielle textile : le « moulin » (mill) effectuait les opérations de tissage/calcul, tandis que le « magasin » (store) conservait les données et variables numériques sur roues dentées.",
+      "pieges": [
+        "C'est la référence exacte mise en exergue dans le cours de M. Moulin à l'IUT d'Anglet."
+      ],
+      "tags": [
+        "Babbage",
+        "Moulin",
+        "Magasin",
+        "Histoire informatique"
+      ]
+    },
+    {
+      "id": "r103_q25",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "Annexes : Babbage & Turing",
+      "question": "Quel résultat fondamental Alan Turing a-t-il démontré dans son article fondateur de 1936 (« On Computable Numbers ») ?",
+      "options": [
+        "Il existe une machine de Turing universelle capable d'exécuter n'importe quelle autre machine de Turing, mais le problème de l'arrêt est indécidable",
+        "Tous les ordinateurs doivent utiliser le système décimal",
+        "Il est impossible de concevoir un ordinateur électronique",
+        "L'intelligence artificielle dépassera l'humain en l'an 2000"
+      ],
+      "correct_index": 0,
+      "explication": "Turing a formalisé la notion d'algorithme et prouvé l'existence d'une machine universelle à programme enregistré. Il a également démontré qu'aucun algorithme universel ne peut prédire si un programme arbitraire s'arrêtera (problème de l'arrêt).",
+      "pieges": [
+        "Turing a montré les capacités absolues de calcul algorithmique tout en démontrant ses limites mathématiques théoriques infranchissables."
+      ],
+      "tags": [
+        "Turing",
+        "Indécidabilité",
+        "Problème de l'arrêt",
+        "Machine universelle"
+      ]
+    },
+    {
+      "id": "r103_q26",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann : UT, UC, Bus & E/S",
+      "question": "Quel est le rôle précis du registre d'état (PSW / Flags Register) dans l'Unité de Traitement ?",
+      "options": [
+        "Il stocke le prix de fabrication du microprocesseur",
+        "Il mémorise des indicateurs binaires (drapeaux Zero, Retenue, Débordement, Signe) résultant de la dernière opération arithmétique ou logique",
+        "Il enregistre la vitesse actuelle de la connexion Internet",
+        "Il conserve l'adresse de la page Web en cours de consultation"
+      ],
+      "correct_index": 1,
+      "explication": "Le registre d'état contient des bits individuels (flags) positionnés automatiquement par l'UAL : Z (Zero: résultat nul), C (Carry: retenue non signée), V (Overflow: débordement signé), N (Negative: bit de signe). Ces flags sont indispensables pour que les instructions de saut conditionnel (ex: BEQ, BGT) sachent si la condition est remplie.",
+      "pieges": [
+        "Le registre d'état ne stocke pas de données applicatives mais les métadonnées matérielles du calcul venant d'avoir lieu."
+      ],
+      "tags": [
+        "Flags",
+        "PSW",
+        "Zero Flag",
+        "Sauts conditionnels"
+      ]
+    },
+    {
+      "id": "r103_q27",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann : UT, UC, Bus & E/S",
+      "question": "Comment le registre Pointeur de Pile (Stack Pointer - SP) fonctionne-t-il lors de l'appel d'une fonction (instruction CALL) ?",
+      "options": [
+        "Il est réinitialisé à zéro et efface toute la mémoire",
+        "Il décrémente ou incrémente son adresse pour empiler l'adresse de retour (adresse de l'instruction suivant le CALL) sur la pile d'exécution LIFO",
+        "Il transfère le programme complet sur le disque dur",
+        "Il demande confirmation manuelle à l'utilisateur au clavier"
+      ],
+      "correct_index": 1,
+      "explication": "Lors d'un CALL, le processeur doit se souvenir d'où il vient. Il sauvegarde le Compteur Ordinal (PC) sur la pile gérée par SP. Lorsque la fonction se termine par RET, l'adresse est dépilée pour replacer PC à la suite de l'appel.",
+      "pieges": [
+        "La pile (Stack) suit le principe Dernier Entré Premier Sorti (LIFO), ce qui permet d'imbriquer les appels de fonctions et de gérer la récursivité."
+      ],
+      "tags": [
+        "Stack Pointer",
+        "Pile LIFO",
+        "CALL",
+        "RET",
+        "Adresse de retour"
+      ]
+    },
+    {
+      "id": "r103_q28",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann : UT, UC, Bus & E/S",
+      "question": "Quelle est la caractéristique fondamentale du bus d'adresses comparé au bus de données ?",
+      "options": [
+        "Le bus d'adresses est unidirectionnel (du processeur vers la mémoire/périphériques) alors que le bus de données est bidirectionnel",
+        "Le bus d'adresses ne transporte que des lettres alphabétiques",
+        "Le bus d'adresses est 10 fois plus lent que le bus de contrôle",
+        "Le bus d'adresses ne fonctionne que lorsque l'ordinateur est éteint"
+      ],
+      "correct_index": 0,
+      "explication": "Le processeur est le maître d'adressage : c'est lui qui émet l'adresse de la case mémoire à lire ou écrire sur le bus d'adresses. En revanche, le bus de données doit permettre au processeur d'écrire (CPU -> RAM) et de lire (RAM -> CPU), il est donc bidirectionnel.",
+      "pieges": [
+        "Ne pas confondre largeur du bus d'adresses (qui détermine la quantité maximale de RAM adressable : 2^N octets) et largeur du bus de données (qui détermine le nombre de bits transférés par cycle)."
+      ],
+      "tags": [
+        "Bus d'adresses",
+        "Bus de données",
+        "Unidirectionnel",
+        "Bidirectionnel"
+      ]
+    },
+    {
+      "id": "r103_q29",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann : UT, UC, Bus & E/S",
+      "question": "Si un processeur dispose d'un bus d'adresses de 32 bits, quel est l'espace mémoire physique maximal qu'il peut théoriquement adresser directement (en adressage par octet) ?",
+      "options": [
+        "32 Mo",
+        "4 Go (2^32 octets)",
+        "64 Go",
+        "512 Ko"
+      ],
+      "correct_index": 1,
+      "explication": "Avec 32 bits, on peut former 2^32 combinaisons d'adresses distinctes. Chaque adresse désignant 1 octet, 2^32 octets = 4 294 967 296 octets = 4 Go. C'est la limite historique bien connue des systèmes d'exploitation 32 bits.",
+      "pieges": [
+        "Piège d'examen : confondre bits et octets. L'adressage standard de la mémoire se fait par case de 1 octet (8 bits)."
+      ],
+      "tags": [
+        "Bus d'adresses",
+        "Espace d'adressage",
+        "32 bits",
+        "4 Go"
+      ]
+    },
+    {
+      "id": "r103_q30",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann : UT, UC, Bus & E/S",
+      "question": "En quoi consiste le goulot d'étranglement de Von Neumann (Von Neumann Bottleneck) ?",
+      "options": [
+        "La vitesse de calcul de l'UAL est limitée par le câble d'alimentation secteur",
+        "Le débit de transfert entre le processeur et la mémoire centrale sur un bus unique partagé est très inférieur à la vitesse de traitement interne du processeur",
+        "Le ventilateur du processeur fait trop de bruit pour les calculs scientifiques",
+        "La mémoire vive s'efface quand la température dépasse 40 degrés"
+      ],
+      "correct_index": 1,
+      "explication": "Comme les instructions et les données doivent transiter par le même bus externe pour aller de la RAM au CPU, le processeur passe une part considérable de son temps à attendre l'arrivée des données. C'est ce goulot qui a motivé l'introduction des mémoires caches hiérarchiques.",
+      "pieges": [
+        "La séparation physique des mémoires instruction et donnée (Architecture Harvard) est une solution partielle employée dans les microcontrôleurs et le cache L1."
+      ],
+      "tags": [
+        "Goulot Von Neumann",
+        "Bande passante mémoire",
+        "Latence"
+      ]
+    },
+    {
+      "id": "r103_q31",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Pourquoi la mémoire cache est-elle réalisée en technologie SRAM (Static RAM) tandis que la mémoire principale est en DRAM (Dynamic RAM) ?",
+      "options": [
+        "La SRAM utilise des bascules bistables à 6 transistors ultra-rapides sans rafraîchissement, mais coûteuse et volumineuse ; la DRAM utilise un simple condensateur par cellule, plus lente mais très dense et économique",
+        "La SRAM fonctionne avec de l'eau tandis que la DRAM fonctionne avec de l'huile",
+        "La DRAM est non volatile alors que la SRAM s'efface toutes les 2 secondes",
+        "La SRAM a été inventée par Apple et la DRAM par Microsoft"
+      ],
+      "correct_index": 0,
+      "explication": "Une cellule SRAM (6 transistors) conserve son état tant qu'elle est sous tension sans aucun cycle de rafraîchissement, offrant des temps d'accès de 1 à 3 ns. Une cellule DRAM (1 transistor + 1 condensateur) fuit électriquement et doit être rafraîchie des milliers de fois par seconde, ce qui la rend plus lente mais permet d'en mettre des milliards sur une barrette.",
+      "pieges": [
+        "Les deux sont des mémoires volatiles (perdent leur contenu hors tension). La distinction clé réside dans le rafraîchissement (Refresh cycle)."
+      ],
+      "tags": [
+        "SRAM",
+        "DRAM",
+        "Transistors",
+        "Rafraîchissement",
+        "Caches"
+      ]
+    },
+    {
+      "id": "r103_q32",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Qu'est-ce qu'une « ligne de cache » (cache line) dans l'architecture matérielle ?",
+      "options": [
+        "Un fil électrique reliant le clavier à la carte mère",
+        "Le bloc d'octets contigus (typiquement 64 octets) transféré en un seul bloc indivisible entre la RAM et le cache lors d'un défaut de cache",
+        "Une ligne de commande écrite en langage bash",
+        "Une règle graduée utilisée pour mesurer la taille de la puce"
+      ],
+      "correct_index": 1,
+      "explication": "Le cache ne charge jamais un seul octet isolé ! Lors d'un miss, il ramène toute une ligne de cache (64 octets alignés). Cela permet d'exploiter immédiatement la localité spatiale : les instructions ou données suivantes se trouveront déjà dans le cache.",
+      "pieges": [
+        "Même si le processeur demande 1 seul octet (ex: char c), le contrôleur de cache charge l'intégralité des 64 octets entourant cette adresse."
+      ],
+      "tags": [
+        "Ligne de cache",
+        "Cache line",
+        "64 octets",
+        "Localité spatiale"
+      ]
+    },
+    {
+      "id": "r103_q33",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Quelle est la différence fondamentale entre la politique d'écriture « Write-Through » et la politique « Write-Back » dans un cache ?",
+      "options": [
+        "Write-Through écrit simultanément dans le cache et la RAM ; Write-Back n'écrit que dans le cache et ne met à jour la RAM que lors de l'éviction de la ligne modifiée (dirty bit)",
+        "Write-Through n'écrit que les nombres positifs, Write-Back les négatifs",
+        "Write-Back supprime immédiatement toutes les données du disque dur",
+        "Write-Through n'est utilisé que pour les clés USB"
+      ],
+      "correct_index": 0,
+      "explication": "Write-Through garantit la cohérence permanente entre le cache et la RAM mais génère un trafic mémoire élevé sur chaque écriture. Write-Back économise massivement la bande passante en différant l'écriture en RAM grâce à un indicateur 'dirty bit' (ligne modifiée).",
+      "pieges": [
+        "Le 'dirty bit' signale que la ligne de cache a été modifiée par rapport à la mémoire principale et doit obligatoirement être réécrite en RAM avant d'être écrasée."
+      ],
+      "tags": [
+        "Write-Through",
+        "Write-Back",
+        "Dirty bit",
+        "Cohérence"
+      ]
+    },
+    {
+      "id": "r103_q34",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Si un cache a un temps d'accès de 2 ns, que la RAM a un temps d'accès de 80 ns, et que le taux de succès (hit rate) est de 95 %, quel est le temps moyen d'accès à la mémoire ?",
+      "options": [
+        "2 + 80 = 82 ns",
+        "5.9 ns (0.95 * 2 ns + 0.05 * 80 ns)",
+        "41 ns",
+        "0.1 ns"
+      ],
+      "correct_index": 1,
+      "explication": "Formule canonique vue en cours avec M. Moulin : Temps Moyen = (Taux_Hit * T_cache) + (Taux_Miss * T_RAM). Ici : (0.95 * 2) + (0.05 * 80) = 1.9 + 4.0 = 5.9 ns. Cela montre l'efficacité spectaculaire d'un bon cache (95% de hit réduit le temps d'accès moyen de 80 ns à moins de 6 ns !).",
+      "pieges": [
+        "Attention au taux de défaut (miss rate) : 100% - 95% = 5% = 0.05. Ne pas oublier de le multiplier par le temps de la RAM."
+      ],
+      "tags": [
+        "Hit rate",
+        "Miss rate",
+        "Temps moyen d'accès",
+        "Calcul cache"
+      ]
+    },
+    {
+      "id": "r103_q35",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "4. La Mémoire et le Cache",
+      "question": "Pourquoi parcourir une matrice 2D par colonnes (en langage C) est-il beaucoup plus lent que de la parcourir par lignes ?",
+      "options": [
+        "Parce que le compilateur C déteste les colonnes",
+        "En C, les tableaux sont stockés en mémoire contiguë ligne par ligne (Row-Major Order) : le parcours par colonnes provoque un défaut de cache (cache miss) à chaque itération en sautant de ligne en ligne",
+        "Parce que les colonnes nécessitent obligatoirement des nombres flottants",
+        "Le parcours par colonnes utilise deux fois plus d'électricité"
+      ],
+      "correct_index": 1,
+      "explication": "En C, l'élément [i][j+1] est immédiatement consécutif en RAM à [i][j] (Row-Major). En parcourant par lignes, les éléments voisins sont déjà préchargés dans la ligne de cache (localité spatiale). En parcourant par colonnes [i+1][j], on fait un bond de N éléments en mémoire, vidant le cache continuellement.",
+      "pieges": [
+        "Exemple classique illustré en TD d'architecture : un simple changement d'ordre de deux boucles imbriquées peut multiplier le temps d'exécution par 10 ou 20 à algorithme identique !"
+      ],
+      "tags": [
+        "Row-Major",
+        "Localité spatiale",
+        "Cache miss",
+        "Optimisation C"
+      ]
+    },
+    {
+      "id": "r103_q36",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'Information",
+      "question": "Comment s'effectue la négation d'un nombre entier en complément à 2 sur 8 bits ?",
+      "options": [
+        "On inverse simplement le premier bit à gauche",
+        "On inverse tous les bits (complément à 1 avec l'opérateur NOT), puis on ajoute 1 au résultat binaire",
+        "On soustrait 256 au nombre",
+        "On multiplie par -1 en virgule flottante"
+      ],
+      "correct_index": 1,
+      "explication": "Règle universelle du complément à 2 : -X = NOT(X) + 1. Par exemple pour +5 (00000101) : inversion -> 11111010, puis +1 -> 11111011 (-5 en binaire). Cette méthode permet à l'UAL d'utiliser le même circuit additionneur pour additionner et soustraire !",
+      "pieges": [
+        "Inverser uniquement le bit de poids fort (signe/valeur absolue) conduirait à l'existence de deux zéros (+0 et -0), ce que le complément à 2 élimine élégamment."
+      ],
+      "tags": [
+        "Complément à 2",
+        "Inversion de bits",
+        "Additionneur",
+        "Entiers signés"
+      ]
+    },
+    {
+      "id": "r103_q37",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'Information",
+      "question": "Sur 8 bits signés en complément à 2, quel est l'intervalle exact des entiers représentables ?",
+      "options": [
+        "De 0 à 255",
+        "De -128 à +127",
+        "De -127 à +128",
+        "De -256 à +255"
+      ],
+      "correct_index": 1,
+      "explication": "Formule générale pour N bits : de -2^(N-1) à +(2^(N-1) - 1). Pour N=8 : de -2^7 (-128) à +(2^7 - 1) (+127). Il y a une valeur négative de plus que de valeurs positives à cause de la représentation unique du zéro.",
+      "pieges": [
+        "Piège classique : croire que l'intervalle est symétrique [-128, +128]. +128 ne peut pas être représenté sur 8 bits signés (débordement) !"
+      ],
+      "tags": [
+        "Complément à 2",
+        "Intervalle",
+        "-128 à +127",
+        "Overflow"
+      ]
+    },
+    {
+      "id": "r103_q38",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'Information",
+      "question": "Comment détecte-t-on matériellement un dépassement de capacité (Overflow) lors de l'addition de deux entiers signés ?",
+      "options": [
+        "Le processeur s'éteint immédiatement",
+        "Lorsque l'addition de deux nombres de même signe produit un résultat de signe opposé (ex: positif + positif = négatif)",
+        "Dès qu'une retenue sort du bit de poids faible",
+        "Uniquement si l'un des deux nombres vaut zéro"
+      ],
+      "correct_index": 1,
+      "explication": "En arithmétique signée, si on additionne deux entiers positifs (bit de signe 0) et qu'on obtient un bit de signe 1 (négatif), ou l'inverse, il y a eu débordement arithmétique. Le bit V (Overflow Flag) du registre d'état est alors activé à 1.",
+      "pieges": [
+        "Ne pas confondre la retenue non signée (Carry Flag, qui signale un dépassement au-delà de 255 sur 8 bits) et le débordement signé (Overflow Flag)."
+      ],
+      "tags": [
+        "Overflow",
+        "Débordement",
+        "Bit de signe",
+        "Arithmétique signée"
+      ]
+    },
+    {
+      "id": "r103_q39",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'Information",
+      "question": "Dans la norme IEEE 754 simple précision (32 bits), comment sont répartis les bits pour représenter un nombre à virgule flottante ?",
+      "options": [
+        "10 bits signe, 10 bits exposant, 12 bits mantisse",
+        "1 bit de signe, 8 bits d'exposant (biaisé de 127), 23 bits de mantisse (avec bit implicite à 1)",
+        "16 bits partie entière, 16 bits partie décimale",
+        "32 bits pour la mantisse et le signe est stocké dans un registre séparé"
+      ],
+      "correct_index": 1,
+      "explication": "Norme IEEE 754 float 32 bits : Bit 31 = Signe (0 positif, 1 négatif) ; Bits 30 à 23 = Exposant biaisé (E_stocké = E_réel + 127) ; Bits 22 à 0 = Mantisse normalisée 1,M (le 1 initial n'est pas stocké pour économiser 1 bit).",
+      "pieges": [
+        "Le bit implicite à 1 permet de gagner 1 bit de précision gratuite pour tous les nombres normalisés."
+      ],
+      "tags": [
+        "IEEE 754",
+        "Flottants",
+        "Signe",
+        "Exposant biaisé",
+        "Mantisse"
+      ]
+    },
+    {
+      "id": "r103_q40",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "2. Représentation de l'Information",
+      "question": "Pourquoi l'encodage UTF-8 est-il dit « auto-synchronisant » et rétro-compatible avec l'ASCII ?",
+      "options": [
+        "Parce que les 128 premiers caractères (ASCII standard 0-127) sont codés sur exactement 1 octet avec leur bit de poids fort à 0, et les octets suivants de caractères multi-octets commencent toujours par le préfixe binaire 10xxxxxx",
+        "Parce qu'il utilise le protocole NTP pour synchroniser l'heure avec les satellites",
+        "Parce qu'il traduit automatiquement le texte en anglais",
+        "Parce qu'il crypte les données avec une clé RSA"
+      ],
+      "correct_index": 0,
+      "explication": "Génie de conception de Ken Thompson et Rob Pike : un fichier ASCII pur est un fichier UTF-8 valide identique au bit près. De plus, si on arrive au milieu d'un flux de données corrompu, on sait immédiatement si on est sur un octet de tête (0xxxxxxx, 110xxxxx, 1110xxxx...) ou un octet de suite (10xxxxxx).",
+      "pieges": [
+        "UTF-16 et UTF-32 ne sont PAS rétro-compatibles avec l'ASCII car ils utilisent au minimum 2 ou 4 octets par caractère, insérant des octets nuls 0x00 qui coupent les chaînes en C."
+      ],
+      "tags": [
+        "UTF-8",
+        "ASCII",
+        "Auto-synchronisation",
+        "Encodage"
+      ]
+    },
+    {
+      "id": "r103_q41",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "5. L'Unité de Contrôle & Cycle d'Instruction",
+      "question": "Que fait exactement l'Unité de Contrôle lors de la micro-étape « Fetch » (Recherche d'instruction) ?",
+      "options": [
+        "Elle exécute l'addition dans l'UAL",
+        "Elle place le contenu de PC sur le bus d'adresses, active le signal de lecture (READ) sur le bus de contrôle, récupère le mot d'instruction sur le bus de données pour le charger dans RI, puis incrémente PC",
+        "Elle affiche l'instruction à l'écran pour que l'utilisateur la valide",
+        "Elle formate la partition du disque dur"
+      ],
+      "correct_index": 1,
+      "explication": "Séquence formelle du Fetch (cours M. Moulin) : 1. MAR <- PC ; 2. Lancement cycle lecture mémoire ; 3. MBR <- Donnée mémoire ; 4. RI <- MBR ; 5. PC <- PC + taille_instruction. L'instruction est désormais prête à être décodée dans le Registre d'Instruction.",
+      "pieges": [
+        "L'incrémentation de PC se fait dès la fin du Fetch, pour pointer par avance sur la prochaine instruction séquentielle."
+      ],
+      "tags": [
+        "Fetch",
+        "Cycle d'instruction",
+        "PC",
+        "RI",
+        "Bus"
+      ]
+    },
+    {
+      "id": "r103_q42",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "5. L'Unité de Contrôle & Cycle d'Instruction",
+      "question": "Quelle est la différence fondamentale entre une unité de contrôle « câblée » et une unité de contrôle « microprogrammée » ?",
+      "options": [
+        "L'unité câblée utilise des portes logiques dédiées ultra-rapides mais figées ; l'unité microprogrammée utilise une petite mémoire morte (ROM de microcode) interprétant les instructions, plus souple mais plus lente",
+        "L'unité câblée n'a pas besoin d'électricité",
+        "L'unité microprogrammée est programmée en Python par l'utilisateur",
+        "Il n'y a aucune différence technique, ce sont deux marques déposées"
+      ],
+      "correct_index": 0,
+      "explication": "Dans un CPU RISC, l'UC est souvent entièrement câblée en circuits combinatoires/séquentiels pour aller le plus vite possible (1 cycle par instruction). Dans les architectures CISC complexes (comme x86), l'UC exécute du microcode interne qui décompose chaque instruction complexe en micro-opérations simples.",
+      "pieges": [
+        "Le microcode est interne au silicium du constructeur (Intel, AMD) et n'est pas accessible au programmeur assembleur classique."
+      ],
+      "tags": [
+        "Unité de contrôle",
+        "Câblée",
+        "Microprogrammée",
+        "Microcode"
+      ]
+    },
+    {
+      "id": "r103_q43",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "5. L'Unité de Contrôle & Cycle d'Instruction",
+      "question": "Que signifie la fréquence d'horloge d'un processeur (exprimée en Gigahertz, GHz) ?",
+      "options": [
+        "Le nombre d'octets que le disque dur peut lire par seconde",
+        "Le nombre de cycles d'horloge de base oscillant par seconde (1 GHz = 1 milliard de battements par seconde synchronisant les transitions logiques)",
+        "La vitesse maximale du ventilateur en tours par minute",
+        "Le temps nécessaire pour charger Windows"
+      ],
+      "correct_index": 1,
+      "explication": "L'horloge génère un signal carré régulier cadençant les bascules et registres du processeur. À 3 GHz, la durée d'un cycle élémentaire est de 1 / (3 * 10^9) seconde ≈ 0.33 nanoseconde.",
+      "pieges": [
+        "Attention : 1 cycle d'horloge ne signifie pas 1 instruction terminée (sauf cas idéal avec pipeline) ! Deux processeurs à la même fréquence peuvent avoir des performances très différentes selon leur IPC (Instructions Par Cycle)."
+      ],
+      "tags": [
+        "Fréquence d'horloge",
+        "GHz",
+        "Période d'horloge",
+        "IPC"
+      ]
+    },
+    {
+      "id": "r103_q44",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "5. L'Unité de Contrôle & Cycle d'Instruction",
+      "question": "Quelle opération logique binaire permet d'isoler (masquer) certains bits d'un registre sans toucher aux autres ?",
+      "options": [
+        "L'opération ET logique (AND) avec un masque ayant des 1 aux positions souhaitées et des 0 ailleurs",
+        "L'opération OU logique (OR) avec que des 1",
+        "Une division par zéro",
+        "L'opération NON logique (NOT)"
+      ],
+      "correct_index": 0,
+      "explication": "Propriété fondamentale de l'algèbre booléenne : X AND 1 = X, et X AND 0 = 0. En appliquant un masque avec AND, on conserve intacts les bits voulus tout en forçant tous les autres bits à 0.",
+      "pieges": [
+        "Pour forcer des bits à 1, on utilise l'opération OU (OR car X OR 1 = 1). Pour inverser des bits ciblés, on utilise le XOR (X XOR 1 = NOT X)."
+      ],
+      "tags": [
+        "Masquage",
+        "AND logique",
+        "Opérations bit à bit",
+        "UAL"
+      ]
+    },
+    {
+      "id": "r103_q45",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "Quels sont les 5 étages classiques du pipeline d'instructions RISC (MIPS / DLX classique) ?",
+      "options": [
+        "IF (Fetch), ID (Decode), EX (Execute), MEM (Memory access), WB (Write Back)",
+        "Start, Compile, Link, Run, Stop",
+        "Clavier, Souris, Écran, Carte mère, Alimentation",
+        "Scan, Parse, Tokenize, Build, Deploy"
+      ],
+      "correct_index": 0,
+      "explication": "Les 5 étages standards enseignés à l'IUT : 1. IF (Instruction Fetch: chercher l'instruction), 2. ID (Instruction Decode & lecture des registres), 3. EX (Execute: calcul UAL ou calcul d'adresse effective), 4. MEM (accès mémoire data pour LOAD/STORE), 5. WB (Write Back: écriture du résultat final dans le registre cible).",
+      "pieges": [
+        "Toutes les instructions traversent les 5 étages au même rythme cadencé pour éviter les collisions."
+      ],
+      "tags": [
+        "Pipeline 5 étages",
+        "IF ID EX MEM WB",
+        "RISC",
+        "MIPS"
+      ]
+    },
+    {
+      "id": "r103_q46",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "Qu'est-ce qu'un aléa de données « RAW » (Read After Write / Vraie dépendance) dans un pipeline ?",
+      "options": [
+        "Une instruction tente de lire le contenu d'un registre avant qu'une instruction précédente n'ait eu le temps d'y écrire son résultat calculé",
+        "Le disque dur est formaté en système de fichiers RAW non reconnu",
+        "Une tentative de lecture sur un fichier non compilé",
+        "Deux écrans branchés sur la même carte graphique"
+      ],
+      "correct_index": 0,
+      "explication": "Exemple : Instruction 1 : R1 = R2 + R3 (le résultat ne sera écrit dans R1 qu'à l'étage WB au cycle 5). Instruction 2 : R4 = R1 + R5 (veut lire R1 dès son étage ID au cycle 3). Si on ne fait rien, l'instruction 2 lira une ancienne valeur erronée de R1.",
+      "pieges": [
+        "Le mécanisme matériel de 'Forwarding' (court-circuit) résout la plupart des aléas RAW en dérivant le résultat directement de la sortie de l'ALU vers l'étage EX suivant sans attendre l'étage WB."
+      ],
+      "tags": [
+        "Aléa RAW",
+        "Read After Write",
+        "Dépendance de données",
+        "Forwarding"
+      ]
+    },
+    {
+      "id": "r103_q47",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "En quoi consiste la technique du « court-circuit matériel » (Forwarding / Bypassing) dans un processeur avec pipeline ?",
+      "options": [
+        "Créer un court-circuit électrique pour faire fondre les composants défectueux",
+        "Acheminer le résultat produit à la sortie de l'étage EX ou MEM directement vers l'entrée de l'UAL pour l'instruction suivante, sans attendre l'écriture dans le banc de registres",
+        "Éviter de compiler les boucles for",
+        "Supprimer le système de refroidissement"
+      ],
+      "correct_index": 1,
+      "explication": "Le Forwarding relie par des multiplexeurs la sortie du registre pipeline EX/MEM à l'entrée de l'étage EX. L'instruction suivante dispose immédiatement de la valeur calculée sans avoir besoin d'insérer des bulles d'attente (NOP).",
+      "pieges": [
+        "Attention : dans le cas d'une instruction LOAD suivie immédiatement d'une instruction qui utilise la donnée chargée, un cycle de gel (stall) reste inévitable même avec Forwarding (Load-Use delay)."
+      ],
+      "tags": [
+        "Forwarding",
+        "Bypassing",
+        "Résolution aléa",
+        "Pipeline"
+      ]
+    },
+    {
+      "id": "r103_q48",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "Que provoque une erreur de prédiction de branchement (Branch Misprediction) dans un processeur moderne ?",
+      "options": [
+        "Un crash définitif de la carte mère",
+        "L'obligation de vider immédiatement toutes les instructions chargées à tort dans le pipeline (Pipeline Flush), gaspillant ainsi plusieurs cycles d'horloge (pénalité de branchement)",
+        "L'affichage d'un écran bleu de la mort à chaque condition if",
+        "L'effacement complet de la mémoire cache L3"
+      ],
+      "correct_index": 1,
+      "explication": "Dans les pipelines profonds (10 à 20 étages), le CPU devine quel chemin le IF prendra. S'il s'est trompé, toutes les instructions en cours de traitement dans le pipeline sont annulées (flushed), ce qui occasionne une pénalité de 10 à 20 cycles.",
+      "pieges": [
+        "C'est pourquoi les prédicteurs de branchement modernes (utilisant des tables d'historique et des réseaux neuronaux) atteignent plus de 95% de précision."
+      ],
+      "tags": [
+        "Prédiction de branchement",
+        "Pipeline Flush",
+        "Branch penalty"
+      ]
+    },
+    {
+      "id": "r103_q49",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "6. Pipeline, Parallélisme & CISC/RISC",
+      "question": "Quelle est la caractéristique majeure de l'architecture « Load / Store » propre aux processeurs RISC ?",
+      "options": [
+        "Toutes les instructions peuvent lire et écrire directement dans la RAM",
+        "Seules deux instructions spécifiques (LOAD pour charger en registre et STORE pour enregistrer en RAM) peuvent accéder à la mémoire centrale ; toutes les opérations de calcul s'effectuent exclusivement entre registres",
+        "Le processeur n'a pas de mémoire RAM",
+        "Les registres sont stockés sur le disque dur"
+      ],
+      "correct_index": 1,
+      "explication": "Dans une architecture Load/Store, on ne peut pas faire 'ADD R1, [0x1000]'. Il faut obligatoirement faire 'LOAD R2, [0x1000]' puis 'ADD R1, R2'. Cela simplifie considérablement le matériel et régularise le pipeline.",
+      "pieges": [
+        "C'est l'opposé de l'architecture CISC x86 historique où une instruction arithmétique peut avoir un opérande directement en mémoire."
+      ],
+      "tags": [
+        "Load/Store",
+        "RISC",
+        "Registres",
+        "Orthogonalité"
+      ]
+    },
+    {
+      "id": "r103_q50",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "7. Évolutions de l'Architecture : Multicœurs & Parallélisme",
+      "question": "Que stipule la Loi d'Amdahl concernant le gain de performance obtenu par l'ajout de cœurs de processeur ?",
+      "options": [
+        "La vitesse est toujours proportionnelle au nombre de processeurs multiplié par 2",
+        "L'accélération maximale d'un programme parallélisé est strictement bornée par la proportion de son code qui demeure séquentielle (non parallélisable)",
+        "Plus on met de cœurs, plus l'ordinateur devient lent",
+        "La loi d'Amdahl ne s'applique qu'aux cartes graphiques"
+      ],
+      "correct_index": 1,
+      "explication": "Formule : Accélération_max = 1 / ((1 - p) + (p / N)). Si 10% d'un programme est intrinsèquement séquentiel (p=0.9), même avec 1 000 000 de cœurs (N -> infini), l'accélération ne pourra JAMAIS dépasser 1 / (1 - 0.9) = 10 fois !",
+      "pieges": [
+        "Ajouter des cœurs n'accélère pas la partie séquentielle du programme. C'est l'écueil majeur de la programmation parallèle."
+      ],
+      "tags": [
+        "Loi d'Amdahl",
+        "Parallélisme",
+        "Accélération limite",
+        "Partie séquentielle"
+      ]
+    },
+    {
+      "id": "r103_q51",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "7. Évolutions de l'Architecture : Multicœurs & Parallélisme",
+      "question": "Quel problème fondamental le protocole de cohérence de cache MESI (Modified, Exclusive, Shared, Invalid) résout-il sur un processeur multicœur ?",
+      "options": [
+        "Il empêche le processeur de surchauffer",
+        "Il évite qu'un cœur lise dans son cache privé une ancienne valeur périmée alors qu'un autre cœur vient d'écrire une nouvelle valeur dans son propre cache",
+        "Il crypte les données échangées entre les cœurs",
+        "Il gère la connexion Wi-Fi des différents cœurs"
+      ],
+      "correct_index": 1,
+      "explication": "Sur un processeur multicœur, chaque cœur possède son cache L1 privé. Si le cœur A modifie une variable partagée X, le protocole MESI invalide immédiatement la copie de X présente dans le cache du cœur B en écoutant le bus partagé (Bus Snooping).",
+      "pieges": [
+        "Les 4 états de MESI : Modified (modifié localement), Exclusive (identique à la RAM, présent uniquement ici), Shared (identique à la RAM, présent dans plusieurs caches), Invalid (donnée périmée à recharger)."
+      ],
+      "tags": [
+        "MESI",
+        "Cohérence de cache",
+        "Multicœur",
+        "Bus Snooping"
+      ]
+    },
+    {
+      "id": "r103_q52",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "7. Évolutions de l'Architecture : Multicœurs & Parallélisme",
+      "question": "En quoi l'architecture matérielle d'un GPU (processeur graphique) diffère-t-elle radicalement de celle d'un CPU (processeur central) ?",
+      "options": [
+        "Le CPU possède quelques cœurs très puissants et complexes optimisés pour exécuter du code séquentiel avec une latence minimale ; le GPU possède des milliers de petits cœurs simples optimisés pour le débit massif de calculs parallèles identiques (SIMD / SIMT)",
+        "Le GPU ne sait faire que des soustractions",
+        "Le CPU n'a pas d'unité arithmétique",
+        "Le GPU est entièrement mécanique alors que le CPU est électronique"
+      ],
+      "correct_index": 0,
+      "explication": "Le CPU consacre l'essentiel de sa surface de silicium au contrôle (prédiction de branchement, exécution hors ordre) et à de gigantesques mémoires caches. Le GPU consacre sa surface presque exclusivement aux unités de calcul (ALU) pour traiter en parallèle des millions de pixels ou tenseurs.",
+      "pieges": [
+        "Le GPU est très mauvais pour exécuter du code à branchements imprévisibles, mais imbattable sur le traitement matriciel régulier (3D, IA)."
+      ],
+      "tags": [
+        "GPU vs CPU",
+        "SIMD",
+        "SIMT",
+        "Débit vs Latence",
+        "Parallélisme massif"
+      ]
+    },
+    {
+      "id": "r103_q53",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "8. Codage des Images, Vidéos & Multimédia",
+      "question": "Combien d'octets de données brutes non compressées nécessite une image matricielle de résolution 1920 x 1080 pixels codée en couleur vraie (RGB 24 bits) ?",
+      "options": [
+        "Environ 2 Mo",
+        "Exactement 6 220 800 octets (environ 6.22 Mo)",
+        "1920 Ko",
+        "64 Go"
+      ],
+      "correct_index": 1,
+      "explication": "Calcul fondamental : Nombre de pixels = 1920 * 1080 = 2 073 600 pixels. En RGB 24 bits, chaque pixel occupe 3 octets (1 octet Rouge + 1 octet Vert + 1 octet Bleu). Taille brute = 2 073 600 * 3 = 6 220 800 octets ≈ 5.93 Mio (ou 6.22 Mo décimaux).",
+      "pieges": [
+        "Piège d'examen : ne pas confondre 24 bits (qui font 3 octets par pixel) avec 24 octets par pixel !"
+      ],
+      "tags": [
+        "Images matricielles",
+        "RGB 24 bits",
+        "Calcul taille",
+        "Pixels"
+      ]
+    },
+    {
+      "id": "r103_q54",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "8. Codage des Images, Vidéos & Multimédia",
+      "question": "Quelle est la différence fondamentale entre la compression sans perte (ex: PNG) et la compression avec perte (ex: JPEG) ?",
+      "options": [
+        "La compression sans perte permet de reconstruire l'image originale au bit près sans aucune altération ; la compression avec perte élimine définitivement des informations jugées peu perceptibles par l'œil humain pour obtenir des taux de compression bien supérieurs",
+        "La compression sans perte ne fonctionne qu'avec des images en noir et blanc",
+        "La compression avec perte augmente la taille du fichier sur le disque",
+        "JPEG est un format vectoriel alors que PNG est du texte pur"
+      ],
+      "correct_index": 0,
+      "explication": "PNG utilise l'algorithme DEFLATE (LZ77 + Huffman) : réversible à 100%. JPEG utilise la Transformée en Cosinus Discrète (DCT) et la quantification fréquentielle : les détails haute fréquence imperceptibles sont jetés, ce qui est irréversible mais réduit la taille par 10 ou 20.",
+      "pieges": [
+        "Réenregistrer plusieurs fois de suite un fichier en JPEG dégrade la qualité à chaque fois (génération loss)."
+      ],
+      "tags": [
+        "Compression sans perte",
+        "Compression avec perte",
+        "PNG",
+        "JPEG",
+        "DCT"
+      ]
+    },
+    {
+      "id": "r103_q55",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "8. Codage des Images, Vidéos & Multimédia",
+      "question": "Selon le théorème d'échantillonnage de Nyquist-Shannon, à quelle fréquence minimale doit-on échantillonner un signal sonore audible (dont la fréquence maximale perçue par l'oreille humaine est d'environ 20 kHz) ?",
+      "options": [
+        "Au moins 10 kHz",
+        "Au moins le double de la fréquence maximale, soit au moins 40 kHz (d'où le standard Audio CD à 44.1 kHz)",
+        "À exactement 1 GHz",
+        "Une fois par seconde suffit largement"
+      ],
+      "correct_index": 1,
+      "explication": "Théorème de Shannon : Fe >= 2 * Fmax pour éviter le phénomène de repliement de spectre (aliasing). Pour l'oreille humaine (bande 20 Hz - 20 000 Hz), Fe doit être supérieure à 40 000 Hz. Le format CD Audio standardise cette valeur à 44.1 kHz (16 bits stéréo).",
+      "pieges": [
+        "Si la fréquence d'échantillonnage est trop basse (< 2*Fmax), des fréquences fantômes inaudibles dans le signal d'origine apparaissent dans le son restitué."
+      ],
+      "tags": [
+        "Nyquist-Shannon",
+        "Échantillonnage",
+        "44.1 kHz",
+        "Audio CD",
+        "Aliasing"
+      ]
+    },
+    {
+      "id": "r103_q56",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "Annexes : Babbage & Ada Lovelace",
+      "question": "Pourquoi Ada Lovelace (comtesse de Lovelace) est-elle reconnue historiquement comme la toute première programmeuse de l'histoire informatique ?",
+      "options": [
+        "Elle a fondé l'entreprise Microsoft au 19ème siècle",
+        "En 1843, dans ses notes détaillées sur la machine analytique de Babbage, elle a conçu le premier algorithme complet destiné à être exécuté par une machine (pour calculer les nombres de Bernoulli)",
+        "Elle a inventé l'écran à cristaux liquides",
+        "Elle a découvert la formule de la relativité restreinte"
+      ],
+      "correct_index": 1,
+      "explication": "Dans sa Note G publiée en 1843, Ada Lovelace a décrit avec une précision mathématique remarquable la séquence d'instructions pas à pas, avec boucles et embranchements, pour calculer les nombres de Bernoulli sur la machine analytique de Babbage.",
+      "pieges": [
+        "Elle avait également compris que la machine pouvait manipuler d'autres symboles que des nombres (comme des notes de musique ou du texte), anticipant la révolution informatique 100 ans avant l'électronique."
+      ],
+      "tags": [
+        "Ada Lovelace",
+        "Machine analytique",
+        "Premier programme",
+        "Nombres de Bernoulli"
+      ]
+    },
+    {
+      "id": "r103_q57",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "Annexes : John von Neumann & EDVAC",
+      "question": "Quel était le titre et l'année du document historique dans lequel John von Neumann a décrit pour la première fois l'architecture des ordinateurs modernes ?",
+      "options": [
+        "« First Draft of a Report on the EDVAC » en 1945",
+        "« The Windows 95 Bible » en 1995",
+        "« Programmation en langage C » en 1978",
+        "« Le Traité d'Internet » en 1969"
+      ],
+      "correct_index": 0,
+      "explication": "Le « First Draft of a Report on the EDVAC » (101 pages rédigées en juin 1945) a posé les bases théoriques de l'ordinateur moderne : découpage en unité arithmétique (CA), unité de contrôle (CC), mémoire centrale (M), entrées/sorties (I/O) et stockage du programme dans la même mémoire que les données.",
+      "pieges": [
+        "Ce document était un brouillon confidentiel diffusé par Herman Goldstine, ce qui valut à von Neumann d'être crédité seul au détriment des ingénieurs concepteurs de l'ENIAC (Eckert et Mauchly)."
+      ],
+      "tags": [
+        "Von Neumann",
+        "EDVAC",
+        "1945",
+        "First Draft",
+        "Histoire"
+      ]
+    },
+    {
+      "id": "r103_q58",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "Annexes : Décidabilité & Turing",
+      "question": "Qu'est-ce que le « problème de l'arrêt » démontré par Alan Turing en 1936 ?",
+      "options": [
+        "L'impossibilité d'éteindre un ordinateur qui a pris feu",
+        "La preuve mathématique qu'il n'existe aucun algorithme général capable de décider si un programme arbitraire s'arrêtera un jour ou tournera indéfiniment",
+        "L'obligation de redémarrer le système toutes les 24 heures",
+        "Le fait que les trains arrivaient toujours en retard à Londres en 1936"
+      ],
+      "correct_index": 1,
+      "explication": "Turing utilise un raisonnement par l'absurde (par diagonalisation) : en supposant qu'il existe un programme H(P, I) qui prédit l'arrêt, il construit une machine paradoxale qui s'arrête si H dit qu'elle boucle, et qui boucle si H dit qu'elle s'arrête. Cette contradiction prouve l'indécidabilité du problème.",
+      "pieges": [
+        "C'est la démonstration éclatante qu'il existe des problèmes parfaitement définis que l'informatique ne pourra JAMAIS résoudre par un algorithme universel."
+      ],
+      "tags": [
+        "Problème de l'arrêt",
+        "Turing",
+        "Indécidabilité",
+        "Calculabilité"
+      ]
+    },
+    {
+      "id": "r103_q59",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "1. Introduction : Qu'est-ce qu'un ordinateur ?",
+      "question": "Quel est le rôle du micrologiciel UEFI (ou BIOS historique) lors du démarrage de l'ordinateur ?",
+      "options": [
+        "Il télécharge automatiquement les jeux vidéo depuis Steam",
+        "Il initialise et teste les composants matériels essentiels (POST - Power-On Self-Test), puis localise et charge en mémoire vive le chargeur d'amorçage (Bootloader) du système d'exploitation",
+        "Il crypte le disque dur pour empêcher le démarrage",
+        "Il augmente la luminosité de l'écran"
+      ],
+      "correct_index": 1,
+      "explication": "Au démarrage, le processeur s'éveille à une adresse mémoire fixe pointant vers la puce ROM/Flash contenant l'UEFI/BIOS. L'UEFI teste la RAM, la carte mère, puis charge le premier secteur du disque ou la partition EFI (GRUB, Windows Boot Manager) pour passer la main à l'OS.",
+      "pieges": [
+        "Le BIOS/UEFI n'est pas le système d'exploitation lui-même, mais le programme de bas niveau qui permet d'amorcer l'OS."
+      ],
+      "tags": [
+        "UEFI",
+        "BIOS",
+        "POST",
+        "Bootloader",
+        "Démarrage"
+      ]
+    },
+    {
+      "id": "r103_q60",
+      "module": "R1.03",
+      "prof": "M. Moulin / M. Roose",
+      "chapitre": "3. Architecture de Von Neumann : UT, UC, Bus & E/S",
+      "question": "En synthèse des enseignements de M. Moulin, quelle phrase résume le mieux l'essence de l'architecture d'un ordinateur ?",
+      "options": [
+        "Un ordinateur est un assemblage magique de composants que seul un fabricant de puces peut comprendre",
+        "Un ordinateur est un système synchrone à programme enregistré où des instructions et des données encodées en binaire circulent sur des bus pour être interprétées et exécutées cycle après cycle par une unité de commande et de traitement",
+        "Un ordinateur est simplement un téléviseur perfectionné avec un clavier mécanique",
+        "Un ordinateur n'a plus besoin d'architecture matérielle grâce au Cloud"
+      ],
+      "correct_index": 1,
+      "explication": "C'est la synthèse magistrale du cours de R1.03 dispensé par M. Moulin et M. Roose à l'IUT d'Anglet : l'alliance du modèle abstrait de machine universelle de Turing et de l'architecture matérielle concrète de Von Neumann.",
+      "pieges": [
+        "Même dans le Cloud ou les smartphones les plus récents, l'ordinateur repose toujours sur les principes fondamentaux de Von Neumann."
+      ],
+      "tags": [
+        "Synthèse",
+        "M. Moulin",
+        "Von Neumann",
+        "Architecture des ordinateurs"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R1.01 / S1.01 — TP7 : Algorithmes de parcours et de recherche (M. Patrick Etcheverry)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Lexend', sans-serif; background: #FAF8F5; color: #0F172A; line-height: 1.8; padding: 2rem; max-width: 960px; margin: 0 auto; }
+pre, code { font-family: 'JetBrains Mono', monospace; background: #0f172a; color: #f8fafc; padding: 0.75rem 1rem; border-radius: 0.75rem; display: block; overflow-x: auto; margin: 1rem 0; }
+h1, h2, h3, h4 { font-weight: 800; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+<div class="mb-6 p-4 rounded-xl bg-white border border-slate-200 shadow-xs">
+  <div class="text-xs font-mono font-bold text-teal-700">RESSOURCE OFFICIELLE MOODLE ELEARN UPPA (EXTRAITE EN MODE FURTIF #692244)</div>
+  <h1 class="text-xl font-black mt-1">R1.01 / S1.01 — TP7 : Algorithmes de parcours et de recherche (M. Patrick Etcheverry)</h1>
+</div>
+<div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+<div role="main"><div class="box py-3 generalbox center clearfix"><div class="no-overflow"><div id="r101-tp7" style="max-width: 930px; margin: 0 auto; padding: 16px 20px 40px; box-sizing: border-box; color: #17233c; font-family: inherit; font-size: 18px; line-height: 1.68;"><!-- =========================================================
+
+       EN-TÊTE DU TP
+
+       ========================================================= -->
+<div style="display: flex; align-items: center; gap: 16px; margin: 0 0 30px; padding: 17px 22px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 5px solid #66aee0; border-radius: 13px; background: #f1f8fd; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);">
+<div style="flex: 0 0 auto; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e3f1fb; color: #2f86c7; font-size: 18px; font-weight: 800; line-height: 1; box-shadow: 0 2px 7px rgba(15, 23, 42, .08);">TP7</div>
+<div style="min-width: 0;">
+<div style="margin: 0 0 4px; color: #2f86c7; font-size: 24px; font-weight: 800; line-height: 1.25;">Modèles d’algorithmes essentiels sur structures à accès direct</div>
+<div style="color: #66758a; font-size: 15px; font-weight: 600; line-height: 1.4;">R1.01 - Initiation au développement</div>
+</div>
+</div>
+<!-- =========================================================
+
+       TRAVAIL À FAIRE
+
+       ========================================================= -->
+<div style="margin: 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 4px solid #66aee0; border-radius: 11px; background: #f1f8fd; color: #2f86c7; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">✓ Travail à faire</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0;">L’objectif est de coder les algorithmes élaborés avec votre enseignant lors des séances de travaux dirigés portant sur les <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692243" style="color: #2f86c7; font-weight: bold; text-decoration: underline;">modèles d’algorithmes essentiels sur structures à accès direct</a>.</p>
+</div>
+</div>
+<!-- =========================================================
+
+       RESSOURCES À DISPOSITION
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 4px solid #66aee0; border-radius: 11px; background: #f1f8fd; color: #2f86c7; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">✓ Ressources à disposition</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0;">Pour vous faire gagner du temps, vous trouverez ci-dessous des extraits de code que vous pouvez utiliser pour coder plus rapidement certains exercices.</p>
+<!-- =====================================================
+
+           RESSOURCE 1
+
+           ===================================================== -->
+<div style="margin: 40px 0 0;">
+<div style="margin: 0 0 15px; padding: 9px 13px; border-left: 4px solid #6e9fe6; color: #356fae; font-size: 20px; font-weight: 800; line-height: 1.35;">Compter l’effectif d’un groupe de TP</div>
+<p style="margin: 0 0 17px;">Copiez-collez les définitions et déclarations suivantes afin de ne pas perdre de temps :</p>
+<!-- ===================================================
+
+             BLOC DE CODE 1
+
+             =================================================== -->
+<div style="width: 100%; max-width: 860px; margin: 0 auto; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);"><!-- Barre de fenêtre -->
+<div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+<div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;"> </span></div>
+<button data-copy="#tp7-code-etudiants" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button"> Copier </button></div>
+<!-- Code -->
+<div style="width: 100%; overflow-x: auto; background: #fbfcfe;">
+<pre id="tp7-code-etudiants" style="min-width: 760px; margin: 0; padding: 17px 19px; box-sizing: border-box; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #586579; font-style: italic;">// ===== Définition du type Etudiant =====</span>
+
+<span style="color: #6b3fa0; font-weight: bold;">struct</span> <span style="color: #1f5fbf; font-weight: bold;">Etudiant</span>
+
+{
+
+    <span style="color: #1f5fbf; font-weight: bold;">string</span> nom; <span style="color: #586579; font-style: italic;">// nom de l'étudiant</span>
+
+    <span style="color: #1f5fbf; font-weight: bold;">string</span> prenom; <span style="color: #586579; font-style: italic;">// prénom de l'étudiant</span>
+
+    <span style="color: #a13e57; font-weight: bold;">unsigned short int</span> td; <span style="color: #586579; font-style: italic;">// numéro de TD de l'étudiant</span>
+
+    <span style="color: #a13e57; font-weight: bold;">unsigned short int</span> tp; <span style="color: #586579; font-style: italic;">// numéro de TP de l'étudiant</span>
+
+};
+
+
+
+<span style="color: #586579; font-style: italic;">// ===== Constante =====</span>
+
+<span style="color: #6b3fa0; font-weight: bold;">const</span> <span style="color: #a13e57; font-weight: bold;">unsigned int</span> EFFECTIF_PROMO = <span style="color: #5d4cb0; font-weight: 600;">15</span>; <span style="color: #586579; font-style: italic;">// Nombre d’étudiants enregistrés dans promo</span>
+
+
+
+<span style="color: #586579; font-style: italic;">// ===== Variables (dictionnaire) =====</span>
+
+<span style="color: #1f5fbf; font-weight: bold;">Etudiant</span> promo[EFFECTIF_PROMO] = {
+
+    <span style="color: #586579; font-style: italic;">// Tableau contenant les étudiants d’une promotion donnée</span>
+
+    { <span style="color: #a23b55; font-weight: 500;">"Attan"</span>, <span style="color: #a23b55; font-weight: 500;">"Charles"</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Terrieur"</span>, <span style="color: #a23b55; font-weight: 500;">"Alain"</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Touille"</span>, <span style="color: #a23b55; font-weight: 500;">"Sacha"</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Ompagne"</span>, <span style="color: #a23b55; font-weight: 500;">"Jacques"</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span>, <span style="color: #5d4cb0; font-weight: 600;">3</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Cué"</span>, <span style="color: #a23b55; font-weight: 500;">"Eva"</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Bonneau"</span>, <span style="color: #a23b55; font-weight: 500;">"Jean"</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Zion"</span>, <span style="color: #a23b55; font-weight: 500;">"Éva"</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span>, <span style="color: #5d4cb0; font-weight: 600;">3</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Dy"</span>, <span style="color: #a23b55; font-weight: 500;">"Sam"</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span>, <span style="color: #5d4cb0; font-weight: 600;">4</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Xélaire"</span>, <span style="color: #a23b55; font-weight: 500;">"Jacques"</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span>, <span style="color: #5d4cb0; font-weight: 600;">3</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Plé"</span>, <span style="color: #a23b55; font-weight: 500;">"Sam"</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span>, <span style="color: #5d4cb0; font-weight: 600;">4</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Inter"</span>, <span style="color: #a23b55; font-weight: 500;">"Roger"</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span>, <span style="color: #5d4cb0; font-weight: 600;">4</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Masse"</span>, <span style="color: #a23b55; font-weight: 500;">"Laly"</span>, <span style="color: #5d4cb0; font-weight: 600;">5</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Dy"</span>, <span style="color: #a23b55; font-weight: 500;">"Alain"</span>, <span style="color: #5d4cb0; font-weight: 600;">5</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Bole"</span>, <span style="color: #a23b55; font-weight: 500;">"Maguy"</span>, <span style="color: #5d4cb0; font-weight: 600;">5</span>, <span style="color: #5d4cb0; font-weight: 600;">1</span> },
+
+    { <span style="color: #a23b55; font-weight: 500;">"Sérien"</span>, <span style="color: #a23b55; font-weight: 500;">"Jean"</span>, <span style="color: #5d4cb0; font-weight: 600;">2</span>, <span style="color: #5d4cb0; font-weight: 600;">3</span> }
+
+};</pre>
+</div>
+</div>
+</div>
+<!-- =====================================================
+
+           RESSOURCE 2
+
+           ===================================================== -->
+<div style="margin: 42px 0 0;">
+<div style="margin: 0 0 15px; padding: 9px 13px; border-left: 4px solid #6e9fe6; color: #356fae; font-size: 20px; font-weight: 800; line-height: 1.35;">Afficher les tables de multiplication</div>
+<p style="margin: 0 0 17px;">Copiez-collez les définitions et déclarations ci-dessous afin de ne pas perdre de temps :</p>
+<!-- ===================================================
+
+             BLOC DE CODE 2
+
+             =================================================== -->
+<div style="width: 100%; max-width: 860px; margin: 0 auto; border: 1px solid #cfd6df; border-radius: 12px; overflow: hidden; background: #fbfcfe; box-shadow: 0 6px 16px rgba(15, 23, 42, .08);"><!-- Barre de fenêtre -->
+<div style="min-height: 38px; padding: 0 10px 0 13px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #d7dbe3; background: #eef1f5;">
+<div style="display: flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e; display: inline-block; font-size: 0;"> </span> <span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840; display: inline-block; font-size: 0;"> </span></div>
+<button data-copy="#tp7-code-tables" style="padding: 5px 11px; border: 1px solid #a9cfea; border-radius: 7px; background: #f1f8fd; color: #2377b5; font-family: inherit; font-size: 12px; font-weight: bold; line-height: 1.2; cursor: pointer;" type="button"> Copier </button></div>
+<!-- Code -->
+<div style="width: 100%; overflow-x: auto; background: #fbfcfe;">
+<pre id="tp7-code-tables" style="min-width: 760px; margin: 0; padding: 17px 19px; box-sizing: border-box; background: #fbfcfe; color: #1f2937; font-family: Consolas, 'Liberation Mono', Menlo, Monaco, monospace; font-size: 16px; font-weight: 500; line-height: 1.55; white-space: pre;"><span style="color: #586579; font-style: italic;">// Le nombre de lignes du tableau contenant les tables de multiplication :</span>
+
+<span style="color: #6b3fa0; font-weight: bold;">const</span> <span style="color: #a13e57; font-weight: bold;">unsigned short int</span> NB_LIGNES = <span style="color: #5d4cb0; font-weight: 600;">11</span>;
+
+<span style="color: #586579; font-style: italic;">// Le nombre de colonnes du tableau contenant les tables de multiplication :</span>
+
+<span style="color: #6b3fa0; font-weight: bold;">const</span> <span style="color: #a13e57; font-weight: bold;">unsigned short int</span> NB_COLONNES = <span style="color: #5d4cb0; font-weight: 600;">11</span>;
+
+<span style="color: #586579; font-style: italic;">// Le tableau contenant les tables de multiplication :</span>
+
+<span style="color: #a13e57; font-weight: bold;">unsigned short int</span> tablesDeMultiplication[NB_LIGNES][NB_COLONNES] = {
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">0</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">1</span>,  <span style="color: #5d4cb0; font-weight: 600;">2</span>,  <span style="color: #5d4cb0; font-weight: 600;">3</span>,  <span style="color: #5d4cb0; font-weight: 600;">4</span>,  <span style="color: #5d4cb0; font-weight: 600;">5</span>,  <span style="color: #5d4cb0; font-weight: 600;">6</span>,  <span style="color: #5d4cb0; font-weight: 600;">7</span>,  <span style="color: #5d4cb0; font-weight: 600;">8</span>,  <span style="color: #5d4cb0; font-weight: 600;">9</span>, <span style="color: #5d4cb0; font-weight: 600;">10</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">2</span>,  <span style="color: #5d4cb0; font-weight: 600;">4</span>,  <span style="color: #5d4cb0; font-weight: 600;">6</span>,  <span style="color: #5d4cb0; font-weight: 600;">8</span>, <span style="color: #5d4cb0; font-weight: 600;">10</span>, <span style="color: #5d4cb0; font-weight: 600;">12</span>, <span style="color: #5d4cb0; font-weight: 600;">14</span>, <span style="color: #5d4cb0; font-weight: 600;">16</span>, <span style="color: #5d4cb0; font-weight: 600;">18</span>, <span style="color: #5d4cb0; font-weight: 600;">20</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">3</span>,  <span style="color: #5d4cb0; font-weight: 600;">6</span>,  <span style="color: #5d4cb0; font-weight: 600;">9</span>, <span style="color: #5d4cb0; font-weight: 600;">12</span>, <span style="color: #5d4cb0; font-weight: 600;">15</span>, <span style="color: #5d4cb0; font-weight: 600;">18</span>, <span style="color: #5d4cb0; font-weight: 600;">21</span>, <span style="color: #5d4cb0; font-weight: 600;">24</span>, <span style="color: #5d4cb0; font-weight: 600;">27</span>, <span style="color: #5d4cb0; font-weight: 600;">30</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">4</span>,  <span style="color: #5d4cb0; font-weight: 600;">8</span>, <span style="color: #5d4cb0; font-weight: 600;">12</span>, <span style="color: #5d4cb0; font-weight: 600;">16</span>, <span style="color: #5d4cb0; font-weight: 600;">20</span>, <span style="color: #5d4cb0; font-weight: 600;">24</span>, <span style="color: #5d4cb0; font-weight: 600;">28</span>, <span style="color: #5d4cb0; font-weight: 600;">32</span>, <span style="color: #5d4cb0; font-weight: 600;">36</span>, <span style="color: #5d4cb0; font-weight: 600;">40</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">5</span>, <span style="color: #5d4cb0; font-weight: 600;">10</span>, <span style="color: #5d4cb0; font-weight: 600;">15</span>, <span style="color: #5d4cb0; font-weight: 600;">20</span>, <span style="color: #5d4cb0; font-weight: 600;">25</span>, <span style="color: #5d4cb0; font-weight: 600;">30</span>, <span style="color: #5d4cb0; font-weight: 600;">35</span>, <span style="color: #5d4cb0; font-weight: 600;">40</span>, <span style="color: #5d4cb0; font-weight: 600;">45</span>, <span style="color: #5d4cb0; font-weight: 600;">50</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">6</span>, <span style="color: #5d4cb0; font-weight: 600;">12</span>, <span style="color: #5d4cb0; font-weight: 600;">18</span>, <span style="color: #5d4cb0; font-weight: 600;">24</span>, <span style="color: #5d4cb0; font-weight: 600;">30</span>, <span style="color: #5d4cb0; font-weight: 600;">36</span>, <span style="color: #5d4cb0; font-weight: 600;">42</span>, <span style="color: #5d4cb0; font-weight: 600;">48</span>, <span style="color: #5d4cb0; font-weight: 600;">54</span>, <span style="color: #5d4cb0; font-weight: 600;">60</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">7</span>, <span style="color: #5d4cb0; font-weight: 600;">14</span>, <span style="color: #5d4cb0; font-weight: 600;">21</span>, <span style="color: #5d4cb0; font-weight: 600;">28</span>, <span style="color: #5d4cb0; font-weight: 600;">35</span>, <span style="color: #5d4cb0; font-weight: 600;">42</span>, <span style="color: #5d4cb0; font-weight: 600;">49</span>, <span style="color: #5d4cb0; font-weight: 600;">56</span>, <span style="color: #5d4cb0; font-weight: 600;">63</span>, <span style="color: #5d4cb0; font-weight: 600;">70</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">8</span>, <span style="color: #5d4cb0; font-weight: 600;">16</span>, <span style="color: #5d4cb0; font-weight: 600;">24</span>, <span style="color: #5d4cb0; font-weight: 600;">32</span>, <span style="color: #5d4cb0; font-weight: 600;">40</span>, <span style="color: #5d4cb0; font-weight: 600;">48</span>, <span style="color: #5d4cb0; font-weight: 600;">56</span>, <span style="color: #5d4cb0; font-weight: 600;">64</span>, <span style="color: #5d4cb0; font-weight: 600;">72</span>, <span style="color: #5d4cb0; font-weight: 600;">80</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>,  <span style="color: #5d4cb0; font-weight: 600;">9</span>, <span style="color: #5d4cb0; font-weight: 600;">18</span>, <span style="color: #5d4cb0; font-weight: 600;">27</span>, <span style="color: #5d4cb0; font-weight: 600;">36</span>, <span style="color: #5d4cb0; font-weight: 600;">45</span>, <span style="color: #5d4cb0; font-weight: 600;">54</span>, <span style="color: #5d4cb0; font-weight: 600;">63</span>, <span style="color: #5d4cb0; font-weight: 600;">72</span>, <span style="color: #5d4cb0; font-weight: 600;">81</span>, <span style="color: #5d4cb0; font-weight: 600;">90</span>,
+
+    <span style="color: #5d4cb0; font-weight: 600;">0</span>, <span style="color: #5d4cb0; font-weight: 600;">10</span>, <span style="color: #5d4cb0; font-weight: 600;">20</span>, <span style="color: #5d4cb0; font-weight: 600;">30</span>, <span style="color: #5d4cb0; font-weight: 600;">40</span>, <span style="color: #5d4cb0; font-weight: 600;">50</span>, <span style="color: #5d4cb0; font-weight: 600;">60</span>, <span style="color: #5d4cb0; font-weight: 600;">70</span>, <span style="color: #5d4cb0; font-weight: 600;">80</span>, <span style="color: #5d4cb0; font-weight: 600;">90</span>,<span style="color: #5d4cb0; font-weight: 600;">100</span>
+
+};</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- =========================================================
+
+       RAPPEL DE POINTS IMPORTANTS
+
+       ========================================================= -->
+<div style="margin: 50px 0 0;">
+<div style="margin: 0 0 21px; padding: 11px 15px; box-sizing: border-box; border: 1px solid #cfe5f4; border-left: 4px solid #66aee0; border-radius: 11px; background: #f1f8fd; color: #2f86c7; font-size: 21px; font-weight: 800; line-height: 1.3; box-shadow: 0 4px 12px rgba(15, 23, 42, .06);">✓ Rappel de points importants</div>
+<div style="padding: 0 4px;">
+<p style="margin: 0 0 16px;">Au-delà de produire un code fonctionnel, votre but consistera surtout à :</p>
+<ul style="margin: 0 0 24px; padding-left: 29px;">
+<li style="margin: 0 0 12px; padding-left: 3px;">produire un code fidèle aux algorithmes élaborés en TD ;</li>
+<li style="margin: 0; padding-left: 3px;">appliquer toutes les bonnes pratiques de programmation mises en avant dans les tutoriels vidéos vus jusqu’à maintenant.</li>
+</ul>
+<!-- =====================================================
+
+           CRITÈRES DE QUALITÉ
+
+           ===================================================== -->
+<div style="margin: 0; padding: 20px 22px; box-sizing: border-box; border: 1px solid #d5e3f7; border-left: 4px solid #6e9fe6; border-radius: 12px; background: #f5f8fd; box-shadow: 0 5px 14px rgba(15, 23, 42, .06);">
+<div style="margin: 0 0 16px; color: #356fae; font-size: 18px; font-weight: 800;">Critères de qualité à prendre en compte à ce stade d’avancement</div>
+<ol style="margin: 0; padding-left: 30px;">
+<li style="margin: 0 0 13px; padding-left: 3px;">Écrire <strong>progressivement</strong> et compiler à chaque étape.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Utiliser des <strong>noms significatifs</strong> pour variables/constantes.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Respecter les <strong>conventions de nommage</strong>.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Choisir des <strong>types précis</strong> et adaptés.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Documenter par des <strong>commentaires</strong> utiles.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Structurer en <strong>blocs</strong> alignés sur l’algorithme.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Garder la <strong>correspondance</strong> code ↔ algorithme.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Toujours <strong>indenter</strong>.</li>
+<li style="margin: 0 0 13px; padding-left: 3px;">Écrire les structures en <strong>deux étapes</strong> (squelette → remplissage).</li>
+<li style="margin: 0; padding-left: 3px;">Toujours <strong>délimiter par des accolades</strong> (même pour une seule instruction).</li>
+</ol>
+</div>
+<!-- =====================================================
+
+           ATTENTION
+
+           ===================================================== -->
+<div style="margin: 28px 0 0; padding: 18px 20px; box-sizing: border-box; border: 1px solid #f4d1d7; border-left: 4px solid #ef6178; border-radius: 12px; background: #fff5f7; box-shadow: 0 4px 12px rgba(15, 23, 42, .04);">
+<p style="margin: 0 0 12px; color: #c94960; font-weight: 800;">⚠️ Attention</p>
+<p style="margin: 0 0 14px; font-weight: bold;">Aucune aide ne vous sera fournie en TP si vous n’êtes pas en mesure de montrer l’algorithme sur lequel vous vous appuyez pour élaborer votre code !</p>
+<p style="margin: 0;">Ne codez jamais un exercice sans avoir, au préalable, réalisé l’algorithme correspondant. Même en TP, si vous devez écrire un code dont vous n’avez pas l’algorithme, lâchez le clavier, prenez une feuille et un crayon et concevez votre solution sur papier puis faites-la valider par votre enseignant.</p>
+</div>
+<!-- =====================================================
+
+           IMPORTANT
+
+           ===================================================== -->
+<div style="margin: 22px 0 0; padding: 18px 20px; box-sizing: border-box; border: 1px solid #f1dfac; border-left: 4px solid #e2a82d; border-radius: 12px; background: #fffaf0; box-shadow: 0 4px 12px rgba(15, 23, 42, .04);">
+<div style="margin: 0 0 14px;"><span style="display: inline-block; padding: 4px 11px; border: 1.4px solid #d79800; border-radius: 999px; background: #fff8dc; color: #b77d00; font-size: 14px; font-weight: 800; line-height: 1.1;"> 📌 Important </span></div>
+<p style="margin: 0 0 12px;">Un exercice est jugé <em>terminé</em> si vous êtes en mesure :</p>
+<ol style="margin: 0; padding-left: 30px;">
+<li style="margin: 0 0 11px; padding-left: 3px;">de fournir l’algorithme correspondant ;</li>
+<li style="margin: 0 0 11px; padding-left: 3px;">de fournir le code correspondant ;</li>
+<li style="margin: 0 0 11px; padding-left: 3px;">d’expliquer comment les bonnes pratiques de programmation vues jusqu’à maintenant ont été appliquées dans le code ;</li>
+<li style="margin: 0; padding-left: 3px;">de répondre à n’importe quelle question posée par votre enseignant, que ce soit sur l’algorithme ou sur le code.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<!-- ===========================================================
+
+     JAVASCRIPT : BOUTONS COPIER
+
+     =========================================================== -->
+<p>
+<script>
+
+    (function() {
+
+
+
+      var root =
+
+        document.getElementById("r101-tp7");
+
+
+
+      if (!root) {
+
+        return;
+
+      }
+
+
+
+      root
+
+        .querySelectorAll("button[data-copy]")
+
+        .forEach(function(btn) {
+
+
+
+          if (btn.dataset.copyReady === "1") {
+
+            return;
+
+          }
+
+
+
+          btn.dataset.copyReady = "1";
+
+
+
+          btn.addEventListener(
+
+            "click",
+
+            function() {
+
+
+
+              var selector =
+
+                btn.getAttribute("data-copy");
+
+
+
+              var target =
+
+                root.querySelector(selector);
+
+
+
+              if (!target) {
+
+                return;
+
+              }
+
+
+
+              var texte =
+
+                target.textContent
+
+                  .replace(/\u00a0/g, " ")
+
+                  .trim();
+
+
+
+              var ancienTexte =
+
+                btn.textContent;
+
+
+
+              function terminer(ok) {
+
+
+
+                btn.textContent =
+
+                  ok
+
+                    ? "Copié !"
+
+                    : "Sélectionné ✔";
+
+
+
+                btn.disabled = true;
+
+
+
+                setTimeout(function() {
+
+
+
+                  btn.textContent =
+
+                    ancienTexte;
+
+
+
+                  btn.disabled = false;
+
+
+
+                }, 1200);
+
+              }
+
+
+
+              function copieSecours() {
+
+
+
+                var zone =
+
+                  document.createElement(
+
+                    "textarea"
+
+                  );
+
+
+
+                zone.value = texte;
+
+
+
+                zone.setAttribute(
+
+                  "readonly",
+
+                  ""
+
+                );
+
+
+
+                zone.style.position =
+
+                  "fixed";
+
+
+
+                zone.style.left =
+
+                  "-9999px";
+
+
+
+                zone.style.top =
+
+                  "0";
+
+
+
+                document.body
+
+                  .appendChild(zone);
+
+
+
+                zone.focus();
+
+                zone.select();
+
+
+
+                var ok = false;
+
+
+
+                try {
+
+
+
+                  ok =
+
+                    document.execCommand(
+
+                      "copy"
+
+                    );
+
+
+
+                } catch (e) {
+
+
+
+                  ok = false;
+
+                }
+
+
+
+                document.body
+
+                  .removeChild(zone);
+
+
+
+                terminer(ok);
+
+              }
+
+
+
+              if (
+
+                navigator.clipboard &&
+
+                window.isSecureContext
+
+              ) {
+
+
+
+                navigator.clipboard
+
+                  .writeText(texte)
+
+                  .then(function() {
+
+
+
+                    terminer(true);
+
+
+
+                  })
+
+                  .catch(function() {
+
+
+
+                    copieSecours();
+
+
+
+                  });
+
+
+
+              } else {
+
+
+
+                copieSecours();
+
+              }
+
+
+
+            }
+
+          );
+
+
+
+        });
+
+
+
+    })();
+
+  </script>
+</p></div></div></div>
+</div>
+</body>
+</html>

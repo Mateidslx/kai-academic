@@ -1,0 +1,1282 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Modèles d'algorithmes essentiels sur structures à accès direct</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 10px; margin-bottom: -90px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Introduction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Définitions
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">8</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Parcours complet avec traitement systématique
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">17</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Parcours complet avec traitement conditionné
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">21</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Recherche de première occurrence
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">25</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Adapter un modèle
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">39</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Introduction">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Introduction" data-transition="convex">
+        <h1>Introduction</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Solutions efficaces pour problèmes récurrents</h4>
+
+        <div style="font-size: 67%;">
+            <p>
+                Dans le domaine de la programmation, il existe un certain nombres de
+                problèmes récurrents :
+            </p>
+
+            <ul>
+                <li>Parcours d'un ensemble d'éléments ;</li>
+                <li style="margin-top: -7px;">Recherche d'un élément dans un ensemble ; </li>
+                <li style="margin-top: -7px;">Tri d'un ensemble d'éléments ;</li>
+                <li style="margin-top: -7px;">...</li>
+            </ul>
+
+            <p>
+                Des solutions algorithmiques éprouvées et réutilisables ont été mises au
+                point pour répondre efficacement à une grande partie de ces problèmes...
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Objectif</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                L'objectif du cours est de présenter quelques modèles d'algorithmes bien
+                connus pour répondre à des problèmes récurrents concernant la gestion
+                de collections à <strong class="text-primary">accès direct</strong> : chaı̂nes de caractères,
+                tableaux...
+            </p>
+
+            <div class="card bg-light border-danger mb-3 fragment fade-right" style="margin-top: 15px;">
+                <div class="card-header text-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Important
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Ces modèles d'algorithmes doivent être <strong>appris par cœur</strong> et
+                        parfaitement maı̂trisés car ils permettent de produire des
+                        algorithmes efficaces en très peu de temps.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Modèles à maîtriser</h4>
+
+        <div style="font-size: 65%;">
+            <p style="margin-top: -7px;">
+                Dans ce cours, nous aborderons les modèles d'algorithmes suivants :
+            </p>
+            <ul>
+                <li style="margin-top: -14px;">Parcours complet avec traitement <strong>systématique</strong> sur
+                    structure à
+                    accès <strong>direct</strong> ;</li>
+                <li style="margin-top: -9px;">Parcours complet avec traitement <strong>conditionné</strong> sur
+                    structure à
+                    accès <strong>direct</strong> ;</li>
+                <li style="margin-top: -9px;">Recherche de première occurrence.</li>
+            </ul>
+
+            <div class="fragment fade-right" style="margin-top: 12px;">
+                <p>
+                    Dans la deuxième partie du module R1.01 d'autres modèles seront étudiés :
+                </p>
+                <ul>
+                    <li style="margin-top: -14px;">Parcours complet avec traitement <strong>systématique</strong> sur
+                        structure à
+                        accès <strong>séquentiel</strong> ;</li>
+                    <li style="margin-top: -9px;">Parcours complet avec traitement <strong>conditionné</strong> sur
+                        structure à
+                        accès <strong>séquentiel</strong> ;</li>
+                    <li style="margin-top: -9px;">Recherche dichotomique ;</li>
+                    <li style="margin-top: -9px;">Tri par sélection de place, tri par insertion, tri à bulle.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Points à travailler</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Pour utiliser efficacement des modèles d'algorithmes, il faut :
+            </p>
+            <ul>
+                <li style="margin-top: 1px;">les connaı̂tre <strong>par cœur</strong> : vous seul pouvez faire cet
+                    effort ;</li>
+                <li class="fragment fade-right" style="margin-top: 1px;">apprendre à reconnaître les types de problèmes sur lesquels chaque modèle
+                    est applicable : nous verrons quelles sont les <strong>pré-conditions d'applicabilité</strong> 
+                    d'un modèle ;</li>
+                <li class="fragment fade-right" style="margin-top: 1px;"> être en mesure d'adapter le modèle au problème spécifique que l'on
+                    traite : nous verrons comment élaborer une <strong>stratégie pour réaliser
+                    cette adaptation</strong>.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section><section name="Définitions">
+    <!--
+      l'attribut "id" de section implante les liens du menu du haut
+      l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+      -->
+
+    <section data-menu-title="Définitions" data-transition="convex">
+        <h1>Définitions</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Applicabilité des modèles</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Les modèles d'algorithmes permettent de produire des solutions efficaces
+                en peu de temps <strong>à condition de savoir sur quels types de problèmes
+                    ils sont applicables</strong>...
+            </p>
+            <ul class="fragment fade-right">
+                <li style="margin-top: -5px;">
+                    Peut-on utiliser un modèle de parcours séquentiel complet pour
+                    afficher le contenu d'un fichier csv ?
+                </li>
+                <li style="margin-top: -5px;">
+                    Peut-on utiliser un modèle de parcours complet avec traitement
+                    conditionné pour afficher les nombres pairs d'une liste ?
+                </li>
+                <li style="margin-top: -5px;">
+                    Peut-on utiliser un modèle de recherche dichotomique pour
+                    rechercher un mot dans un fichier texte ?
+                </li>
+                <li style="margin-top: -5px;">
+                    Peut-on utiliser un modèle de tri par insertion pour trier un tableau
+                    contenant des chaı̂nes de caractères ?
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Mécanismes d'accès</h4>
+
+        <div style="font-size: 68%;">
+            <p>
+                Un modèle d'algorithme, doit vérifier un certain nombre de pré-conditions
+                avant de pouvoir être appliqué sur une structure.
+            </p>
+            <p>
+                Parmi ces pré-conditions, on considérera notamment les mécanismes
+                d'accès proposés par la structure sur laquelle on veut appliquer le
+                modèle :
+            </p>
+            <ul>
+                <li style="margin-top: -5px;">
+                    accès séquentiel ;
+                </li>
+                <li style="margin-top: -5px;">
+                    accès direct ;
+                </li>
+                <li style="margin-top: -5px;">
+                    accès dynamique.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Structure à accès direct</h4>
+
+        <div style="font-size: 68%;">
+
+            <div class="card bg-light border-primary mb-3" style="margin-top: 15px;">
+                <div class="card-header text-primary">
+                    <i class="fas fa-book-reader"></i>
+                    Définition
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Une structure à accès direct regroupe un ensemble d'éléments ordonnés
+                        et propose des mécanismes permettant d'accéder à chaque
+                        élément directement <strong>sans passer par ceux qui le précèdent</strong>.
+                    </p>
+                    <p>
+                        Ce type de structure propose aussi la plupart du temps un mécanisme
+                        permettant de déterminer le nombre d'éléments stockés.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exemples de structures à accès direct</h4>
+
+        <div style="font-size: 68%;">
+            <ul>
+                <li style="margin-top: -5px;">Chaı̂nes de caractères</li>
+                <li style="margin-top: -5px;">Tableaux</li>
+                <li style="margin-top: -5px;">Fichiers à accès direct avec organisation relative</li>
+                <li style="margin-top: -5px;">Certaines listes</li>
+                <li style="margin-top: -5px;">Dictionnaires (<em>map</em>)</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Structure à accès séquentiel</h4>
+
+        <div style="font-size: 68%;">
+
+            <div class="card bg-light border-primary mb-3" style="margin-top: 15px;">
+                <div class="card-header text-primary">
+                    <i class="fas fa-book-reader"></i>
+                    Définition
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Une structure à accès séquentiel regroupe un ensemble d'éléments
+                        ordonnés et propose des mécanismes permettant :
+                    </p>
+                    <ul>
+                        <li style="margin-top: -5px;">d'accéder au premier élément de la structure (et parfois au
+                            dernier) ;</li>
+                        <li style="margin-top: -5px;">d'accéder, à partir de la position courante, à l'élément suivant
+                            (et parfois au précédent)</li>
+                        <li style="margin-top: -5px;">de détecter la fin de la structure</li>
+                    </ul>
+                    <p>
+                        Dans une structure à accès séquentiel, on ne peut accéder au <em>N-ième</em> élément
+                        qu'en passant par les <em>N-1</em> éléments qui le précèdent.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exemples de structures à accès séquentiel</h4>
+
+        <div style="font-size: 68%;">
+            <ul>
+                <li style="margin-top: -5px;">Fichiers séquentiels</li>
+                <li style="margin-top: -5px;">Piles</li>
+                <li style="margin-top: -5px;">Files</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+    <section>
+
+        <h4>Structure à accès dynamique</h4>
+
+        <div style="font-size: 68%;">
+
+            <div class="card bg-light border-primary mb-3" style="margin-top: 15px;">
+                <div class="card-header text-primary">
+                    <i class="fas fa-book-reader"></i>
+                    Définition
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="margin-top: -7px;">
+                        Une structure à accès dynamique regroupe un ensemble d'éléments
+                        ordonnés et propose des mécanismes permettant d'accéder aux
+                        éléments de manière séquentielle et directe.
+                    </p>
+                </div>
+            </div>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: 40px;">Exemples de structures proposant des accès dynamiques :</p>
+                <ul>
+                    <li style="margin-top: -5px;">Certaines listes</li>
+                    <li style="margin-top: -5px;">Certains fichiers</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+    
+            <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT12/0" 
+               role="button" target="_blank">
+               <i class="fas fa-mobile"></i> &nbsp;
+               Sortez vos smartphones
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </a>
+    </section>
+    
+    <!-- ====================================================================== -->
+
+
+</section><section name="Parcours complet avec traitement systématique">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Parcours complet avec traitement systématique" data-transition="convex">
+        <h1>Parcours complet avec traitement systématique</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Caractéristiques</h4>
+
+        <div style="font-size: 62%;">
+            <ul>
+                <li>
+                    <strong class="text-primary">Nom du modèle</strong> : Parcours complet avec traitement <strong>systématique</strong>
+                    sur structure à accès direct.
+                </li>
+                <li style="margin-top: -10px;">
+                    <p><strong class="text-primary">Quand l'utiliser</strong> : Lorsqu'on doit appliquer un traitement à
+                        <strong>tous</strong> les éléments situés entre une <strong>borne de départ</strong> et une
+                        <strong>borne d'arrivée</strong> dans une structure à accès direct.
+                    </p>
+                    <p>
+                        Exemples : Afficher la 1ère moitié d'un tableau, remplir toutes les cases d'un
+                        tableau, incrémenter de 1 toutes les valeurs d'un tableau, mettre en
+                        majuscule toutes les lettres d'une chaı̂ne de caractères...
+                    </p>
+                </li>
+                <li style="margin-top: -7px;">
+                    <strong class="text-primary">Pré-conditions</strong> : La structure doit proposer des mécanismes d'accès direct.
+                </li>
+                <li style="margin-top: 7px;">
+                    <strong class="text-primary">Remarques</strong> : Les éléments de la structure peuvent être ordonnés, ou pas.
+                    La structure peut comporter des doublons ou pas.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Algorithme</h4>
+
+        <div style="font-size: 70%;">
+            <div class="text-center">
+                <img src="presentation/images/figure01.svg" width="65%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Exemple d'usage</h4>
+
+        <div style="font-size: 70%;">
+            <div class="text-center">
+                <img src="presentation/images/figure02.svg" width="95%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Parcours complet avec traitement conditionné">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Parcours complet avec traitement conditionné" data-transition="convex">
+        <h1>Parcours complet avec traitement conditionné</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Caractéristiques</h4>
+
+        <div style="font-size: 62%;">
+            <ul>
+                <li>
+                    <strong class="text-primary">Nom du modèle</strong> : Parcours complet avec traitement <strong>conditionné</strong>
+                    sur structure à accès direct.
+                </li>
+                <li style="margin-top: -10px;">
+                    <p><strong class="text-primary">Quand l'utiliser</strong> : Lorsqu'on doit appliquer un traitement à <strong>certains</strong>
+                        éléments d'une structure <strong>vérifiant une propriété</strong> particulière. Le parcours
+                        complet induit une visite de tous les éléments situés entre une <strong>borne de
+                        départ</strong> et une <strong>borne d'arrivée</strong>.
+                    </p>
+                    <p>
+                        Exemples : Compter le nombre de voyelles d'une chaı̂ne de caractères, afficher les
+                        nombres pairs situés dans la première partie d'un tableau...
+                    </p>
+                </li>
+                <li style="margin-top: -7px;">
+                    <strong class="text-primary">Pré-conditions</strong> : La structure doit proposer des mécanismes d'accès direct.
+                </li>
+                <li style="margin-top: 7px;">
+                    <strong class="text-primary">Remarques</strong> : Les éléments de la structure peuvent être ordonnés, ou pas.
+                    La structure peut comporter des doublons ou pas.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Algorithme</h4>
+
+        <div style="font-size: 70%;">
+            <div class="text-center">
+                <img src="presentation/images/figure03.svg" width="65%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Exemple d'usage</h4>
+
+        <div style="font-size: 70%;">
+            <div class="text-center">
+                <img src="presentation/images/figure04.svg" width="100%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Recherche de première occurrence">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Recherche de première occurrence" data-transition="convex">
+        <h1>Recherche de première occurrence</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Caractéristiques</h4>
+
+        <div style="font-size: 65%;">
+            <ul>
+                <li>
+                    <strong class="text-primary">Nom du modèle</strong> : Recherche de première occurrence.
+                </li>
+                <li style="margin-top: -5px;">
+                    <p><strong class="text-primary">Quand l'utiliser</strong> : Lorsqu'on recherche, dans un ensemble d'élements le
+                            <strong>premier</strong> élément
+                            satisfaisant une propriété particulière..
+                    </p>
+                    <p>
+                        Exemples : Déterminer si une valeur particulière se trouve dans un
+                        tableau d'entiers, chercher la position de la 1ère valeur supérieure à 100
+                        dans un tableau de valeurs...
+                    </p>
+                </li>
+                <li style="margin-top: -5px;">
+                    <strong class="text-primary">Pré-condition</strong> : Aucune
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Remarques</h4>
+
+        <div style="font-size: 62%;">
+            <ul>
+                <li>
+                    Les éléments de la structure peuvent être ordonnés ou pas.
+                </li>
+                <li style="margin-top: -2px;">
+                    La structure peut comporter des doublons ou pas.
+                </li>
+                <li style="margin-top: -2px;">
+                    Le modèle d'algorithme est identique pour une structure à accès
+                    séquentiel et pour une structure à accès direct.
+                </li>
+                <li style="margin-top: -2px;">
+                    La première occurrence fait référence au 1er élément rencontré vérifiant la propriété recherchée.
+                    Ce 1er élément peut donc varier selon qu'on parcourt la structure du début vers la fin ou de la fin
+                    vers le début...
+                </li>
+                <li style="margin-top: -2px;">
+                    Ce type d'algorithme (algorithme de recherche) a toujours <em>au moins</em> deux conditions d'arrêt :
+                    <ul>
+                        <li>recherche fructueuse : l'élément cherché a été trouvé,</li>
+                        <li style="margin-top: -10px;">recherche infructueuse : on a parcouru toute la structure et l'élément
+                            recherché n'a pas été trouvé.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Algorithme</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div class="text-center">
+                <img src="presentation/images/figure05.svg" width="80%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Les deux conditions d'arrêt propres à tout algorithme de recherche</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div class="text-center">
+                <img src="presentation/images/figure06.svg" width="67%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Les étapes à adapter selon la structure parcourue</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div class="text-center">
+                <img src="presentation/images/figure07.svg" width="70%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Exploitation des 3 mécanismes caractérisant une structure à accès séquentiel</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div class="text-center">
+                <img src="presentation/images/figure08.svg" width="70%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Variante du modèle</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div class="text-center">
+                <img src="presentation/images/figure09.svg" width="70%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Avantages / inconvénients</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div class="text-center">
+                <img src="presentation/images/figure10.svg" width="100%">
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="font-size: 75%;">
+                    <p><i class="far fa-thumbs-up text-success"></i> : On s'arrête dès que la valeur est trouvée
+                        &rarr;  A la fin de l'itération on est positionné sur l'élément cherché.</p>
+                    <p><i class="far fa-thumbs-down text-danger"></i> : Deux conditions d'arrêt non évaluées en même temps qui compliqueront un peu le codage.</p>
+                </div>
+                <div class="col-md-6" style="font-size: 75%;">
+                    <p><i class="far fa-thumbs-up text-success"></i> : Les conditions d'arrêt sont regroupées, le codage est facilité avec une boucle <em>while</em>.</p>
+                    <p><i class="far fa-thumbs-down text-danger"></i> : On ne s'arrête pas immédiatement dès qu'on a trouvé
+                        &rarr;  A la fin de l'itération on n'est pas positionné sur l'élément cherché.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Déterminer la position de l'élément trouvé (1/2)</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div style="font-size: 70%; margin-top: -30px;">
+                <div class="text-center">
+                    <img src="presentation/images/figure11.svg" width="70%">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4 style="margin-top: 20px;">Déterminer la position de l'élément trouvé (2/2)</h4>
+
+        <div style="font-size: 70%; margin-top: -30px;">
+            <div style="font-size: 70%; margin-top: -30px;">
+                <div class="text-center">
+                    <img src="presentation/images/figure12.svg" width="70%">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Exemple d'usage - avec la version 1</h4>
+
+        <div style="font-size: 70%;">
+            <div class="text-center" style="margin-top: -30px;">
+                <img src="presentation/images/figure13.svg" width="70%">
+            </div>
+        </div>
+
+    </section>
+
+        <!-- ====================================================================== -->
+
+        <section>
+
+            <h4>Exemple d'usage - avec la version 2</h4>
+    
+            <div style="font-size: 70%;">
+                <div class="text-center" style="margin-top: -30px;">
+                    <img src="presentation/images/figure14.svg" width="70%">
+                </div>
+            </div>
+    
+        </section>
+    
+            <!-- ====================================================================== -->
+    
+    
+            <section>
+                <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+            
+                    <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT13/0" 
+                       role="button" target="_blank">
+                       <i class="fas fa-mobile"></i> &nbsp;
+                       Sortez vos smartphones
+                        <i class="fas fa-arrow-alt-circle-right"></i>
+                    </a>
+            </section>
+            
+            <!-- ====================================================================== -->
+
+
+</section><section name="Adapter un modèle">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Adapter un modèle" data-transition="convex">
+        <h1>Adapter un modèle d'algorithme</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Difficultés à adapter un modèle...</h4>
+
+        <div style="font-size: 70%;">
+            <p>Pour utiliser un modèle d'algorithmique, il est nécessaire de l'adapter au
+                problème traité.</p>
+
+            <p>Ce travail d'adaptation peut être difficile lorsqu'on est débutant mais
+                peut être facilité en spécifiant une stratégie algorithmique dans laquelle
+                on cherche à répondre à une série de questions dépendant du modèle utilisé...
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Stratégie pour un parcours complet avec traitement systématique</h4>
+
+        <div style="font-size: 66%;">
+            <p>On cherchera à répondre aux questions suivantes :</p>
+            <ul>
+                <li style="margin-top: -5px;">le sens de parcours de la structure a-t-il une importance ? Si oui, quel est le sens à privilégier ?
+                </li>
+                <li style="margin-top: -7px;">quelle opération permet de se positionner au début de la structure pour
+                    initier le parcours ?
+                </li>
+                <li style="margin-top: -7px;">quelle opération permet de se déplacer sur l'élément suivant dans la
+                    structure ?
+                </li>
+                <li style="margin-top: -7px;">quelle condition permet de déterminer si tous les éléments de la structure
+                    ont été visités ?</li>
+                <li style="margin-top: -7px;">quel est ou quels sont les traitements à appliquer à tous les éléments de
+                    la structure ?</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Stratégie pour un parcours complet avec traitement conditionné</h4>
+
+        <div style="font-size: 65%;">
+            <p>On cherchera à répondre aux questions suivantes :</p>
+            <ul>
+                <li style="margin-top: -5px;">le sens de parcours de la structure a-t-il une importance ? Si oui, quel est le sens à privilégier ?
+                </li>
+                <li style="margin-top: -7px;">quelle opération permet de se positionner au début de la structure pour
+                    initier le parcours ?
+                </li>
+                <li style="margin-top: -7px;">quelle opération permet de se déplacer sur l'élément suivant dans la
+                    structure ?
+                </li>
+                <li style="margin-top: -7px;">quelle condition permet de déterminer si tous les éléments de la structure
+                    ont été visités ?</li>
+                <li style="margin-top: -7px;">quelle condition permet de déterminer si l'élément courant doit être traité ?</li>
+                <li style="margin-top: -7px;">quel est ou quels sont les traitements à appliquer sur l'élément courant s'il vérifie la propriété cherchée ?</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Stratégie pour une recherche de de première occurrence</h4>
+
+        <div style="font-size: 65%;">
+            <p>On cherchera à répondre aux questions suivantes :</p>
+            <ul>
+                <li style="margin-top: -5px;">le sens de parcours de la structure a-t-il une importance ? Si oui, quel est le sens à privilégier ?
+                </li>
+                <li style="margin-top: -7px;">quelle opération permet de se positionner au début de la structure pour
+                    initier le parcours ?
+                </li>
+                <li style="margin-top: -7px;">quelle opération permet de se déplacer sur l'élément suivant dans la
+                    structure ?
+                </li>
+                <li style="margin-top: -7px;">quelle condition permet de déterminer si tous les éléments de la structure
+                    ont été visités ?</li>
+                <li style="margin-top: -7px;">quelle condition permet de déterminer si l'élément courant vérifie la propriété recherchée ?</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

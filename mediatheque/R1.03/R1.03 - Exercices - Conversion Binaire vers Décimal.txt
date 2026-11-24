@@ -1,0 +1,101 @@
+//Table qui transforme un entier naturel binaire en décimal.
+// Le principe est le suivant :
+// Prendre le bit de gauche et le noter comme valeur initiale du décimal
+// Puis, pour chaque bit, multiplier le décimal par 2 et ajouter ce bit
+// Par exemple 1101 donne : valeur initiale = 1 puis ((((1)*2+1)*2+0)*2+1) = 13
+
+//Table d'états (10 états)
+//état   car lu  état suiv  écrit opération
+// Au début marquer = (séparateur entre décimal et binaire)
+q0      0     q0      0     G
+q0      1     q0      1     G
+q0      .     q2      =     D
+// Prendre le 1er bit non marqué et le marquer comme déjà traité par *
+// ou passer au nettoyage de fin s'il ne reste plus de bits non traités
+q2      *     q2      *     D
+q2      .     q10     .     G
+q2      0     q30     *     G     
+q2      1     q40     *     G 
+// Revenir à gauche du séparateur = après avoir lu un 0 => mult par 2   
+q30     *     q30     *     G
+q30     =     q31     =     G
+// Revenir à gauche du séparateur = après avoir lu un 1 => mult par 2 + 1 
+q40     *     q40     *     G
+q40     =     q41     =     G
+// Multiplier un chiffre du décimal par 2 sans retenue
+q31     0     q31     0     G
+q31     1     q31     2     G
+q31     2     q31     4     G
+q31     3     q31     6     G
+q31     4     q31     8     G
+q31     5     q32     0     G
+q31     6     q32     2     G
+q31     7     q32     4     G
+q31     8     q32     6     G
+q31     9     q32     8     G
+q31     .     q50     0     D
+// Multiplier un chiffre du décimal par 2 avec report de retenue (car on a dépassé 9)
+q32     0     q31     1     G
+q32     1     q31     3     G
+q32     2     q31     5     G
+q32     3     q31     7     G
+q32     4     q31     9     G
+q32     5     q32     1     G
+q32     6     q32     3     G
+q32     7     q32     5     G
+q32     8     q32     7     G
+q32     9     q32     9     G
+q32     .     q50     0     D
+// Multiplier le chiffre de droite du décimal par 2 et ajouter 1 (car on a lu un bit à 1)
+q41     0     q31     1     G
+q41     1     q31     3     G
+q41     2     q31     5     G
+q41     3     q31     7     G
+q41     4     q31     9     G
+q41     5     q32     1     G
+q41     6     q32     3     G
+q41     7     q32     5     G
+q41     8     q32     7     G
+q41     9     q32     9     G
+q41     .     q50     1     D
+// Revenir à droite jusqu'au séparateur = pour traiter le bit suivant
+q50     0     q50     0     D
+q50     1     q50     1     D
+q50     2     q50     2     D
+q50     3     q50     3     D
+q50     4     q50     4     D
+q50     5     q50     5     D
+q50     6     q50     6     D
+q50     7     q50     7     D
+q50     8     q50     8     D
+q50     9     q50     9     D
+q50     =     q2      =     D
+// Etats de nettoyage du résultat :
+// On a fini => revenir tout à gauche en effaçant les * et le =
+q10     *     q10     .     G
+q10     =     q10     .     G
+q10     0     q10     0     G     
+q10     1     q10     1     G     
+q10     2     q10     2     G     
+q10     3     q10     3     G     
+q10     4     q10     4     G     
+q10     5     q10     5     G     
+q10     6     q10     6     G     
+q10     7     q10     7     G     
+q10     8     q10     8     G     
+q10     9     q10     9     G     
+q10     .     q11     .     D
+// On fini => effacer les 0 en début du nombre décimal
+q11     0     q11     .     D
+q11     1     q0      1     A     
+q11     2     q0      2     A     
+q11     3     q0      3     A     
+q11     4     q0      4     A     
+q11     5     q0      5     A     
+q11     6     q0      6     A     
+q11     7     q0      7     A     
+q11     8     q0      8     A     
+q11     9     q0      9     A     
+q11     .     q0      0     A     
+
+

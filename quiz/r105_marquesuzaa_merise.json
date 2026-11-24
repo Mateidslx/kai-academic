@@ -1,0 +1,608 @@
+{
+  "module": "R1.05",
+  "titre": "Bases de Données (Merise & SQL)",
+  "professeur": "M. Christophe Marquesuzaà",
+  "couleur": "#6E4970",
+  "description": "MCD, double lecture des cardinalités, dérivation MLD, normalisation 1FN-3FN-BCNF, dépendances fonctionnelles, SQL DDL (contraintes, clés) et DQL (jointures, sous-requêtes, GROUP BY, HAVING)",
+  "count": 25,
+  "questions": [
+    {
+      "id": "r105_q01",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "1. Démarche Merise & Dictionnaire des Données",
+      "question": "Quelle est la distinction fondamentale entre une « donnée » et une « information » selon le cours de M. Marquesuzaà ?",
+      "options": [
+        "Une information est un texte, alors qu'une donnée est obligatoirement un nombre",
+        "Une donnée est brute et sans contexte ; une information est une donnée contextualisée porteuse de sens pour l'utilisateur",
+        "Une donnée est stockée en SQL, une information est affichée en HTML",
+        "Il n'y a aucune différence, ce sont deux synonymes parfaits"
+      ],
+      "correct_index": 1,
+      "explication": "Dans l'enseignement Merise de M. Marquesuzaà, la donnée est l'élément brut enregistré (ex: 42), tandis que l'information est le résultat de l'interprétation de cette donnée dans son contexte (ex: la température de l'eau est de 42°C).",
+      "pieges": [
+        "Ne pas croire que le type de données (nombre/texte) définit l'information."
+      ],
+      "tags": [
+        "Merise",
+        "Donnée",
+        "Information",
+        "Concepts"
+      ]
+    },
+    {
+      "id": "r105_q02",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "2. Modèle Conceptuel de Données (MCD)",
+      "question": "Comment applique-t-on la règle formelle de la « double lecture » des cardinalités sur une association binaire entre deux entités A et B ?",
+      "options": [
+        "On lit la cardinalité minimale (le nombre minimum de fois qu'une occurrence de A participe à l'association) et maximale (le nombre maximum)",
+        "On lit la cardinalité une fois en français et une fois en anglais",
+        "On multiplie la cardinalité de gauche par celle de droite",
+        "On lit d'abord les attributs de la clé primaire puis les attributs secondaires"
+      ],
+      "correct_index": 0,
+      "explication": "La cardinalité (min, max) exprime pour une occurrence d'une entité donnée, le nombre minimum (0 ou 1) et maximum (1 ou n) de fois où elle peut être reliée à l'autre entité via l'association. Les valeurs canoniques sont (0,1), (1,1), (0,n) et (1,n).",
+      "pieges": [
+        "Piège d'examen IUT : inverser le sens de lecture en plaçant la cardinalité du mauvais côté de la patte d'association."
+      ],
+      "tags": [
+        "MCD",
+        "Cardinalités",
+        "Double lecture",
+        "Associations"
+      ]
+    },
+    {
+      "id": "r105_q03",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "3. Dérivation MCD vers MLD Relationnel",
+      "question": "Lors de la dérivation d'une association binaire de cardinalités (1,1) d'un côté et (0,n) de l'autre, comment se traduit le MLD relationnel ?",
+      "options": [
+        "On crée obligatoirement une nouvelle table pour l'association",
+        "L'identifiant de l'entité côté (0,n) migre comme clé étrangère (#) dans la table de l'entité côté (1,1)",
+        "L'identifiant de l'entité côté (1,1) migre dans l'entité côté (0,n)",
+        "On fusionne immédiatement les deux entités en une seule grande table"
+      ],
+      "correct_index": 1,
+      "explication": "Règle de dérivation cardinalité 1-n (Marquesuzaà) : la clé primaire de l'entité à cardinalité multiple (0,n) migre dans la relation de l'entité à cardinalité simple (1,1) sous forme de clé étrangère (notée avec un # ou soulignée en pointillés).",
+      "pieges": [
+        "Ne pas créer de table intermédiaire inutile pour une relation 1-n !",
+        "Attention au sens de migration : c'est toujours le côté 1 qui reçoit la clé du côté n."
+      ],
+      "tags": [
+        "MLD",
+        "Dérivation",
+        "Clé étrangère",
+        "Migration"
+      ]
+    },
+    {
+      "id": "r105_q04",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "3. Dérivation MCD vers MLD Relationnel",
+      "question": "Quand dérive-t-on une association sous la forme d'une nouvelle table relationnelle (table de liaison / associative) ?",
+      "options": [
+        "Lorsque l'association est de type n-m (cardinalités (0,n)-(0,n) ou (1,n)-(0,n)) ou si l'association porte des attributs propres",
+        "Uniquement si les deux tables contiennent plus de 1000 lignes",
+        "Lorsque l'association relie une table à elle-même",
+        "Jamais, les tables de liaison sont interdites en modèle relationnel"
+      ],
+      "correct_index": 0,
+      "explication": "Pour une relation n-m (many-to-many), aucune table ne peut recevoir la clé de l'autre sans violer la 1ère forme normale. On crée donc une table associative dont la clé primaire est composée de la concaténation des deux clés primaires étrangères.",
+      "pieges": [
+        "Si l'association porte une propriété (ex: 'quantite' dans Commander), celle-ci devient un attribut de la table associative."
+      ],
+      "tags": [
+        "MLD",
+        "Table associative",
+        "Relation n-m",
+        "Clé primaire composite"
+      ]
+    },
+    {
+      "id": "r105_q05",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "4. Théorie de la Normalisation (1FN, 2FN, 3FN)",
+      "question": "Quelle condition stricte une relation doit-elle respecter pour être en 2ème Forme Normale (2FN) ?",
+      "options": [
+        "Être en 1FN et tous les attributs non-clés doivent dépendre pleinement de la totalité de la clé primaire (et pas d'une sous-partie)",
+        "Avoir au moins deux clés primaires différentes",
+        "Ne contenir aucun nombre décimal à virgule",
+        "Avoir été vérifiée par deux professeurs différents"
+      ],
+      "correct_index": 0,
+      "explication": "La 2FN élimine les dépendances fonctionnelles partielles : si la clé primaire est composite (A, B), aucun attribut non-clé C ne doit dépendre uniquement de A ou uniquement de B.",
+      "pieges": [
+        "Si la clé primaire est constituée d'un seul attribut atomique, toute relation en 1FN est automatiquement en 2FN !"
+      ],
+      "tags": [
+        "Normalisation",
+        "2FN",
+        "Dépendance fonctionnelle pleine"
+      ]
+    },
+    {
+      "id": "r105_q06",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "4. Théorie de la Normalisation (1FN, 2FN, 3FN)",
+      "question": "Quelle anomalie la 3ème Forme Normale (3FN) vise-t-elle spécifiquement à éliminer ?",
+      "options": [
+        "Les dépendances fonctionnelles transitives entre attributs non-clés (X -> Y -> Z)",
+        "Les fautes d'orthographe dans les noms de colonnes",
+        "Les jointures externes dans les requêtes SQL",
+        "L'utilisation de clés primaires auto-incrémentées"
+      ],
+      "correct_index": 0,
+      "explication": "La 3FN impose qu'aucun attribut non-clé ne dépende d'un autre attribut non-clé (ex: NumEmployé -> CodePostal -> Ville). Ville dépend transitivement de NumEmployé via CodePostal, il faut donc extraire une table Ville(CodePostal, NomVille).",
+      "pieges": [
+        "Ne pas confondre la 2FN (dépendance partielle par rapport à la clé) et la 3FN (dépendance transitive entre non-clés)."
+      ],
+      "tags": [
+        "Normalisation",
+        "3FN",
+        "Dépendance transitive"
+      ]
+    },
+    {
+      "id": "r105_q07",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "Quelle est la différence fondamentale entre les clauses WHERE et HAVING dans une requête SQL d'agrégation ?",
+      "options": [
+        "WHERE filtre les lignes individuelles avant le regroupement (GROUP BY) ; HAVING filtre les groupes formés après le regroupement",
+        "WHERE s'utilise pour les nombres, HAVING pour le texte",
+        "HAVING est obligatoire après chaque SELECT",
+        "WHERE ne fonctionne qu'avec Oracle, HAVING avec PostgreSQL"
+      ],
+      "correct_index": 0,
+      "explication": "WHERE s'applique sur les tuples initiaux de la table. HAVING s'applique sur les résultats des fonctions d'agrégation (COUNT, AVG, SUM...) après exécution du GROUP BY. Écrire 'WHERE COUNT(*) > 5' déclenche une erreur de syntaxe SQL.",
+      "pieges": [
+        "Piège d'examen universel à l'IUT : mettre une fonction d'agrégat dans la clause WHERE au lieu de HAVING."
+      ],
+      "tags": [
+        "SQL",
+        "WHERE",
+        "HAVING",
+        "GROUP BY",
+        "Agrégats"
+      ]
+    },
+    {
+      "id": "r105_q08",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "Que retourne une jointure externe gauche (LEFT OUTER JOIN) entre deux tables A et B ?",
+      "options": [
+        "Toutes les lignes de A, associées aux colonnes correspondantes de B si la condition est vérifiée, ou avec des valeurs NULL si aucune correspondance n'existe",
+        "Uniquement les lignes qui ont une correspondance exacte dans les deux tables",
+        "Toutes les lignes de B en ignorant complètement la table A",
+        "Le produit cartésien complet sans aucune condition de jointure"
+      ],
+      "correct_index": 0,
+      "explication": "LEFT JOIN préserve l'intégralité des lignes de la table de gauche (A). Si une ligne de A n'a pas de correspondance dans B, les colonnes de B sont remplies avec NULL (très utile pour trouver les clients sans commande par exemple).",
+      "pieges": [
+        "La jointure interne (INNER JOIN) élimine les lignes de A sans correspondance dans B."
+      ],
+      "tags": [
+        "SQL",
+        "LEFT JOIN",
+        "Jointures externes",
+        "NULL"
+      ]
+    },
+    {
+      "id": "r105_q09",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "1. Démarche Merise & Dictionnaire des Données",
+      "question": "Quels sont les trois niveaux d'abstraction formels de la méthode Merise dans l'ordre décroissant d'abstraction ?",
+      "options": [
+        "Niveau Utilisateur -> Niveau Développeur -> Niveau Serveur",
+        "Niveau Conceptuel (MCD) -> Niveau Logique (MLD) -> Niveau Physique (MPD)",
+        "Niveau HTML -> Niveau CSS -> Niveau JavaScript",
+        "Niveau Cahier des charges -> Niveau Algorithme -> Niveau Exécutable"
+      ],
+      "correct_index": 1,
+      "explication": "Dans la démarche Merise enseignée par M. Marquesuzaà : 1. Conceptuel (MCD : indépendant de toute technologie, sémantique pure du métier), 2. Logique (MLD : adapté au modèle organisationnel et relationnel avec tables et clés étrangères), 3. Physique (MPD : spécifique au SGBD choisi, index, types physiques, stockage disques).",
+      "pieges": [
+        "Le MCD ne dépend absolument pas du SGBD (Oracle, PostgreSQL, etc.), alors que le MPD en dépend directement."
+      ],
+      "tags": [
+        "Merise",
+        "MCD",
+        "MLD",
+        "MPD",
+        "Niveaux d'abstraction"
+      ]
+    },
+    {
+      "id": "r105_q10",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "2. Modèle Conceptuel de Données (MCD)",
+      "question": "Quelle est la règle formelle d'intégrité d'une entité dans un MCD selon M. Marquesuzaà ?",
+      "options": [
+        "Une entité doit comporter au moins 10 propriétés et être écrite en majuscules",
+        "Toute entité doit posséder un identifiant unique et discriminant, et chaque propriété doit être atomique et monovaluée pour chaque occurrence",
+        "Une entité ne peut être reliée qu'à une seule autre entité",
+        "Les entités n'ont pas besoin d'identifiant si elles ont un nom"
+      ],
+      "correct_index": 1,
+      "explication": "Chaque occurrence de l'entité doit pouvoir être identifiée sans ambiguïté par son identifiant (clé primaire conceptuelle). Les propriétés multivaluées (ex: plusieurs numéros de téléphone dans un même champ) sont strictement proscrites en Merise.",
+      "pieges": [
+        "Si une personne peut avoir plusieurs numéros de téléphone, il faut créer une entité Téléphone séparée ou une association !"
+      ],
+      "tags": [
+        "MCD",
+        "Identifiant",
+        "Propriété atomique",
+        "Règles Merise"
+      ]
+    },
+    {
+      "id": "r105_q11",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "2. Modèle Conceptuel de Données (MCD)",
+      "question": "Comment modélise-t-on en Merise une association réflexive telle que la relation hiérarchique « être responsable hiérarchique de » au sein de l'entité Employé ?",
+      "options": [
+        "En reliant l'entité Employé à elle-même via une association, avec deux pattes portant des cardinalités et des rôles distincts (ex: chef (0,n) et subordonné (0,1))",
+        "En créant deux entités distinctes : 'EmployéChef' et 'EmployéNormal'",
+        "C'est interdit en Merise, une entité ne peut pas être reliée à elle-même",
+        "En créant une vue SQL temporaire"
+      ],
+      "correct_index": 0,
+      "explication": "Une association réflexive relie une entité à elle-même. Les rôles sur les pattes permettent de distinguer le sens (un employé a au plus 1 chef : (0,1), et un chef supervise 0 à n subordonnés : (0,n)). Lors de la dérivation MLD, cela devient une clé étrangère auto-référencée.",
+      "pieges": [
+        "Piège d'examen : oublier de nommer les rôles sur les pattes de l'association réflexive."
+      ],
+      "tags": [
+        "MCD",
+        "Association réflexive",
+        "Rôles",
+        "Auto-référence"
+      ]
+    },
+    {
+      "id": "r105_q12",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "3. Dérivation MCD vers MLD Relationnel",
+      "question": "Lors de la dérivation d'une association binaire de cardinalités (1,1) d'un côté et (0,1) ou (1,1) de l'autre (relation 1-to-1), quelle est la règle ?",
+      "options": [
+        "On crée toujours deux tables de liaison",
+        "L'identifiant de l'entité la plus stable migre dans l'autre relation sous forme de clé étrangère avec une contrainte d'unicité (UNIQUE), ou les deux relations fusionnent si elles partagent la même existence",
+        "On supprime les deux entités",
+        "On duplique toutes les données dans un fichier CSV"
+      ],
+      "correct_index": 1,
+      "explication": "Dans une relation 1-1, la clé migre d'un côté vers l'autre. Pour garantir qu'une occurrence n'est reliée qu'à une seule, la colonne de clé étrangère doit être marquée UNIQUE. Si les cardinalités sont (1,1)-(1,1) strictes, la fusion en une seule table est souvent la solution la plus saine.",
+      "pieges": [
+        "Oublier la contrainte UNIQUE transformerait la relation 1-1 en relation 1-n dans le MLD !"
+      ],
+      "tags": [
+        "MLD",
+        "Relation 1-1",
+        "Contrainte UNIQUE",
+        "Dérivation"
+      ]
+    },
+    {
+      "id": "r105_q13",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "3. Dérivation MCD vers MLD Relationnel",
+      "question": "Comment dérive-t-on une association ternaire (reliant 3 entités A, B, C avec des cardinalités maximales à n) ?",
+      "options": [
+        "En créant obligatoirement une nouvelle table dont la clé primaire est la concaténation des trois clés primaires étrangères (#idA, #idB, #idC)",
+        "En reliant A à B puis B à C sans table intermédiaire",
+        "En choisissant au hasard l'une des 3 entités pour recevoir les deux autres clés",
+        "Les associations ternaires ne peuvent pas être traduites en relationnel"
+      ],
+      "correct_index": 0,
+      "explication": "Toute association n-aire (de dimension >= 3) se traduit systématiquement par une relation (table) associative. Sa clé primaire est composée de la concaténation des identifiants des entités participantes, complétée par les éventuels attributs portés par l'association.",
+      "pieges": [
+        "Si l'association ternaire porte une cardinalité maximale à 1 sur une de ses branches, la clé primaire de la table associative peut être réduite, cas pointu souvent examiné en TD par M. Marquesuzaà."
+      ],
+      "tags": [
+        "MLD",
+        "Association ternaire",
+        "Clé composite",
+        "Table associative"
+      ]
+    },
+    {
+      "id": "r105_q14",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "4. Théorie de la Normalisation (1FN, 2FN, 3FN, BCNF)",
+      "question": "Quelle condition supplémentaire la Forme Normale de Boyce-Codd (BCNF) exige-t-elle par rapport à la 3FN classique ?",
+      "options": [
+        "La table ne doit pas contenir plus de 5 colonnes",
+        "Pour toute dépendance fonctionnelle non triviale X -> Y, X doit obligatoirement être une super-clé (déterminant de clé)",
+        "Toutes les colonnes doivent être indexées",
+        "La table doit avoir été créée par un administrateur système"
+      ],
+      "correct_index": 1,
+      "explication": "La 3FN tolère qu'un attribut non-clé dépende d'une sous-partie de clé si cet attribut fait lui-même partie d'une clé candidate alternative. La BCNF élimine cette exception : tout déterminant d'une DF doit être une super-clé complète.",
+      "pieges": [
+        "Si une table en 3FN ne possède qu'une seule clé candidate, elle est TOUJOURS en BCNF !"
+      ],
+      "tags": [
+        "Normalisation",
+        "BCNF",
+        "Boyce-Codd",
+        "Super-clé"
+      ]
+    },
+    {
+      "id": "r105_q15",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "Quelle est la différence fondamentale entre les fonctions d'agrégation COUNT(*) et COUNT(nom_colonne) en SQL ?",
+      "options": [
+        "COUNT(*) compte toutes les lignes sans exception (y compris celles contenant des valeurs NULL), alors que COUNT(nom_colonne) ignore les lignes où nom_colonne vaut NULL",
+        "COUNT(*) ne fonctionne que sur les tables de moins de 100 lignes",
+        "COUNT(nom_colonne) retourne toujours un nombre à virgule",
+        "Il n'y a aucune différence, ce sont des synonymes stricts"
+      ],
+      "correct_index": 0,
+      "explication": "Différence fondamentale de la norme SQL : COUNT(*) évalue le nombre de tuples du résultat. COUNT(colonne) n'incrémente le compteur que pour les valeurs non NULL de cette colonne. Si tous les champs d'une colonne sont NULL, COUNT(colonne) retourne 0 alors que COUNT(*) retourne le nombre de lignes !",
+      "pieges": [
+        "Piège d'examen redoutable à l'IUT d'Anglet dans les requêtes de statistiques."
+      ],
+      "tags": [
+        "SQL",
+        "COUNT",
+        "NULL",
+        "Agrégats"
+      ]
+    },
+    {
+      "id": "r105_q16",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "Quel opérateur SQL permet de tester la présence de résultats retournés par une sous-requête corrélée ?",
+      "options": [
+        "EXISTS (et NOT EXISTS)",
+        "EQUALS",
+        "CONTAINS",
+        "MATCH"
+      ],
+      "correct_index": 0,
+      "explication": "EXISTS retourne VRAI dès que la sous-requête produit au moins un tuple (évaluation paresseuse très performante). Il s'utilise typiquement dans les sous-requêtes corrélées (ex: trouver les clients ayant passé au moins une commande).",
+      "pieges": [
+        "NOT EXISTS est l'arme absolue pour exprimer la division relationnelle en SQL (ex: les étudiants qui ont suivi TOUS les cours)."
+      ],
+      "tags": [
+        "SQL",
+        "EXISTS",
+        "Sous-requête corrélée",
+        "DQL"
+      ]
+    },
+    {
+      "id": "r105_q17",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "Dans quel ordre logique le moteur SGBD interprète-t-il les clauses d'une requête SQL SELECT ?",
+      "options": [
+        "SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY",
+        "FROM / JOIN -> WHERE -> GROUP BY -> HAVING -> SELECT -> DISTINCT -> ORDER BY -> LIMIT",
+        "ORDER BY -> LIMIT -> SELECT -> FROM -> WHERE",
+        "L'ordre n'a aucune importance, tout est exécuté en même temps"
+      ],
+      "correct_index": 1,
+      "explication": "L'ordre logique d'exécution : 1. FROM & JOIN (identifier les tables sources et jointures), 2. WHERE (filtrer les lignes brutes), 3. GROUP BY (regrouper les lignes), 4. HAVING (filtrer les groupes agrégés), 5. SELECT (projeter les colonnes et alias), 6. DISTINCT (éliminer les doublons), 7. ORDER BY (trier le résultat), 8. LIMIT (tronquer l'affichage).",
+      "pieges": [
+        "Voilà pourquoi on ne peut pas utiliser un alias défini dans SELECT à l'intérieur de la clause WHERE : au moment où le WHERE filtre, le SELECT n'a pas encore été évalué !"
+      ],
+      "tags": [
+        "SQL",
+        "Ordre d'exécution",
+        "FROM WHERE GROUP BY",
+        "Moteur relationnel"
+      ]
+    },
+    {
+      "id": "r105_q18",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "6. Définition des Données SQL (DDL) & Contraintes",
+      "question": "Que signifie la clause « ON DELETE CASCADE » sur une clé étrangère en SQL ?",
+      "options": [
+        "Elle empêche toute suppression dans la table parent",
+        "Si une ligne de la table parent est supprimée, toutes les lignes filles associées dans la table courante sont automatiquement et récursivement supprimées pour préserver l'intégrité",
+        "Elle supprime la base de données entière en cas d'erreur",
+        "Elle affiche une boîte de dialogue d'avertissement"
+      ],
+      "correct_index": 1,
+      "explication": "CASCADE propage la suppression de l'élément référencé à tous ses dépendants (ex: supprimer une Commande supprime en cascade toutes ses LignesCommande). C'est très pratique mais dangereux si appliqué sur des entités fortes.",
+      "pieges": [
+        "L'alternative par défaut 'ON DELETE RESTRICT' ou 'NO ACTION' bloque la suppression du parent tant qu'il reste des enfants."
+      ],
+      "tags": [
+        "SQL DDL",
+        "ON DELETE CASCADE",
+        "Intégrité référentielle"
+      ]
+    },
+    {
+      "id": "r105_q19",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "6. Définition des Données SQL (DDL) & Contraintes",
+      "question": "Quelle contrainte d'intégrité SQL permet d'imposer qu'un prix soit strictement positif (prix > 0) ?",
+      "options": [
+        "NOT NULL",
+        "CHECK (prix > 0)",
+        "UNIQUE (prix)",
+        "FOREIGN KEY (prix)"
+      ],
+      "correct_index": 1,
+      "explication": "La contrainte CHECK évalue une condition booléenne sur chaque ligne lors de l'insertion ou de la mise à jour (INSERT/UPDATE). Si la condition est fausse, le SGBD rejette la transaction.",
+      "pieges": [
+        "NOT NULL interdit uniquement la valeur NULL, mais n'empêche pas un prix négatif (-50€) !"
+      ],
+      "tags": [
+        "SQL DDL",
+        "CHECK",
+        "Contraintes de domaine"
+      ]
+    },
+    {
+      "id": "r105_q20",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "Quelle est la différence fondamentale entre les opérateurs ensemblistes UNION et UNION ALL en SQL ?",
+      "options": [
+        "UNION élimine automatiquement les lignes doublons (ce qui implique un tri/hachage coûteux), alors que UNION ALL concatène tous les résultats bruts en conservant tous les doublons",
+        "UNION ne fonctionne qu'avec des tables de 2 colonnes",
+        "UNION ALL supprime toutes les données des deux tables",
+        "UNION ALL est réservé aux jointures externes"
+      ],
+      "correct_index": 0,
+      "explication": "UNION effectue une élimination des doublons (équivalent à un DISTINCT), plus lente. UNION ALL est beaucoup plus rapide si l'on sait que les deux ensembles sont disjoints ou si l'on souhaite conserver les doublons.",
+      "pieges": [
+        "Pour que UNION ou UNION ALL fonctionne, les deux requêtes doivent obligatoirement projeter le même nombre de colonnes avec des types de données compatibles."
+      ],
+      "tags": [
+        "SQL",
+        "UNION",
+        "UNION ALL",
+        "Ensembles"
+      ]
+    },
+    {
+      "id": "r105_q21",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "En SQL, comment traite-t-on la valeur NULL dans les comparaisons arithmétiques ou logiques ?",
+      "options": [
+        "NULL est égal à 0",
+        "Toute comparaison avec NULL (ex: age = NULL) renvoie la valeur logique UNKNOWN (inconnu) ; il faut obligatoirement utiliser les prédicats IS NULL ou IS NOT NULL",
+        "NULL est une chaîne de caractères vide \"\"",
+        "NULL provoque l'arrêt immédiat du serveur"
+      ],
+      "correct_index": 1,
+      "explication": "En logique tri-valuée SQL (VRAI, FAUX, UNKNOWN), NULL représente l'absence de valeur. L'expression 'col = NULL' ne renverra jamais VRAI, même si col est NULL ! Il faut impérativement écrire 'col IS NULL'.",
+      "pieges": [
+        "L'un des pièges les plus universels des examens de M. Marquesuzaà à l'IUT d'Anglet."
+      ],
+      "tags": [
+        "SQL",
+        "NULL",
+        "IS NULL",
+        "Logique tri-valuée"
+      ]
+    },
+    {
+      "id": "r105_q22",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "5. Interrogation SQL (DQL) & Jointures",
+      "question": "Que représentent respectivement les caractères génériques '%' et '_' dans une condition avec l'opérateur LIKE en SQL ?",
+      "options": [
+        "'%' remplace exactement 1 chiffre, et '_' remplace une lettre",
+        "'%' remplace une chaîne de 0, 1 ou plusieurs caractères quelconques, tandis que '_' remplace exactement 1 seul caractère",
+        "'%' est réservé aux adresses e-mail, '_' aux espaces",
+        "Ce sont deux caractères identiques sans différence"
+      ],
+      "correct_index": 1,
+      "explication": "Exemple : 'LIKE 'A%'' trouve tous les mots commençant par A. 'LIKE 'A_'' ne trouve que les mots de exactement 2 lettres commençant par A.",
+      "pieges": [
+        "Si l'on cherche littéralement le caractère '%' dans un texte, il faut l'échapper (ex: LIKE '10\\%%' ESCAPE '\\')."
+      ],
+      "tags": [
+        "SQL",
+        "LIKE",
+        "Wildcards",
+        "Jokers"
+      ]
+    },
+    {
+      "id": "r105_q23",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "6. Définition des Données SQL (DDL) & Contraintes",
+      "question": "Quel est l'impact principal de la création d'un INDEX (ex: B-Tree) sur une colonne en base de données ?",
+      "options": [
+        "Il accélère considérablement la lecture et les filtres WHERE sur cette colonne, mais ralentit légèrement les opérations d'écriture (INSERT, UPDATE, DELETE) car l'arbre d'index doit être maintenu à jour",
+        "Il compresse les données pour diviser la taille de la table par deux",
+        "Il interdit la suppression des lignes",
+        "Il crypte la colonne avec un mot de passe"
+      ],
+      "correct_index": 0,
+      "explication": "Un index permet une recherche en O(log N) au lieu d'un parcours séquentiel complet de table en O(N) (Full Table Scan). Le coût à payer est l'espace disque et le temps de réorganisation de l'arbre lors des écritures.",
+      "pieges": [
+        "Les clés primaires et colonnes marquées UNIQUE sont automatiquement indexées par les SGBD relationnels."
+      ],
+      "tags": [
+        "Index",
+        "B-Tree",
+        "Performance",
+        "Full Table Scan"
+      ]
+    },
+    {
+      "id": "r105_q24",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "4. Théorie de la Normalisation (1FN, 2FN, 3FN)",
+      "question": "Qu'est-ce qu'une Dépendance Fonctionnelle élémentaire X -> Y selon le cours de M. Marquesuzaà ?",
+      "options": [
+        "Une relation où Y est une fonction mathématique trigonométrique de X",
+        "Une relation où la connaissance d'une valeur de X détermine de manière unique et certaine au plus une valeur de Y, et aucun sous-ensemble strict de X ne détermine Y",
+        "Une clé étrangère qui dépend d'un mot de passe",
+        "Une requête SQL qui utilise une boucle while"
+      ],
+      "correct_index": 1,
+      "explication": "La dépendance fonctionnelle est le concept mathématique fondamental qui sous-tend la normalisation relationnelle de Codd. Si NumEtudiant détermine NomEtudiant, c'est une DF. Elle est dite pleine/élémentaire si aucune partie de la clé ne suffit à elle seule.",
+      "pieges": [
+        "Une DF traduit une règle de gestion métier (et non l'état accidentel d'une table à un instant T)."
+      ],
+      "tags": [
+        "Dépendance fonctionnelle",
+        "Normalisation",
+        "Règles de gestion"
+      ]
+    },
+    {
+      "id": "r105_q25",
+      "module": "R1.05",
+      "prof": "M. Christophe Marquesuzaà",
+      "chapitre": "2. Modèle Conceptuel de Données (MCD)",
+      "question": "Quelle est la conclusion méthodologique essentielle que M. Marquesuzaà répète à chaque promotion pour réussir la conception d'une base de données ?",
+      "options": [
+        "Commencer directement par taper les tables en SQL pour gagner du temps",
+        "Le temps investi dans la rigueur du modèle conceptuel (MCD) et la validation des règles de gestion élimine à la source 95% des anomalies, redondances et incohérences dans l'application finale",
+        "Utiliser Excel plutôt qu'une base de données relationnelle",
+        "Ne jamais poser de questions aux utilisateurs métier"
+      ],
+      "correct_index": 1,
+      "explication": "Une base de données mal modélisée conceptuellement conduira inévitablement à des anomalies de mise à jour, des incohérences de données et des requêtes SQL tortueuses et lentes. Le MCD est la pierre angulaire de tout système d'information pérenne.",
+      "pieges": [
+        "L'erreur classique de l'étudiant pressé : vouloir coder le SQL avant d'avoir validé les cardinalités et la normalisation."
+      ],
+      "tags": [
+        "Méthodologie",
+        "M. Marquesuzaà",
+        "MCD",
+        "Rigueur de conception"
+      ]
+    }
+  ]
+}

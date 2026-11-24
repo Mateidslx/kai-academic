@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>📚 Cours Promo (Netameow) — BUT 1 Informatique | Kai Study</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    :root {
+      --bg-app: #FAF8F5;
+      --bg-card: #FFFFFF;
+      --bg-sidebar: #F4EFEA;
+      --text-main: #2D3142;
+      --text-muted: #5C677D;
+      --border-color: #E6DFD5;
+      --active-accent: #8A5A44; /* Brun ardoise chaud par défaut */
+      --accent-moulin: #8A5A44;
+      --accent-marquesuzaa: #6E4970;
+      --accent-fernandes: #B85042;
+      --accent-roegel: #A64D47;
+      --accent-alzieu: #7A5C58;
+      --accent-eco: #4E7055;
+      --accent-web: #366687;
+      --font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      line-height: 1.65;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Topbar */
+    header.promo-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-card);
+      border-bottom: 1.5px solid var(--border-color);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+      padding: 10px 16px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--bg-app);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+    .btn-back-home:hover {
+      color: var(--text-main);
+      border-color: var(--text-muted);
+    }
+
+    .page-title-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-icon {
+      font-size: 1.2rem;
+    }
+    .badge-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .badge-source {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #E8F0FE;
+      color: #1A73E8;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-qcm-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-moulin);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(138,90,68,0.25);
+      transition: transform 0.15s;
+    }
+    .btn-qcm-header:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Barre de recherche et filtres de modules */
+    .filter-bar {
+      max-width: 1400px;
+      margin: 10px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    .search-input-wrapper svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .search-box {
+      width: 100%;
+      height: 40px;
+      padding: 0 16px 0 38px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-app);
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus {
+      border-color: var(--active-accent);
+      background: #FFFFFF;
+    }
+
+    /* Onglets de modules scrollables */
+    .module-chips {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .module-chips::-webkit-scrollbar {
+      display: none;
+    }
+    .chip {
+      flex: 0 0 auto;
+      padding: 5px 12px;
+      border-radius: 16px;
+      background: var(--bg-app);
+      border: 1px solid var(--border-color);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chip.active {
+      background: var(--active-accent);
+      color: #FFFFFF;
+      border-color: var(--active-accent);
+      font-weight: 600;
+    }
+
+    /* Layout principal */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      height: calc(100vh - 120px);
+    }
+
+    /* Liste latérale des cours */
+    .courses-sidebar {
+      width: 360px;
+      flex-shrink: 0;
+      border-right: 1.5px solid var(--border-color);
+      background: var(--bg-sidebar);
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .course-card-item {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .course-card-item:hover {
+      border-color: var(--active-accent);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+    .course-card-item.selected {
+      border-color: var(--active-accent);
+      background: #FAF6F0;
+      box-shadow: 0 2px 8px rgba(138,90,68,0.12);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .card-mod-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #FFFFFF;
+      background: var(--active-accent);
+    }
+    .card-char-count {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .card-snippet {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.35;
+    }
+
+    /* Zone de lecture centrale */
+    .reader-main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px 80px 32px;
+      background: var(--bg-card);
+      position: relative;
+    }
+
+    .reader-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      color: var(--text-muted);
+      padding: 20px;
+    }
+    .reader-placeholder h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    /* En-tête de cours sélectionné */
+    .course-detail-header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+
+    .course-detail-mod {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--active-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .course-detail-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .course-detail-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-app);
+      padding: 3px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Contenu Markdown rendu */
+    .markdown-body {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-main);
+      max-width: 900px;
+    }
+
+    .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+      color: var(--text-main);
+      margin-top: 1.6em;
+      margin-bottom: 0.6em;
+      font-weight: 700;
+    }
+    .markdown-body h2 {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
+    }
+
+    .markdown-body p {
+      margin-bottom: 1em;
+    }
+
+    .markdown-body ul, .markdown-body ol {
+      padding-left: 24px;
+      margin-bottom: 1em;
+    }
+    .markdown-body li {
+      margin-bottom: 4px;
+    }
+
+    .markdown-body blockquote {
+      border-left: 4px solid var(--active-accent);
+      padding: 10px 16px;
+      background: var(--bg-app);
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1em;
+      font-size: 0.9rem;
+    }
+
+    .markdown-body code {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      background: #ECE6DE;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .markdown-body pre {
+      background: #2D3142;
+      color: #F8F9FA;
+      padding: 14px 16px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin-bottom: 1.2em;
+    }
+    .markdown-body pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.2em;
+      font-size: 0.88rem;
+    }
+    .markdown-body th, .markdown-body td {
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .markdown-body th {
+      background: var(--bg-app);
+      font-weight: 600;
+    }
+
+    /* Bouton flottant QCM */
+    .floating-qcm-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      z-index: 99;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-moulin);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 16px rgba(138,90,68,0.35);
+      transition: all 0.2s;
+    }
+    .floating-qcm-cta:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(138,90,68,0.45);
+    }
+
+    /* Mobile bar pour basculer liste/cours */
+    .mobile-nav-toggle {
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .app-layout {
+        height: auto;
+        flex-direction: column;
+      }
+      .courses-sidebar {
+        width: 100%;
+        max-height: 45vh;
+        border-right: none;
+        border-bottom: 1.5px solid var(--border-color);
+      }
+      .reader-main {
+        padding: 16px 16px 80px 16px;
+      }
+      .floating-qcm-cta {
+        bottom: 16px;
+        right: 16px;
+        font-size: 0.85rem;
+        padding: 10px 16px;
+      }
+      .badge-source {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="promo-header">
+    <div class="header-top">
+      <div class="brand-group">
+        <a href="index.html" class="btn-back-home">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Accueil
+        </a>
+        <div class="page-title-badge">
+          <span class="badge-icon">📚</span>
+          <span class="badge-title">Cours Promo (Netameow)</span>
+          <span class="badge-source">70 cours scrapés</span>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <a href="quiz/" id="top-btn-quiz" class="btn-qcm-header">
+          <span>🎯 QCM Express</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Barre de recherche et filtre de modules -->
+    <div class="filter-bar">
+      <div class="search-input-wrapper">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="course-search-input" class="search-box" placeholder="Rechercher par concept, titre, prof (ex: Moulin, Von Neumann, Turing, Babbage, MLD, Gauss, Mintzberg)...">
+      </div>
+      
+      <div class="module-chips" id="module-chips-container">
+        <button class="chip active" data-mod="ALL">Tous les cours (<span id="total-count-badge">70</span>)</button>
+        <button class="chip" data-mod="R1.03" style="--active-accent: #8A5A44;">R1.03 Archi (M. Moulin)</button>
+        <button class="chip" data-mod="R1.05" style="--active-accent: #6E4970;">R1.05 BD (Marquesuzaà)</button>
+        <button class="chip" data-mod="R1.06" style="--active-accent: #B85042;">R1.06 Maths (Fernandes)</button>
+        <button class="chip" data-mod="R1.07" style="--active-accent: #A64D47;">R1.07 Matrices (Roegel)</button>
+        <button class="chip" data-mod="R1.08" style="--active-accent: #7A5C58;">R1.08 Gestion (Alzieu)</button>
+        <button class="chip" data-mod="R1.09" style="--active-accent: #4E7055;">R1.09 Économie</button>
+        <button class="chip" data-mod="R1.02" style="--active-accent: #366687;">R1.02 Web (Dalmau)</button>
+        <button class="chip" data-mod="DIVERS">Divers / Index</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Layout Principal -->
+  <div class="app-layout">
+    
+    <!-- Liste latérale des cours -->
+    <aside class="courses-sidebar" id="courses-sidebar">
+      <div id="course-list-status" style="font-size:0.75rem; color:var(--text-muted); padding:4px 6px;">Chargement des cours...</div>
+      <div id="course-cards-container"></div>
+    </aside>
+
+    <!-- Zone de lecture centrale -->
+    <main class="reader-main" id="reader-main">
+      <div class="reader-placeholder" id="reader-placeholder">
+        <div style="font-size:3rem; margin-bottom:12px;">📖</div>
+        <h3>Sélectionnez un cours pour commencer la lecture</h3>
+        <p>70 fiches et cours complets de la promo avec architecture de M. Moulin, TP résolus, annexes et démonstrations.</p>
+      </div>
+
+      <article id="reader-content" style="display:none;">
+        <header class="course-detail-header">
+          <span class="course-detail-mod" id="course-detail-mod">R1.03 — Architecture des ordinateurs</span>
+          <h1 class="course-detail-title" id="course-detail-title">Titre du cours</h1>
+          <div class="course-detail-meta-row">
+            <span class="meta-pill" id="meta-prof">👨‍🏫 M. Moulin</span>
+            <span class="meta-pill" id="meta-chars">📝 4 500 car.</span>
+            <span class="meta-pill" id="meta-tables">📊 2 tableaux</span>
+            <a href="#" target="_blank" class="meta-pill" id="meta-source-link" style="text-decoration:none; color:inherit;">🔗 Source originale</a>
+          </div>
+        </header>
+
+        <div class="markdown-body" id="markdown-render-area">
+          <!-- Rendu du Markdown -->
+        </div>
+      </article>
+    </main>
+
+  </div>
+
+  <!-- Bouton Flottant QCM Express -->
+  <a href="quiz/" id="floating-qcm-cta" class="floating-qcm-cta">
+    <span>🎯 S'entraîner en QCM sur ce cours</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+
+  <!-- Script des données de cours assemblées -->
+  <script src="cours_promo_bundle.js"></script>
+
+  <script>
+    // Module color mapping
+    const MODULE_COLORS = {
+      "R1.03": "#8A5A44",
+      "R1.05": "#6E4970",
+      "R1.06": "#B85042",
+      "R1.07": "#A64D47",
+      "R1.08": "#7A5C58",
+      "R1.09": "#4E7055",
+      "R1.02": "#366687",
+      "DIVERS": "#5C677D"
+    };
+
+    let allCourses = [];
+    let currentFiltered = [];
+    let activeModule = "ALL";
+    let activeCourse = null;
+
+    // Initialisation
+    async function initPromoApp() {
+      if (window.NETAMEOW_COURSES && window.NETAMEOW_COURSES.courses_list) {
+        allCourses = window.NETAMEOW_COURSES.courses_list;
+      } else {
+        try {
+          const res = await fetch('cours_promo_bundle.json');
+          const data = await res.json();
+          allCourses = data.courses_list || [];
+        } catch (e) {
+          console.error("Erreur de chargement bundle:", e);
+        }
+      }
+
+      document.getElementById('total-count-badge').textContent = allCourses.length;
+      setupFilters();
+      applyFilters();
+
+      // Check URL params for direct course opening
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
+      const mod = params.get('mod');
+      if (mod) {
+        setModuleFilter(mod);
+      }
+      if (slug) {
+        const found = allCourses.find(c => c.slug === slug);
+        if (found) selectCourse(found);
+      } else if (allCourses.length > 0) {
+        // Sélectionner par défaut le premier cours de M. Moulin
+        const moulinFirst = allCourses.find(c => c.module_code === "R1.03") || allCourses[0];
+        selectCourse(moulinFirst);
+      }
+    }
+
+    function setupFilters() {
+      // Module chips click
+      document.querySelectorAll('.module-chips .chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.module-chips .chip').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeModule = btn.getAttribute('data-mod');
+          applyFilters();
+        });
+      });
+
+      // Search box
+      const searchBox = document.getElementById('course-search-input');
+      searchBox.addEventListener('input', () => {
+        applyFilters();
+      });
+    }
+
+    function setModuleFilter(mod) {
+      activeModule = mod;
+      document.querySelectorAll('.module-chips .chip').forEach(b => {
+        if (b.getAttribute('data-mod') === mod) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('course-search-input').value.toLowerCase().trim();
+      currentFiltered = allCourses.filter(c => {
+        const matchMod = (activeModule === "ALL") || (c.module_code === activeModule);
+        if (!matchMod) return false;
+
+        if (!q) return true;
+        const haystack = `${c.title} ${c.module_code} ${c.module_name} ${c.professeur} ${c.summary} ${c.slug}`.toLowerCase();
+        return haystack.includes(q);
+      });
+
+      renderSidebar();
+    }
+
+    function renderSidebar() {
+      const container = document.getElementById('course-cards-container');
+      const status = document.getElementById('course-list-status');
+      container.innerHTML = '';
+      
+      status.textContent = `${currentFiltered.length} cours affichés sur ${allCourses.length}`;
+
+      currentFiltered.forEach(course => {
+        const card = document.createElement('div');
+        card.className = `course-card-item ${activeCourse && activeCourse.slug === course.slug ? 'selected' : ''}`;
+        
+        const col = MODULE_COLORS[course.module_code] || '#5C677D';
+        card.style.setProperty('--active-accent', col);
+
+        const cleanSummary = (course.summary || '').replace(/>\s*\[!note\]/gi, '').replace(/\*\*/g, '').trim();
+
+        card.innerHTML = `
+          <div class="card-meta">
+            <span class="card-mod-tag" style="background:${col};">${course.module_code || 'AUTRE'}</span>
+            <span class="card-char-count">${course.char_count} car.</span>
+          </div>
+          <div class="card-title">${course.title || course.slug}</div>
+          <div class="card-snippet">${cleanSummary || 'Contenu pédagogique officiel du camarade de promo.'}</div>
+        `;
+
+        card.addEventListener('click', () => {
+          selectCourse(course);
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    function selectCourse(course) {
+      activeCourse = course;
+      
+      // Update selected card in sidebar
+      document.querySelectorAll('.course-card-item').forEach(c => c.classList.remove('selected'));
+      // Find card with this slug
+      const foundIdx = currentFiltered.findIndex(c => c.slug === course.slug);
+      if (foundIdx !== -1) {
+        const cards = document.querySelectorAll('.course-card-item');
+        if (cards[foundIdx]) cards[foundIdx].classList.add('selected');
+      }
+
+      // Hide placeholder, show article
+      document.getElementById('reader-placeholder').style.display = 'none';
+      const article = document.getElementById('reader-content');
+      article.style.display = 'block';
+
+      // Set colors
+      const accent = MODULE_COLORS[course.module_code] || '#8A5A44';
+      document.documentElement.style.setProperty('--active-accent', accent);
+
+      // Header details
+      document.getElementById('course-detail-mod').textContent = `${course.module_code || 'IUT'} — ${course.module_name || 'Cours'}`;
+      document.getElementById('course-detail-title').textContent = course.title || course.slug;
+      document.getElementById('meta-prof').textContent = `👨‍🏫 ${course.professeur || 'IUT Anglet'}`;
+      document.getElementById('meta-chars').textContent = `📝 ${course.char_count || 0} caractères`;
+      document.getElementById('meta-tables').textContent = `📊 ${course.tables_count || 0} tableaux`;
+      
+      const srcLink = document.getElementById('meta-source-link');
+      if (course.url) {
+        srcLink.href = course.url;
+        srcLink.style.display = 'inline-flex';
+      } else {
+        srcLink.style.display = 'none';
+      }
+
+      // Floating button links directly to QCM of that module
+      const qcmMod = course.module_code || 'R1.03';
+      const floatingBtn = document.getElementById('floating-qcm-cta');
+      floatingBtn.href = `quiz/?mod=${encodeURIComponent(qcmMod)}`;
+      floatingBtn.style.background = accent;
+      floatingBtn.innerHTML = `<span>🎯 S'entraîner en QCM (${qcmMod})</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+
+      const headerBtn = document.getElementById('top-btn-quiz');
+      headerBtn.href = `quiz/?mod=${encodeURIComponent(qcmMod)}`;
+      headerBtn.style.background = accent;
+
+      // Render Markdown
+      const renderArea = document.getElementById('markdown-render-area');
+      const md = course.content_md || '';
+      if (window.marked && typeof window.marked.parse === 'function') {
+        renderArea.innerHTML = window.marked.parse(md);
+      } else {
+        // Fallback minimal text rendering
+        renderArea.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit;">${escapeHtml(md)}</pre>`;
+      }
+
+      // Scroll reader to top
+      document.getElementById('reader-main').scrollTop = 0;
+    }
+
+    function escapeHtml(text) {
+      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // Auto-boot
+    window.addEventListener('DOMContentLoaded', initPromoApp);
+  </script>
+</body>
+</html>

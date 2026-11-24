@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#8A5A44">
+    <title>R1.03 — Architecture des Ordinateurs — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Marked.js Markdown Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    
+    <!-- DOMPurify for Safe Sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #8A5A44;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Rich Typography for Rendered Markdown */
+        .revision-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .revision-prose h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .revision-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .revision-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .revision-prose h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #334155;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .revision-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .revision-prose ul {
+            list-style-type: disc;
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .revision-prose ol {
+            list-style-type: decimal;
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .revision-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .revision-prose blockquote {
+            border-left: 5px solid #8A5A44;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .revision-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .revision-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            margin: 1.25rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .revision-prose pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: inherit;
+            font-size: inherit;
+        }
+        .revision-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.25rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            font-size: 0.88rem;
+        }
+        .revision-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .revision-prose td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .revision-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .revision-prose tr:hover td {
+            background: #fafbfc;
+        }
+        .revision-prose strong {
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .revision-prose hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        /* Container du diagramme Mermaid avec Vrais Losanges */
+        .mermaid-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- En-tête Allégé & Épuré (Accès Rapide et Direct) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <a href="../index.html#revisions" class="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Retour au Centre de Révision</span>
+            </a>
+            <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-lg text-xs font-mono font-bold" style="background-color: #8A5A4415; color: #8A5A44; border: 1px solid #8A5A4430;">
+                    R1.03
+                </span>
+                <a href="../index.html" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition" title="Dashboard">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5 flex-1 w-full">
+
+        <!-- Module Header Card avec Description Grande & Équipe Étudiante -->
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #8A5A44;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #8A5A4415; color: #8A5A44; border: 1px solid #8A5A4430;">R1.03</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">R1.03 — Architecture des Ordinateurs</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Philippe Roose / M. Bouizem</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+                <a href="../courses/R1.03.html" class="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>Ouvrir les chapitres dédiés</span>
+                </a>
+            </div>
+
+            <!-- DESCRIPTION PLUS GRANDE ISSUE DE L'ANCIEN DOC -->
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
+                <div class="text-[11px] font-black uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1.5">
+                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                    <span>Description & Objectifs Officiels :</span>
+                </div>
+                Fondements matériels et architecture interne des systèmes informatiques : Systèmes de numération positionnelle (binaire naturel, hexadécimal, ASCII, UTF-8), arithmétique binaire des entiers signés en complément à deux et détection d'overflow, nombres flottants réels selon la norme IEEE 754, algèbre de Boole et simplification par tableaux de Karnaugh (circuits combinatoires, additionneurs complets, multiplexeurs, bascules), modèle architectural de Von Neumann (UAL, unité de contrôle, registres PC/RI/ACC, cycle Fetch-Decode-Execute), bus système et hiérarchie des mémoires caches (localité spatiale et temporelle, code de Hamming).
+            </div>
+        </div>
+
+        <!-- Onglets Pédagogiques (Niveau 3 : Fiche Approfondie active par défaut !) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            <button onclick="switchLevel('DETAILED')" id="tabDetailed" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs text-white" style="background-color: #8A5A44; border-color: #8A5A44;">
+                <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                <span>📖 Fiche Approfondie (Grand Mémo des Partiels)</span>
+            </button>
+            <button onclick="switchLevel('STANDARD')" id="tabStandard" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs bg-white text-slate-700 border-slate-200 hover:bg-slate-50">
+                <i data-lucide="book" class="w-3.5 h-3.5"></i>
+                <span>📘 Révision Standard (Mémo & Exercices)</span>
+            </button>
+            <button onclick="switchLevel('QUICK_REVIEW')" id="tabQuick" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs bg-white text-slate-700 border-slate-200 hover:bg-slate-50">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                <span>⚡ Synthèse Express (Fiche 80/20)</span>
+            </button>
+        </div>
+
+        <!-- Main Content Card with Dynamic Rendered Markdown -->
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div id="revContent" class="revision-prose">
+                <div class="animate-pulse space-y-4">
+                    <div class="h-6 bg-slate-100 rounded w-1/3"></div>
+                    <div class="h-4 bg-slate-100 rounded w-full"></div>
+                    <div class="h-4 bg-slate-100 rounded w-5/6"></div>
+                    <div class="h-32 bg-slate-50 rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Payload JSON contenant les 3 niveaux -->
+    <script>
+        const contentData = {"DETAILED": "# 📖 R1.03 — Synthèse Complète : Architecture des Ordinateurs\n> **Enseignants référents** : M. Philippe Roose / M. Bouizem — IUT de Bayonne & du Pays Basque (Campus d'Anglet)\n\n## 🎯 Objectifs officiels & Périmètre\nArchitecture de Von Neumann, codage de l'information (binaire, hexadécimal, complément à 2), détection d'erreurs de Hamming et fondements de la calculabilité.\n\n## 📚 Synthèse des 6 Chapitres & Supports\n\n### Chapitre 1 : Systèmes de Numération Positionnelle & Conversions de Bases (~14 min · 2523 mots)\n**Plan des notions abordées :**\n- 1. Théorie de la Numération Positionnelle Pondérée\n- 2. Méthodes de Conversion Déterministes Pas-à-Pas\n- 3. Codages Spécifiques : BCD, Code Gray & Encodages Textuels\n- 4. Atelier Pièges d'Examen de M. Moulin\n- 5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)\n- 6. QCM Interactif Format Partiel M. Moulin\n\n**Points essentiels du cours :**\nThéorie rigoureuse de la numération polynomiale pondérée en base B. Méthodes complètes de conversions déterministes (divisions et multiplications successives, groupements directs par paquets de bits), fractions binaires et périodicité, codages BCD et Gray (binaire réfléchi), normes ASCII et UTF-8.\nDans l'histoire des civilisations, deux grands systèmes de représentation des nombres se sont affrontés : les systèmes additifs (comme les chiffres romains $XVI = 10 + 5 + 1$, où la position du symbole influe peu sur son ordre de grandeur et où les calculs arithmétiques sont atrocement complexes) et les systèmes positionnels pondérés inventés en Inde et transmis par le monde arabo-musulman.\n\n```\n0.625 × 2 = 1.25  --> Entière = 1 (poids 2⁻¹ = 0.5)\n0.250 × 2 = 0.50  --> Entière = 0 (poids 2⁻² = 0.25)\n0.500 × 2 = 1.00  --> Entière = 1 (poids 2⁻³ = 0.125)\n0.000             --> Reste nul, arrêt !\n\n(0.625)₁₀ = (0.101)₂\nVérif : 1/2 + 0/4 + 1/8 = 0.5 + 0.125 = 0.625.\n```\n\n### Chapitre 2 : Arithmétique Binaire, Complément à Deux & Virgule Flottante IEEE 754 (~11 min · 2076 mots)\n**Plan des notions abordées :**\n- 1. Représentation des Nombres Entiers Relatifs & Complément à Deux (C2)\n- 2. Arithmétique dans l'ALU : Distinction Fondamentale Carry ($C$) vs Overflow ($V$)\n- 3. Nombres à Virgule Flottante : La Norme IEEE 754\n- 4. Atelier Pièges d'Examen de M. Moulin\n- 5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)\n- 6. QCM Interactif Format Partiel M. Moulin\n\n**Points essentiels du cours :**\nThéorie des entiers signés en Complément à 2 (C2), dynamique d'intervalle asymétrique, extension de signe. Arithmétique binaire dans l'ALU, distinction Carry (C) vs Overflow (V). Norme IEEE 754 simple et double précision, mantisse normalisée, zéros signés, dénormalisés, infinis et NaN.\nComment représenter un signe mathématique négatif ($-$ ou $+$) dans une mémoire électronique constituée exclusivement de bistables valant 0 ou 1 ? Trois représentations ont été historiquement expérimentées, mais une seule s'est imposée universellement :\n\n- • $ ext{Positif} + ext{Positif} = ext{Négatif} \\implies$ OVERFLOW IMMÉDIAT ($V=1$) (ex: $70 + 70 = 140 > 127$).\n- • $ ext{Négatif} + ext{Négatif} = ext{Positif} \\implies$ OVERFLOW IMMÉDIAT ($V=1$) (ex: $-80 + (-70) = -150 < -128$).\n- • $ ext{Positif} + ext{Négatif}$ : L'overflow est rigoureusement IMPOSSIBLE ($V=0$ toujours), car le résultat est mathématiquement compris entre les deux valeurs.\n\n```\nExemple : Trouver -24 sur 8 bits\n+24 décimal en binaire naturel = 0 0 0 1 1 0 0 0₂\nParcours depuis la droite :\n- Les trois '0' et le premier '1' sont recopiés tels quels : ... 1 0 0 0\n- Les bits à gauche (0001) sont inversés (1110)            : 1 1 1 0 1 0 0 0\nRésultat immédiat : (-24)₁₀ = (1110 1000)₂ en C2.\n```\n\n### Chapitre 3 : Algèbre de Boole, Tableaux de Karnaugh & Circuits Combinatoires (~10 min · 1873 mots)\n**Plan des notions abordées :**\n- 1. Fondements de l'Algèbre de Boole & Théorèmes Cardinaux\n- 2. Méthode des Tableaux de Karnaugh (K-Maps)\n- 3. Circuits Combinatoires Fondamentaux & Universalité NAND\n- 4. Atelier Pièges d'Examen de M. Moulin\n- 5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)\n- 6. QCM Interactif Format Partiel M. Moulin\n\n**Points essentiels du cours :**\nFondements formels de l'algèbre booléenne (Huntington, De Morgan, consensus). Méthode géométrique de Karnaugh (K-Maps), adjacence torique, conditions indifférentes (Don't Care). Synthèse des circuits combinatoires : universalité NAND/NOR, additionneurs (Half & Full Adder, Ripple Carry) et multiplexeurs.\nThéorisée par le mathématicien britannique George Boole en 1854 puis appliquée aux circuits de commutation électronique par Claude Shannon au MIT en 1937, l'algèbre booléenne opère sur l'ensemble binaire $\\mathbb{B} = \\{0, 1\\}$ muni de deux lois de composition interne ($+$ pour le OU logique, $\\cdot$ pour le ET logique) et d'une involution (la négation logique notée $\\overline{a}$ ou $ ext{NOT}(a)$).\n\n- Axes en Code Gray : L'ordonnancement des lignes et des colonnes suit rigoureusement le code Gray : 00, 01, 11, 10. Deux cases adjacentes ne diffèrent TOUJOURS que d'un seul bit !\n- Taille des Groupements : On ne peut regrouper que des paquets contenant un nombre de cases égal à une puissance exacte de 2 ($1, 2, 4, 8, 16$). Les formes doivent impérativement être rectangulaires ou carrées (jamais de L, de croix ni de paquets de 3 ou 6).\n\n### Chapitre 4 : Architecture de Von Neumann, CPU, Cycles d'Horloge & Bus (~10 min · 1830 mots)\n**Plan des notions abordées :**\n- 1. Le Modèle de Von Neumann vs Architecture Harvard\n- 2. Anatomie Détaillée du CPU & Typologie des 3 Bus Système\n- 3. Le Cycle d'Exécution d'une Instruction en Micro-Opérations RTL\n- 4. Atelier Pièges d'Examen de M. Moulin\n- 5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)\n- 6. QCM Interactif Format Partiel M. Moulin\n\n**Points essentiels du cours :**\nLe modèle historique de Von Neumann vs Harvard, le goulot d'étranglement de Von Neumann. Anatomie du microprocesseur : PC, RI, Accumulateur, Flags, MAR, MDR. Les 3 bus système. Chronogramme d'instruction (Fetch, Decode, Execute, Write-Back), micro-opérations RTL, métriques de performance CPI et équation fondamentale du temps d'exécution.\nEn 1945, le mathématicien et physicien John von Neumann publia son célèbre rapport First Draft of a Report on the EDVAC. Pour la première fois dans l'histoire des calculateurs, il introduisit le concept révolutionnaire de programme enregistré (Stored-Program Concept) : les instructions du programme et les données numériques sont stockées ensemble, indistinctement dans la même mémoire centrale sous forme de mots binai…\n\n### Chapitre 5 : Hiérarchie Mémoire, Caches & Détection d'Erreurs Hamming (~12 min · 2181 mots)\n**Plan des notions abordées :**\n- 1. La Pyramide des Mémoires & les Deux Principes de Localité\n- 2. Micro-Architecture du Cache, Adressage & Formule AMAT\n- 3. Théorie de Richard Hamming : Distance & Code Correcteur (7, 4)\n- 4. Atelier Pièges d'Examen de M. Moulin\n- 5. Exercices Résolus Pas-à-Pas (TD Type M. Moulin)\n- 6. QCM Interactif Format Partiel M. Moulin\n\n**Points essentiels du cours :**\nPyramide de la hiérarchie mémoire, principes de localité spatiale et temporelle. Micro-architecture des caches (Tag, Index, Offset), mappings (Direct Mapped, N-Way Set Associative), politiques LRU, Write-Through et Write-Back, équation AMAT. Théorie de l'information de Richard Hamming, distance minimale, code (7,4), calcul matriciel et correction matérielle par le syndrome.\nEn physique des semi-conducteurs, il est impossible de concevoir une mémoire qui soit simultanément infiniment rapide, immense en capacité et économiquement bon marché. Pour contourner cette limite physique, les architectes d'ordinateurs organisent la mémoire sous forme d'une pyramide hiérarchique :\n\n- • Entièrement Associatif (Fully Associative) : Un bloc de RAM peut être placé dans n'importe quelle ligne libre. Zéro conflit, mais nécessite de comparer tous les tags en parallèle (très coûteux en surface et énergie).\n- • Pour détecter $e$ erreurs simples : il faut $d_{\\min} \\ge e + 1$.\n- • Pour corriger $c$ erreurs simples : il faut $d_{\\min} \\ge 2c + 1$.\n\n### TD 3 : Architecture de Von Neumann — Mémoire, CPU & UE (~3 min · 262 mots)\n**Plan des notions abordées :**\n- 1. Les Trois Composants Fondamentaux de la Mémoire\n- 2. Déroulement Chronologique des Opérations\n- 3. Exercices Corrigés de la Planche TD3\n\n**Points essentiels du cours :**\nEnseignant : M. Sébastien Dalmau • IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nContient l'adresse de la case mémoire sur laquelle l'opération (lecture ou écriture) va s'effectuer.\n\n- L'adresse est chargée dans le RA.\n- Le DA décode l'adresse et active la ligne.\n- Ordre de lecture émis sur le bus de commande.\n- Copie de la valeur de la case mémoire dans le RM.\n\n## ⚠️ Pièges d'examen & Réflexes (issu des QCM officiels)\n- **1. Introduction : Qu'est-ce qu'un ordinateur ?** : ['Une calculatrice effectue des calculs mais son programme est figé dans ses circuits.', \"L'écran et l'OS sont des éléments périphériques ou logiciels, pas la définition intrinsèque.\"]\n- **1. Introduction : Qu'est-ce qu'un ordinateur ?** : [\"L'interprétation est plus lente que l'exécution de code compilé natif en raison du travail d'analyse à la volée.\"]\n- **1. Introduction : Qu'est-ce qu'un ordinateur ?** : [\"Ne pas confondre la portabilité logicielle avec la génération de jeux d'instructions machines distincts.\"]\n- **2. Représentation de l'information** : ['Ne pas confondre 2^N avec 2*N (erreur de débutant fréquente).', '2^(N-1) est le nombre de valeurs strictement positives en complément à deux.']\n- **2. Représentation de l'information** : ['1101 vaut 13 (D) et non 12 (C).', 'Table hexadécimale : 10=A, 11=B, 12=C, 13=D, 14=E, 15=F.']\n- **2. Représentation de l'information** : ['La simple inversion du bit de signe produit une représentation signe/valeur absolue avec un double zéro (+0 et -0), bannie dans les ordinateurs modernes.']", "STANDARD": "# 📘 R1.03 — Révision Standard : Architecture des Ordinateurs\n> **Référent** : M. Philippe Roose / M. Bouizem\n\nArchitecture de Von Neumann, codage de l'information (binaire, hexadécimal, complément à 2), détection d'erreurs de Hamming et fondements de la calculabilité.\n\n## 📌 Notions clés par chapitre\n\n### Chapitre 1 : Systèmes de Numération Positionnelle & Conversions de Bases\nThéorie rigoureuse de la numération polynomiale pondérée en base B. Méthodes complètes de conversions déterministes (divisions et multiplications successives, groupements directs par paquets de bits), fractions binaires et périodicité, codages BCD et Gray (binaire réfléchi), normes ASCII et UTF-8.\n\n### Chapitre 2 : Arithmétique Binaire, Complément à Deux & Virgule Flottante IEEE 754\nThéorie des entiers signés en Complément à 2 (C2), dynamique d'intervalle asymétrique, extension de signe. Arithmétique binaire dans l'ALU, distinction Carry (C) vs Overflow (V). Norme IEEE 754 simple et double précision, mantisse normalisée, zéros signés, dénormalisés, infinis et NaN.\n- • $ ext{Positif} + ext{Positif} = ext{Négatif} \\implies$ OVERFLOW IMMÉDIAT ($V=1$) (ex: $70 + 70 = 140 > 127$).\n- • $ ext{Négatif} + ext{Négatif} = ext{Positif} \\implies$ OVERFLOW IMMÉDIAT ($V=1$) (ex: $-80 + (-70) = -150 < -128$).\n- • $ ext{Positif} + ext{Négatif}$ : L'overflow est rigoureusement IMPOSSIBLE ($V=0$ toujours), car le résultat est mathématiquement compris entre les deux valeurs.\n\n### Chapitre 3 : Algèbre de Boole, Tableaux de Karnaugh & Circuits Combinatoires\nFondements formels de l'algèbre booléenne (Huntington, De Morgan, consensus). Méthode géométrique de Karnaugh (K-Maps), adjacence torique, conditions indifférentes (Don't Care). Synthèse des circuits combinatoires : universalité NAND/NOR, additionneurs (Half & Full Adder, Ripple Carry) et multiplexe…\n- Axes en Code Gray : L'ordonnancement des lignes et des colonnes suit rigoureusement le code Gray : 00, 01, 11, 10. Deux cases adjacentes ne diffèrent TOUJOURS que d'un seul bit !\n- Taille des Groupements : On ne peut regrouper que des paquets contenant un nombre de cases égal à une puissance exacte de 2 ($1, 2, 4, 8, 16$). Les formes doivent impérativement être rectangulaires ou carrées (jamais de L, de croix ni de paquets de 3 ou 6).\n\n### Chapitre 4 : Architecture de Von Neumann, CPU, Cycles d'Horloge & Bus\nLe modèle historique de Von Neumann vs Harvard, le goulot d'étranglement de Von Neumann. Anatomie du microprocesseur : PC, RI, Accumulateur, Flags, MAR, MDR. Les 3 bus système. Chronogramme d'instruction (Fetch, Decode, Execute, Write-Back), micro-opérations RTL, métriques de performance CPI et équa…\n\n### Chapitre 5 : Hiérarchie Mémoire, Caches & Détection d'Erreurs Hamming\nPyramide de la hiérarchie mémoire, principes de localité spatiale et temporelle. Micro-architecture des caches (Tag, Index, Offset), mappings (Direct Mapped, N-Way Set Associative), politiques LRU, Write-Through et Write-Back, équation AMAT. Théorie de l'information de Richard Hamming, distance mini…\n- • Entièrement Associatif (Fully Associative) : Un bloc de RAM peut être placé dans n'importe quelle ligne libre. Zéro conflit, mais nécessite de comparer tous les tags en parallèle (très coûteux en surface et énergie).\n- • Pour détecter $e$ erreurs simples : il faut $d_{\\min} \\ge e + 1$.\n- • Pour corriger $c$ erreurs simples : il faut $d_{\\min} \\ge 2c + 1$.\n\n### TD 3 : Architecture de Von Neumann — Mémoire, CPU & UE\nEnseignant : M. Sébastien Dalmau • IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- L'adresse est chargée dans le RA.\n- Le DA décode l'adresse et active la ligne.\n- Ordre de lecture émis sur le bus de commande.\n\n## ⚠️ Points de vigilance\n- ['Une calculatrice effectue des calculs mais son programme est figé dans ses circuits.', \"L'écran et l'OS sont des éléments périphériques ou logiciels, pas la définition intrinsèque.\"]\n- [\"L'interprétation est plus lente que l'exécution de code compilé natif en raison du travail d'analyse à la volée.\"]\n- [\"Ne pas confondre la portabilité logicielle avec la génération de jeux d'instructions machines distincts.\"]\n- ['Ne pas confondre 2^N avec 2*N (erreur de débutant fréquente).', '2^(N-1) est le nombre de valeurs strictement positives en complément à deux.']", "QUICK_REVIEW": "# ⚡ R1.03 — Fiche Express 80/20 : Architecture des Ordinateurs\n> **6 chapitres couverts** · Révision rapide avant contrôle\n\n## ✅ Plan d'attaque 80/20\n- **Chapitre 1 : Systèmes de Numération Positionnelle & Conversions de Bases** : 1. Théorie de la Numération Positionnelle Pondérée · 2. Méthodes de Conversion Déterministes Pas-à-Pas · 3. Codages Spécifiques : BCD, Code Gray & Encodages Textuels\n- **Chapitre 2 : Arithmétique Binaire, Complément à Deux & Virgule Flottante IEEE 754** : 1. Représentation des Nombres Entiers Relatifs & Complément à Deux (C2) · 2. Arithmétique dans l'ALU : Distinction Fondamentale Carry ($C$) vs Overflow ($V$) · 3. Nombres à Virgule Flottante : La Norme IEEE 754\n- **Chapitre 3 : Algèbre de Boole, Tableaux de Karnaugh & Circuits Combinatoires** : 1. Fondements de l'Algèbre de Boole & Théorèmes Cardinaux · 2. Méthode des Tableaux de Karnaugh (K-Maps) · 3. Circuits Combinatoires Fondamentaux & Universalité NAND\n- **Chapitre 4 : Architecture de Von Neumann, CPU, Cycles d'Horloge & Bus** : 1. Le Modèle de Von Neumann vs Architecture Harvard · 2. Anatomie Détaillée du CPU & Typologie des 3 Bus Système · 3. Le Cycle d'Exécution d'une Instruction en Micro-Opérations RTL\n- **Chapitre 5 : Hiérarchie Mémoire, Caches & Détection d'Erreurs Hamming** : 1. La Pyramide des Mémoires & les Deux Principes de Localité · 2. Micro-Architecture du Cache, Adressage & Formule AMAT · 3. Théorie de Richard Hamming : Distance & Code Correcteur (7, 4)\n- **TD 3 : Architecture de Von Neumann — Mémoire, CPU & UE** : 1. Les Trois Composants Fondamentaux de la Mémoire · 2. Déroulement Chronologique des Opérations · 3. Exercices Corrigés de la Planche TD3\n\n## 🎯 Questions incontournables à savoir justifier\n- **Selon la définition canonique de M. Moulin, qu'est-ce qui caractérise fondamentalement un ordinateur par rapport à un automate ou une calculatrice ?** → C'est une machine universelle capable d'exécuter n'importe quel algorithme en modifiant son programme enregistré en mémoire\n- **Quelle est la différence fondamentale entre la compilation et l'interprétation d'un code source ?** → La compilation traduit tout le code source en langage machine avant exécution, tandis que l'interprète traduit et exécute ligne par ligne\n- **Qu'appelle-t-on la « compilation croisée » (cross-compilation) ?** → Compiler sur une machine hôte un binaire destiné à s'exécuter sur une architecture de processeur cible différente (ex: compiler sur PC x86 pour une carte ARM)\n- **Combien de valeurs distinctes peut-on coder sur un mot binaire de N bits ?** → 2^N valeurs\n- **Quelle est la valeur hexadécimale correspondant à l'octet binaire 1101 1010 ?** → 0xDA"};
+        const moduleColor = "#8A5A44";
+        let currentLevel = 'DETAILED';
+
+        // Initialisation Mermaid 10 avec configuration permissive pour les losanges
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'neutral',
+                securityLevel: 'loose',
+                flowchart: {
+                    curve: 'basis',
+                    htmlLabels: true
+                }
+            });
+        }
+
+        // Moteur de rendu hybride : Markdown + Math KaTeX + Mermaid SVG
+        function renderRevisionMarkdown(mdText) {
+            if (!mdText) return "";
+
+            // 1. Protection des formules mathématiques KaTeX
+            const blockMath = [];
+            const inlineMath = [];
+
+            let text = mdText.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
+                blockMath.push(formula.trim());
+                return `%%%MATH_BLOCK_${blockMath.length - 1}%%%`;
+            });
+
+            text = text.replace(/\$([^$\n]+?)\$/g, (match, formula) => {
+                inlineMath.push(formula.trim());
+                return `%%%MATH_INLINE_${inlineMath.length - 1}%%%`;
+            });
+
+            // 2. Protection et isolation des blocs Mermaid (avec vrais losanges)
+            const mermaidBlocks = [];
+            text = text.replace(/```mermaid\s*([\s\S]*?)\s*```/g, (match, code) => {
+                mermaidBlocks.push(code.trim());
+                return `%%%MERMAID_BLOCK_${mermaidBlocks.length - 1}%%%`;
+            });
+
+            // 3. Conversion Markdown -> HTML avec Marked.js
+            let html = "";
+            if (typeof marked !== 'undefined' && marked.parse) {
+                html = marked.parse(text);
+            } else {
+                html = escapeHtml(text);
+            }
+
+            // 4. Restauration des formules KaTeX
+            html = html.replace(/%%%MATH_BLOCK_(\d+)%%%/g, (match, id) => {
+                const formula = blockMath[parseInt(id, 10)];
+                if (typeof katex !== 'undefined' && katex.renderToString) {
+                    try {
+                        return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center">${katex.renderToString(formula, { displayMode: true, throwOnError: false })}</div>`;
+                    } catch (e) {
+                        return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center font-mono">$$${formula}$$</div>`;
+                    }
+                }
+                return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center font-mono">$$${formula}$$</div>`;
+            });
+
+            html = html.replace(/%%%MATH_INLINE_(\d+)%%%/g, (match, id) => {
+                const formula = inlineMath[parseInt(id, 10)];
+                if (typeof katex !== 'undefined' && katex.renderToString) {
+                    try {
+                        return `<span class="katex-inline px-1">${katex.renderToString(formula, { displayMode: false, throwOnError: false })}</span>`;
+                    } catch (e) {
+                        return `<span class="katex-inline font-mono text-indigo-700">$${formula}$</span>`;
+                    }
+                }
+                return `<span class="katex-inline font-mono text-indigo-700">$${formula}$</span>`;
+            });
+
+            // 5. Restauration des conteneurs Mermaid
+            html = html.replace(/%%%MERMAID_BLOCK_(\d+)%%%/g, (match, id) => {
+                const code = mermaidBlocks[parseInt(id, 10)];
+                return `<div class="mermaid-card my-6"><div class="mermaid flex justify-center overflow-x-auto py-2">${code}</div></div>`;
+            });
+
+            // 6. Assainissement DOMPurify sécurisé
+            if (typeof DOMPurify !== 'undefined' && DOMPurify.sanitize) {
+                html = DOMPurify.sanitize(html, {
+                    ADD_TAGS: ['span', 'div', 'math', 'semantics', 'mrow', 'mi', 'mo', 'mn', 'annotation', 'svg', 'path', 'g', 'polygon', 'text', 'line', 'polyline', 'rect', 'circle', 'ellipse', 'i'],
+                    ADD_ATTR: ['aria-hidden', 'style', 'class', 'role', 'encoding', 'display', 'data-lucide', 'viewBox', 'fill', 'stroke', 'stroke-width', 'd', 'xmlns', 'points', 'x', 'y', 'width', 'height', 'cx', 'cy', 'rx', 'ry', 'x1', 'y1', 'x2', 'y2']
+                });
+            }
+
+            return html;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function renderCurrentContent() {
+            let raw = contentData[currentLevel];
+            if (!raw) {
+                if (currentLevel === 'DETAILED') raw = contentData['mastery'] || contentData['detailed'];
+                else if (currentLevel === 'STANDARD') raw = contentData['standard'];
+                else if (currentLevel === 'QUICK_REVIEW') raw = contentData['quick'] || contentData['quick_review'];
+            }
+            if (!raw) {
+                const keys = Object.keys(contentData);
+                if (keys.length > 0) raw = contentData[keys[0]];
+            }
+            const container = document.getElementById('revContent');
+            if (!container) return;
+            
+            container.innerHTML = renderRevisionMarkdown(raw || "Contenu académique en cours de chargement...");
+            
+            // Re-render Mermaid SVG avec losanges
+            if (typeof mermaid !== 'undefined' && mermaid.run) {
+                const mermaidNodes = container.querySelectorAll('.mermaid');
+                if (mermaidNodes.length > 0) {
+                    try {
+                        mermaid.run({ nodes: mermaidNodes });
+                    } catch(e) {
+                        console.warn("Mermaid error:", e);
+                    }
+                }
+            }
+
+            // Auto-render des éventuels délimiteurs mathématiques restants
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(container, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+            
+            // Recréer les icônes Lucide
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+        }
+
+        function switchLevel(lvl) {
+            currentLevel = lvl;
+            renderCurrentContent();
+            ['tabDetailed', 'tabStandard', 'tabQuick'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.backgroundColor = "white";
+                    el.style.borderColor = "#e2e8f0";
+                    el.style.color = "#334155";
+                }
+            });
+            const activeId = lvl === 'DETAILED' ? 'tabDetailed' : (lvl === 'STANDARD' ? 'tabStandard' : 'tabQuick');
+            const activeEl = document.getElementById(activeId);
+            if (activeEl) {
+                activeEl.style.backgroundColor = moduleColor;
+                activeEl.style.borderColor = moduleColor;
+                activeEl.style.color = "white";
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            switchLevel('DETAILED');
+        });
+        window.addEventListener('load', () => {
+            renderCurrentContent();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2005 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Décomposition séquentielle d'un problème algorithmique</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 30px; margin-bottom: -80px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Démarche de conception d'un algorithme
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">3</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Principe de la décomposition séquentielle
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">9</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Formalisme de la décomposition séquentielle
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">16</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Représenter les données et les résultats (1/2)
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">28</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                L'opération d'affectation
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">33</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Représenter les données et les résultats (2/2)
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">40</span>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Codage
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">40</span>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+</section><section name="Démarche">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Démarche de conception" data-transition="convex">
+        <h1>Démarche de conception d'un algorithme</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Principe de construction d'un algorithme</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Pour élaborer un algorithme, une des approches consiste à réduire la
+                complexité du problème initial en se ramenenant à des
+                sous-problèmes plus simples à résoudre.
+            </p>
+
+
+            <div class="row fragment fade-left">
+                <div class="col-md-5" style="font-size: 90%;">
+
+                    <p>Cette approche nommée <strong class="text-primary">approche descendante</strong>, déjà décrite
+                        par Descartes en 1637, est celle que nous utiliserons dans ce cours.</p>
+                </div>
+                <div class="col-md-7 text-center">
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded"
+                        style="font-size: 70%; margin-top: -30px;">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p class="mb-0 mt-2 font-italic">
+                            <img class="img-fluid rounded float-left" data-src="presentation/images/rene-descartes.jpg"
+                                width="130" style="padding-right: 20px; margin-top: -6px;">
+                            "[...] diviser chacune des difficultés que
+                            j'examinerois, en autant de parcelles qu'il se
+                            pourroit, et qu'il seroit requis pour les mieux
+                            résoudre."
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top" style="margin-bottom: -40px;">
+                            René Descartes
+                            <cite title="Source Title">Discours de la méthode, 1637</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Principe de l'approche descendante</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                L'approche descendante consiste à <strong class="text-primary">décomposer</strong>
+                un problème en sous-problèmes qui, à leur tour, peuvent être re-décomposés
+                <strong>autant de fois que nécessaire jusqu'à obtenir des sous-problèmes faciles à
+                    résoudre</strong>.
+            </p>
+        </div>
+
+        <div style="font-size: 70%;">
+            <div class="r-stack">
+                <img class="fragment" data-fragment-index="0"
+                    src="presentation/images/decomposition-branchement-ordi-figure1.svg">
+                <img class="fragment current-visible" data-fragment-index="1"
+                    src="presentation/images/decomposition-branchement-ordi-figure2.svg">
+                <img class="fragment" data-fragment-index="3"
+                    src="presentation/images/decomposition-branchement-ordi-figure3.svg">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Exploiter les différents niveaux de décomposition</h4>
+
+        <div style="font-size: 62%;">
+            <p class="fragment" data-fragment-index="0">
+                La décomposition d'un problème en sous-problèmes nous amène à travailler à différents niveaux...
+            </p>
+            <ul>
+                <li class="fragment" data-fragment-index="1" style="margin-top: -15px;">
+                    Lorsqu'on analyse le problème de départ,
+                    on travaille à un niveau <strong>global</strong> et <strong>complexe</strong> ;
+                </li>
+                <li class="fragment" data-fragment-index="2" style="margin-top: -3px;">Plus on décompose le problème,
+                    plus on travaille à un niveau
+                    <strong>détaillé</strong> et <strong>simple</strong>.
+                </li>
+            </ul>
+        </div>
+
+        <div class="text-center" margin-top: -12px">
+            <div class="r-stack">
+                <img class="fragment" data-fragment-index="0"
+                    src="presentation/images/decomposition-branchement-ordi-figure3.svg" width="60%">
+                <img class="fragment" data-fragment-index="1"
+                    src="presentation/images/decomposition-branchement-ordi-figure4.svg" width="75%">
+                <img class="fragment" data-fragment-index="2"
+                    src="presentation/images/decomposition-branchement-ordi-figure5.svg" width="80%">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>La décomposition au centre de l'algorithmique</h4>
+
+        <div style="font-size: 70%;">
+            <p>L'algorithmique consiste à résoudre un problème en <strong>décomposant</strong> ce problème
+                en sous-problèmes plus simples à résoudre.</p>
+            <ul>
+                <li>Un algorithme doit donc décrire comment <strong>décomposer</strong> un problème complexe en
+                    sous-problèmes plus simples. </li>
+                <li>Le langage algorithmique utilisé doit permettre de décrire ces <strong>décompositions</strong>.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Les formes de décompositions algorithmiques</h4>
+
+        <div style="font-size: 70%;">
+            <p>La science informatique nous enseigne que tout problème pouvant être résolu
+                par un algorithme<sup>[1]</sup> a une solution qui peut être décrite à partir de trois types
+                de décompositions<sup>[2]</sup> :</p>
+            <ul>
+                <li style="margin-top: -15px;">
+                    La <strong class="text-primary">décomposition séquentielle</strong>;
+                </li>
+                <li style="margin-top: -5px;">
+                    La <strong class="text-primary">décomposition alternative</strong> (ou décomposition conditionnelle) ; 
+                </li>
+                <li style="margin-top: -5px;">
+                    La <strong class="text-primary">décomposition itérative</strong> (ou décomposition répétitive)
+                </li>
+            </ul>
+        </div>
+
+        <div class="fragment" style="font-size: 70%; padding-top: 15px ;">
+            <div class="card bg-light mb-4">
+                <div class="card-body" style="margin-top: -30px;">
+                    <p class="card-text">
+                        <i class="fas fa-arrow-alt-circle-right"></i>
+                        Les solutions décrites par nos algorithmes seront formalisées en termes de
+                        <strong>séquences</strong>, d'<strong>alternatives</strong> et d'<strong>itérations</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="font-size: 40%; margin-top: -10px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> Certains problèmes ne peuvent pas être résolus par un algorithme... <br />
+            <span style="color: #35a3e5">[2]</span> Théorème de Böhm – Jacopini à la base de la programmation structurée (permettant d'éviter les <span class="font-italic">goto</span>) <br />         
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Principe">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Séquence : principe" data-transition="convex">
+        <h1>Principe de la décomposition séquentielle</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition séquentielle - Définition</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Une décomposition séquentielle exprime le fait que la résolution d'un
+                problème <strong>P</strong> de nature complexe équivaut à résoudre successivement une
+                suite de problèmes <strong>P<sub>n</sub></strong> de nature moins complexe.
+            </p>
+
+            <p style="margin-top: 40px;">
+                Les décompositions séquentielles permettent de décrire des solutions 
+                algorithmiques du type <span class="font-italic">"faire ça puis ça puis ça."</span>
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Rôle de la décomposition séquentielle</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Un algorithme décrit une solution dans laquelle il s'agit de résoudre un ensemble de sous-problèmes
+                <strong>dans un ordre spécifique</strong>.
+            </p>
+
+            <p style="margin-top: 40px;">
+                La décomposition séquentielle formalise :
+            </p>
+            <ul>
+                <li style="margin-top: -15px;">quels sont les problèmes à résoudre ;</li>
+                <li style="margin-top: -10px;"><strong>l'ordre</strong> dans lequel il faut les résoudre.</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition séquentielle - Exemple simple</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Problème : Comment se préparer le matin pour aller travailler...
+            </p>
+
+            <div class="row">
+                <div class="col-md-5 fragment">
+                    <p>
+                        Algorithme :
+                    </p>
+                    <ol>
+                        <li>Je me réveille ;</li>
+                        <li>Je me lève ;</li>
+                        <li>Je prépare le café ;</li>
+                        <li>Je déjeune ;</li>
+                        <li>J'enlève mon pyjama ;</li>
+                        <li>Je me douche ;</li>
+                        <li>Je m'habille ;</li>
+                        <li>Je mets mes chaussures ;</li>
+                        <li>Je mets mon manteau ;</li>
+                        <li>Je sors de chez moi.</li>
+                    </ol>
+                </div>
+                <div class="col-md-7 fragment">
+                    <ul style="margin-top: 40px;">
+                        <li>
+                            Le problème de départ est <strong>décomposé</strong> en étapes consistant
+                            à résoudre des <strong>sous-problèmes</strong> :
+                            se réveiller, se lever (sous-problème le plus compliqué ?), préparer le café...
+                        </li>
+                        <li>
+                            La résolution de ces sous-problèmes est traitée dans un <strong>ordre donné</strong>
+                            représenté par les numéros.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Réfléchir à l'ordre des étapes (1/3)</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                <strong>
+                    Souvent, l'ordre des étapes est <span class="text-primary"><u>essentiel</u></span>
+                    pour que la solution soit consistante et correcte.
+                </strong>
+            </p>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <ol>
+                        <li class="font-weight-bold text-danger"><s>Je me lève</s> ;</li>
+                        <li class="font-weight-bold text-danger"><s>Je me réveille</s> ;</li>
+                        <li>Je prépare le café ;</li>
+                        <li>Je déjeune ;</li>
+                        <li>J'enlève mon pyjama ;</li>
+                        <li>Je me douche ;</li>
+                        <li>Je m'habille ;</li>
+                        <li>Je mets mes chaussures ;</li>
+                        <li>Je mets mon manteau ;</li>
+                        <li>Je sors de chez moi.</li>
+                    </ol>
+                </div>
+                <div class="col-md-2">
+                    <br /><br /><br /><br /><br />
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </div>
+                <div class="col-md-5">
+                    <ol>
+                        <li class="font-weight-bold text-success">Je me réveille ;</li>
+                        <li class="font-weight-bold text-success">Je me lève ;</li>
+                        <li>Je prépare le café ;</li>
+                        <li>Je déjeune ;</li>
+                        <li>J'enlève mon pyjama ;</li>
+                        <li>Je me douche ;</li>
+                        <li>Je m'habille ;</li>
+                        <li>Je mets mes chaussures ;</li>
+                        <li>Je mets mon manteau ;</li>
+                        <li>Je sors de chez moi.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Réfléchir à l'ordre des étapes (2/3)</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                <strong>Parfois l'ordre des étapes <span class="text-primary"><u>n'a pas
+                            d'importance</u></span>...</strong>
+            </p>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <ol>
+                        <li>Je me réveille ;</li>
+                        <li>Je me lève ;</li>
+                        <li class="font-weight-bold text-success">Je prépare le café ;</li>
+                        <li class="font-weight-bold text-success">Je déjeune ;</li>
+                        <li class="font-weight-bold text-info">J'enlève mon pyjama ;</li>
+                        <li class="font-weight-bold text-info">Je me douche ;</li>
+                        <li class="font-weight-bold text-info">Je m'habille ;</li>
+                        <li class="font-weight-bold text-info">Je mets mes chaussures ;</li>
+                        <li>Je mets mon manteau ;</li>
+                        <li>Je sors de chez moi.</li>
+                    </ol>
+                </div>
+                <div class="col-md-2">
+                    <br /><br /><br /><br /><br />
+                    <i class="fas fa-arrows-alt-h"></i>
+                </div>
+                <div class="col-md-5">
+                    <ol>
+                        <li>Je me réveille ;</li>
+                        <li>Je me lève ;</li>
+                        <li class="font-weight-bold text-info">J'enlève mon pyjama ;</li>
+                        <li class="font-weight-bold text-info">Je me douche ;</li>
+                        <li class="font-weight-bold text-info">Je m'habille ;</li>
+                        <li class="font-weight-bold text-info">Je mets mes chaussures ;</li>
+                        <li class="font-weight-bold text-success">Je prépare le café ;</li>
+                        <li class="font-weight-bold text-success">Je déjeune ;</li>
+                        <li>Je mets mon manteau ;</li>
+                        <li>Je sors de chez moi.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Réfléchir à l'ordre des étapes (3/3)</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                <strong>Parfois l'ordre des étapes permet
+                    d'<span class="text-primary"><u>optimiser</u></span> la solution...</strong>
+            </p>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <ol>
+                        <li>Je me réveille ;</li>
+                        <li>Je me lève ;</li>
+                        <li>Je prépare le café ;</li>
+                        <li>Je déjeune ;</li>
+                        <li>J'enlève mon pyjama ;</li>
+                        <li>Je me douche ;</li>
+                        <li class="text-danger font-weight-bold">Je mets mes chaussures ;</li>
+                        <li class="text-danger font-weight-bold">Je m'habille ;</li>
+                        <li>Je mets mon manteau ;</li>
+                        <li>Je sors de chez moi.</li>
+                    </ol>
+                </div>
+                <div class="col-md-2">
+                    <br /><br /><br /><br /><br />
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </div>
+                <div class="col-md-5">
+                    <ol>
+                        <li>Je me réveille ;</li>
+                        <li>Je me lève ;</li>
+                        <li>Je prépare le café ;</li>
+                        <li>Je déjeune ;</li>
+                        <li>J'enlève mon pyjama ;</li>
+                        <li>Je me douche ;</li>
+                        <li class="text-success font-weight-bold">Je m'habille ;</li>
+                        <li class="text-success font-weight-bold">Je mets mes chaussures ;</li>
+                        <li>Je mets mon manteau ;</li>
+                        <li>Je sors de chez moi.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+</section><section name="Formalisme">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Séquence : formalisme" data-transition="convex">
+        <h1>Décomposition séquentielle : Formalisme </h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Formalisme général</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/formalisme-decomposition-1.svg">
+            </div>
+
+            <p>
+                Signification : Le problème <strong>P</strong> se résout
+                en solutionnant <strong>séquentiellement</strong> :
+            </p>
+            <ul>
+                <li>le sous-problème <strong>P1</strong> puis</li>
+                <li style="margin-top: -4px;">le sous-problème <strong>P2</strong> puis</li>
+                <li style="margin-top: -4px;">... puis</li>
+                <li style="margin-top: -4px;">le sous-problème <strong>Pn</strong>.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Représentation des problèmes et sous-problèmes</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/formalisme-decomposition-2.svg">
+            </div>
+
+            <ul>
+                <li style="margin-top: -4px;">
+                    Les problèmes et sous-problèmes sont
+                    représentés par des rectangles&nbsp;;
+                </li>
+                <li style="margin-top: -4px;">
+                    Les <strong>noms</strong> des problèmes et des sous-problèmes
+                    sont renseignés à l'intérieur des rectangles.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Nommez le problème et les sous-problèmes !</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row">
+                <div class="col-md-6" style="font-size: 70%;">
+                    <div class="text-center" style="margin-top: -20px;">
+                        <img src="presentation/images/formalisme-decomposition-2-bis.svg" width="280px;">
+                    </div>
+                </div>
+                <div class="col-md-6 fragment fade-left" data-fragment-index="3">
+                    <div class="card bg-light mb-4">
+                        <div class="card-body" style="margin-top: -30px;">
+                            <p class="card-text">
+                                <i class="far fa-thumbs-up"></i>
+                                Prenez l'habitude de <strong>d'abord nommer</strong> les sous-problèmes avant de
+                                décrire comment les résoudre.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul style="margin-top: -25px;">
+                <li style="margin-top: -4px;">
+                    Vos algorithmes doivent être lisibles et compréhensibles par
+                    un autre programmeur (et pas uniquement par vous !) ;
+                </li>
+                <li style="margin-top: -4px;">
+                    Un algorithme lisible favorise la production d'un code lisible ;
+                </li>
+                <li class="fragment fade-right" data-fragment-index="1" style="margin-top: -4px;">
+                    Donner des noms aux sous-problèmes qui composent un algorithme
+                    vous oblige à structurer vos pensées. Ces noms faciliteront la compréhension
+                    de cet algorithme par quelqu'un d'autre ;
+                </li>
+                <li class="fragment fade-right" data-fragment-index="2" style="margin-top: -4px;">
+                    Les noms donnés aux sous-problèmes constitueront par la suite
+                    des indicateurs (commentaire, nom de fonction...) pour se repérer dans le code.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Représentation de la décomposition</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/formalisme-decomposition-3.svg">
+            </div>
+            <p>
+                La décomposition du problème est représentée par les double barres
+                <strong class="text-danger">||</strong> située sous le problème.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Représentation de la séquence</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/formalisme-decomposition-4.svg">
+            </div>
+            <ul>
+                <li>
+                    La séquence, c'est à dire l'ordre dans lequel les sous-problèmes doivent
+                    être résolus, est représentée par une ligne horizontale sur laquelle sont rattachés les
+                    sous-problèmes à résoudre.
+                </li>
+                <li>
+                    La lecture se fait de gauche à droite : ici il s'agit de résoudre d'abord le
+                    sous-problème <strong>P1</strong> puis le sous-problème <strong>P2</strong>...
+                    et enfin le sous-problème <strong>Pn</strong>.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Représentation de la décomposition séquentielle</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center">
+                <img src="presentation/images/formalisme-decomposition-3-et-4.svg">
+            </div>
+            <p>
+                La <strong>décomposition séquentielle</strong> est donc, au final,
+                représentée par les doubles barres sur lesquelles est
+                ratachée la ligne horizontale listant, de manière ordonnée,
+                les sous-problèmes à résoudre.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Double sens de lecture</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center" style="margin-top: -15px;">
+                <img src="presentation/images/formalisme-decomposition-5.svg">
+            </div>
+            <p style="margin-top: -15px;">
+                La représentation graphique autorise à la fois une lecture
+                verticale et horizontale de l'algorithme :
+            </p>
+            <ul>
+                <li style="margin-top: -15px;">
+                    lorsqu'on lit verticalement, on décompose un problème, on va du général
+                    vers du détail, du complexe vers du plus simple ;
+                </li>
+                <li style="margin-top: -4px;">
+                    lorsqu'on lit horizontalement (toujours de gauche à droite), on exprime
+                    dans quel ordre les différents sous-problèmes doivent être résolus : un
+                    sous-problème situé sur la gauche doit toujours être résolu avant un
+                    sous-problème situé sur la droite.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Décomposition simple : Exemple</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="text-center" style="margin-top: -15px;">
+                <img src="presentation/images/formalisme-decomposition-6.svg">
+            </div>
+            <p style="margin-top: 5px;">
+                Dans l'exemple ci-dessus, le problème consistant à additionner deux nombres a
+                été décomposé en 3 sous-problèmes qui seront résolus successivement dans
+                l'ordre suivant :
+            </p>
+            <ol>
+                <li>
+                    Saisir au clavier les nombres à additionner ;
+                </li>
+                <li style="margin-top: 5px;">
+                    Calculer la somme des nombres saisis ;
+                </li>
+                <li style="margin-top: 5px;">
+                    Afficher la somme calculée.
+                </li>
+            </ol>
+            <p class="text-primary fragment fade-right">
+                <i class="far fa-thumbs-up"></i> Remarque : Les sous-problèmes sont d'abord nommés 
+                (la manière de les résoudre viendra plus tard).
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Décomposer la difficulté du problème</h4>
+
+        <div style="font-size: 65%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p>Les niveaux de décomposition
+                        peuvent être multiples : Tout
+                        problème d'un niveau jugé trop
+                        complexe peut, à son tour, être
+                        re-décomposé (cf. René Descartes -
+                        Discours de la méthode).</p>
+                </div>
+                <div class="col-md-5">
+                    <div class="text-center">
+                        <img class="" src="presentation/images/formalisme-decomposition-7.svg" width="300px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="fragment fade-right">
+                <p style="margin-top: -10px;">
+                    Dans l'exemple ci-dessus :
+                </p>
+                <ul>
+                    <li style="margin-top: -10px;">Le problème <strong>P</strong> a été décomposé
+                        en 3 sous-problèmes : <strong>P1</strong>, <strong>P2</strong>
+                        et <strong>P3</strong>.
+                    </li>
+                    <li style="margin-top: -4px;">
+                        Les problèmes <strong>P1</strong> et <strong>P3</strong> ont été jugés
+                        suffisamment simples à résoudre et n'ont pas été re-décomposés ;
+                    </li>
+                    <li style="margin-top: -4px;">
+                        Le problème <strong>P2</strong> est jugé trop complexe et a donc été
+                        re-décomposé en deux sous-problèmes plus simples à résoudre :
+                        <strong>P2-A</strong> et <strong>P2-B</strong>.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Lecture de la séquence sur plusieurs niveaux</h4>
+
+        <div style="font-size: 70%;">
+
+            <div class="row">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <p>Lorsque les niveaux de décomposition se multiplient, il faut rester vigilant sur
+                        l'ordre de lecture de l'algorithme. Pour retrouver l'ordre d'exécution des
+                        actions, la lecture verticale a priorité sur la lecture horizontale.</p>
+                </div>
+                <div class="col-md-5">
+                    <div class="text-center">
+                        <img class="" src="presentation/images/formalisme-decomposition-8.svg" width="300px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="fragment fade-right">
+                <p>
+                    Dans l'exemple ci-dessus, la résolution du problème <strong>P</strong> consiste
+                    à résoudre séquentiellement : le problème <strong>P1</strong>, le problème
+                    <strong>P2</strong>, c'est-à-dire, le sous-problème
+                    <strong>P2-A</strong> puis le sous-problème <strong>P2-B</strong>. Une fois
+                    </strong>P2</strong> résolu, on passera à la résolution
+                    de <strong>P3</strong>.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Décomposition multi-niveau : Exemple</h4>
+
+        <div style="font-size: 66%;">
+
+            <div class="row" style="margin-top: -10px;">
+                <div class="col-md-7" style="font-size: 100%;">
+                    <div class="text-center" style="margin-top: -15px;">
+                        <img src="presentation/images/formalisme-decomposition-9.svg" width="430px;">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <p>
+                        Ci-contre, l'action de saisie a été décomposée en deux sous-problèmes : la saisie
+                        du premier nombre puis la saisie du second nombre.
+                    </p>
+                </div>
+            </div>
+
+            <p style="margin-top: -5px;">
+                Les sous-problèmes seront séquentiellement résolus dans l'ordre suivant :
+            </p>
+            <ol>
+                <li>
+                    La saisie des deux nombres à additionner qui sera réalisée :
+                    <ul>
+                        <li>en saisissant d'abord nb1 puis,</li>
+                        <li style="margin-top: -10px;">en saissant ensuite nb2;</li>
+                    </ul>
+                </li>
+                <li style="margin-top: 5px;">
+                    Le calcul de la somme des nombres saisis ;
+                </li>
+                <li style="margin-top: 15px;">
+                    L'affichage de la somme calculée.
+                </li>
+            </ol>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+
+
+            <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT5/0" 
+               role="button" target="_blank">
+               Sortez vos smartphones
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </a>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+</section><section name="Données et résultats">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Données et résultats" data-transition="convex">
+        <h1>Représenter les données et les résultats</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Mettre en évidence les données et résultats</h4>
+
+        <div style="font-size: 70%;">
+            <p>Le fait de mettre en évidence les données et résultats permet
+                d'<strong>estimer la cohérence de la décomposition
+                    séquentielle</strong> de l'algorithme.
+            </p>
+
+            <div class="fragment" style="margin-top: 30px;">
+                <p>
+                    En effet :
+                </p>
+                <ul>
+                    <li>
+                        Si la résolution d'un sous-problème <strong>Pa</strong>
+                        nécessite une donnée <strong>x</strong>,
+                    </li>
+                    <li>et si l'information <strong>x</strong> est produite suite
+                        à la résolution du sous-problème <strong>Pb</strong>,</li>
+                </ul>
+                <p>
+                    <i class="fas fa-arrow-alt-circle-right"></i> alors la résolution du sous-problème
+                    <strong>Pb</strong>
+                    doit être traitée <u>avant</u> la résolution du
+                    sous-problème <strong>Pa</strong> !
+                </p>
+            </div>
+        </div>
+
+    </section>
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Représenter les données et résultats</h4>
+
+        <div style="font-size: 66%;">
+
+            <div class="row">
+                <div class="col-md-6" style="font-size: 100%;">
+                    <p style="line-height: 1.5;">
+                        Quelque soit le niveau de décomposition considéré, on mettra en évidence :
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center" style="margin-top: -20px;">
+                        <img class="" src="presentation/images/formalisme-decomposition-10.svg" width="350px">
+                    </div>
+                </div>
+            </div>
+
+            <ul style="margin-top: -20px;">
+                <li>les données nécessaires à la résolution du problème ;</li>
+                <li style="margin-top: -10px;">les résultats produits ou modifiés suite à la résolution du problème.
+                </li>
+            </ul>
+
+            <p style="margin-top: 20px;">D'un point de vue de la représentation algorithmique :</p>
+            <ul>
+                <li style="margin-top: -5px;">
+                    les variables en <strong class="text-success">donnée</strong> pour résoudre un problème
+                    <strong>P</strong>
+                    sont listées entre accolades, <strong class="text-success">à gauche</strong> du
+                    problème <strong>P</strong> ;
+                </li>
+                <li style="margin-top: -5px;">
+                    les <strong class="text-info">résultats</strong>, c'est-à-dire les variables résultantes ou
+                    modifiées
+                    suite à la résolution du problème <strong>P</strong> sont listées entre accolades,
+                    <strong class="text-info">à droite</strong> du problème <strong>P</strong>.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Données et résultats : Exemple général</h4>
+
+        <div class="text-center" style="margin-top: -20px;">
+            <img class="" src="presentation/images/formalisme-decomposition-10.svg" width="370px">
+        </div>
+
+        <div style="font-size: 67%; margin-top: -30px;">
+            <p>Dans l'exemple ci-dessus :</p>
+
+            <ul>
+                <li style="margin-top: -10px;">
+                    La résolution du problème <strong>P1</strong> produira en
+                    <strong class="text-info">résultat</strong> une
+                    nouvelle information nommée <strong>x</strong> ;
+                </li>
+                <li style="margin-top: -5px;">
+                    L'information <strong>x</strong> sert ensuite de
+                    <strong class="text-success">donnée</strong>
+                    pour la résolution du problème <strong>P2</strong> ;
+                </li>
+                <li style="margin-top: -5px;">
+                    après avoir résolu le problème <strong>P2</strong>, on obtient
+                    en <strong class="text-info">résultat</strong> une
+                    nouvelle information nommée <strong>y</strong> ;
+                </li>
+                <li style="margin-top: -5px;">
+                    Cette information <strong>y</strong> sert ensuite de
+                    <strong class="text-success">donnée</strong>
+                    pour la résolution du problème <strong>P3</strong>.
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Données et résultats : Exemple concret</h4>
+
+        <div class="text-center" style="margin-top: -20px;">
+            <img class="" src="presentation/images/formalisme-decomposition-11.svg" width="560px">
+        </div>
+
+        <div style="font-size: 67%; margin-top: -10px;">
+
+            <ul>
+                <li style="margin-top: -10px;">
+                    après exécution de l'action de saisie, on obtient deux
+                    <strong class="text-info">résultats</strong> : les valeurs des nombres
+                    à additionner (<strong class="text-info">nb1</strong> et
+                    <strong class="text-info">nb2</strong>) ;
+                </li>
+                <li style="margin-top: -5px;">
+                    les valeurs des nombres à additionner
+                    (<strong class="text-success">nb1</strong> et
+                    <strong class="text-success">nb2</strong>) sont utilisées en
+                    <strong class="text-success">données</strong>
+                    pour effectuer le calcul de la somme ;
+                </li>
+                <li style="margin-top: -5px;">
+                    suite à l'opération de calcul, on obtient 
+                    en <strong class="text-info">résultat</strong>
+                    la <strong class="text-info">somme</strong> des nombres saisis ;
+                </li>
+                <li style="margin-top: -5px;">
+                    enfin, la <strong class="text-success">somme</strong> calculée
+                    sert de <strong class="text-success">donnée</strong> à l'action d'affichage.
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+    <!-- ====================================================================== -->
+
+
+
+
+</section><section name="Affectation">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Affectation" data-transition="convex">
+        <h1>L'opération d'affectation</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Affectation : Définition</h4>
+
+        <div style="font-size: 70%;">
+            <p>L'affectation est une opération algorithmique incontournable sans laquelle
+                il serait quasiment impossible d'écrire le moindre programme.
+            </p>
+
+            <div class="card border-secondary bg-light mb-3" style="margin-top: 30px;">
+                <div class="card-header">
+                    <p><strong>
+                            <i class="fas fa-book-reader"></i> &nbsp;
+                            Définition
+                        </strong></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        L'<strong>affectation</strong>, appelée aussi
+                        <strong>assignation</strong>, est une opération
+                        permettant d'attribuer une valeur à une variable.
+                        On dit qu'on <strong class="text-primary">affecte</strong>
+                        une valeur à une variable.
+                    </p>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px;">
+                <i class="fas fa-thumbtack"></i>&nbsp;
+                On retiendra que l'affectation est la <u>seule façon</u> d'attribuer une valeur à
+                une variable.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Notation algorithmique et cas d'usage</h4>
+
+        <div style="font-size: 65%;">
+            <p>L'opération d'affectation est représentée algorithmiquement par une flèche
+                de la manière suivante :
+                <strong class="bg-warning">
+                    <span class="text-primary">variable</span>
+                    &#8592;
+                    <span class="text-warning">expression</span>
+                </strong>
+            </p>
+
+            <p class="fragment fade-right" data-fragment-index="0" style="margin-top: 20px;">
+                Sachant qu'une <strong class="text-warning">expression</strong> peut être :
+            </p>
+            <ul>
+
+                <li class="fragment fade-right" data-fragment-index="0" style="margin-top: -10px;">
+                    une <strong class="text-info">valeur</strong> prédéfinie.
+                    Dans ce cas, la variable à gauche reçoit directement
+                    la valeur qui se trouve à droite.
+                    Exemple : <strong>
+                        <span class="text-primary">pi</span>
+                        &#8592;
+                        <span class="text-info">3.14</span>
+                    </strong>
+                </li>
+
+                <li class="fragment fade-right" data-fragment-index="1" style="margin-top: -2px;">
+                    une <strong class="text-primary">variable</strong>.
+                    Dans ce cas, la variable à gauche reçoit
+                    <u>la valeur contenue</u> dans la variable qui se trouve à droite :
+                    <strong>
+                        <span class="text-primary">copieDePi</span>
+                        &#8592;
+                        <span class="text-primary">pi</span>
+                    </strong>
+                </li>
+
+                <li class="fragment fade-right" data-fragment-index="2" style="margin-top: -2px;">
+                    une <strong class="text-success">fonction</strong>.
+                    Dans ce cas, la variable à gauche reçoit
+                    la valeur renvoyée par la fonction :
+                    <strong>
+                        <span class="text-primary">resultat</span>
+                        &#8592;
+                        <span class="text-success">cosinus(90)</span>
+                    </strong>
+                </li>
+
+                <li class="fragment fade-right" data-fragment-index="3" style="margin-top: -2px;">
+                    un calcul combinant des <strong class="text-info">valeurs</strong>,
+                    des <strong class="text-primary">variables</strong>,
+                    des <strong class="text-success">fonctions</strong>
+                    Dans ce cas, la variable à gauche reçoit
+                    la valeur résultant du calcul : <br />
+                    <strong>
+                        <span class="text-primary">perimetre</span>
+                        &#8592;
+                        <span class="text-info">2</span>
+                        &#215;
+                        <span class="text-primary">pi</span>
+                        &#215;
+                        <span class="text-success">getRayon()</span>
+                    </strong>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Affectation : Exemple d'usage dans un algorithme</h4>
+
+        <div style="font-size: 70%;">
+            <div class="text-center" style="margin-top: -20px;">
+                <img class="" src="presentation/images/formalisme-decomposition-12.svg">
+            </div>
+
+            <p>
+                Dans l'algorithme ci-dessus, l'opération de calcul de la somme a été
+                décomposée pour spécifier la manière de réaliser le calcul.
+            </p>
+            <p>
+                Le calcul se traduit par une addition dont le résultat est
+                <strong class="text-primary">affecté</strong> à la
+                variable <strong>somme</strong>.
+            </p>
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Comprendre le mécanisme de l'affectation</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                Une affectation
+                <strong>
+                    <span class="text-primary">variable</span>
+                    &#8592;
+                    <span class="text-warning">expression</span>
+                </strong>
+                suit le mécanisme suivant :
+            </p>
+            <ol>
+                <li class="fragment fade-right">
+                    La machine détermine d'abord la valeur de l'<span class="text-warning">expression</span>;
+                </li>
+                <li class="fragment fade-right" style="margin-top: 15px;">
+                    La machine <u>tente</u> ensuite d'affecter cette valeur
+                    à la <span class="text-primary">variable</span> : La machine
+                    <u>vérifie</u> que la valeur de
+                    l'<span class="text-warning">expression</span> est du même type
+                    que la <span class="text-primary">variable</span> : Si c'est le cas,
+                    la <span class="text-primary">variable</span> prend la valeur de
+                    l'<span class="text-warning">expression</span>. <br />
+                    <div class="fragment" style="margin-top: 20px;">
+                        Sinon, le résultat de l'affectation dépend du langage de programmation...
+                    </div>
+                    <ul>
+                        <li class="fragment fade-right">
+                            si le langage de programmation utilise du
+                            <strong>typage statique</strong> (C++ par exemple),
+                            une erreur est générée pour signaler que la valeur
+                            de l'expression est incompatible avec le type de l'expression;
+                        </li>
+                        <li class="fragment fade-right" style="margin-top: -7px;">
+                            si le langage de programmation utilise du
+                            <strong>typage dynamique</strong> (Python par exemple),
+                            la
+                            <span class="text-primary">variable</span> change de type
+                            (elle devient du même type que <span class="text-warning">expression</span>)
+                            puis elle prend la valeur de l'<span class="text-warning">expression</span>.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Affectation et typage dynamique</h4>
+
+        <div style="font-size: 70%;">
+            <p>Exemple avec le langage Python :</p>
+        </div>
+
+        <iframe
+            src="//mediakiosque.univ-pau.fr/video_priv/11237/fb0ba057ccad2bc62f36a420360a99e479fa852790f79bb94f069826262be190/?is_iframe=true&size=240"
+            width="640" height="360" style="padding: 0; margin: 0; border:0" allowfullscreen></iframe>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Affectation et typage statique</h4>
+
+        <div style="font-size: 70%;">
+            <p>Exemple avec le langage C++ :</p>
+        </div>
+
+        <iframe
+        src="//mediakiosque.univ-pau.fr/video_priv/11239/034575a5b6bc7e8e7c2aa32ec6161e53d63ac7f704e0059b594143fa406ae9dc/?is_iframe=true&size=480"
+        width="854" height="480" style="padding: 0; margin: 0; border:0" allowfullscreen></iframe>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Données et résultats (2)">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Données et résultats (2)" data-transition="convex">
+        <h1>Retour sur la spécification des données / résultats...</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Pas de données / résultats sur les calculs</h4>
+
+
+        <div style="font-size: 67%;">
+
+            <div class="row">
+                <div class="col-md-4" style="font-size: 100%;">
+                    <p>
+                        <strong>Pour des raisons de lisibilité, les données et les résultats sont renseignés
+                            uniquement au niveau des noms des sous-problèmes :</strong>
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <div class="text-center" style="margin-top: -10px;">
+                        <img class="" src="presentation/images/formalisme-decomposition-12-bis.svg">
+                    </div>
+                </div>
+            </div>
+            <ul>
+                <li class="fragment fade-right">
+                    <strong class="text-warning">Calculer la somme des nombres saisis</strong> est
+                    le nom d'un <strong>sous-problème</strong>
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    on renseigne donc les données nécessaires à sa résolution (nb1 et nb2)
+                    ainsi que le résultat obtenu (somme).
+                </li>
+                <li class="fragment fade-right" style="margin-top: -5px ;">
+                    <strong class="text-primary">somme ← nb1 + nb2</strong> n'est pas le nom d'un
+                    sous-problème : C'est un <strong>calcul</strong> détaillant comment résoudre le sous-problème
+                    <strong class="text-warning">Calculer la somme des nombres saisis</strong>
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    On ne précise donc pas les données et résultats.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Cas des résultats intermédiaires</h4>
+
+
+        <div style="font-size: 70%;">
+            <p style="margin-top: 7px;">
+                Parfois, un traitement complexe peut être décomposé et produire des
+                <strong class="text-primary">résultats intermédiaires</strong> permettant d'atteindre le résultat final
+                visé.
+            </p>
+
+            <p style="margin-top: 7px;">
+                Ces résultats intermédiaires, qui ne sont pas utilisés ailleurs dans
+                l'algorithme, <strong>n'ont pas besoin d'être spécifiés entre accolades à droite du
+                    traitement qui les produit</strong>.
+            </p>
+
+            <p style="margin-top: 7px;">
+                En d'autres termes, <strong class="text-primary">seuls les résultats qui sont utilisés dans la suite
+                    de l'algorithme sont mentionnés entre accolades</strong>.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Cas des résultats intermédiaires : Exemple (1/2)</h4>
+
+        <div style="font-size: 70%;">
+
+            <p style="margin-top: 7px;">
+                <strong>Problème</strong> : Élaborer un algorithme capable de calculer et afficher le
+                périmètre d'un triangle quelconque.
+            </p>
+
+            <div class="text-center" style="margin-top: -25px;">
+                <img class="" src="presentation/images/formalisme-decomposition-13-a.svg">
+            </div>
+
+            <p style="margin-top: -10px;">
+                <strong>Étapes possibles pour l'algorithme :</strong>
+            </p>
+            <ol>
+                <li style="margin-top: -7px;"> saisir les coordonnées des trois sommets ; </li>
+                <li style="margin-top: 7px;"> calculer la longueur de chaque côté ;</li>
+                <li style="margin-top: 7px;"> additionner les 3 longueurs ;</li>
+                <li style="margin-top: 7px;"> afficher le résultat de l'addition.</li>
+            </ol>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Cas des résultats intermédiaires : Exemple (2/2) </h4>
+
+        <div style="font-size: 67%;">
+
+            <div class="text-center" style="margin-top: -25px;">
+                <img class="" src="presentation/images/formalisme-decomposition-13-b.svg">
+            </div>
+
+
+            <ul>
+                <li style="margin-top: 1px;">
+                    Dans l'algorithme proposé, <strong>lgAB</strong>, <strong>lgAC</strong>
+                    et <strong>lgBC</strong> sont considérés comme des
+                    <strong class="text-primary">résultats intermédiaires</strong>
+                    permettant de calculer le périmètre du triangle.
+                </li>
+                <li style="margin-top: 7px;">
+                    Même si ces résultats sont produits lors de la résolution du sous-problème
+                    <strong>Calculer le périmètre</strong>
+                    ils n'apparaissent pas en tant que résultat de cette action
+                    car ils ne sont pas utilisés dans la suite de l'algorithme.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Cas des résultats "éventuels" </h4>
+
+        <div style="font-size: 65%;">
+
+            <p>
+                Parfois, la résolution d'un sous-problème peut produire des <strong class="text-primary">résultats
+                    éventuels</strong>,
+                c'est-à-dire, des résultats qui seront parfois produits, parfois non. On précisera qu'un résultat
+                est éventuel en l'entourant de crochets : <strong class="text-primary">[resultat]</strong>
+            </p>
+
+            <div class="fragment fade-right">
+
+
+                <div class="row fragment fade-left">
+                    <div class="col-md-7" style="font-size: 100%;">
+                        <p style="margin-top: -10px;">
+                            <strong>Exemple</strong> : Élaborer un algorithme qui recherche la position
+                            de la première voyelle dans une chaı̂ne de caractères.
+                        </p>
+                    </div>
+                    <div class="col-md-5 text-center">
+                        <div class="text-center" style="margin-top: -10px;">
+                            <img class="" src="presentation/images/formalisme-decomposition-14.svg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fragment fade-right">
+                    <p style="margin-top: 1px;">
+                        Cet algorithme aura en donnée la chaı̂ne à analyser et produira en résultat :
+                    </p>
+                    <ul>
+                        <li style="margin-top: -20px;">
+                            un booléen <strong>trouve</strong> qui indique si la chaı̂ne contient ou pas au moins une
+                            voyelle.
+                            Ce résultat est <strong>toujours calculé</strong>.
+                        </li>
+                        <li style="margin-top: -5px;">
+                            une valeur numérique <strong>posVoyelle</strong> qui désigne la position de la première
+                            voyelle.
+                            Ce résultat n'est calculé que si la chaı̂ne contient au moins une voyelle : C'est donc un
+                            résultat <strong class="text-primary">éventuel</strong> que l'on note entre
+                            <strong class="text-danger">[ ]</strong>.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+</section><section name="Codage">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Codage" data-transition="convex">
+        <h1>Codage de la décomposition séquentielle</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Principe</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                La décomposition séquentielle exprime le fait que la résolution d'un
+                problème consiste à réaliser une suite d'actions de manière séquentielle.
+            </p>
+            <p style="margin-top: 30px;">
+                Lorsqu'on passe ensuite en phase de codage, le travail consiste à traduire
+                dans un langage de programmation donné les différentes actions décrites
+                dans l'algorithme.
+            </p>
+            <p style="margin-top: 30px;">
+                <strong>L'ordre d'écriture des lignes de codes doit respecter l'ordre des actions
+                    décrites dans l'algorithme.</strong>
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Séquence dans l'algorithme... et dans le code</h4>
+
+        <div style="font-size: 65%;">
+            <ul>
+                <li>
+                    Dans l'<strong class="text-warning">algorithme</strong>, la séquence s'exprime
+                    <strong class="text-warning">horizontalement</strong>
+                    (lecture de gauche à droite) ;
+                </li>
+                <li style="margin-top: -5px;">
+                    Dans le <strong class="text-success">code</strong>, la séquence s'exprime
+                    <strong class="text-success">verticalement</strong> en écrivant les
+                    instructions les unes en dessous des autres.
+                </li>
+            </ul>
+
+            <div class="text-center" style="margin-top: -15px;">
+                <img class="" src="presentation/images/formalisme-decomposition-15.svg">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>L'algorithme d'addition de 2 nombres codé en C++</h4>
+
+        <div style="font-size: 65%;">
+
+            <pre><code data-trim data-noescape data-line-numbers>
+  #include < iostream>
+  using namespace std;
+                
+  int main (void)
+  {
+    // Dictionnaire des variables
+    double nb1;	  // Premier nombre a additionner
+    double nb2;	  // Second nombre a additionner
+    double somme; // Somme de nb1 et nb2
+                
+    // clavier >> Saisir les nombres à additionner >> nb1, nb2
+    cout << "Entrez la valeur du 1er operande :";
+    cin  >> nb1;
+    cout << "Entrez la valeur du 2eme operande : ";
+    cin  >> nb2;
+                
+    // nb1, nb2 >> Calculer le résultat de l'addition >> somme
+    somme = nb1 + nb2;
+                
+    // somme >> Afficher le résultat de l'addition >> (ecran)
+    cout << "La somme est egale a " << somme << endl;
+    return 0;
+  }
+                  </code></pre>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4><i class="fas fa-poll-h"></i> &nbsp; Évaluons ce que vous avez retenu...</h4>
+
+
+        <a class="btn btn-outline-warning text-warning" href="https://app.wooclap.com/events/ALGOPAT6/0" role="button"
+            target="_blank">
+            Sortez vos smartphones
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

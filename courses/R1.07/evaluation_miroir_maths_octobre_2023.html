@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R1.07 — Contrôle de Mathématiques • Vue Miroir Pédagogique</title>
+  
+  <!-- Typographie Lexend anti-fatigue & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '\\[', right: '\\]', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+          });"></script>
+
+  <style>
+    :root {
+      --accent: #C25444;
+      --accent-soft: #FDF2EF;
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --surface-paper: #FCFAF7;
+      --text: #2D3748;
+      --text-muted: #5A6A80;
+      --border: #E2E8F0;
+      --border-soft: #EFEBE5;
+      --success: #2A7A4C;
+      --success-bg: #EDF7F1;
+      --warning: #C05621;
+      --warning-bg: #FEF7EE;
+      --danger: #B83232;
+      --danger-bg: #FDF2F2;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lexend', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      letter-spacing: 0.015em;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* BARRE SUPÉRIEURE DE NAVIGATION */
+    .top-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+    }
+
+    .back-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .badge-matiere {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+    }
+
+    .top-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .mobile-tab-toggle {
+      display: none;
+      gap: 0.5rem;
+    }
+
+    .tab-btn {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    /* CONTENEUR SPLIT SCREEN */
+    .split-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 46% 54%;
+      height: calc(100vh - 60px);
+      overflow: hidden;
+    }
+
+    /* PANNEAU GAUCHE : SUJET BRUT AUTHENTIQUE */
+    .pane-sujet {
+      background: var(--surface-paper);
+      border-right: 2px solid var(--border);
+      overflow-y: auto;
+      padding: 2.2rem;
+    }
+
+    .exam-paper {
+      background: #FFFFFF;
+      border: 1px solid #D8D2C6;
+      border-radius: 0.5rem;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .exam-header-banner {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    .exam-title-box {
+      border: 2px solid var(--text);
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: #FAF9F6;
+    }
+
+    .exam-title-box h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      color: #1A202C;
+    }
+
+    .exam-instructions {
+      font-size: 0.88rem;
+      margin: 1.2rem 0 2rem 0;
+      padding-left: 1.2rem;
+      color: #4A5568;
+    }
+
+    .exam-instructions li {
+      margin-bottom: 0.35rem;
+    }
+
+    .exam-exercise {
+      margin-bottom: 2.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed #CBD5E0;
+    }
+
+    .exam-exercise:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .exercise-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .exercise-title-bar h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .exercise-badge-jump {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.35rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--accent);
+    }
+
+    .exercise-badge-jump:hover {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    /* PANNEAU DROIT : MASTERCLASS VULGARISÉE */
+    .pane-explications {
+      background: var(--bg);
+      overflow-y: auto;
+      padding: 2.2rem 2.8rem;
+    }
+
+    .expl-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .expl-hero {
+      background: var(--surface);
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .expl-hero h1 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .expl-hero p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .expl-section {
+      background: var(--surface);
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 80px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .expl-section.highlighted {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .expl-section h2 {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+
+    .expl-section h3 {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin: 1.5rem 0 0.8rem 0;
+    }
+
+    /* ENCADRÉS PÉDAGOGIQUES */
+    .box-why {
+      background: var(--success-bg);
+      border-left: 4px solid var(--success);
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    .box-why strong {
+      color: var(--success);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .box-trap {
+      background: var(--danger-bg);
+      border-left: 4px solid var(--danger);
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    .box-trap strong {
+      color: var(--danger);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .box-check {
+      background: #EBF4FC;
+      border-left: 4px solid #2B6CB0;
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    .box-check strong {
+      color: #2B6CB0;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    table.notion-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    table.notion-table th, table.notion-table td {
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.9rem;
+      text-align: left;
+    }
+
+    table.notion-table th {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    table.notion-table tr:nth-child(even) {
+      background: #FBF9F7;
+    }
+
+    details.interactive-solution {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      cursor: pointer;
+    }
+
+    details.interactive-solution summary {
+      font-weight: 600;
+      color: var(--accent);
+      outline: none;
+    }
+
+    details.interactive-solution[open] {
+      background: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+    }
+
+    pre {
+      background: #1E293B;
+      color: #F8FAFC;
+      padding: 1.1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    /* RESPONSIVE SMARTPHONE & TABLETTE */
+    @media (max-width: 960px) {
+      .split-container {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .mobile-tab-toggle {
+        display: flex;
+      }
+      .pane-sujet, .pane-explications {
+        height: calc(100vh - 110px);
+        padding: 1.2rem;
+      }
+      .pane-sujet.hidden, .pane-explications.hidden {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRE SUPÉRIEURE -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <a href="../../index.html#revisions" class="back-btn">← Portail KAI</a>
+      <span class="badge-matiere">R1.07</span>
+      <span class="top-title">Outils Mathématiques Fondamentaux — Contrôle de Mathématiques</span>
+    </div>
+    
+    <div class="mobile-tab-toggle">
+      <button class="tab-btn active" onclick="basculerTab('sujet')">📄 Sujet officiel</button>
+      <button class="tab-btn" onclick="basculerTab('expl')">💡 Explications</button>
+    </div>
+  </header>
+
+  <!-- CONTENEUR DOUBLE VOLET (SIDE-BY-SIDE) -->
+  <main class="split-container">
+    
+    <!-- VOLET GAUCHE : SUJET BRUT OFFICIEL -->
+    <section class="pane-sujet" id="col-sujet">
+      <article class="exam-paper">
+        
+        <div class="exam-header-banner">
+          <span>Outils fondamentaux</span>
+          <span>IUT de Bayonne - Pays basque<br>Département Informatique</span>
+        </div>
+
+        <div class="exam-title-box">
+          <h1>Contrôle de Mathématiques</h1>
+          <p><strong>Jeudi 26 octobre 2023</strong> — Durée : <strong>1h 30</strong></p>
+        </div>
+
+        <ul class="exam-instructions">
+          <li>Documents et calculatrices non autorisés — Téléphones dans les sacs</li><li>Montres connectées strictement interdites</li><li>Le barème donné est indicatif (Total sur 20 points)</li><li>Tous les raisonnements et calculs effectués doivent être justifiés en détail</li><li>Vous devez rendre un travail correctement présenté et rédigé à l'encre</li>
+        </ul>
+
+        <!-- CONTENU DU SUJET BRUT (EXERCICES) -->
+        <div class="exam-body-content">
+          
+    <div class="exam-exercise" id="sujet-ex1">
+      <div class="exercise-title-bar">
+        <h2>Exercice 1 (3 points)</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie1')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>Résoudre le système d'équations suivant en utilisant la méthode du <strong>pivot de Gauss</strong> et donner l'ensemble $S$ des solutions :</p>
+      $$\begin{cases} x + y - z = 0 \\ 2x - y + 2z = 11 \\ -x + y + 3z = 2 \end{cases}$$
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex2">
+      <div class="exercise-title-bar">
+        <h2>Exercice 2 (3 points)</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie2')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>On considère les matrices suivantes ($a, b, c$ sont 3 nombres réels) :</p>
+      $$A = \begin{pmatrix} 1 & 2 & a \\ 3 & -1 & 4 \\ 0 & 5 & 1 \end{pmatrix} \qquad B = \begin{pmatrix} 1 & 2 & 3 \\ b & -1 & 2 \\ 0 & 3 & -1 \end{pmatrix} \qquad C = \begin{pmatrix} 1 & c \\ 3 & 2 \end{pmatrix}$$
+      <ol style="margin-left: 1.5rem; margin-top: 0.6rem;">
+        <li style="margin-bottom: 0.5rem;">Déterminer $a$ et $b$ tels que : $$3A - 4B = \begin{pmatrix} -1 & -2 & 3 \\ 1 & 1 & 4 \\ 0 & 3 & 7 \end{pmatrix}$$</li>
+        <li>Existe-t-il un réel $c$ tel que : $$C^2 = \begin{pmatrix} -5 & -6 \\ 9 & -2 \end{pmatrix} \quad ?$$</li>
+      </ol>
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex3">
+      <div class="exercise-title-bar">
+        <h2>Exercice 3 (3 points)</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie4')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>Déterminer, en détaillant les calculs, la matrice inverse de :</p>
+      $$A = \begin{pmatrix} 1 & 1 & -2 \\ -1 & 3 & 1 \\ 1 & 1 & 2 \end{pmatrix}$$
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex4">
+      <div class="exercise-title-bar">
+        <h2>Exercice 4 (4 points)</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie5')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>On considère la matrice :</p>
+      $$A = \begin{pmatrix} 1 & -1 & -1 \\ -1 & 1 & -1 \\ -1 & -1 & 1 \end{pmatrix}$$
+      <ol style="margin-left: 1.5rem; margin-top: 0.6rem;">
+        <li style="margin-bottom: 0.5rem;">
+          <strong>a.</strong> Calculer la matrice $A^2$.<br>
+          <strong>b.</strong> Montrer que $A^2 - A = 2I$ où $I$ est la matrice identité d'ordre 3.
+        </li>
+        <li>En mettant la matrice $A$ en facteur, montrer que la matrice $A$ est inversible et donner sa matrice inverse.</li>
+      </ol>
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex5">
+      <div class="exercise-title-bar">
+        <h2>Exercice 5 (4 points)</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie6')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>Soit $(S)$ le système suivant :</p>
+      $$\begin{cases} x + y + z = 20 \\ 3x + 4y + 7z = 10 \\ 2x + 3y + 5z = 30 \end{cases}$$
+      <ol style="margin-left: 1.5rem; margin-top: 0.6rem;">
+        <li style="margin-bottom: 0.5rem;">On considère les matrices colonnes $X = \begin{pmatrix} x \\ y \\ z \end{pmatrix}$ et $Y = \begin{pmatrix} 20 \\ 10 \\ 30 \end{pmatrix}$. Déterminer la matrice carrée $M$ qui traduit le système ci-dessus par l'équation matricielle $M \times X = Y$.</li>
+        <li style="margin-bottom: 0.5rem;">On considère la matrice $P = \begin{pmatrix} 1 & 2 & -3 \\ 1 & -3 & 4 \\ -1 & 1 & -1 \end{pmatrix}$. Calculer le produit $P \times M$. Que peut-on en déduire ?</li>
+        <li style="margin-bottom: 0.5rem;">Montrer que si $M \times X = Y$ alors $X = P \times Y$.</li>
+        <li>Résoudre le système $(S)$.</li>
+      </ol>
+    </div>
+
+    <div class="exam-exercise" id="sujet-ex6">
+      <div class="exercise-title-bar">
+        <h2>Exercice 6 (3 points)</h2>
+        <a href="javascript:void(0)" onclick="scrollerVersExercice('expl-partie7')" class="exercise-badge-jump">Voir explication ➔</a>
+      </div>
+      <p>Résoudre suivant les valeurs de $m$ le système suivant :</p>
+      $$\begin{cases} x + my = 1 \\ mx + 4y = -2m \end{cases}$$
+    </div>
+    
+        </div>
+
+      </article>
+    </section>
+
+    <!-- VOLET DROIT : MASTERCLASS PÉDAGOGIQUE -->
+    <section class="pane-explications" id="col-explications">
+      <div class="expl-container">
+        
+        
+    <div class="expl-hero">
+      <h1>Cours complet de révision — Outils fondamentaux (BUT Informatique S1)</h1>
+      <p>J'ai analysé les 6 exercices du contrôle de mathématiques du 26 octobre 2023 de l'IUT de Bayonne–Pays basque. Je vais tout t'expliquer en partant des bases, sans supposer que tu maîtrises déjà les matrices ou le pivot de Gauss. L'objectif n'est pas simplement de connaître les réponses de ce contrôle : c'est de comprendre les méthodes pour pouvoir résoudre un autre sujet, même avec des nombres différents.</p>
+    </div>
+
+    <!-- 1. CE QUE TU DOIS MAÎTRISER -->
+    <div class="expl-section">
+      <h2>1. Ce que tu dois maîtriser</h2>
+      <table class="notion-table">
+        <thead>
+          <tr>
+            <th>Notion</th>
+            <th>Exercice</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pivot de Gauss et systèmes d'équations</strong></td>
+            <td>1</td>
+            <td>3 points</td>
+          </tr>
+          <tr>
+            <td><strong>Calculs sur les matrices et multiplication</strong></td>
+            <td>2</td>
+            <td>3 points</td>
+          </tr>
+          <tr>
+            <td><strong>Inverse d'une matrice par Gauss-Jordan</strong></td>
+            <td>3</td>
+            <td>3 points</td>
+          </tr>
+          <tr>
+            <td><strong>Matrice identité et calcul d'inverse</strong></td>
+            <td>4</td>
+            <td>4 points</td>
+          </tr>
+          <tr>
+            <td><strong>Écriture matricielle d'un système</strong></td>
+            <td>5</td>
+            <td>4 points</td>
+          </tr>
+          <tr>
+            <td><strong>Systèmes avec un paramètre $m$</strong></td>
+            <td>6</td>
+            <td>3 points</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+        ⏱️ <em>Le contrôle dure 1 h 30, sans calculatrice, et demande de justifier les calculs. Il vaut donc mieux connaître quelques méthodes simples plutôt que beaucoup de formules apprises sans les comprendre.</em>
+      </p>
+    </div>
+
+    <!-- PARTIE 1 : SYSTÈMES & EXERCICE 1 -->
+    <div class="expl-section" id="expl-partie1">
+      <h2>Partie 1 — Les systèmes d'équations & Exercice 1</h2>
+      
+      <h3>2. Comprendre un système</h3>
+      <p>Un système est un ensemble d'équations qui doivent être vraies simultanément.</p>
+      <p>Exemple : $\begin{cases} x+y=7 \\ x-y=3 \end{cases}$</p>
+      <p>En additionnant les deux équations, les $y$ s'annulent : $2x = 10 \Rightarrow x = 5$. On remplace ensuite dans la première équation : $5 + y = 7 \Rightarrow y = 2$.</p>
+      
+      <div class="box-why">
+        <strong>Pourquoi ça marche ?</strong>
+        Parce qu'en combinant les équations, nous éliminons progressivement des inconnues pour simplifier le problème. C'est exactement le principe fondamental du pivot de Gauss.
+      </div>
+
+      <h3>3. Les trois opérations autorisées au pivot de Gauss</h3>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+        <li>Échanger deux lignes ($L_i \leftrightarrow L_j$)</li>
+        <li>Multiplier une ligne par un scalaire non nul ($L_i \leftarrow k L_i, k \neq 0$)</li>
+        <li>Ajouter à une ligne un multiple d'une autre ligne ($L_i \leftarrow L_i + k L_j$)</li>
+      </ul>
+
+      <h3>4. Exercice 1 du contrôle — Corrigé détaillé pas à pas</h3>
+      <p>On doit résoudre :</p>
+      $$\begin{cases} x+y-z=0 &(L_1) \\ 2x-y+2z=11 &(L_2) \\ -x+y+3z=2 &(L_3) \end{cases}$$
+
+      <p><strong>Étape 1 — Éliminer $x$ de $L_2$ et $L_3$ :</strong></p>
+      <p>On applique $L_2 \leftarrow L_2 - 2L_1$ :</p>
+      $$(2x-y+2z) - 2(x+y-z) = 11 - 0 \implies -3y + 4z = 11$$
+      <p>On applique $L_3 \leftarrow L_3 + L_1$ :</p>
+      $$(-x+y+3z) + (x+y-z) = 2 + 0 \implies 2y + 2z = 2$$
+
+      <p>Notre système devient triangulaire en $x$ :</p>
+      $$\begin{cases} x+y-z=0 \\ -3y+4z=11 \\ 2y+2z=2 \end{cases}$$
+
+      <p><strong>Étape 2 — Éliminer $y$ entre $L_2$ et $L_3$ :</strong></p>
+      <p>On multiplie $L_2$ par 2 et $L_3$ par 3 :</p>
+      $$\begin{cases} -6y + 8z = 22 \\ 6y + 6z = 6 \end{cases}$$
+      <p>On additionne : $14z = 28 \implies \mathbf{z = 2}$.</p>
+
+      <p><strong>Étape 3 — Remontée des inconnues :</strong></p>
+      <p>De $2y + 2z = 2$, avec $z=2$, on tire : $2y + 4 = 2 \implies 2y = -2 \implies \mathbf{y = -1}$.</p>
+      <p>De $x + y - z = 0$, on tire : $x - 1 - 2 = 0 \implies \mathbf{x = 3}$.</p>
+      
+      <p style="margin: 1rem 0; font-size: 1.05rem;"><strong>Ensemble des solutions :</strong></p>
+      $$\boxed{S = \{(3; -1; 2)\}}$$
+
+      <div class="box-check">
+        <strong>Vérification de la réponse (Obligatoire en contrôle) :</strong>
+        $$L_1 : 3 + (-1) - 2 = 0 \quad \checkmark$$
+        $$L_2 : 2(3) - (-1) + 2(2) = 6 + 1 + 4 = 11 \quad \checkmark$$
+        $$L_3 : -(3) + (-1) + 3(2) = -4 + 6 = 2 \quad \checkmark$$
+        Les 3 équations sont vérifiées, les 3 points sont acquis !
+      </div>
+    </div>
+
+    <!-- PARTIE 2 : CALCUL MATRICIEL & EXERCICE 2 -->
+    <div class="expl-section" id="expl-partie2">
+      <h2>Partie 2 — Calcul Matriciel & Exercice 2</h2>
+      
+      <h3>Exercice 2, Question 1 — Trouver $a$ et $b$</h3>
+      <p>On cherche $a$ et $b$ tels que $3A - 4B = \begin{pmatrix} -1 & -2 & 3 \\ 1 & 1 & 4 \\ 0 & 3 & 7 \end{pmatrix}$.</p>
+      <div class="box-why">
+        <strong>L'astuce de temps :</strong>
+        Il est inutile de recalculer toute la matrice $3A - 4B$. Il suffit d'isoler les deux équations où se trouvent les inconnues $a$ (ligne 1, colonne 3) et $b$ (ligne 2, colonne 1) !
+      </div>
+      <p><strong>Pour $a$ (L1, C3) :</strong></p>
+      $$3(a) - 4(3) = 3 \implies 3a - 12 = 3 \implies 3a = 15 \implies \mathbf{a = 5}$$
+      <p><strong>Pour $b$ (L2, C1) :</strong></p>
+      $$3(3) - 4(b) = 1 \implies 9 - 4b = 1 \implies -4b = -8 \implies \mathbf{b = 2}$$
+      $$\boxed{a = 5, \quad b = 2}$$
+
+      <h3>Exercice 2, Question 2 — Existe-t-il un réel $c$ tel que $C^2 = \begin{pmatrix} -5 & -6 \\ 9 & -2 \end{pmatrix}$ ?</h3>
+      <p>On calcule le produit matriciel $C^2 = C \times C$ en effectuant rigoureusement <strong>Ligne $\times$ Colonne</strong> :</p>
+      $$C^2 = \begin{pmatrix} 1 & c \\ 3 & 2 \end{pmatrix} \begin{pmatrix} 1 & c \\ 3 & 2 \end{pmatrix} = \begin{pmatrix} 1\times 1 + c\times 3 & 1\times c + c\times 2 \\ 3\times 1 + 2\times 3 & 3\times c + 2\times 2 \end{pmatrix} = \begin{pmatrix} 1+3c & 3c \\ 9 & 3c+4 \end{pmatrix}$$
+      
+      <p>On identifie terme à terme avec la matrice cible :</p>
+      <ul>
+        <li>En haut à droite (L1, C2) : $3c = -6 \implies \mathbf{c = -2}$.</li>
+        <li>Vérification en haut à gauche (L1, C1) : $1 + 3(-2) = 1 - 6 = -5 \quad \checkmark$.</li>
+        <li>Vérification en bas à gauche (L2, C1) : $9 = 9 \quad \checkmark$.</li>
+        <li>Vérification en bas à droite (L2, C2) : $3(-2) + 4 = -6 + 4 = -2 \quad \checkmark$.</li>
+      </ul>
+      <div class="box-why">
+        <strong>Conclusion :</strong>
+        Oui, il existe un réel unique $\mathbf{c = -2}$ qui vérifie l'ensemble des 4 coefficients.
+      </div>
+    </div>
+
+    <!-- PARTIE 3 : INVERSION GAUSS-JORDAN & EXERCICE 3 -->
+    <div class="expl-section" id="expl-partie4">
+      <h2>Partie 3 — Inverse d'une Matrice (Gauss-Jordan) & Exercice 3</h2>
+      <p>Objectif : Calculer $A^{-1}$ pour $A = \begin{pmatrix} 1 & 1 & -2 \\ -1 & 3 & 1 \\ 1 & 1 & 2 \end{pmatrix}$.</p>
+      
+      <p>On applique l'algorithme de <strong>Gauss-Jordan</strong> sur la matrice augmentée $(A \mid I_3)$ :</p>
+      $$\left(\begin{array}{ccc|ccc} 1 & 1 & -2 & 1 & 0 & 0 \\ -1 & 3 & 1 & 0 & 1 & 0 \\ 1 & 1 & 2 & 0 & 0 & 1 \end{array}\right)$$
+
+      <p><strong>Étape 1 — Élimination sous le premier pivot :</strong></p>
+      <p>$L_2 \leftarrow L_2 + L_1$ et $L_3 \leftarrow L_3 - L_1$ :</p>
+      $$\left(\begin{array}{ccc|ccc} 1 & 1 & -2 & 1 & 0 & 0 \\ 0 & 4 & -1 & 1 & 1 & 0 \\ 0 & 0 & 4 & -1 & 0 & 1 \end{array}\right)$$
+
+      <p><strong>Étape 2 — Normalisation et remontée :</strong></p>
+      <p>$L_3 \leftarrow \frac{1}{4}L_3$ donne un pivot 1 en bas à droite :</p>
+      $$\left(\begin{array}{ccc|ccc} 1 & 1 & -2 & 1 & 0 & 0 \\ 0 & 4 & -1 & 1 & 1 & 0 \\ 0 & 0 & 1 & -1/4 & 0 & 1/4 \end{array}\right)$$
+
+      <p>On annule les termes de la colonne 3 au-dessus du pivot :</p>
+      <p>$L_2 \leftarrow L_2 + L_3$ puis $L_2 \leftarrow \frac{1}{4}L_2$, et $L_1 \leftarrow L_1 + 2L_3$ :</p>
+      $$\left(\begin{array}{ccc|ccc} 1 & 1 & 0 & 1/2 & 0 & 1/2 \\ 0 & 1 & 0 & 3/16 & 1/4 & 1/16 \\ 0 & 0 & 1 & -1/4 & 0 & 1/4 \end{array}\right)$$
+
+      <p>Enfin, on annule le 1 de $L_1$ : $L_1 \leftarrow L_1 - L_2$ :</p>
+      $$\left(\begin{array}{ccc|ccc} 1 & 0 & 0 & 5/16 & -1/4 & 7/16 \\ 0 & 1 & 0 & 3/16 & 1/4 & 1/16 \\ 0 & 0 & 1 & -4/16 & 0 & 4/16 \end{array}\right)$$
+
+      <p style="margin: 1rem 0;">La partie gauche est devenue l'identité $I_3$, la partie droite est $A^{-1}$ :</p>
+      $$\boxed{A^{-1} = \frac{1}{16} \begin{pmatrix} 5 & -4 & 7 \\ 3 & 4 & 1 \\ -4 & 0 & 4 \end{pmatrix}}$$
+    </div>
+
+    <!-- PARTIE 4 : PUISSANCES & FACTORISATION & EXERCICE 4 -->
+    <div class="expl-section" id="expl-partie5">
+      <h2>Partie 4 — Puissances & Factorisation & Exercice 4</h2>
+      <p>Soit $A = \begin{pmatrix} 1 & -1 & -1 \\ -1 & 1 & -1 \\ -1 & -1 & 1 \end{pmatrix}$.</p>
+      
+      <h3>1.a. Calculer $A^2$</h3>
+      <p>En effectuant le produit $A \times A$, chaque terme diagonal vaut $1^2 + (-1)^2 + (-1)^2 = 3$. Chaque terme non diagonal vaut $1(-1) + (-1)(1) + (-1)(-1) = -1 - 1 + 1 = -1$.</p>
+      $$A^2 = \begin{pmatrix} 3 & -1 & -1 \\ -1 & 3 & -1 \\ -1 & -1 & 3 \end{pmatrix}$$
+
+      <h3>1.b. Montrer que $A^2 - A = 2I$</h3>
+      $$A^2 - A = \begin{pmatrix} 3 & -1 & -1 \\ -1 & 3 & -1 \\ -1 & -1 & 3 \end{pmatrix} - \begin{pmatrix} 1 & -1 & -1 \\ -1 & 1 & -1 \\ -1 & -1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{pmatrix} = 2 I_3 \quad \checkmark$$
+
+      <h3>2. Montrer que $A$ est inversible et donner $A^{-1}$</h3>
+      <div class="box-why">
+        <strong>Méthode de factorisation matricielle :</strong>
+        On part de $A^2 - A = 2I$. On factorise par $A$ à gauche :
+        $$A(A - I) = 2I \implies A \left( \frac{A - I}{2} \right) = I$$
+        Par définition, la matrice qui multipliée par $A$ donne $I$ est l'inverse de $A$.
+      </div>
+      $$\boxed{A^{-1} = \frac{1}{2}(A - I) = \begin{pmatrix} 0 & -1/2 & -1/2 \\ -1/2 & 0 & -1/2 \\ -1/2 & -1/2 & 0 \end{pmatrix}}$$
+    </div>
+
+    <!-- PARTIE 5 : SYSTÈME MATRICIEL & EXERCICE 5 -->
+    <div class="expl-section" id="expl-partie6">
+      <h2>Partie 5 — Système Matriciel $MX = Y$ & Exercice 5</h2>
+      
+      <h3>1. Déterminer la matrice carrée $M$</h3>
+      <p>En regroupant les coefficients de $x, y, z$ par ligne :</p>
+      $$M = \begin{pmatrix} 1 & 1 & 1 \\ 3 & 4 & 7 \\ 2 & 3 & 5 \end{pmatrix}$$
+
+      <h3>2. Calculer $P \times M$ et déduction</h3>
+      <p>Avec $P = \begin{pmatrix} 1 & 2 & -3 \\ 1 & -3 & 4 \\ -1 & 1 & -1 \end{pmatrix}$ :</p>
+      $$P \times M = \begin{pmatrix} 1(1)+2(3)-3(2) & 1(1)+2(4)-3(3) & 1(1)+2(7)-3(5) \\ \dots & \dots & \dots \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} = I_3$$
+      <p>Puisque $PM = I_3$, on en déduit immédiatement que $\mathbf{P = M^{-1}}$ (la matrice $P$ est l'inverse de $M$).</p>
+
+      <h3>3. Montrer que si $MX = Y$, alors $X = PY$</h3>
+      $$MX = Y \implies P(MX) = PY \implies (PM)X = PY \implies IX = PY \implies \boxed{X = PY}$$
+
+      <h3>4. Résoudre le système</h3>
+      $$X = \begin{pmatrix} 1 & 2 & -3 \\ 1 & -3 & 4 \\ -1 & 1 & -1 \end{pmatrix} \begin{pmatrix} 20 \\ 10 \\ 30 \end{pmatrix} = \begin{pmatrix} 20 + 20 - 90 \\ 20 - 30 + 120 \\ -20 + 10 - 30 \end{pmatrix} = \begin{pmatrix} -50 \\ 110 \\ -40 \end{pmatrix}$$
+      $$\boxed{S = \{(-50; 110; -40)\}}$$
+    </div>
+
+    <!-- PARTIE 6 : SYSTÈME AVEC PARAMÈTRE M & EXERCICE 6 -->
+    <div class="expl-section" id="expl-partie7">
+      <h2>Partie 6 — Système avec Paramètre $m$ & Exercice 6</h2>
+      <p>On considère le système : $\begin{cases} x + my = 1 \\ mx + 4y = -2m \end{cases}$</p>
+
+      <h3>Résolution par substitution</h3>
+      <p>De la première ligne, on isole $x$ : $\mathbf{x = 1 - my}$.</p>
+      <p>On substitue dans la seconde équation :</p>
+      $$m(1 - my) + 4y = -2m \implies m - m^2y + 4y = -2m \implies (4 - m^2)y = -3m$$
+
+      <div class="box-trap">
+        <strong>Le grand piège du contrôle :</strong>
+        On ne peut diviser par $(4 - m^2)$ que si cette quantité est NON NULLE !
+        $4 - m^2 = 0 \iff m^2 = 4 \iff \mathbf{m = 2}$ ou $\mathbf{m = -2}$. Il faut impérativement traiter ces cas séparément !
+      </div>
+
+      <p><strong>Cas 1 : $m \neq 2$ et $m \neq -2$</strong></p>
+      <p>On peut diviser : $y = \frac{-3m}{4 - m^2}$. On en déduit $x$ :</p>
+      $$x = 1 - m\left(\frac{-3m}{4-m^2}\right) = 1 + \frac{3m^2}{4-m^2} = \frac{4-m^2+3m^2}{4-m^2} = \frac{4+2m^2}{4-m^2}$$
+      $$\boxed{S = \left\{\left( \frac{4+2m^2}{4-m^2} ; \frac{-3m}{4-m^2} \right)\right\} \quad \text{(Solution unique)}}$$
+
+      <p><strong>Cas 2 : Si $m = 2$</strong></p>
+      <p>L'équation devient $(4 - 4)y = -3(2) \implies 0 \times y = -6$, ce qui est <strong>impossible</strong>. Donc $\mathbf{S = \emptyset}$.</p>
+
+      <p><strong>Cas 3 : Si $m = -2$</strong></p>
+      <p>L'équation devient $(4 - 4)y = -3(-2) \implies 0 \times y = 6$, ce qui est également <strong>impossible</strong>. Donc $\mathbf{S = \emptyset}$.</p>
+
+      <table class="notion-table">
+        <thead>
+          <tr>
+            <th>Valeur de $m$</th>
+            <th>Nombre de solutions</th>
+            <th>Ensemble $S$</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$m \notin \{-2; 2\}$</td>
+            <td>Solution unique</td>
+            <td>$S = \{ ( \frac{4+2m^2}{4-m^2} ; \frac{-3m}{4-m^2} ) \}$</td>
+          </tr>
+          <tr>
+            <td>$m = 2$</td>
+            <td>Aucune solution</td>
+            <td>$S = \emptyset$</td>
+          </tr>
+          <tr>
+            <td>$m = -2$</td>
+            <td>Aucune solution</td>
+            <td>$S = \emptyset$</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PARTIE 7 : MÉTHODES ET ENTRAÎNEMENT INTERACTIF -->
+    <div class="expl-section">
+      <h2>Partie 7 — Synthèse des Méthodes & Entraînement Interactif</h2>
+      
+      <h3>Tableau récapitulatif des méthodes à connaître</h3>
+      <table class="notion-table">
+        <thead>
+          <tr>
+            <th>Type de question</th>
+            <th>Méthode systématique</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Résoudre un système par Gauss</td>
+            <td>Éliminer $x$, puis $y$, puis remonter pour trouver chaque valeur</td>
+          </tr>
+          <tr>
+            <td>Calculer un produit matriciel $AB$</td>
+            <td>Toujours faire <strong>Ligne de $A \times$ Colonne de $B$</strong></td>
+          </tr>
+          <tr>
+            <td>Inverser une matrice</td>
+            <td>Gauss-Jordan $(A \mid I) \to (I \mid A^{-1})$ ou factorisation $A(A-I)=kI$</td>
+          </tr>
+          <tr>
+            <td>Système avec paramètre $m$</td>
+            <td>Isoler une variable, trouver les valeurs qui annulent le dénominateur, tester chaque cas</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Entraînement interactif (Testez-vous sans calculatrice)</h3>
+      <details class="interactive-solution">
+        <summary>Exercice d'application 1 : Résoudre $\begin{cases} x + y = 9 \\ 2x - y = 6 \end{cases}$</summary>
+        <div style="padding-top: 0.8rem;">
+          <p>En additionnant les deux équations : $3x = 15 \implies x = 5$.</p>
+          <p>On remplace dans la première : $5 + y = 9 \implies y = 4$.</p>
+          <p><strong>Solution :</strong> $\mathbf{S = \{(5; 4)\}}$</p>
+        </div>
+      </details>
+
+      <details class="interactive-solution">
+        <summary>Exercice d'application 2 : Calculer $M^2$ pour $M = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$</summary>
+        <div style="padding-top: 0.8rem;">
+          <p>$$M^2 = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 2(2)+1(0) & 2(1)+1(3) \\ 0(2)+3(0) & 0(1)+3(3) \end{pmatrix} = \mathbf{\begin{pmatrix} 4 & 5 \\ 0 & 9 \end{pmatrix}}$$</p>
+        </div>
+      </details>
+    </div>
+    
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function basculerTab(tab) {
+      const colSujet = document.getElementById('col-sujet');
+      const colExpl = document.getElementById('col-explications');
+      const btns = document.querySelectorAll('.tab-btn');
+      
+      if (tab === 'sujet') {
+        colSujet.classList.remove('hidden');
+        colExpl.classList.add('hidden');
+        btns[0].classList.add('active');
+        btns[1].classList.remove('active');
+      } else {
+        colSujet.classList.add('hidden');
+        colExpl.classList.remove('hidden');
+        btns[0].classList.remove('active');
+        btns[1].classList.add('active');
+      }
+    }
+
+    function scrollerVersExercice(idTarget) {
+      // Si en vue mobile, basculer sur l'onglet explications
+      if (window.innerWidth <= 960) {
+        basculerTab('expl');
+      }
+      const target = document.getElementById(idTarget);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.classList.add('highlighted');
+        setTimeout(() => target.classList.remove('highlighted'), 2500);
+      }
+    }
+  </script>
+</body>
+</html>

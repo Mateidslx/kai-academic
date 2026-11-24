@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurer Visual studio code sur votre PC — R1.01 (Elearn UPPA)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1E293B;
+      --primary: #2563EB;
+      --border: #E2E8F0;
+    }
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      margin: 0;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #EFF6FF;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-top: 0;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .source-meta {
+      font-size: 12px;
+      color: #64748B;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 8px;
+    }
+    pre {
+      padding: 16px;
+      overflow-x: auto;
+    }
+    code {
+      padding: 2px 6px;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: #F1F5F9;
+      font-weight: 700;
+    }
+    blockquote {
+      border-left: 4px solid var(--primary);
+      margin: 16px 0;
+      padding: 8px 16px;
+      background: #F8FAFC;
+      color: #334155;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">R1.01 — Ressource Officielle Elearn</div>
+    <h1>Configurer Visual studio code sur votre PC</h1>
+    <div class="source-meta">
+      Source originale : <a href="https://elearn.univ-pau.fr/mod/page/view.php?id=692257" target="_blank" rel="noopener">https://elearn.univ-pau.fr/mod/page/view.php?id=692257</a> — Synchronisé automatiquement par Kai Sentinel
+    </div>
+    <div class="moodle-content">
+      <div role="main"><div class="box py-3 generalbox center clearfix"><div class="no-overflow"><!-- ====== R1.01 — Gabarit bleu 100% inline (sans <style>) ====== -->
+<div style="font-family: Tahoma, sans-serif; font-size: 115%; color: #334155; padding: 28px 18px; background: #fff;">
+<div style="max-width: 1040px; margin: 0 auto;"><!-- ========= En-tête (comme le TP1) ========= -->
+<div style="position: relative; padding: 30px 28px; margin: 0 0 28px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 18px; text-align: center; background: linear-gradient(180deg,#f8fbff 0%, #eef4fb 100%); box-shadow: 0 12px 28px rgba(51,65,85,.08);">
+<h1 style="margin: 4px 0; font-size: clamp(1.9rem,2.6vw + 1rem,2.4rem); line-height: 1.15; letter-spacing: .2px; color: #2f6fbe; font-weight: bold;">Configuration de Visual Studio Code</h1>
+<h1 style="margin: 4px 0; font-size: clamp(1.9rem,2.6vw + 1rem,2.4rem); line-height: 1.15; letter-spacing: .2px; color: #2f6fbe; font-weight: bold;">sur un PC personnel</h1>
+</div>
+<!-- ========= Intro ========= -->
+<p style="line-height: 1.75; margin: 0 0 30px 0; padding: 18px 20px; border: 1px solid #e2e8f0; border-radius: 14px; background: #fbfdff; box-shadow: 0 6px 18px rgba(51,65,85,.05);"><a href="https://code.visualstudio.com/" rel="noopener" style="color: #2563eb; text-decoration: underline; font-weight: 500;" target="_blank">Visual Studio Code</a> est un éditeur de code extensible qui peut être paramétré pour travailler avec de nombreux langages de programmation. L'objectif ici est d'installer Visual Studio Code sur votre PC windows avec un paramétrage équivalent à celui disponible sur les bureaux virtuels de l'IUT.</p>
+<!-- ========= Encadré ATTENTION (gabarit) ========= -->
+<div style="border: 1px solid #fed7aa; border-radius: 14px; padding: 14px 16px; background: #fff7ed; margin: 20px 0; box-shadow: inset 6px 0 0 #f97316, 0 6px 16px rgba(51,65,85,.05);">
+<p style="margin: 0 0 6px; font-weight: 600; color: #c2410c;">⚠️ Attention</p>
+<p style="margin: 0; line-height: 1.65;">Les étapes de configuration que vous allez suivre ici sont uniquement valables pour configurer l'éditeur Visual Studio Code sur une <strong style="color: #c2410c;">machine windows personnelle</strong>. Ce processus de configuration n'est pas valable si vous souhaitez installer et configurer Visual Studio Code sur les bureaux virtuels de l'IUT.</p>
+</div>
+<!-- ========= H2 (gabarit) ========= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%, #edf4fc 100%); font-weight: bold; color: #2f6fbe; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">1. Prérequis concernant votre PC</div>
+<p style="line-height: 1.72; margin: .6rem 0;">Vous devez disposer d'une machine avec Windows 8, Windows 10 ou Windows 11 en version 64 bits et d'1 GO d'espace libre sur votre disque dur. Si vous disposez déjà d'une version de Visual Studio Code installée sur votre PC, désinstallez-la.</p>
+<!-- (Bloc Github conservé en commentaire, comme fourni)
+    <h4>Prérequis pour versionner du code sur Github</h4> ... --><!-- ========= H2 ========= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%, #edf4fc 100%); font-weight: bold; color: #2f6fbe; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">2. Contenu du pack</div>
+<p style="line-height: 1.72; margin: .6rem 0;">Cet assistant installe et pré-configure les logiciels libres suivants :</p>
+<ul data-bullets="square" style="margin: .4rem 0 .9rem 0; padding-left: .6rem; display: grid; row-gap: .6rem;">
+<li><a href="https://github.com/microsoft/vscode" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Visual Studio Code</a> (Licence MIT)</li>
+<li>Le compilateur et débogueur C++ de <a href="https://github.com/mirror/mingw-w64" style="color: #2563eb; text-decoration: underline; font-weight: 500;">MinGW-64</a> (Licence GNU GPL)</li>
+<li>Des extensions pour faciliter l'écriture, la compilation, l'exécution et le débogage de programmes C++</li>
+</ul>
+<br/>
+<p style="line-height: 1.72; margin: .6rem 0;">Le pack installe également les logiciels libres suivants qui vous seront utiles en 2ème année de BUT :</p>
+<ul data-bullets="square" style="margin: .4rem 0 .9rem 0; padding-left: .6rem; display: grid; row-gap: .6rem;">
+<li>Le générateur de documentation <a href="https://github.com/doxygen/doxygen" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Doxygen</a> (Licence publique générale GNU version 2)</li>
+<li>Des extensions pour faciliter la génération de documentation à partir de commentaires Doxygen, la sauvegarde et le partage du code sur Github.</li>
+</ul>
+<!-- ========= H2 ========= -->
+<div style="display: block; margin: 42px 0 16px; padding: 15px 18px; border: 1px solid #cfe0f7; border-left: 6px solid #5b9df9; border-radius: 14px; background: linear-gradient(180deg,#f8fbff 0%, #edf4fc 100%); font-weight: bold; color: #2f6fbe; font-size: 1.25rem; box-shadow: 0 6px 18px rgba(51,65,85,.05);">3. Installation et premiers pas</div>
+<!-- H3 (barre verticale) -->
+<h3 style="margin: 46px 0 12px; padding: 10px 14px; font-size: 1.08rem; font-weight: bold; color: #356fae; line-height: 1.35; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff;">Récupérer les fichiers nécessaires</h3>
+<p style="line-height: 1.72; margin: .6rem 0;">Téléchargez les deux fichiers mis à disposition ci-dessous :</p>
+<ul data-bullets="square" style="margin: .4rem 0 .6rem 0; padding-left: .6rem; display: grid; row-gap: .6rem;">
+<li style="margin-top: 15px;"><strong>VScodePackInstaller.exe</strong> : Cet exécutable permet d'installer Visual Studio Code sur votre PC avec le paramétrage et les extensions nécessaires. <strong>Important :</strong> Si Visual Studio Code est déjà installé sur votre PC, il est recommandé de le désinstaller avant de procéder à l'installation de cette version pré-configurée.</li>
+<li style="margin-top: 15px;"><strong>workspace-cplusplus.zip</strong> : Cette archive contient un projet préconfiguré (workspace) que vous devrez utiliser avec Visual Studio Code pour écrire vos programmes.</li>
+</ul>
+<!-- Boutons (pills) -->
+<div style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin: 1rem 0 1.4rem; width: 100%;"><a class="btn" href="https://nuage.univ-pau.fr/s/Wjo3yJjqYYYfrBw/download" role="button" style="display: inline-flex; align-items: center; gap: 8px; padding: .65rem 1rem; border-radius: 12px; text-decoration: none; color: #065f46; background: linear-gradient(135deg,#ecfdf5,#d1fae5); border: 1px solid #a7f3d0; box-shadow: 0 7px 16px rgba(16,185,129,.14); font-weight: bold;"> <i class="fas fa-cloud-download-alt"></i> VScodePackInstaller.exe </a> <a class="btn" href="https://nuage.univ-pau.fr/s/bZHJdXExkXrziBC/download" role="button" style="display: inline-flex; align-items: center; gap: 8px; padding: .65rem 1rem; border-radius: 12px; text-decoration: none; color: #1e40af; background: linear-gradient(135deg,#eef2ff,#e0e7ff); border: 1px solid #c7d2fe; box-shadow: 0 7px 16px rgba(59,130,246,.14); font-weight: bold;"> <i class="fas fa-cloud-download-alt"></i> workspace-cplusplus </a></div>
+<h3 style="margin: 46px 0 12px; padding: 10px 14px; font-size: 1.08rem; font-weight: bold; color: #356fae; line-height: 1.35; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff;">Installer Visual Studio Code</h3>
+<p style="line-height: 1.72; margin: .6rem 0;">Exécutez le programme <em>VScodePackInstaller.exe</em> sur votre PC.</p>
+<p style="line-height: 1.72; margin: .6rem 0;">Selon votre configuration de windows, il est possible qu'une <span style="color: #ef4444;">fenêtre d'avertissement</span> apparaisse vous indiquant que Windows souhaite protéger votre PC de ce programme d'installation. Si c'est le cas, cliquez sur le lien "Informations complémentaires" puis sur le bouton "Exécuter quand même". Suivez ensuite les étapes proposées par l'assistant.</p>
+<p style="line-height: 1.72; margin: .6rem 0;">A la fin de l'installation, l'assistant vous demandera de redémarrer votre PC et ajoutera un raccourci <em>VSCode pour C++</em> sur votre bureau windows (<strong>A</strong> sur l'image ci-dessous).</p>
+<div style="border: 1px solid #fed7aa; border-radius: 14px; padding: 14px 16px; background: #fff7ed; margin: 20px 0; box-shadow: inset 6px 0 0 #f97316, 0 6px 16px rgba(51,65,85,.05);">
+<p style="margin: 0; line-height: 1.65;"><span style="font-weight: 600; color: #c2410c;">⚠️ Important :</span> Ce raccourci exécutera Visual Studio Code avec une configuration dédiée au développement de programmes C++. Il est donc important que vous utilisiez ce raccourci (et non celui ajouté dans votre menu <em>Démarrer</em>) dès lors que vous voudrez utiliser Visual Studio Code pour écrire des programmes C++. Si vous souhaitez utiliser Visual Studio Code pour une autre activité de programmation, utilisez le raccourci présent dans votre menu <em>Démarrer</em>.</p>
+</div>
+<br/>
+<p style="margin: .6rem 0; text-align: center;"><img alt="Visual Studio Code configuré pour le développement C++" class="img-fluid" id="vscode-lightbox-trigger" src="https://patrick-etcheverry.github.io/r1.01-initiation-au-developpement/travaux-pratiques/config-vscode-machine-perso/images/premiers-pas.png" style="display: block; max-width: 88%; height: auto; margin: 22px auto 8px; border-radius: 14px; border: 1px solid #e2e8f0; box-shadow: 0 16px 34px rgba(15,23,42,.16), 0 5px 12px rgba(15,23,42,.08); cursor: zoom-in;" title="Cliquez pour agrandir"/> <span style="display: inline-block; margin: 0 0 14px; color: #64748b; font-size: .9rem;"> Cliquez sur l'image pour l'agrandir </span></p>
+<h3 style="margin: 46px 0 12px; padding: 10px 14px; font-size: 1.08rem; font-weight: bold; color: #356fae; line-height: 1.35; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff;">Mettre en place l'espace de développement</h3>
+<p style="line-height: 1.72; margin: .6rem 0;">Pour commencer un nouveau projet (workspace) C++, dézippez l'archive <em>workspace-cplusplus</em> dans un dossier dont le chemin ne contient ni caractère accentué ni espace (voir <strong>B</strong> dans l'image ci-dessus - par exemple <em>c:\Developpement</em>).</p>
+<h3 style="margin: 46px 0 12px; padding: 10px 14px; font-size: 1.08rem; font-weight: bold; color: #356fae; line-height: 1.35; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff;">Ouvrir l'espace de développement</h3>
+<p style="line-height: 1.72; margin: .6rem 0;">Lancez Visual Studio Code à partir du raccourci <em>VSCode pour C++</em> présent sur votre bureau puis ouvrez le workspace que vous avez précédemment dézippé.</p>
+<p style="line-height: 1.72; margin: .6rem 0;">Pour cela, rendez-vous dans le menu <em>Fichier → Ouvrir l'espace de travail</em> (ou <em>Open workspace</em> si votre interface est en anglais) et sélectionnez le fichier <em>workspace-cplusplus.code-workspace</em> (qui peut simplement apparaître sous le nom <em>workspace-cplusplus</em> si votre explorateur windows masque les extensions de fichiers).</p>
+<h3 style="margin: 46px 0 12px; padding: 10px 14px; font-size: 1.08rem; font-weight: bold; color: #356fae; line-height: 1.35; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff;">Faire une première compilation</h3>
+<p style="line-height: 1.72; margin: .6rem 0;">Une fois le worspace ouvert, utilisez l'explorateur situé sur la zone gauche de Visual Studio Code pour ouvrir le fichier <em>main.cpp</em> situé dans le dossier <em>hello-world</em> (<strong>D</strong> dans l'image ci-dessus). Le code d'un programme <em>hello-world</em> s'affiche alors dans Visual Studio Code.</p>
+<p style="line-height: 1.72; margin: .6rem 0;">Utilisez le raccourci clavier <strong style="color: #16a34a;">CTRL + MAJ + B</strong> pour lancer une opération de compilation. Vérifiez qu'un terminal s'ouvre et présente le résultat de la compilation au bas de l'interface de Visual Studio Code (<strong>E</strong> dans l'image ci-dessus)</p>
+<h3 style="margin: 46px 0 12px; padding: 10px 14px; font-size: 1.08rem; font-weight: bold; color: #356fae; line-height: 1.35; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff;">Exécuter le programme</h3>
+<p style="line-height: 1.72; margin: .6rem 0;">Appuyez sur le bouton <em>Play</em> situé en haut à droite de l'interface de Visual Studio Code (<strong>F</strong> dans l'image ci-dessus) et vérifiez qu'une nouvelle fenêtre de terminal s'ouvre (<strong>G</strong> dans l'image ci-dessus) pour présenter le résultat de l'exécution (affichage du message <em>Hello world!</em>).</p>
+<p style="line-height: 1.72; margin: .6rem 0;">Si vous êtes arrivé jusqu'à cette étape vous disposez maintenant d'un environnement de développement fonctionnel vous permettant d'écrire des programmes C++ à l'aide de Visual Studio Code, de générer de la documentation technique et éventuellement de versionner le code sur Github si vous avez rempli les pré-requis listés en haut de ce document. 😄</p>
+<h3 style="margin: 46px 0 12px; padding: 10px 14px; font-size: 1.08rem; font-weight: bold; color: #356fae; line-height: 1.35; border-left: 5px solid #6e9fe6; border-radius: 0 10px 10px 0; background: #f7faff;">Aller plus loin</h3>
+<p style="line-height: 1.72; margin: .6rem 0;">A partir de l'espace de travail que vous avez mis en place vous pouvez écrire de nouveaux programmes C++ en respectant la règle suivante : <em>Tout programme doit se trouver dans un dossier du workspace qui lui est dédié</em>.</p>
+<p style="line-height: 1.72; margin: .6rem 0;">Autrement dit, vous ne devez pas avoir plusieurs fichiers contenant l'extrait de code <code style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace; background: #f1f5f9; border: 1px solid #dbe4ef; padding: .12rem .35rem; border-radius: 6px;">int
+        main (void)</code> dans un même dossier.</p>
+<p style="line-height: 1.72; margin: .6rem 0;">Si vous voulez écrire un nouveau programme <em>dans ce workspace</em> :</p>
+<ul data-bullets="square" style="margin: .4rem 0 .9rem 0; padding-left: .6rem; display: grid; row-gap: .6rem;">
+<li>créez un nouveau dossier avec un nom sans caractère accentué ni espace, soit avec Visual Studio Code soit avec votre explorateur windows ;</li>
+<li>au sein de ce dossier créez un nouveau fichier <em>main.cpp</em> puis commencez à écrire votre programme.</li>
+</ul>
+<div style="border: 1px solid #fed7aa; border-radius: 14px; padding: 14px 16px; background: #fff7ed; margin: 20px 0; box-shadow: inset 6px 0 0 #f97316, 0 6px 16px rgba(51,65,85,.05);">
+<p style="margin: 0 0 6px; line-height: 1.6;"><span style="font-weight: 600; color: #c2410c;">⚠️ Important :</span> Rappelez-vous que, dès lors que vous voulez écrire du code C++ via cette installation personnalisée de Visual Studio Code, vous devez :</p>
+<ul data-bullets="square" style="margin: .35rem 0 0; padding-left: .6rem;">
+<li style="list-style: none; margin: .3rem 0;">ouvrir Visual Studio Code via le raccourci de bureau <em>VSCode pour C++</em> fourni avec cette installation ;</li>
+<li style="list-style: none; margin: .3rem 0;">toujours ouvrir un espace de travail (désigné ici par le fichier <em>workspace-cplusplus.code-workspace</em>). Si vous ouvrez directement un fichier C++ ou un dossier C++ à la place d'un workspace vous n'aurez pas accès aux commandes de compilation et à certaines autres fonctionnalités.</li>
+</ul>
+</div>
+<p style="line-height: 1.72; margin: .6rem 0;">Maintenant c'est à vous de jouer : Bon travail de programmation !</p>
+<p style="margin: 0 0 24px;"></p>
+</div>
+</div>
+<!-- ===== Lightbox de l'image ===== -->
+<div aria-label="Agrandissement de l'image" aria-modal="true" id="vscode-lightbox" role="dialog" style="display: none; position: fixed; inset: 0; z-index: 99999; align-items: center; justify-content: center; padding: 24px; background: rgba(15,23,42,.88); cursor: zoom-out;"> <img alt="Visual Studio Code configuré pour le développement C++" class="img-fluid" id="vscode-lightbox-image" src="https://patrick-etcheverry.github.io/r1.01-initiation-au-developpement/travaux-pratiques/config-vscode-machine-perso/images/premiers-pas.png" style="display: block; max-width: 96vw; max-height: 92vh; width: auto; height: auto; border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,.45); cursor: default;"/></div>
+<!-- ===== JS inline : puces carrées ===== -->
+<p>
+
+</p>
+<!-- ===== JS inline : lightbox ===== -->
+<p>
+
+</p></div></div></div>
+    </div>
+  </div>
+</body>
+</html>

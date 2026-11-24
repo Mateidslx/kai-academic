@@ -1,0 +1,2634 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Présentation</title>
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+	<link rel="stylesheet" href="css/mon-css.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/stackoverflow-light.css">
+</head>
+
+<body>
+	<div class="reveal">
+
+		<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en haut -->
+		<div class="menubar">
+			<ul class="menu"></ul>
+		</div>
+
+		<div class="slides">
+<section data-menu-title="Page de titre">
+    <div class="card shadow-lg" style="border-radius: 15px; margin-top: 40px;">
+        <div class="card-body p-5" style="margin-top: -35px; margin-bottom: -35px;">
+            <h3 class="text-primary">Analyse et spécification d'un problème algorithmique</h3>
+            <p class="text-muted" style="text-align: center !important;">
+                R1.01 - Initiation au développement
+            </p>
+        </div>
+    </div>
+
+    <div class="image" style="margin-top: 30px; margin-bottom: -80px;">
+        <img src="presentation/images/logo-iut.gif" class="img-fluid" width="18%">
+    </div>
+
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 text-left" style="border:none">
+            <div class="d-flex align-items-center">
+                <div class="image" style="padding-top:15px;">
+                    <img src="presentation/images/patrick_etcheverry.jpg" class="img-fluid rounded-circle" width="100">
+                </div>
+                <div class="ml-3 w-100" style="font-size:small;">
+                    <p class="mb-0 mt-0" style="font-size:medium">
+                        Patrick Etcheverry
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-university"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr">
+                            IUT de Bayonne - Département informatique
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="far fa-envelope"></i>&nbsp;
+                        <a href="mailto:patrick.etcheverry@iutbayonne.univ-pau.fr">
+                            patrick.etcheverry@iutbayonne.univ-pau.fr
+                        </a>
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fas fa-home"></i>&nbsp;
+                        <a href="https://www.iutbayonne.univ-pau.fr/~etchever">
+                            www.iutbayonne.univ-pau.fr/~etchever
+                        </a>
+
+                    </p>
+                    <p class="mb-0 mt-1">
+                        <i class="fab fa-github"></i>&nbsp;
+                        <a href="https://github.com/patrick-etcheverry">
+                            https://github.com/patrick-etcheverry
+                        </a>
+
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section data-menu-title="Plan" data-menu-title="Plan" data-transition="convex">
+
+
+  <section>
+
+    <h4><i class="fas fa-bookmark"></i> &nbsp; Plan du cours</h4>
+
+    <br />
+    <div style="font-size: 70%;">
+
+      <div class="table-responsive">
+        <table class="table table-borderless table-light">
+          <tbody style="color: rgb(144, 144, 144);">
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Introduction
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">3</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Spécifications externes : Principes
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">9</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Spécifications externes : Exemple
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">15</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Définitions
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">22</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Spécifications internes : Principes
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">36</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: none;">
+                <i class="fas fa-cube"></i> &nbsp;
+                Spécifications internes : Exemple
+              </td>
+              <td style="border: none;">
+                <span class="badge badge-primary">60</span>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================== -->
+
+
+
+</section><section>
+
+    <!-- 
+    l'attribut "id" de section implante les liens du menu du haut  
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Introduction" data-transition="convex">
+        <h1>Introduction</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>De l'importance de la phase d'analyse...</h4>
+
+        <br />
+        <div style="font-size: 70%;">
+            <p>Avant d’élaborer un programme, il est primordial de <strong>bien cerner les
+                    propriétés du problème</strong> à résoudre.</p>
+
+            <ul>
+                <li class="fragment fade-right">Sans cette phase d’analyse, la solution a peu de chance de répondre
+                    parfaitement au problème de départ.</li>
+
+                <li class="fragment fade-right">D'autre part, certaines propriétés du problème, si elles sont
+                    identifiées
+                    suffisamment tôt, peuvent parfois être exploitées pour élaborer des
+                    solutions plus simples et/ou plus efficaces... </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Paroles d'experts...</h4>
+
+        <div class="row">
+            <div class="col-md-6" style="font-size: 70%;">
+                <!-- colonne de gauche -->
+
+                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                    <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i>
+                    </div>
+                    <p class="mb-0 mt-2 font-italic" style="font-size: 93%;">
+                        <img class="img-fluid rounded-circle float-left"
+                            data-src="presentation/images/albert_einstein.jpg" width="100" style="padding-right: 10px;">
+                        "Si j'avais une heure pour résoudre un problème,
+                        je prendrais 55 minutes à réfléchir au problème
+                        et 5 minutes à penser aux solutions."
+                    </p>
+                    <footer class="blockquote-footer pt-4 mt-4 border-top">
+                        <span style="font-size: 90%;">Attribué à Albert Einstein</span>
+                        <cite title="Source Title" style="font-size: 90%;"></cite>
+                    </footer>
+                </blockquote>
+
+
+            </div>
+            <div class="col-md-6">
+                <!-- colonne de droite -->
+
+                <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                    <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i>
+                    </div>
+                    <p class="mb-0 mt-2 font-italic" style="font-size: 93%;">
+                        <img class="img-fluid rounded-circle float-left"
+                            data-src="presentation/images/jacques_arsac.jpg" width="90" style="padding-right: 10px;">
+                        "Il faut définir le problème aussi complètement
+                        que possible avant de réfléchir à une quelconque
+                        solution."
+                    </p>
+                    <footer class="blockquote-footer pt-4 mt-4 border-top">
+                        <span style="font-size: 90%;">Jacques Arsac,</span>
+                        <cite title="Source Title" style="font-size: 90%;">Préceptes pour programmer, Dunod, 1991</cite>
+                    </footer>
+                </blockquote>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>De l'importance de la phase de spécification...</h4>
+
+        <div style="font-size: 65%;">
+            <p style="margin-top: -7px;">Savoir <strong>spécifier</strong> <span class="text-warning">précisément</span> un problème, un besoin, une solution est essentiel pour pouvoir échanger avec :</p>
+
+            <ul>
+                <li style="margin-top: -14px;">un co-équipier</li>
+                <li style="margin-top: -10px;">un chef de projet</li>
+                <li style="margin-top: -10px;">un client</li>
+                <li style="margin-top: -10px;" class="fragment fade-right" data-fragment-index="2">mais aussi une
+                    intelligence artificielle...</li>
+            </ul>
+
+
+            <div class="fragment fade-right" data-fragment-index="2">
+                <iframe
+                    src="https://mediakiosque.univ-pau.fr/video/15932-specifier-du-code-avec-une-ia/d0e23e08-bb35-4f98-80e6-a2c2b8d9bbb9/?is_iframe=true"
+                    width="512" height="288" style="padding: 0; margin: 0; border:0" allowfullscreen
+                    title="Spécifier du code avec une IA"></iframe>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    <!-- ====================================================================== -->
+
+
+
+
+
+
+
+    <section>
+
+        <h4>Caractéristiques des problèmes algorithmiques</h4>
+
+        <div style="font-size: 70%;">
+            <p>Les problèmes traités en algorithmique sont ciblés et se limitent
+                souvent à répondre à un objectif unique :
+            <ul>
+                <li>rechercher un élément dans un tableau,</li>
+                <li>trier un fichier par ordre alphabétique, </li>
+                <li>compter le nombre d'éléments enregistrés dans une liste, </li>
+                <li>...</li>
+            </ul>
+            </p>
+            <p>Bien que souvent restreints, certains problèmes algorithmiques peuvent se révéler très complexes à
+                résoudre... </p>
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+    <section>
+
+        <h4>Analyser et spécifier les caractéristiques d'un problème algorithmique</h4>
+
+        <br />
+        <div style="font-size: 70%;">
+            <p>Pour analyser, identifier et spécifier les caractéristiques du problème à résoudre, une approche
+                consiste à établir successivement :
+            </p>
+            <ul>
+                <li>les spécifications <span class="text-primary">externes</span> du problème ;</li>
+                <li>les spécifications <span class="text-primary">internes</span> du problème.</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+
+
+</section><section name="Spécifs externes: Principe">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+
+    <section data-menu-title="Spécifs externes : Principe" data-transition="convex">
+        <h1>Spécifications externes : Principe</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Spécifications externes : De quoi s'agit-il ?</h4>
+
+        <ul style="font-size: 80%;">
+            <li>Les spécifications externes d'un programme visent à <strong>définir
+                    ce que le programme doit faire</strong> par rapport à l'utilisateur.</li>
+
+            <li>Il s'agit de décrire <span class="font-weight-bold">le quoi</span> et non le comment<sup>[1]</sup>.</li>
+
+        </ul>
+
+        <br/>
+        <div class="card border-primary mb-3 fragment">
+            <div class="card-body text-primary">
+                <p class="card-text text-primary" style="font-size: 80%; margin-top: -10px;">
+                    <i class="fas fa-flag-checkered"></i>
+                    <strong>Objectif :</strong> Spécifier clairement tous les "non-dits".
+                </p>
+            </div>
+        </div>
+
+        <div style="font-size: 50%; padding-top: 40px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> Le "comment" sera décrit par un algorithme. <br />
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <!-- <section>
+        <h4>Comment élaborer des spécifications externes ?</h4>
+
+
+        <div style="font-size: 80%; padding-top: 10px;">
+            <p>
+                Dans ce cours, nous définirons les spécifications
+                externes d'un programme en élaborant <strong>des jeux d'essais qui décriront le
+                    comportement du programme dans diverses situations</strong>.
+            </p>
+
+            <br />
+
+            <p class="fragment">
+                Ces mêmes jeux d'essai serviront ensuite de <strong>données de test</strong> pour vérifier
+                sur machine que le programme élaboré répond bien au problème de
+                départ.
+            </p>
+        </div>
+
+    </section> -->
+
+
+
+    <!-- ====================================================================== -->
+
+    <!-- <section>
+        <h4>Spécifications externes : Définition de jeux de tests</h4>
+
+
+        <div style="font-size: 70%; padding-top: 10px;">
+            <p>
+                Pour décrire le comportement du programme, il s'agira d'élaborer des jeux de tests
+                qui s'inspireront des tests unitaires de type <strong>boı̂te noire.</strong>
+            </p>
+
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 90%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/john_watkins.jpg"
+                        width="100" style="padding-right: 20px;">
+                    "Les tests boı̂te noire visent à concevoir des jeux
+                    d'essais en se fondant sur le
+                    <span class="fragment highlight-current-blue" data-fragment-index="1">fonctionnement externe</span>
+                    du système.
+
+                    Ces tests définissent des jeux de
+                    <span class="fragment highlight-current-blue" data-fragment-index="2">données</span>
+                    en entrée du traitement à tester ainsi que les
+                    <span class="fragment highlight-current-blue" data-fragment-index="2">résultats</span>
+                    attendus en fin de traitement."
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top">
+                    John Watkins
+                    <cite title="Source Title"> - Test logiciel en pratique - Vuibert informatique, 2002</cite>
+                </footer>
+            </blockquote>
+
+        </div>
+
+    </section> -->
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Spécifications externes : Étape 1</h4>
+
+
+        <div style="font-size: 70%; padding-top: 10px;">
+            <p>On spécifie les différents comportements possibles du programme :</p>
+            <ul>
+                <li>comportement idéal<sup>[1]</sup></li>
+                <li>comportements particuliers<sup>[2]</sup></li>
+                <li>comportements en cas d'erreur<sup>[3]</sup></li>
+            </ul>
+        </div>
+
+        <div style="font-size: 40%; padding-top: 40px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> on parlera de <strong>scénario nominal</strong> <br />
+            <span style="color: #35a3e5">[2]</span> on parlera de <strong>scénarios alternatifs</strong> <br />
+            <span style="color: #35a3e5">[3]</span> on parlera de <strong>scénarios d'exception</strong> <br />
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Spécifications externes : Étape 2</h4>
+
+        <div style="font-size: 65%; padding-top: 10px; padding-bottom: 10px;">
+            <p>Pour <u>chaque</u> comportement précédemment identifié, on élaborera un jeu d'essai mettant en évidence :
+            </p>
+            <ul>
+                <li style="margin-top: -5px;"><strong>ce que voit l'utilisateur</strong> à l'écran (sous forme d'un
+                    croquis) ;</li>
+                <li style="margin-top: -5px;">les informations en <strong>donnée</strong> du programme ;</li>
+                <li style="margin-top: -5px;">les <strong>résultats</strong> attendus par rapport aux données entrées ;
+                </li>
+                <li style="margin-top: -5px;">les <strong>propriétés</strong> discutables et retenues sur les
+                    informations
+                    utilisées en données et/ou en résultats.</li>
+            </ul>
+        </div>
+
+        <div class="card border-primary fragment">
+            <div class="card-body text-primary">
+                <p class="card-text text-primary" style="font-size: 70%; margin-top: -10px;">
+                    Ce travail va soulever des questions sur le programme à réaliser :
+                    les réponses possibles devront être discutées
+                    et les réponses retenues contribueront à clarifier le travail à réaliser
+                    <i class="far fa-thumbs-up"></i>
+                </p>
+            </div>
+        </div>
+
+
+
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+</section><section name="Spécifs externes : exemple">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+    <section data-menu-title="Spécifs externes : Exemple"  data-transition="convex">
+        <h1>Spécifications externes : Exemple</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Problème de départ et objectif</h4>
+
+        <div style="font-size: 80%; padding-top: 10px;">
+            <p>
+                Élaborer un programme permettant de convertir en dollars
+                une somme de départ exprimée en euros...
+            </p>
+
+
+            <div class="fragment">
+                <p>
+                    Rappels :
+                <ul>
+                    <li>l'objectif des spécifications externes est de
+                        <strong>clarifier les caractéristiques</strong> du programme à élaborer.
+                    </li>
+                    <li>
+                        le moyen d'y parvenir consiste à élaborer un ou plusieurs <strong>jeux d'essais</strong>
+                        décrivant le comportement de ce programme...
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 1 : Identifier les scénarios possibles...</h4>
+
+        <div style="font-size: 80%; padding-top: 10px;">
+            <p>
+                Pour cet exemple, on pourrait considérer trois scénarios :
+            <ul>
+                <li><strong>Scénario nominal</strong> (cas le plus fréquent) : le programme parvient à réaliser
+                    la conversion euros &#8594; dollars ; </li>
+
+                <li><strong>Scénario alternatif</strong> (cas particulier) : l'utilisateur souhaite convertir une somme de... 0 € ; </li>
+
+                <li><strong>Scénario d'exception</strong> (cas d'erreur) : le programme ne peut pas réaliser la conversion à cause
+                    d'une erreur de saisie de la part de l'utilisateur.</li>
+            </ul>
+            </p>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Etape 2 : Élaborer un jeu d'essai pour chaque scénario identifié (1/3)</h4>
+
+        <div style="font-size: 60%; font-weight: bold;">
+            Scénario nominal
+            (comportement le plus fréquent)
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="fragment">
+                    <span class="text-info" style="font-size: 50%;">Ce que voit l'utilisateur :</span>
+                    <div style="font-size: 50%; text-align: center;">
+
+                        <img src="presentation/images/scenar-nominal.svg" alt="Scénario nominal" />
+                    </div>
+                </div>
+                <div class="fragment" style="font-size: 50%;">
+                    <span class="text-info">Données et résultats pour ce jeu d'essai : </span><br />
+                    <ul>
+                        <li>Donnée : 12.99</li>
+                        <li style="margin-top: -10px;">Résultat attendu : 16.89</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <span class="text-info fragment" style="font-size: 50%;">Propriétés mises en évidence sur ce jeu d'essai
+                    :</span>
+                <ul style="font-size: 50%;">
+                    <li class="fragment" style="margin-top: 15px;">La valeur du taux de conversion euros &#8594; dollars
+                        est intégrée au
+                        programme (elle ne sera pas saisie).</li>
+                    <li class="fragment" style="margin-top: 15px;">le résultat de la conversion aura une précision de 2
+                        chiffres après la
+                        virgule.</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Etape 2 : Élaborer un jeu d'essai pour chaque scénario identifié (2/3)</h4>
+
+        <div style="font-size: 65%; font-weight: bold;">
+            Scénario alternatif
+            (comportements moins fréquent / cas particuliers)
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="fragment">
+                    <span class="text-info" style="font-size: 56%;">Ce que voit l'utilisateur :</span>
+                    <div style="font-size: 56%; text-align: center;">
+
+                        <img src="presentation/images/scenar-alternatif.svg" alt="Scénario alternatif" />
+                    </div>
+                </div>
+                <div class="fragment" style="font-size: 56%;">
+                    <span class="text-info">Données et résultats pour ce jeu d'essai : </span><br />
+                    <ul>
+                        <li>Donnée : 0</li>
+                        <li style="margin-top: -10px;">Résultat attendu : 0</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <span class="text-info fragment" style="font-size: 56%;">
+                    <p>Nouvelles propriétés mises en évidence par ce jeu d'essai : </p>
+                </span>
+                <ul style="font-size: 56%;">
+                    <li class="fragment">Une somme de départ égale à 0 n'est pas considéré comme un cas d'erreur ;</li>
+                    <li class="fragment" style="margin-top: 15px;">Dans ce cas particulier, le programme pourrait se
+                        dispenser du calcul de conversion (&#8594; piste éventuelle pour optimiser le programme ?).
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Etape 2 : Élaborer un jeu d'essai pour chaque scénario identifié (3/3)</h4>
+
+        <div style="font-size: 63%; font-weight: bold;">
+            Scénario d'exception
+            (comportement du programme en cas d'erreur)
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="fragment">
+                    <span class="text-info" style="font-size: 55%;">Ce que voit l'utilisateur :</span>
+                    <div style="font-size: 55%; text-align: center;">
+
+                        <img src="presentation/images/scenar-exception.svg" alt="Scénario d'exception" />
+                    </div>
+                </div>
+                <div class="fragment" style="font-size: 55%;">
+                    <span class="text-info">Données et résultats pour ce jeu d'essai : </span><br />
+                    <ul>
+                        <li>Donnée : -100</li>
+                        <li style="margin-top: -10px;">Résultat attendu :
+                            Le message d'erreur "Erreur de saisie. Conversion impossible."</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <span class="text-info fragment" style="font-size: 55%;">
+                    <p>Nouvelles propriétés mises en évidence par ce jeu d'essai : </p>
+                </span>
+                <ul style="font-size: 55%;">
+                    <li class="fragment">Une erreur de saisie ne doit pas faire "planter" le programme ;</li>
+                    <li class="fragment" style="margin-top: 15px;">Le message d'erreur affiché reste général,
+                        il ne précise pas la nature de l'erreur (ici saisie d'un nombre négatif).
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h4>Un mot sur la gestion des cas d'erreur...</h4>
+
+        <div style="font-size: 70%; padding-top: 10px;">
+            <ul>
+                <li>La conception de tout programme informatique <strong>doit</strong> tenir compte des cas
+                    d'erreurs qui peuvent survenir ;</li>
+                <li>Cet aspect est particulièrement important lorsque l'utilisateur peut
+                    introduire des données dans le programme ;<sup>[1]</sup></li>
+            </ul>
+
+            <div style="padding-top: 20px;">
+                <div class="card border-primary mb-3" >
+                    <div class="card-body text-primary">
+                        <p class="card-text text-primary" style="font-size: 80%; margin-top: -10px;">
+                            <u>Pour le moment</u>, <strong>nous ne décrirons pas les cas d'erreurs</strong>, lorsque nous
+                            établirons les spécifications externes d'un programme.
+                            La prise en compte des erreurs sera abordée lorsque vous travaillerez sur
+                            les techniques de gestion des erreurs.<sup>[2]</sup>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-size: 60%; padding-top: 40px ; text-align: left;">
+                <hr />
+                <span style="color: #35a3e5">[1]</span> <span class="font-italic">Never Trust User Input</span> : Arsac,
+                J. - Préceptes pour programmer - Dunod, 1991 <br />
+                <span style="color: #35a3e5">[2]</span> Semestre 2 :  R2.03 - Qualité de développement. <br />
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+
+
+</section>
+<section name="Définitions">
+    <!-- 
+    l'attribut "id" de section implante les liens du menu du haut  
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+    <section data-menu-title="Définitions" data-transition="convex">
+        <h1>Définitions</h1>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Quel est le point commun entre ces programmes ?</h4>
+
+        <div class="text-center" style="margin-top: -20px;">
+            <img src="presentation/images/exemples_programmes_v1.png" class="figure-img img-fluid rounded">
+        </div>
+
+        <div style="font-size: 80%; margin-top: -55px;">
+            <p class="fragment text-primary">
+                Pour répondre à la question, il faut revenir à la base : <br />
+                <strong>Qu'est-ce que l'informatique ?</strong>
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Qu'est-ce que l'informatique ?</h4>
+        <p style="font-size: 70%;"> <strong>Historique et définition</strong> </p>
+
+
+        <div class="row">
+            <div class="col-md-10" style="font-size: 70%;">
+                <ul>
+                    <li>Le terme informatique désigne littéralement l'<strong>automatisation</strong> du traitement
+                        de l'<strong>information</strong> par ordinateur. </li>
+
+                    <li class="fragment" data-fragment-index="1">Il a été créé en 1962 par Philippe Dreyfus à partir des
+                        mots <strong>«&nbsp;information&nbsp;»</strong> et
+                        <strong>«&nbsp;automatique&nbsp;»</strong>.
+                    </li>
+
+                    <li class="fragment" data-fragment-index="2">Le terme a été accepté par l'Academie francaise en
+                        1966, et l’informatique devint alors
+                        officiellement
+                        <strong class="text-primary">la science du traitement automatique de l'information</strong>.
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <img class="fragment rounded-circle" data-fragment-index="1" width="200px"
+                    style="margin-top: 110px; margin-left: -70px;" src="presentation/images/philippe_dreyfus.jpg">
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Qu'est-ce qui caractérise un programmme informatique ?</h4>
+
+
+
+        <p style="font-size: 70%; margin-top: 25px; font-weight: bold;">
+            L'informatique est la science du
+            <span class="fragment highlight-current-blue" data-fragment-index="2">traitement</span>
+            <span class="fragment highlight-current-blue" data-fragment-index="1">automatique</span>
+            de l'<span class="fragment highlight-current-blue" data-fragment-index="2">information</span>...
+        </p>
+
+
+        <div style="font-size: 70%; padding-bottom: 35px;">
+            <ul>
+                <li class="fragment" data-fragment-index="1">
+                    L'automatisation va être mise en œuvre par un ordinateur qui va exécuter un programme.
+                </li>
+
+                <li class="fragment" data-fragment-index="2" style="margin-top: -5px;">
+                    Ce programme va traiter de l'information.</li>
+            </ul>
+        </div>
+
+
+        <div class="card border-primary mb-3 fragment" data-fragment-index="3">
+            <div class="card-body text-primary">
+                <p class="card-text text-primary" style="font-size: 70%; margin-top: -10px;">
+                    <i class="fas fa-long-arrow-alt-right"></i> Autrement dit : Tout programme, quel que soit le langage
+                    utilisé, est composé d'<strong>informations</strong> de
+                    <strong>traitements</strong> !
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Quel est le point commun entre ces programmes ?</h4>
+
+        <div class="text-center" style="margin-top: -20px;">
+
+            <div class="r-stack">
+                <img class="fragment fade-out" data-fragment-index="0"
+                    src="presentation/images/exemples_programmes_v1.png" width="90%">
+                <img class="fragment current-visible" data-fragment-index="0"
+                    src="presentation/images/exemples_programmes_v2.png">
+            </div>
+        </div>
+
+        <div style="font-size: 80%; margin-top: -15px;">
+            <p class="fragment text-primary text-center" data-fragment-index="0">
+                Tous ces programmes sont composés d'informations et de traitements !
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+    <section>
+
+        <h4>Quelles conséquences pour un programmeur ?</h4>
+
+        <div style="font-size: 70%; padding-top: 10px; padding-bottom: 20px;">
+            <p>
+                Puisque tout programme est composé d'informations et de traitements, un
+                «&nbsp;bon programmeur&nbsp;» doit <strong>savoir identifier et structurer</strong> :
+            </p>
+            <ul>
+                <li>les <strong>informations</strong> qui seront manipulées dans son programme&nbsp;;
+                </li>
+                <li>
+                    les <strong>traitements</strong> à mettre en place pour traiter ces informations.
+                </li>
+            </ul>
+        </div>
+        <div class="card border-danger mb-3 fragment">
+            <div class="card-body text-danger">
+                <p class="card-text text-danger" style="font-size: 60%; margin-top: -10px;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Il est important d'avoir des repères méthodologiques pour identifier les informations à gérer ainsi
+                    que les traitements à mettre en place, en particulier lorsque la complexité du problème à résoudre
+                    augmente...
+                    <br /><br />
+                    <i class="far fa-arrow-alt-circle-right"></i>
+                    L'élaboration des <strong>spécifications internes</strong> du problème peut vous aider à surmonter
+                    ces
+                    difficultés.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <!-- <section>
+        <h4>Rappel...</h4>
+
+
+        <div style="font-size: 85%; padding-top: 10px;">
+            <p>
+                Un programme est composé de <strong>traitements</strong>
+                et d'<strong>informations</strong>.
+            </p>
+
+            <ul class="fragment">
+                <li>Qu'est-ce qu'un traitement ?</li>
+                <li>Qu'est-ce qu'une information ?</li>
+            </ul>
+        </div>
+
+    </section>
+ -->
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Notion de <strong>traitement</strong></h4>
+
+        <div style="font-size: 80%; padding-top: 10px;">
+
+            <div class="card border-primary mb-4">
+                <div class="card-body text-muted bg-secondary">
+                    <h5 class="card-title">
+                        <i class="fas fa-book-reader"></i>
+                        &nbsp;Définition
+                    </h5>
+                    <p class="card-text">
+                        <strong>
+                            Un <span class="text-info">traitement</span> est une opération (calcul, saisie,
+                            affichage...)
+                            manipulant une ou plusieurs <span class="text-success">informations</span>.
+                        </strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="fragment" style="font-size: 80%; padding-top: 10px;">
+                Exemples de traitements :
+                <ul style="padding-top: 20px;">
+                    <li>
+                        <span class="text-info font-weight-bold" style="padding-top: 20px;">Saisir</span>
+                        au clavier l'<span class="text-success font-weight-bold">identifiant</span> et le
+                        <span class="text-success font-weight-bold">mot de passe</span> d'un utilisateur
+                    </li>
+
+                    <li><span class="text-info font-weight-bold">Afficher</span>
+                        à l'écran le <span class="text-success">nom</span> d'un client</li>
+
+                    <li><span class="text-info font-weight-bold">Calculer</span>
+                        la <span class="text-success font-weight-bold">moyenne</span> d'un étudiant</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Notion d'<strong>information</strong></h4>
+
+        <div style="font-size: 80%; padding-top: 10px;">
+
+            <div class="card border-primary mb-4">
+                <div class="card-body text-muted bg-secondary">
+                    <h5 class="card-title">
+                        <i class="fas fa-book-reader"></i>
+                        &nbsp;Définition
+                    </h5>
+                    <p class="card-text">
+                        <strong>
+                            Une <span class="text-primary">information</span> est une valeur jouant un
+                            rôle dans un traitement.
+                        </strong>
+                        <br /><br />
+                        Pour un traitement donné, une information peut jouer le <strong>rôle</strong> :
+                    <ul>
+                        <li style="margin-top:-5px;">de <span class="text-info">donnée</span> ;</li>
+                        <li style="margin-top:-5px;">de <span class="text-success">résultat</span> ;</li>
+                        <li style="margin-top:-5px;">de <span class="text-info">donnée</span>
+                            ET de <span class="text-success">résultat</span>.</li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Notion de <strong>donnée</strong></h4>
+
+        <div style="font-size: 80%; padding-top: 10px;">
+            <div class="card border-primary mb-4">
+                <div class="card-body text-muted bg-secondary">
+                    <h5 class="card-title">
+                        <i class="fas fa-book-reader"></i>
+                        &nbsp;Définition
+                    </h5>
+                    <p class="card-text">
+                        <strong>
+                            Une <span class="text-primary">donnée</span> est une information nécessaire pour
+                            pouvoir exécuter un traitement.
+                        </strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fragment" style="font-size: 70%; padding-top: 10px;">
+            <p>Exemple:</p>
+            <p>
+                Pour mettre en place un <strong>traitement</strong> visant à
+                <span class="text-info">calculer le périmètre d'un cercle</span>,
+                il faut connaître le <span class="text-success">rayon</span>
+                de ce cercle.
+            </p>
+            <p>
+                <i class="fas fa-long-arrow-alt-right"></i> L'<strong>information</strong>
+                <span class="text-success">rayon</span> joue donc le rôle de
+                <span class="text-primary">donnée</span> pour le <strong>traitement</strong>
+                <span class="text-info">calculer le périmètre d'un cercle</span>.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Notion de <strong>résultat</strong></h4>
+
+        <div style="font-size: 80%; padding-top: 10px;">
+            <div class="card border-primary mb-4">
+                <div class="card-body text-muted bg-secondary">
+                    <h5 class="card-title">
+                        <i class="fas fa-book-reader"></i>
+                        &nbsp;Définition
+                    </h5>
+                    <p class="card-text">
+                        <strong>
+                            Un <span class="text-primary">résultat</span> est une information
+                            qui est produite, calculée ou modifiée par un traitement.
+                        </strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fragment" style="font-size: 70%; padding-top: 10px;">
+            <p>Exemple:</p>
+            <p>
+                Le <strong>traitement</strong> visant à
+                <span class="text-info">calculer le périmètre d'un cercle</span>,
+                calcule une nouvelle information qui est le
+                <span class="text-success">périmètre</span>
+                du cercle.
+            </p>
+            <p>
+                <i class="fas fa-long-arrow-alt-right"></i> L'<strong>information</strong>
+                <span class="text-success">périmètre</span> joue donc le rôle de
+                <span class="text-primary">résultat</span> pour le <strong>traitement</strong>
+                <span class="text-info">calculer le périmètre d'un cercle</span>.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Statut de donnée/résultat</h4>
+
+        <div style="font-size: 80%; padding-top: 10px;">
+            <div class="card border-danger mb-4">
+                <div class="card-body text-muted bg-secondary">
+                    <h5 class="card-title text-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        &nbsp;Attention
+                    </h5>
+                    <p class="card-text">
+                        <strong>
+                            Le statut de donnée / résultat d'une information n'est pas absolu :
+                            Ce statut est toujours <u>spécifique à un traitement</u>.
+                        </strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Statut de donnée/résultat : Exemple</h4>
+
+        <p style="font-size: 70%; padding-top: 10px;">
+            Statut des différentes informations dans le programme calculant le périmètre d'un cercle...
+        </p>
+
+        <div style="font-size: 65%; padding-top: 10px;">
+
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">Données</th>
+                        <th scope="col">Traitements</th>
+                        <th scope="col">Résultats</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="fragment" data-fragment-index="10">
+                        <td><span class="fragment fade-down" data-fragment-index="11">aucune</span></td>
+                        <td>Saisir le rayon</td>
+                        <td><span class="fragment" data-fragment-index="12">rayon</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="fragment fade-down" data-fragment-index="1">rayon, &#960;</span> </td>
+                        <td>Calculer le périmètre</td>
+                        <td><span class="fragment" data-fragment-index="2">périmètre</span></td>
+                    </tr>
+                    <tr class="fragment" data-fragment-index="20">
+                        <td><span class="fragment fade-down" data-fragment-index="21">périmètre</span></td>
+                        <td>Afficher le périmètre</td>
+                        <td><span class="fragment" data-fragment-index="22">aucun</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="fragment fade-up" data-fragment-index="30" style="font-size: 100%; padding-top: 15px;">
+                <p>
+                    Dans cet exemple, l'information <strong>rayon</strong> a un statut de :
+                <ul>
+                    <li>
+                        <strong>résultat</strong> pour le traitement
+                        <span class="font-italic">Saisir le rayon</span>
+                    </li>
+                    <li>
+                        <strong>donnée</strong> pour le traitement
+                        <span class="font-italic">Calculer le périmètre</span>
+                    </li>
+                </ul>
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Informations et traitements au sein du code</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+
+            <p>Au sein d'un code informatique :</p>
+            <ul style="padding-top: 15px;">
+                <li>une <strong>information</strong> prendra la forme d'une
+                    <strong class="text-primary">variable</strong>
+                    (ou d'une <strong class="text-primary">constante</strong>
+                    si sa valeur est fixe et ne change pas au cours de
+                    l'exécution du code) ;
+                </li>
+                <li class="fragment">
+                    un <strong>traitement</strong> prendra la forme d'un ensemble
+                    de lignes de code qui seront regroupées au sein d'un
+                    <strong class="text-primary">programme principal</strong>,
+                    d'une <strong class="text-primary">procédure</strong>,
+                    d'une <strong class="text-primary">fonction</strong> ou
+                    d'une <strong class="text-primary">méthode</strong>.<sup>[1]</sup>
+                </li>
+            </ul>
+        </div>
+        <div style="font-size: 50%; padding-top: 40px ;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span> Ces notions de programmation
+            seront définies et étudiées progressivement au cours de l'année.
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+
+
+</section><section name="Spécifs internes: Principe">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+    <section data-menu-title="Spécifs internes : Principe" data-transition="convex">
+        <h1>Spécifications internes : Principe</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Spécifications internes : De quoi s'agit-il ?</h4>
+
+        <p style="font-size: 70%;">
+            Puisque tout programme est composé d'informations et de traitements,
+            <strong>les spécifications internes ont pour but de décrire les
+                caractéristiques de ces informations et de ces traitements.</strong>
+        </p>
+
+
+        <div class="card border-primary fragment">
+            <div class="card-body text-primary">
+                <div style="font-size: 70%; padding-top: 0px;">
+                    <strong>
+                        <i class="fas fa-flag-checkered"></i>
+                        Objectifs :
+                    </strong>
+                    <ul>
+                        <li class="">Identifier les <strong>informations</strong> et <strong>traitements</strong>
+                            composant un programme ;</li>
+                        <li class="fragment" style="margin-top: -5px;">Caractériser les <strong>propriétés</strong> de
+                            chaque information / traitement ;</li>
+                        <li class="fragment" style="margin-top: -5px;">Mettre en évidence les <strong>liens</strong>
+                            existants entre informations et traitements.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h1>Spécifier une information...</h1>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Spécifier les propriétés d'une information</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <p>
+                Pour spécifier les propriétés d'une information, on renseignera les éléments suivants :
+            </p>
+            <ul>
+                <li>le <strong>nom</strong> de l'information ;</li>
+                <li>sa <strong>signification</strong> ;</li>
+                <li>son <strong>type</strong> ;</li>
+                <li>son <strong>mode d'initialisation</strong> ;</li>
+                <li>son éventuelle <strong>exportation</strong>.</li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Nommer une information</h4>
+
+        <div style="font-size: 65%; padding-top: 5px;">
+            <p>
+                Le <strong>nom</strong> d'une information est un identifiant choisi arbitrairement et
+                qui doit avoir les propriétés suivantes :
+            </p>
+            <ul>
+                <li style="margin-top:-10px;">
+                    Le nom doit être <u><strong>significatif</strong></u>.<sup>[1]</sup>
+                    Des noms comme <strong class="text-success">rayon-cercle</strong> ou
+                    <strong class="text-success">vitesse-train</strong> sont acceptables mais
+                    <span class="text-danger">x114</span> ou
+                    <span class="text-danger">toto</span> sont à proscrire !
+                </li>
+
+                <li class="fragment" data-fragment-index="2">
+                    Pour des contraintes techniques, le nom de l'information ne doit pas
+                    comporter de caractères accentués et d'espaces. On utilisera
+                    <strong class="text-success">diametre</strong> plutôt que
+                    <span class="text-danger">diamètre</span> ou
+                    <strong class="text-success">tauxHoraire</strong>
+                    à la place de <span class="text-danger">taux horaire</span><sup>[2]</sup> ;
+                </li>
+
+                <li class="fragment" data-fragment-index="3">
+                    le nom choisi est fixé <u><strong>une fois pour toutes</strong></u> : il sera ensuite repris
+                    au niveau des algorithmes et du code.
+                </li>
+            </ul>
+        </div>
+        <div style="font-size: 50%; padding-top: 5px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span>
+            car vos programmes doivent être lisibles ! <br />
+
+            <span class="fragment" data-fragment-index="2">
+                <span style="color: #35a3e5">[2]</span>
+                Des techniques de nommage des
+                informations seront abordées en TP.
+            </span>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Donner la signification d'une information</h4>
+
+        <div style="font-size: 70%; padding-top: 5px;">
+            <ul>
+                <li>La <strong>signification</strong> d'une information est un texte qui
+                    décrit le <strong class="text-primary">rôle</strong>
+                    de l'information.</li>
+
+                <li>Ce texte doit permettre à un autre programmeur de comprendre ce que représente
+                    l'information et quel est son rôle dans le programme.</li>
+            </ul>
+        </div>
+
+        <div class="fragment" style="font-size: 70%; padding-top: 30px;">
+
+            <p><strong class=text-primary>Exemple</strong></p>
+            <p>
+                <strong style="margin-top: 15px;">Nom</strong> : sommeEuros
+            </p>
+            <p>
+                <strong style="margin-top: 15px;">Signification</strong> :
+                La somme en euros qui doit être convertie en dollars.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Prendre de bonnes habitudes dès le départ...</h4>
+
+        <div style="font-size: 60%; padding-top: 5px;">
+            <div class="card border-dark">
+                <div class="card-header text-danger bg-secondary">
+                    <i class="fas fa-exclamation-circle"></i> &nbsp; Important
+                </div>
+                <div class="card-body">
+                    <p class="card-text font-weight-bold" style="margin-top: -10px;">
+                        Bien choisir le nom des informations et décrire avec soin la
+                        signification de chaque information manipulée contribue à
+                        produire des codes plus lisibles !
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fragment fade-down" style="font-size: 90%; padding-top: 5px;">
+            <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="font-size: 64%;">
+                <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                <p class="mb-0 mt-2 font-italic">
+                    <img class="img-fluid rounded-circle float-left" data-src="presentation/images/john_woods.jpg"
+                        width="100" style="margin-right: 15px; margin-top:-2px;">
+                <p> "Always code as if the person who ends up
+                    maintaining your code is a violent psychopath
+                    who knows where you live."
+                </p>
+                </p>
+                <footer class="blockquote-footer pt-4 mt-4 border-top">
+                    John F. Woods -
+                    <cite title="Source Title"> on comp.lang.c++ newsgroup, september 1991</cite>
+                </footer>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Définir le type d'une information</h4>
+
+        <div style="font-size: 70%; padding-top: 5px;">
+            <p> Le <strong>type</strong> d'une information détermine :</p>
+
+            <ul>
+                <li style="margin-top: -5px;">l'ensemble des valeurs que l'information pourra prendre ;</li>
+                <li style="margin-top: -5px;">les opérations autorisées sur cette information.
+            </ul>
+        </div>
+
+        <div class="fragment fade-right" style="font-size: 70%; padding-top: 10px;">
+
+            <p>Dans un premier temps, on ne considérera que les types suivants :</p>
+
+            <table class="table table-hover" style="font-size: 80%;">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Exemples de valeurs</th>
+                        <th scope="col">Codage basique en C++</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nombre entier</td>
+                        <td>-4, 0, 3, 415, 9</td>
+                        <td><span class="text-info">int</span></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre à virgule</td>
+                        <td>-2.14, 3.14, 10.2, 9.0</td>
+                        <td><span class="text-info">float</span></td>
+                    </tr>
+                    <tr>
+                        <td>Caractère</td>
+                        <td>'a', 'b', '!', '+', '9'</td>
+                        <td><span class="text-info">char</span></td>
+                    </tr>
+                    <tr>
+                        <td>Chaîne de caractères</td>
+                        <td>"Bonjour", "au revoir", "a", "9"</td>
+                        <td><span class="text-info">string</span></td>
+                    </tr>
+                    <tr>
+                        <td>Booléen</td>
+                        <td><span class="font-italic">true</span> ou <span class="font-italic">false</span></td>
+                        <td><span class="text-info">bool</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>S'interroger sur le mode d'initialisation </h4>
+
+        <p style="font-size: 67%;">
+            <strong>Le mode d'initialisation décrit comment l'information va acquérir sa
+                première valeur.</strong>
+        </p>
+
+        <div style="font-size: 67%; padding-top: 5px;" class="fragment fade-up">
+            <p>Il n'y a que trois possibilités :</p>
+            <ul>
+                <li>
+                    <strong class="text-primary">Prédéfinie</strong> : la valeur de
+                    l'information est connue <u>avant</u> l'exécution
+                    du programme : <strong>On précisera alors sa valeur</strong>.
+                </li>
+
+                <li class="fragment fade-up">
+                    <strong class="text-primary">Saisie</strong> : la valeur de
+                    l'information est entrée dans le programme au
+                    cours de son exécution (par exemple via une saisie au clavier).
+                    <strong>On précisera alors le nom du traitement qui
+                        réalise la saisie.</strong>
+                </li>
+
+                <li class="fragment fade-up">
+                    <strong class="text-primary">Calculée</strong> : la valeur de
+                    l'information est calculée au cours de l'exécution du programme.
+                    <strong>On précisera alors le nom du traitement qui réalise ce calcul.</strong>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Déterminer si l'information doit être exportée</h4>
+
+        <p style="font-size: 70%;">
+            <strong>
+                Il s'agit de préciser si le programme doit afficher la valeur de
+                l'information sur un écran, l'imprimer ou l'enregistrer dans un fichier.
+            </strong>
+        </p>
+
+        <div style="font-size: 70%; padding-top: 10px;" class="fragment fade-up">
+            <p>Il n'y a que deux possibilités :</p>
+            <ul style="margin-top: 5px;">
+                <li>
+                    <strong class="text-primary">Non</strong> :
+                    la valeur de l'information reste en mémoire centrale au sein du
+                    programme.
+                </li>
+
+                <li class="fragment fade-up">
+                    <strong class="text-primary">Oui</strong> : la valeur de
+                    l'information est envoyée sur un périphérique de
+                    sortie (écran, imprimante, disque dur).
+                    <strong>On précisera alors le nom du traitement qui réalise
+                        ce traitement.</strong>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Spécification d'une information - Résumé</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                <strong class="text-primary">Nom</strong> :
+                Identifiant significatif, sans accents ni espaces.
+            </p>
+
+            <p>
+                <strong class="text-primary">Signification</strong> :
+                Commentaire détaillant le rôle et les propriétés de l'information.
+            </p>
+
+            <p>
+                <strong class="text-primary">Type</strong> :
+                Ensemble des valeurs possibles de l'information.
+            </p>
+
+            <p>
+                <strong class="text-primary">Mode d'initialisation</strong> :
+            <ul>
+                <li style="margin-top: -15px;">
+                    <span class="font-italic">Prédéfinie</span>
+                    &#8594; donner la valeur de l'information ;
+                </li>
+                <li style="margin-top: -2px;">
+                    <span class="font-italic">Saisie</span>
+                    &#8594; donner le nom du traitement qui réalise la saisie ;
+                </li>
+                <li style="margin-top: -2px;">
+                    <span class="font-italic">Calculée</span>
+                    &#8594; donner le nom du traitement qui réalise le calcul.
+                </li>
+            </ul>
+            </p>
+
+            <p>
+                <strong class="text-primary">Exportation</strong> :
+            <ul>
+                <li style="margin-top: -15px;">
+                    <span class="font-italic">Non</span>
+                </li>
+                <li style="margin-top: -2px;">
+                    <span class="font-italic">Oui</span>
+                    &#8594; donner le nom du traitement qui réalise l'exportation.
+                </li>
+            </ul>
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h1>Spécifier un traitement...</h1>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+    <section>
+        <h4>Spécifier les propriétés d'un traitement</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <p>
+                Pour spécifier les propriétés d'un traitement, on renseignera les éléments suivants :
+            </p>
+            <ul>
+                <li>le <strong>nom</strong> du traitement ;</li>
+                <li>son <strong>but</strong> ;</li>
+                <li>ses <strong>données</strong> ;</li>
+                <li>ses <strong>résultats</strong> ;</li>
+                <li>sa <strong>description</strong>.</li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Nommer un traitement</h4>
+
+        <div style="font-size: 70%; padding-top: 5px;">
+            <p>
+                Le <strong>nom</strong> d'un traitement est un identifiant choisi arbitrairement et
+                qui doit avoir les propriétés suivantes :
+            </p>
+            <ul>
+                <li style="margin-top:-10px;">
+                    Le nom doit être <u><strong>significatif</strong></u>.<sup>[1]</sup>
+                    Des noms comme <strong class="text-success">saisir-somme-euros</strong> ou
+                    <strong class="text-success">calculer-vitesse-train</strong> sont acceptables mais
+                    <span class="text-danger">traitement4</span> ou
+                    <span class="text-danger">t28</span> sont à proscrire !
+                </li>
+
+                <li class="fragment" data-fragment-index="2">
+                    Pour des contraintes techniques, le nom du traitement ne doit pas
+                    comporter de caractères accentués et d'espaces. On choisira donc par
+                    exemple
+                    <strong class="text-success">afficherPerimetre</strong> et non pas
+                    <span class="text-danger">afficher périmètre</span> ;
+                </li>
+
+                <li class="fragment" data-fragment-index="3">
+                    le nom choisi est fixé <u><strong>une fois pour toutes</strong></u> : il sera ensuite repris
+                    au niveau des algorithmes et du code.
+                </li>
+            </ul>
+        </div>
+        <div style="font-size: 50%; padding-top: 5px; text-align: left;">
+            <hr />
+            <span style="color: #35a3e5">[1]</span>
+            N'oubliez pas que vous devez tout faire pour rendre vos programmes lisibles ! <br />
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Clarifier le but du traitement</h4>
+
+        <div style="font-size: 70%; padding-top: 5px;">
+            <ul>
+                <li>Le <strong>but</strong> d'un traitement est un texte qui
+                    décrit ce que fait le traitement en termes de service rendu.
+                    de l'information.</li>
+
+                <li>Ce texte doit permettre à un autre programmeur de comprendre
+                    à quoi sert ce traitement et quel est son rôle dans le programme.</li>
+            </ul>
+        </div>
+
+        <div class="fragment" style="font-size: 70%; padding-top: 30px;">
+
+            <p><strong class=text-primary>Exemple</strong></p>
+            <p>
+                <strong style="margin-top: 15px;">Nom</strong> : convertirEurosVersDollars
+            </p>
+            <p>
+                <strong style="margin-top: 15px;">Signification</strong> :
+                A partir d'une somme de départ exprimée en euros, ce traitement
+                calcule la somme correspondante en dollars en tenant compte d'un
+                taux de conversion prédéfini.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Identifier les données nécessaires à un traitement</h4>
+
+        <div style="font-size: 70%; padding-top: 5px;">
+            <p>
+                Il s'agit de lister les informations dont la valeur est nécessaire pour
+                exécuter le traitement : sans la valeur de ces informations, le traitement n'est
+                pas en mesure de s'exécuter.
+            </p>
+        </div>
+
+        <div class="fragment" style="font-size: 70%; padding-top: 30px;">
+
+            <p><strong class=text-primary>Exemple</strong></p>
+            <p>
+                <strong style="margin-top: 15px;">Nom</strong> : convertirEurosVersDollars
+            </p>
+            <p>
+                <strong style="margin-top: 15px;">Signification</strong> :
+                A partir d'une somme de départ exprimée en euros, ce traitement
+                calcule la somme correspondante en dollars en tenant compte d'un
+                taux de conversion prédéfini.
+            </p>
+            <p>
+                <strong style="margin-top: 15px;">Données</strong> :
+                sommeEuros, tauxEurosVersDollars
+            </p>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Identifier les résultats produits par un traitement</h4>
+
+        <div style="font-size: 70%; padding-top: 5px;">
+            <p>
+                Il s'agit de lister les informations dont la valeur est produite, calculée
+                ou modifiée suite à l'exécution du traitement.
+            </p>
+        </div>
+
+        <div class="fragment" style="font-size: 70%; padding-top: 30px;">
+
+            <p><strong class=text-primary>Exemple</strong></p>
+            <p>
+                <strong style="margin-top: 15px;">Nom</strong> : convertirEurosVersDollars
+            </p>
+            <p>
+                <strong style="margin-top: 15px;">Signification</strong> :
+                A partir d'une somme de départ exprimée en euros, ce traitement
+                calcule la somme correspondante en dollars en tenant compte d'un
+                taux de conversion prédéfini.
+            </p>
+            <p>
+                <strong style="margin-top: 15px;">Données</strong> :
+                sommeEuros, tauxEurosVersDollars
+            </p>
+            <p>
+                <strong style="margin-top: 15px;">Résultats</strong> :
+                sommeDollars
+            </p>
+        </div>
+
+    </section>
+
+    <section>
+        <h4>Décrire un traitement</h4>
+
+        <div style="font-size: 70%; padding-top: 5px;">
+            <p>
+                La <strong>description</strong> d'un traitement dépend de la nature du
+                traitement :
+            </p>
+            <ul>
+                <li>
+                    S'il s'agit d'une <span class="text-primary">action de saisie</span>,
+                    la description prend la forme d'un croquis qui illustre comment
+                    la saisie se présente à l'écran.
+                </li>
+
+                <li>
+                    S'il s'agit d'une <span class="text-primary">action de calcul</span>,
+                    la description correspond à la formule permettant de réaliser le calcul.
+                </li>
+
+                <li>
+                    S'il s'agit d'une <span class="text-primary">action de sortie</span>
+                    (affichage ou impresion), la description
+                    la description prend la forme d'un croquis qui illustre ce qui
+                    apparaît à l'écran ou sur le papier de l'imprimante.
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Spécification d'un traitement - Résumé</h4>
+
+        <div style="font-size: 65%;">
+            <p>
+                <strong class="text-primary">Nom</strong> :
+                Identifiant significatif, sans accent ni espace.
+            </p>
+
+            <p>
+                <strong class="text-primary">But</strong> :
+                Commentaire détaillant le service rendu par le traitement.
+            </p>
+
+            <p>
+                <strong class="text-primary">Données</strong> :
+                Liste des informations dont la valeur est nécessaire pour exécuter le
+                traitement.
+            </p>
+
+            <p>
+                <strong class="text-primary">Résultats</strong> :
+                Liste des informations dont la valeur est produite, calculée ou modifiée après
+                exécution du traitement.
+            </p>
+
+            <p>
+                <strong class="text-primary">Description</strong> :
+                A adapter selon le type de traitement :
+            <ul>
+                <li style="margin-top: -15px;">
+                    <span class="font-italic">Saisie</span>
+                    &#8594; un croquis décrivant comment la saisie se présente à l'écran.
+                </li>
+                <li style="margin-top: -2px;">
+                    <span class="font-italic">Calcul</span>
+                    &#8594; spécifier la formule utilisée pour réaliser le calcul.
+                </li>
+                <li style="margin-top: -2px;">
+                    <span class="font-italic">Sortie</span>
+                    &#8594; décrire ce que l'utilisateur voit (à l'écran / à
+                    l'impression) lorsque l'action de sortie a été réalisée.
+                </li>
+            </ul>
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Évaluons ce que vous avez retenu...</h4>
+
+        <a class="btn btn-primary text-white" href="https://app.wooclap.com/events/ALGOPAT3/0" target="_blank">
+            <strong style="font-size: 150%;">
+                Spécifications externes et internes
+                <i class="far fa-arrow-alt-circle-right"></i>
+            </strong>
+        </a>
+
+    </section>
+    <!-- ====================================================================== -->
+
+
+    <section>
+
+        <h1>Estimer la cohérence globale...</h1>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Analyse des liens entre informations et traitements</h4>
+
+        <div style="font-size: 75%; padding-top: 20px;">
+            <p>Le tableau bilan est un outil permettant :</p>
+
+            <ul>
+                <li>de mettre en évidence les liens existant entre informations
+                    et traitements ;
+                </li>
+                <li>d'estimer la cohérence globale des spécifications réalisées.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Structure d'un tableau bilan</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Le tableau bilan est une matrice dans laquelle :
+            <ul>
+                <li>chaque ligne correspond à une information ;</li>
+                <li>chaque colonne correspond à un traitement.</li>
+            </ul>
+            </p>
+        </div>
+        <div style="font-size: 60%; padding-top: 20px;">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" style="text-align:center">Traitement 1</th>
+                            <th scope="col" style="text-align:center">Traitement 2</th>
+                            <th scope="col" style="text-align:center">Traitement 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Information 1</th>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Information 2</th>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Information 3</th>
+                            <td style="text-align:center"> </td>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Remplir un tableau bilan</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Chaque case du tableau bilan est à l'intersection d'un traitement et
+                d'une information. Pour remplir cette case, on écrira :
+            <ul>
+                <li style="margin-top: -10px"> <strong>D</strong> si l'information est une donnée pour le traitement ;
+                </li>
+                <li style="margin-top: -5px"><strong>R</strong>> si l'information est un résultat du traitement ;</li>
+                <li style="margin-top: -5px"><strong>D/R</strong> si l'information est une donnée qui est modifiée par
+                    le traitement ;</li>
+                <li style="margin-top: -5px">rien dans tous les autres cas.</li>
+            </ul>
+            </p>
+        </div>
+        <div style="font-size: 60%; padding-top: 20px;">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" style="text-align:center">Traitement 1</th>
+                            <th scope="col" style="text-align:center">Traitement 2</th>
+                            <th scope="col" style="text-align:center">Traitement 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Information 1</th>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Information 2</th>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Information 3</th>
+                            <td style="text-align:center"> </td>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+    <section>
+        <h4>Estimer la cohérence globale des spécifications</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                On évalue la consistance globale des spécifications internes
+                selon les règles suivantes :
+            <ul>
+                <li style="margin-top: -10px"> Toute information doit être impliquée dans au moins un
+                    traitement, sinon elle ne sert à rien &#8594; <strong>pas de ligne vide</strong> ;
+                </li>
+                <li style="margin-top: -5px">Tout traitement doit être en relation avec au moins une
+                    information, sinon ce n’est pas un traitement informatique &#8594;
+                    <strong>pas de colonne vide</strong>.
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div style="font-size: 60%; padding-top: 20px;">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" style="text-align:center">Traitement 1</th>
+                            <th scope="col" style="text-align:center">Traitement 2</th>
+                            <th scope="col" style="text-align:center">Traitement 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Information 1</th>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Information 2</th>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Information 3</th>
+                            <td style="text-align:center"> </td>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+</section><section name="Spécifs internes: Exemple">
+    <!--
+    l'attribut "id" de section implante les liens du menu du haut
+    l'atribut "data-menu-title" de section fait référence aux titres qui apparaissent dans le menu de gauche
+    -->
+    <section data-menu-title="Spécifs internes : Exemple" data-transition="convex">
+        <h1>Spécifications internes : Exemple</h1>
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+
+        <h4>Problème de départ</h4>
+
+        <div style="font-size: 70%;">
+            <p>
+                Élaborer un programme permettant de saisir une somme de départ
+                en euros puis de la convertir en dollars.
+            </p>
+        </div>
+
+        <h4 class="fragment" data-fragment-index="2">Liste des informations et traitements</h4>
+
+        <div class="fragment" data-fragment-index="2" style="font-size: 70%;">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Informations</strong></p>
+                    <ul>
+                        <li>sommeEuros</li>
+                        <li>sommeDollars</li>
+                        <li>tauxEurosVersDollars</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Traitements</strong></p>
+                    <ul>
+                        <li>saisirSommeEuros</li>
+                        <li>calculerSommeDollars</li>
+                        <li>afficherSommeDollars</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Spécification des informations (1/3)</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <ul>
+                <li>
+                    <strong>Nom</strong> :
+                    <strong class="text-success">sommeEuros</strong>
+                </li>
+                <li>
+                    <strong>Signification</strong> :
+                    La somme en euros qui doit être convertie en dollars.
+                </li>
+                <li>
+                    <strong>Type</strong> :
+                    nombre à virgule
+                </li>
+                <li>
+                    <strong>Mode d'initialisation</strong> :
+                    Saisie au clavier par le traitement
+                    <strong class="text-info">saisirSommeEuros</strong>
+                </li>
+                <li>
+                    <strong>Exportation</strong> :
+                    Non
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Spécification des informations (2/3)</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <ul>
+                <li>
+                    <strong>Nom</strong> :
+                    <strong class="text-success">tauxEurosVersDollars</strong>
+                </li>
+                <li>
+                    <strong>Signification</strong> :
+                    Taux de conversion utilisé pour convertir des euros en dollars.
+                </li>
+                <li>
+                    <strong>Type</strong> :
+                    nombre à virgule
+                </li>
+                <li>
+                    <strong>Mode d'initialisation</strong> :
+                    Prédéfini à la valeur <span class="font-italic">1.3383</span>
+                </li>
+                <li>
+                    <strong>Exportation</strong> :
+                    Non
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Spécification des informations (3/3)</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <ul>
+                <li>
+                    <strong>Nom</strong> :
+                    <strong class="text-success">sommeDollars</strong>
+                </li>
+                <li>
+                    <strong>Signification</strong> :
+                    La somme en dollars résultant de la conversion.
+                </li>
+                <li>
+                    <strong>Type</strong> :
+                    nombre à virgule
+                </li>
+                <li>
+                    <strong>Mode d'initialisation</strong> :
+                    Calculé par le traitement
+                    <strong class="text-info">calculerSommeDollars</strong>
+                </li>
+                <li>
+                    <strong>Exportation</strong> :
+                    Oui : par le traitement <strong class="text-info">afficherSommeDollars</strong>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Spécification des traitements (1/3)</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <ul>
+                <li>
+                    <strong>Nom</strong> :
+                    <strong class="text-info">saisirSommeEuros</strong>
+                </li>
+                <li>
+                    <strong>But</strong> :
+                    Saisir au clavier la somme en &euro; qui sera convertie en &#36;
+                </li>
+                <li>
+                    <strong>Données</strong> :
+                    aucune
+                </li>
+                <li>
+                    <strong>Résultats</strong> :
+                    <strong class="text-success">sommeEuros</strong>
+                </li>
+                <li>
+                    <strong>Description</strong> :
+                </li>
+                <img src="presentation/images/description-saisie-somme-euros.svg" width="42%" style="margin-top: -2px;"
+                    alt="Scénario nominal" />
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+    <section>
+        <h4>Spécification des traitements (2/3)</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <ul>
+                <li>
+                    <strong>Nom</strong> :
+                    <strong class="text-info">calculerSommeDollars</strong>
+                </li>
+                <li>
+                    <strong>But</strong> :
+                    Convertir en &#36; une somme de départ exprimée en &euro;
+                </li>
+                <li>
+                    <strong>Données</strong> :
+                    <strong class="text-success">sommeEuros</strong>,
+                    <strong class="text-success">tauxEurosVersDollars</strong>
+                </li>
+                <li>
+                    <strong>Résultats</strong> :
+                    <strong class="text-success">sommeDollars</strong>
+                </li>
+                <li>
+                    <strong>Description</strong> : <br /> sommeDollars = sommeEuros &#215; tauxEurosVersDollars
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Spécification des traitements (3/3)</h4>
+
+        <div style="font-size: 75%; padding-top: 10px;">
+            <ul>
+                <li>
+                    <strong>Nom</strong> :
+                    <strong class="text-info">afficherSommeDollars</strong>
+                </li>
+                <li>
+                    <strong>But</strong> :
+                    Afficher à l'écran la somme convertie en &#36;
+                </li>
+                <li>
+                    <strong>Données</strong> :
+                    <strong class="text-success">sommeDollars</strong>
+                </li>
+                <li>
+                    <strong>Résultats</strong> :
+                    aucun
+                </li>
+                <li>
+                    <strong>Description</strong> :
+                </li>
+                <img src="presentation/images/description-affichage-somme-dollars.svg" width="51%"
+                    style="margin-top: -2px;" alt="Scénario nominal" />
+            </ul>
+        </div>
+
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+    <section>
+        <h4>Tableau bilan</h4>
+
+        <div style="font-size: 50%; padding-top: 20px;">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" style="text-align:center">saisirSommeEuros</th>
+                            <th scope="col" style="text-align:center">calculerSommeDollars</th>
+                            <th scope="col" style="text-align:center">afficherSommeDollars</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">sommeEuros</th>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">tauxEurosVersDollars</th>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:center">D</td>
+                            <td style="text-align:center"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">sommeDollars</th>
+                            <td style="text-align:center"> </td>
+                            <td style="text-align:center">R</td>
+                            <td style="text-align:center">D</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <div style="font-size: 70%; padding-top: 40px;">
+            <ul>
+                <li>Aucune ligne vide : toute information joue bien un rôle dans la solution spécifiée ;</li>
+                <li style="margin-top: -2px;">Aucune colonne vide : tous les traitements semblent faire sens car ils manipulent
+                    tous une ou plusieurs informations.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ====================================================================== -->
+
+
+
+
+
+
+
+</section></div>
+
+<!-- Placer le div du menu des chapitres ci-dessous pour que le menu apparaisse en bas -->
+
+
+</div>
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/simplemenu/simplemenu.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+    fragments: true, // Turns fragments on and off globally
+    embedded: false, // Mettre à vrai si par exemple la présentation est incorporée dans un iframe
+    autoAnimateEasing: 'ease',
+    overview: false,
+    slideNumber: 'c',
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, Simplemenu],
+    menu: { numbers: true, titleSelector: '', markers: true, hideMissingTitles: true },
+    simplemenu: { auto: true, activeclass: 'active' },
+    toolbar: {
+      // Specifies where the toolbar will be shown: 'top' or 'bottom'
+      position: 'bottom',
+
+      // Add button to toggle fullscreen mode for the presentation
+      fullscreen: true,
+
+      // Add button to toggle the overview mode on and off
+      overview: false,
+
+      // Add button to pause (hide) the presentation display
+      pause: false,
+
+      // Add button to show the speaker notes
+      notes: false,
+
+      // Add button to show the help overlay
+      help: false,
+
+      // If true, the reveal.js-menu will be moved into the toolbar.
+      // Set to false to leave the menu on its own.
+      captureMenu: true,
+
+      // If true, the playback control will be moved into the toolbar.
+      // This is only relevant if the presentation is configured to autoSlide.
+      // Set to false to leave the menu on its own.
+      capturePlaybackControl: true,
+
+      // By default the menu will load it's own font-awesome library
+      // icons. If your presentation needs to load a different
+      // font-awesome library the 'loadIcons' option can be set to false
+      // and the menu will not attempt to load the font-awesome library.
+      loadIcons: true
+    },
+    dependencies: [{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function () { title_footer.initialize(); } },
+    { src: 'plugin/toolbar/toolbar.js' }]
+  });
+</script>
+<script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<!-- ###################################################################### -->
+<!-- Fonctions pour ajouter des boutons permettant de controler les videos -->
+<!-- ###################################################################### -->
+<script>
+  // Get a handle to the player
+  player = document.getElementById('video-element');
+  btnPlayPause = document.getElementById('btnPlayPause');
+  btnMute = document.getElementById('btnMute');
+  progressBar = document.getElementById('progress-bar');
+  volumeBar = document.getElementById('volume-bar');
+
+  // Update the video volume
+  volumeBar.addEventListener("change", function (evt) {
+    player.volume = evt.target.value;
+  });
+  document.getElementById('btnFullScreen').disabled = false;
+  // Add a listener for the timeupdate event so we can update the progress bar
+  player.addEventListener('timeupdate', updateProgressBar, false);
+
+  // Add a listener for the play and pause events so the buttons state can be updated
+  player.addEventListener('play', function () {
+    // Change the button to be a pause button
+    changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+  }, false);
+
+  player.addEventListener('pause', function () {
+    // Change the button to be a play button
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }, false);
+
+  player.addEventListener('volumechange', function (e) {
+    // Update the button to be mute/unmute
+    if (player.muted) changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+    else changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+  }, false);
+
+  player.addEventListener('ended', function () { this.pause(); }, false);
+
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    player.currentTime = percent * player.duration;
+    e.target.value = Math.floor(percent / 100);
+    e.target.innerHTML = progressBar.value + '% played';
+  }
+
+  function playPauseVideo() {
+    if (player.paused || player.ended) {
+      // Change the button to a pause button
+      changeButtonType(btnPlayPause, '<i class="fas fa-pause"></i>');
+      player.play();
+    }
+    else {
+      // Change the button to a play button
+      changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+      player.pause();
+    }
+  }
+
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+    player.pause();
+    if (player.currentTime) player.currentTime = 0;
+  }
+
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+    if (player.muted) {
+      // Change the button to a mute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-mute"></i>');
+      player.muted = false;
+    }
+    else {
+      // Change the button to an unmute button
+      changeButtonType(btnMute, '<i class="fas fa-volume-up"></i>');
+      player.muted = true;
+    }
+  }
+
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+    resetPlayer();
+    player.play();
+  }
+
+  // Update the progress bar
+  function updateProgressBar() {
+    // Work out how much of the media has played via the duration and currentTime parameters
+    var percentage = Math.floor((100 / player.duration) * player.currentTime);
+    // Update the progress bar's value
+    progressBar.value = percentage;
+    // Update the progress bar's text (for browsers that don't support the progress element)
+    progressBar.innerHTML = percentage + '% played';
+  }
+
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+    btn.title = value;
+    btn.innerHTML = value;
+    btn.className = value;
+  }
+
+  function resetPlayer() {
+    progressBar.value = 0;
+    // Move the media back to the start
+    player.currentTime = 0;
+    // Set the play/pause button to 'play'
+    changeButtonType(btnPlayPause, '<i class="fas fa-play"></i>');
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    //var player = document.getElementById("player");
+
+    if (player.requestFullscreen)
+      if (document.fullScreenElement) {
+        document.cancelFullScreen();
+      } else {
+        player.requestFullscreen();
+      }
+    else if (player.msRequestFullscreen)
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+      } else {
+        player.msRequestFullscreen();
+      }
+    else if (player.mozRequestFullScreen)
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+      } else {
+        player.mozRequestFullScreen();
+      }
+    else if (player.webkitRequestFullscreen)
+      if (document.webkitFullscreenElement) {
+        document.webkitCancelFullScreen();
+      } else {
+        player.webkitRequestFullscreen();
+      }
+    else {
+      alert("Fullscreen API is not supported");
+
+    }
+  }
+</script>
+
+
+</body>
+
+</html>

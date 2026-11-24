@@ -1,0 +1,606 @@
+{
+  "module": "R1.06",
+  "titre": "Mathématiques Discrètes",
+  "professeur": "Mme Fernandes",
+  "couleur": "#B85042",
+  "description": "Théorie des ensembles, P(E), inclusion/appartenance, De Morgan, partitions, relations binaires (équivalence, ordre), logique propositionnelle, implication, prédicats et quantificateurs (∀, ∃), récurrence, dénombrement",
+  "count": 25,
+  "questions": [
+    {
+      "id": "r106_q01",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "1. Théorie des Ensembles & Opérations",
+      "question": "Quelle est la distinction formelle entre l'appartenance (∈) et l'inclusion (⊆) ?",
+      "options": [
+        "Il n'y a aucune différence, ce sont deux notations interchangeables",
+        "L'appartenance relie un élément à un ensemble (ex: x ∈ E), tandis que l'inclusion relie un sous-ensemble à un ensemble (ex: {x} ⊆ E ou A ⊆ E)",
+        "L'inclusion s'utilise uniquement pour les ensembles infinis",
+        "L'appartenance est réservée aux nombres entiers"
+      ],
+      "correct_index": 1,
+      "explication": "Règle fondamentale enseignée par Mme Fernandes : x est un élément ; {x} est le singleton contenant l'élément x. Écrire x ⊆ E est une erreur de type majeure en mathématiques discrètes, tout comme écrire {x} ∈ E (sauf si E est un ensemble d'ensembles).",
+      "pieges": [
+        "Piège d'examen : confondre l'élément vide ∅ et le singleton {∅}. ∅ ⊆ E pour tout ensemble E, mais ∅ ∈ E seulement si l'ensemble vide est lui-même un élément de E."
+      ],
+      "tags": [
+        "Ensembles",
+        "Appartenance",
+        "Inclusion",
+        "Singleton"
+      ]
+    },
+    {
+      "id": "r106_q02",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "1. Théorie des Ensembles & Opérations",
+      "question": "Si un ensemble fini E possède n éléments (|E| = n), quel est le cardinal de l'ensemble de ses parties P(E) ?",
+      "options": [
+        "n^2",
+        "2^n",
+        "n!",
+        "2 * n"
+      ],
+      "correct_index": 1,
+      "explication": "Chaque sous-ensemble de E correspond à un choix binaire pour chacun des n éléments (soit il est présent dans le sous-ensemble, soit il est absent). Il y a donc 2 * 2 * ... * 2 = 2^n sous-ensembles possibles.",
+      "pieges": [
+        "P(E) contient toujours au moins ∅ et E lui-même. Si E = ∅ (n=0), |P(∅)| = 2^0 = 1 (le sous-ensemble {∅})."
+      ],
+      "tags": [
+        "Parties d'un ensemble",
+        "P(E)",
+        "2^n",
+        "Cardinal"
+      ]
+    },
+    {
+      "id": "r106_q03",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "1. Théorie des Ensembles & Opérations",
+      "question": "Quelles sont les Lois de De Morgan appliquées à la complémentation d'ensembles ?",
+      "options": [
+        "Complément(A ∪ B) = Complément(A) ∩ Complément(B) et Complément(A ∩ B) = Complément(A) ∪ Complément(B)",
+        "Complément(A ∪ B) = Complément(A) ∪ Complément(B)",
+        "Complément(A ∩ B) = A ∩ B",
+        "A ∪ B = A ∩ B"
+      ],
+      "correct_index": 0,
+      "explication": "Le complémentaire d'une union est l'intersection des complémentaires ; le complémentaire d'une intersection est l'union des complémentaires. Cette dualité se retrouve à l'identique en logique booléenne.",
+      "pieges": [
+        "Ne pas oublier d'inverser l'opérateur (∪ devient ∩, et ∩ devient ∪) lorsqu'on distribue la barre de négation !"
+      ],
+      "tags": [
+        "De Morgan",
+        "Complémentaire",
+        "Union",
+        "Intersection"
+      ]
+    },
+    {
+      "id": "r106_q04",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "1. Théorie des Ensembles & Opérations",
+      "question": "Qu'est-ce qu'une « partition » d'un ensemble E non vide ?",
+      "options": [
+        "Une liste de fichiers enregistrés sur une clé USB",
+        "Une famille de sous-ensembles non vides de E, deux à deux disjoints (intersection vide), et dont la réunion reconstitue exactement tout l'ensemble E",
+        "La division de chaque nombre de E par 2",
+        "Un sous-ensemble ne contenant que des nombres premiers"
+      ],
+      "correct_index": 1,
+      "explication": "Définition rigoureuse de Mme Fernandes : une partition découpe E en blocs sans aucun chevauchement et sans rien oublier : 1. Aucun bloc n'est vide, 2. Si A ≠ B, alors A ∩ B = ∅, 3. L'union de tous les blocs est égale à E.",
+      "pieges": [
+        "Si deux sous-ensembles partagent ne serait-ce qu'un seul élément commun, ils ne forment PAS une partition !"
+      ],
+      "tags": [
+        "Partition",
+        "Sous-ensembles disjoints",
+        "Recouvrement",
+        "Classes"
+      ]
+    },
+    {
+      "id": "r106_q05",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "2. Relations Binaires & Équivalence",
+      "question": "Quelles sont les trois propriétés indispensables qui définissent une relation d'équivalence sur un ensemble E ?",
+      "options": [
+        "Elle doit être commutative, associative et distributive",
+        "Elle doit être Réflexive, Symétrique et Transitive",
+        "Elle doit être Réflexive, Antisymétrique et Transitive",
+        "Elle doit être Linéaire, Continue et Dérivable"
+      ],
+      "correct_index": 1,
+      "explication": "Relation d'équivalence : 1. Réflexive : ∀x ∈ E, x R x ; 2. Symétrique : ∀x,y ∈ E, (x R y ⇒ y R x) ; 3. Transitive : ∀x,y,z ∈ E, (x R y et y R z ⇒ x R z).",
+      "pieges": [
+        "Ne pas confondre avec une relation d'ordre, qui remplace la symétrie par l'antisymétrie (x R y et y R x ⇒ x = y)."
+      ],
+      "tags": [
+        "Relation d'équivalence",
+        "Réflexive",
+        "Symétrique",
+        "Transitive"
+      ]
+    },
+    {
+      "id": "r106_q06",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "2. Relations Binaires & Équivalence",
+      "question": "Quel théorème fondamental lie les relations d'équivalence et les partitions d'un ensemble ?",
+      "options": [
+        "Toute relation d'équivalence sur E engendre une partition de E (ses classes d'équivalence), et réciproquement toute partition de E définit une relation d'équivalence unique",
+        "Les relations d'équivalence ne peuvent s'appliquer qu'à des ensembles à nombre pair d'éléments",
+        "Une relation d'équivalence détruit toujours la partition",
+        "Le théorème de Pythagore"
+      ],
+      "correct_index": 0,
+      "explication": "Théorème central du cours de Mme Fernandes : la classe d'équivalence de x, notée cl(x), regroupe tous les éléments y tels que x R y. Deux classes sont soit strictement disjointes, soit totalement confondues. L'ensemble quotient E/R est une partition de E.",
+      "pieges": [
+        "Deux éléments ont la même classe d'équivalence si et seulement s'ils sont en relation (x R y ⇔ cl(x) = cl(y))."
+      ],
+      "tags": [
+        "Classes d'équivalence",
+        "Ensemble quotient",
+        "Partition",
+        "Théorème fondamental"
+      ]
+    },
+    {
+      "id": "r106_q07",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "2. Relations Binaires & Équivalence",
+      "question": "Quelle est la définition formelle de l'antisymétrie d'une relation binaire R sur un ensemble E ?",
+      "options": [
+        "∀x,y ∈ E, (x R y ⇒ NON(y R x))",
+        "∀x,y ∈ E, (x R y et y R x ⇒ x = y)",
+        "∀x ∈ E, NON(x R x)",
+        "∀x,y ∈ E, x R y ou y R x"
+      ],
+      "correct_index": 1,
+      "explication": "L'antisymétrie signifie que deux éléments distincts ne peuvent jamais être en relation dans les deux sens simultanément : si x R y et y R x, ils sont nécessairement le même élément. Exemple canonique : la relation ≤ sur les nombres réels (si x ≤ y et y ≤ x, alors x = y).",
+      "pieges": [
+        "L'antisymétrie n'est PAS le contraire de la symétrie ! Une relation peut être à la fois symétrique et antisymétrique (ex: l'égalité =)."
+      ],
+      "tags": [
+        "Antisymétrie",
+        "Relation d'ordre",
+        "Ordre partiel"
+      ]
+    },
+    {
+      "id": "r106_q08",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "3. Logique Propositionnelle & Connecteurs",
+      "question": "Quand l'implication logique (P ⇒ Q) est-elle FAUSSE selon sa table de vérité canonique ?",
+      "options": [
+        "Elle est fausse dès que P est faux",
+        "Elle est fausse dans un UNIQUE cas : lorsque l'hypothèse P est VRAIE et la conclusion Q est FAUSSE",
+        "Elle est fausse quand P et Q sont tous les deux vrais",
+        "Elle est toujours vraie quoi qu'il arrive"
+      ],
+      "correct_index": 1,
+      "explication": "Une promesse n'est rompue que si la condition est réalisée (P vrai) mais que l'engagement n'est pas tenu (Q faux). Si l'hypothèse de départ est fausse (ex: 'Si 2+2=5, alors je suis le roi d'Espagne'), l'implication est considérée comme mathématiquement VRAIE (ex falso quodlibet).",
+      "pieges": [
+        "Formule d'équivalence indispensable : (P ⇒ Q) est strictement équivalent à (¬P ∨ Q)."
+      ],
+      "tags": [
+        "Implication",
+        "Table de vérité",
+        "¬P ∨ Q",
+        "Logique"
+      ]
+    },
+    {
+      "id": "r106_q09",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "3. Logique Propositionnelle & Connecteurs",
+      "question": "Quelle est la négation logique rigoureuse de l'implication (P ⇒ Q) ?",
+      "options": [
+        "¬P ⇒ ¬Q",
+        "P ∧ ¬Q",
+        "¬P ∨ Q",
+        "Q ⇒ P"
+      ],
+      "correct_index": 1,
+      "explication": "Comme (P ⇒ Q) ⇔ (¬P ∨ Q), sa négation s'écrit ¬(¬P ∨ Q) ⇔ ¬(¬P) ∧ ¬Q ⇔ P ∧ ¬Q (d'après les lois de De Morgan). Nier 's'il pleut alors je prends mon parapluie' revient à affirmer 'il pleut ET je ne prends pas mon parapluie'.",
+      "pieges": [
+        "Erreur classique d'étudiant : croire que la négation d'une implication est une autre implication ('s'il ne pleut pas alors je ne prends pas de parapluie'). C'est faux !"
+      ],
+      "tags": [
+        "Négation",
+        "Implication",
+        "P ∧ ¬Q",
+        "De Morgan"
+      ]
+    },
+    {
+      "id": "r106_q10",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "3. Logique Propositionnelle & Connecteurs",
+      "question": "Quelle est la contraposée de la proposition conditionnelle (P ⇒ Q) ?",
+      "options": [
+        "Q ⇒ P (la réciproque)",
+        "¬Q ⇒ ¬P",
+        "¬P ⇒ ¬Q (la contraire)",
+        "P ⇔ Q"
+      ],
+      "correct_index": 1,
+      "explication": "La contraposée de (P ⇒ Q) est (¬Q ⇒ ¬P). Elles ont exactement la même table de vérité (elles sont logiquement équivalentes). Si l'une est vraie, l'autre est obligatoirement vraie. Le raisonnement par contraposition est une technique de démonstration majeure.",
+      "pieges": [
+        "Attention à la réciproque (Q ⇒ P) qui n'a AUCUNE équivalence logique avec (P ⇒ Q) !"
+      ],
+      "tags": [
+        "Contraposée",
+        "Réciproque",
+        "Équivalence logique",
+        "Démonstration"
+      ]
+    },
+    {
+      "id": "r106_q11",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "3. Logique Propositionnelle & Connecteurs",
+      "question": "Qu'est-ce qu'une « tautologie » en calcul propositionnel ?",
+      "options": [
+        "Une proposition qui contient deux fois le même mot",
+        "Une formule propositionnelle qui est VRAIE pour toutes les affectations possibles de valeurs de vérité de ses variables propositionnelles (ex: P ∨ ¬P)",
+        "Une erreur de syntaxe dans une démonstration",
+        "Une proposition qui ne peut jamais être démontrée"
+      ],
+      "correct_index": 1,
+      "explication": "Une tautologie est une vérité logique absolue (toujours 1 dans sa table de vérité). Le principe du tiers exclu (P ∨ ¬P) en est l'exemple le plus célèbre. Son opposé strict est l'antilogie (ou contradiction, toujours fausse, ex: P ∧ ¬P).",
+      "pieges": [
+        "Si une proposition est contingente, elle est vraie pour certaines lignes de sa table de vérité et fausse pour d'autres."
+      ],
+      "tags": [
+        "Tautologie",
+        "Tiers exclu",
+        "Contradiction",
+        "Table de vérité"
+      ]
+    },
+    {
+      "id": "r106_q12",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "4. Prédicats, Quantificateurs & Démonstrations",
+      "question": "Quelle est la négation formelle de la proposition universelle : ∀x ∈ E, P(x) ?",
+      "options": [
+        "∀x ∈ E, ¬P(x)",
+        "∃x ∈ E, ¬P(x)",
+        "NON(E) ⊆ P",
+        "∃x ∉ E, P(x)"
+      ],
+      "correct_index": 1,
+      "explication": "Pour réfuter que TOUS les éléments satisfont une propriété, il suffit d'en trouver AU MOINS UN qui ne la satisfait pas (un contre-exemple). Par conséquent, la négation de ∀ est ∃ accompagné de la négation du prédicat.",
+      "pieges": [
+        "Nier 'tous les corbeaux sont noirs' ne signifie PAS 'tous les corbeaux sont blancs', mais 'il existe au moins un corbeau qui n'est pas noir'."
+      ],
+      "tags": [
+        "Quantificateurs",
+        "Négation",
+        "Contre-exemple",
+        "∀ et ∃"
+      ]
+    },
+    {
+      "id": "r106_q13",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "4. Prédicats, Quantificateurs & Démonstrations",
+      "question": "Pourquoi les deux propositions (∀x, ∃y, P(x, y)) et (∃y, ∀x, P(x, y)) ne sont-elles PAS logiquement équivalentes ?",
+      "options": [
+        "L'ordre des quantificateurs change fondamentalement le sens : dans la première y peut dépendre de chaque x ; dans la seconde il existe un même y universel valable pour tous les x",
+        "Parce que x et y doivent être de même signe",
+        "Elles sont parfaitement équivalentes, l'ordre ne change rien",
+        "Parce que le quantificateur existentiel ne s'applique qu'au premier paramètre"
+      ],
+      "correct_index": 0,
+      "explication": "Exemple parlant : 'Pour tout humain x, il existe un humain y tel que y est la mère de x' (VRAI : chacun a sa propre mère) vs 'Il existe un humain y tel que pour tout humain x, y est la mère de x' (FAUX : il n'y a pas une unique mère universelle de l'humanité entière).",
+      "pieges": [
+        "Inverser deux quantificateurs de même nature (∀x ∀y ou ∃x ∃y) est permis, mais inverser un ∀ et un ∃ modifie radicalement le sens mathématique !"
+      ],
+      "tags": [
+        "Ordre des quantificateurs",
+        "∀ et ∃",
+        "Dépendance",
+        "Subtilité logique"
+      ]
+    },
+    {
+      "id": "r106_q14",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "4. Prédicats, Quantificateurs & Démonstrations",
+      "question": "En quoi consiste la méthode de démonstration par « l'absurde » ?",
+      "options": [
+        "Raconter une blague au correcteur",
+        "Pour démontrer qu'une proposition P est vraie, on suppose que sa négation ¬P est vraie, et on en déduit rigoureusement une contradiction logique ou une impossibilité mathématique",
+        "Démontrer que la question n'a aucun sens",
+        "Vérifier le résultat sur 3 exemples numériques au hasard"
+      ],
+      "correct_index": 1,
+      "explication": "Fondée sur le principe de non-contradiction : si supposer ¬P mène à une absurdité (ex: 0 = 1, ou un entier qui est à la fois pair et impair), alors ¬P est nécessairement fausse, ce qui prouve que P est vraie (ex: preuve de l'irrationalité de racine de 2).",
+      "pieges": [
+        "Ne pas confondre le raisonnement par l'absurde avec la démonstration par contraposition (qui prouve P⇒Q via ¬Q⇒¬P sans introduire de contradiction externe)."
+      ],
+      "tags": [
+        "Démonstration",
+        "Absurde",
+        "Contradiction",
+        "Raisonnement"
+      ]
+    },
+    {
+      "id": "r106_q15",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "4. Prédicats, Quantificateurs & Démonstrations",
+      "question": "Quelles sont les deux étapes indispensables d'une démonstration par récurrence simple sur les entiers naturels n ≥ n0 ?",
+      "options": [
+        "L'hypothèse et la conclusion",
+        "L'Initialisation (vérifier la propriété au rang de base n0) et l'Hérédité (démontrer que pour tout n ≥ n0, si P(n) est vraie alors P(n+1) est vraie)",
+        "L'addition et la soustraction",
+        "Le calcul numérique et le tracé du graphique"
+      ],
+      "correct_index": 1,
+      "explication": "Principe des dominos : l'initialisation fait tomber le premier domino P(n0) ; l'hérédité garantit que chaque domino fait tomber le suivant P(n) ⇒ P(n+1). La propriété est alors vraie pour tout entier n ≥ n0.",
+      "pieges": [
+        "Piège d'examen : oublier de vérifier l'initialisation ! Une propriété héréditaire peut être totalement fausse si le rang de base ne démarre pas."
+      ],
+      "tags": [
+        "Récurrence",
+        "Initialisation",
+        "Hérédité",
+        "Entiers naturels"
+      ]
+    },
+    {
+      "id": "r106_q16",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "5. Dénombrement & Combinatoire",
+      "question": "Que stipule le Principe des tiroirs de Dirichlet (Pigeonhole Principle) ?",
+      "options": [
+        "Si on range n chaussettes dans n tiroirs, il reste un tiroir vide",
+        "Si l'on range n objets dans k boîtes (tiroirs) avec n > k, alors il existe au moins une boîte qui contient au moins 2 objets",
+        "Les tiroirs en bois sont plus solides que les tiroirs en plastique",
+        "Le nombre d'objets doit toujours être impair"
+      ],
+      "correct_index": 1,
+      "explication": "Résultat d'une puissance redoutable en informatique théorique : s'il y a 367 personnes dans une salle, au moins deux partagent le même anniversaire (car il y a au plus 366 dates possibles dans l'année). Il permet de prouver l'existence sans chercher la solution.",
+      "pieges": [
+        "Ce principe prouve l'existence mais ne donne aucun moyen constructif de savoir quel tiroir précis contient les doublons."
+      ],
+      "tags": [
+        "Dirichlet",
+        "Principe des tiroirs",
+        "Dénombrement",
+        "Pigeonhole"
+      ]
+    },
+    {
+      "id": "r106_q17",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "5. Dénombrement & Combinatoire",
+      "question": "Quelle est la formule du coefficient binomial (k parmi n), c'est-à-dire le nombre de combinaisons de k éléments choisis parmi n sans répétition et sans ordre ?",
+      "options": [
+        "n! / (k! * (n - k)!)",
+        "n! / (n - k)!",
+        "n * k",
+        "n^k"
+      ],
+      "correct_index": 0,
+      "explication": "Il y a A_n^k = n! / (n-k)! listes ordonnées de k éléments. Comme l'ordre ne compte pas dans un sous-ensemble, on divise par le nombre de permutations possibles de ces k éléments, soit k!. D'où C_n^k = n! / (k! * (n - k)!).",
+      "pieges": [
+        "Si l'ordre comptait (ex: podium 1er, 2ème, 3ème), ce serait un arrangement n! / (n-k)!, sans division par k!."
+      ],
+      "tags": [
+        "Combinaisons",
+        "Coefficients binomiaux",
+        "Factorielle",
+        "Dénombrement"
+      ]
+    },
+    {
+      "id": "r106_q18",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "5. Dénombrement & Combinatoire",
+      "question": "Quelle est la formule de récurrence du Triangle de Pascal reliant les coefficients binomiaux ?",
+      "options": [
+        "(k parmi n) + (k+1 parmi n) = (k+1 parmi n+1)",
+        "(k parmi n) * (k parmi n) = (k parmi n+1)",
+        "(k parmi n) = (n parmi k)",
+        "(k parmi n) + (k parmi n) = (2k parmi 2n)"
+      ],
+      "correct_index": 0,
+      "explication": "Règle de construction du triangle de Pascal : chaque case est la somme de la case située juste au-dessus et de la case située au-dessus à gauche : C(n, k) + C(n, k+1) = C(n+1, k+1).",
+      "pieges": [
+        "Interprétation combinatoire : pour choisir k+1 éléments parmi n+1, soit on choisit le premier élément (reste k parmi n), soit on ne le choisit pas (reste k+1 parmi n)."
+      ],
+      "tags": [
+        "Triangle de Pascal",
+        "Relation de récurrence",
+        "Combinatoire"
+      ]
+    },
+    {
+      "id": "r106_q19",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "1. Théorie des Ensembles & Opérations",
+      "question": "Qu'est-ce que la « différence symétrique » de deux ensembles A et B, notée A Δ B ?",
+      "options": [
+        "L'ensemble des éléments qui appartiennent à A ou à B, mais PAS aux deux à la fois (équivalent à (A ∪ B) \\ (A ∩ B))",
+        "L'ensemble vide",
+        "Le produit cartésien A x B",
+        "L'ensemble des éléments qui appartiennent obligatoirement à la fois à A et à B"
+      ],
+      "correct_index": 0,
+      "explication": "La différence symétrique correspond exactement à l'opération logique OU EXCLUSIF (XOR). A Δ B = (A \\ B) ∪ (B \\ A).",
+      "pieges": [
+        "Propriété remarquable : l'opération Δ est associative et possède ∅ pour élément neutre (A Δ ∅ = A, et A Δ A = ∅)."
+      ],
+      "tags": [
+        "Différence symétrique",
+        "XOR ensembliste",
+        "A Δ B"
+      ]
+    },
+    {
+      "id": "r106_q20",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "2. Relations Binaires & Équivalence",
+      "question": "Sur l'ensemble des entiers relatifs ℤ, pourquoi la relation de congruence modulo 5 (x ≡ y [5]) est-elle une relation d'équivalence ?",
+      "options": [
+        "Parce que 5 est un nombre premier",
+        "Elle est réflexive (x - x = 0 est multiple de 5), symétrique (si x-y est multiple de 5, y-x l'est aussi) et transitive (si x-y et y-z sont multiples, leur somme x-z l'est aussi)",
+        "Parce qu'elle n'a que 5 éléments",
+        "Ce n'est pas une relation d'équivalence"
+      ],
+      "correct_index": 1,
+      "explication": "Preuve canonique vue en TD avec Mme Fernandes : la relation de congruence modulo n vérifie scrupuleusement les 3 axiomes. Elle partitionne ℤ en 5 classes d'équivalence : cl(0), cl(1), cl(2), cl(3), cl(4), formant l'anneau ℤ/5ℤ.",
+      "pieges": [
+        "C'est la base de toute la cryptographie moderne (RSA, Diffie-Hellman) et de l'arithmétique modulaire en informatique."
+      ],
+      "tags": [
+        "Congruence modulaire",
+        "ℤ/nℤ",
+        "Relation d'équivalence",
+        "Arithmétique"
+      ]
+    },
+    {
+      "id": "r106_q21",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "3. Logique Propositionnelle & Connecteurs",
+      "question": "Que signifie la « distributivité » du connecteur ET (∧) sur le connecteur OU (∨) en logique ?",
+      "options": [
+        "P ∧ (Q ∨ R) ⇔ (P ∧ Q) ∨ (P ∧ R)",
+        "P ∧ (Q ∨ R) ⇔ (P ∨ Q) ∧ (P ∨ R)",
+        "P ∧ Q ⇔ Q ∧ P",
+        "P ∧ P ⇔ P"
+      ],
+      "correct_index": 0,
+      "explication": "Comme la multiplication se distribue sur l'addition en algèbre numérique a * (b + c) = a*b + a*c, le connecteur ET se distribue sur le OU. Remarquablement, en algèbre de Boole, le OU se distribue aussi sur le ET : P ∨ (Q ∧ R) ⇔ (P ∨ Q) ∧ (P ∨ R).",
+      "pieges": [
+        "En calcul arithmétique ordinaire, + ne se distribue pas sur * (a + (b*c) ≠ (a+b)*(a+c)). Mais en logique booléenne, la distributivité est parfaitement symétrique !"
+      ],
+      "tags": [
+        "Distributivité",
+        "Algèbre de Boole",
+        "Connecteurs logiques"
+      ]
+    },
+    {
+      "id": "r106_q22",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "2. Relations Binaires & Équivalence",
+      "question": "Qu'est-ce qu'une relation d'ordre « total » comparée à un ordre « partiel » ?",
+      "options": [
+        "Dans un ordre total, deux éléments quelconques x et y sont TOUJOURS comparables (on a toujours x R y ou y R x) ; dans un ordre partiel, certains éléments peuvent n'avoir aucun lien de comparaison",
+        "Un ordre total a une infinité d'éléments",
+        "Un ordre partiel est obligatoirement faux",
+        "L'ordre total ne s'applique qu'aux lettres de l'alphabet"
+      ],
+      "correct_index": 0,
+      "explication": "Exemple d'ordre total : ≤ sur ℝ (pour n'importe quel couple de nombres, soit x ≤ y soit y ≤ x). Exemple d'ordre partiel : l'inclusion ⊆ sur P(E) : les ensembles {1} et {2} ne sont pas comparables ({1} n'est pas inclus dans {2} et {2} n'est pas inclus dans {1}).",
+      "pieges": [
+        "Un ordre partiel respecte réflexivité, antisymétrie et transitivité, mais n'impose pas la comparabilité universelle."
+      ],
+      "tags": [
+        "Ordre total",
+        "Ordre partiel",
+        "Comparabilité",
+        "Inclusion"
+      ]
+    },
+    {
+      "id": "r106_q23",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "1. Théorie des Ensembles & Opérations",
+      "question": "Si A = {1, 2} et B = {x, y, z}, quel est le produit cartésien A x B et quel est son cardinal ?",
+      "options": [
+        "A x B = {(1,x), (1,y), (1,z), (2,x), (2,y), (2,z)} et son cardinal est 2 * 3 = 6",
+        "A x B = {1, 2, x, y, z} et son cardinal est 5",
+        "A x B = 6",
+        "A x B est l'ensemble vide"
+      ],
+      "correct_index": 0,
+      "explication": "Le produit cartésien A x B est l'ensemble des couples ordonnés (a, b) formés d'un premier élément issu de A et d'un second élément issu de B. Son cardinal est toujours |A| * |B|.",
+      "pieges": [
+        "Attention : A x B n'est pas égal à B x A (sauf si A=B ou l'un est vide) car les couples sont ordonnés ((1, x) ≠ (x, 1))."
+      ],
+      "tags": [
+        "Produit cartésien",
+        "Couples",
+        "Cardinal",
+        "|A| * |B|"
+      ]
+    },
+    {
+      "id": "r106_q24",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "4. Prédicats, Quantificateurs & Démonstrations",
+      "question": "Comment prouve-t-on de manière irréfutable qu'une proposition universelle de la forme (∀x ∈ E, P(x)) est FAUSSE ?",
+      "options": [
+        "Il suffit d'exhiber UN SEUL élément x0 ∈ E tel que P(x0) soit fausse (un contre-exemple)",
+        "Il faut tester tous les éléments de l'univers un par un",
+        "On ne peut pas prouver qu'elle est fausse",
+        "En calculant la dérivée seconde"
+      ],
+      "correct_index": 0,
+      "explication": "Principe du contre-exemple : un seul contre-exemple détruit instantanément une affirmation universelle. Ex: pour réfuter 'Tous les nombres impairs sont premiers', il suffit de donner 9 (impair et non premier).",
+      "pieges": [
+        "À l'inverse, pour prouver qu'une proposition universelle est VRAIE, un exemple ne suffit jamais (il faut une démonstration générale valable pour tout x) !"
+      ],
+      "tags": [
+        "Contre-exemple",
+        "Réfutation",
+        "∀ universel",
+        "Rigueur"
+      ]
+    },
+    {
+      "id": "r106_q25",
+      "module": "R1.06",
+      "prof": "Mme Fernandes",
+      "chapitre": "1. Théorie des Ensembles & Opérations",
+      "question": "En synthèse des cours de Mme Fernandes, quelle est la raison d'être des mathématiques discrètes en BUT Informatique ?",
+      "options": [
+        "Remplir l'emploi du temps avec des calculs abstraits inutiles",
+        "Fournir le socle formel rigoureux indispensable pour structurer la logique booléenne des processeurs, la théorie des bases de données relationnelles, la vérification formelle d'algorithmes et la cryptographie",
+        "Remplacer les ordinateurs par du papier",
+        "Apprendre à faire des calculs mentaux rapides"
+      ],
+      "correct_index": 1,
+      "explication": "Contrairement aux mathématiques continues (analyse, dérivées, intégrales), l'informatique fonctionne par nature sur des états discrets (0 et 1, bits, ensembles finis, graphes, tables relationnelles). Les mathématiques discrètes en constituent la grammaire formelle exacte.",
+      "pieges": [
+        "Tout le modèle relationnel de Codd (SQL / Merise) repose directement sur la théorie des ensembles et la logique du premier ordre !"
+      ],
+      "tags": [
+        "Synthèse",
+        "Mme Fernandes",
+        "Mathématiques discrètes",
+        "Informatique théorique"
+      ]
+    }
+  ]
+}

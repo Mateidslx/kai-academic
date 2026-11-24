@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="light" style="color-scheme: light;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#C25444">
+    <title>R1.07 — Outils Mathématiques Fondamentaux — KAI Academic</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Marked.js Markdown Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    
+    <!-- DOMPurify for Safe Sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+    
+    <!-- KaTeX CDN for Mathematics Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Mermaid.js for Mindmaps & Flowcharts avec Vrais Losanges -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts: Lexend (Spécial Dyslexie), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            color-scheme: light;
+            --accent-color: #C25444;
+            --scotopic-bg: #FAF8F5;
+            --scotopic-card: #FFFFFF;
+            --scotopic-text: #0F172A;
+            --scotopic-border: #E2E8F0;
+        }
+        body {
+            font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--scotopic-bg);
+            color: var(--scotopic-text);
+            line-height: 1.85;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--scotopic-card);
+            border: 1px solid var(--scotopic-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.02);
+            transition: all 180ms ease-out;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Rich Typography for Rendered Markdown */
+        .revision-prose {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #1e293b;
+        }
+        .revision-prose h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .revision-prose h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .revision-prose h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.65rem;
+        }
+        .revision-prose h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #334155;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .revision-prose p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .revision-prose ul {
+            list-style-type: disc;
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .revision-prose ol {
+            list-style-type: decimal;
+            padding-left: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .revision-prose li {
+            margin-bottom: 0.45rem;
+            color: #334155;
+        }
+        .revision-prose blockquote {
+            border-left: 5px solid #C25444;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 0 0.85rem 0.85rem 0;
+            margin: 1.25rem 0;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .revision-prose code:not(pre code) {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            border: 1px solid #e2e8f0;
+        }
+        .revision-prose pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1.1rem 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            margin: 1.25rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .revision-prose pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: inherit;
+            font-size: inherit;
+        }
+        .revision-prose table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.25rem 0;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            font-size: 0.88rem;
+        }
+        .revision-prose th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .revision-prose td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        .revision-prose tr:last-child td {
+            border-bottom: none;
+        }
+        .revision-prose tr:hover td {
+            background: #fafbfc;
+        }
+        .revision-prose strong {
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .revision-prose hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        /* Container du diagramme Mermaid avec Vrais Losanges */
+        .mermaid-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- En-tête Allégé & Épuré (Accès Rapide et Direct) -->
+    <div class="border-b border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+            <a href="../index.html#revisions" class="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 transition">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Retour au Centre de Révision</span>
+            </a>
+            <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-lg text-xs font-mono font-bold" style="background-color: #C2544415; color: #C25444; border: 1px solid #C2544430;">
+                    R1.07
+                </span>
+                <a href="../index.html" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition" title="Dashboard">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5 flex-1 w-full">
+
+        <!-- Module Header Card avec Description Grande & Équipe Étudiante -->
+        <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-200 bg-white shadow-xs" style="border-left: 6px solid #C25444;">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 rounded-md text-xs font-black font-mono" style="background-color: #C2544415; color: #C25444; border: 1px solid #C2544430;">R1.07</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">R1.07 — Outils Mathématiques Fondamentaux</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1 font-semibold flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i>
+                        <span>Enseignant Référent : <strong>M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère</strong> — IUT de Bayonne et du Pays Basque (Campus d'Anglet)</span>
+                    </p>
+                </div>
+                <a href="../courses/R1.07.html" class="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 shadow-2xs">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>Ouvrir les chapitres dédiés</span>
+                </a>
+            </div>
+
+            <!-- DESCRIPTION PLUS GRANDE ISSUE DE L'ANCIEN DOC -->
+            <div class="mt-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
+                <div class="text-[11px] font-black uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1.5">
+                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                    <span>Description & Objectifs Officiels :</span>
+                </div>
+                Algèbre linéaire fondamentale et calcul matriciel appliqué à l'informatique : Matrices et opérations algébriques (produit ligne par colonne, transposée, non-commutativité), résolution méthodique des systèmes d'équations linéaires par le pivot de Gauss, réduction totale de Gauss-Jordan, calcul de l'inverse d'une matrice via la matrice augmentée, déterminants (Sarrus, comatrice) et mise en œuvre numérique avec Python NumPy (tableaux multidimensionnels et résolution automatique).
+            </div>
+        </div>
+
+        <!-- Onglets Pédagogiques (Niveau 3 : Fiche Approfondie active par défaut !) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            <button onclick="switchLevel('DETAILED')" id="tabDetailed" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs text-white" style="background-color: #C25444; border-color: #C25444;">
+                <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                <span>📖 Fiche Approfondie (Grand Mémo des Partiels)</span>
+            </button>
+            <button onclick="switchLevel('STANDARD')" id="tabStandard" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs bg-white text-slate-700 border-slate-200 hover:bg-slate-50">
+                <i data-lucide="book" class="w-3.5 h-3.5"></i>
+                <span>📘 Révision Standard (Mémo & Exercices)</span>
+            </button>
+            <button onclick="switchLevel('QUICK_REVIEW')" id="tabQuick" class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold border transition flex items-center gap-2 shadow-2xs bg-white text-slate-700 border-slate-200 hover:bg-slate-50">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                <span>⚡ Synthèse Express (Fiche 80/20)</span>
+            </button>
+        </div>
+
+        <!-- Main Content Card with Dynamic Rendered Markdown -->
+        <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-200 bg-white shadow-xs">
+            <div id="revContent" class="revision-prose">
+                <div class="animate-pulse space-y-4">
+                    <div class="h-6 bg-slate-100 rounded w-1/3"></div>
+                    <div class="h-4 bg-slate-100 rounded w-full"></div>
+                    <div class="h-4 bg-slate-100 rounded w-5/6"></div>
+                    <div class="h-32 bg-slate-50 rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Payload JSON contenant les 3 niveaux -->
+    <script>
+        const contentData = {"DETAILED": "# 📖 R1.07 — Synthèse Complète : Outils Mathématiques Fondamentaux\n> **Enseignants référents** : Mme Marie Bruyère / M. Sébastien Dalmau / M. Jean-Noël Lagahe — IUT de Bayonne & du Pays Basque (Campus d'Anglet)\n\n## 🎯 Objectifs officiels & Périmètre\nCalcul matriciel, résolution de systèmes linéaires par pivot de Gauss, arithmétique modulaire (Euclide, Bezout, RSA) et suites récurrentes pour l'analyse de complexité algorithmique.\n\n## 📚 Synthèse des 6 Chapitres & Supports\n\n### Calcul Matriciel Fondamental & Opérations Algébriques (~19 min · 3496 mots)\n**Plan des notions abordées :**\n- 1. Définition et Vocabulaire des Matrices\n- 2. Opérations Algébriques Fondamentales\n- 3. La Transposition\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Calcul Matriciel Fondamental & Opérations Algébriques\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nUne matrice $A$ à coefficients réels de dimension $n \\times p$ (notée $A \\in \\mathcal{M}_{n, p}(\\mathbb{R})$) est un tableau rectangulaire comprenant $n$ lignes et $p$ colonnes :\n\n- Matrice Carrée : Possède autant de lignes que de colonnes ($n = p$). L'ensemble est noté $\\mathcal{M}_n(\\mathbb{R})$.\n- Matrice Ligne : Matrice de dimension $1 \\times p$ (vecteur ligne).\n- Matrice Colonne : Matrice de dimension $n \\times 1$ (vecteur colonne).\n- Matrice Diagonale : Matrice carrée dont tous les coefficients hors de la diagonale principale sont nuls : $a_{i,j} = 0$ pour tout $i \\neq j$.\n\n```\n=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.07 — Produit matriciel) ===\n• Hypothèse initiale : Définition des matrices dans M_n,p(R), addition, multiplication par un scalaire, produit matriciel l...\n• Opération principale : Mise en œuvre de Matrices combiné à Produit matriciel\n• Point clé vérifié : Matrice Ligne : Matrice de dimension $1 \\times p$ (vecteur ligne).\n• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.\n```\n\n### Méthode du Pivot de Gauss & Systèmes Linéaires (~19 min · 3519 mots)\n**Plan des notions abordées :**\n- 1. Formulation Matricielle d'un Système Linéaire\n- 2. Les Trois Opérations Élémentaires sur les Lignes\n- 3. L'Algorithme d'Échelonnement de Gauss Pas-à-Pas\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Méthode du Pivot de Gauss & Systèmes Linéaires\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nConsidérons un système de $n$ équations linéaires à $p$ inconnues $x_1, x_2, \\dots, x_p$ :\n\n- Combinaison linéaire : $L_i \\leftarrow L_i - \\alpha L_j$ (avec $j \\neq i$) pour éliminer un coefficient sous un pivot.\n- Multiplication par un scalaire non nul : $L_i \\leftarrow k \\cdot L_i$ avec $k \\in \\mathbb{R}^*$.\n- Permutation de deux lignes : $L_i \\leftrightarrow L_j$ pour positionner un pivot non nul.\n- De la 3ème équation : $z = \\frac{-18}{-6} = 3$.\n\n```\n=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.07 — Systèmes linéaires) ===\n• Hypothèse initiale : Écriture matricielle AX = B, matrice augmentée (A | B), opérations élémentaires sur les lignes, algo...\n• Opération principale : Mise en œuvre de Pivot de Gauss combiné à Systèmes linéaires\n• Point clé vérifié : Multiplication par un scalaire non nul : $L_i \\leftarrow k \\cdot L_i$ avec $k \\in \\mathbb{R}^*$.\n• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.\n```\n\n### Algorithme de Gauss-Jordan & Inversion Matricielle (~19 min · 3567 mots)\n**Plan des notions abordées :**\n- 1. Définition et Caractérisation de l'Inversibilité\n- 2. L'Algorithme de Gauss-Jordan sur Matrice Augmentée\n- 3. Exemple Complet : Inversion d'une Matrice $3 \\times 3$\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n- Tableau Synthétique de Référence & Aide-Mémoire — Algorithme de Gauss-Jordan & Inversion Matricielle\n- Atelier Pièges d'Examen & Erreurs Éliminatoires\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nUne matrice carrée $A \\in \\mathcal{M}_n(\\mathbb{R})$ est dite inversible (ou régulière) s'il existe une matrice $B \\in \\mathcal{M}_n(\\mathbb{R})$ telle que : $$A \\times B = B \\times A = I_n$$ Si elle existe, cette matrice est unique et notée $A^{-1}$.\n\n- $(A \\times B)^{-1} = B^{-1} \\times A^{-1}$ (l'ordre des facteurs s'inverse !)\n- $(A^T)^{-1} = (A^{-1})^T$\n- $(\\lambda A)^{-1} = \\frac{1}{\\lambda} A^{-1}$ pour tout scalaire $\\lambda \\neq 0$.\n- Identification des données et du cadre théorique : On repère dans l'énoncé les éléments relevant de Gauss-Jordan. Rappel du cours : $(A \\times B)^{-1} = B^{-1} \\times A^{-1}$ (l'ordre des facteurs s'inverse !)\n\n```\n=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.07 — Matrice inverse) ===\n• Hypothèse initiale : Matrices inversibles, méthode de la matrice augmentée [A | In] -> [In | A^-1], calcul de l'inverse p...\n• Opération principale : Mise en œuvre de Gauss-Jordan combiné à Matrice inverse\n• Point clé vérifié : $(A^T)^{-1} = (A^{-1})^T$\n• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.\n```\n\n### Déterminants, Règle de Sarrus & Comatrice (~23 min · 4182 mots)\n**Plan des notions abordées :**\n- 1. Déterminant d'une Matrice Carrée d'Ordre 2\n- 2. Déterminant d'Ordre 3 & Règle Mnémotechnique de Sarrus\n- 3. Développement par Rapport à une Ligne ou une Colonne (Formule de Laplace)\n- 4. Inversion de Matrice par la Méthode de la Comatrice\n- 5. Exemple d'Examen Intégralement Résolu\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nSoit $A = \begin{pmatrix} a & b \\ c & d \\end{pmatrix} \\in \\mathcal{M}_2(\\mathbb{R})$. Son déterminant est le scalaire défini par le produit en croix :\n\n- Comatrice et Transposition : $$ ext{Com}(A) = \begin{pmatrix} -11 & -4 & 6 \\ 2 & 0 & -1 \\ 2 & 1 & -1 \\end{pmatrix} \\implies {}^t ext{Com}(A) = \begin{pmatrix} -11 & 2 & 2 \\ -4 & 0 & 1 \\ 6 & -1 & -1 \\end{pmatrix}$$\n- Matrice Inverse Finale : $$A^{-1} = rac{1}{1} \begin{pmatrix} -11 & 2 & 2 \\ -4 & 0 & 1 \\ 6 & -1 & -1 \\end{pmatrix} = \begin{pmatrix} -11 & 2 & 2 \\ -4 & 0 & 1 \\ 6 & -1 & -1 \\end{pmatrix}$$ Vérification immédiate : $A \\cdot A^{-1} = I_3$. Tout est validé !\n- Vérification des préconditions : Avant tout calcul ou écriture technique, on contrôle que les contraintes de 1. Déterminant d'une Matrice Carrée d'Ordre 2 sont satisfaites sur les données d'entrée.\n- Restauration du cadre rigoureux : On repart de la définition formelle enseignée par M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère dans la section 3. Développement par Rapport à une Ligne ou une Colonne (For.\n\n```\n=== SYNTHÈSE & VÉRIFICATION D'EXAMEN (R1.07 — Sarrus) ===\n• Hypothèse initiale : Calcul de déterminants d'ordre 2 et 3, règle mnémotechnique de Sarrus, développement par rapport à u...\n• Opération principale : Mise en œuvre de Déterminant combiné à Sarrus\n• Point clé vérifié : Calcul des cofacteurs : $$C_{11} = +(-8 - 3) = -11, \\quad C_{12} = -(16 - 12) = -4, \\quad C_{13} = +(2 - (-4))\n• Diagnostic : Aucune anomalie, toutes les contraintes du sujet sont satisfaites.\n```\n\n### Calcul Matriciel Numérique sous Python avec NumPy (~20 min · 3615 mots)\n**Plan des notions abordées :**\n- 1. Pourquoi Utiliser NumPy pour le Calcul Matriciel en BUT ?\n- 2. Déclaration et Inspection de Matrices ndarray\n- 3. Piège Fondamental : Produit de Hadamard vs Produit Matriciel\n- 4. Module numpy.linalg : Déterminant, Inverse et Résolution de Systèmes\n- 5. Application en Traitement d'Images : Filtre de Convolution $3 imes 3$\n- Comprendre ce Chapitre en Partant de Zéro (Méthodologie Pas-à-Pas)\n\n**Points essentiels du cours :**\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\nEn Python standard, manipuler des matrices avec des listes imbriquées ([[1, 2], [3, 4]]) pose deux problèmes majeurs :\n\n- Inefficacité algorithmique : Les boucles imbriquées for en Python pur sont lentes car exécutées par l'interpréteur CPython.\n- Surconsommation mémoire : Chaque élément d'une liste Python standard est un objet enveloppé (boxed object) avec un surcoût d'au moins 28 octets.\n- Identification des données et du cadre théorique : On repère dans l'énoncé les éléments relevant de Python. Rappel du cours : Inefficacité algorithmique : Les boucles imbriquées for en Python pur sont lentes car exécutées par l'interpréteur CPython.\n- Vérification des préconditions : Avant tout calcul ou écriture technique, on contrôle que les contraintes de 1. Pourquoi Utiliser NumPy pour le Calcul Matriciel en BUT ? sont satisfaites sur les données d'entrée.\n\n```\nimport numpy as np\n\n# Déclaration d'une matrice réelle 3x3 (float64)\nA = np.array([\n    [1.0, 0.0, 2.0],\n    [2.0, -1.0, 3.0],\n    [4.0, 1.0, 8.0]\n], dtype=np.float64)\n\n# Vecteur colonne B pour le système AX = B\nB = np.array([1.0, 11.0, 8.0], dtype=np.float64)\n\nprint(\"Dimensions de A (lignes, colonnes) :\", A.shape)  # (3, 3)\nprint(\"Nombre total d'éléments :\", A.size)             # 9\nprint(\"Type machine des éléments :\", A.dtype)          # float64\nprint(\"Transposée de A :\n\", A.T)\n```\n\n### Contrôle de Mathématiques (~15 min · 2704 mots)\n**Plan des notions abordées :**\n- Exercice 1 (3 points)\n- Exercice 2 (3 points)\n- Exercice 3 (3 points)\n- Exercice 4 (4 points)\n- Exercice 5 (4 points)\n- Exercice 6 (3 points)\n\n**Points essentiels du cours :**\nRésoudre le système d'équations suivant en utilisant la méthode du pivot de Gauss et donner l'ensemble $S$ des solutions :\nOn considère les matrices suivantes ($a, b, c$ sont 3 nombres réels) :\n\n- Documents et calculatrices non autorisés — Téléphones dans les sacs\n- Montres connectées strictement interdites\n- Le barème donné est indicatif (Total sur 20 points)\n- Tous les raisonnements et calculs effectués doivent être justifiés en détail\n\n## ⚠️ Pièges d'examen & Réflexes (issu des QCM officiels)\n- **1. Définition des Matrices & Opérations de Base** : [\"Piège d'examen de M. Roegel : vouloir additionner deux matrices (qui exige des dimensions identiques) vs les multiplier (qui exige colonnes(A) = lignes(B)).\"]\n- **1. Définition des Matrices & Opérations de Base** : ['Conséquence directe : (A + B)^2 ≠ A^2 + 2AB + B^2, mais (A + B)^2 = A^2 + AB + BA + B^2 !']\n- **1. Définition des Matrices & Opérations de Base** : [\"Ne pas confondre la transposée A^T avec l'opposée -A ou l'inverse A^-1.\"]\n- **1. Définition des Matrices & Opérations de Base** : [\"Toute matrice non carrée ne peut JAMAIS être symétrique car sa transposée n'a même pas la même dimension !\"]\n- **2. Déterminants & Propriétés** : [\"Attention au signe moins : c'est bien - bc et non + bc.\"]\n- **2. Déterminants & Propriétés** : ['Erreur fatale en examen : appliquer la règle de Sarrus sur une matrice 4x4.']", "STANDARD": "# 📘 R1.07 — Révision Standard : Outils Mathématiques Fondamentaux\n> **Référent** : Mme Marie Bruyère / M. Sébastien Dalmau / M. Jean-Noël Lagahe\n\nCalcul matriciel, résolution de systèmes linéaires par pivot de Gauss, arithmétique modulaire (Euclide, Bezout, RSA) et suites récurrentes pour l'analyse de complexité algorithmique.\n\n## 📌 Notions clés par chapitre\n\n### Calcul Matriciel Fondamental & Opérations Algébriques\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Matrice Carrée : Possède autant de lignes que de colonnes ($n = p$). L'ensemble est noté $\\mathcal{M}_n(\\mathbb{R})$.\n- Matrice Ligne : Matrice de dimension $1 \\times p$ (vecteur ligne).\n- Matrice Colonne : Matrice de dimension $n \\times 1$ (vecteur colonne).\n\n### Méthode du Pivot de Gauss & Systèmes Linéaires\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Combinaison linéaire : $L_i \\leftarrow L_i - \\alpha L_j$ (avec $j \\neq i$) pour éliminer un coefficient sous un pivot.\n- Multiplication par un scalaire non nul : $L_i \\leftarrow k \\cdot L_i$ avec $k \\in \\mathbb{R}^*$.\n- Permutation de deux lignes : $L_i \\leftrightarrow L_j$ pour positionner un pivot non nul.\n\n### Algorithme de Gauss-Jordan & Inversion Matricielle\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- $(A \\times B)^{-1} = B^{-1} \\times A^{-1}$ (l'ordre des facteurs s'inverse !)\n- $(A^T)^{-1} = (A^{-1})^T$\n- $(\\lambda A)^{-1} = \\frac{1}{\\lambda} A^{-1}$ pour tout scalaire $\\lambda \\neq 0$.\n\n### Déterminants, Règle de Sarrus & Comatrice\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Comatrice et Transposition : $$ ext{Com}(A) = \begin{pmatrix} -11 & -4 & 6 \\ 2 & 0 & -1 \\ 2 & 1 & -1 \\end{pmatrix} \\implies {}^t ext{Com}(A) = \begin{pmatrix} -11 & 2 & 2 \\ -4 & 0 & 1 \\ 6 & -1 & -1 \\end{pmatrix}$$\n- Matrice Inverse Finale : $$A^{-1} = rac{1}{1} \begin{pmatrix} -11 & 2 & 2 \\ -4 & 0 & 1 \\ 6 & -1 & -1 \\end{pmatrix} = \begin{pmatrix} -11 & 2 & 2 \\ -4 & 0 & 1 \\ 6 & -1 & -1 \\end{pmatrix}$$ Vérification immédiate : $A \\cdot A^{-1} = I_3$. Tout est validé !\n- Vérification des préconditions : Avant tout calcul ou écriture technique, on contrôle que les contraintes de 1. Déterminant d'une Matrice Carrée d'Ordre 2 sont satisfaites sur les données d'entrée.\n\n### Calcul Matriciel Numérique sous Python avec NumPy\nEnseignant Référent : M. Sébastien Dalmau / M. Jean-Noël Lagahe / Mme Marie Bruyère — IUT de Bayonne et du Pays Basque (Campus d'Anglet)\n- Inefficacité algorithmique : Les boucles imbriquées for en Python pur sont lentes car exécutées par l'interpréteur CPython.\n- Surconsommation mémoire : Chaque élément d'une liste Python standard est un objet enveloppé (boxed object) avec un surcoût d'au moins 28 octets.\n- Identification des données et du cadre théorique : On repère dans l'énoncé les éléments relevant de Python. Rappel du cours : Inefficacité algorithmique : Les boucles imbriquées for en Python pur sont lentes car exécutées par l'interpréteur CPython.\n\n### Contrôle de Mathématiques\nRésoudre le système d'équations suivant en utilisant la méthode du pivot de Gauss et donner l'ensemble $S$ des solutions :\n- Documents et calculatrices non autorisés — Téléphones dans les sacs\n- Montres connectées strictement interdites\n- Le barème donné est indicatif (Total sur 20 points)\n\n## ⚠️ Points de vigilance\n- [\"Piège d'examen de M. Roegel : vouloir additionner deux matrices (qui exige des dimensions identiques) vs les multiplier (qui exige colonnes(A) = lignes(B)).\"]\n- ['Conséquence directe : (A + B)^2 ≠ A^2 + 2AB + B^2, mais (A + B)^2 = A^2 + AB + BA + B^2 !']\n- [\"Ne pas confondre la transposée A^T avec l'opposée -A ou l'inverse A^-1.\"]\n- [\"Toute matrice non carrée ne peut JAMAIS être symétrique car sa transposée n'a même pas la même dimension !\"]", "QUICK_REVIEW": "# ⚡ R1.07 — Fiche Express 80/20 : Outils Mathématiques Fondamentaux\n> **6 chapitres couverts** · Révision rapide avant contrôle\n\n## ✅ Plan d'attaque 80/20\n- **Calcul Matriciel Fondamental & Opérations Algébriques** : 1. Définition et Vocabulaire des Matrices · 2. Opérations Algébriques Fondamentales · 3. La Transposition\n- **Méthode du Pivot de Gauss & Systèmes Linéaires** : 1. Formulation Matricielle d'un Système Linéaire · 2. Les Trois Opérations Élémentaires sur les Lignes · 3. L'Algorithme d'Échelonnement de Gauss Pas-à-Pas\n- **Algorithme de Gauss-Jordan & Inversion Matricielle** : 1. Définition et Caractérisation de l'Inversibilité · 2. L'Algorithme de Gauss-Jordan sur Matrice Augmentée · 3. Exemple Complet : Inversion d'une Matrice $3 \\times 3$\n- **Déterminants, Règle de Sarrus & Comatrice** : 1. Déterminant d'une Matrice Carrée d'Ordre 2 · 2. Déterminant d'Ordre 3 & Règle Mnémotechnique de Sarrus · 3. Développement par Rapport à une Ligne ou une Colonne (Formule de Laplace)\n- **Calcul Matriciel Numérique sous Python avec NumPy** : 1. Pourquoi Utiliser NumPy pour le Calcul Matriciel en BUT ? · 2. Déclaration et Inspection de Matrices ndarray · 3. Piège Fondamental : Produit de Hadamard vs Produit Matriciel\n- **Contrôle de Mathématiques** : Exercice 1 (3 points) · Exercice 2 (3 points) · Exercice 3 (3 points)\n\n## 🎯 Questions incontournables à savoir justifier\n- **Quelle est la condition obligatoire pour que le produit matriciel A * B de deux matrices A et B soit défini ?** → Le nombre de colonnes de la matrice A doit être strictement égal au nombre de lignes de la matrice B\n- **Le produit matriciel est-il commutatif (a-t-on toujours A * B = B * A) ?** → NON, en général A * B ≠ B * A (et B * A peut même ne pas être calculable si les dimensions ne concordent pas)\n- **Qu'appelle-t-on la matrice transposée A^T (ou tA) d'une matrice A de taille (n x p) ?** → La matrice de dimension (p x n) obtenue en échangeant les lignes et les colonnes (l'élément à la ligne i et colonne j devient l'élément à la ligne j et colonne i)\n- **Quelle est la définition d'une matrice symétrique ?** → Une matrice carrée égale à sa propre transposée : A = A^T (c'est-à-dire A_ij = A_ji pour tous i et j)\n- **Quelle est la formule du déterminant d'une matrice carrée 2x2 : A = [[a, b], [c, d]] ?** → det(A) = a * d - b * c"};
+        const moduleColor = "#C25444";
+        let currentLevel = 'DETAILED';
+
+        // Initialisation Mermaid 10 avec configuration permissive pour les losanges
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'neutral',
+                securityLevel: 'loose',
+                flowchart: {
+                    curve: 'basis',
+                    htmlLabels: true
+                }
+            });
+        }
+
+        // Moteur de rendu hybride : Markdown + Math KaTeX + Mermaid SVG
+        function renderRevisionMarkdown(mdText) {
+            if (!mdText) return "";
+
+            // 1. Protection des formules mathématiques KaTeX
+            const blockMath = [];
+            const inlineMath = [];
+
+            let text = mdText.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
+                blockMath.push(formula.trim());
+                return `%%%MATH_BLOCK_${blockMath.length - 1}%%%`;
+            });
+
+            text = text.replace(/\$([^$\n]+?)\$/g, (match, formula) => {
+                inlineMath.push(formula.trim());
+                return `%%%MATH_INLINE_${inlineMath.length - 1}%%%`;
+            });
+
+            // 2. Protection et isolation des blocs Mermaid (avec vrais losanges)
+            const mermaidBlocks = [];
+            text = text.replace(/```mermaid\s*([\s\S]*?)\s*```/g, (match, code) => {
+                mermaidBlocks.push(code.trim());
+                return `%%%MERMAID_BLOCK_${mermaidBlocks.length - 1}%%%`;
+            });
+
+            // 3. Conversion Markdown -> HTML avec Marked.js
+            let html = "";
+            if (typeof marked !== 'undefined' && marked.parse) {
+                html = marked.parse(text);
+            } else {
+                html = escapeHtml(text);
+            }
+
+            // 4. Restauration des formules KaTeX
+            html = html.replace(/%%%MATH_BLOCK_(\d+)%%%/g, (match, id) => {
+                const formula = blockMath[parseInt(id, 10)];
+                if (typeof katex !== 'undefined' && katex.renderToString) {
+                    try {
+                        return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center">${katex.renderToString(formula, { displayMode: true, throwOnError: false })}</div>`;
+                    } catch (e) {
+                        return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center font-mono">$$${formula}$$</div>`;
+                    }
+                }
+                return `<div class="katex-block my-4 p-4 bg-slate-50 border border-slate-200/90 rounded-2xl overflow-x-auto text-center font-mono">$$${formula}$$</div>`;
+            });
+
+            html = html.replace(/%%%MATH_INLINE_(\d+)%%%/g, (match, id) => {
+                const formula = inlineMath[parseInt(id, 10)];
+                if (typeof katex !== 'undefined' && katex.renderToString) {
+                    try {
+                        return `<span class="katex-inline px-1">${katex.renderToString(formula, { displayMode: false, throwOnError: false })}</span>`;
+                    } catch (e) {
+                        return `<span class="katex-inline font-mono text-indigo-700">$${formula}$</span>`;
+                    }
+                }
+                return `<span class="katex-inline font-mono text-indigo-700">$${formula}$</span>`;
+            });
+
+            // 5. Restauration des conteneurs Mermaid
+            html = html.replace(/%%%MERMAID_BLOCK_(\d+)%%%/g, (match, id) => {
+                const code = mermaidBlocks[parseInt(id, 10)];
+                return `<div class="mermaid-card my-6"><div class="mermaid flex justify-center overflow-x-auto py-2">${code}</div></div>`;
+            });
+
+            // 6. Assainissement DOMPurify sécurisé
+            if (typeof DOMPurify !== 'undefined' && DOMPurify.sanitize) {
+                html = DOMPurify.sanitize(html, {
+                    ADD_TAGS: ['span', 'div', 'math', 'semantics', 'mrow', 'mi', 'mo', 'mn', 'annotation', 'svg', 'path', 'g', 'polygon', 'text', 'line', 'polyline', 'rect', 'circle', 'ellipse', 'i'],
+                    ADD_ATTR: ['aria-hidden', 'style', 'class', 'role', 'encoding', 'display', 'data-lucide', 'viewBox', 'fill', 'stroke', 'stroke-width', 'd', 'xmlns', 'points', 'x', 'y', 'width', 'height', 'cx', 'cy', 'rx', 'ry', 'x1', 'y1', 'x2', 'y2']
+                });
+            }
+
+            return html;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function renderCurrentContent() {
+            let raw = contentData[currentLevel];
+            if (!raw) {
+                if (currentLevel === 'DETAILED') raw = contentData['mastery'] || contentData['detailed'];
+                else if (currentLevel === 'STANDARD') raw = contentData['standard'];
+                else if (currentLevel === 'QUICK_REVIEW') raw = contentData['quick'] || contentData['quick_review'];
+            }
+            if (!raw) {
+                const keys = Object.keys(contentData);
+                if (keys.length > 0) raw = contentData[keys[0]];
+            }
+            const container = document.getElementById('revContent');
+            if (!container) return;
+            
+            container.innerHTML = renderRevisionMarkdown(raw || "Contenu académique en cours de chargement...");
+            
+            // Re-render Mermaid SVG avec losanges
+            if (typeof mermaid !== 'undefined' && mermaid.run) {
+                const mermaidNodes = container.querySelectorAll('.mermaid');
+                if (mermaidNodes.length > 0) {
+                    try {
+                        mermaid.run({ nodes: mermaidNodes });
+                    } catch(e) {
+                        console.warn("Mermaid error:", e);
+                    }
+                }
+            }
+
+            // Auto-render des éventuels délimiteurs mathématiques restants
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(container, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+            
+            // Recréer les icônes Lucide
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+        }
+
+        function switchLevel(lvl) {
+            currentLevel = lvl;
+            renderCurrentContent();
+            ['tabDetailed', 'tabStandard', 'tabQuick'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.backgroundColor = "white";
+                    el.style.borderColor = "#e2e8f0";
+                    el.style.color = "#334155";
+                }
+            });
+            const activeId = lvl === 'DETAILED' ? 'tabDetailed' : (lvl === 'STANDARD' ? 'tabStandard' : 'tabQuick');
+            const activeEl = document.getElementById(activeId);
+            if (activeEl) {
+                activeEl.style.backgroundColor = moduleColor;
+                activeEl.style.borderColor = moduleColor;
+                activeEl.style.color = "white";
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            switchLevel('DETAILED');
+        });
+        window.addEventListener('load', () => {
+            renderCurrentContent();
+        });
+    </script>
+</body>
+</html>
