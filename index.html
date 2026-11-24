@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#287271" />
-  <title>Kai Study • Studio de Révision &amp; Rappel Actif BUT 1 Informatique</title>
-  <meta name="description" content="Plateforme d'étude BUT 1 Informatique (IUT de Bayonne – Anglet) : 20 modules, 116 chapitres complets, 235 flashcards SM-2 &amp; QCM d'examen, et 215 supports enseignants vérifiés." />
+  <title>Kai Study · BUT 1 Informatique (IUT de Bayonne – Anglet)</title>
+  <meta name="description" content="Cahier d'étude BUT 1 Informatique (IUT de Bayonne – Anglet) : 20 modules, 116 chapitres, atelier socratique, deep dives code, répétition espacée SM-2 et 215 supports officiels." />
   <link rel="icon" href="favicon.ico" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Lexend:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="kai_study_v2.css?v=2" />
+  <link rel="stylesheet" href="kai_study_v2.css?v=4" />
 </head>
 <body>
   <div class="reading-ruler" id="reading-ruler" aria-hidden="true"></div>
@@ -22,112 +22,117 @@
         <span class="brand-mark" aria-hidden="true">KAI</span>
         <span class="brand-meta">
           <strong>Kai Study · BUT 1</strong>
-          <span>IUT de Bayonne – Campus d'Anglet</span>
+          <span>IUT Bayonne – Anglet</span>
         </span>
       </button>
 
       <nav class="main-nav" aria-label="Navigation principale">
         <button type="button" class="nav-tab is-active" data-view="home">Accueil</button>
         <button type="button" class="nav-tab" data-view="explorer">Cours <span class="nav-count" id="nav-count-chaps">116</span></button>
-        <button type="button" class="nav-tab" data-view="flashcards">Flashcards SM-2</button>
+        <button type="button" class="nav-tab" data-view="socratic">Socratique <span class="nav-count" id="nav-count-socratic">42</span></button>
+        <button type="button" class="nav-tab" data-view="flashcards">Flashcards</button>
         <button type="button" class="nav-tab" data-view="quiz">QCM <span class="nav-count" id="nav-count-quiz">235</span></button>
         <button type="button" class="nav-tab" data-view="library">Supports <span class="nav-count" id="nav-count-docs">215</span></button>
       </nav>
 
       <div class="utility-cluster">
         <button type="button" class="util-btn" id="open-search-btn" aria-label="Rechercher un cours ou notion">Rechercher <span class="kbd-hint">Ctrl+K</span></button>
-        <button type="button" class="util-btn" id="pomo-btn">Pomodoro 25:00</button>
+        <button type="button" class="util-btn mono" id="pomo-btn" title="Minuteur Pomodoro 25 minutes">25:00</button>
         <button type="button" class="util-btn" id="open-prefs-btn">Confort</button>
       </div>
     </div>
   </header>
 
   <main class="app-shell">
-    <!-- ==================== VIEW 1 : ACCUEIL & COCKPIT ==================== -->
+    <!-- ==================== VIEW 1 : ACCUEIL & REGISTRE ==================== -->
     <section id="view-home" class="view-pane is-active" aria-labelledby="hero-title">
-      <div class="surface-card hero-cockpit">
-        <div>
-          <span class="hero-kicker">STUDIO DE RÉVISION · RAPPEL ACTIF &amp; RÉPÉTITION ESPACÉE</span>
-          <h1 class="hero-title" id="hero-title">Révise tout le BUT 1, sans bruit ni contenu vide.</h1>
-          <p class="hero-sub">
-            Tous tes cours de l'IUT d'Anglet en un seul espace : 116 chapitres complets indexés par notions, 235 flashcards SM-2 et QCM d'examen corrigés par les professeurs, et 215 polycopiés vérifiés.
+      <header class="editorial-masthead">
+        <div class="masthead-lead">
+          <p class="masthead-kicker">BUT 1 INFORMATIQUE · IUT DE BAYONNE – ANGLET</p>
+          <h1 class="masthead-title" id="hero-title">Kai Study — Cours &amp; Rappel Actif</h1>
+          <p class="masthead-sub">
+            116 chapitres conformes aux polycopiés, 235 questions d'examen, 42 extraits de code annotés et 215 documents officiels réunis dans une interface sobre.
           </p>
-          <div class="hero-actions">
-            <button type="button" class="btn-solid" data-view="flashcards">Session Flashcards SM-2</button>
-            <button type="button" class="btn-outline" data-view="quiz">QCM Express (10 Q)</button>
-            <button type="button" class="btn-outline" data-view="explorer">Explorer les 116 chapitres</button>
-            <a href="portfolio.html" class="btn-outline">Portfolio Matéi ↗</a>
+          <div class="masthead-actions">
+            <button type="button" class="btn-solid" data-view="socratic">Atelier Socratique</button>
+            <button type="button" class="btn-outline" data-view="flashcards">Flashcards SM-2</button>
+            <button type="button" class="btn-outline" data-view="quiz">QCM Express</button>
+            <a href="portfolio.html" class="btn-outline">Portfolio ↗</a>
           </div>
         </div>
 
-        <div class="hero-stats-panel">
-          <div class="stat-tile">
-            <strong id="kpi-modules">20</strong>
-            <span>Modules BUT 1</span>
+        <dl class="kpi-ledger" aria-label="État du corpus d'étude">
+          <div class="kpi-cell">
+            <dt>Modules</dt>
+            <dd class="mono" id="kpi-modules">20</dd>
           </div>
-          <div class="stat-tile">
-            <strong id="kpi-chapters">0 / 116</strong>
-            <span>Chapitres validés</span>
+          <div class="kpi-cell">
+            <dt>Chapitres lus</dt>
+            <dd class="mono" id="kpi-chapters">0 / 116</dd>
           </div>
-          <div class="stat-tile">
-            <strong id="kpi-quizzes">0 / 235</strong>
-            <span>Cartes SM-2 &amp; QCM</span>
+          <div class="kpi-cell">
+            <dt>Maîtrisés (SM-2 / Socratic)</dt>
+            <dd class="mono" id="kpi-mastery">0 / 235</dd>
           </div>
-          <div class="stat-tile">
-            <strong id="kpi-supports">215</strong>
-            <span>Supports PDFs réels</span>
+          <div class="kpi-cell">
+            <dt>Supports vérifiés</dt>
+            <dd class="mono" id="kpi-supports">215</dd>
           </div>
-        </div>
-      </div>
+        </dl>
+      </header>
 
-      <div class="surface-card resume-strip">
+      <div class="resume-bar">
         <div class="resume-info">
+          <span class="resume-eyebrow">Dernière session</span>
           <strong id="resume-title">R1.05 — Bases de Données &amp; Modélisation (MCD)</strong>
-          <span id="hero-progress-text">Prêt pour ta session d'étude.</span>
+          <span class="resume-meta" id="hero-progress-text">0 chapitres validés · 235 cartes dues</span>
         </div>
-        <div class="utility-cluster">
-          <button type="button" class="btn-solid" id="resume-btn">Reprendre la matière →</button>
-        </div>
+        <button type="button" class="btn-outline" id="resume-btn">Reprendre →</button>
       </div>
 
-      <div class="section-head">
+      <div class="catalog-header">
         <div>
-          <h2>Catalogue des 20 Modules Officiels</h2>
-          <p>Palette WCAG dédiée (Maths en Terracotta doux) et accès direct aux chapitres, fiches de synthèse et QCM.</p>
+          <h2>Catalogue officiel (20 modules)</h2>
+          <p>Palette dédiée par pôle (Mathématiques en terracotta) et accès direct aux chapitres, fiches 3 niveaux et rappels.</p>
         </div>
 
-        <div class="filter-pills" role="group" aria-label="Filtrer les modules par pôle">
-          <button type="button" class="pill-btn is-active" data-home-filter="all">Tous (20)</button>
-          <button type="button" class="pill-btn" data-home-filter="info">Informatique (5)</button>
-          <button type="button" class="pill-btn" data-home-filter="maths">Maths (2)</button>
-          <button type="button" class="pill-btn" data-home-filter="eco">Éco &amp; Gestion (2)</button>
-          <button type="button" class="pill-btn" data-home-filter="sae">SAÉ (6)</button>
-          <button type="button" class="pill-btn" data-home-filter="trans">Transverses (5)</button>
+        <div class="filter-tabs" role="group" aria-label="Filtrer les modules par pôle">
+          <button type="button" class="filter-tab is-active" data-home-filter="all">Tous (20)</button>
+          <button type="button" class="filter-tab" data-home-filter="info">Informatique (5)</button>
+          <button type="button" class="filter-tab" data-home-filter="maths">Maths (2)</button>
+          <button type="button" class="filter-tab" data-home-filter="eco">Éco &amp; Gestion (2)</button>
+          <button type="button" class="filter-tab" data-home-filter="sae">SAÉ (6)</button>
+          <button type="button" class="filter-tab" data-home-filter="trans">Transverses (5)</button>
         </div>
       </div>
 
-      <div class="modules-grid" id="modules-grid"></div>
+      <div class="modules-ledger" id="modules-grid"></div>
     </section>
 
     <!-- ==================== VIEW 2 : EXPLORATEUR & LECTEUR ==================== -->
     <section id="view-explorer" class="view-pane" aria-label="Explorateur des cours et chapitres">
       <div class="explorer-layout">
-        <aside class="surface-card explorer-rail" id="explorer-rail" aria-label="Liste des 20 modules"></aside>
+        <aside class="explorer-rail" id="explorer-rail" aria-label="Liste des 20 modules"></aside>
         <div class="explorer-main" id="explorer-main"></div>
       </div>
     </section>
 
-    <!-- ==================== VIEW 3 : FLASHCARDS SM-2 ==================== -->
+    <!-- ==================== VIEW 3 : ATELIER SOCRATIQUE & ANTIVIBE ==================== -->
+    <section id="view-socratic" class="view-pane" aria-label="Atelier Socratique et Deep Dive Code">
+      <div id="socratic-host"></div>
+    </section>
+
+    <!-- ==================== VIEW 4 : FLASHCARDS SM-2 ==================== -->
     <section id="view-flashcards" class="view-pane" aria-label="Flashcards à répétition espacée SM-2">
       <div class="flashcards-wrap" id="flashcards-host"></div>
     </section>
 
-    <!-- ==================== VIEW 4 : QCM EXAMEN ==================== -->
+    <!-- ==================== VIEW 5 : QCM EXAMEN ==================== -->
     <section id="view-quiz" class="view-pane" aria-label="Simulateur de QCM d'examen">
       <div class="quiz-wrap" id="quiz-host"></div>
     </section>
 
-    <!-- ==================== VIEW 5 : BIBLIOTHÈQUE PDFs ==================== -->
+    <!-- ==================== VIEW 6 : BIBLIOTHÈQUE PDFs ==================== -->
     <section id="view-library" class="view-pane" aria-label="Bibliothèque des supports officiels">
       <div id="library-host"></div>
     </section>
@@ -135,26 +140,26 @@
 
   <!-- ==================== MODAL RECHERCHE GLOBALE ==================== -->
   <div class="modal-backdrop" id="search-modal" role="dialog" aria-modal="true" aria-labelledby="search-modal-title">
-    <div class="surface-card modal-card">
-      <div class="section-head" style="margin:0;">
-        <h2 id="search-modal-title" style="font-size:1.1rem;">Recherche Instantanée (Modules, Chapitres, Supports)</h2>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <h2 id="search-modal-title">Recherche instantanée (modules, chapitres, deep dives, supports)</h2>
         <button type="button" class="btn-outline" id="close-search-btn">Fermer (Échap)</button>
       </div>
-      <input type="search" class="search-input" id="global-search-input" placeholder="Ex: pointeurs, Merise, Karnaugh, DNS, gestion, C99..." aria-label="Terme à rechercher" />
+      <input type="search" class="search-input" id="global-search-input" placeholder="Ex: pointeurs, Merise, Karnaugh, chmod, C99, malloc..." aria-label="Terme à rechercher" />
       <div class="search-results" id="search-results"></div>
     </div>
   </div>
 
   <!-- ==================== MODAL CONFORT VISUEL SCOTOPIC ==================== -->
   <div class="modal-backdrop" id="prefs-modal" role="dialog" aria-modal="true" aria-labelledby="prefs-modal-title">
-    <div class="surface-card modal-card">
-      <div class="section-head" style="margin:0;">
-        <h2 id="prefs-modal-title" style="font-size:1.1rem;">Confort de Lecture &amp; Ergonomie Scotopique</h2>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <h2 id="prefs-modal-title">Confort de lecture &amp; ergonomie scotopique</h2>
         <button type="button" class="btn-outline" id="close-prefs-btn">Fermer</button>
       </div>
 
       <div>
-        <p class="chapter-summary" style="margin-bottom:8px;">Fond anti-éblouissement (zéro blanc pur) :</p>
+        <p class="prefs-label">Fond anti-éblouissement (aucun blanc pur #FFFFFF) :</p>
         <div class="swatch-row">
           <button type="button" class="swatch-btn" data-tint-choice="cream" style="background:#FAF8F5;color:#1E293B;">Crème Reposant</button>
           <button type="button" class="swatch-btn" data-tint-choice="mint" style="background:#EAF5F0;color:#142B3C;">Menthe Douce</button>
@@ -163,14 +168,14 @@
         </div>
       </div>
 
-      <div class="utility-cluster" style="justify-content:space-between;flex-wrap:wrap;">
+      <div class="prefs-toggles">
         <button type="button" class="btn-outline" id="pref-font">Police : Lexend (Dyslexie)</button>
         <button type="button" class="btn-outline" id="pref-bionic" aria-pressed="false">Lecture Bionique : Désactivée</button>
         <button type="button" class="btn-outline" id="pref-ruler" aria-pressed="false">Réglette guidée : Désactivée</button>
       </div>
 
       <div>
-        <label for="pref-size-slider" style="display:flex;justify-content:space-between;font-size:0.88rem;font-weight:700;margin-bottom:6px;">
+        <label for="pref-size-slider" class="prefs-range-label">
           <span>Taille du texte</span>
           <span class="mono" id="pref-size-label">16 px</span>
         </label>
@@ -179,7 +184,7 @@
     </div>
   </div>
 
-  <script src="kai_study_data.js?v=2" defer></script>
-  <script src="kai_study_v2.js?v=2" defer></script>
+  <script src="kai_study_data.js?v=4" defer></script>
+  <script src="kai_study_v2.js?v=4" defer></script>
 </body>
 </html>
