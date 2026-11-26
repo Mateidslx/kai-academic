@@ -1037,6 +1037,30 @@
       if (items.length >= MAX_ITEMS) return;
       const tag = el.localName;
       if (SKIP.has(tag) || el === env.host) return;
+      if (el.id === "preloader-curtain" || el.id === "scroll-island" || el.id === "cmdk-modal" || el.id === "cli-modal") return;
+      if (el.classList && (el.classList.contains("figma-agent-cursor") || el.classList.contains("figma-selection-overlay") || el.classList.contains("tab-hover-preview"))) return;
+      if (el.classList && el.classList.contains("hero-marquee-track")) {
+        el.style.animationPlayState = "paused";
+      }
+      if (el.classList && el.classList.contains("drum-cell")) {
+        const tr = el.querySelector(".drum-track");
+        const curDigit = tr ? (tr.getAttribute("data-cur") || tr.getAttribute("data-digit") || "0") : (el.textContent || "0").trim().charAt(0);
+        const cloneSpan = document.createElement("span");
+        cloneSpan.textContent = curDigit;
+        const fakeCs = css(el);
+        const box = conv(el.getBoundingClientRect(), ctx.layer);
+        if (box.w > 1 && box.h > 1) {
+          const root = document.createElement("div");
+          root.setAttribute("style", rootStyle(fakeCs, true) + "display:flex;align-items:center;justify-content:center;");
+          root.appendChild(cloneSpan);
+          textItem({ ...box, layer: ctx.layer, key: ctx.key(), op: ctx.op, clip: null, parentBox: ctx.boxItem, blend: ctx.blend || "" }, root, { ...box }, fakeCs, ctx.layer);
+        }
+        return;
+      }
+      if (tag === "iframe" && el.classList && el.classList.contains("app-live-stage")) {
+        const wrap = el.parentElement;
+        if (wrap && wrap.querySelector && wrap.querySelector(".app-preview-img")) return;
+      }
       const cs = css(el);
       const disp = cs.display;
       if (disp === "none") return;
@@ -3559,11 +3583,6 @@
       this.engine.setModel(model);
       this.model = model;
       mark("mount");
-      if (typeof this._bootScrollY === "number" && !this.tour && !this._autoReleased && Math.abs(this.env.geom().sy - this._bootScrollY) > 260) {
-        this._autoReleased = true;
-        stop(true);
-        return;
-      }
       const wait = 1500 - (performance.now() - this.t0);
       if (wait > 0) await sleep(wait);
       if (this.dead || this._destroying) return;
@@ -3608,10 +3627,6 @@
       scrollTarget.removeEventListener("scroll", checkUnexpectedScroll);
       if (aborted || Math.abs(env.geom().sy - g.sy) > 120) {
         this.view.frozen = null;
-        if (!this._autoReleased && (aborted || Math.abs(env.geom().sy - g.sy) > 260)) {
-          this._autoReleased = true;
-          stop(true);
-        }
         return;
       }
       if (!aborted) progScroll(g.sy, g.sx);
@@ -3625,15 +3640,7 @@
       };
       const scrollTarget = this.env.isRoot ? window : this.env.scroller;
       on(scrollTarget, "scroll", () => {
-        if (!this.view.frozen) {
-          this.view.syncWorld();
-          if (typeof this._bootScrollY === "number" && !this.tour && !this._autoReleased) {
-            if (Math.abs(this.env.geom().sy - this._bootScrollY) > 260) {
-              this._autoReleased = true;
-              stop(true);
-            }
-          }
-        }
+        if (!this.view.frozen) this.view.syncWorld();
       }, { passive: true });
       on(window, "resize", () => this.view.measure());
       on(window, "wheel", () => {
@@ -3764,7 +3771,9 @@
           `<b>${workers}</b> agents<span class="sep"></span><b>${done.toLocaleString()}</b> / ${total.toLocaleString()} layers` +
           (below && pend && !this.tour && E.backlog() === 0 ? `<span class="sep"></span>scroll to keep building` : "");
       }
-      v.barFill.style.width = total ? `${(done / total) * 100}%` : "0%";
+      const rawBarPct = total > 0 ? (done / total) * 100 : 0;
+      const safeBarPct = Number.isFinite(rawBarPct) ? clamp(rawBarPct, 0, 100) : 0;
+      v.barFill.style.width = `${safeBarPct.toFixed(1)}%`;
       const busy = E.cursors.filter((c) => c.task).slice(-5);
       const key = busy.map((c) => c.id).join(",");
       if (key !== this._dots) {
@@ -3832,6 +3841,7 @@
   // put the page back once our canvas covers it (or if we bail out early).
   async function unhidePage() {
     if (typeof window.__swarmUnhide === 'function') { try { window.__swarmUnhide(); } catch(_) {} }
+    document.querySelectorAll('.hero-marquee-track').forEach((el) => { el.style.animationPlayState = ''; });
     if (!window.__swarmHidden) return;
     window.__swarmHidden = false;
     try {

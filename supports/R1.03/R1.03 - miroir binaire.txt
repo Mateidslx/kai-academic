@@ -1,0 +1,37 @@
+// Table qui écrit le mot miroir d'un mot binaire donné
+// Par exemple pour 0110010 elle écrit 0100110
+// Méthode utilisée :
+// On commence par remplacer les 0 par des z et les 1 par des u
+// Puis on lit la chaine de droite à gauche en allant écrire 0 ou 1 à la fin selon que l'on a lu z ou u
+// et en remplaçant le z ou le u lu par une * pour marquer qu'il a été traité.
+// Puis on revient en arrière chercher le prochain z ou u non encore traité
+// Quand on arrive au bout on efface toutes les * pour enlever les traces.
+
+// Table d'états (5 états)
+//-----------------------------------------------------
+//    état	car lu     état suiv   écrit  opération
+//-----------------------------------------------------
+    remplace       0        remplace     z       D
+    remplace       1        remplace     u       D
+    remplace       .        marque       .       G
+    marque         0        marque       0       G
+    marque         1        marque       1       G
+    marque         *        marque       *       G
+    marque         z        ecrit0       *       D
+    marque         u        ecrit1       *       D
+    marque         .        efface       .       D
+    ecrit0         0        ecrit0       0       D
+    ecrit0         1        ecrit0       1       D
+    ecrit0         z        ecrit0       z       D
+    ecrit0         u        ecrit0       u       D
+    ecrit0         *        ecrit0       *       D
+    ecrit0         .        marque       0       G
+    ecrit1         0        ecrit1       0       D
+    ecrit1         1        ecrit1       1       D
+    ecrit1         z        ecrit1       z       D
+    ecrit1         u        ecrit1       u       D
+    ecrit1         *        ecrit1       *       D
+    ecrit1         .        marque       1       G
+    efface         *        efface       .       D
+    efface         0        remplace     0       A
+    efface         1        remplace     1       A

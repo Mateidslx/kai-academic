@@ -865,7 +865,7 @@ if fmt == "pdf":
 
     const SECTIONS = [
       { id: 'hero', label: '00 / HERO' },
-      { id: 'about', label: '01 / TRAJECTOIRE' },
+      { id: 'about', label: '01 / BENTO' },
       { id: 'flagships', label: '02 / ÉTUDES CAS' },
       { id: 'exploded-architecture', label: '03 / TOTEM 3D' },
       { id: 'parcours', label: '04 / PARCOURS' },
@@ -939,7 +939,560 @@ if fmt == "pdf":
     syncIsland();
   }
 
+  function initScrollStagger() {
+    const targets = document.querySelectorAll('.flagship-card, .parcours-card, .bento-card');
+    if (!targets.length) return;
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+    targets.forEach((el, idx) => {
+      el.classList.add('ux-stagger-item');
+      el.style.setProperty('--stagger-i', String(idx % 3));
+    });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((ent) => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add('is-revealed');
+          obs.unobserve(ent.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    targets.forEach((el) => obs.observe(el));
+  }
+
+  function initHeroDitherCanvas() {
+    const canvas = document.getElementById('hero-dither-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const bayer4 = [
+      [0, 8, 2, 10],
+      [12, 4, 14, 6],
+      [3, 11, 1, 9],
+      [15, 7, 13, 5]
+    ];
+
+    let cols = 0, rows = 0, w = 0, h = 0;
+    const cell = 6;
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      w = Math.max(240, Math.floor(rect.width));
+      h = Math.max(240, Math.floor(rect.height));
+      canvas.width = w;
+      canvas.height = h;
+      cols = Math.ceil(w / cell);
+      rows = Math.ceil(h / cell);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let mx = 0.5, my = 0.44, activeHover = 0;
+    const parent = canvas.parentElement || canvas;
+    parent.addEventListener('pointermove', (e) => {
+      const r = canvas.getBoundingClientRect();
+      mx = Math.max(0, Math.min(1, (e.clientX - r.left) / Math.max(1, r.width)));
+      my = Math.max(0, Math.min(1, (e.clientY - r.top) / Math.max(1, r.height)));
+      activeHover = 1;
+    }, { passive: true });
+    parent.addEventListener('pointerleave', () => { activeHover = 0; });
+
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let frame = 0;
+    let lastTs = 0;
+
+    function draw(ts) {
+      if (!reduced && ts - lastTs < 48) {
+        requestAnimationFrame(draw);
+        return;
+      }
+      lastTs = ts;
+      frame += 0.045;
+
+      ctx.fillStyle = '#050507';
+      ctx.fillRect(0, 0, w, h);
+
+      const cx = cols * 0.5;
+      const cy = rows * 0.44;
+      const norm = Math.max(1, Math.min(cols, rows) * 0.46);
+      const pmx = mx * cols;
+      const pmy = my * rows;
+
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const dx = (x - cx) / norm;
+          const dy = (y - cy) / norm;
+          const distCursor = Math.hypot((x - pmx) / norm, (y - pmy) / norm);
+          const attract = activeHover * Math.exp(-distCursor * 3.8);
+
+          const r = Math.sqrt(dx * dx + dy * dy);
+          const ang = Math.atan2(dy, dx) + attract * 0.65;
+          const vortex = Math.sin(r * 6.2 - frame * 1.45 + ang * 4.0) * 0.5 + 0.5;
+          const radial = Math.max(0, 1.06 - r * 0.72) * (r > 0.14 ? 1 : r / 0.14);
+          const lum = vortex * radial + attract * 0.42;
+          const threshold = (bayer4[y & 3][x & 3] + 0.5) / 16;
+
+          if (lum > threshold + 0.12) {
+            ctx.fillStyle = (attract > 0.25 || lum > 0.86) ? '#f4f4f5' : '#ff1e42';
+            ctx.fillRect(x * cell, y * cell, cell - 1, cell - 1);
+          }
+        }
+      }
+      if (!reduced) requestAnimationFrame(draw);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  function initSkiper80Showcase() {
+    const items = document.querySelectorAll('.s80-item[data-s80]');
+    if (!items.length) return;
+
+    const DATA = {
+      cloud: {
+        kicker: '01 // CLOUD CONTROL PLANE',
+        badge: '41/41 PYTEST VERTS',
+        title: 'Cloud Agents & Orchestration 24/7',
+        desc: '20 agents spécialisés (<code>CLOUD_MASTER</code>, <code>QA_AGENT</code>, <code>SECURITY_AUDIT_AGENT</code>, <code>FRONTEND_AGENT</code>…) orchestrés via DAG SQLite (<code>TaskGraphDB</code>), routage multi-modèles et vérification physique fail-closed sur Oracle Cloud Ubuntu.',
+        metrics: [
+          ['20', 'Agents Spécialisés'],
+          ['41/41', 'Tests Cloud Passés'],
+          ['OCI', 'Ubuntu Systemd 24/7']
+        ],
+        href: '#case-kai',
+        cta: 'Inspecter StateVerifier & DAG ↓'
+      },
+      zentable: {
+        kicker: '02 // ZENTABLE PRO (NOUVEAU EXCEL)',
+        badge: 'REACT 19 / TYPESCRIPT',
+        title: 'ZenTable Pro — Tableur Web Haute Performance',
+        desc: 'Conçu comme une alternative moderne et fluide à Excel en <strong>React 19 + TypeScript strict</strong> : grille réactive, moteur de formules dédié et ergonomie sans lourdeur pour manipuler des tableaux structurés.',
+        metrics: [
+          ['React 19', 'Rendu Réactif'],
+          ['TS Strict', 'Typage Sûr'],
+          ['Formules', 'Moteur Tableur']
+        ],
+        href: '#about',
+        cta: 'Voir dans le parcours Systèmes ↓'
+      },
+      quant: {
+        kicker: '03 // QUANT & FALSIFICATION',
+        badge: 'RMSE 0,677°C',
+        title: 'Moteur Quantitatif Polymarket & Audit Adversarial',
+        desc: 'Réseau <strong>PyTorch GMM-MDN</strong> entraîné sur <strong>466 572 prévisions</strong> (ECE ramenée à 1,43% par calibration PAV), <code>TCN 30×32</code> sur carnets L2 et coupure volontaire V43 après détection de biais look-ahead.',
+        metrics: [
+          ['466 572', 'Prévisions Replay'],
+          ['0,677°C', 'RMSE 5-Gaussian MDN'],
+          ['1,43%', 'ECE après PAV']
+        ],
+        href: '#case-quant',
+        cta: 'Ouvrir l\'étude Polymarket ↓'
+      },
+      oss: {
+        kicker: '04 // UPSTREAM & APPSEC',
+        badge: '46 PRs FUSIONNÉES',
+        title: 'BasedHardware/omi, Twenty CRM & SafePath-Lint',
+        desc: 'Correctifs sécurité et concurrence fusionnés en production sur <strong>Omi</strong> (7 PRs : XSS, OverflowError, CWE-209) et <strong>Twenty CRM</strong> (<code>#26490</code>), complétés par l\'analyseur AST <strong>SafePath-Lint (MIT, CWE-22)</strong>.',
+        metrics: [
+          ['46 PRs', 'Fusionnées Upstream'],
+          ['7 PRs', 'BasedHardware/omi'],
+          ['CWE-22', 'SafePath AST MIT']
+        ],
+        href: '#case-oss',
+        cta: 'Inspecter les PRs & AST ↓'
+      },
+      b2b: {
+        kicker: '05 // FORGE B2B & ISO C99',
+        badge: '735 TESTS + VALGRIND 0',
+        title: 'Extracteur B2B (735 Tests), Kai Academic & LRU C99',
+        desc: 'Extracteur documentaire B2B validé par <strong>735 tests unitaires</strong> (310 + 425), bibliothèque <strong>Kai Academic</strong> indexée SQLite FTS5 BM25 (79 fiches Lexend) et structures <strong>ISO C99</strong> à 0 octet perdu sous Valgrind.',
+        metrics: [
+          ['735', 'Tests Unitaires B2B'],
+          ['79 p.', 'Kai Academic FTS5'],
+          ['0 fuite', 'Valgrind ISO C99']
+        ],
+        href: '#case-c99',
+        cta: 'Voir C99 & Forge B2B ↓'
+      }
+    };
+
+    const kickerEl = document.getElementById('s80-kicker');
+    const badgeEl = document.getElementById('s80-badge');
+    const titleEl = document.getElementById('s80-title');
+    const descEl = document.getElementById('s80-desc');
+    const metricsEl = document.getElementById('s80-metrics');
+    const linkEl = document.getElementById('s80-link');
+
+    function activate(key) {
+      const entry = DATA[key];
+      if (!entry) return;
+      items.forEach((btn) => {
+        const active = btn.getAttribute('data-s80') === key;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-selected', String(active));
+      });
+      if (kickerEl) kickerEl.textContent = entry.kicker;
+      if (badgeEl) badgeEl.textContent = entry.badge;
+      if (titleEl) titleEl.textContent = entry.title;
+      if (descEl) descEl.innerHTML = entry.desc;
+      if (metricsEl) {
+        metricsEl.innerHTML = entry.metrics
+          .map(([v, l]) => `<div class="s80-stat"><strong>${v}</strong><span>${l}</span></div>`)
+          .join('');
+      }
+      if (linkEl) {
+        linkEl.href = entry.href;
+        linkEl.textContent = entry.cta;
+      }
+    }
+
+    items.forEach((btn) => {
+      const key = btn.getAttribute('data-s80');
+      btn.addEventListener('click', () => activate(key));
+      btn.addEventListener('mouseenter', () => activate(key));
+    });
+  }
+
+  function initSpotlightSurfaces() {
+    const surfaces = document.querySelectorAll('.spotlight-surface');
+    if (!surfaces.length) return;
+    surfaces.forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
+        el.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
+      });
+    });
+  }
+
+  function initGlobalDitherBg() {
+    const canvas = document.getElementById('global-dither-bg');
+    if (!canvas) return;
+    const gl = canvas.getContext('webgl', { alpha: true, antialias: false, depth: false });
+
+    let targetMouse = { x: 0.65, y: 0.52 };
+    let smoothMouse = { x: 0.65, y: 0.52 };
+    let mouseVel = 0;
+    let clickPos = { x: 0.5, y: 0.5 };
+    let clickTime = -10.0;
+
+    window.addEventListener('pointermove', (e) => {
+      const nx = Math.max(0, Math.min(1, e.clientX / Math.max(1, window.innerWidth)));
+      const ny = Math.max(0, Math.min(1, 1.0 - e.clientY / Math.max(1, window.innerHeight)));
+      mouseVel = Math.min(1.0, mouseVel + Math.hypot(nx - targetMouse.x, ny - targetMouse.y) * 5.0);
+      targetMouse.x = nx;
+      targetMouse.y = ny;
+    }, { passive: true });
+
+    window.addEventListener('pointerdown', (e) => {
+      clickPos.x = Math.max(0, Math.min(1, e.clientX / Math.max(1, window.innerWidth)));
+      clickPos.y = Math.max(0, Math.min(1, 1.0 - e.clientY / Math.max(1, window.innerHeight)));
+      clickTime = performance.now() * 0.001;
+    }, { passive: true });
+
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (gl) {
+      const vsSrc = `
+        attribute vec2 aPos;
+        varying vec2 vUv;
+        void main() {
+          vUv = aPos * 0.5 + 0.5;
+          gl_Position = vec4(aPos, 0.0, 1.0);
+        }
+      `;
+      const fsSrc = `
+        precision highp float;
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uScroll;
+        uniform float uVel;
+        uniform float uClickAge;
+        uniform vec2 uRes;
+        uniform vec2 uMouse;
+        uniform vec2 uClickPos;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(
+            mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+            mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+            u.y
+          );
+        }
+
+        float bayer4x4(vec2 p) {
+          int x = int(mod(p.x, 4.0));
+          int y = int(mod(p.y, 4.0));
+          int idx = x + y * 4;
+          if (idx == 0) return 0.0 / 16.0;
+          if (idx == 1) return 8.0 / 16.0;
+          if (idx == 2) return 2.0 / 16.0;
+          if (idx == 3) return 10.0 / 16.0;
+          if (idx == 4) return 12.0 / 16.0;
+          if (idx == 5) return 4.0 / 16.0;
+          if (idx == 6) return 14.0 / 16.0;
+          if (idx == 7) return 6.0 / 16.0;
+          if (idx == 8) return 3.0 / 16.0;
+          if (idx == 9) return 11.0 / 16.0;
+          if (idx == 10) return 1.0 / 16.0;
+          if (idx == 11) return 9.0 / 16.0;
+          if (idx == 12) return 15.0 / 16.0;
+          if (idx == 13) return 7.0 / 16.0;
+          if (idx == 14) return 13.0 / 16.0;
+          return 5.0 / 16.0;
+        }
+
+        void main() {
+          // Crisp separated 6px square pixels over pure #050507 Obsidian Void
+          float gran = 6.0;
+          vec2 pix = floor(gl_FragCoord.xy / gran);
+          vec2 inCell = fract(gl_FragCoord.xy / gran);
+          float pixelBox = step(0.24, inCell.x) * step(0.24, inCell.y);
+
+          vec2 uvPix = (pix * gran) / max(uRes, vec2(1.0));
+          float aspect = uRes.x / max(1.0, uRes.y);
+          vec2 p = vec2((uvPix.x - 0.5) * aspect, uvPix.y - 0.5);
+          vec2 m = vec2((uMouse.x - 0.5) * aspect, uMouse.y - 0.5);
+
+          // Magnetic cursor scatter + shockwave ripple
+          vec2 dVec = p - m;
+          float dist = length(dVec);
+          vec2 warpedP = p - normalize(dVec + vec2(0.0001)) * exp(-dist * 4.2) * (0.08 + uVel * 0.14);
+
+          float mRing = exp(-abs(dist - 0.14) * 26.0) * 0.65 + exp(-dist * 6.5) * (0.38 + uVel * 0.45);
+
+          vec2 cPos = vec2((uClickPos.x - 0.5) * aspect, uClickPos.y - 0.5);
+          float cDist = length(p - cPos);
+          float shock = 0.0;
+          if (uClickAge > 0.0 && uClickAge < 1.8) {
+            float waveR = uClickAge * 0.78;
+            shock = exp(-abs(cDist - waveR) * 32.0) * (1.0 - uClickAge * 0.55) * 0.95;
+          }
+
+          // Sparse, structured scroll-morphing geometries (keeps 75% Noir void for crisp AAA typography)
+          // Mode 0: Asymmetric Hero Orbit Dots (subtle on left, rich wave bands)
+          vec2 sp = warpedP - vec2(0.32 * aspect, 0.0);
+          float sr = length(sp);
+          float sang = atan(sp.y, sp.x);
+          float swirlField = pow(max(0.0, sin(sr * 6.0 - uTime * 1.1 + sang * 3.0)), 2.0) * clamp(1.0 - sr * 0.85, 0.0, 1.0);
+
+          // Mode 1: Rotating Dithered 3D Sphere on right half
+          vec2 gp = warpedP - vec2(0.28 * aspect, 0.0);
+          float gr = length(gp);
+          float sphereMask = smoothstep(0.42, 0.39, gr);
+          float gz = sqrt(max(0.0, 0.41 * 0.41 - gr * gr));
+          vec3 snorm = normalize(vec3(gp.x, gp.y, gz + 0.001));
+          vec3 ldir = normalize(vec3(cos(uTime * 0.65), sin(uTime * 0.45), 0.72));
+          float sphereField = max(0.0, dot(snorm, ldir)) * sphereMask;
+
+          // Mode 2: Sculpted Interference Lattice Waves
+          float waveField = pow(max(0.0, sin(warpedP.x * 6.8 + uTime * 0.85) * cos(warpedP.y * 5.8 - uTime * 0.65)), 2.0) * 0.72;
+
+          float w1 = clamp(1.0 - abs(uScroll - 0.0) * 1.15, 0.0, 1.0);
+          float w2 = clamp(1.0 - abs(uScroll - 1.2) * 1.0, 0.0, 1.0);
+          float w3 = clamp(uScroll - 1.4, 0.0, 1.0) * 0.85;
+          float morphed = (swirlField * w1 + sphereField * w2 + waveField * w3) / max(0.9, w1 + w2 + w3);
+
+          // Sparse ambient dithered stars + interactive magnetic wake
+          float grainField = pow(noise(warpedP * 2.8 + vec2(uTime * 0.06, -uScroll * 0.3)), 2.2) * 0.55;
+          float totalField = clamp(max(morphed * 0.78, grainField) + mRing + shock, 0.0, 1.0);
+
+          float thr = bayer4x4(pix);
+          float mask = step(thr + 0.34, totalField) * pixelBox;
+
+          vec3 voidCol = vec3(0.02, 0.02, 0.028);
+          vec3 crimson = vec3(1.0, 0.118, 0.259);
+          vec3 darkCrimson = vec3(0.42, 0.04, 0.10);
+          vec3 ashWhite = vec3(0.96, 0.96, 0.97);
+
+          vec3 dotCol = mix(darkCrimson, crimson, clamp(totalField * 1.1, 0.0, 1.0));
+          float whitePeak = smoothstep(0.82, 0.96, totalField) * 0.55 + clamp(shock, 0.0, 1.0) * 0.75;
+          dotCol = mix(dotCol, ashWhite, clamp(whitePeak, 0.0, 0.85));
+
+          vec3 outCol = mix(voidCol, dotCol, mask * 0.85);
+          gl_FragColor = vec4(outCol, 1.0);
+        }
+      `;
+
+      function compile(type, src) {
+        const sh = gl.createShader(type);
+        gl.shaderSource(sh, src);
+        gl.compileShader(sh);
+        return gl.getShaderParameter(sh, gl.COMPILE_STATUS) ? sh : null;
+      }
+
+      const vs = compile(gl.VERTEX_SHADER, vsSrc);
+      const fs = compile(gl.FRAGMENT_SHADER, fsSrc);
+      if (vs && fs) {
+        const prog = gl.createProgram();
+        gl.attachShader(prog, vs);
+        gl.attachShader(prog, fs);
+        gl.linkProgram(prog);
+        if (gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+          gl.useProgram(prog);
+          const buf = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+          const aPos = gl.getAttribLocation(prog, 'aPos');
+          gl.enableVertexAttribArray(aPos);
+          gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+          const uTime = gl.getUniformLocation(prog, 'uTime');
+          const uScroll = gl.getUniformLocation(prog, 'uScroll');
+          const uVel = gl.getUniformLocation(prog, 'uVel');
+          const uClickAge = gl.getUniformLocation(prog, 'uClickAge');
+          const uRes = gl.getUniformLocation(prog, 'uRes');
+          const uMouse = gl.getUniformLocation(prog, 'uMouse');
+          const uClickPos = gl.getUniformLocation(prog, 'uClickPos');
+
+          function resizeGl() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+            canvas.width = Math.max(320, Math.floor(window.innerWidth * dpr));
+            canvas.height = Math.max(240, Math.floor(window.innerHeight * dpr));
+            gl.viewport(0, 0, canvas.width, canvas.height);
+          }
+          resizeGl();
+          window.addEventListener('resize', resizeGl, { passive: true });
+
+          function renderGl(now) {
+            const tSec = now * 0.001;
+            smoothMouse.x += (targetMouse.x - smoothMouse.x) * 0.1;
+            smoothMouse.y += (targetMouse.y - smoothMouse.y) * 0.1;
+            mouseVel *= 0.92;
+
+            const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            const scrollNorm = (window.scrollY || 0) / docH;
+
+            gl.uniform1f(uTime, tSec);
+            gl.uniform1f(uScroll, scrollNorm * 3.0);
+            gl.uniform1f(uVel, mouseVel);
+            gl.uniform1f(uClickAge, tSec - clickTime);
+            gl.uniform2f(uRes, canvas.width, canvas.height);
+            gl.uniform2f(uMouse, smoothMouse.x, smoothMouse.y);
+            gl.uniform2f(uClickPos, clickPos.x, clickPos.y);
+
+            gl.clearColor(0.02, 0.02, 0.028, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            if (!reduced) requestAnimationFrame(renderGl);
+          }
+          requestAnimationFrame(renderGl);
+          return;
+        }
+      }
+    }
+  }
+
+  function initMagneticElements() {
+    const els = document.querySelectorAll('.hero-btn-primary, .magnetic-circle-btn');
+    els.forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) * 0.28;
+        const dy = (e.clientY - (r.top + r.height / 2)) * 0.28;
+        el.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
+      });
+      el.addEventListener('pointerleave', () => {
+        el.style.transform = '';
+      });
+    });
+  }
+
+  function initQuantWaveform() {
+    const canvas = document.getElementById('quant-live-wave');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(240, Math.floor(rect.width * (window.devicePixelRatio || 1)));
+      canvas.height = Math.max(60, Math.floor(rect.height * (window.devicePixelRatio || 1)));
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function draw(now) {
+      const w = canvas.width;
+      const h = canvas.height;
+      const t = now * 0.0018;
+      ctx.clearRect(0, 0, w, h);
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.09)';
+      ctx.lineWidth = 1;
+      for (let g = 1; g <= 2; g++) {
+        const y = (h / 3) * g;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // MDN Confidence Band in Crimson
+      ctx.fillStyle = 'rgba(255, 30, 66, 0.12)';
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 6) {
+        const nx = (x / w) * Math.PI * 3.2;
+        const mean = h * 0.5 + Math.sin(nx + t) * h * 0.22 + Math.cos(nx * 1.7 - t * 0.6) * h * 0.1;
+        const spread = h * (0.1 + 0.04 * Math.sin(nx * 2 + t));
+        if (x === 0) ctx.moveTo(x, mean - spread);
+        else ctx.lineTo(x, mean - spread);
+      }
+      for (let x = w; x >= 0; x -= 6) {
+        const nx = (x / w) * Math.PI * 3.2;
+        const mean = h * 0.5 + Math.sin(nx + t) * h * 0.22 + Math.cos(nx * 1.7 - t * 0.6) * h * 0.1;
+        const spread = h * (0.1 + 0.04 * Math.sin(nx * 2 + t));
+        ctx.lineTo(x, mean + spread);
+      }
+      ctx.closePath();
+      ctx.fill();
+
+      // Predicted Mean (Crimson #ff1e42)
+      ctx.strokeStyle = '#ff1e42';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 4) {
+        const nx = (x / w) * Math.PI * 3.2;
+        const y = h * 0.5 + Math.sin(nx + t) * h * 0.22 + Math.cos(nx * 1.7 - t * 0.6) * h * 0.1;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Observed Parity Trace (Crisp Silver #e4e4e7)
+      ctx.strokeStyle = '#e4e4e7';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 4) {
+        const nx = (x / w) * Math.PI * 3.2;
+        const y = h * 0.5 + Math.sin(nx + t - 0.18) * h * 0.2 + Math.cos(nx * 2.3 - t * 0.8) * h * 0.08;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      if (!reduced) requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  }
+
   function init() {
+    initGlobalDitherBg();
+    initHeroDitherCanvas();
+    initMagneticElements();
+    initQuantWaveform();
+    initSkiper80Showcase();
+    initSpotlightSurfaces();
     initAkaruStory();
     initLayerInteractive();
     initClipboard();
@@ -948,6 +1501,7 @@ if fmt == "pdf":
     initCodeSwitcher();
     initRollingNumbers();
     initScrollIsland();
+    initScrollStagger();
   }
 
   if (document.readyState === 'loading') {

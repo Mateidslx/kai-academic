@@ -24,23 +24,20 @@
 
   var KEY = "__swarmRebuild";
 
-  window.__startSwarm = async function () { try { await loadEngine(); } catch(e){ console.error(e); } };
   window.__swarmUnhide = function () {
     document.documentElement.classList.remove("swarm-booting");
   };
 
   var opts = {
     auto: true,
-    // Settle time after load+fonts before we snapshot the page.
-    delayMs: 450,
+    // Settle time after load+fonts+preloader before we snapshot the page.
+    delayMs: 120,
     // Wait for webfonts before capturing, otherwise headings get captured with
     // a fallback font and the rebuilt page renders in the wrong typeface.
     waitFonts: true,
     // Refuse to boot if the tab never becomes visible within this window.
     visibilityTimeoutMs: 8000,
-    // false = replay the takeover on every page load (Sahi's call, 2026-11-06).
-    // Flip to true for production if returning visitors should get the live
-    // site straight away — no query flag or redeploy beyond this one line.
+    // false = replay the takeover on every page load (exact match to saai.pro).
     oncePerSession: false
   };
 
@@ -124,11 +121,41 @@
   // The engine registers window.__swarmRebuild and self-starts when the script
   // is evaluated. We inject it as a classic script so execution order is
   // deterministic, then let it own the takeover.
+  function waitPreloaderDone(timeoutMs) {
+    var curtain = document.getElementById("preloader-curtain");
+    var doneAlready =
+      !document.body.classList.contains("is-preloading") &&
+      (!curtain || curtain.classList.contains("is-done") || getComputedStyle(curtain).display === "none");
+    if (doneAlready) return Promise.resolve();
+    return new Promise(function (resolve) {
+      var settled = false;
+      var finish = function () {
+        if (settled) return;
+        settled = true;
+        clearInterval(poll);
+        resolve();
+      };
+      var poll = setInterval(function () {
+        var c = document.getElementById("preloader-curtain");
+        var ready =
+          !document.body.classList.contains("is-preloading") &&
+          (!c || c.classList.contains("is-done") || getComputedStyle(c).display === "none");
+        if (ready) finish();
+      }, 60);
+      setTimeout(finish, timeoutMs || 3200);
+    });
+  }
+
   function loadEngine() {
     return new Promise(function (resolve, reject) {
-      if (window[KEY]) return resolve(window[KEY]);
+      if (window[KEY]) {
+        if (!window[KEY].app) {
+          try { window[KEY].start(); } catch (_) {}
+        }
+        return resolve(window[KEY]);
+      }
       var s = document.createElement("script");
-      s.src = "portfolio_assets/swarm.js";
+      s.src = "portfolio_assets/swarm.js?v=12";
       s.onerror = function () {
         var s2 = document.createElement("script");
         s2.src = "swarm/swarm.js";
@@ -152,6 +179,29 @@
     });
   }
 
+  function startTourWhenReady() {
+    setTimeout(function () {
+      try {
+        var host = document.querySelector("swarm-rebuild");
+        var btn = host && host.shadowRoot && host.shadowRoot.querySelector('[data-a="tour"]');
+        if (btn && !btn.hidden && !btn.classList.contains("on")) {
+          btn.click();
+        } else if (window[KEY] && window[KEY].app) {
+          window[KEY].app.tour = true;
+        }
+      } catch (_) {}
+    }, 350);
+  }
+
+  window.__startSwarm = async function (withTour) {
+    try {
+      await loadEngine();
+      if (withTour) startTourWhenReady();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   async function boot() {
     if (!opts.auto) return;
     if (disabled()) return;
@@ -171,6 +221,8 @@
     var visible = await waitVisible(opts.visibilityTimeoutMs);
     if (!visible) return;
 
+    await waitPreloaderDone(3200);
+
     if (opts.waitFonts) {
       try {
         await Promise.race([
@@ -189,13 +241,8 @@
     try {
       await loadEngine();
       markDone();
-      // Scroll-driven interactive build mode:
-      // Site builds dynamically as the human scrolls down.
-      // If the visitor does not scroll, the viewport stays as is.
-      // Tour can be initiated on-demand by clicking the Tour button on the HUD.
-      if (window[KEY] && window[KEY].app) {
-        window[KEY].app.tour = false;
-      }
+      // Exact match to saai.pro: launch active multi-cursor Touring assembly after intro.
+      startTourWhenReady();
     } catch (err) {
       console.error("[swarm] boot failed", err);
       window.__swarmUnhide();

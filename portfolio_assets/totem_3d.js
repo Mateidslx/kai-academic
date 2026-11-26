@@ -9,140 +9,140 @@
   const TOTEM_LAYERS = [
     {
       num: '01',
-      label: 'C99',
-      roleFr: 'BAS-NIVEAU • RIGUEUR IUT',
-      roleEn: 'LOW-LEVEL • IUT RIGOR',
-      titleFr: 'SYSTÈMES &\nISO C99',
-      titleEn: 'SYSTEMS &\nISO C99',
-      ribbon: 'SYSTÈMES & ISO C99 ',
+      label: 'ZENTABLE',
+      roleFr: 'PRODUIT LIVRÉ • REACT 18 & ELECTRON',
+      roleEn: 'SHIPPED PRODUCT • REACT 18 & ELECTRON',
+      titleFr: 'ZENWORKSPACE &\nFORMULA ENGINE',
+      titleEn: 'ZENWORKSPACE &\nFORMULA ENGINE',
+      ribbon: 'ZENWORKSPACE REACT TS ',
       descFr:
-        'Développement ISO C99 strict (-Wall -Wextra -Werror) avec pointeurs durcis, arbres syntaxiques AST et gestion mémoire manuelle.',
+        'Tableur spatial intelligent (EXCEL_AI_APP v2.0.0) avec canevas libre, graphe de dépendances inter-tables (923 lignes), copilote IA structuré et export Excel .xlsx.',
       descEn:
-        'Strict ISO C99 engineering (-Wall -Wextra -Werror) with hardened pointers, AST trees and manual heap lifecycle.',
-      buildsFr: 'lru_cache.c O(1) • dijkstra_graph.c • Transpileur AlgoForge Pro',
-      buildsEn: 'lru_cache.c O(1) • dijkstra_graph.c • AlgoForge Pro Transpiler',
-      proofFr: 'Valgrind : 0 octet perdu / 0 erreur • Flags -Wall -Wextra -Werror',
-      proofEn: 'Valgrind: 0 bytes lost / 0 errors • Flags -Wall -Wextra -Werror',
-      tags: ['ISO C99', 'VALGRIND', 'GDB / MAKEFILE'],
-      ctaFr: 'TEST VALGRIND ↗',
-      ctaEn: 'VALGRIND TRACE ↗',
+        'Spatial intelligent spreadsheet (EXCEL_AI_APP v2.0.0) with free canvas, cross-table dependency graph (923 lines), structured AI copilot and .xlsx export.',
+      buildsFr: '63 fichiers TS/TSX • FormulaEngine.ts • LinkEngine.ts • SheetJS',
+      buildsEn: '63 TS/TSX files • FormulaEngine.ts • LinkEngine.ts • SheetJS',
+      proofFr: 'Vitest : 57 / 57 tests passés (13 suites) • Build Electron 33',
+      proofEn: 'Vitest: 57 / 57 tests passed (13 suites) • Electron 33 build',
+      tags: ['REACT 18', 'TYPESCRIPT', 'VITEST 57/57'],
+      ctaFr: 'INSPECTER ZENTABLE ↗',
+      ctaEn: 'INSPECT ZENTABLE ↗',
       actionType: 'terminal',
-      actionPayload: 'valgrind',
+      actionPayload: 'zentable',
       faultOffset: { x: 0.04, z: -0.03, rotY: 0.015 }
     },
     {
       num: '02',
-      label: 'IA/QUANT',
-      roleFr: 'QUANT • DEEP LEARNING • 24/7',
-      roleEn: 'QUANT • DEEP LEARNING • 24/7',
-      titleFr: 'SWARMS IA &\nPOLYMARKET',
-      titleEn: 'AI SWARMS &\nPOLYMARKET',
-      ribbon: 'POLYMARKET QUANT & IA ',
+      label: 'CLOUD 20',
+      roleFr: 'ORCHESTRATION • DAG MULTI-AGENTS',
+      roleEn: 'ORCHESTRATION • MULTI-AGENT DAG',
+      titleFr: '20 AGENTS CLOUD &\nCONTROL PLANE',
+      titleEn: '20 CLOUD AGENTS &\nCONTROL PLANE',
+      ribbon: '20 AGENTS CLOUD DAG ',
       descFr:
-        'Pipeline quantitatif météo (GMM-MDN) & carnet d\'ordres temps réel, calibration isotone PAV et validation adversariale PBO/CSCV.',
+        'Plan de contrôle distribué en Python orchestrant 20 profils spécialisés (Architect, Builder, Critic, QA, Deploy) reliés par graphe de dépendances DAG.',
       descEn:
-        'Real-time weather & orderbook quant pipeline (GMM-MDN), PAV isotonic calibration and adversarial PBO/CSCV gating.',
-      buildsFr: 'GMM-MDN (466k prév.) • TCN BTC 30×32 • Kill-Switch V43 Look-Ahead',
-      buildsEn: 'GMM-MDN (466k forecasts) • TCN BTC 30×32 • V43 Look-Ahead Kill-Switch',
-      proofFr: 'RMSE 0.677°C • ECE PAV 1.43% • PBO/CSCV PASS • Flat Sizing 1,00 $',
-      proofEn: 'RMSE 0.677°C • ECE PAV 1.43% • PBO/CSCV PASS • Strict $1 Flat Sizing',
-      tags: ['PYTORCH', 'WEBSOCKET CLOB', 'WALK-FORWARD'],
-      ctaFr: 'FLUX CLOB ↗',
-      ctaEn: 'CLOB STREAM ↗',
+        'Distributed Python control plane orchestrating 20 specialized profiles (Architect, Builder, Critic, QA, Deploy) scheduled as a dependency DAG.',
+      buildsFr: 'AGENTS_REGISTRY (20 rôles) • CLOUD_MASTER • Portes Critic & QA',
+      buildsEn: 'AGENTS_REGISTRY (20 roles) • CLOUD_MASTER • Critic & QA Gates',
+      proofFr: '22 / 22 tests pytest (registre, routage Master et contraintes sécurité)',
+      proofEn: '22 / 22 pytest tests (registry, routing and security constraints)',
+      tags: ['PYTHON 3.12', 'DAG AGENTS', 'PYTEST 22/22'],
+      ctaFr: 'VOIR AGENTS CLOUD ↗',
+      ctaEn: 'VIEW CLOUD AGENTS ↗',
       actionType: 'terminal',
-      actionPayload: 'polymarket',
+      actionPayload: 'cloud',
       faultOffset: { x: -0.07, z: 0.05, rotY: -0.025 }
     },
     {
       num: '03',
-      label: 'APPSEC',
-      roleFr: 'SÉCURITÉ AST • UPSTREAM PRS',
-      roleEn: 'AST SECURITY • UPSTREAM PRS',
-      titleFr: 'APPSEC &\nOPEN-SOURCE',
-      titleEn: 'APPSEC &\nOPEN-SOURCE',
-      ribbon: 'APPSEC & 46 PRS ',
+      label: 'OSS & MCP',
+      roleFr: 'SÉCURITÉ • 46 PRS FUSIONNÉES',
+      roleEn: 'SECURITY • 46 MERGED PRS',
+      titleFr: '46 PRS GITHUB &\nSECURITY MCP',
+      titleEn: '46 GITHUB PRS &\nSECURITY MCP',
+      ribbon: '46 PRS GITHUB & MCP ',
       descFr:
-        'Audit statique de vulnérabilités, verrouillage strict RBAC, assainissement des entrées et revues quotidiennes en production.',
+        'Contributions fusionnées sur Twenty CRM (#26490, #26502), BasedHardware/omi (XSS, CWE-209) et FinTech TS, plus serveur MCP public d’audit OWASP.',
       descEn:
-        'Static vulnerability analysis, strict RBAC enforcement, input sanitization and production upstream engineering.',
-      buildsFr: 'SafePath-Lint (SPL001..004) • Omi 7 PRs (#14604..#20168) • Twenty #26490',
-      buildsEn: 'SafePath-Lint (SPL001..004) • Omi 7 PRs (#14604..#20168) • Twenty #26490',
-      proofFr: '46 PRs fusionnées • Neutralisation CWE-22, CWE-79 (XSS) & CWE-209',
-      proofEn: '46 Merged PRs • CWE-22, CWE-79 (XSS) & CWE-209 Mitigated',
-      tags: ['AST PYTHON', 'CWE-22 / RBAC', 'TYPESCRIPT'],
-      ctaFr: 'VOIR PRS ↗',
-      ctaEn: 'VIEW PRS ↗',
+        'Merged production contributions on Twenty CRM (#26490, #26502), BasedHardware/omi (XSS, CWE-209) and FinTech TS, plus MIT OWASP MCP server.',
+      buildsFr: 'Twenty CRM (40k★) • Omi (8k★) • FinTech (38 PRs) • security-scanner-mcp',
+      buildsEn: 'Twenty CRM (40k★) • Omi (8k★) • FinTech (38 PRs) • security-scanner-mcp',
+      proofFr: '46 PRs fusionnées (@Mateidslx) • Publié sur Smithery.ai & Glama.ai',
+      proofEn: '46 Merged PRs (@Mateidslx) • Published on Smithery.ai & Glama.ai',
+      tags: ['RBAC / OWASP', 'TYPESCRIPT', 'LICENCE MIT'],
+      ctaFr: 'AFFICHER LES PRS ↗',
+      ctaEn: 'VIEW MERGED PRS ↗',
       actionType: 'terminal',
-      actionPayload: 'prs',
+      actionPayload: 'oss',
       faultOffset: { x: 0.08, z: 0.04, rotY: 0.03 }
     },
     {
       num: '04',
-      label: 'LINUX',
-      roleFr: 'SYSADMIN • VÉRIFICATION PHYSIQUE',
-      roleEn: 'SYSADMIN • PHYSICAL STATE CHECKS',
-      titleFr: 'LINUX &\nKAI CORE OS',
-      titleEn: 'LINUX &\nKAI CORE OS',
-      ribbon: 'SYSTEMD & KAI CORE OS ',
+      label: 'KAI IUT',
+      roleFr: 'ENTRAIDE • 447 RESSOURCES',
+      roleEn: 'STUDENT PLATFORM • 447 FILES',
+      titleFr: 'KAI ACADEMIC &\nALGOFORGE',
+      titleEn: 'KAI ACADEMIC &\nALGOFORGE',
+      ribbon: 'KAI ACADEMIC IUT ANGLET ',
       descFr:
-        'Exploitation Ubuntu 24.04 avec vérificateur d\'état physique post-action (StateVerifier), daemons systemd auto-guéris et pipelines B2B.',
+        'Portail web de révision partagé avec ma promotion de BUT Informatique à l’IUT d’Anglet (police Lexend, 20 modules) et transpileur AlgoForge Desktop vers C/C++.',
       descEn:
-        'Ubuntu 24.04 operations with deterministic post-action verification (StateVerifier), self-healing systemd units and B2B pipelines.',
-      buildsFr: 'StateVerifier (%PDF-/SQLite/ADB) • Extracteur B2B sans hallucination',
-      buildsEn: 'StateVerifier (%PDF-/SQLite/ADB) • Zero-Hallucination B2B Extractor',
-      proofFr: '735 tests unitaires B2B ancrés mot-à-mot • Services Ubuntu 24/7',
-      proofEn: '735 word-grounded B2B unit tests • Ubuntu 24/7 systemd services',
-      tags: ['UBUNTU 24.04', 'STATE VERIFIER', 'VPS ORACLE'],
-      ctaFr: 'VOIR ÉTUDE #04 ↓',
-      ctaEn: 'CASE STUDY #04 ↓',
-      actionType: 'scroll',
-      actionPayload: '#case-kai',
+        'Shared revision portal for my IUT Anglet Computer Science cohort (Lexend clarity, 20 modules) paired with AlgoForge Desktop C/C++ transpiler.',
+      buildsFr: '137 pages HTML de cours • Recherche plein texte • AlgoForge Desktop',
+      buildsEn: '137 HTML course pages • Instant full-text search • AlgoForge Desktop',
+      proofFr: '447 documents organisés • 20 modules officiels R1.01 à S1.06',
+      proofEn: '447 indexed files • 20 official BUT Info modules',
+      tags: ['447 FICHIERS', '20 MODULES', 'ALGOFORGE'],
+      ctaFr: 'INSPECTER KAI IUT ↗',
+      ctaEn: 'INSPECT KAI IUT ↗',
+      actionType: 'terminal',
+      actionPayload: 'kai',
       faultOffset: { x: -0.06, z: -0.06, rotY: -0.02 }
     },
     {
       num: '05',
-      label: 'DATA',
-      roleFr: 'DATA ARCHITECTURE • TRAÇABILITÉ',
-      roleEn: 'DATA ARCHITECTURE • TRACEABILITY',
-      titleFr: 'SQLITE WAL &\nMERISE 3NF',
-      titleEn: 'SQLITE WAL &\nMERISE 3NF',
-      ribbon: 'SQLITE WAL & 3NF ',
+      label: 'POLYDRIVE',
+      roleFr: 'IA AUTONOME • NUMPY PUR',
+      roleEn: 'AUTONOMOUS AI • PURE NUMPY',
+      titleFr: 'POLYDRIVE\nNEURAL LAB',
+      titleEn: 'POLYDRIVE\nNEURAL LAB',
+      ribbon: 'POLYDRIVE NEURAL LAB ',
       descFr:
-        'Modélisation conceptuelle MCD/MLD en 3e forme normale, indexation plein texte FTS5 BM25 et journaux d\'audit cryptographiques SHA-256.',
+        'Réseau de neurones 16→24→16→4 (876 paramètres) en NumPy pur entraîné par PPO-Clip et Neuroévolution sur moteur physique PolyTrack 3D avec capteurs LiDAR.',
       descEn:
-        'Conceptual MCD/MLD 3NF database modeling, FTS5 BM25 indexing and cryptographically chained SHA-256 audit ledgers.',
-      buildsFr: 'academic_vault.db (2 018+ entités) • Registre Audit SHA-256 & SPRT',
-      buildsEn: 'academic_vault.db (2,018+ entities) • SHA-256 Ledger & SPRT Drift',
-      proofFr: 'SQLite WAL ACID • Normalisation 3NF stricte • Parité live/replay 0.00',
-      proofEn: 'SQLite WAL ACID • Strict 3NF Normalization • 0.00 Live/Replay Parity',
-      tags: ['MERISE 3NF', 'FTS5 BM25', 'SHA-256'],
-      ctaFr: 'AUDIT ÉTAT ↗',
-      ctaEn: 'STATE VERIFY ↗',
+        'Pure NumPy MLP 16→24→16→4 (876 parameters) trained via PPO-Clip and Neuroevolution directly inside PolyTrack 3D physics with LiDAR sensors.',
+      buildsFr: 'neural_network.py • ppo_trainer.py • neuroevolution.py • Web Workers',
+      buildsEn: 'neural_network.py • ppo_trainer.py • neuroevolution.py • Web Workers',
+      proofFr: '5 / 5 tests pytest passés • Inférence 3D temps réel',
+      proofEn: '5 / 5 pytest tests passed • Real-time 3D inference',
+      tags: ['NUMPY MLP', 'PPO-CLIP', 'LIDAR 3D'],
+      ctaFr: 'VOIR POLYDRIVE ↗',
+      ctaEn: 'VIEW POLYDRIVE ↗',
       actionType: 'terminal',
-      actionPayload: 'verify',
+      actionPayload: 'polydrive',
       faultOffset: { x: 0.05, z: -0.05, rotY: 0.02 }
     },
     {
       num: '06',
-      label: 'UI 60FPS',
-      roleFr: 'FRONTEND • ERGONOMIE COGNITIVE',
-      roleEn: 'FRONTEND • COGNITIVE UX',
-      titleFr: 'UI 60FPS &\nSHELL CLI',
-      titleEn: '60FPS UI &\nSHELL CLI',
-      ribbon: 'UI 60FPS • SHELL CLI ',
+      label: 'C99 & SQL',
+      roleFr: 'FONDAMENTAUX • IUT & LINUX',
+      roleEn: 'FUNDAMENTALS • IUT & LINUX',
+      titleFr: 'ISO C99, SQL 3NF\n& UBUNTU VPS',
+      titleEn: 'ISO C99, 3NF SQL\n& UBUNTU VPS',
+      ribbon: 'ISO C99 VALGRIND & SQL ',
       descFr:
-        'Interfaces Vanilla JS, React et Tauri haute fréquence, axées sur la clarté cognitive (Lexend) et pilotables 100 % au clavier.',
+        'Code système C/C++ compilé sous -Wall -Wextra -Werror, contrôle mémoire Valgrind sans fuite, modélisation Merise 3NF / PostgreSQL et services Linux 24/7.',
       descEn:
-        'High-frequency Vanilla JS, React & Tauri interfaces tailored for cognitive clarity and full keyboard navigation.',
-      buildsFr: 'Kai Academic (79 pages) • ZenTable Pro (React 19) • Pdf-helper (Tauri)',
-      buildsEn: 'Kai Academic (79 pages) • ZenTable Pro (React 19) • Pdf-helper (Tauri)',
-      proofFr: 'Palette clavier ⌘K • Cartes HUPI Leaflet/D3.js • Shaders WebGL GLSL',
-      proofEn: '⌘K Command Palette • HUPI Leaflet/D3.js • WebGL GLSL Shaders',
-      tags: ['REACT 19 / TS', 'WEBGL GLSL', 'TAURI / LEAFLET'],
-      ctaFr: 'SHELL ⌘K ↗',
-      ctaEn: 'SHELL ⌘K ↗',
+        'Strict C/C++ (-Wall -Wextra -Werror), zero-leak Valgrind audits, Merise 3NF / PostgreSQL schemas and 24/7 Linux services.',
+      buildsFr: 'Travaux C/C++ IUT • Merise 3NF (R1.05) • Serveur web Ubuntu 24/7',
+      buildsEn: 'IUT C/C++ Labs • Merise 3NF (R1.05) • Ubuntu 24/7 Web Server',
+      proofFr: 'V-Bot Chess (OpenCV + Stockfish UCI) • Stages HUPI & Marra',
+      proofEn: 'V-Bot Chess (OpenCV + Stockfish UCI) • HUPI & Marra Internships',
+      tags: ['ISO C99 / C++', 'MERISE SQL', 'UBUNTU 24.04'],
+      ctaFr: 'CONSULTER CV PDF ↗',
+      ctaEn: 'VIEW RESUME PDF ↗',
       actionType: 'terminal',
-      actionPayload: 'cat cv',
+      actionPayload: 'cv',
       faultOffset: { x: -0.03, z: 0.06, rotY: -0.015 }
     }
   ];
@@ -193,7 +193,7 @@
     const fontStr = '400 156px "Archivo Black", "Bebas Neue", "Impact", sans-serif';
     ctx.font = fontStr;
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#ef4444';
+    ctx.fillStyle = '#ff1e42';
 
     const cleanText = text.trim().toUpperCase() + '  •  ';
     const rawW = Math.max(120, ctx.measureText(cleanText).width || 1100);
@@ -278,7 +278,7 @@
       const octx = off.getContext('2d');
       octx.translate(256, 256);
       octx.rotate(angle);
-      octx.fillStyle = '#ef4444';
+      octx.fillStyle = '#ff1e42';
 
       octx.beginPath();
       octx.roundRect(-142, -22, 284, 44, 6);
@@ -319,27 +319,26 @@
     return tex;
   }
 
-  // Octagonal Chamfered 2D Points (eliminating flat square corners -> chiseled monolithic slab)
+  // Clean Architectural Micro-Chamfered Square Profile (SCRIB3-style monolith)
   function getOctagonPoints(w, d, chamfer) {
     const hw = w * 0.5;
     const hd = d * 0.5;
     const sw = hw - chamfer;
     const sd = hd - chamfer;
 
-    // Ordered clockwise from viewer-left wall across front beveled center spine
     return [
-      [-sw, hd],   // Front-Left start
-      [sw, hd],    // Front-Left end -> Center Front Chamfer!
-      [hw, sd],    // Front-Right start
-      [hw, -sd],   // Front-Right end -> Right Chamfer
-      [sw, -hd],   // Back-Right start
-      [-sw, -hd],  // Back-Right end -> Back Left Chamfer
-      [-hw, -sd],  // Back-Left start
-      [-hw, sd]    // Back-Left end
+      [-sw, hd],
+      [sw, hd],
+      [hw, sd],
+      [hw, -sd],
+      [sw, -hd],
+      [-sw, -hd],
+      [-hw, -sd],
+      [-hw, sd]
     ];
   }
 
-  // Sculpted Extruded Chamfered Octagonal Monolith Geometry
+  // Sharp Architectural Extruded Monolith Geometry (Zero inner diagonal artifacts)
   function createOctagonSlabGeometry(w, h, d, chamfer, bevelSize = 0.0) {
     const pts = getOctagonPoints(w, d, chamfer);
     const shape = new THREE.Shape();
@@ -363,9 +362,9 @@
     return geo;
   }
 
-  // 8-Segment Seamless Perimeter Ribbon Wrapping Around Octagonal Walls & Front Chamfer Spine
-  function createOctagonRibbonGeometry(w, h, d, chamfer) {
-    const pts = getOctagonPoints(w, d, chamfer);
+  // 8-Segment Seamless Perimeter Ribbon Wrapping Around Fractured Walls
+  function createOctagonRibbonGeometry(w, h, d, chamfer, seed = 0) {
+    const pts = getOctagonPoints(w, d, chamfer, seed);
     const ring = [...pts, pts[0]];
     const hh = h * 0.5;
 
@@ -423,7 +422,7 @@
         uPulseTime: { value: 0 },
         uActive: { value: 0 },
         uRepeatX: { value: repeatFactor },
-        uAccent: { value: new THREE.Color('#ef4444') }
+        uAccent: { value: new THREE.Color('#ff1e42') }
       },
       vertexShader: `
         varying vec2 vUv;
@@ -468,22 +467,12 @@
         void main() {
           vec2 scrolledUv = vec2(fract(vUv.x * uRepeatX + uScroll), vUv.y);
           vec4 textSample = texture2D(uMap, scrolledUv);
-          float crack = texture2D(uFissure, vec2(fract(vUv.x * 2.0), vUv.y)).r;
 
-          // Retro Bayer dithered obsidian texture & glowing tectonic fissures on inactive slabs
-          vec2 pix = floor(gl_FragCoord.xy / 3.0);
-          float d = bayer4x4(pix);
-          float pulse = 0.55 + 0.45 * sin(uPulseTime * 1.8 + vUv.x * 6.2831853);
-          float ditherCrack = step(d, crack * 0.65 * pulse);
-
-          vec3 darkBase = vec3(0.022, 0.022, 0.032);
-          vec3 inactiveStone = darkBase + vec3(0.02, 0.02, 0.026) * step(d, 0.14);
-          vec3 inactiveFissure = mix(inactiveStone, uAccent * 0.48, ditherCrack);
-
-          // Unbroken razor-sharp active kinetic typography (no static cracks slicing letters)
+          // Matte pure obsidian on inactive slabs + bold unbroken typography on active slab
+          vec3 darkBase = vec3(0.02, 0.02, 0.028);
           vec3 activeCol = textSample.rgb;
 
-          vec3 finalCol = mix(inactiveFissure, activeCol, uActive);
+          vec3 finalCol = mix(darkBase, activeCol, uActive);
           gl_FragColor = vec4(finalCol, 1.0);
         }
       `,
@@ -498,7 +487,7 @@
         uTime: { value: 0 },
         uResolution: { value: new THREE.Vector2(1440, 620) },
         uMouse: { value: new THREE.Vector2(0.64, 0.48) },
-        uColor: { value: new THREE.Color('#ef4444') }
+        uColor: { value: new THREE.Color('#ff1e42') }
       },
       vertexShader: `
         varying vec2 vUv;
@@ -549,10 +538,10 @@
           vec2 uvPix = (pixCoord * gran) / max(uResolution, vec2(1.0));
 
           float aspect = uResolution.x / max(1.0, uResolution.y);
-          vec2 p = vec2((uvPix.x - 0.62) * aspect, uvPix.y - 0.48);
+          vec2 p = vec2((uvPix.x - 0.5) * aspect, uvPix.y - 0.5);
 
           // Gentle localized cursor gravity modulation confined strictly inside the radial halo
-          vec2 m = vec2((uMouse.x - 0.62) * aspect, uMouse.y - 0.48);
+          vec2 m = vec2((uMouse.x - 0.5) * aspect, uMouse.y - 0.5);
           float mouseDist = length(p - m);
           float mouseRipple = exp(-mouseDist * 4.5) * 0.34;
 
@@ -665,14 +654,16 @@
         ctaEl.textContent = lang === 'en' ? layer.ctaEn : layer.ctaFr;
         ctaEl.onclick = function () {
           if (layer.actionType === 'terminal') {
-            const termBtn = document.getElementById('terminal-pill-btn');
-            const termInput = document.getElementById('terminal-input');
+            const termBtn = document.getElementById('cli-open-btn') || document.getElementById('terminal-pill-btn');
+            const termInput = document.getElementById('cli-input') || document.getElementById('terminal-input');
+            const termForm = document.getElementById('cli-form');
             if (termBtn) termBtn.click();
             if (termInput) {
               setTimeout(() => {
                 termInput.value = layer.actionPayload;
-                termInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-              }, 260);
+                if (termForm) termForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+                else termInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+              }, 240);
             }
           } else {
             const dest = document.querySelector(layer.actionPayload);
@@ -734,51 +725,50 @@
         stainPlane.frustumCulled = false;
         stainScene.add(stainPlane);
 
-        // Main Chamfered Monolith Group (Bigger & Sculpted!)
+        // Main SCRIB3-faithful Isometric Monolith Group (Aligned, Clean Edges, Zero Internal Diagonals)
         totemRoot = new THREE.Group();
-        totemRoot.rotation.set(Math.PI / 6.3, -Math.PI / 4, 0);
+        totemRoot.rotation.set(Math.PI / 6.2, -Math.PI / 4, 0);
         scene.add(totemRoot);
 
-        const W = 3.12;
-        const D = 3.12;
-        const H = 0.78;
-        const chamfer = 0.42;
-        const gap = 0.065; // Deeper fractured shadow gaps between strata
+        const W = 3.16;
+        const D = 3.16;
+        const H = 0.82;
+        const chamfer = 0.09; // Crisp machined corner chamfer ("carrée pas complètement carré")
+        const gap = 0.085;
         const step = H + gap;
         const topStartY = ((TOTEM_LAYERS.length - 1) * step) / 2;
 
-        const coreGeo = createOctagonSlabGeometry(W - 0.05, H, D - 0.05, chamfer, 0.0);
-        const coreMat = new THREE.MeshBasicMaterial({ color: 0x060609 });
-
-        const edgesGeo = new THREE.EdgesGeometry(
-          createOctagonSlabGeometry(W + 0.016, H + 0.008, D + 0.016, chamfer, 0.012),
-          14
-        );
-        const bandH = H * 0.94;
-        const { geo: ribbonGeo, perimeter } = createOctagonRibbonGeometry(W, bandH, D, chamfer);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0x050507 });
 
         TOTEM_LAYERS.forEach((layer, idx) => {
-          const sliceGroup = new THREE.Group();
-          const fault = layer.faultOffset;
-          sliceGroup.position.set(fault.x, topStartY - idx * step, fault.z);
-          sliceGroup.userData = { baseRotY: fault.rotY, baseY: sliceGroup.position.y };
-          sliceGroup.rotation.y = fault.rotY;
+          const coreGeo = createOctagonSlabGeometry(W - 0.02, H, D - 0.02, chamfer, 0.0);
+          // 24deg threshold keeps ONLY outer architectural prism edges (zero internal triangle diagonals)
+          const edgesGeo = new THREE.EdgesGeometry(
+            createOctagonSlabGeometry(W + 0.012, H + 0.008, D + 0.012, chamfer, 0.0),
+            24
+          );
+          const bandH = H * 0.96;
+          const { geo: ribbonGeo, perimeter } = createOctagonRibbonGeometry(W + 0.004, bandH, D + 0.004, chamfer, 0);
 
-          // 1. Chamfered Octagonal Obsidian Core
+          const sliceGroup = new THREE.Group();
+          sliceGroup.position.set(0, topStartY - idx * step, 0);
+          sliceGroup.userData = { baseRotY: 0, baseY: sliceGroup.position.y };
+
+          // 1. Matte Obsidian Prism Core
           const coreMesh = new THREE.Mesh(coreGeo, coreMat);
           coreMesh.userData = { layerIndex: idx };
           sliceGroup.add(coreMesh);
 
-          // 2. Razor-Sharp Chamfer Wireframes
+          // 2. Clean 1px Architectural Wireframe Edges
           const edgeMat = new THREE.LineBasicMaterial({
-            color: idx === 0 ? 0xef4444 : 0xffffff,
+            color: idx === 0 ? 0xff1e42 : 0xe4a0b2,
             transparent: true,
-            opacity: idx === 0 ? 0.9 : 0.25
+            opacity: idx === 0 ? 0.95 : 0.42
           });
           const edgeLines = new THREE.LineSegments(edgesGeo, edgeMat);
           sliceGroup.add(edgeLines);
 
-          // 3. Full-Bleed Kinetic Ribbon + Retro Bayer Cracks Shader
+          // 3. Seamless Full-Height Kinetic Ribbon on Active Slab
           const textTex = createKineticRibbonTexture(layer.ribbon);
           const fissTex = createFissureVeinsTexture(idx + 3);
           const ribbonMat = createKineticRibbonMaterial(textTex, fissTex, perimeter, bandH);
@@ -787,10 +777,10 @@
           ribbonMesh.userData = { layerIndex: idx };
           sliceGroup.add(ribbonMesh);
 
-          // 4. Crossed Engineering Wrenches Crown Emblem on Slice 01
+          // 4. Crossed Engineering Wrenches Crown Emblem on Slice 01 Top
           if (idx === 0) {
             const markTex = createCrownMarkTexture();
-            const markGeo = new THREE.PlaneGeometry(W * 0.58, D * 0.58);
+            const markGeo = new THREE.PlaneGeometry(W * 0.56, D * 0.56);
             const markMat = new THREE.MeshBasicMaterial({ map: markTex, transparent: true });
             const markMesh = new THREE.Mesh(markGeo, markMat);
             markMesh.rotation.x = -Math.PI / 2;
@@ -809,6 +799,8 @@
             twistAnim: null
           });
         });
+
+        totemRoot.userData.shards = [];
 
         raycaster = new THREE.Raycaster();
         resizeCanvas();
@@ -832,8 +824,8 @@
       }
 
       const aspect = w / h;
-      // Full-frame orthographic clearance so bottom slab (06) always floats cleanly above pill dock
-      const frustumH = window.innerWidth <= 980 ? 7.0 : 7.45;
+      // Full-frame orthographic clearance so all 6 SCRIB3 slabs sit cleanly in frame
+      const frustumH = window.innerWidth <= 980 ? 7.6 : 8.2;
       const frustumW = frustumH * aspect;
       camera.left = -frustumW / 2;
       camera.right = frustumW / 2;
@@ -842,8 +834,8 @@
       camera.updateProjectionMatrix();
 
       if (totemRoot) {
-        totemRoot.position.x = window.innerWidth > 980 ? frustumW * 0.172 : 0;
-        totemRoot.position.y = window.innerWidth > 980 ? 0.34 : 0.04;
+        totemRoot.position.x = 0;
+        totemRoot.position.y = 0.04;
       }
     }
 
@@ -856,8 +848,8 @@
         s.targetActive = i === targetIdx ? 1.0 : 0.0;
         const dist = Math.abs(i - targetIdx);
         s.twistAnim = {
-          startTime: now + dist * 75,
-          duration: fullPi ? 1850 : 1550,
+          startTime: now + dist * 55,
+          duration: fullPi ? 1150 : 950,
           fromY: s.group.userData.baseRotY,
           deltaY: angleDelta
         };
@@ -948,28 +940,24 @@
         hoverTilt.y += (hoverTilt.targetY - hoverTilt.y) * 0.08;
 
         if (totemRoot) {
-          const baseRootY = window.innerWidth > 980 ? 0.34 : 0.04;
-          const idleFloatY = Math.sin(tSec * 1.15) * 0.045;
-          const idleBreathRot = Math.sin(tSec * 0.7) * 0.04;
+          const baseRootY = 0.06;
+          const idleFloatY = Math.sin(tSec * 1.4) * 0.05;
           totemRoot.position.y = baseRootY + idleFloatY;
-          totemRoot.rotation.x = Math.PI / 6.3 + hoverTilt.y * 0.07;
-          totemRoot.rotation.y = -Math.PI / 4 + hoverTilt.x * 0.14 + scrollTwist + idleBreathRot;
+          totemRoot.rotation.x = Math.PI / 6.2 + hoverTilt.y * 0.08;
+          totemRoot.rotation.y = -Math.PI / 4 + Math.sin(tSec * 0.35) * 0.08 + hoverTilt.x * 0.18 + scrollTwist * 0.45;
         }
 
-        sliceObjects.forEach((s, idx) => {
-          s.ribbonMat.uniforms.uScroll.value = (s.ribbonMat.uniforms.uScroll.value + dt * 0.044) % 1.0;
+        sliceObjects.forEach((s) => {
+          s.ribbonMat.uniforms.uScroll.value = (s.ribbonMat.uniforms.uScroll.value + dt * 0.16) % 1.0;
           s.ribbonMat.uniforms.uPulseTime.value = tSec;
-          s.activeVal += (s.targetActive - s.activeVal) * Math.min(1, dt * 10);
+          s.activeVal += (s.targetActive - s.activeVal) * Math.min(1, dt * 12);
           s.ribbonMat.uniforms.uActive.value = s.activeVal;
+          s.group.position.y = s.group.userData.baseY;
 
-          // Smooth micro levitation breathing per stratum (no abrupt cursor jumps)
-          const waveY = Math.sin(tSec * 1.6 + idx * 0.8) * 0.012;
-          s.group.position.y = s.group.userData.baseY + waveY;
-
-          const targetOp = 0.24 + s.activeVal * 0.68;
-          s.edgeMat.opacity += (targetOp - s.edgeMat.opacity) * 0.15;
-          if (s.activeVal > 0.35) s.edgeMat.color.setHex(0xef4444);
-          else s.edgeMat.color.setHex(0xffffff);
+          const targetOp = 0.36 + s.activeVal * 0.6;
+          s.edgeMat.opacity += (targetOp - s.edgeMat.opacity) * 0.18;
+          if (s.activeVal > 0.35) s.edgeMat.color.setHex(0xff1e42);
+          else s.edgeMat.color.setHex(0xe4a0b2);
 
           if (s.twistAnim) {
             const elapsed = now - s.twistAnim.startTime;

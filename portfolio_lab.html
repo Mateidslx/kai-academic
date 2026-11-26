@@ -1,0 +1,2892 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Lab — Composants &amp; Effets Motion Design (13 Démos Live)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @property --xray-r {
+      syntax: "<length-percentage>";
+      inherits: true;
+      initial-value: 0px;
+    }
+
+    :root {
+      --bg: #07070a;
+      --surface: #0d0e13;
+      --surface-2: #14161e;
+      --ink: #f4f3ef;
+      --muted: #8c91a3;
+      --rule: rgba(255, 255, 255, 0.11);
+      --rule-strong: rgba(255, 255, 255, 0.22);
+      --accent: #ff1e42;
+      --accent-soft: rgba(255, 30, 66, 0.14);
+      --sage: #a2c8b1;
+      --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-display: "Archivo Black", system-ui, sans-serif;
+      --font-serif: "Instrument Serif", Georgia, serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+      color-scheme: dark;
+    }
+
+    html[data-theme="light"] {
+      --bg: #f2efe9;
+      --surface: #ffffff;
+      --surface-2: #e8e4dc;
+      --ink: #111216;
+      --muted: #585c6c;
+      --rule: rgba(17, 18, 22, 0.12);
+      --rule-strong: rgba(17, 18, 22, 0.24);
+      --accent: #d90f32;
+      --accent-soft: rgba(217, 15, 50, 0.09);
+      --sage: #0f766e;
+      color-scheme: light;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 30, 66, 0.5) transparent;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Subtle SLX CRT scanline micro-texture (zero readability hit) */
+    body.crt-enabled::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      pointer-events: none;
+      background: repeating-linear-gradient(transparent 0 2px, rgba(0, 0, 0, 0.06) 2px 3px);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* Top Lab Console Header */
+    .lab-header {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .lab-header-inner {
+      width: min(1320px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 12px 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .lab-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .lab-brand-badge {
+      padding: 4px 8px;
+      border-radius: 5px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .lab-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .filter-pill, .hud-btn {
+      padding: 6px 11px;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+    }
+
+    .filter-pill:hover, .hud-btn:hover {
+      border-color: var(--accent);
+      color: var(--ink);
+    }
+
+    .filter-pill.is-active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .lab-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hud-btn.is-primary {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+
+    .lab-shell {
+      width: min(1320px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 110px;
+    }
+
+    .lab-intro {
+      padding: 20px 0 28px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+      gap: 24px;
+      align-items: end;
+    }
+
+    .lab-intro h1 {
+      margin: 0 0 10px;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.4vw, 3.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+    }
+
+    .lab-intro p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 68ch;
+      font-size: 0.98rem;
+    }
+
+    .lab-picks-box {
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    .lab-picks-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .lab-picks-list {
+      color: var(--muted);
+      min-height: 22px;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .proto-card {
+      border-radius: 12px;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface);
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+
+    .proto-card[hidden] { display: none; }
+
+    .proto-card.is-picked {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .proto-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--surface-2);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .proto-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .proto-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .proto-title {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .proto-desc {
+      margin: 2px 0 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .proto-title code,
+    .proto-desc code {
+      font-family: var(--font-mono);
+      font-size: 0.84em;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(255, 30, 66, 0.25);
+    }
+
+    .proto-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pick-btn {
+      padding: 7px 12px;
+      border-radius: 7px;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .pick-btn.is-picked {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .proto-stage {
+      position: relative;
+      padding: 20px;
+      min-height: 300px;
+      overflow: hidden;
+    }
+
+    /* ============ MODULE 01: SLX 3D HORIZON + ORBITAL RETICLE + STATION DOCK ============ */
+    .slx-stage {
+      position: relative;
+      height: 360px;
+      background: #040507;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: center;
+      padding: 24px;
+      gap: 20px;
+      color: #edf1ee;
+    }
+
+    .slx-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .slx-reticle-box {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+    }
+
+    .slx-reticle-svg {
+      width: 240px;
+      height: 240px;
+    }
+
+    .slx-callout {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--sage);
+      background: rgba(4, 5, 7, 0.75);
+      padding: 3px 6px;
+      border-radius: 3px;
+    }
+
+    .slx-copy {
+      position: relative;
+      z-index: 2;
+      padding-bottom: 38px;
+    }
+
+    .slx-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--sage);
+      margin-bottom: 6px;
+    }
+
+    .slx-h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    @keyframes slxConstitute {
+      0% { opacity: 0; filter: blur(10px); transform: translateY(20px) scale(0.98); }
+      100% { opacity: 1; filter: blur(0px); transform: none; }
+    }
+
+    .slx-anim [data-el] {
+      animation: slxConstitute 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--i, 0) * 90ms);
+    }
+
+    .slx-dock {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(12px);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+    }
+
+    .slx-ticks {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slx-tick {
+      width: 18px;
+      height: 2px;
+      background: var(--sage);
+      opacity: 0.35;
+      border: none;
+      padding: 0;
+      transition: width 0.25s, opacity 0.25s, background-color 0.25s;
+    }
+
+    .slx-tick:hover { width: 28px; opacity: 0.8; }
+    .slx-tick.is-active { width: 42px; opacity: 1; background: var(--accent); }
+
+    /* ============ MODULE 02: SLX X-RAY HOUDINI LENS ============ */
+    .xray-demo-card {
+      position: relative;
+      height: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface-2);
+      cursor: crosshair;
+      user-select: none;
+    }
+
+    .xray-layer {
+      position: absolute;
+      inset: 0;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .xray-layer.is-top {
+      background: var(--surface);
+    }
+
+    .xray-top-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .xray-preview-frame {
+      height: 146px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--rule-strong);
+      background: #0a0b10;
+    }
+
+    .xray-preview-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .xray-layer.is-under {
+      background: #050709;
+      color: #a2c8b1;
+      font-family: var(--font-mono);
+      clip-path: circle(var(--xray-r) at var(--xray-x, 50%) var(--xray-y, 50%));
+      transition: --xray-r 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      background-image:
+        radial-gradient(rgba(255, 30, 66, 0.24) 1px, transparent 1px),
+        linear-gradient(to right, rgba(162, 200, 177, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(162, 200, 177, 0.08) 1px, transparent 1px);
+      background-size: 16px 16px, 48px 48px, 48px 48px;
+    }
+
+    .xray-ring {
+      position: absolute;
+      width: calc(var(--xray-r) * 2);
+      height: calc(var(--xray-r) * 2);
+      left: var(--xray-x, 50%);
+      top: var(--xray-y, 50%);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    /* ============ MODULE 03: BIZARRO 3D CASSETTE TOWER + CV TRACKER HUD + WEBAUDIO EQ ============ */
+    .bizarro-stage {
+      position: relative;
+      height: 390px;
+      background: radial-gradient(circle at 38% 50%, #170812 0%, #050508 72%);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: grid;
+      grid-template-columns: 1.45fr 0.55fr;
+      align-items: stretch;
+      padding: 14px 16px;
+      gap: 14px;
+      cursor: crosshair;
+    }
+
+    .bizarro-viewport {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .bizarro-3d-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .cv-tracker-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .bizarro-3d-spacer {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      padding: 6px;
+      pointer-events: none;
+    }
+
+    .bizarro-telemetry-badge {
+      padding: 6px 10px;
+      border-radius: 5px;
+      background: rgba(7, 7, 10, 0.82);
+      border: 1px solid rgba(255, 30, 66, 0.38);
+      color: #f4f3ef;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .cv-target-list {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+    }
+
+    .cv-target-card {
+      position: relative;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(13, 15, 22, 0.88);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: #f4f3ef;
+      text-align: left;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s, transform 0.25s, background-color 0.2s;
+    }
+
+    .cv-target-card:hover,
+    .cv-target-card.is-active {
+      border-color: var(--accent);
+      background: rgba(255, 30, 66, 0.14);
+      transform: translateX(-4px);
+    }
+
+    .bizarro-eq-btn {
+      display: inline-flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      width: 34px;
+      height: 28px;
+      padding: 6px 5px;
+      border-radius: 6px;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface);
+    }
+
+    .bizarro-eq-btn i {
+      display: block;
+      width: 2px;
+      height: 14px;
+      background: var(--ink);
+      transform: scaleY(0.28);
+      transform-origin: bottom;
+    }
+
+    .bizarro-eq-btn[aria-pressed="true"] i {
+      background: var(--accent);
+      animation: eqPulse 0.85s ease-in-out infinite alternate;
+    }
+    .bizarro-eq-btn[aria-pressed="true"] i:nth-child(2) { animation-delay: -0.45s; }
+    .bizarro-eq-btn[aria-pressed="true"] i:nth-child(3) { animation-delay: -0.2s; }
+    .bizarro-eq-btn[aria-pressed="true"] i:nth-child(4) { animation-delay: -0.7s; }
+
+    @keyframes eqPulse {
+      from { transform: scaleY(0.22); }
+      to { transform: scaleY(1); }
+    }
+
+    /* ============ MODULE 04: MAYA KHALIL CRT CONSOLE (OUT 01/02/03) ============ */
+    .maya-console {
+      background: #050507;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      overflow: hidden;
+      color: #f4f3ef;
+      font-family: var(--font-mono);
+    }
+
+    .maya-topbar {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+    }
+
+    .maya-scope-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .maya-canvas-wrap {
+      position: relative;
+      height: 350px;
+      background: #030305;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .maya-main-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .maya-hud-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .maya-prog-words {
+      padding: 12px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .maya-word-btn {
+      background: transparent;
+      border: none;
+      color: #7c8194;
+      font-family: var(--font-mono);
+      font-size: clamp(1rem, 2vw, 1.45rem);
+      font-weight: 800;
+      padding: 4px 2px;
+      border-bottom: 2px solid transparent;
+      letter-spacing: 0.04em;
+    }
+
+    .maya-word-btn.is-active {
+      color: #ffffff;
+      border-bottom-color: #ff1e42;
+    }
+
+    .maya-telemetry {
+      font-size: 0.72rem;
+      color: #ff6b81;
+    }
+
+    /* ============ MODULE 05: TOUCHDESIGNER NODE-WIRE GRAPH ============ */
+    .node-graph-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 8px;
+      background: #06070b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow-x: auto;
+    }
+
+    .td-node {
+      min-width: 165px;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: #0e1017;
+      color: #f4f3ef;
+      font-family: var(--font-mono);
+      text-align: left;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .td-node:hover, .td-node.is-active {
+      border-color: #ff1e42;
+      transform: translateY(-2px);
+    }
+
+    .td-wire {
+      width: 34px;
+      height: 2px;
+      background: rgba(255, 30, 66, 0.55);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .td-wire::before, .td-wire::after {
+      content: "";
+      position: absolute;
+      top: -3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff1e42;
+    }
+    .td-wire::before { left: -4px; }
+    .td-wire::after { right: -4px; }
+
+    .td-inspector {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--rule);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    /* ============ MODULE 06: GARGANTUA 3D BLACK HOLE + TERMINAL PROMPT ============ */
+    .gargantua-stage {
+      position: relative;
+      height: 360px;
+      border-radius: 8px;
+      background: #030306;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .gargantua-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .gargantua-prompt-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+      background: rgba(8, 9, 14, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      padding: 6px;
+      backdrop-filter: blur(10px);
+    }
+
+    .gargantua-prompt-row input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 6px 8px;
+    }
+
+    .gargantua-reply {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      background: rgba(162, 200, 177, 0.12);
+      border: 1px solid rgba(162, 200, 177, 0.35);
+      color: #d6efe0;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      display: none;
+    }
+
+    .gargantua-reply.is-open { display: block; }
+
+    /* ============ MODULE 07: CARTER LINKED CURVED WHEEL + CHAR-ROLL TICKER ============ */
+    .wheel-stage {
+      position: relative;
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .wheel-track {
+      position: relative;
+      height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1100px;
+      transform-style: preserve-3d;
+    }
+
+    .wheel-card {
+      position: absolute;
+      width: 248px;
+      height: 176px;
+      border-radius: 10px;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+      backface-visibility: hidden;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, border-color 0.25s ease;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.32);
+    }
+
+    .wheel-thumb {
+      width: 100%;
+      height: 62px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      background: linear-gradient(135deg, rgba(255, 30, 66, 0.22), rgba(17, 19, 28, 0.9));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--ink);
+    }
+
+    .wheel-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .wheel-ticker {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--rule);
+      font-family: var(--font-mono);
+    }
+
+    .char-roll-word {
+      display: inline-flex;
+      gap: 1px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .char-roll-word span {
+      display: inline-block;
+      animation: charPop 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--ci, 0) * 24ms);
+    }
+
+    @keyframes charPop {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============ MODULE 08: MELON 3D S-WAVE VELOCITY WARP ============ */
+    .warp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      padding: 14px 0;
+      perspective: 1000px;
+    }
+
+    .warp-card {
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface-2);
+      transform-style: preserve-3d;
+      transition: transform 0.14s ease-out;
+      will-change: transform;
+    }
+
+    /* ============ MODULE 09: MELON CRIMSON ROW FLOOD ============ */
+    .insights-list {
+      border-top: 1px solid var(--rule-strong);
+    }
+
+    .insight-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 16px;
+      border-bottom: 1px solid var(--rule);
+      transition: background-color 0.2s ease, color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .insight-row:hover {
+      background: #ff1e42;
+      color: #ffffff;
+    }
+
+    .insight-row:hover .insight-muted { color: rgba(255, 255, 255, 0.84); }
+
+    .insight-thumb {
+      width: 84px;
+      height: 54px;
+      border-radius: 5px;
+      background: var(--surface-2);
+      border: 1px solid var(--rule-strong);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 800;
+      opacity: 0.35;
+      transform: scale(0.92);
+      transition: opacity 0.22s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .insight-row:hover .insight-thumb {
+      opacity: 1;
+      transform: scale(1);
+      background: #0b0c10;
+      color: #ffffff;
+    }
+
+    /* ============ MODULE 10: MELON PIXEL-FILL CANVAS BUTTONS ============ */
+    .fx-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 16px 0;
+    }
+
+    .fx-px-btn {
+      position: relative;
+      overflow: hidden;
+      padding: 14px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface-2);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .fx-px-btn canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .fx-px-btn span {
+      position: relative;
+      z-index: 2;
+      transition: color 0.22s ease;
+    }
+
+    .fx-px-btn:hover span { color: #ffffff; }
+
+    /* ============ MODULE 11: LIQUID BLOB-TO-INK + WIDTH-LOCKED GLYPH SWAP ============ */
+    .liquid-stage {
+      padding: 22px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--rule);
+    }
+
+    .liquid-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: clamp(1.5rem, 3vw, 2.45rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .liq-w {
+      transition: filter 0.35s ease, color 0.35s ease, opacity 0.35s ease;
+    }
+
+    .liq-w.is-blob {
+      filter: blur(5px);
+      color: var(--accent);
+      opacity: 0.72;
+    }
+
+    .glyph-swap-bar {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .gs-ch {
+      display: inline-block;
+      width: 1ch;
+      text-align: center;
+      transition: color 0.15s;
+    }
+
+    .gs-ch.is-alt {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* ============ MODULE 12: UNANIM MORPH DOCK + ./ PREFIX ============ */
+    .unanim-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .unanim-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .u-prefix-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 4px 0;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
+    }
+
+    .u-prefix-link::before {
+      content: "./";
+      font-family: var(--font-mono);
+      color: var(--accent);
+      opacity: 0;
+      margin-right: 6px;
+      transform: translateX(-10px);
+      transition: opacity 0.25s, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .u-prefix-link:hover {
+      transform: translateX(8px);
+      color: var(--accent);
+    }
+
+    .u-prefix-link:hover::before {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .unanim-dock-demo {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .unanim-drawer {
+      width: 280px;
+      padding: 14px;
+      border-radius: 14px;
+      background: #14161e;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #f4f3ef;
+      transform: translateY(10px) scale(0.96);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
+    }
+
+    .unanim-drawer.is-open {
+      transform: none;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .unanim-pill-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 6px 6px 14px;
+      border-radius: 999px;
+      background: rgba(30, 30, 34, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+    }
+
+    .u-ham {
+      display: grid;
+      gap: 3px;
+      width: 14px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .u-ham span {
+      display: block;
+      height: 1.5px;
+      background: currentColor;
+      transition: transform 0.28s;
+    }
+
+    .unanim-pill-bar.is-open .u-ham span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+    .unanim-pill-bar.is-open .u-ham span:nth-child(2) { opacity: 0; }
+    .unanim-pill-bar.is-open .u-ham span:nth-child(3) { transform: translateY(-4.5px) rotate(-45deg); }
+
+    /* ============ MODULE 13: LA BOITE A SLIDES ELLIPTICAL MASK + INNER SHARP ============ */
+    .slides-stage {
+      position: relative;
+      height: 270px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--rule-strong);
+      display: grid;
+      place-items: center;
+      background: #100d18;
+    }
+
+    .slides-ambient {
+      position: absolute;
+      inset: -16px;
+      background: radial-gradient(circle at 30% 40%, #ff1e42 0%, #3b0d1e 48%, #07070a 100%);
+      filter: blur(18px) saturate(1.2);
+      opacity: 0.72;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .slides-stage:hover .slides-ambient {
+      transform: scale(1.06);
+      opacity: 0.92;
+    }
+
+    .slides-inner-sharp {
+      position: relative;
+      z-index: 2;
+      width: min(460px, 86%);
+      padding: 20px;
+      border-radius: 10px;
+      background: #0d0e13;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .slides-stage:hover .slides-inner-sharp {
+      transform: scale(1.03);
+    }
+
+    .slides-curtain {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      pointer-events: none;
+      clip-path: ellipse(0% 0% at 50% 0%);
+      transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    .slides-curtain.is-wiped {
+      clip-path: ellipse(150% 145% at 50% 0%);
+    }
+
+    @media (max-width: 860px) {
+      .lab-intro, .slx-stage, .unanim-stage, .bizarro-stage, .xray-top-grid { grid-template-columns: 1fr; }
+      .slx-stage { height: auto; min-height: 440px; padding: 20px 16px 58px; }
+      .slx-reticle-svg { width: 170px; height: 170px; }
+      .xray-demo-card { height: 340px; }
+      .xray-preview-frame { height: 108px; }
+      .bizarro-stage { height: auto; padding: 12px; gap: 12px; }
+      .bizarro-viewport { height: 270px; min-height: 270px; }
+      .cv-target-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .wheel-card { width: 196px; height: 158px; }
+      .warp-grid { grid-template-columns: 1fr; }
+      .insight-row { grid-template-columns: 1fr; }
+      .unanim-drawer { width: min(280px, 100%); }
+    }
+  </style>
+</head>
+<body>
+  <header class="lab-header">
+    <div class="lab-header-inner">
+      <div class="lab-brand">
+        <span class="lab-brand-badge">LAB // 13</span>
+        <span>INSPIRATIONS PORTFOLIO MATÉI</span>
+      </div>
+
+      <div class="lab-filters" role="tablist" aria-label="Filtrer les prototypes">
+        <button type="button" class="filter-pill is-active" data-cat="all">Tous (13)</button>
+        <button type="button" class="filter-pill" data-cat="3d">3D &amp; Shaders</button>
+        <button type="button" class="filter-pill" data-cat="hud">HUD &amp; Curseurs</button>
+        <button type="button" class="filter-pill" data-cat="typo">Typo &amp; Micro-UI</button>
+        <button type="button" class="filter-pill" data-cat="cards">Cartes &amp; Navigation</button>
+      </div>
+
+      <div class="lab-actions">
+        <button type="button" class="hud-btn" id="lab-crt-btn">CRT : OFF</button>
+        <button type="button" class="hud-btn" id="lab-theme-btn">☀ Mode Jour</button>
+        <a href="portfolio.html" class="hud-btn is-primary">← Retour Portfolio</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="lab-shell">
+    <section class="lab-intro">
+      <div>
+        <h1>Laboratoire Interactif — 13 Mécaniques Récoltées<span style="color:var(--accent)">.</span></h1>
+        <p>
+          Chaque prototype ci-dessous provient des sites inspectés (<strong>SLX Management</strong>, <strong>Luis Bizarro</strong>, <strong>Maya Khalil</strong>, <strong>Carter Ogunsola</strong>, <strong>Melon Studio</strong>, <strong>Unanim Studio</strong>, <strong>La boite à slides</strong>), adapté à ton identité <em>Noir / Crimson / Papier Éditorial</em>. Clique sur <strong>★ Garder</strong> pour composer ta sélection.
+        </p>
+      </div>
+
+      <div class="lab-picks-box">
+        <div class="lab-picks-head">
+          <span>MA SÉLECTION (<span id="picks-count">0</span>)</span>
+          <button type="button" class="hud-btn" id="copy-picks-btn">Copier ma sélection</button>
+        </div>
+        <div class="lab-picks-list" id="picks-list">Aucun module sélectionné pour l'instant.</div>
+      </div>
+    </section>
+
+    <div class="modules-grid">
+      <!-- 01 -->
+      <article class="proto-card" data-id="#01 SLX 3D Horizon & Station Dock" data-cat="3d">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">01 // SLXMANAGEMENT.COM · THREE/WIREFRAME</span>
+            <h2 class="proto-title">Terrain Wireframe + Réticule Orbital SVG + Station Dock</h2>
+            <p class="proto-desc">Terrain filaire temps réel, viseur orbital 3 callouts, révélation Blur-Deconstitute et barre stations extensible.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="hud-btn" id="slx-replay-btn">Rejouer Texte</button>
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="slx-stage" id="slx-stage">
+            <canvas class="slx-canvas" id="slx-terrain-canvas"></canvas>
+            <div class="slx-reticle-box">
+              <svg class="slx-reticle-svg" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="24" stroke="#a2c8b1" stroke-width="0.4" opacity="0.55" />
+                <circle cx="50" cy="50" r="38" stroke="#a2c8b1" stroke-width="0.4" stroke-dasharray="1.5 2.5" opacity="0.5" />
+                <line x1="50" y1="6" x2="50" y2="94" stroke="#a2c8b1" stroke-width="0.3" opacity="0.4" />
+                <line x1="6" y1="50" x2="94" y2="50" stroke="#a2c8b1" stroke-width="0.3" opacity="0.4" />
+                <circle cx="50" cy="50" r="2.2" fill="#ff1e42" />
+              </svg>
+              <span class="slx-callout" style="top:12%;left:6%;">01 // ARCHITECTURE DAG</span>
+              <span class="slx-callout" style="top:42%;right:2%;">02 // PYTEST 22/22</span>
+              <span class="slx-callout" style="bottom:14%;left:10%;">03 // ORACLE VPS 24/7</span>
+            </div>
+            <div class="slx-copy slx-anim" id="slx-copy-block">
+              <div class="slx-kicker" data-el style="--i:0" id="slx-kicker">01 / 04 · SYSTÈME</div>
+              <h3 class="slx-h3" data-el style="--i:1" id="slx-title">Orchestration Multi-Agents</h3>
+              <p data-el style="--i:2" id="slx-desc" style="color:#d6e2dc;font-size:0.9rem;">20 profils spécialisés reliés en graphe acyclique (DAG) avec portes qualité Critic + QA avant déploiement.</p>
+            </div>
+            <div class="slx-dock">
+              <span id="slx-dock-label">01 / 04</span>
+              <div class="slx-ticks">
+                <button type="button" class="slx-tick is-active" data-slx-idx="0" aria-pressed="true" aria-label="Station 1"></button>
+                <button type="button" class="slx-tick" data-slx-idx="1" aria-pressed="false" aria-label="Station 2"></button>
+                <button type="button" class="slx-tick" data-slx-idx="2" aria-pressed="false" aria-label="Station 3"></button>
+                <button type="button" class="slx-tick" data-slx-idx="3" aria-pressed="false" aria-label="Station 4"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="proto-card" data-id="#02 SLX Lentille X-Ray Houdini" data-cat="hud">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">02 // SLXMANAGEMENT.COM · @PROPERTY --XRAY-R</span>
+            <h2 class="proto-title">Lentille Rayons-X Interactive (UI ↔ Architecture Code)</h2>
+            <p class="proto-desc">Survole la carte pour ouvrir un rayon-X circulaire ; clique pour verrouiller / déverrouiller toute l'architecture.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="xray-demo-card" id="xray-demo-card" style="--xray-x: 74%; --xray-y: 50%; --xray-r: 92px;">
+            <div class="xray-layer is-top">
+              <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent);font-weight:800;">SURVOLER / CLIQUER POUR ACTIVER LE RAYON-X</div>
+              <div class="xray-top-grid">
+                <div>
+                  <h3 style="margin:0 0 8px;font-size:1.65rem;">ZenWorkspace v2.0.0 — Tableur Spatial</h3>
+                  <p style="margin:0;color:var(--muted);">Interface utilisateur épurée : glissez le curseur ici pour inspecter la structure TypeScript interne.</p>
+                </div>
+                <div class="xray-preview-frame">
+                  <img src="portfolio_assets/real_previews/zentable_real.png" alt="Aperçu réel ZenWorkspace" loading="lazy" />
+                </div>
+              </div>
+              <div style="font-family:var(--font-mono);font-size:0.8rem;">React 18 · TypeScript · Electron 33</div>
+            </div>
+            <div class="xray-layer is-under">
+              <div>// BLUEPRINT X-RAY :: FORMULA_ENGINE.TS (923 LIGNES)</div>
+              <div>
+                <div>AST Parser → Graphe DAG inter-tables → Évaluation Topologique</div>
+                <div style="color:#ffffff;margin-top:6px;">63 fichiers TS/TSX • 13 suites Vitest (57/57 PASS) • Export .xlsx SheetJS</div>
+              </div>
+              <div>LOCK_MODE: CLICK TO TOGGLE 150%</div>
+            </div>
+            <div class="xray-ring" aria-hidden="true"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="proto-card" data-id="#03 Bizarro HUD Computer-Vision + Audio EQ" data-cat="hud">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">03 // BIZAR.RO · 3D CASSETTE TOWER + CV TELEMETRY + WEBAUDIO</span>
+            <h2 class="proto-title">Tour 3D Translucide + HUD Computer-Vision &amp; Synthé EQ</h2>
+            <p class="proto-desc">Tour 3D WebGL temps réel avec viseur CV projeté (<code>x/y/z</code>, ellipses orbitales, sous-rectangles pointillés) + audio optionnel.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="bizarro-eq-btn" id="bizarro-eq-btn" aria-pressed="false" title="Activer/couper le micro-synthé"><i></i><i></i><i></i><i></i></button>
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="bizarro-stage" id="cv-stage">
+            <div class="bizarro-viewport" id="bizarro-viewport">
+              <canvas class="bizarro-3d-canvas" id="bizarro-3d-canvas"></canvas>
+              <canvas class="cv-tracker-canvas" id="cv-tracker-canvas"></canvas>
+              <div class="bizarro-3d-spacer">
+                <div class="bizarro-telemetry-badge" id="bizarro-3d-readout">STACK_3D :: ZENWORKSPACE [57/57 VITEST]</div>
+              </div>
+            </div>
+            <div class="cv-target-list">
+              <button type="button" class="cv-target-card is-active" data-cv-idx="0" data-cv-title="ZENWORKSPACE" data-cv-sub="React 18 · 57/57 Vitest · Electron">
+                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);">01 // APP · STRATE A</span>
+                <strong>ZenWorkspace</strong>
+                <span style="font-size:0.75rem;color:#9da3b5;">Tableur spatial + IA</span>
+              </button>
+              <button type="button" class="cv-target-card" data-cv-idx="1" data-cv-title="20 AGENTS CLOUD" data-cv-sub="Python DAG · 22/22 Pytest · Oracle">
+                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);">02 // SYS · STRATE B</span>
+                <strong>20 Agents Cloud</strong>
+                <span style="font-size:0.75rem;color:#9da3b5;">Orchestration autonome</span>
+              </button>
+              <button type="button" class="cv-target-card" data-cv-idx="2" data-cv-title="POLYDRIVE MLP" data-cv-sub="NumPy 16→24→16→4 · PPO + AG">
+                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);">03 // AI · STRATE C</span>
+                <strong>PolyDrive Lab</strong>
+                <span style="font-size:0.75rem;color:#9da3b5;">Neuroévolution 876 params</span>
+              </button>
+              <button type="button" class="cv-target-card" data-cv-idx="3" data-cv-title="46 PRS & MCP" data-cv-sub="Twenty CRM · Omi · FinTech">
+                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);">04 // SEC · STRATE D</span>
+                <strong>46 PRs &amp; MCP</strong>
+                <span style="font-size:0.75rem;color:#9da3b5;">Sécurité &amp; RBAC</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="proto-card" data-id="#04 Maya Khalil Console OUT 01/02/03" data-cat="3d">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">04 // MAYAKHALIL.COM · THREE.JS SHADER / VOXELCUBE / IK-3D</span>
+            <h2 class="proto-title">Console WebGL 3D Multi-Programmes (Shader Ondes · Voxels · Bras IK)</h2>
+            <p class="proto-desc">Change de programme (<code>OUT 01 · SIGNAL</code>, <code>OUT 02 · VOXELS</code>, <code>OUT 03 · BRAS IK</code>) et déplace/clique sur la scène 3D.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="maya-console">
+            <div class="maya-topbar">
+              <div class="maya-scope-wrap">
+                <canvas id="maya-scope-canvas" width="68" height="22" style="border:1px solid rgba(255,30,66,0.45);border-radius:3px;"></canvas>
+                <span>MATÉI // LAB_MONITOR_3D</span>
+              </div>
+              <span class="maya-telemetry" id="maya-telemetry">tx 0.500 · ty 0.500 · cook 1.4 ms · 60 fps</span>
+            </div>
+            <div class="maya-canvas-wrap">
+              <canvas class="maya-main-canvas" id="maya-main-canvas"></canvas>
+              <canvas class="maya-hud-canvas" id="maya-hud-canvas"></canvas>
+            </div>
+            <div class="maya-prog-words">
+              <div style="display:flex;flex-wrap:wrap;gap:14px;">
+                <button type="button" class="maya-word-btn is-active" data-maya-prog="0">OUT 01 · SIGNAL,</button>
+                <button type="button" class="maya-word-btn" data-maya-prog="1">OUT 02 · VOXELS,</button>
+                <button type="button" class="maya-word-btn" data-maya-prog="2">OUT 03 · BRAS IK.</button>
+              </div>
+              <span style="font-size:0.74rem;color:#9da3b5;">Glisser = orbite 3D / Cliquer = impulsion</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="proto-card" data-id="#05 Graphe Node-Wire TouchDesigner" data-cat="hud">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">05 // MAYAKHALIL.COM/#LAB · PIPELINE INTERACTIF</span>
+            <h2 class="proto-title">Graphe Opérateurs Node-Wire (Inspecteur Architecture Réelle)</h2>
+            <p class="proto-desc">Clique sur chaque nœud (<code>[SENSOR_IN]</code>, <code>[NEURAL_MLP]</code>, <code>[ORCH_DAG]</code>, <code>[SYSTEMD_24_7]</code>) pour inspecter le flux de données réel.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="node-graph-wrap">
+            <button type="button" class="td-node is-active" data-td="0">
+              <div style="font-size:0.65rem;color:#ff1e42;">[SENSOR_IN]</div>
+              <strong>lidar_16ch</strong>
+              <div style="font-size:0.7rem;color:#9da3b5;">-75° → +75° · télémétrie</div>
+            </button>
+            <div class="td-wire"></div>
+            <button type="button" class="td-node" data-td="1">
+              <div style="font-size:0.65rem;color:#ff1e42;">[NEURAL_MLP]</div>
+              <strong>numpy_ppo</strong>
+              <div style="font-size:0.7rem;color:#9da3b5;">16→24→16→4 (876p)</div>
+            </button>
+            <div class="td-wire"></div>
+            <button type="button" class="td-node" data-td="2">
+              <div style="font-size:0.65rem;color:#ff1e42;">[ORCH_DAG]</div>
+              <strong>cloud_master</strong>
+              <div style="font-size:0.7rem;color:#9da3b5;">20 rôles · SQLite WAL</div>
+            </button>
+            <div class="td-wire"></div>
+            <button type="button" class="td-node" data-td="3">
+              <div style="font-size:0.65rem;color:#ff1e42;">[SYSTEMD_24_7]</div>
+              <strong>oracle_vps</strong>
+              <div style="font-size:0.7rem;color:#9da3b5;">Ubuntu · 88.96.47.180</div>
+            </button>
+          </div>
+          <div class="td-inspector" id="td-inspector">
+            <strong>[SENSOR_IN] lidar_16ch →</strong> 7 rayons distances normalisées [0..1] + vitesse, lacet, état roues et courbure anticipée (+14m / +34m).
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="proto-card" data-id="#06 SLX Gargantua + Terminal Prompt" data-cat="3d">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">06 // SLXMANAGEMENT.COM · ACCRETION + PROMPT IA</span>
+            <h2 class="proto-title">Trou Noir Gravitationnel 3D (<code>Gargantua</code>) + Invite Conversationnelle</h2>
+            <p class="proto-desc">Disque d'accrétion à parallaxe souris + barre de question rapide dédiée aux recruteurs (tapez "zentable", "alternance", "cloud", "c").</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="gargantua-stage" id="gargantua-stage">
+            <canvas class="gargantua-canvas" id="gargantua-canvas"></canvas>
+            <div class="gargantua-reply" id="gargantua-reply"></div>
+            <form class="gargantua-prompt-row" id="gargantua-form">
+              <input type="text" id="gargantua-input" placeholder="Posez une question (ex: alternance, zentable, cloud)..." autocomplete="off" />
+              <button type="submit" class="hud-btn is-primary" style="background:#ff1e42;color:#fff;border-color:#ff1e42;">DEMANDER ⏎</button>
+            </form>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 -->
+      <article class="proto-card" data-id="#07 Carter Roue Orbitale & Ticker" data-cat="cards">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">07 // CARTEROGUNSOLA.COM · ORBITAL WHEEL + CHAR-ROLL</span>
+            <h2 class="proto-title">Roue de Projets Incurvée + Ticker Caractère par Caractère</h2>
+            <p class="proto-desc">Navigue avec <code>←</code> / <code>→</code> ou clique une carte latérale pour déclencher la courbe orbitale 3D et le roulement vertical des métadonnées.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="hud-btn" id="wheel-prev">← Précédent</button>
+            <button type="button" class="hud-btn" id="wheel-next">Suivant →</button>
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="wheel-stage">
+            <div class="wheel-track" id="wheel-track"></div>
+            <div class="wheel-ticker">
+              <span id="wheel-counter">N°01 / 05</span>
+              <span class="char-roll-word" id="wheel-roll-tag">REACT 18 · VITEST</span>
+              <span id="wheel-year" style="color:var(--muted);">2025–2026</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 08 -->
+      <article class="proto-card" data-id="#08 Melon Déformation Vélocité S-Wave" data-cat="cards">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">08 // MELON.STUDIO · SCROLL VELOCITY WARP</span>
+            <h2 class="proto-title">Cartes Déformées en Direct par la Vélocité de Scroll (S-Wave)</h2>
+            <p class="proto-desc">Scrolle la page rapidement ou déplace le curseur d'impulsion pour voir les 3 cartes se tordre et revenir à plat.</p>
+          </div>
+          <div class="proto-controls">
+            <input type="range" id="warp-pulse-range" min="-20" max="20" value="0" aria-label="Impulsion de déformation" />
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="warp-grid" id="warp-grid">
+            <div class="warp-card"><strong>ZenWorkspace</strong><p style="margin:6px 0 0;color:var(--muted);font-size:0.86rem;">Tableur spatial Electron &amp; React</p></div>
+            <div class="warp-card"><strong>20 Agents Cloud</strong><p style="margin:6px 0 0;color:var(--muted);font-size:0.86rem;">Graphe DAG autonome Python</p></div>
+            <div class="warp-card"><strong>PolyDrive Neural</strong><p style="margin:6px 0 0;color:var(--muted);font-size:0.86rem;">Neuroévolution &amp; PPO-Clip</p></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 09 -->
+      <article class="proto-card" data-id="#09 Melon/Zajno Inondation Crimson" data-cat="cards">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">09 // MELON.STUDIO &amp; ZAJNO · FULL-BLEED ROW FLOOD</span>
+            <h2 class="proto-title">Index 1px à Inondation Crimson + Vignette Pop au Survol</h2>
+            <p class="proto-desc">Survole n'importe quelle ligne : inversion instantanée plein cadre en <code>#ff1e42</code> avec vignette surgissante à droite.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="insights-list">
+            <div class="insight-row">
+              <span class="insight-muted" style="font-family:var(--font-mono);font-size:0.75rem;">2026 · OSS</span>
+              <div><strong>46 PRs Fusionnées sur Twenty CRM, Omi &amp; FinTech</strong><div class="insight-muted" style="font-size:0.82rem;color:var(--muted);">RBAC · XSS · OAuth · Security Scanner MCP ↗</div></div>
+              <div class="insight-thumb">RFC 9116</div>
+            </div>
+            <div class="insight-row">
+              <span class="insight-muted" style="font-family:var(--font-mono);font-size:0.75rem;">2025 · IUT</span>
+              <div><strong>Kai Academic &amp; AlgoForge Desktop (447 documents)</strong><div class="insight-muted" style="font-size:0.82rem;color:var(--muted);">20 modules BUT Informatique · C/C++ · SQL ↗</div></div>
+              <div class="insight-thumb">447 DOCS</div>
+            </div>
+            <div class="insight-row">
+              <span class="insight-muted" style="font-family:var(--font-mono);font-size:0.75rem;">2024 · STAGE</span>
+              <div><strong>Stages HUPI (Python/Data) &amp; Marra + Immersion UK</strong><div class="insight-muted" style="font-size:0.82rem;color:var(--muted);">Bournemouth 2024 &amp; Brighton 2025 · Anglais B2 ↗</div></div>
+              <div class="insight-thumb">UK · B2</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10 -->
+      <article class="proto-card" data-id="#10 Melon Bouton Dissolution Pixel Canvas" data-cat="typo">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">10 // MELON.STUDIO · &lt;CANVAS class="fx-px"&gt;</span>
+            <h2 class="proto-title">Boutons CTA à Dissolution Pixelisée en Canvas (<code>Hover me</code>)</h2>
+            <p class="proto-desc">Survole les boutons : des blocs carrés <code>#ff1e42</code> envahissent aléatoirement l'intérieur du bouton à 60 fps.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="fx-btn-row">
+            <button type="button" class="fx-px-btn"><canvas></canvas><span>Démarrer un projet →</span></button>
+            <button type="button" class="fx-px-btn"><canvas></canvas><span>Inspecter Totem 3D ↗</span></button>
+            <button type="button" class="fx-px-btn"><canvas></canvas><span>Copier matei64200@gmail.com</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11 -->
+      <article class="proto-card" data-id="#11 Melon Liquide-à-Encre & Glitch Glyphes" data-cat="typo">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">11 // MELON.STUDIO · SCROLL LIQUID REVEAL + GLYPH SWAP</span>
+            <h2 class="proto-title">Révélation Flou-Crimson → Encre Nette + Glitch Largeur Verrouillée</h2>
+            <p class="proto-desc">Déplace le curseur de lecture pour solidifier chaque mot progressivement, et observe les glyphes italiques serif alterner sans décalage.</p>
+          </div>
+          <div class="proto-controls">
+            <input type="range" id="liquid-progress" min="0" max="100" value="48" aria-label="Progression liquide" />
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="liquid-stage">
+            <div class="liquid-words" id="liquid-words"></div>
+            <div class="glyph-swap-bar" id="glyph-swap-bar"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 12 -->
+      <article class="proto-card" data-id="#12 Unanim Morph-Dock & Liens ./Préfixe" data-cat="cards">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">12 // UNANIM.STUDIO · FLOATING MORPH DOCK + ./LINKS</span>
+            <h2 class="proto-title">Dock Flottant à Tiroir Ascendant + Liens <code>./</code> Glissants</h2>
+            <p class="proto-desc">Survole les liens à gauche et clique sur le bouton Menu à droite pour voir l'icône se transformer en croix et déployer le tiroir.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="unanim-stage">
+            <div class="unanim-links">
+              <a href="javascript:void(0)" class="u-prefix-link">ZenWorkspace</a>
+              <a href="javascript:void(0)" class="u-prefix-link">Orchestrateur 20 Agents</a>
+              <a href="javascript:void(0)" class="u-prefix-link">Totem 3D WebGL</a>
+              <a href="javascript:void(0)" class="u-prefix-link">Contact Alternance</a>
+            </div>
+            <div class="unanim-dock-demo">
+              <div class="unanim-drawer" id="unanim-drawer">
+                <div style="font-family:var(--font-mono);font-size:0.72rem;color:#9da3b5;margin-bottom:8px;">NAVIGATION RAPIDE</div>
+                <div style="display:grid;gap:6px;font-weight:700;">
+                  <span>01 · Univers &amp; Trame Bayer</span>
+                  <span>02 · Projets Vérifiés</span>
+                  <span>03 · Monolithe 3D SCRIB3</span>
+                  <span>04 · CV FR / EN &amp; GitHub</span>
+                </div>
+              </div>
+              <button type="button" class="unanim-pill-bar" id="unanim-dock-btn">
+                <span>Menu</span>
+                <span class="u-ham"><span></span><span></span><span></span></span>
+                <span style="padding:5px 10px;border-radius:999px;background:#fff;color:#000;font-weight:800;" id="unanim-pill-tag">Explorer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 13 -->
+      <article class="proto-card" data-id="#13 La Boite à Slides Masque Elliptique" data-cat="cards">
+        <div class="proto-head">
+          <div class="proto-meta">
+            <span class="proto-kicker">13 // LABOITEASLIDES.FR · ELLIPSE CURTAIN + BLUR/SHARP</span>
+            <h2 class="proto-title">Rideau Elliptique &amp; Carte Double-Plan (Nette sur Halo Flou)</h2>
+            <p class="proto-desc">Clique sur « Rejouer Rideau » pour voir l'ellipse crimson s'ouvrir, et survole la carte centrale pour animer la profondeur.</p>
+          </div>
+          <div class="proto-controls">
+            <button type="button" class="hud-btn" id="slides-curtain-btn">Rejouer Rideau</button>
+            <button type="button" class="pick-btn">★ Garder</button>
+          </div>
+        </div>
+        <div class="proto-stage">
+          <div class="slides-stage">
+            <div class="slides-ambient"></div>
+            <div class="slides-inner-sharp">
+              <div style="font-family:var(--font-mono);font-size:0.7rem;color:#ff6b81;margin-bottom:6px;">ÉTUDE DE CAS // PYTHON + REACT</div>
+              <strong style="font-size:1.25rem;display:block;margin-bottom:6px;">PolyDrive Neural Lab — Conduite Autonome</strong>
+              <span style="font-size:0.86rem;color:#c2c5d4;">Double entraînement PPO-Clip &amp; Neuroévolution sans framework lourd.</span>
+            </div>
+            <div class="slides-curtain" id="slides-curtain">MATÉI · STUDIO</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script src="portfolio_assets/vendor/three.min.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------------- Shared Three.js WebGL Lifecycle Helper ---------------- */
+      function createLabWebGL(canvas, observeTarget, renderCb) {
+        if (!window.THREE || !canvas) return null;
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: true,
+          alpha: true,
+          powerPreference: 'high-performance',
+          preserveDrawingBuffer: true
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        if (THREE.sRGBEncoding !== undefined) renderer.outputEncoding = THREE.sRGBEncoding;
+
+        let inView = true;
+        let warmup = 6;
+        if ('IntersectionObserver' in window && observeTarget) {
+          const io = new IntersectionObserver((entries) => {
+            inView = entries[0].isIntersecting;
+          }, { threshold: 0.01 });
+          io.observe(observeTarget);
+        }
+
+        function syncSize(camera, host) {
+          const w = Math.max(1, host.clientWidth || canvas.clientWidth || 800);
+          const h = Math.max(1, host.clientHeight || canvas.clientHeight || 360);
+          const size = renderer.getSize(new THREE.Vector2());
+          if (size.x !== w || size.y !== h) {
+            renderer.setSize(w, h, false);
+            if (camera) {
+              camera.aspect = w / h;
+              camera.updateProjectionMatrix();
+            }
+          }
+          return { w, h };
+        }
+
+        function tick(now) {
+          if (inView || warmup > 0) {
+            if (warmup > 0) warmup--;
+            renderCb(now, renderer, syncSize);
+          }
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+
+        return {
+          renderer,
+          bumpWarmup(frames = 4) { warmup = Math.max(warmup, frames); }
+        };
+      }
+
+      /* ---------------- 0. Global Controls (Theme, CRT, Filter, Picks) ---------------- */
+      const themeBtn = document.getElementById('lab-theme-btn');
+      const crtBtn = document.getElementById('lab-crt-btn');
+      themeBtn.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', cur);
+        themeBtn.textContent = cur === 'light' ? '☾ Mode Nuit' : '☀ Mode Jour';
+      });
+      crtBtn.addEventListener('click', () => {
+        const on = document.body.classList.toggle('crt-enabled');
+        crtBtn.textContent = on ? 'CRT : ON' : 'CRT : OFF';
+      });
+
+      const picks = new Set();
+      function syncPicks() {
+        const list = document.getElementById('picks-list');
+        const cnt = document.getElementById('picks-count');
+        cnt.textContent = String(picks.size);
+        list.textContent = picks.size ? Array.from(picks).join(' | ') : "Aucun module sélectionné pour l'instant.";
+      }
+      document.querySelectorAll('.proto-card').forEach((card) => {
+        const id = card.getAttribute('data-id');
+        const btn = card.querySelector('.pick-btn');
+        btn.addEventListener('click', () => {
+          if (picks.has(id)) {
+            picks.delete(id);
+            card.classList.remove('is-picked');
+            btn.classList.remove('is-picked');
+            btn.textContent = '★ Garder';
+          } else {
+            picks.add(id);
+            card.classList.add('is-picked');
+            btn.classList.add('is-picked');
+            btn.textContent = '✓ Gardé';
+          }
+          syncPicks();
+        });
+      });
+
+      document.getElementById('copy-picks-btn').addEventListener('click', async () => {
+        const txt = picks.size ? 'Sélection Portfolio Lab :\n- ' + Array.from(picks).join('\n- ') : 'Aucune sélection';
+        try { await navigator.clipboard.writeText(txt); } catch (_) {}
+        const b = document.getElementById('copy-picks-btn');
+        const prev = b.textContent;
+        b.textContent = '✓ Copié !';
+        setTimeout(() => (b.textContent = prev), 1800);
+      });
+
+      document.querySelectorAll('.filter-pill').forEach((pill) => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.filter-pill').forEach((p) => p.classList.toggle('is-active', p === pill));
+          const cat = pill.getAttribute('data-cat');
+          document.querySelectorAll('.proto-card').forEach((c) => {
+            c.hidden = cat !== 'all' && c.getAttribute('data-cat') !== cat;
+          });
+        });
+      });
+
+      /* ---------------- 1. SLX 3D Horizon Wireframe + Orbital Core ---------------- */
+      (function initSlx() {
+        const stage = document.getElementById('slx-stage');
+        const canvas = document.getElementById('slx-terrain-canvas');
+        const stations = [
+          { k: '01 / 04 · DISQUE', t: 'Orchestration Multi-Agents', d: '20 profils spécialisés reliés en graphe acyclique (DAG) avec portes qualité Critic + QA avant déploiement.', cam: [0, 3.8, 12.2], wire: 0xa2c8b1 },
+          { k: '02 / 04 · GARGANTUA', t: 'ZenWorkspace FormulaEngine', d: '923 lignes TypeScript de résolution de graphes de dépendances inter-tables (57/57 tests Vitest passés).', cam: [2.8, 4.9, 10.8], wire: 0x38bdf8 },
+          { k: '03 / 04 · TESSERACT', t: 'Sécurité Applicative & MCP', d: '46 Pull Requests fusionnées (Twenty, Omi, FinTech) + serveur public security-scanner-mcp RFC 9116.', cam: [-2.4, 4.4, 11.4], wire: 0xff1e42 },
+          { k: '04 / 04 · ORBITE', t: 'PolyDrive Neuroévolution', d: 'Perceptron NumPy pur 16→24→16→4 entraîné par gradient PPO-Clip et algorithme génétique sur PolyTrack 3D.', cam: [1.4, 3.4, 9.8], wire: 0xf59e0b }
+        ];
+        let activeSt = 0;
+        let px = 0, py = 0;
+        let glCtrl = null;
+
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x040507, 0.036);
+        const camera = new THREE.PerspectiveCamera(46, 2, 0.1, 140);
+        camera.position.set(0, 3.8, 12.2);
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+        const redLight = new THREE.PointLight(0xff1e42, 3.6, 30);
+        redLight.position.set(-4, 5, 5);
+        scene.add(redLight);
+        const sageLight = new THREE.PointLight(0xa2c8b1, 2.4, 28);
+        sageLight.position.set(6, 4, 2);
+        scene.add(sageLight);
+
+        const planeGeo = new THREE.PlaneGeometry(52, 38, 44, 32);
+        const baseSolid = new THREE.Mesh(
+          planeGeo,
+          new THREE.MeshStandardMaterial({ color: 0x07080d, roughness: 0.9, metalness: 0.25, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 })
+        );
+        baseSolid.rotation.x = -Math.PI / 2;
+        baseSolid.position.set(0, -1.8, -4);
+        scene.add(baseSolid);
+
+        const wireMat = new THREE.MeshBasicMaterial({ color: 0xa2c8b1, wireframe: true, transparent: true, opacity: 0.34 });
+        const wireMesh = new THREE.Mesh(planeGeo, wireMat);
+        wireMesh.rotation.x = -Math.PI / 2;
+        wireMesh.position.set(0, -1.77, -4);
+        scene.add(wireMesh);
+
+        const coreGroup = new THREE.Group();
+        coreGroup.position.set(-3.9, 1.5, -1.5);
+        const icoGeo = new THREE.IcosahedronGeometry(1.55, 1);
+        coreGroup.add(new THREE.Mesh(icoGeo, new THREE.MeshStandardMaterial({ color: 0x0c0e15, metalness: 0.85, roughness: 0.2 })));
+        const coreEdges = new THREE.LineSegments(new THREE.EdgesGeometry(icoGeo), new THREE.LineBasicMaterial({ color: 0xff1e42, transparent: true, opacity: 0.85 }));
+        coreGroup.add(coreEdges);
+        const ringA = new THREE.Mesh(new THREE.TorusGeometry(2.35, 0.03, 10, 84), new THREE.MeshBasicMaterial({ color: 0xa2c8b1, transparent: true, opacity: 0.65 }));
+        ringA.rotation.x = 1.05;
+        coreGroup.add(ringA);
+        const ringB = new THREE.Mesh(new THREE.TorusGeometry(2.75, 0.02, 10, 84), new THREE.MeshBasicMaterial({ color: 0xff1e42, transparent: true, opacity: 0.55 }));
+        ringB.rotation.y = 0.8;
+        coreGroup.add(ringB);
+        scene.add(coreGroup);
+
+        stage.addEventListener('pointermove', (e) => {
+          const r = stage.getBoundingClientRect();
+          px = ((e.clientX - r.left) / r.width - 0.5) * 2;
+          py = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        });
+
+        function setStation(i) {
+          activeSt = i;
+          document.querySelectorAll('.slx-tick').forEach((t, idx) => {
+            t.classList.toggle('is-active', idx === i);
+            t.setAttribute('aria-pressed', String(idx === i));
+          });
+          document.getElementById('slx-dock-label').textContent = `0${i + 1} / 04`;
+          document.getElementById('slx-kicker').textContent = stations[i].k;
+          document.getElementById('slx-title').textContent = stations[i].t;
+          document.getElementById('slx-desc').textContent = stations[i].d;
+          wireMat.color.setHex(stations[i].wire);
+          const blk = document.getElementById('slx-copy-block');
+          blk.classList.remove('slx-anim');
+          void blk.offsetWidth;
+          blk.classList.add('slx-anim');
+          if (glCtrl) glCtrl.bumpWarmup(8);
+        }
+        document.querySelectorAll('.slx-tick').forEach((t) => {
+          t.addEventListener('click', () => setStation(Number(t.dataset.slxIdx)));
+        });
+        document.getElementById('slx-replay-btn').addEventListener('click', () => setStation(activeSt));
+
+        glCtrl = createLabWebGL(canvas, stage, (now, renderer, syncSize) => {
+          syncSize(camera, stage);
+          const t = now * 0.0011;
+          const pos = planeGeo.attributes.position;
+          for (let i = 0; i < pos.count; i++) {
+            const vx = pos.getX(i);
+            const vy = pos.getY(i);
+            const wave = Math.sin(vx * 0.24 + t + activeSt) * 0.75 + Math.cos(vy * 0.26 - t * 0.8) * 0.65;
+            pos.setZ(i, wave);
+          }
+          pos.needsUpdate = true;
+
+          coreGroup.rotation.y = t * 0.45 + px * 0.5;
+          coreGroup.rotation.x = Math.sin(t * 0.4) * 0.18 + py * 0.35;
+          ringA.rotation.z = t * 0.6;
+          ringB.rotation.x = -t * 0.5;
+
+          const tc = stations[activeSt].cam;
+          camera.position.x += (tc[0] + px * 0.9 - camera.position.x) * 0.06;
+          camera.position.y += (tc[1] - py * 0.5 - camera.position.y) * 0.06;
+          camera.position.z += (tc[2] - camera.position.z) * 0.06;
+          camera.lookAt(-0.4, 0.2, -2.5);
+          renderer.render(scene, camera);
+        });
+      })();
+
+      /* ---------------- 2. SLX X-Ray Houdini Lens ---------------- */
+      (function initXray() {
+        const card = document.getElementById('xray-demo-card');
+        let locked = false;
+        card.addEventListener('pointermove', (e) => {
+          if (locked) return;
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--xray-x', `${e.clientX - r.left}px`);
+          card.style.setProperty('--xray-y', `${e.clientY - r.top}px`);
+          card.style.setProperty('--xray-r', '108px');
+        });
+        card.addEventListener('pointerleave', () => {
+          if (!locked) card.style.setProperty('--xray-r', '92px');
+        });
+        card.addEventListener('click', (e) => {
+          locked = !locked;
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--xray-x', `${e.clientX - r.left}px`);
+          card.style.setProperty('--xray-y', `${e.clientY - r.top}px`);
+          card.style.setProperty('--xray-r', locked ? '150%' : '108px');
+        });
+      })();
+
+      /* ---------------- 3. Bizarro 3D Cassette Tower + Projected CV HUD + WebAudio EQ ---------------- */
+      (function initBizarro3DAndCv() {
+        const stage = document.getElementById('bizarro-viewport');
+        const glCanvas = document.getElementById('bizarro-3d-canvas');
+        const hudCanvas = document.getElementById('cv-tracker-canvas');
+        const hctx = hudCanvas.getContext('2d');
+        const readout = document.getElementById('bizarro-3d-readout');
+        const eqBtn = document.getElementById('bizarro-eq-btn');
+        const cards = Array.from(document.querySelectorAll('.cv-target-card'));
+
+        let actx = null;
+        let ptr = { x: 240, y: 180, inside: false };
+        let activeIdx = 0;
+        let glCtrl = null;
+
+        eqBtn.addEventListener('click', () => {
+          const next = eqBtn.getAttribute('aria-pressed') !== 'true';
+          eqBtn.setAttribute('aria-pressed', String(next));
+          if (next && !actx) {
+            try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (_) {}
+          }
+        });
+
+        function pingChime() {
+          if (eqBtn.getAttribute('aria-pressed') !== 'true' || !actx) return;
+          const o = actx.createOscillator();
+          const g = actx.createGain();
+          o.type = 'sine';
+          o.frequency.value = 330 + activeIdx * 85;
+          g.gain.setValueAtTime(0.05, actx.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.0008, actx.currentTime + 0.16);
+          o.connect(g); g.connect(actx.destination);
+          o.start(); o.stop(actx.currentTime + 0.17);
+        }
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(40, 1.8, 0.1, 60);
+        camera.position.set(1.2, 1.5, 9.2);
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.68));
+        const pCrimson = new THREE.PointLight(0xff1e42, 4.4, 24);
+        pCrimson.position.set(2.0, 3.0, 5.2);
+        scene.add(pCrimson);
+        const pCyan = new THREE.PointLight(0x38bdf8, 2.8, 20);
+        pCyan.position.set(-4.5, -1.6, 4.0);
+        scene.add(pCyan);
+        const dirKey = new THREE.DirectionalLight(0xffffff, 1.3);
+        dirKey.position.set(4, 6, 6);
+        scene.add(dirKey);
+
+        const towerGroup = new THREE.Group();
+        scene.add(towerGroup);
+
+        const slabs = [];
+        const slabGeo = new THREE.BoxGeometry(3.8, 0.56, 2.2);
+        const railGeo = new THREE.BoxGeometry(3.86, 0.10, 0.14);
+        const topBarGeo = new THREE.BoxGeometry(2.3, 0.08, 1.25);
+
+        for (let i = 0; i < 4; i++) {
+          const g = new THREE.Group();
+          const restY = (1.5 - i) * 1.08;
+          g.position.set(0, restY, 0);
+
+          const bodyMat = new THREE.MeshStandardMaterial({
+            color: 0x10131d,
+            metalness: 0.78,
+            roughness: 0.18,
+            transparent: true,
+            opacity: 0.90
+          });
+          g.add(new THREE.Mesh(slabGeo, bodyMat));
+
+          const edgeMat = new THREE.LineBasicMaterial({ color: i === 0 ? 0xff1e42 : 0x72849e, transparent: true, opacity: i === 0 ? 1 : 0.72 });
+          g.add(new THREE.LineSegments(new THREE.EdgesGeometry(slabGeo), edgeMat));
+
+          const railMat = new THREE.MeshBasicMaterial({ color: i === 0 ? 0xff1e42 : 0x38bdf8 });
+          const rail = new THREE.Mesh(railGeo, railMat);
+          rail.position.set(0, 0, 1.12);
+          g.add(rail);
+
+          const cap = new THREE.Mesh(topBarGeo, new THREE.MeshStandardMaterial({ color: 0x1a1e2e, metalness: 0.65, roughness: 0.3 }));
+          cap.position.set(0, 0.31, 0);
+          g.add(cap);
+
+          towerGroup.add(g);
+          slabs.push({ group: g, restY, edgeMat, railMat });
+        }
+
+        // Orbiting telemetry satellites around the 3D tower
+        const sats = [];
+        const satGeo = new THREE.EdgesGeometry(new THREE.OctahedronGeometry(0.16, 0));
+        for (let s = 0; s < 10; s++) {
+          const sat = new THREE.LineSegments(satGeo, new THREE.LineBasicMaterial({ color: s % 2 === 0 ? 0xff1e42 : 0xffffff, transparent: true, opacity: 0.72 }));
+          towerGroup.add(sat);
+          sats.push({ mesh: sat, a: (s / 10) * Math.PI * 2, r: 2.8 + (s % 3) * 0.45, y: ((s % 5) - 2) * 0.75 });
+        }
+
+        function setActiveSlab(idx) {
+          activeIdx = idx;
+          cards.forEach((c, ci) => c.classList.toggle('is-active', ci === idx));
+          slabs.forEach((s, si) => {
+            s.edgeMat.color.setHex(si === idx ? 0xff1e42 : 0x6f7c94);
+            s.railMat.color.setHex(si === idx ? 0xff1e42 : 0x38bdf8);
+          });
+          if (readout && cards[idx]) {
+            readout.textContent = `STACK_3D // ${cards[idx].dataset.cvTitle} [${cards[idx].dataset.cvSub}]`;
+          }
+          pingChime();
+          if (glCtrl) glCtrl.bumpWarmup(6);
+        }
+
+        cards.forEach((card, idx) => {
+          card.addEventListener('pointerenter', () => setActiveSlab(idx));
+          card.addEventListener('click', () => setActiveSlab(idx));
+        });
+
+        stage.addEventListener('pointermove', (e) => {
+          const r = stage.getBoundingClientRect();
+          ptr = { x: e.clientX - r.left, y: e.clientY - r.top, inside: true };
+        });
+        stage.addEventListener('pointerleave', () => { ptr.inside = false; });
+
+        const boxCorners = [
+          new THREE.Vector3(-1.95, -0.32, -1.15),
+          new THREE.Vector3(1.95, -0.32, -1.15),
+          new THREE.Vector3(-1.95, 0.36, -1.15),
+          new THREE.Vector3(1.95, 0.36, -1.15),
+          new THREE.Vector3(-1.95, -0.32, 1.15),
+          new THREE.Vector3(1.95, -0.32, 1.15),
+          new THREE.Vector3(-1.95, 0.36, 1.15),
+          new THREE.Vector3(1.95, 0.36, 1.15)
+        ];
+
+        glCtrl = createLabWebGL(glCanvas, stage, (now, renderer, syncSize) => {
+          const { w, h } = syncSize(camera, stage);
+          if (hudCanvas.width !== w || hudCanvas.height !== h) {
+            hudCanvas.width = w;
+            hudCanvas.height = h;
+          }
+          const t = now * 0.001;
+          const mobile = w < 520;
+
+          towerGroup.position.set(0, mobile ? 0.15 : 0.08, 0);
+          camera.position.set(0.35, 1.35, mobile ? 9.6 : 8.2);
+          camera.lookAt(0, 0.08, 0);
+
+          const mxNorm = ptr.inside ? (ptr.x / w - 0.5) : 0.08;
+          const myNorm = ptr.inside ? (ptr.y / h - 0.5) : 0;
+          towerGroup.rotation.y = Math.sin(t * 0.55) * 0.28 + mxNorm * 0.45 - 0.32;
+          towerGroup.rotation.x = 0.16 + myNorm * 0.22;
+
+          slabs.forEach((s, si) => {
+            const tz = si === activeIdx ? 1.25 : 0;
+            const tr = si === activeIdx ? 0.12 : 0;
+            s.group.position.z += (tz - s.group.position.z) * 0.1;
+            s.group.rotation.y += (tr - s.group.rotation.y) * 0.1;
+            s.group.position.y = s.restY + Math.sin(t * 1.4 + si * 0.8) * 0.05;
+          });
+
+          sats.forEach((s, idx) => {
+            const ang = s.a + t * 0.65;
+            s.mesh.position.set(Math.cos(ang) * s.r, s.y + Math.sin(t + idx) * 0.2, Math.sin(ang) * (s.r * 0.65));
+            s.mesh.rotation.x = t * 1.1;
+            s.mesh.rotation.y = t * 0.8;
+          });
+
+          towerGroup.updateMatrixWorld(true);
+          renderer.render(scene, camera);
+
+          // Project active 3D slab corners onto 2D CV HUD canvas
+          hctx.clearRect(0, 0, w, h);
+          const activeSlab = slabs[activeIdx].group;
+          let minX = w, minY = h, maxX = 0, maxY = 0;
+          const tmp = new THREE.Vector3();
+          boxCorners.forEach((corner) => {
+            tmp.copy(corner).applyMatrix4(activeSlab.matrixWorld).project(camera);
+            const sx = (tmp.x * 0.5 + 0.5) * w;
+            const sy = (-tmp.y * 0.5 + 0.5) * h;
+            if (sx < minX) minX = sx;
+            if (sx > maxX) maxX = sx;
+            if (sy < minY) minY = sy;
+            if (sy > maxY) maxY = sy;
+          });
+
+          const bx = minX - 10;
+          const by = minY - 8;
+          const bw = Math.max(80, maxX - minX + 20);
+          const bh = Math.max(46, maxY - minY + 16);
+          const cx = bx + bw * 0.5;
+          const cy = by + bh * 0.5;
+
+          // Orbital ellipse around projected 3D box
+          hctx.save();
+          hctx.setLineDash([4, 4]);
+          hctx.strokeStyle = 'rgba(255, 255, 255, 0.34)';
+          hctx.lineWidth = 1;
+          hctx.beginPath();
+          hctx.ellipse(cx, cy, bw * 0.68, bh * 0.92, t * 0.35, 0, Math.PI * 2);
+          hctx.stroke();
+          hctx.restore();
+
+          // Crimson corner brackets on 3D slab bounds
+          const arm = 14;
+          hctx.strokeStyle = '#ff1e42';
+          hctx.lineWidth = 1.8;
+          hctx.beginPath();
+          hctx.moveTo(bx, by + arm); hctx.lineTo(bx, by); hctx.lineTo(bx + arm, by);
+          hctx.moveTo(bx + bw - arm, by); hctx.lineTo(bx + bw, by); hctx.lineTo(bx + bw, by + arm);
+          hctx.moveTo(bx, by + bh - arm); hctx.lineTo(bx, by + bh); hctx.lineTo(bx + arm, by + bh);
+          hctx.moveTo(bx + bw - arm, by + bh); hctx.lineTo(bx + bw, by + bh); hctx.lineTo(bx + bw, by + bh - arm);
+          hctx.stroke();
+
+          // Internal CV sub-rectangles + coordinates
+          hctx.fillStyle = 'rgba(255, 30, 66, 0.16)';
+          hctx.fillRect(bx + bw * 0.14, by + bh * 0.22, bw * 0.28, bh * 0.45);
+          hctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+          hctx.lineWidth = 1;
+          hctx.strokeRect(bx + bw * 0.14, by + bh * 0.22, bw * 0.28, bh * 0.45);
+
+          hctx.font = '800 11px "JetBrains Mono", monospace';
+          hctx.fillStyle = '#ffffff';
+          const activeCard = cards[activeIdx];
+          hctx.fillText(`TRACK_0${activeIdx + 1} // ${activeCard ? activeCard.dataset.cvTitle : ''}`, bx, by - 10);
+          hctx.font = '700 9px "JetBrains Mono", monospace';
+          hctx.fillStyle = '#ff6b81';
+          hctx.fillText(`x:${Math.round(cx)} y:${Math.round(cy)} z:${activeSlab.position.z.toFixed(2)}`, bx, by + bh + 15);
+
+          if (ptr.inside) {
+            hctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+            hctx.lineWidth = 1;
+            hctx.beginPath();
+            hctx.arc(ptr.x, ptr.y, 13, 0, Math.PI * 2);
+            hctx.moveTo(ptr.x - 19, ptr.y); hctx.lineTo(ptr.x - 5, ptr.y);
+            hctx.moveTo(ptr.x + 5, ptr.y); hctx.lineTo(ptr.x + 19, ptr.y);
+            hctx.moveTo(ptr.x, ptr.y - 19); hctx.lineTo(ptr.x, ptr.y - 5);
+            hctx.moveTo(ptr.x, ptr.y + 5); hctx.lineTo(ptr.x, ptr.y + 19);
+            hctx.stroke();
+          }
+        });
+      })();
+
+      /* ---------------- 4. Maya Khalil WebGL 3D Console (GLSL Waves + Instanced Voxels + 3D IK Arm) ---------------- */
+      (function initMaya3D() {
+        const wrap = document.querySelector('.maya-canvas-wrap');
+        const scope = document.getElementById('maya-scope-canvas');
+        const sctx = scope.getContext('2d');
+        const glCanvas = document.getElementById('maya-main-canvas');
+        const hudCanvas = document.getElementById('maya-hud-canvas');
+        const hctx = hudCanvas.getContext('2d');
+        const tel = document.getElementById('maya-telemetry');
+
+        let prog = 0;
+        let mx = 0.5, my = 0.5, pulse = 0;
+        let glCtrl = null;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(42, 2.2, 0.1, 80);
+        camera.position.set(0, 3.0, 8.6);
+        camera.lookAt(0, 0.1, 0);
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+        const mRed = new THREE.PointLight(0xff1e42, 4.4, 24);
+        mRed.position.set(-4.5, 4.5, 4.5);
+        scene.add(mRed);
+        const mCyan = new THREE.PointLight(0x38bdf8, 3.2, 24);
+        mCyan.position.set(4.5, 2.8, 3.8);
+        scene.add(mCyan);
+        const mDir = new THREE.DirectionalLight(0xffffff, 1.35);
+        mDir.position.set(3, 8, 5);
+        scene.add(mDir);
+
+        /* --- Prog 0: GLSL 3D Topographic Wave Shader --- */
+        const g0 = new THREE.Group();
+        const signalUniforms = {
+          uTime: { value: 0 },
+          uMouse: { value: new THREE.Vector2(0, 0) },
+          uPulse: { value: 0 }
+        };
+        const signalGeo = new THREE.PlaneGeometry(14.5, 7.6, 88, 52);
+        const signalMat = new THREE.ShaderMaterial({
+          uniforms: signalUniforms,
+          side: THREE.DoubleSide,
+          vertexShader: `
+            uniform float uTime;
+            uniform vec2 uMouse;
+            uniform float uPulse;
+            varying float vElev;
+            varying vec2 vUv;
+            void main() {
+              vUv = uv;
+              vec3 pos = position;
+              float dist = length((uv - 0.5) * vec2(1.8, 1.0) - uMouse * vec2(0.8, 0.5));
+              float ripple = sin(pos.x * 1.1 + uTime * 1.8) * cos(pos.y * 1.2 - uTime * 1.3) * 0.72;
+              float bend = exp(-dist * dist * 5.0) * (1.25 + uPulse * 1.4);
+              pos.z += ripple + bend;
+              vElev = pos.z;
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+            }
+          `,
+          fragmentShader: `
+            varying float vElev;
+            varying vec2 vUv;
+            void main() {
+              float iso = abs(fract(vElev * 3.8) - 0.5);
+              float line = 1.0 - smoothstep(0.02, 0.09, iso);
+              float crest = smoothstep(-0.3, 1.2, vElev);
+              vec3 low = vec3(0.03, 0.05, 0.10);
+              vec3 cyan = vec3(0.14, 0.62, 0.86);
+              vec3 crimson = vec3(1.0, 0.118, 0.259);
+              vec3 base = mix(low, mix(cyan, crimson, crest), 0.52);
+              vec3 col = mix(base, vec3(1.0, 0.96, 0.96), line * 0.85);
+              float edgeFade = smoothstep(0.0, 0.14, vUv.x) * smoothstep(1.0, 0.86, vUv.x);
+              gl_FragColor = vec4(col * (0.35 + 0.65 * edgeFade), 0.96);
+            }
+          `
+        });
+        const signalMesh = new THREE.Mesh(signalGeo, signalMat);
+        signalMesh.rotation.x = -1.04;
+        signalMesh.position.y = -0.35;
+        g0.add(signalMesh);
+        scene.add(g0);
+
+        /* --- Prog 1: InstancedMesh 3D Neural Voxel Cube + Symmetric Wave Columns --- */
+        const g1 = new THREE.Group();
+        g1.visible = false;
+        const g1CoreGroup = new THREE.Group();
+        const voxGeo = new THREE.BoxGeometry(0.28, 0.28, 0.28);
+        const voxMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.45, roughness: 0.25 });
+        const coreSize = 6;
+        const coreCount = coreSize * coreSize * coreSize; // 216
+        const sideCols = 7;
+        const sideRows = 4;
+        const sideCount = sideCols * sideRows * 2; // 56
+        const instCore = new THREE.InstancedMesh(voxGeo, voxMat, coreCount);
+        const instWings = new THREE.InstancedMesh(voxGeo, voxMat, sideCount);
+        const dummy = new THREE.Object3D();
+        const tmpColor = new THREE.Color();
+
+        for (let i = 0; i < coreCount; i++) {
+          if (i % 5 === 0) tmpColor.setHex(0xff1e42);
+          else if (i % 3 === 0) tmpColor.setHex(0x38bdf8);
+          else tmpColor.setHex(0xf4f3ef);
+          instCore.setColorAt(i, tmpColor);
+        }
+        if (instCore.instanceColor) instCore.instanceColor.needsUpdate = true;
+
+        for (let i = 0; i < sideCount; i++) {
+          tmpColor.setHex(i % 4 === 0 ? 0xff1e42 : i % 2 === 0 ? 0x38bdf8 : 0xd8dce8);
+          instWings.setColorAt(i, tmpColor);
+        }
+        if (instWings.instanceColor) instWings.instanceColor.needsUpdate = true;
+
+        const cubeFrame = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(2.75, 2.75, 2.75)),
+          new THREE.LineBasicMaterial({ color: 0xff1e42, transparent: true, opacity: 0.78 })
+        );
+        g1CoreGroup.add(instCore, cubeFrame);
+        g1.add(g1CoreGroup, instWings);
+        scene.add(g1);
+
+        /* --- Prog 2: 3D Articulated Inverse Kinematics Arm (J1..J5) --- */
+        const g2 = new THREE.Group();
+        g2.visible = false;
+        const floorGrid = new THREE.GridHelper(16, 22, 0xff1e42, 0x262938);
+        floorGrid.position.y = -1.75;
+        g2.add(floorGrid);
+
+        const armBasePos = new THREE.Vector3(-0.6, -1.75, 0);
+        const whiteMat = new THREE.MeshStandardMaterial({ color: 0xf4f3ef, metalness: 0.55, roughness: 0.25 });
+        const darkMat = new THREE.MeshStandardMaterial({ color: 0x181a24, metalness: 0.75, roughness: 0.3 });
+        const crimsonMat = new THREE.MeshStandardMaterial({ color: 0xff1e42, emissive: 0x450510, metalness: 0.4, roughness: 0.3 });
+
+        const turret = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.78, 0.45, 24), darkMat);
+        turret.position.copy(armBasePos).add(new THREE.Vector3(0, 0.22, 0));
+        g2.add(turret);
+
+        const link1Mesh = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.19, 1, 16), whiteMat);
+        const link2Mesh = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.14, 1, 16), whiteMat);
+        const jSphereGeo = new THREE.SphereGeometry(0.24, 18, 18);
+        const j1Orb = new THREE.Mesh(jSphereGeo, crimsonMat);
+        const j2Orb = new THREE.Mesh(jSphereGeo, darkMat);
+        const j3Orb = new THREE.Mesh(new THREE.SphereGeometry(0.19, 16, 16), crimsonMat);
+        const clawGroup = new THREE.Group();
+        const clawA = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.32, 0.14), whiteMat);
+        clawA.position.set(-0.12, 0.16, 0);
+        const clawB = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.32, 0.14), whiteMat);
+        clawB.position.set(0.12, 0.16, 0);
+        clawGroup.add(clawA, clawB);
+
+        const targetOrb = new THREE.Mesh(
+          new THREE.OctahedronGeometry(0.30, 0),
+          new THREE.MeshBasicMaterial({ color: 0xff1e42, wireframe: true })
+        );
+        const trajGeo = new THREE.BufferGeometry().setFromPoints(new Array(20).fill(0).map(() => new THREE.Vector3()));
+        const trajLine = new THREE.Line(trajGeo, new THREE.LineBasicMaterial({ color: 0xff1e42, transparent: true, opacity: 0.85 }));
+
+        g2.add(link1Mesh, link2Mesh, j1Orb, j2Orb, j3Orb, clawGroup, targetOrb, trajLine);
+        scene.add(g2);
+
+        const progGroups = [g0, g1, g2];
+
+        function placeSegment(mesh, pA, pB, len) {
+          const mid = pA.clone().add(pB).multiplyScalar(0.5);
+          mesh.position.copy(mid);
+          mesh.scale.set(1, len, 1);
+          mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), pB.clone().sub(pA).normalize());
+        }
+
+        function setProg(p) {
+          prog = p;
+          progGroups.forEach((gr, gi) => { gr.visible = gi === p; });
+          document.querySelectorAll('[data-maya-prog]').forEach((b) => b.classList.toggle('is-active', Number(b.dataset.mayaProg) === p));
+          if (glCtrl) glCtrl.bumpWarmup(8);
+        }
+
+        document.querySelectorAll('[data-maya-prog]').forEach((btn) => {
+          btn.addEventListener('click', () => setProg(Number(btn.dataset.mayaProg)));
+        });
+
+        wrap.addEventListener('pointermove', (e) => {
+          const r = wrap.getBoundingClientRect();
+          mx = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+          my = Math.max(0, Math.min(1, (e.clientY - r.top) / r.height));
+        });
+        wrap.addEventListener('click', () => {
+          pulse = 1;
+          if (glCtrl) glCtrl.bumpWarmup(6);
+        });
+
+        glCtrl = createLabWebGL(glCanvas, wrap, (now, renderer, syncSize) => {
+          const t0 = performance.now();
+          const { w, h } = syncSize(camera, wrap);
+          if (hudCanvas.width !== w || hudCanvas.height !== h) {
+            hudCanvas.width = w;
+            hudCanvas.height = h;
+          }
+
+          // Topbar mini oscilloscope
+          sctx.clearRect(0, 0, 68, 22);
+          sctx.strokeStyle = '#ff1e42';
+          sctx.lineWidth = 1.3;
+          sctx.beginPath();
+          for (let x = 0; x < 68; x++) {
+            const y = 11 + Math.sin(x * 0.25 + now * 0.008) * 6 * Math.sin(x / 21);
+            if (x === 0) sctx.moveTo(x, y); else sctx.lineTo(x, y);
+          }
+          sctx.stroke();
+
+          pulse *= 0.94;
+          const t = now * 0.0014;
+          const rotY = (mx - 0.5) * 0.9;
+          const rotX = (my - 0.5) * 0.45;
+
+          hctx.clearRect(0, 0, w, h);
+
+          if (prog === 0) {
+            camera.position.set(rotY * 1.4, 3.4 - rotX * 1.2, 8.2);
+            camera.lookAt(0, -0.2, 0);
+            signalUniforms.uTime.value = t;
+            signalUniforms.uMouse.value.set((mx - 0.5) * 2, (0.5 - my) * 2);
+            signalUniforms.uPulse.value = pulse;
+          } else if (prog === 1) {
+            camera.position.set(0, 1.5, 9.2);
+            camera.lookAt(0, 0, 0);
+            g1CoreGroup.rotation.y = t * 0.52 + rotY * 1.3;
+            g1CoreGroup.rotation.x = Math.sin(t * 0.4) * 0.24 + rotX * 0.8;
+
+            let idx = 0;
+            const spread = 0.39 + pulse * 0.14;
+            const half = (coreSize - 1) * 0.5;
+            for (let ix = 0; ix < coreSize; ix++) {
+              for (let iy = 0; iy < coreSize; iy++) {
+                for (let iz = 0; iz < coreSize; iz++) {
+                  const sc = 0.65 + 0.45 * Math.sin(t * 2.2 + ix * 0.6 + iy * 0.7 + iz * 0.5);
+                  dummy.position.set((ix - half) * spread, (iy - half) * spread, (iz - half) * spread);
+                  dummy.scale.setScalar(sc);
+                  dummy.updateMatrix();
+                  instCore.setMatrixAt(idx++, dummy.matrix);
+                }
+              }
+            }
+            instCore.instanceMatrix.needsUpdate = true;
+
+            let wIdx = 0;
+            for (let side = -1; side <= 1; side += 2) {
+              for (let c = 0; c < sideCols; c++) {
+                for (let r = 0; r < sideRows; r++) {
+                  const xPos = side * (2.55 + c * 0.48);
+                  const yPos = -0.65 + r * 0.42 + Math.sin(t * 2.4 + c * 0.7 + r * 0.45 + (mx - 0.5) * 3) * 0.48;
+                  dummy.position.set(xPos, yPos, (r - 1.5) * 0.35);
+                  dummy.scale.setScalar(0.85 + pulse * 0.4);
+                  dummy.updateMatrix();
+                  instWings.setMatrixAt(wIdx++, dummy.matrix);
+                }
+              }
+            }
+            instWings.instanceMatrix.needsUpdate = true;
+
+            hctx.font = '700 10px "JetBrains Mono", monospace';
+            hctx.fillStyle = '#38bdf8';
+            hctx.fillText('VOXEL_TENSOR :: 272 INSTANCED_3D CUBES', 18, 26);
+          } else {
+            camera.position.set(0.4 + rotY * 1.2, 2.2 - rotX * 0.9, 8.6);
+            camera.lookAt(0.2, 0.2, 0);
+
+            const p0 = new THREE.Vector3(armBasePos.x, armBasePos.y + 0.48, armBasePos.z);
+            const a1 = 0.55 + (mx - 0.5) * 1.15;
+            const a2 = -0.35 + (my - 0.5) * 1.35 + pulse * 0.4;
+            const yaw = (mx - 0.5) * 1.4;
+            const l1 = 2.05;
+            const l2 = 1.85;
+
+            const p1 = new THREE.Vector3(
+              p0.x + Math.sin(a1) * Math.cos(yaw) * l1,
+              p0.y + Math.cos(a1) * l1,
+              p0.z + Math.sin(a1) * Math.sin(yaw) * l1
+            );
+            const p2 = new THREE.Vector3(
+              p1.x + Math.sin(a1 + a2 + 0.8) * Math.cos(yaw) * l2,
+              p1.y + Math.cos(a1 + a2 + 0.8) * l2,
+              p1.z + Math.sin(a1 + a2 + 0.8) * Math.sin(yaw) * l2
+            );
+            const tgt = new THREE.Vector3((mx - 0.5) * 6.0 + 1.1, (0.5 - my) * 2.6 + 0.7, Math.sin(t) * 1.1);
+
+            j1Orb.position.copy(p0);
+            j2Orb.position.copy(p1);
+            j3Orb.position.copy(p2);
+            placeSegment(link1Mesh, p0, p1, l1);
+            placeSegment(link2Mesh, p1, p2, l2);
+            clawGroup.position.copy(p2);
+            clawGroup.lookAt(tgt);
+            clawGroup.rotateX(Math.PI / 2);
+
+            targetOrb.position.copy(tgt);
+            targetOrb.rotation.y = t * 1.8;
+            targetOrb.rotation.x = t * 1.2;
+
+            const ctrlPt = p2.clone().lerp(tgt, 0.5).add(new THREE.Vector3(0, 1.0, 0.4));
+            const curve = new THREE.CatmullRomCurve3([p2, ctrlPt, tgt]);
+            trajGeo.setFromPoints(curve.getPoints(19));
+
+            // Project J1/J2/J3/TGT to 2D HUD leader lines
+            g2.updateMatrixWorld(true);
+            const labels = [
+              { lbl: `J1 BASE ${(yaw * 57.3).toFixed(1)}°`, pos: p0, col: '#ff1e42' },
+              { lbl: `J2 SHOULDER ${(a1 * 57.3).toFixed(1)}°`, pos: p1, col: '#ffffff' },
+              { lbl: `J3 WRIST ${(a2 * 57.3).toFixed(1)}°`, pos: p2, col: '#38bdf8' },
+              { lbl: `TARGET (${tgt.x.toFixed(1)}, ${tgt.y.toFixed(1)})`, pos: tgt, col: '#ff6b81' }
+            ];
+            hctx.font = '700 10px "JetBrains Mono", monospace';
+            labels.forEach((item) => {
+              const v = item.pos.clone().project(camera);
+              const sx = (v.x * 0.5 + 0.5) * w;
+              const sy = (-v.y * 0.5 + 0.5) * h;
+              hctx.strokeStyle = 'rgba(255,255,255,0.38)';
+              hctx.lineWidth = 1;
+              hctx.beginPath(); hctx.moveTo(20, sy); hctx.lineTo(sx, sy); hctx.stroke();
+              hctx.fillStyle = item.col;
+              hctx.fillText(item.lbl, 20, sy - 4);
+            });
+          }
+
+          renderer.render(scene, camera);
+          const cook = Math.max(0.4, (performance.now() - t0)).toFixed(1);
+          tel.textContent = `tx ${mx.toFixed(3)} · ty ${my.toFixed(3)} · cook ${cook} ms · prog 0${prog + 1}`;
+        });
+      })();
+
+      /* ---------------- 5. TouchDesigner Node Graph Inspector ---------------- */
+      (function initNodes() {
+        const specs = [
+          '<strong>[SENSOR_IN] lidar_16ch →</strong> 7 rayons distances normalisées [0..1] + vitesse, lacet, état roues et courbure anticipée (+14m / +34m).',
+          '<strong>[NEURAL_MLP] numpy_ppo →</strong> 16 → 24 → 16 → 4 (876 poids Xavier), mise à jour PPO-Clip + GA sans PyTorch.',
+          '<strong>[ORCH_DAG] cloud_master →</strong> Planifie les 20 agents selon les dépendances topologiques avec garde Critic + QA.',
+          '<strong>[SYSTEMD_24_7] oracle_vps →</strong> Déploiement continu sur 88.96.47.180, healthchecks automatiques et 22/22 pytest verts.'
+        ];
+        document.querySelectorAll('[data-td]').forEach((node) => {
+          node.addEventListener('click', () => {
+            document.querySelectorAll('[data-td]').forEach((n) => n.classList.toggle('is-active', n === node));
+            document.getElementById('td-inspector').innerHTML = specs[Number(node.dataset.td)];
+          });
+        });
+      })();
+
+      /* ---------------- 6. SLX Gargantua 3D GLSL Black Hole + Terminal Prompt ---------------- */
+      (function initGargantua3D() {
+        const stage = document.getElementById('gargantua-stage');
+        const c = document.getElementById('gargantua-canvas');
+        const input = document.getElementById('gargantua-input');
+        const reply = document.getElementById('gargantua-reply');
+        let px = 0, py = 0;
+
+        stage.addEventListener('pointermove', (e) => {
+          const r = stage.getBoundingClientRect();
+          px = ((e.clientX - r.left) / r.width - 0.5) * 2;
+          py = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        });
+
+        const phList = [
+          'Posez une question : "alternance" ou "zentable"...',
+          'Essayez : "cloud", "polydrive" ou "c99"...'
+        ];
+        let phi = 0;
+        setInterval(() => { phi = (phi + 1) % phList.length; input.placeholder = phList[phi]; }, 2800);
+
+        document.getElementById('gargantua-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const q = input.value.trim().toLowerCase();
+          let ans = 'Disponibilité : alternance BUT 2 dès Septembre 2027 (Côte Basque / Hybride). Projets vérifiés : ZenWorkspace (57/57 Vitest), 20 Agents Cloud (22/22 pytest), 46 PRs OSS.';
+          if (q.includes('zen')) ans = 'ZenWorkspace : 63 fichiers TypeScript/React 18, FormulaEngine (923 l.), Electron 33, 57/57 tests Vitest.';
+          else if (q.includes('cloud')) ans = 'Cloud Control Plane : orchestrateur DAG Python à 20 rôles spécialisés déployé 24/7 sur VPS Ubuntu (22/22 pytest).';
+          else if (q.includes('poly')) ans = 'PolyDrive Neural Lab : MLP NumPy pur (16→24→16→4, 876 paramètres), PPO-Clip + Neuroévolution, 5/5 pytest.';
+          reply.textContent = ans;
+          reply.classList.add('is-open');
+        });
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(42, 2.2, 0.1, 120);
+        camera.position.set(0, 1.15, 7.6);
+        camera.lookAt(0, -0.35, 0);
+
+        const bhGroup = new THREE.Group();
+        bhGroup.position.set(0, 0.35, 0);
+        scene.add(bhGroup);
+
+        // Event Horizon Core
+        bhGroup.add(new THREE.Mesh(
+          new THREE.SphereGeometry(1.14, 42, 42),
+          new THREE.MeshBasicMaterial({ color: 0x020204 })
+        ));
+
+        const gUniforms = { uTime: { value: 0 } };
+
+        // Fresnel Photon Sphere Halo
+        const photonMat = new THREE.ShaderMaterial({
+          uniforms: gUniforms,
+          transparent: true,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+          vertexShader: `
+            varying vec3 vNormal;
+            varying vec3 vViewPos;
+            void main() {
+              vNormal = normalize(normalMatrix * normal);
+              vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+              vViewPos = -mvPos.xyz;
+              gl_Position = projectionMatrix * mvPos;
+            }
+          `,
+          fragmentShader: `
+            varying vec3 vNormal;
+            varying vec3 vViewPos;
+            void main() {
+              float fresnel = pow(1.0 - max(0.0, dot(normalize(vViewPos), vNormal)), 3.2);
+              vec3 col = mix(vec3(1.0, 0.12, 0.26), vec3(1.0, 0.92, 0.88), fresnel);
+              gl_FragColor = vec4(col * fresnel * 1.4, fresnel * 0.9);
+            }
+          `
+        });
+        bhGroup.add(new THREE.Mesh(new THREE.SphereGeometry(1.26, 42, 42), photonMat));
+
+        function makeDiskMaterial(innerR, outerR) {
+          return new THREE.ShaderMaterial({
+            uniforms: {
+              uTime: gUniforms.uTime,
+              uInner: { value: innerR },
+              uOuter: { value: outerR }
+            },
+            side: THREE.DoubleSide,
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            vertexShader: `
+              varying vec3 vPos;
+              void main() {
+                vPos = position;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+              }
+            `,
+            fragmentShader: `
+              uniform float uTime;
+              uniform float uInner;
+              uniform float uOuter;
+              varying vec3 vPos;
+              void main() {
+                float r = length(vPos.xy);
+                float normR = clamp((r - uInner) / (uOuter - uInner), 0.0, 1.0);
+                float ang = atan(vPos.y, vPos.x);
+                float spiral = sin(ang * 4.0 + r * 6.5 - uTime * 2.2) * 0.5 + 0.5;
+                float bands = sin(r * 14.0 - uTime * 1.6) * 0.5 + 0.5;
+                float intensity = pow(1.0 - normR, 1.6) * (0.45 + 0.55 * spiral * bands);
+                vec3 hot = vec3(1.0, 0.88, 0.82);
+                vec3 crim = vec3(1.0, 0.118, 0.259);
+                vec3 col = mix(hot, crim, smoothstep(0.0, 0.45, normR));
+                float innerFade = smoothstep(0.0, 0.08, normR);
+                gl_FragColor = vec4(col * intensity * 1.5, intensity * innerFade);
+              }
+            `
+          });
+        }
+
+        // Primary tilted accretion disk
+        const disk = new THREE.Mesh(new THREE.RingGeometry(1.26, 4.35, 112, 10), makeDiskMaterial(1.26, 4.35));
+        disk.rotation.x = -1.24;
+        disk.rotation.y = 0.16;
+        bhGroup.add(disk);
+
+        // Gravitational Lensing Einstein Ring Halo
+        const halo = new THREE.Mesh(new THREE.RingGeometry(1.18, 2.75, 96, 8), makeDiskMaterial(1.18, 2.75));
+        halo.rotation.x = 0.15;
+        bhGroup.add(halo);
+
+        // 500-star orbiting 3D field
+        const starCount = 500;
+        const starPos = new Float32Array(starCount * 3);
+        for (let i = 0; i < starCount; i++) {
+          const r = 3.2 + Math.random() * 8.5;
+          const a = Math.random() * Math.PI * 2;
+          starPos[i * 3] = Math.cos(a) * r;
+          starPos[i * 3 + 1] = (Math.random() - 0.5) * 4.2;
+          starPos[i * 3 + 2] = Math.sin(a) * r - 2.0;
+        }
+        const starGeo = new THREE.BufferGeometry();
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xf4f3ef, size: 0.055, transparent: true, opacity: 0.72 }));
+        bhGroup.add(stars);
+
+        createLabWebGL(c, stage, (now, renderer, syncSize) => {
+          syncSize(camera, stage);
+          const t = now * 0.001;
+          gUniforms.uTime.value = t;
+          stars.rotation.y = t * 0.06;
+          bhGroup.rotation.y += (px * 0.25 - bhGroup.rotation.y) * 0.06;
+          bhGroup.rotation.x += (py * 0.14 - bhGroup.rotation.x) * 0.06;
+          renderer.render(scene, camera);
+        });
+      })();
+
+      /* ---------------- 7. Carter Linked Curved 3D Wheel + Char-Roll Ticker ---------------- */
+      (function initWheel() {
+        const data = [
+          { n: 'ZenWorkspace', tag: 'REACT 18 · VITEST', yr: '2025–2026', desc: 'Tableur spatial & FormulaEngine (57/57)', img: 'portfolio_assets/real_previews/zentable_real.png' },
+          { n: '20 Agents Cloud', tag: 'PYTHON DAG · PYTEST', yr: '2025–2026', desc: 'Orchestrateur multi-agents sur Oracle VPS', img: '' },
+          { n: '46 PRs OSS & MCP', tag: 'RBAC · OWASP · NESTJS', yr: '2026', desc: 'Twenty CRM, Omi & Security Scanner', img: 'portfolio_assets/real_previews/security_scanner_real.png' },
+          { n: 'Kai Academic', tag: 'BUT INFO · 447 DOCS', yr: '2025–2026', desc: 'Portail promo IUT d’Anglet & AlgoForge', img: 'portfolio_assets/real_previews/kai_academic_real.png' },
+          { n: 'PolyDrive Lab', tag: 'NUMPY MLP · PPO-CLIP', yr: '2026', desc: 'Réseau 876 paramètres sur PolyTrack 3D', img: '' }
+        ];
+        const track = document.getElementById('wheel-track');
+        let idx = 0;
+
+        data.forEach((d, i) => {
+          const card = document.createElement('div');
+          card.className = 'wheel-card';
+          const thumbHtml = d.img
+            ? `<div class="wheel-thumb"><img src="${d.img}" alt="${d.n}" loading="lazy" /></div>`
+            : `<div class="wheel-thumb">${d.tag}</div>`;
+          card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);">0${i + 1}</span><span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--muted);">${d.yr}</span></div>${thumbHtml}<strong style="font-size:0.96rem;">${d.n}</strong><span style="font-size:0.74rem;color:var(--muted);">${d.desc}</span>`;
+          card.addEventListener('click', () => { idx = i; sync(); });
+          track.appendChild(card);
+        });
+
+        function sync() {
+          const cards = track.querySelectorAll('.wheel-card');
+          const step = (track.clientWidth || 800) < 520 ? 132 : 225;
+          cards.forEach((c, i) => {
+            const off = i - idx;
+            const tx = off * step;
+            const ty = Math.abs(off) * 16;
+            const tz = -Math.abs(off) * 75;
+            const rotY = -off * 18;
+            const rotZ = off * 5;
+            const op = Math.abs(off) > 2 ? 0 : 1 - Math.abs(off) * 0.28;
+            c.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px) rotateY(${rotY}deg) rotateZ(${rotZ}deg) scale(${off === 0 ? 1.05 : 0.92})`;
+            c.style.opacity = String(op);
+            c.style.zIndex = String(10 - Math.abs(off));
+            c.style.borderColor = off === 0 ? 'var(--accent)' : 'var(--rule-strong)';
+          });
+          document.getElementById('wheel-counter').textContent = `N°0${idx + 1} / 0${data.length}`;
+          document.getElementById('wheel-year').textContent = data[idx].yr;
+          const roll = document.getElementById('wheel-roll-tag');
+          roll.innerHTML = [...data[idx].tag].map((ch, ci) => `<span style="--ci:${ci}">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('');
+        }
+        document.getElementById('wheel-prev').addEventListener('click', () => { idx = (idx - 1 + data.length) % data.length; sync(); });
+        document.getElementById('wheel-next').addEventListener('click', () => { idx = (idx + 1) % data.length; sync(); });
+        window.addEventListener('resize', sync);
+        sync();
+      })();
+
+      /* ---------------- 8. Melon 3D S-Wave Velocity Warp ---------------- */
+      (function initWarp() {
+        const range = document.getElementById('warp-pulse-range');
+        const cards = document.querySelectorAll('#warp-grid .warp-card');
+        let lastY = window.scrollY;
+        let vel = 0;
+
+        function applyWarp(v) {
+          cards.forEach((c, idx) => {
+            const dir = idx === 1 ? -1 : 1;
+            const rx = (v * 0.85 * dir).toFixed(2);
+            const ry = ((idx - 1) * v * 0.55).toFixed(2);
+            const sk = (v * 0.32 * dir).toFixed(2);
+            const ty = (v * 0.55 * dir).toFixed(1);
+            const tz = (Math.abs(v) * (idx === 1 ? 1.4 : -0.6)).toFixed(1);
+            c.style.transform = `translate3d(0px, ${ty}px, ${tz}px) rotateX(${rx}deg) rotateY(${ry}deg) skewY(${sk}deg)`;
+          });
+        }
+        range.addEventListener('input', () => applyWarp(Number(range.value)));
+        range.addEventListener('pointerup', () => { range.value = '0'; applyWarp(0); });
+        range.addEventListener('keyup', () => { range.value = '0'; applyWarp(0); });
+
+        function tick() {
+          const dy = window.scrollY - lastY;
+          lastY = window.scrollY;
+          vel = vel * 0.8 + dy * 0.25;
+          if (Math.abs(vel) > 0.25 && Number(range.value) === 0) applyWarp(Math.max(-16, Math.min(16, vel)));
+          else if (Number(range.value) === 0) applyWarp(0);
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      })();
+
+      /* ---------------- 10. Melon Pixel-Fill Canvas Buttons ---------------- */
+      (function initPixelBtns() {
+        document.querySelectorAll('.fx-px-btn').forEach((btn) => {
+          const cv = btn.querySelector('canvas');
+          const ctx = cv.getContext('2d');
+          let target = 0, progress = 0, cells = [];
+
+          function setup() {
+            const w = (cv.width = btn.clientWidth || 180);
+            const h = (cv.height = btn.clientHeight || 44);
+            const sz = 8;
+            cells = [];
+            for (let x = 0; x < w; x += sz) {
+              for (let y = 0; y < h; y += sz) {
+                cells.push({ x, y, sz, thresh: Math.random() });
+              }
+            }
+          }
+          setup();
+          btn.addEventListener('pointerenter', () => { setup(); target = 1; });
+          btn.addEventListener('pointerleave', () => { target = 0; });
+
+          function render() {
+            progress += (target - progress) * 0.16;
+            ctx.clearRect(0, 0, cv.width, cv.height);
+            if (progress > 0.01) {
+              ctx.fillStyle = '#ff1e42';
+              cells.forEach((cell) => {
+                if (progress >= cell.thresh) ctx.fillRect(cell.x, cell.y, cell.sz + 0.5, cell.sz + 0.5);
+              });
+            }
+            requestAnimationFrame(render);
+          }
+          requestAnimationFrame(render);
+        });
+      })();
+
+      /* ---------------- 11. Liquid Blur-to-Ink & Width-Locked Glyph Swap ---------------- */
+      (function initLiquidAndGlyph() {
+        const sentence = 'Architecte logiciel pragmatique concevant des outils autonomes et testés.';
+        const wrap = document.getElementById('liquid-words');
+        const range = document.getElementById('liquid-progress');
+        const words = sentence.split(' ');
+        wrap.innerHTML = words.map((w) => `<span class="liq-w">${w}</span>`).join('');
+        const wordEls = Array.from(wrap.querySelectorAll('.liq-w'));
+
+        function syncLiquid(pct) {
+          const cut = Math.round((pct / 100) * wordEls.length);
+          wordEls.forEach((w, i) => w.classList.toggle('is-blob', i >= cut));
+        }
+        range.addEventListener('input', () => syncLiquid(Number(range.value)));
+        syncLiquid(48);
+
+        const bar = document.getElementById('glyph-swap-bar');
+        const label = 'ZENWORKSPACE · PYTEST · ORACLE_VPS';
+        bar.innerHTML = [...label].map((c) => `<span class="gs-ch">${c}</span>`).join('');
+        const chEls = Array.from(bar.querySelectorAll('.gs-ch'));
+        setInterval(() => {
+          chEls.forEach((el) => el.classList.remove('is-alt'));
+          for (let k = 0; k < 4; k++) {
+            const pick = chEls[Math.floor(Math.random() * chEls.length)];
+            if (pick && pick.textContent.trim()) pick.classList.add('is-alt');
+          }
+        }, 650);
+      })();
+
+      /* ---------------- 12. Unanim Morph Dock ---------------- */
+      (function initUnanimDock() {
+        const btn = document.getElementById('unanim-dock-btn');
+        const drawer = document.getElementById('unanim-drawer');
+        const tag = document.getElementById('unanim-pill-tag');
+        btn.addEventListener('click', () => {
+          const open = drawer.classList.toggle('is-open');
+          btn.classList.toggle('is-open', open);
+          tag.textContent = open ? 'Fermer' : 'Explorer';
+        });
+      })();
+
+      /* ---------------- 13. La Boite à Slides Elliptical Curtain ---------------- */
+      (function initSlidesCurtain() {
+        const curtain = document.getElementById('slides-curtain');
+        document.getElementById('slides-curtain-btn').addEventListener('click', () => {
+          curtain.classList.add('is-wiped');
+          setTimeout(() => curtain.classList.remove('is-wiped'), 900);
+        });
+      })();
+    })();
+  </script>
+</body>
+</html>

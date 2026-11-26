@@ -1,0 +1,830 @@
+/* ==========================================================================
+   ARCHITECTURAL RED & NOIR BAYER PIXEL-DOT THEME
+   Inspired by p5aholic.me + basement.studio + dennissnellenberg.com + shaders.paper.design
+   ========================================================================== */
+
+:root {
+  --bg-void: #050507;
+  --bg-surface: rgba(5, 5, 8, 0.54);
+  --bg-card: rgba(7, 7, 10, 0.58);
+  --hairline: rgba(255, 255, 255, 0.11);
+  --hairline-strong: rgba(255, 30, 66, 0.42);
+  --crimson: #ff1e42;
+  --crimson-soft: #ff4d6d;
+  --emerald: #34d399;
+  --text-primary: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --accent-red: #ff1e42;
+}
+
+html,
+body {
+  background: var(--bg-void) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Plus Jakarta Sans', 'Lexend', system-ui, sans-serif !important;
+}
+
+/* Full-Viewport Sharp Bayer Pixel-Dot Field */
+.global-dither-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.96;
+}
+
+/* Single Inset Architectural Hairline Frame (p5aholic.me discipline) */
+.page-shell {
+  position: relative;
+  z-index: 2;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.page-shell::before {
+  content: "";
+  position: fixed;
+  inset: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 8500;
+}
+
+/* Crimson Signal Monogram & Tokens */
+.brand-monogram {
+  background: var(--crimson) !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.brand-dot,
+.status-pulse-red,
+.hero-red,
+.divider-coord,
+.divider-index {
+  color: var(--crimson) !important;
+}
+.status-dot {
+  background: var(--crimson) !important;
+  box-shadow: 0 0 10px var(--crimson) !important;
+}
+.card-glow-red,
+.contact-glow-red {
+  display: none !important;
+}
+
+/* Sticky Top Navigation Rail (0px Architectural Razor Edge) */
+.dock-container {
+  position: fixed;
+  top: 22px;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  padding: 0 28px;
+  pointer-events: none;
+}
+
+.nav-dock {
+  pointer-events: auto;
+  max-width: 1240px;
+  margin: 0 auto;
+  border-radius: 0 !important;
+  background: rgba(5, 5, 7, 0.78) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: none !important;
+}
+
+.nav-item {
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  color: #d4d4d8 !important;
+  border-radius: 0 !important;
+}
+.nav-item:hover {
+  color: #ffffff !important;
+}
+
+.cmdk-trigger-btn {
+  border-radius: 0 !important;
+  border-color: var(--hairline) !important;
+}
+
+.dock-cta {
+  border-radius: 0 !important;
+  background: var(--crimson) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.dock-cta:hover {
+  background: #dc143c !important;
+}
+
+/* ==========================================================================
+   00 // HERO — OPEN ASYMMETRIC COMPOSITION OVER LIVE RED BAYER PIXELS
+   ========================================================================== */
+.hero-section {
+  min-height: min(860px, 100vh) !important;
+  padding: 112px 32px 64px !important;
+  display: flex !important;
+  align-items: center !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.hero-bg-grid {
+  display: none !important;
+}
+
+.hero-dither-split {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 52px;
+  align-items: center;
+}
+
+.hero-status-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: 0;
+  background: rgba(5, 5, 7, 0.72);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: #e4e4e7;
+  margin-bottom: 22px;
+}
+
+.hero-status-line .status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 0;
+  background: var(--crimson);
+}
+
+.hero-brutal-title {
+  margin: 0 0 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(44px, 5.4vw, 76px);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  color: #ffffff;
+}
+
+.hero-brutal-title .hero-sub-line {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(20px, 2.3vw, 31px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: #d4d4d8;
+}
+
+.hero-brutal-desc {
+  margin: 0 0 28px;
+  max-width: 580px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+
+.hero-brutal-desc strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.hero-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 0;
+  background: var(--crimson);
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: 1px solid var(--crimson);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+}
+
+.hero-btn-primary:hover {
+  background: #e11d48;
+}
+
+.hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: 0;
+  background: rgba(5, 5, 7, 0.72);
+  backdrop-filter: blur(8px);
+  color: #f4f4f5;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-btn-secondary:hover {
+  background: rgba(255, 30, 66, 0.12);
+  border-color: var(--crimson);
+}
+
+.hero-proof-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0;
+  background: rgba(5, 5, 7, 0.64);
+  backdrop-filter: blur(12px);
+}
+
+.hero-proof-cell {
+  padding: 16px 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.11);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-proof-cell:last-child {
+  border-right: none;
+}
+
+.hero-proof-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hero-proof-lbl {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* Right Portal: Raw 0px Crimson Bayer Vortex Canvas (exact match to target pixel-art) */
+.hero-dither-portal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 490px;
+  margin-left: auto;
+  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #050507;
+  overflow: hidden;
+}
+
+.hero-dither-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1 !important;
+  image-rendering: pixelated;
+}
+
+.hero-portal-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 0;
+  background: rgba(5, 5, 7, 0.88);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hero-portal-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: 50% 18%;
+  background: #0a0a0e;
+  border: 1px solid var(--crimson);
+  flex-shrink: 0;
+}
+
+.hero-portal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.hero-portal-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--crimson);
+}
+
+.hero-portal-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hero-portal-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   ARCHITECTURAL SECTIONS, 0px HAIRLINES & BAYER MATRIX WIDGETS
+   ========================================================================== */
+.section {
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 76px 32px !important;
+  scroll-margin-top: 96px !important;
+  background: transparent !important;
+}
+
+.section-divider-bar {
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 0 32px !important;
+  border-color: var(--hairline) !important;
+}
+
+.section-tag,
+.flagship-badge,
+.parcours-tag,
+.kai-col-kicker {
+  font-family: 'JetBrains Mono', monospace !important;
+  color: var(--crimson) !important;
+  letter-spacing: 0.09em !important;
+  border-radius: 0 !important;
+}
+
+.flagship-badge {
+  background: rgba(255, 30, 66, 0.12) !important;
+  border: 1px solid rgba(255, 30, 66, 0.36) !important;
+}
+
+.section-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: clamp(28px, 3.4vw, 42px) !important;
+  letter-spacing: -0.03em !important;
+  color: #ffffff !important;
+}
+
+.section-desc {
+  color: #cbd5e1 !important;
+  max-width: 720px !important;
+}
+
+/* Unified 0px Architectural Hairline Grid (Replaces rounded box clutter) */
+.bento-telemetry-grid {
+  max-width: 100% !important;
+  margin: 0 !important;
+  grid-template-columns: 1.35fr 1fr !important;
+  gap: 0 !important;
+  border: 1px solid var(--hairline);
+}
+
+.bento-tele-card {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: none !important;
+  border-right: 1px solid var(--hairline) !important;
+  border-radius: 0 !important;
+  transition: background 0.25s ease !important;
+}
+
+.bento-tele-card:last-child {
+  border-right: none !important;
+}
+
+.bento-tele-card:hover {
+  background: rgba(15, 7, 10, 0.72) !important;
+}
+
+.bento-tele-kicker {
+  color: var(--crimson) !important;
+}
+
+.bento-tele-badge {
+  border-radius: 0 !important;
+  color: #f4f4f5 !important;
+  background: rgba(255, 30, 66, 0.16) !important;
+  border: 1px solid rgba(255, 30, 66, 0.48) !important;
+}
+
+.bento-matrix-row strong {
+  color: #f4f4f5 !important;
+}
+
+.cli-dot {
+  background: var(--crimson) !important;
+  box-shadow: 0 0 8px var(--crimson) !important;
+}
+
+.bento-bars {
+  border-radius: 0 !important;
+  border-color: var(--hairline) !important;
+  background: rgba(5, 5, 7, 0.72) !important;
+}
+
+/* Pixel-Dithered Segmented Bars (Repeating tiny crimson square blocks!) */
+.bento-bar-col span {
+  border-radius: 0 !important;
+  background: repeating-linear-gradient(
+    to top,
+    var(--crimson) 0px,
+    var(--crimson) 5px,
+    transparent 5px,
+    transparent 7px
+  ) !important;
+  box-shadow: none !important;
+}
+
+.bento-leds i {
+  border-radius: 0 !important;
+  width: 6px !important;
+  height: 10px !important;
+  background: #f4f4f5 !important;
+}
+.bento-leds i:nth-child(6),
+.bento-leds i:nth-child(7),
+.bento-leds i:nth-child(8) {
+  background: var(--crimson) !important;
+}
+
+.bento-sub-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--hairline);
+  border-top: none;
+}
+
+.bento-chip,
+.tech-tag {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 5px 10px !important;
+  border-radius: 0 !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #e4e4e7 !important;
+}
+
+/* Editorial Typographic Index Showcase (dennissnellenberg / skiper80) */
+.skiper80-showcase {
+  gap: 0 !important;
+  border: 1px solid var(--hairline);
+}
+
+.skiper80-preview {
+  border-radius: 0 !important;
+  background: rgba(6, 6, 9, 0.72) !important;
+  backdrop-filter: blur(12px) !important;
+  border: none !important;
+  border-right: 1px solid var(--hairline) !important;
+  box-shadow: none !important;
+}
+
+.skiper80-kicker,
+.s80-num {
+  color: var(--crimson) !important;
+}
+
+.skiper80-badge {
+  border-radius: 0 !important;
+  background: rgba(255, 30, 66, 0.12) !important;
+  border: 1px solid rgba(255, 30, 66, 0.42) !important;
+  color: #fda4af !important;
+}
+
+.s80-stat {
+  border-radius: 0 !important;
+  border-color: var(--hairline) !important;
+}
+
+.skiper80-index {
+  gap: 0 !important;
+}
+
+.s80-item {
+  border-radius: 0 !important;
+  background: rgba(5, 5, 7, 0.56) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--hairline) !important;
+  padding: 18px 22px !important;
+  flex: 1;
+}
+
+.s80-item:last-child {
+  border-bottom: none !important;
+}
+
+.s80-item:hover,
+.s80-item.is-active {
+  background: rgba(255, 30, 66, 0.11) !important;
+  color: #ffffff !important;
+  transform: none !important;
+}
+
+.s80-item.is-active .s80-meta {
+  color: #fda4af !important;
+}
+
+.s80-cta {
+  border-radius: 0 !important;
+  background: var(--crimson) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border: none !important;
+}
+
+.spotlight-surface::before {
+  background: radial-gradient(
+    360px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(255, 30, 66, 0.13),
+    transparent 70%
+  ) !important;
+}
+
+/* Live Quant Waveform Box */
+.quant-wave-box {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 0;
+  background: rgba(5, 5, 7, 0.72);
+  border: 1px solid var(--hairline);
+}
+.quant-wave-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #a1a1aa;
+  margin-bottom: 10px;
+}
+.quant-wave-live {
+  color: var(--crimson);
+}
+.quant-live-wave {
+  display: block;
+  width: 100%;
+  height: 76px;
+}
+
+/* Deep Case Study, Parcours & Contact 0px Architectural Surfaces */
+.glass-card,
+.parcours-card,
+.metric-pill,
+.kai-col-box,
+.code-switcher-pre {
+  border-radius: 0 !important;
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--hairline) !important;
+  box-shadow: none !important;
+}
+
+.glass-card:hover,
+.parcours-card:hover {
+  border-color: var(--hairline-strong) !important;
+  transform: none !important;
+}
+
+.metric-num {
+  color: #ffffff !important;
+}
+.layer-tab,
+.code-tab-btn,
+.case-ext-link,
+.copy-btn,
+.cv-download-btn,
+.social-pill {
+  border-radius: 0 !important;
+}
+.layer-tab.active,
+.code-tab-btn.active {
+  background: rgba(255, 30, 66, 0.16) !important;
+  border-color: var(--crimson) !important;
+  color: #ffffff !important;
+}
+.case-ext-link {
+  border-color: var(--hairline) !important;
+  color: #f4f4f5 !important;
+}
+.copy-btn,
+.cv-btn-fr {
+  background: var(--crimson) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border: 1px solid var(--crimson) !important;
+}
+.cv-btn-fr:hover {
+  background: #e11d48 !important;
+  box-shadow: none !important;
+}
+.email-action-box {
+  border-radius: 0 !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+}
+
+/* Magnetic Circle CTA for Direct Connect (dennissnellenberg inspiration) */
+.magnetic-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.magnetic-circle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 138px;
+  height: 138px;
+  border-radius: 999px;
+  background: var(--crimson);
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.35;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+}
+.magnetic-circle-btn:hover {
+  background: #e11d48;
+}
+
+/* Totem 3D Crimson Typography & 0px Spec Card */
+.totem-marquee-banner {
+  margin-bottom: 14px !important;
+  opacity: 0.8 !important;
+}
+.totem-marquee-banner .marquee-word {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: clamp(26px, 3.6vw, 44px) !important;
+  letter-spacing: 0.14em !important;
+  font-weight: 800 !important;
+}
+.totem-marquee-banner .marquee-word.is-solid {
+  color: var(--crimson) !important;
+}
+.totem-marquee-banner .marquee-word.is-stroke {
+  -webkit-text-stroke: 1px rgba(255, 30, 66, 0.55) !important;
+  color: transparent !important;
+}
+
+.totem-card {
+  border-radius: 0 !important;
+  background: rgba(5, 5, 7, 0.78) !important;
+  backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 30, 66, 0.42) !important;
+  box-shadow: none !important;
+}
+.totem-card-role,
+.totem-spec-val.is-proof {
+  color: var(--crimson-soft) !important;
+  border-radius: 0 !important;
+}
+.totem-card-role {
+  background: rgba(255, 30, 66, 0.12) !important;
+  border-color: rgba(255, 30, 66, 0.38) !important;
+}
+.totem-spec-grid,
+.totem-tag-pill,
+.totem-inline-cta {
+  border-radius: 0 !important;
+}
+.totem-telem-sq.active {
+  background: var(--crimson) !important;
+  border-color: var(--crimson) !important;
+}
+.totem-inline-cta {
+  color: #fda4af !important;
+  background: rgba(255, 30, 66, 0.12) !important;
+  border-color: rgba(255, 30, 66, 0.44) !important;
+}
+.totem-inline-cta:hover,
+.totem-arrow-btn:hover {
+  color: var(--crimson) !important;
+}
+.totem-inline-cta:hover {
+  background: var(--crimson) !important;
+  color: #ffffff !important;
+}
+.totem-arrow-btn:hover .corner {
+  border-color: var(--crimson) !important;
+}
+
+/* Scroll Island: Crisp 0px Architectural Index */
+.scroll-island {
+  border-radius: 0 !important;
+  background: rgba(5, 5, 7, 0.92) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+}
+.scroll-island-ring {
+  background: conic-gradient(#ff1e42 calc(var(--scroll-island-p, 0) * 1%), rgba(255, 255, 255, 0.14) 0) !important;
+}
+.scroll-island-ring::after {
+  background: #050507 !important;
+}
+.scroll-island-kicker,
+.island-link.is-active span {
+  color: var(--crimson) !important;
+}
+.scroll-island-pct {
+  border-radius: 0 !important;
+  color: #ffffff !important;
+  background: rgba(255, 30, 66, 0.18) !important;
+  border: 1px solid rgba(255, 30, 66, 0.48) !important;
+}
+
+@media (max-width: 980px) {
+  .page-shell::before {
+    inset: 6px;
+  }
+  .dock-container {
+    padding: 0 12px;
+  }
+  .hero-section {
+    padding: 96px 18px 48px !important;
+  }
+  .section {
+    padding: 56px 18px !important;
+  }
+  .section-divider-bar {
+    padding: 0 18px !important;
+  }
+  .hero-dither-split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .hero-dither-portal {
+    height: 320px;
+    max-width: 100%;
+  }
+  .hero-proof-strip,
+  .bento-telemetry-grid,
+  .bento-sub-row,
+  .skiper80-showcase {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-proof-cell,
+  .bento-tele-card,
+  .skiper80-preview {
+    border-right: none !important;
+    border-bottom: 1px solid var(--hairline) !important;
+  }
+  .hero-proof-cell:last-child,
+  .bento-tele-card:last-child {
+    border-bottom: none !important;
+  }
+}

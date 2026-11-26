@@ -1,0 +1,42 @@
+//Titre : Double
+
+// Cette table d'états permet de calculer le double d'un nombre décimal quelconque.
+// Il y a 3 états :
+// L'état initial ('double') remplace le chiffre lu par le chiffre des unités de son double
+//  si cette opération ne provoque pas de retenue l'état suivant est 'double' et on passe à droite
+//  sinon l'état suivant est 'retenue' et on passe à gauche pour reporter la retenue.
+// L'état 'retenue' remplace un chiffre par son successeur ou un espace par un 1 (ajout de retenue)
+//  puis on revient à gauche et l'état suivant est 'saute' car le chiffre de gauche a déjà été traité.
+// L'état 'saute' se contente de passer au chiffre de droite qui n'a pas encore été traité et de revenir à 'double'.
+// La machine s'arrête quand elle rencontre un espace alors qu'elle s'est déplacée à droite.
+
+// Table d'états (3 états)
+// état	   car lu  état suiv  écrit  opération
+   double     0     double      0       D
+   double     1     double      2       D
+   double     2     double      4       D
+   double     3     double      6	D
+   double     4     double      8       D
+   double     5     retenue     0       G
+   double     6     retenue     2       G
+   double     7     retenue     4       G
+   double     8     retenue     6       G
+   double     9     retenue     8       G
+   double     .     double      .       A
+   retenue    0     saute       1       D
+   retenue    2     saute       3       D
+   retenue    4     saute       5       D
+   retenue    6     saute       7       D
+   retenue    8     saute       9       D
+   retenue    .     saute       1       D
+   saute      0     double      0       D
+   saute      1     double      1       D
+   saute      2     double      2       D
+   saute      3     double      3       D
+   saute      4     double      4       D
+   saute      5     double      5       D
+   saute      6     double      6       D
+   saute      7     double      7       D
+   saute      8     double      8       D
+   saute      9     double      9       D
+   saute      .     double      .       A

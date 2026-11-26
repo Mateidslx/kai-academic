@@ -1,0 +1,849 @@
+/* ==========================================================================
+   MATÉI DE SAINT LÉGER — COSMIC SPACE & BAYER POINTILLÉ EDITION (v15)
+   Unified Space-Dotted Theme + Lab Picks (#01, #06, #07, #11, #12, #13)
+   ========================================================================== */
+
+:root {
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --space-dot-light: rgba(244, 243, 239, 0.22);
+  --space-dot-crimson: rgba(255, 30, 66, 0.34);
+  --space-nebula: radial-gradient(circle at 82% 14%, rgba(255, 30, 66, 0.13) 0%, transparent 46%),
+                  radial-gradient(circle at 14% 72%, rgba(56, 189, 248, 0.08) 0%, transparent 44%);
+}
+
+html[data-theme="light"] {
+  --space-dot-light: rgba(16, 17, 22, 0.14);
+  --space-dot-crimson: rgba(217, 15, 50, 0.22);
+  --space-nebula: radial-gradient(circle at 82% 14%, rgba(217, 15, 50, 0.07) 0%, transparent 48%),
+                  radial-gradient(circle at 14% 72%, rgba(16, 17, 22, 0.04) 0%, transparent 45%);
+}
+
+/* Deep Space Pointillé Backdrop unifying entire site with the SCRIB3 Totem */
+body {
+  background-color: #050508;
+  background-image:
+    var(--space-nebula),
+    radial-gradient(rgba(255, 30, 66, 0.16) 1px, transparent 1px),
+    radial-gradient(var(--space-dot-light) 1px, transparent 1px);
+  background-size: 100% 100%, 36px 36px, 18px 18px;
+  background-position: 0 0, 9px 9px, 0 0;
+}
+
+html[data-theme="light"] body {
+  background-color: #ecebe9;
+  background-image:
+    var(--space-nebula),
+    radial-gradient(rgba(217, 15, 50, 0.13) 1px, transparent 1px),
+    radial-gradient(var(--space-dot-light) 1px, transparent 1px);
+  background-size: 100% 100%, 36px 36px, 18px 18px;
+  background-position: 0 0, 9px 9px, 0 0;
+}
+
+.page-shell,
+.top-header {
+  position: relative;
+  z-index: 2;
+}
+
+/* Stippled Space Frames matching the Totem canvas perimeter */
+.hero-stage-card,
+.timer-chronicle-section,
+.project-showcase-stage,
+.totem-card-shell {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 30, 66, 0.14),
+    0 22px 60px -18px rgba(0, 0, 0, 0.72);
+}
+
+html[data-theme="light"] .hero-stage-card,
+html[data-theme="light"] .timer-chronicle-section,
+html[data-theme="light"] .project-showcase-stage,
+html[data-theme="light"] .totem-card-shell {
+  box-shadow:
+    inset 0 0 0 1px rgba(217, 15, 50, 0.12),
+    0 14px 40px -14px rgba(16, 17, 22, 0.12);
+}
+
+.section-cad-rule::after {
+  border-top: 1px dotted rgba(255, 30, 66, 0.42);
+  background: none !important;
+  height: 0 !important;
+}
+
+/* ==========================================================================
+   MODULE #13: ELLIPTICAL SPACE DOT-MATRIX TRANSITION CURTAIN
+   ========================================================================== */
+.space-curtain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 980;
+  pointer-events: none;
+  background-color: #c90c2b;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.24) 1px, transparent 1px),
+    radial-gradient(rgba(5, 5, 8, 0.35) 1px, transparent 1px);
+  background-size: 20px 20px, 10px 10px;
+  background-position: 0 0, 5px 5px;
+  display: grid;
+  place-items: center;
+  clip-path: ellipse(0% 0% at 50% 0%);
+  transition: clip-path 0.68s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.space-curtain-overlay.is-wiped {
+  clip-path: ellipse(155% 150% at 50% 0%);
+}
+
+.space-curtain-inner {
+  text-align: center;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.space-curtain-kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.86;
+  margin-bottom: 10px;
+}
+
+.space-curtain-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 4.4rem);
+  letter-spacing: -0.02em;
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   MODULE #01: SLX SPACE POINTILLÉ 3D HORIZON + ORBITAL RETICLE + STATION DOCK
+   ========================================================================== */
+.slx-space-shell {
+  display: grid;
+  gap: 20px;
+}
+
+.slx-stage {
+  position: relative;
+  height: 390px;
+  background-color: #040509;
+  background-image: radial-gradient(circle at 26% 42%, rgba(255, 30, 66, 0.16) 0%, #040509 62%);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  padding: 26px 28px 54px;
+  gap: 22px;
+  color: #f4f3ef;
+  box-shadow: var(--shadow-card);
+}
+
+.slx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.slx-reticle-box {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+
+.slx-reticle-svg {
+  width: 245px;
+  height: 245px;
+}
+
+.slx-callout {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: #f4f3ef;
+  background: rgba(5, 5, 9, 0.78);
+  border: 1px solid rgba(255, 30, 66, 0.42);
+  padding: 3px 7px;
+  border-radius: 4px;
+}
+
+.slx-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.slx-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #ff6b81;
+  margin-bottom: 8px;
+}
+
+.slx-h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.slx-copy p {
+  margin: 0;
+  color: #d0d3e2;
+  font-size: 0.94rem;
+  max-width: 52ch;
+}
+
+@keyframes slxConstitute {
+  0% { opacity: 0; filter: blur(10px); transform: translateY(18px) scale(0.98); }
+  100% { opacity: 1; filter: blur(0px); transform: none; }
+}
+
+.slx-anim [data-el] {
+  animation: slxConstitute 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+.slx-dock {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(6, 7, 12, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #f4f3ef;
+  white-space: nowrap;
+  max-width: calc(100% - 24px);
+}
+
+.slx-ticks {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.slx-tick {
+  width: 18px;
+  height: 3px;
+  background: rgba(244, 243, 239, 0.4);
+  border: none;
+  padding: 0;
+  border-radius: 99px;
+  transition: width 0.25s, background-color 0.25s;
+}
+
+.slx-tick:hover {
+  width: 28px;
+  background: #ffffff;
+}
+
+.slx-tick.is-active {
+  width: 42px;
+  background: #ff1e42;
+}
+
+.slx-replay-btn {
+  margin-left: 6px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4f3ef;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+}
+
+.slx-replay-btn:hover {
+  border-color: #ff1e42;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   MODULE #11: LIQUID BLUR-TO-INK MANIFESTO & WIDTH-LOCKED GLITCH GLYPHS
+   ========================================================================== */
+.cosmic-manifesto-card {
+  padding: 24px 26px;
+  border-radius: 12px;
+  background-color: var(--bg-surface);
+  background-image: radial-gradient(var(--space-dot-light) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-card);
+}
+
+.manifesto-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.manifesto-scrub-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.liquid-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 11px;
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.7vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--text-primary);
+}
+
+.liq-w {
+  transition: filter 0.35s ease, color 0.35s ease, opacity 0.35s ease;
+}
+
+.liq-w.is-blob {
+  filter: blur(4.5px);
+  color: var(--accent);
+  opacity: 0.68;
+}
+
+.glyph-swap-bar {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dotted var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.7vw, 1.18rem);
+  font-weight: 800;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  color: var(--text-primary);
+}
+
+.gs-ch {
+  display: inline-block;
+  width: 1ch;
+  text-align: center;
+  transition: color 0.15s;
+}
+
+.gs-ch.is-alt {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+  font-size: 1.12em;
+}
+
+/* ==========================================================================
+   MODULE #07: CARTER 3D ORBITAL WHEEL & CHARACTER-ROLL TICKER
+   ========================================================================== */
+.cosmic-wheel-shell {
+  margin-bottom: 18px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background-color: var(--bg-surface);
+  background-image: radial-gradient(var(--space-dot-light) 1px, transparent 1px);
+  background-size: 14px 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.wheel-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.wheel-controls-row {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.wheel-nav-btn {
+  padding: 6px 12px;
+  border-radius: 7px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface-soft);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.wheel-nav-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.wheel-track {
+  position: relative;
+  height: 224px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1100px;
+  transform-style: preserve-3d;
+}
+
+.wheel-card {
+  position: absolute;
+  width: 244px;
+  height: 174px;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface-soft);
+  color: var(--text-primary);
+  padding: 11px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, border-color 0.25s ease;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.34);
+}
+
+.wheel-thumb {
+  width: 100%;
+  height: 62px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  background: radial-gradient(circle at 25% 30%, rgba(255, 30, 66, 0.28), #090b12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: #f4f3ef;
+}
+
+.wheel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.wheel-ticker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px dotted var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.char-roll-word {
+  display: inline-flex;
+  gap: 1px;
+  font-weight: 800;
+  font-size: 0.96rem;
+  color: var(--accent);
+}
+
+.char-roll-word span {
+  display: inline-block;
+  animation: charPop 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--ci, 0) * 24ms);
+}
+
+@keyframes charPop {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   MODULE #13 PARCOURS DUAL-LAYER HALO BENTO CARDS
+   ========================================================================== */
+.bento-card.slides-halo-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.slides-halo-ambient {
+  position: absolute;
+  inset: -14px;
+  z-index: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 30, 66, 0.26) 0%, transparent 56%),
+              radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.14) 0%, transparent 54%);
+  filter: blur(18px);
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.bento-card.slides-halo-card:hover .slides-halo-ambient {
+  opacity: 0.92;
+  transform: scale(1.06);
+}
+
+.slides-halo-inner {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bento-card.slides-halo-card:hover .slides-halo-inner {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   MODULE #06: GARGANTUA 3D BLACK HOLE + RECRUITER TERMINAL
+   ========================================================================== */
+.gargantua-contact-stage {
+  position: relative;
+  min-height: 410px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background-color: #030306;
+  background-image: radial-gradient(circle at 50% 42%, #13060c 0%, #030306 72%);
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  color: #f4f3ef;
+  box-shadow: var(--shadow-card);
+}
+
+.gargantua-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gargantua-top-hud {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #ff6b81;
+}
+
+.gargantua-bottom-console {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 10px;
+}
+
+.gargantua-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.gargantua-chip {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(8, 9, 14, 0.72);
+  color: #f4f3ef;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.gargantua-chip:hover {
+  border-color: #ff1e42;
+  background: rgba(255, 30, 66, 0.22);
+}
+
+.gargantua-reply {
+  padding: 10px 14px;
+  border-radius: 7px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.36);
+  color: #d6f5e8;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  backdrop-filter: blur(8px);
+  display: none;
+}
+
+.gargantua-reply.is-open {
+  display: block;
+}
+
+.gargantua-prompt-row {
+  display: flex;
+  gap: 8px;
+  background: rgba(8, 9, 14, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  padding: 6px;
+  backdrop-filter: blur(10px);
+}
+
+.gargantua-prompt-row input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 6px 8px;
+}
+
+.gargantua-submit-btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ff1e42;
+  background: #ff1e42;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   MODULE #12: UNANIM FLOATING MORPH-DOCK & ./ SLIDING PREFIX LINKS
+   ========================================================================== */
+.u-prefix-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
+}
+
+.u-prefix-link::before {
+  content: "./";
+  font-family: var(--font-mono);
+  color: var(--accent);
+  opacity: 0;
+  margin-right: 5px;
+  transform: translateX(-8px);
+  transition: opacity 0.22s, transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.u-prefix-link:hover {
+  transform: translateX(6px);
+  color: var(--accent);
+}
+
+.u-prefix-link:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.unanim-dock-wrap {
+  position: fixed;
+  right: 22px;
+  bottom: 20px;
+  z-index: 640;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: calc(100vw - 24px);
+}
+
+.unanim-drawer {
+  width: min(300px, calc(100vw - 24px));
+  padding: 15px;
+  border-radius: 14px;
+  background-color: rgba(11, 12, 18, 0.94);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+  background-size: 14px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f4f3ef;
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(14px);
+  transform: translateY(12px) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
+}
+
+.unanim-drawer.is-open {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.unanim-drawer-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #ff6b81;
+  margin-bottom: 10px;
+}
+
+.unanim-drawer-links {
+  display: grid;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.unanim-drawer-links a {
+  padding: 4px 6px;
+  border-radius: 6px;
+  color: #f4f3ef;
+}
+
+.unanim-drawer-links a:hover {
+  background: rgba(255, 30, 66, 0.12);
+}
+
+.unanim-pill-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 12px;
+  border-radius: 999px;
+  background: rgba(16, 17, 24, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.unanim-pill-bar .island-ring {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.unanim-pill-bar .island-ring::after {
+  width: 14px;
+  height: 14px;
+  background: #101118;
+}
+
+.unanim-pill-bar .island-text {
+  font-size: 0.72rem;
+  color: #f4f3ef;
+  max-width: 138px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unanim-pill-bar .island-pct {
+  font-size: 0.72rem;
+}
+
+.u-ham {
+  display: grid;
+  gap: 3px;
+  width: 14px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.u-ham span {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.28s, opacity 0.2s;
+}
+
+.unanim-pill-bar.is-open .u-ham span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+.unanim-pill-bar.is-open .u-ham span:nth-child(2) { opacity: 0; }
+.unanim-pill-bar.is-open .u-ham span:nth-child(3) { transform: translateY(-4.5px) rotate(-45deg); }
+
+.unanim-pill-tag {
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0b0c10;
+  font-weight: 800;
+}
+
+@media (max-width: 860px) {
+  .slx-stage {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 460px;
+    padding: 20px 16px 84px;
+  }
+  .slx-tick {
+    width: 13px;
+  }
+  .slx-tick.is-active {
+    width: 26px;
+  }
+  .slx-dock {
+    gap: 8px;
+    padding: 6px 11px;
+  }
+  .slx-reticle-svg {
+    width: 170px;
+    height: 170px;
+  }
+  .wheel-card {
+    width: 196px;
+    height: 162px;
+  }
+  .gargantua-contact-stage {
+    min-height: 430px;
+    padding: 16px;
+  }
+  .unanim-dock-wrap {
+    right: 12px;
+    bottom: 12px;
+  }
+  .unanim-pill-bar .island-text {
+    display: none;
+  }
+}
