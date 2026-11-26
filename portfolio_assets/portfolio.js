@@ -138,7 +138,7 @@
         var isLight = document.documentElement.getAttribute('data-theme') === 'light';
         var rotY = (reducedMotion ? 0.5 : t * 0.00024) + pointerX * 0.35;
         var rotX = 0.28 + pointerY * 0.22 + scrollYRatio * 0.4;
-        var cx = w * 0.54, cy = h * 0.46;
+        var cx = w * 0.74, cy = h * 0.46;
         var cosY = Math.cos(rotY), sinY = Math.sin(rotY);
         var cosX = Math.cos(rotX), sinX = Math.sin(rotX);
 
@@ -218,7 +218,7 @@
           var x = r * Math.cos(p * t) + jitter * 0.48;
           var y = r * Math.sin(p * t) * 0.78 + jitter * 0.40;
           var z = 0.95 * Math.sin(q * t) + jitter * 0.58;
-          positions[i * 3] = x + 0.65;
+          positions[i * 3] = x + 2.2;
           positions[i * 3 + 1] = y;
           positions[i * 3 + 2] = z;
 
@@ -233,28 +233,28 @@
         geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         var mat = new THREE.PointsMaterial({
-          size: 0.13,
+          size: 0.092,
           map: spriteTex,
           vertexColors: true,
           transparent: true,
-          opacity: 0.88,
+          opacity: 0.72,
           depthWrite: false,
           blending: THREE.AdditiveBlending
         });
         var cloud = new THREE.Points(geo, mat);
         scene.add(cloud);
 
-        var ringGeo = new THREE.TorusGeometry(3.2, 0.011, 8, 128);
-        var ringMat = new THREE.MeshBasicMaterial({ color: 0xe24334, transparent: true, opacity: 0.30 });
+        var ringGeo = new THREE.TorusGeometry(3.15, 0.010, 8, 128);
+        var ringMat = new THREE.MeshBasicMaterial({ color: 0xe24334, transparent: true, opacity: 0.28 });
         var ring = new THREE.Mesh(ringGeo, ringMat);
-        ring.position.set(0.65, 0, 0);
+        ring.position.set(2.2, 0, 0);
         ring.rotation.x = 1.1;
         scene.add(ring);
 
-        var ring2Geo = new THREE.TorusGeometry(2.45, 0.008, 8, 120);
+        var ring2Geo = new THREE.TorusGeometry(2.4, 0.007, 8, 120);
         var ring2Mat = new THREE.MeshBasicMaterial({ color: 0xf3f0e8, transparent: true, opacity: 0.12 });
         var ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-        ring2.position.set(0.65, 0, 0);
+        ring2.position.set(2.2, 0, 0);
         ring2.rotation.y = 0.9;
         scene.add(ring2);
 

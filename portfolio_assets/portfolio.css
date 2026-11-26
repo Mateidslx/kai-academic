@@ -203,6 +203,7 @@ button, input { font-family: inherit; color: inherit; }
   color: var(--ink-dim);
   padding: 6px 12px;
   border-radius: var(--r-pill);
+  white-space: nowrap;
   transition: color 150ms var(--ease), background 150ms var(--ease);
 }
 .nav-links a:hover,
@@ -344,6 +345,8 @@ html[data-theme="light"] .btn-glass {
   height: 100%;
   z-index: 0;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.75) 66%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.75) 66%, #000 100%);
 }
 
 /* Atmospheric crimson-amber studio light behind stage */
@@ -1261,9 +1264,12 @@ html[data-theme="light"] .btn-glass {
   .z-float-row { margin-top: 14px; padding: 0; }
 }
 
-@media (max-width: 740px) {
+@media (max-width: 920px) {
   .nav-links, .nav-icon-btn { display: none; }
   .nav-burger { display: inline-flex; }
+}
+
+@media (max-width: 740px) {
   .scene { padding: 80px 0; }
   .hero-scene { padding: 98px 0 40px; }
   .hero-proof-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
