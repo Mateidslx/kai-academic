@@ -47,13 +47,13 @@
   });
 
   /* ========================================================================
-     02. THEME (OBSCURA DEFAULT / LIGHT OPTIONAL) + LEXEND + MOBILE DRAWER
+     02. THEME (ATELIER SOLAIRE DEFAULT / OBSCURA OPTIONAL) + LEXEND + DRAWER
      ======================================================================== */
   function toggleTheme() {
-    var cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'obscura' : 'light';
+    var cur = document.documentElement.getAttribute('data-theme') === 'obscura' ? 'solaire' : 'obscura';
     document.documentElement.setAttribute('data-theme', cur);
-    try { localStorage.setItem('msl-obscura-theme', cur); } catch (_) {}
-    showToast(cur === 'light' ? 'Mode Atelier Clair activé' : 'Mode Obscura Studio activé');
+    try { localStorage.setItem('msl-portfolio-theme', cur); } catch (_) {}
+    showToast(cur === 'obscura' ? 'Mode Obscura activé' : 'Mode Atelier Solaire activé');
   }
 
   function toggleLexend() {
@@ -135,7 +135,7 @@
       window.addEventListener('resize', resize2D, { passive: true });
       function draw2D(t) {
         ctx.clearRect(0, 0, w, h);
-        var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        var isDark = document.documentElement.getAttribute('data-theme') === 'obscura';
         var rotY = (reducedMotion ? 0.5 : t * 0.00024) + pointerX * 0.35;
         var rotX = 0.28 + pointerY * 0.22 + scrollYRatio * 0.4;
         var cx = w * 0.74, cy = h * 0.46;
@@ -148,13 +148,13 @@
         ctx.rotate(rotY * 0.35);
         ctx.beginPath();
         ctx.ellipse(0, 0, Math.min(w * 0.36, 420), Math.min(h * 0.24, 175), -0.28, 0, Math.PI * 2);
-        ctx.strokeStyle = isLight ? 'rgba(200, 46, 33, 0.14)' : 'rgba(226, 67, 52, 0.20)';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = isDark ? 'rgba(226, 67, 52, 0.22)' : 'rgba(232, 76, 53, 0.22)';
+        ctx.lineWidth = 1.2;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.ellipse(0, 0, Math.min(w * 0.28, 320), Math.min(h * 0.18, 130), 0.42, 0, Math.PI * 2);
-        ctx.strokeStyle = isLight ? 'rgba(20, 21, 26, 0.08)' : 'rgba(243, 240, 232, 0.09)';
+        ctx.strokeStyle = isDark ? 'rgba(243, 240, 232, 0.10)' : 'rgba(2, 132, 199, 0.18)';
         ctx.stroke();
         ctx.restore();
 
@@ -168,12 +168,14 @@
           var sx = cx + x1 * scale;
           var sy = cy + y2 * scale;
           ctx.beginPath();
-          ctx.arc(sx, sy, (p.crimson ? 2.6 : 1.55) * scale, 0, Math.PI * 2);
+          ctx.arc(sx, sy, (p.crimson ? 2.6 : 1.7) * scale, 0, Math.PI * 2);
           ctx.fillStyle = p.crimson
-            ? 'rgba(226, 67, 52,' + Math.min(0.92, 0.42 + 0.45 * scale).toFixed(2) + ')'
-            : (isLight
-              ? 'rgba(20, 21, 26,' + Math.min(0.32, 0.10 + 0.18 * scale).toFixed(2) + ')'
-              : 'rgba(243, 240, 232,' + Math.min(0.68, 0.16 + 0.42 * scale).toFixed(2) + ')');
+            ? 'rgba(232, 76, 53,' + Math.min(0.92, 0.45 + 0.45 * scale).toFixed(2) + ')'
+            : (isDark
+              ? 'rgba(243, 240, 232,' + Math.min(0.68, 0.16 + 0.42 * scale).toFixed(2) + ')'
+              : (j % 2 === 0
+                ? 'rgba(2, 132, 199,' + Math.min(0.45, 0.18 + 0.24 * scale).toFixed(2) + ')'
+                : 'rgba(217, 119, 6,' + Math.min(0.40, 0.15 + 0.20 * scale).toFixed(2) + ')'));
           ctx.fill();
         }
         if (!reducedMotion) requestAnimationFrame(draw2D);
@@ -203,12 +205,13 @@
         var spriteTex = new THREE.CanvasTexture(sp);
 
         // Sculptural Torus-Knot Particle Constellation + Dual Orbital Rings
+        var isDarkGL = document.documentElement.getAttribute('data-theme') === 'obscura';
         var count = 2100;
         var positions = new Float32Array(count * 3);
         var colors = new Float32Array(count * 3);
-        var cSilver = new THREE.Color(0xf3f0e8);
-        var cCrimson = new THREE.Color(0xe24334);
-        var cSlate = new THREE.Color(0x6b6c7e);
+        var cSilver = new THREE.Color(isDarkGL ? 0xf3f0e8 : 0x0284c7);
+        var cCrimson = new THREE.Color(0xe84c35);
+        var cSlate = new THREE.Color(isDarkGL ? 0x6b6c7e : 0xd97706);
 
         for (var i = 0; i < count; i++) {
           var t = (i / count) * Math.PI * 2 * 3;
@@ -222,7 +225,7 @@
           positions[i * 3 + 1] = y;
           positions[i * 3 + 2] = z;
 
-          var col = i % 5 === 0 ? cCrimson : (i % 3 === 0 ? cSilver : cSlate);
+          var col = i % 5 === 0 ? cCrimson : (i % 2 === 0 ? cSilver : cSlate);
           colors[i * 3] = col.r;
           colors[i * 3 + 1] = col.g;
           colors[i * 3 + 2] = col.b;
@@ -233,26 +236,26 @@
         geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         var mat = new THREE.PointsMaterial({
-          size: 0.092,
+          size: isDarkGL ? 0.092 : 0.11,
           map: spriteTex,
           vertexColors: true,
           transparent: true,
-          opacity: 0.72,
+          opacity: isDarkGL ? 0.72 : 0.62,
           depthWrite: false,
-          blending: THREE.AdditiveBlending
+          blending: isDarkGL ? THREE.AdditiveBlending : THREE.NormalBlending
         });
         var cloud = new THREE.Points(geo, mat);
         scene.add(cloud);
 
         var ringGeo = new THREE.TorusGeometry(3.15, 0.010, 8, 128);
-        var ringMat = new THREE.MeshBasicMaterial({ color: 0xe24334, transparent: true, opacity: 0.28 });
+        var ringMat = new THREE.MeshBasicMaterial({ color: 0xe84c35, transparent: true, opacity: 0.28 });
         var ring = new THREE.Mesh(ringGeo, ringMat);
         ring.position.set(2.2, 0, 0);
         ring.rotation.x = 1.1;
         scene.add(ring);
 
         var ring2Geo = new THREE.TorusGeometry(2.4, 0.007, 8, 120);
-        var ring2Mat = new THREE.MeshBasicMaterial({ color: 0xf3f0e8, transparent: true, opacity: 0.12 });
+        var ring2Mat = new THREE.MeshBasicMaterial({ color: isDarkGL ? 0xf3f0e8 : 0x0284c7, transparent: true, opacity: 0.18 });
         var ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
         ring2.position.set(2.2, 0, 0);
         ring2.rotation.y = 0.9;
@@ -527,7 +530,7 @@
      07. SCENE 04 — ORBITARIUM LIVE CLOUD TOPOLOGY CANVAS
      ======================================================================== */
   var ORB_NODES = [
-    { id: 'moodle', label: 'Moodle Scraper', orbit: 0.78, angle: 0.3, speed: 0.22, title: 'Moissonneur CAS SSO UPPA (Cron 4h)', desc: 'Authentification Moodle vérifiée, téléchargement récursif des supports PDF/TP et mise à jour du registre (811 documents).' },
+    { id: 'moodle', label: 'Moodle Scraper', orbit: 0.78, angle: 0.3, speed: 0.22, title: 'Moissonneur CAS SSO UPPA (Cron 4h)', desc: 'Découverte dynamique (42 cours actifs S1/S2), téléchargement binaire vérifié (%PDF) et registre live (1 787 supports).' },
     { id: 'fiches', label: 'Auto-Fiches', orbit: 0.56, angle: 2.1, speed: -0.30, title: 'Génération & Unification Kai Study v4', desc: 'Pipeline incrémental générant les 20 pages modules, les fiches 3 niveaux et le thème scotopique Crème/Menthe/Ciel/Nuit.' },
     { id: 'sqlite', label: 'SQLite WAL', orbit: 0.38, angle: 4.0, speed: 0.36, title: 'Persistance ACID + FTS5 Streaming', desc: 'Base relationnelle WAL (15,8 Mo) avec indexation plein texte en lots bornés (< 100 Mo RAM) et empreintes SHA-256.' },
     { id: 'systemd', label: 'Systemd 24/7', orbit: 0.88, angle: 4.8, speed: -0.18, title: '12 Services Cloud Supervisés (Ubuntu 24.04)', desc: 'Watchdog auto-healing, cgroups MemoryMax, bots Discord/Telegram, sentinelle mails Iris et déploiement GitHub Pages.' }
@@ -567,16 +570,17 @@
 
     function draw(now) {
       ctx.clearRect(0, 0, w, h);
+      var isDark = document.documentElement.getAttribute('data-theme') === 'obscura';
       var cx = w / 2, cy = h / 2;
       var maxR = Math.min(w, h) * 0.44;
       var t = reducedMotion ? 0 : now * 0.001;
 
       // Center VPS core glow
-      var grad = ctx.createRadialGradient(cx, cy, 4, cx, cy, 52);
-      grad.addColorStop(0, 'rgba(226, 67, 52, 0.45)');
-      grad.addColorStop(1, 'rgba(226, 67, 52, 0)');
+      var grad = ctx.createRadialGradient(cx, cy, 4, cx, cy, 56);
+      grad.addColorStop(0, isDark ? 'rgba(226, 67, 52, 0.45)' : 'rgba(232, 76, 53, 0.28)');
+      grad.addColorStop(1, 'rgba(232, 76, 53, 0)');
       ctx.fillStyle = grad;
-      ctx.beginPath(); ctx.arc(cx, cy, 52, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx, cy, 56, 0, Math.PI * 2); ctx.fill();
 
       // Orbits & nodes
       ORB_NODES.forEach(function (n) {
@@ -584,8 +588,10 @@
         var active = n.id === selectedOrb;
         ctx.beginPath();
         ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.strokeStyle = active ? 'rgba(226, 67, 52, 0.35)' : 'rgba(255, 255, 255, 0.08)';
-        ctx.lineWidth = active ? 1.4 : 1;
+        ctx.strokeStyle = active
+          ? 'rgba(232, 76, 53, 0.42)'
+          : (isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(15, 23, 42, 0.10)');
+        ctx.lineWidth = active ? 1.5 : 1;
         ctx.stroke();
 
         var a = n.angle + t * n.speed;
@@ -596,27 +602,32 @@
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(nx, ny);
-        ctx.strokeStyle = active ? 'rgba(226, 67, 52, 0.32)' : 'rgba(255, 255, 255, 0.04)';
+        ctx.strokeStyle = active
+          ? 'rgba(232, 76, 53, 0.36)'
+          : (isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(15, 23, 42, 0.06)');
         ctx.stroke();
 
         // Node circle
         ctx.beginPath();
         ctx.arc(nx, ny, active ? 6.5 : 4.5, 0, Math.PI * 2);
-        ctx.fillStyle = active ? '#e24334' : '#f3f0e8';
+        ctx.fillStyle = active ? '#e84c35' : (isDark ? '#f3f0e8' : '#0284c7');
         ctx.fill();
 
         // Label
         ctx.font = '600 10.5px "JetBrains Mono", monospace';
-        ctx.fillStyle = active ? '#f3f0e8' : 'rgba(243, 240, 232, 0.62)';
+        ctx.fillStyle = active
+          ? (isDark ? '#f3f0e8' : '#0f172a')
+          : (isDark ? 'rgba(243, 240, 232, 0.62)' : '#475569');
+        ctx.textAlign = 'left';
         ctx.fillText(n.label, nx + 10, ny + 4);
       });
 
       // Core node
-      ctx.beginPath(); ctx.arc(cx, cy, 10, 0, Math.PI * 2);
-      ctx.fillStyle = '#0e0f15'; ctx.fill();
-      ctx.strokeStyle = '#e24334'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, 11, 0, Math.PI * 2);
+      ctx.fillStyle = isDark ? '#0e0f15' : '#ffffff'; ctx.fill();
+      ctx.strokeStyle = '#e84c35'; ctx.lineWidth = 2.2; ctx.stroke();
       ctx.font = '700 9px "JetBrains Mono", monospace';
-      ctx.fillStyle = '#f3f0e8';
+      ctx.fillStyle = isDark ? '#f3f0e8' : '#0f172a';
       ctx.textAlign = 'center';
       ctx.fillText('VPS', cx, cy + 3);
       ctx.textAlign = 'left';
@@ -683,27 +694,29 @@
     window.addEventListener('resize', resize, { passive: true });
 
     var balls = [
-      { x: 70, y: 60, vx: 1.9, vy: 1.3, r: 9, col: '#e24334' },
-      { x: 160, y: 120, vx: -1.6, vy: 1.7, r: 7, col: '#f3f0e8' },
-      { x: 220, y: 80, vx: 1.2, vy: -1.8, r: 8, col: '#34d399' },
-      { x: 120, y: 150, vx: -1.4, vy: -1.2, r: 6, col: '#d4a85f' }
+      { x: 70, y: 60, vx: 1.9, vy: 1.3, r: 9, col: '#e84c35' },
+      { x: 160, y: 120, vx: -1.6, vy: 1.7, r: 7, col: '#0284c7' },
+      { x: 220, y: 80, vx: 1.2, vy: -1.8, r: 8, col: '#10b981' },
+      { x: 120, y: 150, vx: -1.4, vy: -1.2, r: 6, col: '#f59e0b' }
     ];
 
     c.addEventListener('click', function (e) {
       var r = c.getBoundingClientRect();
       if (balls.length > 12) balls.shift();
+      var palette = ['#e84c35', '#0284c7', '#10b981', '#f59e0b'];
       balls.push({
         x: e.clientX - r.left,
         y: e.clientY - r.top,
         vx: (Math.random() - 0.5) * 4.5,
         vy: -2.2 - Math.random() * 2,
         r: 6 + Math.random() * 4,
-        col: Math.random() > 0.5 ? '#e24334' : '#f3f0e8'
+        col: palette[Math.floor(Math.random() * palette.length)]
       });
     });
 
     function step() {
-      ctx.fillStyle = 'rgba(7, 8, 12, 0.30)';
+      var isDark = document.documentElement.getAttribute('data-theme') === 'obscura';
+      ctx.fillStyle = isDark ? 'rgba(7, 8, 12, 0.30)' : 'rgba(248, 250, 252, 0.36)';
       ctx.fillRect(0, 0, w, h);
 
       for (var i = 0; i < balls.length; i++) {
@@ -784,7 +797,7 @@
     { t: 'Parcours & Terrain (Galerie 3D)', m: 'Scene 06', fn: function () { location.assign('#parcours'); } },
     { t: 'Copier l\'e-mail (matei64200@gmail.com)', m: 'Contact', fn: function () { copyEmail(); } },
     { t: 'Télécharger CV Français (PDF)', m: 'PDF', fn: function () { window.open((isPortalFile ? CDN_BASE : '') + 'portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf', '_blank', 'noopener'); } },
-    { t: 'Basculer Obscura / Atelier Clair', m: 'Thème', fn: toggleTheme },
+    { t: 'Basculer Atelier Solaire / Obscura', m: 'Thème', fn: toggleTheme },
     { t: 'Basculer police confort Lexend', m: 'Confort', fn: toggleLexend }
   ];
   var filtered = CMDS.slice();
