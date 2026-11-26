@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr" data-stage="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matéi de Saint Léger — Système Développeur (v2)</title>
+  <meta name="description" content="Matéi de Saint Léger — BUT Informatique Anglet. 46 PRs open-source fusionnées, ZenWorkspace v2.0, Kai Study v4 & systèmes Linux 24/7." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2309090d'/><circle cx='49' cy='15' r='5' fill='%23ff2e2e'/><text x='28' y='43' font-size='26' font-weight='700' font-family='Georgia,serif' font-style='italic' fill='%23f8f7f4' text-anchor='middle'>M</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="portfolio_v2_assets/portfolio_v2.css?v=3" />
+</head>
+<body>
+  <div class="scroll-hairline" aria-hidden="true">
+    <div class="scroll-hairline-fill" id="scroll-hairline-fill"></div>
+  </div>
+
+  <!-- FLOATING PILL NAVBAR -->
+  <div class="v2-nav-wrap">
+    <header class="v2-nav" id="v2-nav">
+      <a href="#intro-runway" class="v2-brand">
+        <span class="v2-sigil" aria-hidden="true">M</span>
+        <span>Matéi de Saint Léger</span>
+      </a>
+
+      <div class="v2-nav-controls">
+        <button type="button" class="v2-pill-btn v2-pill-compact" id="mask-toggle-btn" title="Basculer le masque (ou survolez le visage)">
+          <span class="dot-red" aria-hidden="true"></span>
+          <span>Masque</span>
+        </button>
+
+        <button type="button" class="v2-pill-btn v2-audio-btn" id="audio-toggle-btn" aria-pressed="false">
+          <span class="eq-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span id="audio-label">Activer le son ♪</span>
+          <span class="vol-readout" id="audio-vol">0%</span>
+        </button>
+
+        <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" target="_blank" rel="noopener noreferrer" class="v2-cta">
+          CV PDF ↗
+        </a>
+      </div>
+    </header>
+  </div>
+
+  <audio id="intro-audio" src="portfolio_v2_assets/intro_theme.mp3" loop preload="auto"></audio>
+
+  <main>
+    <!-- ====================================================================
+         CINEMATIC SCROLL RUNWAY (460vh — Exact 6-Beat Choreography of Reel DgAnRXaI6Zi)
+         ==================================================================== -->
+    <section class="intro-runway" id="intro-runway" aria-label="Introduction cinématique">
+      <div class="intro-sticky" id="intro-sticky">
+
+        <!-- Layer 1: Architectural Dusk Backdrop -->
+        <div class="backdrop-layer" id="backdrop-layer" aria-hidden="true">
+          <img src="portfolio_v2_assets/intro_backdrop_dusk.webp" alt="" />
+          <div class="backdrop-vignette"></div>
+        </div>
+
+        <!-- Layer 2: Halftone Pop-Art Diagonal Sweep (Behind Subject & Torso) -->
+        <div class="halftone-sweep" id="halftone-sweep" aria-hidden="true">
+          <div class="halftone-dots"></div>
+        </div>
+
+        <!-- Layer 3: Stylized Project Showcase Cards Behind Shoulder (z:3 < Subject z:4) -->
+        <div class="dossier-cards" id="dossier-cards" aria-hidden="true">
+          <figure class="d-card d-card-1" id="d-card-1">
+            <img src="portfolio_v2_assets/intro_card_01.webp?v=3" alt="ZenWorkspace v2.0" />
+          </figure>
+          <figure class="d-card d-card-2" id="d-card-2">
+            <img src="portfolio_v2_assets/intro_card_02.webp?v=3" alt="46 Pull Requests Open-Source" />
+          </figure>
+          <figure class="d-card d-card-3" id="d-card-3">
+            <img src="portfolio_v2_assets/intro_card_03.webp?v=3" alt="Kai Study v4 Cloud 24/7" />
+          </figure>
+        </div>
+
+        <!-- Layer 4: Foreground Subject Canvas (Surgical Liquid-Blob Mask Reveal) -->
+        <div class="hero-stage-grid">
+          <div class="hero-subject-box" id="hero-subject-box">
+            <canvas id="hero-mask-canvas" aria-label="Portrait interactif de Matéi de Saint Léger — survolez le visage"></canvas>
+
+            <!-- Layer 5: Tilted Glowing Red & White Head-Tracking Reticle (x=48.9%, y=20.0%) -->
+            <div class="head-reticle" id="head-reticle" aria-hidden="true">
+              <svg viewBox="0 0 180 180" class="reticle-svg">
+                <path class="ret-red" d="M 14 48 L 14 14 L 48 14 M 132 14 L 166 14 L 166 48 M 166 132 L 166 166 L 132 166 M 48 166 L 14 166 L 14 132" />
+                <path class="ret-white" d="M 28 54 L 28 28 L 54 28 M 126 28 L 152 28 L 152 54 M 152 126 L 152 152 L 126 152 M 54 152 L 28 152 L 28 126" />
+              </svg>
+              <span class="reticle-telemetry">LOCK // 43.48°N 1.55°W</span>
+            </div>
+
+            <div class="hover-cue" id="hover-cue">Survolez le visage</div>
+          </div>
+        </div>
+
+        <!-- Layer 5b: X-Ray Negative Scan Ribbon (Beat 2 collar -> Beat 3 inverted white torso!) -->
+        <div class="xray-ribbon" id="xray-ribbon" aria-hidden="true"></div>
+
+        <!-- Layer 5c: Climax Diagonal X-Ray Negative Slash across cards & head (Beat 5) -->
+        <div class="xray-climax" id="xray-climax" aria-hidden="true"></div>
+
+        <!-- Layer 6: Kinetic Editorial Callouts (Exact Reel Framing + Black Redaction Wipes) -->
+        <div class="callout-layer" id="callout-layer">
+          <div class="callout-block" id="callout-block">
+            <div class="callout-name-wrap" id="callout-name-wrap">
+              <span class="callout-name-text">MATÉI DE SAINT LÉGER</span>
+              <span class="callout-underline" aria-hidden="true">
+                <i class="cu-horiz"></i>
+                <i class="cu-diag"></i>
+              </span>
+            </div>
+
+            <h1 class="callout-title" id="callout-title">
+              <span class="ct-white">SYSTÈME</span>
+              <span class="ct-red">DÉVELOPPEUR</span>
+              <span class="ct-flare" aria-hidden="true"></span>
+            </h1>
+
+            <ul class="callout-facts" id="callout-facts">
+              <li class="fact-row">
+                <span class="fact-txt"><b>46 PULL REQUESTS FUSIONNÉES</b> EN PROD (TWENTY 40K★, OMI 8K★).</span>
+                <span class="fact-wipe" aria-hidden="true"></span>
+              </li>
+              <li class="fact-row">
+                <span class="fact-txt"><b>ZENWORKSPACE V2.0</b> — MOTEUR AST/DAG 923 L. · 57/57 VITEST.</span>
+                <span class="fact-wipe" aria-hidden="true"></span>
+              </li>
+              <li class="fact-row">
+                <span class="fact-txt"><b>KAI STUDY V4 &amp; CLOUD 24/7</b> — 1 787 SUPPORTS · 12 SERVICES.</span>
+                <span class="fact-wipe" aria-hidden="true"></span>
+              </li>
+              <li class="fact-row">
+                <span class="fact-txt"><b>ISO C99 VALGRIND 0 FUITE</b> · IUT BAYONNE–ANGLET (PARCOURS A).</span>
+                <span class="fact-wipe" aria-hidden="true"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Scroll Cue (0% -> 14%) -->
+        <div class="scroll-cue" id="scroll-cue">
+          <span>SCROLLER POUR DÉVERROUILLER</span>
+          <span class="scroll-arrow" aria-hidden="true">↓</span>
+        </div>
+
+        <!-- Layer 7: Anamorphic White Lens-Flare Flash -> Bright Daylight Curtain -->
+        <div class="lens-flare" id="lens-flare" aria-hidden="true"></div>
+        <div class="daylight-curtain" id="daylight-curtain" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         BRIGHT EDITORIAL CONTINUATION (Same Editorial DNA in Daylight)
+         ==================================================================== -->
+    <section class="suite-atelier" id="suite-atelier">
+      <div class="suite-halftone-corner" aria-hidden="true"></div>
+
+      <div class="suite-container">
+        <div class="suite-kicker-row">
+          <span class="suite-kicker">DOSSIER VÉRIFIÉ · PRÊT POUR LA SUITE</span>
+          <span class="suite-badge">STAGE 02 · LUMIÈRE ÉDITORIALE</span>
+        </div>
+
+        <h2 class="suite-title">
+          L'intro est verrouillée.<br />
+          <span class="serif-it crimson-ink">Construisons la suite ensemble.</span>
+        </h2>
+
+        <p class="suite-lead">
+          La musique s'éteint proprement à l'arrivée sur cette section claire, tout en conservant la même direction artistique (typographie franche, filets techniques, trame halftone et accent rouge vermillon).
+        </p>
+
+        <div class="suite-proof-grid">
+          <div class="sp-item">
+            <span class="sp-num">46</span>
+            <span class="sp-lbl">PRs Open-Source fusionnées</span>
+          </div>
+          <div class="sp-item">
+            <span class="sp-num">57/57</span>
+            <span class="sp-lbl">Suites Vitest ZenWorkspace</span>
+          </div>
+          <div class="sp-item">
+            <span class="sp-num">1 787</span>
+            <span class="sp-lbl">Supports Kai Study v4</span>
+          </div>
+          <div class="sp-item">
+            <span class="sp-num">0 fuite</span>
+            <span class="sp-lbl">C99 / Valgrind · 24/7 VPS</span>
+          </div>
+        </div>
+
+        <div class="suite-actions">
+          <a href="#intro-runway" class="suite-btn-primary">↑ Revoir l'ouverture</a>
+          <a href="portfolio.html" class="suite-btn-ghost">Comparatif v1 actuelle ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="portfolio_v2_assets/portfolio_v2.js?v=3" defer></script>
+</body>
+</html>
