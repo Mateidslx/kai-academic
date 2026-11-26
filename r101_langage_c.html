@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#287271">
   <meta name="description" content="Plateforme académique d'excellence BUT 1 Informatique — IUT de Bayonne et du Pays Basque">
-  <title>R1.01 • Introduction à la Complexité Algorithmique : Temporelle, Spatiale et Cyclomatique • BUT 1 Informatique Anglet</title>
+  <title>R1.01 • R1.01 - Initiation au Développement : Variables, Affectation, Structures Conditionnelles et Évaluation Paresseuse • BUT 1 Informatique Anglet</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -244,9 +244,9 @@
       <div class="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5 flex-wrap">
-            <span>R1.01 • Introduction à la Complexité Algorithmique : Temporelle, Spatiale et Cyclomatique</span>
+            <span>R1.01 • R1.01 - Initiation au Développement : Variables, Affectation, Structures Conditionnelles et Évaluation Paresseuse</span>
           </h1>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">Ce cours introduit les concepts fondamentaux de la complexité algorithmique. Lors de la conception d'un programme informatique, obtenir un résultat exact ne suffit pas : il faut garantir que le programme s'exécute dans un temps raisonnable et n'épuise pas la mémoire de la machine lors de la montée en charge. Nous étudions ainsi trois dimensions de la complexité : la complexité temporelle (durée/instructions), la complexité spatiale (mémoire requise) et la complexité cyclomatique (structure du code et chemins de contrôle). L'étude concrète du problème de permutation de deux variables permet de comprendre l'évaluation du coût d'un algorithme simple en temps et en espace O(1).</p>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">Ce cours pose l'intégralité des fondations indispensables de la programmation impérative en BUT 1 Informatique. L'objectif est de comprendre le fonctionnement bas niveau de la mémoire vive (RAM) à travers le concept d'abstraction de variable et la rigueur du typage statique. Le cours détaille le mécanisme séquentiel strict de l'instruction d'affectation (évaluée impérativement de droite à gauche avec écrasement mémoire) et enseigne l'aiguillage logique des programmes via les structures conditionnelles (SI... ALORS... SINON). Un accent majeur est mis sur le principe d'évaluation paresseuse (court-circuit logique), indispensable pour optimiser le temps d'exécution du processeur et prévenir les plantages critiques (comme la division par zéro). La séance applique scrupuleusement les normes de codage C++ de l'IUT de Bayonne et du Pays Basque (Campus d'Anglet) : cartouche d'en-tête, tripartition structurée, style Allman et formalisation des flux de données.</p>
         </div>
       </div>
     </div>
@@ -270,17 +270,17 @@
           </div>
           <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
             <i data-lucide="file-text" class="w-4 h-4 text-[#287271]"></i>
-            <span>Introduction à la Complexité Algorithmique : Temporelle, Spatiale et Cyclomatique</span>
+            <span>R1.01 - Initiation au Développement : Variables, Affectation, Structures Conditionnelles et Évaluation Paresseuse</span>
           </h2>
           <div class="flex items-center flex-wrap gap-3 text-[11px] text-slate-500 font-mono">
             <span class="flex items-center gap-1 text-[#287271] font-semibold bg-[#E9F2F1] text-[#287271] border-[#B8D8D6] px-2 py-0.5 rounded-lg border">
-              <i data-lucide="layers" class="w-3 h-3 text-[#287271]"></i> Séance du 25/11/2026
+              <i data-lucide="layers" class="w-3 h-3 text-[#287271]"></i> Séance du 26/11/2026
             </span>
             <span class="flex items-center gap-1">
-              <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i> Récupéré le 25/11/2026
+              <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i> Récupéré le 26/11/2026
             </span>
             <span class="flex items-center gap-1">
-              <i data-lucide="sparkles" class="w-3 h-3 text-emerald-500"></i> Synthétisé le 25/11/2026
+              <i data-lucide="sparkles" class="w-3 h-3 text-emerald-500"></i> Synthétisé le 26/11/2026
             </span>
           </div>
         </div>
@@ -288,7 +288,7 @@
         <div class="flex items-center flex-wrap gap-2 shrink-0">
           
           
-        <a href="/exports/cours_r1.01_Introduction___la_Complexit__A_20261125.pdf" download class="min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#287271] hover:bg-[#205c5b] text-white transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#287271]">
+        <a href="/exports/cours_r1.01_R1_01___Initiation_au_D_velopp_20261126.pdf" download class="min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#287271] hover:bg-[#205c5b] text-white transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#287271]">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
           <span>Support Original PDF</span>
         </a>
@@ -330,21 +330,23 @@
       </div>
       <div class="mermaid flex justify-center overflow-x-auto py-3">
 graph TD
-  A[Complexité Algorithmique] --> B[Complexité Temporelle]
-  A --> C[Complexité Spatiale]
-  A --> D[Complexité Cyclomatique]
-  B --> B1[Nombre d'instructions / Temps d'exécution]
-  C --> C1[Occupation mémoire / Variables tampons]
-  D --> D1[Nombre de chemins d'exécution / Maintenabilité]
-  A --> E[Critère de choix]
-  E --> E1[Permutation de variables O 1]
+  A[R1.01 Algorithmique & Développement] --> B[Variables & Mémoire RAM]
+  B --> B1[Identificateur vs Adresse Hexadécimale]
+  B --> B2[Typage Statique: Entier, Réel, Booléen, Chaîne]
+  B --> B3[Déclaration vs Initialisation & Bruit RAM]
+  A --> C[Instruction d'Affectation :=]
+  C --> C1[1. Évaluation de l'expression à droite]
+  C --> C2[2. Écrasement irréversible à gauche]
+  A --> D[Structures Conditionnelles]
+  D --> D1[Aiguillage SI... ALORS... SINON]
+  D --> D2[Évaluation Paresseuse / Court-Circuit]
       </div>
     </div>
     
         <div class="space-y-4 my-6">
           <div class="flex items-center gap-2.5 pb-2 border-b border-slate-200/80">
             <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold text-xs">1</span>
-            <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">Les trois dimensions de la complexité algorithmique</h2>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">1. Variables, Typage Statique et Modélisation de la Mémoire Vive (RAM)</h2>
           </div>
           
     <div class="rounded-2xl p-5 border-l-4 bg-white border border-slate-200/90 shadow-2xs my-4 space-y-2" style="border-left-color: var(--primary-matiere);">
@@ -352,14 +354,14 @@ graph TD
         <i data-lucide="book-open" class="w-4 h-4" style="color: var(--primary-matiere);"></i>
         <span class="uppercase">DÉFINITION OFFICIELLE DU COURS</span>
         <span class="text-slate-300">•</span>
-        <span class="text-slate-900">Les trois dimensions de la complexité algorithmique</span>
+        <span class="text-slate-900">1. Variables, Typage Statique et Modélisation de la Mémoire Vive (RAM)</span>
       </div>
       <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-        Lorsqu'on développe un algorithme, l'exactitude fonctionnelle n'est que la première étape. Pour traiter de grands volumes de données (fichiers de plusieurs millions de lignes ou bases de données volumineuses), l'efficacité de l'algorithme devient critique. La complexité temporelle permet d'anticiper la croissance du temps d'exécution lorsque le volume d'entrée augmente. La complexité spatiale garantit que le programme ne saturera pas la mémoire vive (RAM) de l'ordinateur, évitant ainsi le plantage du système. Enfin, la complexité cyclomatique évalue la qualité structurelle du code : un algorithme comportant une multitude de conditions imbriquées possède un nombre très élevé de chemins d'exécution, ce qui le rend extrêmement difficile à tester intégralement, à maintenir et à déboguer.
+        En informatique impérative, le processeur manipule exclusivement des données stockées temporairement dans la mémoire vive (RAM). Pour affranchir le développeur de la gestion complexe d'adresses hexadécimales physiques illisibles, les langages de programmation introduisent la notion de variable. Déclarer une variable consiste à demander au système d'exploitation et au compilateur de réserver un emplacement mémoire et de lui associer un nom explicite (identificateur). Le type attribué remplit deux fonctions vitales : déterminer la quantité précise d'octets allouée en RAM et spécifier l'algorithme d'interprétation des bits par l'Unité Arithmétique et Logique (UAL). Déclarer une variable ne nettoie pas la mémoire : l'emplacement conserve les résidus binaires laissés par les applications précédentes. Tenter d'exploiter une variable non initialisée conduit à récupérer ce 'bruit mémoire', provoquant des dysfonctionnements imprévisibles et non reproductibles. Il s'agit d'une faute grave de logique sanctionnée en TP et lors des évaluations.
       </p>
       
         <div class="pt-2.5 mt-2 border-t border-slate-200/80 text-xs text-slate-700">
-          <span class="font-bold" style="color: var(--primary-matiere);">Exemple concret :</span> Le professeur prend l'exemple du traitement d'un fichier de données : un algorithme mal optimisé peut paraître instantané lors d'un test sur un jeu de données de 10 lignes, mais s'effondrer totalement ou bloquer la machine lors du passage à l'échelle sur un fichier réel de 1 000 000 de lignes.
+          <span class="font-bold" style="color: var(--primary-matiere);">Exemple concret :</span> Le professeur compare la variable à une boîte fermée et étiquetée rangée dans une armoire. L'étiquette est l'identificateur, la forme et la taille de la boîte représentent son type, et l'objet à l'intérieur est sa valeur. Si l'on tente de verser du liquide (une chaîne de caractères) dans une boîte en carton grillagée conçue pour des entiers, tout fuit : c'est l'illustration concrète de l'erreur de typage.
         </div>
     </div>
           
@@ -368,7 +370,7 @@ graph TD
                 <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
                 <span>Points Clés & Synthèse à Retenir</span>
               </div>
-              <ul class="space-y-1.5 pl-2"><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Complexité Temporelle : Mesure quantitative du nombre d'opérations élémentaires effectuées en fonction de la taille des données d'entrée N.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Complexité Spatiale : Quantité de mémoire (RAM, variables simples, tableaux) réquisitionnée pendant l'exécution du programme.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Complexité Cyclomatique : Métrique quantifiant le nombre de chemins d'exécution linéairement indépendants dans le graphe de contrôle (liée aux IF, SWITCH, boucles).</span></li></ul>
+              <ul class="space-y-1.5 pl-2"><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Identificateur vs Adresse RAM : Abstraction d'un emplacement hexadécimal complexe (ex: 0x7FFF5FBFF01C) par un nom explicite et lisible par l'humain.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Typage statique : Contrat fixant la quantité d'octets réservée en RAM et la règle de décodage binaire par le processeur (ex: différencier l'entier 65 du caractère ASCII 'A').</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Déclaration vs Initialisation : Allouer la case mémoire (déclaration) versus y écrire sa toute première valeur explicitement garantie (initialisation).</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Bruit mémoire : Danger absolu des variables non initialisées qui contiennent des résidus de traitements antérieurs, entraînant un comportement indéterminé du programme.</span></li></ul>
             </div>
           
           
@@ -376,7 +378,7 @@ graph TD
         <div class="space-y-4 my-6">
           <div class="flex items-center gap-2.5 pb-2 border-b border-slate-200/80">
             <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold text-xs">2</span>
-            <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">Comparaison et choix algorithmique : Le cas de la permutation de deux valeurs</h2>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">2. L'Instruction d'Affectation et le Séquencement Mémoire</h2>
           </div>
           
     <div class="rounded-2xl p-5 border-l-4 bg-white border border-slate-200/90 shadow-2xs my-4 space-y-2" style="border-left-color: var(--primary-matiere);">
@@ -384,14 +386,14 @@ graph TD
         <i data-lucide="book-open" class="w-4 h-4" style="color: var(--primary-matiere);"></i>
         <span class="uppercase">DÉFINITION OFFICIELLE DU COURS</span>
         <span class="text-slate-300">•</span>
-        <span class="text-slate-900">Comparaison et choix algorithmique : Le cas de la permutation de deux valeurs</span>
+        <span class="text-slate-900">2. L'Instruction d'Affectation et le Séquencement Mémoire</span>
       </div>
       <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-        Pour illustrer comment la complexité guide nos choix algorithmiques, nous étudions le problème classique de la permutation de deux variables 'a' et 'b'. Si l'on affecte directement 'b' dans 'a' (`a = b`), la valeur initiale de 'a' est définitivement perdue. Il est donc indispensable d'utiliser une variable temporaire 'z' pour sauvegarder l'ancienne valeur de 'a'. Le processus s'effectue en trois étapes séquentielles : 1) Sauvegarde de 'a' dans 'z' (`z <- a`), 2) Copie de 'b' dans 'a' (`a <- b`), 3) Restitution de 'z' dans 'b' (`b <- z`). Ce traitement possède une complexité temporelle constante de 3 affectations élémentaires et une complexité spatiale additionnelle constante correspondant à la réservation d'une unique variable entière.
+        L'affectation est l'instruction fondamentale qui modifie l'état interne de la mémoire RAM au cours de l'exécution d'un programme. Une écriture algorithmique telle que 'x := x + 1' ne formalise aucunement une équation mathématique (qui n'aurait pas de solution), mais ordonne une séquence d'opérations matérielles strictes au processeur : 1. Extraire la valeur actuellement stockée à l'adresse 'x'. 2. Additionner 1 à cette valeur au sein de l'UAL. 3. Écrire le nouveau résultat dans l'emplacement mémoire 'x', en écrasant irréversiblement l'ancienne valeur. Le membre de gauche doit impérativement désigner une variable réceptrice unique et ne peut jamais être une expression arithmétique.
       </p>
       
         <div class="pt-2.5 mt-2 border-t border-slate-200/80 text-xs text-slate-700">
-          <span class="font-bold" style="color: var(--primary-matiere);">Exemple concret :</span> Exemple d'échange de deux valeurs (Permutation de variables) présenté au tableau : `z <- a`, `a <- b`, `b <- z`.
+          <span class="font-bold" style="color: var(--primary-matiere);">Exemple concret :</span> Pour illustrer la permutation des valeurs de deux variables (échanger le contenu d'un verre d'eau et d'un verre de lait), le professeur rappelle qu'il est physiquement impossible de verser un verre directement dans l'autre sans tout mélanger. Il est indispensable d'utiliser un 'troisième verre vide' (une variable temporaire Temp) pour sauvegarder le premier liquide, réaliser le transfert du second, puis restituer le contenu du premier.
         </div>
     </div>
           
@@ -400,7 +402,39 @@ graph TD
                 <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
                 <span>Points Clés & Synthèse à Retenir</span>
               </div>
-              <ul class="space-y-1.5 pl-2"><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Variable tampon (ou variable temporaire) : Emplacement mémoire intermédiaire utilisé pour sauvegarder temporairement une valeur avant d'écraser la variable source.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Coût d'exécution constant O(1) : Algorithme dont le nombre d'instructions et la mémoire consommée ne dépendent pas de la taille d'une structure de données extérieure.</span></li></ul>
+              <ul class="space-y-1.5 pl-2"><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Sens d'évaluation strict : L'affectation s'exécute impérativement de la DROITE vers la GAUCHE (Évaluation de l'expression -> Stockage dans la variable à gauche).</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Écrasement irréversible : L'écriture d'une nouvelle valeur détruit la donnée qui était précédemment stockée dans la case mémoire.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Opérateur d'affectation (:=) : Symbolique algorithmique choisie pour dissocier l'action séquentielle d'affecter de la relation d'égalité mathématique d'équilibre.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Règle de la variable réceptrice : Seul un identificateur unique de variable réceptrice peut figurer à gauche d'une affectation (ex: 'a + b := x' est une faute de syntaxe grave).</span></li></ul>
+            </div>
+          
+          
+        </div>
+        <div class="space-y-4 my-6">
+          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-200/80">
+            <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold text-xs">3</span>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">3. Structures Conditionnelles et Évaluation Paresseuse (Court-Circuit Logique)</h2>
+          </div>
+          
+    <div class="rounded-2xl p-5 border-l-4 bg-white border border-slate-200/90 shadow-2xs my-4 space-y-2" style="border-left-color: var(--primary-matiere);">
+      <div class="flex items-center gap-2 text-xs font-bold tracking-wide" style="color: var(--primary-matiere);">
+        <i data-lucide="book-open" class="w-4 h-4" style="color: var(--primary-matiere);"></i>
+        <span class="uppercase">DÉFINITION OFFICIELLE DU COURS</span>
+        <span class="text-slate-300">•</span>
+        <span class="text-slate-900">3. Structures Conditionnelles et Évaluation Paresseuse (Court-Circuit Logique)</span>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+        Les structures conditionnelles (SI... ALORS... SINON) permettent à un programme d'adopter des comportements dynamiques fondés sur l'état des données. L'expression testée doit impérativement s'évaluer sous forme booléenne. Pour optimiser les cycles processeur et sécuriser l'exécution, les compilateurs appliquent le principe d'évaluation paresseuse (court-circuit) : dans une condition 'A ET B', si 'A' est évalué à FAUX, la condition globale est irrévocablement FAUSSE, et 'B' n'est même pas examiné par le processeur. Réciproquement, dans un 'A OU B', si 'A' est VRAI, 'B' est ignoré. Ce mécanisme permet de sécuriser le code, par exemple dans l'expression 'SI (x != 0) ET (10 / x > 1) ALORS', où le second membre évitera le crash par division par zéro si x est nul.
+      </p>
+      
+        <div class="pt-2.5 mt-2 border-t border-slate-200/80 text-xs text-slate-700">
+          <span class="font-bold" style="color: var(--primary-matiere);">Exemple concret :</span> L'enseignant prend la métaphore du contrôle d'accès à un manège dans un parc d'attractions : 'SI taille >= 1m40 ET billetValide == VRAI ALORS accès autorisé'. Si un enfant mesure 1m20, l'accès lui est refusé immédiatement sans même prendre le temps de scanner son billet : c'est l'application directe du court-circuit logique du ET.
+        </div>
+    </div>
+          
+            <div class="glass-card rounded-2xl p-5 border border-slate-200/90 bg-white shadow-2xs my-4 space-y-3">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                <span>Points Clés & Synthèse à Retenir</span>
+              </div>
+              <ul class="space-y-1.5 pl-2"><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Aiguillage logique : Branchement du flux d'instructions exécuté selon le résultat booléen (VRAI ou FAUX) d'une expression conditionnelle.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Évaluation paresseuse (Court-circuit) : Optimisation processeur arrêtant l'évaluation logique dès que le résultat global de la condition est garanti.</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Sécurité à l'exécution : Emploi stratégique du court-circuit pour prévenir des erreurs critiques comme la division par zéro (ex: 'SI x != 0 ET (10 / x) > 1').</span></li><li class='text-xs text-slate-700 flex items-start gap-2'><span class='text-indigo-600 font-bold'>•</span><span>Indentation et style Allman : Alignement visuel strict et obligatoire pour délimiter la portée et l'imbrication des blocs d'instructions.</span></li></ul>
             </div>
           
           
@@ -415,10 +449,19 @@ graph TD
         <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-2">
           <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
             <span class="badge-pill bg-indigo-100 text-indigo-800 text-[10px]">Question Étudiant</span>
-            <span>« Pourquoi calcule-t-on la complexité cyclomatique si la complexité temporelle donne déjà le temps d'exécution ? »</span>
+            <span>« Pourquoi écrit-on 'x := x + 1' en pseudo-code au lieu de simplement 'x = x + 1' comme en Python ou Java ? »</span>
           </div>
           <p class="text-xs text-slate-600 pl-4 border-l-2 border-indigo-500 leading-relaxed">
-            <span class="font-semibold text-indigo-950">Nuance de l'Enseignant :</span> La complexité temporelle mesure la vitesse et l'efficacité d'exécution de l'algorithme, alors que la complexité cyclomatique mesure sa structure interne et sa complexité logique. Un code peut s'exécuter très rapidement (bonne complexité temporelle) tout en étant un cauchemar à maintenir ou à tester parce qu'il contient 50 conditions imbriquées (forte complexité cyclomatique). La complexité cyclomatique indique le nombre minimal de tests unitaires à réaliser pour couvrir tous les cas de figure du programme.
+            <span class="font-semibold text-indigo-950">Nuance de l'Enseignant :</span> En pseudo-code, l'opérateur ':=' (ou '<-') est volontairement utilisé pour éviter toute confusion avec l'égalité mathématique. En mathématiques, 'x = x + 1' est une équation impossible. En informatique, il s'agit d'une instruction séquentielle de modification de mémoire où le processeur évalue d'abord 'x + 1' (partie droite) puis affecte le résultat dans la case mémoire 'x' (partie gauche).
+          </p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-2">
+          <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+            <span class="badge-pill bg-indigo-100 text-indigo-800 text-[10px]">Question Étudiant</span>
+            <span>« Que se passe-t-il si j'oublie le bloc 'SINON' dans une structure conditionnelle ? »</span>
+          </div>
+          <p class="text-xs text-slate-600 pl-4 border-l-2 border-indigo-500 leading-relaxed">
+            <span class="font-semibold text-indigo-950">Nuance de l'Enseignant :</span> Le bloc 'SINON' est optionnel. Si la condition s'évalue à FAUX et qu'il n'y a pas de bloc 'SINON', le programme ne fait simplement rien pour cette structure conditionnelle et passe immédiatement à l'instruction séquentielle suivante située juste après la fin du bloc conditionnel.
           </p>
         </div></div>
     </div>
@@ -431,14 +474,15 @@ graph TD
         </div>
         <span class="badge-pill bg-indigo-950 text-indigo-300 border border-indigo-800 text-[10px]">Examen Type</span>
       </div>
-      <p class="text-xs text-slate-300"><b>Énoncé :</b> Écrire en C++ la procédure `echanger` permettant de permuter la valeur de deux variables entières reçues par référence, selon les normes d'écriture strictes de l'IUT d'Anglet (cartouche complet, style Allman, tripartition). Indiquer la complexité temporelle et spatiale du traitement.</p>
+      <p class="text-xs text-slate-300"><b>Énoncé :</b> Écrire un programme C++ complet respectant scrupuleusement la norme de rédaction de l'IUT de Bayonne et du Pays Basque (Campus d'Anglet) permettant de permuter les valeurs de deux variables entières valA et valB saisies au clavier par l'utilisateur.</p>
       <div class="p-3 rounded-lg bg-slate-800 text-xs font-mono text-indigo-300 space-y-1 border border-slate-700 whitespace-pre-line">
-        1. Définition de l'en-tête de la procédure avec passage par référence `int& a` et `int& b` afin de modifier directement les variables d'origine dans la mémoire de l'appelant.
-2. Respect de la tripartition : déclaration de la variable tampon `z` dans la section VARIABLES.
-3. Exécution séquentielle des 3 affectations dans la section TRAITEMENTS pour réaliser l'échange sans perte de valeur.
-4. Évaluation du coût : l'algorithme effectue exactement 3 affectations et utilise 1 variable locale, indépendamment de toute taille de tableau.
+        1. Application stricte du standard IUT Anglet : création du cartouche Doxygen, tripartition du code (// CONSTANTES, // VARIABLES, // TRAITEMENTS) et adoption du style Allman pour les accolades.
+2. Déclaration explicite des variables valA, valB pour stocker les entiers entrés par l'utilisateur, et de la variable auxiliaire valTemp pour préserver le contenu mémoire de valA.
+3. Lecture des entrées clavier annotée par les commentaires de flux (// (clavier) >> saisir >> variable).
+4. Réalisation de la permutation croisée en trois étapes successives de droite à gauche : valTemp = valA (sauvegarde), valA = valB (écrasement), valB = valTemp (restitution).
+5. Affichage final des nouvelles valeurs à l'écran.
       </div>
-      <div class="text-xs font-semibold text-emerald-400 pt-1">Résultat Final : La procédure échange correctement les valeurs de 'a' et 'b'. Sa complexité temporelle est constante O(1) (3 opérations d'affectation) et sa complexité spatiale est constante O(1) (1 variable temporaire en mémoire).</div>
+      <div class="text-xs font-semibold text-emerald-400 pt-1">Résultat Final : Si l'utilisateur entre 5 pour valA et 12 pour valB, le programme réordonne les cases mémoire RAM via valTemp et affiche à l'écran : 'Apres permutation : A = 12 et B = 5'. Les valeurs ont été inversées sans aucune perte d'information.</div>
     </div>
     
     <div class="glass-card rounded-2xl p-5 sm:p-6 border border-indigo-100 bg-white shadow-xs my-6 space-y-3" id="quiz-r101-1">
@@ -446,10 +490,10 @@ graph TD
         <i data-lucide="check-square" class="w-4 h-4 text-indigo-600"></i>
         <span>Auto-Évaluation Interactive</span>
       </div>
-      <p class="text-xs sm:text-sm font-bold text-slate-900">Quelle est la définition exacte de la complexité cyclomatique ?</p>
+      <p class="text-xs sm:text-sm font-bold text-slate-900">Quelle est la valeur de la variable A à la fin de la séquence d'instructions algorithmiques suivante : A := 3; B := 7; A := A + B; B := A - B; ?</p>
       <div class="space-y-2 pt-1">
         <button onclick="checkQuiz('quiz-r101-1', 0, 0)" id="quiz-r101-1-btn-0" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
-          <span>Vrai : C'est une métrique logicielle qui mesure la complexité structurelle d'un algorithme en comptant le nombre de chemins de contrôle linéairement indépendants (conditions, boucles) dans le programme.</span>
+          <span>Vrai : À la fin de l'exécution, la variable A vaut 10. Déroulement pas à pas : 1. A prend 3. 2. B prend 7. 3. A prend 3 + 7 = 10. 4. B prend 10 - 7 = 3. La valeur finale contenue dans l'emplacement mémoire A reste 10.</span>
           <span class="quiz-badge hidden text-xs font-bold"></span>
         </button>
         <button onclick="checkQuiz('quiz-r101-1', 1, 0)" id="quiz-r101-1-btn-1" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
@@ -467,7 +511,7 @@ graph TD
       <div id="quiz-r101-1-exp" class="hidden p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 text-xs text-indigo-950 leading-relaxed mt-2 flex items-start gap-2.5">
         <i data-lucide="info" class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5"></i>
         <div>
-          <b class="text-indigo-900">Explication détaillée :</b> C'est une métrique logicielle qui mesure la complexité structurelle d'un algorithme en comptant le nombre de chemins de contrôle linéairement indépendants (conditions, boucles) dans le programme.
+          <b class="text-indigo-900">Explication détaillée :</b> À la fin de l'exécution, la variable A vaut 10. Déroulement pas à pas : 1. A prend 3. 2. B prend 7. 3. A prend 3 + 7 = 10. 4. B prend 10 - 7 = 3. La valeur finale contenue dans l'emplacement mémoire A reste 10.
         </div>
       </div>
     </div>
@@ -476,10 +520,10 @@ graph TD
         <i data-lucide="check-square" class="w-4 h-4 text-indigo-600"></i>
         <span>Auto-Évaluation Interactive</span>
       </div>
-      <p class="text-xs sm:text-sm font-bold text-slate-900">Que risque-t-il de se passer si un algorithme ayant une forte complexité spatiale est exécuté sur un très grand fichier ?</p>
+      <p class="text-xs sm:text-sm font-bold text-slate-900">Quelle est la différence fondamentale entre l'opérateur '=' et l'opérateur '==' en C++ ?</p>
       <div class="space-y-2 pt-1">
         <button onclick="checkQuiz('quiz-r101-2', 0, 0)" id="quiz-r101-2-btn-0" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
-          <span>Vrai : Le programme risque de consommer la totalité de la mémoire RAM disponible, ce qui provoque un ralentissement extrême par mémoire virtuelle (swap) ou un plantage brutal du système (Out Of Memory).</span>
+          <span>Vrai : L'opérateur '=' est l'opérateur d'affectation : il modifie la mémoire en stockant la valeur évaluée à sa droite dans la variable réceptrice située à sa gauche. L'opérateur '==' est un opérateur de comparaison : il teste l'égalité de deux expressions et renvoie un booléen (true ou false) sans jamais altérer le contenu de la mémoire.</span>
           <span class="quiz-badge hidden text-xs font-bold"></span>
         </button>
         <button onclick="checkQuiz('quiz-r101-2', 1, 0)" id="quiz-r101-2-btn-1" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
@@ -497,7 +541,7 @@ graph TD
       <div id="quiz-r101-2-exp" class="hidden p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 text-xs text-indigo-950 leading-relaxed mt-2 flex items-start gap-2.5">
         <i data-lucide="info" class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5"></i>
         <div>
-          <b class="text-indigo-900">Explication détaillée :</b> Le programme risque de consommer la totalité de la mémoire RAM disponible, ce qui provoque un ralentissement extrême par mémoire virtuelle (swap) ou un plantage brutal du système (Out Of Memory).
+          <b class="text-indigo-900">Explication détaillée :</b> L'opérateur '=' est l'opérateur d'affectation : il modifie la mémoire en stockant la valeur évaluée à sa droite dans la variable réceptrice située à sa gauche. L'opérateur '==' est un opérateur de comparaison : il teste l'égalité de deux expressions et renvoie un booléen (true ou false) sans jamais altérer le contenu de la mémoire.
         </div>
       </div>
     </div>
@@ -506,10 +550,10 @@ graph TD
         <i data-lucide="check-square" class="w-4 h-4 text-indigo-600"></i>
         <span>Auto-Évaluation Interactive</span>
       </div>
-      <p class="text-xs sm:text-sm font-bold text-slate-900">Combien d'affectations élémentaires sont nécessaires pour permuter deux variables au moyen d'une variable tampon ?</p>
+      <p class="text-xs sm:text-sm font-bold text-slate-900">Pourquoi l'utilisation d'une variable non initialisée est-elle sanctionnée par une perte de points systématique en TP et examen de R1.01 ?</p>
       <div class="space-y-2 pt-1">
         <button onclick="checkQuiz('quiz-r101-3', 0, 0)" id="quiz-r101-3-btn-0" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
-          <span>Vrai : Exactement 3 affectations sont nécessaires : `z = a`, puis `a = b`, puis `b = z`.</span>
+          <span>Vrai : Car une variable déclarée mais non initialisée contient du 'bruit mémoire' (des résidus binaires laissés en RAM par d'anciens traitements). Exploiter cette variable dans des instructions arithmétiques ou logiques produit des comportements imprévisibles et aléatoires, ce qui constitue un défaut majeur de rigueur logicielle.</span>
           <span class="quiz-badge hidden text-xs font-bold"></span>
         </button>
         <button onclick="checkQuiz('quiz-r101-3', 1, 0)" id="quiz-r101-3-btn-1" class="quiz-btn w-full text-left p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-400 transition text-xs text-slate-800 font-medium flex items-center justify-between shadow-2xs group">
@@ -527,7 +571,7 @@ graph TD
       <div id="quiz-r101-3-exp" class="hidden p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 text-xs text-indigo-950 leading-relaxed mt-2 flex items-start gap-2.5">
         <i data-lucide="info" class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5"></i>
         <div>
-          <b class="text-indigo-900">Explication détaillée :</b> Exactement 3 affectations sont nécessaires : `z = a`, puis `a = b`, puis `b = z`.
+          <b class="text-indigo-900">Explication détaillée :</b> Car une variable déclarée mais non initialisée contient du 'bruit mémoire' (des résidus binaires laissés en RAM par d'anciens traitements). Exploiter cette variable dans des instructions arithmétiques ou logiques produit des comportements imprévisibles et aléatoires, ce qui constitue un défaut majeur de rigueur logicielle.
         </div>
       </div>
     </div>
