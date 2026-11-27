@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-stage="dark">
+<html lang="fr" data-theme="dark" data-scroll-zone="intro">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="portfolio_v2_assets/portfolio_v2.css?v=3" />
+  <link rel="stylesheet" href="portfolio_v2_assets/portfolio_v2.css?v=8" />
 </head>
 <body>
   <div class="scroll-hairline" aria-hidden="true">
@@ -27,9 +27,13 @@
       </a>
 
       <div class="v2-nav-controls">
-        <button type="button" class="v2-pill-btn v2-pill-compact" id="mask-toggle-btn" title="Basculer le masque (ou survolez le visage)">
+        <button type="button" class="v2-pill-btn v2-pill-compact" id="theme-toggle-btn" aria-pressed="false" title="Basculer Mode Sombre / Mode Clair (inverse le personnage)">
+          <span id="theme-toggle-label">☾ Sombre</span>
+        </button>
+
+        <button type="button" class="v2-pill-btn v2-pill-compact" id="mask-toggle-btn" title="Verrouiller l'alter ego (ou survolez le portrait)">
           <span class="dot-red" aria-hidden="true"></span>
-          <span>Masque</span>
+          <span>Inverser</span>
         </button>
 
         <button type="button" class="v2-pill-btn v2-audio-btn" id="audio-toggle-btn" aria-pressed="false">
@@ -39,7 +43,7 @@
         </button>
 
         <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" target="_blank" rel="noopener noreferrer" class="v2-cta">
-          CV PDF ↗
+          CV PDF
         </a>
       </div>
     </header>
@@ -49,10 +53,13 @@
 
   <main>
     <!-- ====================================================================
-         CINEMATIC SCROLL RUNWAY (460vh — Exact 6-Beat Choreography of Reel DgAnRXaI6Zi)
+         CINEMATIC SCROLL RUNWAY (760vh — Extended 6-Beat Reel Choreography)
          ==================================================================== -->
     <section class="intro-runway" id="intro-runway" aria-label="Introduction cinématique">
       <div class="intro-sticky" id="intro-sticky">
+
+        <!-- Cinema Film Grain Overlay -->
+        <div class="cinema-grain" aria-hidden="true"></div>
 
         <!-- Layer 1: Architectural Dusk Backdrop -->
         <div class="backdrop-layer" id="backdrop-layer" aria-hidden="true">
@@ -60,30 +67,36 @@
           <div class="backdrop-vignette"></div>
         </div>
 
+        <!-- Layer 1b: Monumental Z-Axis Type Behind Subject (Ovra Epoch) -->
+        <div class="hero-monumental-type" id="hero-monumental-type" aria-hidden="true">MATÉI</div>
+
         <!-- Layer 2: Halftone Pop-Art Diagonal Sweep (Behind Subject & Torso) -->
         <div class="halftone-sweep" id="halftone-sweep" aria-hidden="true">
           <div class="halftone-dots"></div>
         </div>
 
-        <!-- Layer 3: Stylized Project Showcase Cards Behind Shoulder (z:3 < Subject z:4) -->
+        <!-- Layer 3: Stylized Project Showcase Cards with Vector HUD Headers -->
         <div class="dossier-cards" id="dossier-cards" aria-hidden="true">
           <figure class="d-card d-card-1" id="d-card-1">
-            <img src="portfolio_v2_assets/intro_card_01.webp?v=3" alt="ZenWorkspace v2.0" />
+            <figcaption class="d-card-head"><i class="hd-red"></i><span>01 // ZENWORKSPACE · AST/DAG</span></figcaption>
+            <img src="portfolio_v2_assets/intro_card_01.webp?v=6" alt="ZenWorkspace v2.0" />
           </figure>
           <figure class="d-card d-card-2" id="d-card-2">
-            <img src="portfolio_v2_assets/intro_card_02.webp?v=3" alt="46 Pull Requests Open-Source" />
+            <figcaption class="d-card-head"><i class="hd-green"></i><span>02 // 46 PRS PROD · TWENTY 40K★</span></figcaption>
+            <img src="portfolio_v2_assets/intro_card_02.webp?v=6" alt="46 Pull Requests Open-Source" />
           </figure>
           <figure class="d-card d-card-3" id="d-card-3">
-            <img src="portfolio_v2_assets/intro_card_03.webp?v=3" alt="Kai Study v4 Cloud 24/7" />
+            <figcaption class="d-card-head d-card-head-right"><span>03 // KAI · 1 787 SUPPORTS</span><i class="hd-blue"></i></figcaption>
+            <img src="portfolio_v2_assets/intro_card_03.webp?v=6" alt="Kai Study v4 Cloud 24/7" />
           </figure>
         </div>
 
         <!-- Layer 4: Foreground Subject Canvas (Surgical Liquid-Blob Mask Reveal) -->
         <div class="hero-stage-grid">
           <div class="hero-subject-box" id="hero-subject-box">
-            <canvas id="hero-mask-canvas" aria-label="Portrait interactif de Matéi de Saint Léger — survolez le visage"></canvas>
+            <canvas id="hero-mask-canvas" aria-label="Portrait interactif de Matéi de Saint Léger — survolez pour révéler l'alter ego"></canvas>
 
-            <!-- Layer 5: Tilted Glowing Red & White Head-Tracking Reticle (x=48.9%, y=20.0%) -->
+            <!-- Layer 5: Tilted Glowing Red & White Head-Tracking Reticle -->
             <div class="head-reticle" id="head-reticle" aria-hidden="true">
               <svg viewBox="0 0 180 180" class="reticle-svg">
                 <path class="ret-red" d="M 14 48 L 14 14 L 48 14 M 132 14 L 166 14 L 166 48 M 166 132 L 166 166 L 132 166 M 48 166 L 14 166 L 14 132" />
@@ -92,17 +105,22 @@
               <span class="reticle-telemetry">LOCK // 43.48°N 1.55°W</span>
             </div>
 
-            <div class="hover-cue" id="hover-cue">Survolez le visage</div>
+            <div class="hover-cue" id="hover-cue">Survolez pour révéler le visage</div>
           </div>
         </div>
 
-        <!-- Layer 5b: X-Ray Negative Scan Ribbon (Beat 2 collar -> Beat 3 inverted white torso!) -->
+        <!-- Layer 5b: Refined Textured X-Ray Negative Torso Ribbon -->
         <div class="xray-ribbon" id="xray-ribbon" aria-hidden="true"></div>
 
-        <!-- Layer 5c: Climax Diagonal X-Ray Negative Slash across cards & head (Beat 5) -->
-        <div class="xray-climax" id="xray-climax" aria-hidden="true"></div>
+        <!-- Layer 5c: Climax Diagonal X-Ray Negative Slash -->
+        <div class="xray-climax" id="xray-climax" aria-hidden="true">
+      <div class="xray-ticker" id="xray-ticker">
+        <span>// VERIFIED · 46 PRS FUSIONNÉES · ZENWORKSPACE V2.0 AST/DAG · 57/57 VITEST · KAI CLOUD 24/7 · 1 787 SUPPORTS · ISO C99 0 FUITE · // VERIFIED · 46 PRS FUSIONNÉES · ZENWORKSPACE V2.0 AST/DAG ·</span>
+      </div>
+    </div>
+    <div class="xray-laser-streak" id="xray-laser-streak" aria-hidden="true"></div>
 
-        <!-- Layer 6: Kinetic Editorial Callouts (Exact Reel Framing + Black Redaction Wipes) -->
+        <!-- Layer 6: Kinetic Editorial Callouts + Black Redaction Wipes -->
         <div class="callout-layer" id="callout-layer">
           <div class="callout-block" id="callout-block">
             <div class="callout-name-wrap" id="callout-name-wrap">
@@ -140,37 +158,160 @@
           </div>
         </div>
 
-        <!-- Scroll Cue (0% -> 14%) -->
+        <!-- Right-Edge Vertical Chapter Progress Rail -->
+        <aside class="chapter-rail" id="chapter-rail" aria-hidden="true">
+          <div class="cr-step is-active" data-cr="0"><span>01</span><i>APPROCHE</i></div>
+          <div class="cr-step" data-cr="1"><span>02</span><i>VERROU</i></div>
+          <div class="cr-step" data-cr="2"><span>03</span><i>DOSSIER</i></div>
+          <div class="cr-step" data-cr="3"><span>04</span><i>CLIMAX</i></div>
+        </aside>
+
+        <!-- Scroll Cue (0% -> 12%) -->
         <div class="scroll-cue" id="scroll-cue">
           <span>SCROLLER POUR DÉVERROUILLER</span>
           <span class="scroll-arrow" aria-hidden="true">↓</span>
         </div>
 
-        <!-- Layer 7: Anamorphic White Lens-Flare Flash -> Bright Daylight Curtain -->
+        <!-- Layer 7: Subtle Climax Flare (no full-screen blackout) -->
         <div class="lens-flare" id="lens-flare" aria-hidden="true"></div>
-        <div class="daylight-curtain" id="daylight-curtain" aria-hidden="true"></div>
       </div>
     </section>
 
     <!-- ====================================================================
-         BRIGHT EDITORIAL CONTINUATION (Same Editorial DNA in Daylight)
+         FIXED TORN-PAGE + HALFTONE DOT LIMITATION DIVIDER
+         ==================================================================== -->
+    <div class="torn-divider" aria-hidden="true">
+      <div class="torn-dots-band"></div>
+      <svg class="torn-svg" viewBox="0 0 1440 84" preserveAspectRatio="none">
+        <path class="torn-fill" d="M0,38 L78,44 L142,26 L216,49 L298,32 L366,54 L444,24 L528,46 L612,28 L694,52 L780,22 L862,48 L948,30 L1030,50 L1116,25 L1204,45 L1288,28 L1368,47 L1440,34 L1440,84 L0,84 Z" />
+        <path class="torn-edge-stroke" d="M0,38 L78,44 L142,26 L216,49 L298,32 L366,54 L444,24 L528,46 L612,28 L694,52 L780,22 L862,48 L948,30 L1030,50 L1116,25 L1204,45 L1288,28 L1368,47 L1440,34" />
+      </svg>
+      <span class="torn-cut-label">// CUT LINE — SECTION 02 // ENTER SYSTEM</span>
+    </div>
+
+    <!-- ====================================================================
+         SCENE 02 — 3D PC DESTRUCTION -> REASSEMBLY -> SCREEN DIVE -> PROJECTS
+         ==================================================================== -->
+    <section class="pc-portal-runway" id="pc-portal-runway" aria-label="Plongée 3D dans le PC et projets">
+      <div class="pc-portal-sticky" id="pc-portal-sticky">
+        <div class="pc-studio-light" aria-hidden="true"></div>
+        <div class="pc-wordmark" id="pc-wordmark" aria-hidden="true">SYSTEM</div>
+
+        <canvas class="pc-portal-canvas" id="pc-portal-canvas" aria-label="Animation 3D du PC qui se détruit, se réassemble et plonge dans les projets"></canvas>
+
+        <div class="pc-corners" aria-hidden="true">
+          <span>WORKSTATION // MATÉI OS</span>
+          <span>60 FPS · 3D + HOOK GOOGLE FLOW</span>
+        </div>
+        <div class="pc-corners pc-corners-bottom" aria-hidden="true">
+          <span>HARDWARE → PORTAL → PRODUCTION</span>
+          <span id="pc-phase-readout">01 / WORKSTATION</span>
+        </div>
+
+        <div class="pc-hud" id="pc-hud">
+          <div class="pc-step is-active" data-pcstep="0">
+            <span class="pc-kicker">01 // WORKSTATION</span>
+            <h2 class="pc-title">Dans la machine.</h2>
+            <p class="pc-copy">Scrollez pour désintégrer le poste, observer ses composants internes et plonger dans l'écran.</p>
+          </div>
+          <div class="pc-step" data-pcstep="1">
+            <span class="pc-kicker">02 // DESTRUCTION MÉCANIQUE</span>
+            <h2 class="pc-title">Pièces en apesanteur.</h2>
+            <p class="pc-copy">Châssis aluminium, 28 touches mécaniques, carte mère C99, moteur AST/DAG et éclats temps réel explosent en 3D.</p>
+          </div>
+          <div class="pc-step" data-pcstep="2">
+            <span class="pc-kicker">03 // RÉASSEMBLAGE MAGNÉTIQUE</span>
+            <h2 class="pc-title">Verrouillage matériel.</h2>
+            <p class="pc-copy">Chaque touche et composant se réaimante exactement dans son logement avant l'ouverture du portail écran.</p>
+          </div>
+          <div class="pc-step" data-pcstep="3">
+            <span class="pc-kicker">04 // PORTAIL ÉCRAN</span>
+            <h2 class="pc-title">Entrée dans le système.</h2>
+            <p class="pc-copy">La caméra traverse la dalle pour ouvrir les 3 projets réels en production.</p>
+          </div>
+        </div>
+
+        <!-- Act 5: Interactive Projects Inside the Screen -->
+        <div class="pc-inside-projects" id="pc-inside-projects">
+          <div class="pc-os-window">
+            <div class="pc-os-bar">
+              <span class="pc-os-title">MATÉI // WORKSPACE — 3 PROJETS EN PRODUCTION</span>
+              <span class="pc-os-status"><i class="dot-red" aria-hidden="true"></i>ONLINE</span>
+            </div>
+
+            <div class="pc-proj-grid">
+              <article class="pc-proj-card">
+                <img src="portfolio_v2_assets/intro_card_01.webp?v=8" alt="ZenWorkspace v2.0" />
+                <div class="pc-proj-body">
+                  <span class="pc-proj-tag">01 · DESKTOP &amp; MOTEUR AST</span>
+                  <h3>ZenWorkspace v2.0</h3>
+                  <p>Tableur spatial React 18 / Electron 33, FormulaEngine.ts (923 L.), tri Kahn 0.2 ms, 57/57 Vitest.</p>
+                  <div class="pc-proj-links">
+                    <a href="portfolio.html#zenworkspace" class="suite-btn-primary pc-btn-sm">Démo v1</a>
+                    <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="suite-btn-ghost pc-btn-sm">GitHub</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="pc-proj-card">
+                <img src="portfolio_v2_assets/intro_card_02.webp?v=8" alt="46 PRs Open-Source" />
+                <div class="pc-proj-body">
+                  <span class="pc-proj-tag">02 · OPEN-SOURCE PRODUCTION</span>
+                  <h3>46 PRs Fusionnées</h3>
+                  <p>Contributions en prod sur Twenty (40k★) et Omi (8k★) : guards d'auth, GraphQL, tests stricts.</p>
+                  <div class="pc-proj-links">
+                    <a href="https://github.com/twentyhq/twenty/pull/26490" target="_blank" rel="noopener noreferrer" class="suite-btn-primary pc-btn-sm">PR Twenty</a>
+                    <a href="https://github.com/BasedHardware/omi/pull/19637" target="_blank" rel="noopener noreferrer" class="suite-btn-ghost pc-btn-sm">PR Omi</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="pc-proj-card">
+                <img src="portfolio_v2_assets/intro_card_03.webp?v=8" alt="Kai Study v4 & Cloud 24/7" />
+                <div class="pc-proj-body">
+                  <span class="pc-proj-tag">03 · CLOUD 24/7 &amp; ÉTUDE</span>
+                  <h3>Kai Study v4 &amp; Cloud</h3>
+                  <p>1 787 supports, 20 modules BUT 1 et 12 services Linux autonomes sur VPS Oracle ARM.</p>
+                  <div class="pc-proj-links">
+                    <a href="https://mateidslx.github.io/kai-academic/" target="_blank" rel="noopener noreferrer" class="suite-btn-primary pc-btn-sm">Ouvrir Kai</a>
+                    <a href="portfolio.html#kaicloud" class="suite-btn-ghost pc-btn-sm">Architecture</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc-progress-track" aria-hidden="true">
+          <div class="pc-progress-fill" id="pc-progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SWISS EDITORIAL CONTINUATION (Zero AI Tells — Ovra Epoch + 19 Rules)
          ==================================================================== -->
     <section class="suite-atelier" id="suite-atelier">
-      <div class="suite-halftone-corner" aria-hidden="true"></div>
+      <div class="suite-studio-light" aria-hidden="true"></div>
+      <div class="suite-watermark" aria-hidden="true">MATÉI</div>
+
+      <div class="suite-specs-corners" aria-hidden="true">
+        <span>BIARRITZ 43.48°N 1.55°W</span>
+        <span>BUT INFO ANGLET / PARCOURS A</span>
+      </div>
 
       <div class="suite-container">
         <div class="suite-kicker-row">
-          <span class="suite-kicker">DOSSIER VÉRIFIÉ · PRÊT POUR LA SUITE</span>
-          <span class="suite-badge">STAGE 02 · LUMIÈRE ÉDITORIALE</span>
+          <span class="suite-kicker">DOSSIER VÉRIFIÉ — SYSTÈMES &amp; PRODUIT</span>
         </div>
 
         <h2 class="suite-title">
           L'intro est verrouillée.<br />
-          <span class="serif-it crimson-ink">Construisons la suite ensemble.</span>
+          <span class="crimson-ink">Construisons la suite.</span>
         </h2>
 
         <p class="suite-lead">
-          La musique s'éteint proprement à l'arrivée sur cette section claire, tout en conservant la même direction artistique (typographie franche, filets techniques, trame halftone et accent rouge vermillon).
+          La piste audio s'efface au seuil de cette grille suisse. Basculez entre le mode Sombre et le mode Clair pour inverser l'identité affichée par défaut et au survol.
         </p>
 
         <div class="suite-proof-grid">
@@ -188,18 +329,20 @@
           </div>
           <div class="sp-item">
             <span class="sp-num">0 fuite</span>
-            <span class="sp-lbl">C99 / Valgrind · 24/7 VPS</span>
+            <span class="sp-lbl">C99 Valgrind / Cloud 24/7</span>
           </div>
         </div>
 
         <div class="suite-actions">
-          <a href="#intro-runway" class="suite-btn-primary">↑ Revoir l'ouverture</a>
-          <a href="portfolio.html" class="suite-btn-ghost">Comparatif v1 actuelle ↗</a>
+          <button type="button" class="suite-btn-primary" id="suite-theme-btn">Passer en Mode Clair</button>
+          <a href="#intro-runway" class="suite-btn-ghost">Revoir l'ouverture</a>
+          <a href="portfolio.html" class="suite-btn-ghost">Comparatif v1</a>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="portfolio_v2_assets/portfolio_v2.js?v=3" defer></script>
+  <script src="portfolio_v2_assets/portfolio_v2.js?v=8" defer></script>
+  <script src="portfolio_v2_assets/portfolio_v2_pc_portal.js?v=8" defer></script>
 </body>
 </html>
