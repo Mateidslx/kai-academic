@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="portfolio_v2_assets/portfolio_v2.css?v=8" />
+  <link rel="stylesheet" href="portfolio_v2_assets/portfolio_v2.css?v=15" />
 </head>
 <body>
   <div class="scroll-hairline" aria-hidden="true">
@@ -178,115 +178,231 @@
     </section>
 
     <!-- ====================================================================
-         FIXED TORN-PAGE + HALFTONE DOT LIMITATION DIVIDER
+         FIXED REALISTIC TORN-PAPER + HALFTONE DOT LIMITATION DIVIDER
          ==================================================================== -->
     <div class="torn-divider" aria-hidden="true">
       <div class="torn-dots-band"></div>
-      <svg class="torn-svg" viewBox="0 0 1440 84" preserveAspectRatio="none">
-        <path class="torn-fill" d="M0,38 L78,44 L142,26 L216,49 L298,32 L366,54 L444,24 L528,46 L612,28 L694,52 L780,22 L862,48 L948,30 L1030,50 L1116,25 L1204,45 L1288,28 L1368,47 L1440,34 L1440,84 L0,84 Z" />
-        <path class="torn-edge-stroke" d="M0,38 L78,44 L142,26 L216,49 L298,32 L366,54 L444,24 L528,46 L612,28 L694,52 L780,22 L862,48 L948,30 L1030,50 L1116,25 L1204,45 L1288,28 L1368,47 L1440,34" />
-      </svg>
-      <span class="torn-cut-label">// CUT LINE — SECTION 02 // ENTER SYSTEM</span>
+      <div class="torn-paper-edge"></div>
+      <span class="torn-cut-label">// ACTE II — DÉCHIRURE // ENTRER DANS LA MACHINE</span>
     </div>
 
     <!-- ====================================================================
-         SCENE 02 — 3D PC DESTRUCTION -> REASSEMBLY -> SCREEN DIVE -> PROJECTS
+         SCENE 02 — LENOVO THINKPAD GOOGLE FLOW (EXPLODED -> ASSEMBLED -> CRT PORTAL)
          ==================================================================== -->
-    <section class="pc-portal-runway" id="pc-portal-runway" aria-label="Plongée 3D dans le PC et projets">
-      <div class="pc-portal-sticky" id="pc-portal-sticky">
-        <div class="pc-studio-light" aria-hidden="true"></div>
-        <div class="pc-wordmark" id="pc-wordmark" aria-hidden="true">SYSTEM</div>
+    <section class="thinkpad-flow-runway" id="thinkpad-flow-runway" aria-label="Exploration du ThinkPad et couloir des projets">
+      <div class="thinkpad-flow-sticky" id="thinkpad-flow-sticky">
+        <canvas class="thinkpad-flow-canvas" id="thinkpad-flow-canvas" aria-label="ThinkPad démonté, assemblé, couloir CRT et porte de sortie"></canvas>
+        <canvas class="crt-static-canvas" id="crt-static-canvas" aria-hidden="true"></canvas>
 
-        <canvas class="pc-portal-canvas" id="pc-portal-canvas" aria-label="Animation 3D du PC qui se détruit, se réassemble et plonge dans les projets"></canvas>
-
-        <div class="pc-corners" aria-hidden="true">
-          <span>WORKSTATION // MATÉI OS</span>
-          <span>60 FPS · 3D + HOOK GOOGLE FLOW</span>
-        </div>
-        <div class="pc-corners pc-corners-bottom" aria-hidden="true">
-          <span>HARDWARE → PORTAL → PRODUCTION</span>
-          <span id="pc-phase-readout">01 / WORKSTATION</span>
-        </div>
-
-        <div class="pc-hud" id="pc-hud">
-          <div class="pc-step is-active" data-pcstep="0">
-            <span class="pc-kicker">01 // WORKSTATION</span>
-            <h2 class="pc-title">Dans la machine.</h2>
-            <p class="pc-copy">Scrollez pour désintégrer le poste, observer ses composants internes et plonger dans l'écran.</p>
-          </div>
-          <div class="pc-step" data-pcstep="1">
-            <span class="pc-kicker">02 // DESTRUCTION MÉCANIQUE</span>
-            <h2 class="pc-title">Pièces en apesanteur.</h2>
-            <p class="pc-copy">Châssis aluminium, 28 touches mécaniques, carte mère C99, moteur AST/DAG et éclats temps réel explosent en 3D.</p>
-          </div>
-          <div class="pc-step" data-pcstep="2">
-            <span class="pc-kicker">03 // RÉASSEMBLAGE MAGNÉTIQUE</span>
-            <h2 class="pc-title">Verrouillage matériel.</h2>
-            <p class="pc-copy">Chaque touche et composant se réaimante exactement dans son logement avant l'ouverture du portail écran.</p>
-          </div>
-          <div class="pc-step" data-pcstep="3">
-            <span class="pc-kicker">04 // PORTAIL ÉCRAN</span>
-            <h2 class="pc-title">Entrée dans le système.</h2>
-            <p class="pc-copy">La caméra traverse la dalle pour ouvrir les 3 projets réels en production.</p>
-          </div>
-        </div>
-
-        <!-- Act 5: Interactive Projects Inside the Screen -->
-        <div class="pc-inside-projects" id="pc-inside-projects">
-          <div class="pc-os-window">
-            <div class="pc-os-bar">
-              <span class="pc-os-title">MATÉI // WORKSPACE — 3 PROJETS EN PRODUCTION</span>
-              <span class="pc-os-status"><i class="dot-red" aria-hidden="true"></i>ONLINE</span>
+        <!-- 7 Corridor Bays (Left & Right walls inside the PC) -->
+        <div class="corridor-project-stage" id="corridor-project-stage">
+          <article class="corridor-bay" data-bay="0" data-side="left" data-project-id="zenworkspace">
+            <div class="cb-head">
+              <span>BAY 01 // MUR GAUCHE</span>
+              <span>REACT 18 / ELECTRON 33</span>
             </div>
-
-            <div class="pc-proj-grid">
-              <article class="pc-proj-card">
-                <img src="portfolio_v2_assets/intro_card_01.webp?v=8" alt="ZenWorkspace v2.0" />
-                <div class="pc-proj-body">
-                  <span class="pc-proj-tag">01 · DESKTOP &amp; MOTEUR AST</span>
-                  <h3>ZenWorkspace v2.0</h3>
-                  <p>Tableur spatial React 18 / Electron 33, FormulaEngine.ts (923 L.), tri Kahn 0.2 ms, 57/57 Vitest.</p>
-                  <div class="pc-proj-links">
-                    <a href="portfolio.html#zenworkspace" class="suite-btn-primary pc-btn-sm">Démo v1</a>
-                    <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="suite-btn-ghost pc-btn-sm">GitHub</a>
-                  </div>
+            <div class="cb-grid">
+              <div class="cb-screen">
+                <img src="portfolio_v2_assets/proj_zen.webp?v=9" alt="ZenWorkspace v2.0" />
+              </div>
+              <div class="cb-body">
+                <h3>ZenWorkspace v2.0</h3>
+                <p>Tableur spatial adossé à FormulaEngine.ts (923 lignes), tri topologique Kahn en 0.2 ms, 57/57 tests Vitest et export .xlsx.</p>
+                <div class="cb-actions">
+                  <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="cb-link">GitHub</a>
+                  <a href="portfolio.html#zenworkspace" class="cb-link">Démo v1</a>
+                  <button type="button" class="cb-room-btn" data-open-room="zenworkspace">&gt; OUVRIR LA SALLE_</button>
                 </div>
-              </article>
-
-              <article class="pc-proj-card">
-                <img src="portfolio_v2_assets/intro_card_02.webp?v=8" alt="46 PRs Open-Source" />
-                <div class="pc-proj-body">
-                  <span class="pc-proj-tag">02 · OPEN-SOURCE PRODUCTION</span>
-                  <h3>46 PRs Fusionnées</h3>
-                  <p>Contributions en prod sur Twenty (40k★) et Omi (8k★) : guards d'auth, GraphQL, tests stricts.</p>
-                  <div class="pc-proj-links">
-                    <a href="https://github.com/twentyhq/twenty/pull/26490" target="_blank" rel="noopener noreferrer" class="suite-btn-primary pc-btn-sm">PR Twenty</a>
-                    <a href="https://github.com/BasedHardware/omi/pull/19637" target="_blank" rel="noopener noreferrer" class="suite-btn-ghost pc-btn-sm">PR Omi</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="pc-proj-card">
-                <img src="portfolio_v2_assets/intro_card_03.webp?v=8" alt="Kai Study v4 & Cloud 24/7" />
-                <div class="pc-proj-body">
-                  <span class="pc-proj-tag">03 · CLOUD 24/7 &amp; ÉTUDE</span>
-                  <h3>Kai Study v4 &amp; Cloud</h3>
-                  <p>1 787 supports, 20 modules BUT 1 et 12 services Linux autonomes sur VPS Oracle ARM.</p>
-                  <div class="pc-proj-links">
-                    <a href="https://mateidslx.github.io/kai-academic/" target="_blank" rel="noopener noreferrer" class="suite-btn-primary pc-btn-sm">Ouvrir Kai</a>
-                    <a href="portfolio.html#kaicloud" class="suite-btn-ghost pc-btn-sm">Architecture</a>
-                  </div>
-                </div>
-              </article>
+              </div>
             </div>
+          </article>
+
+          <article class="corridor-bay" data-bay="1" data-side="right" data-project-id="opensource">
+            <div class="cb-head">
+              <span>BAY 02 // MUR DROIT</span>
+              <span>OPEN-SOURCE PRODUCTION</span>
+            </div>
+            <div class="cb-grid">
+              <div class="cb-screen">
+                <img src="portfolio_v2_assets/intro_card_02.webp?v=9" alt="46 PRs Open-Source" />
+              </div>
+              <div class="cb-body">
+                <h3>46 PRs Fusionnées</h3>
+                <p>Omi (20+ PRs), Twenty (40k★) &amp; LibreChat : durcissement backend, guards GraphQL, flux SSE et tests hermétiques.</p>
+                <div class="cb-actions">
+                  <a href="https://github.com/twentyhq/twenty/pull/26490" target="_blank" rel="noopener noreferrer" class="cb-link">PR Twenty #26490</a>
+                  <a href="https://github.com/BasedHardware/omi/pull/19637" target="_blank" rel="noopener noreferrer" class="cb-link">PR Omi #19637</a>
+                  <button type="button" class="cb-room-btn" data-open-room="opensource">&gt; OUVRIR LA SALLE_</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="corridor-bay" data-bay="2" data-side="left" data-project-id="polytrack">
+            <div class="cb-head">
+              <span>BAY 03 // MUR GAUCHE</span>
+              <span>THREE.JS + AMMO.WASM + NUMPY</span>
+            </div>
+            <div class="cb-grid">
+              <div class="cb-screen">
+                <img src="portfolio_v2_assets/proj_polytrack.webp?v=9" alt="PolyDrive Neural Lab" />
+              </div>
+              <div class="cb-body">
+                <h3>PolyDrive Neural Lab</h3>
+                <p>IA autonome sur PolyTrack 3D : perceptron 16→24→16→4 (876 params), 11 rayons LiDAR 3D, PPO-Clip et neuroévolution.</p>
+                <div class="cb-actions">
+                  <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="cb-link">GitHub @Mateidslx</a>
+                  <button type="button" class="cb-room-btn" data-open-room="polytrack">&gt; OUVRIR LA SALLE_</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="corridor-bay" data-bay="3" data-side="right" data-project-id="polymarket">
+            <div class="cb-head">
+              <span>BAY 04 // MUR DROIT</span>
+              <span>SIGNAUX DISCORD</span>
+            </div>
+            <div class="cb-grid">
+              <div class="cb-screen">
+                <img src="portfolio_v2_assets/proj_polymarket.webp?v=9" alt="Polymarket Whale Signals" />
+              </div>
+              <div class="cb-body">
+                <h3>Polymarket Whales</h3>
+                <p>Suivi des positions Whales (shares Yes/No) avec alertes Discord VIP en temps réel et flux public différé de 15 min.</p>
+                <div class="cb-actions">
+                  <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="cb-link">GitHub @Mateidslx</a>
+                  <button type="button" class="cb-room-btn" data-open-room="polymarket">&gt; OUVRIR LA SALLE_</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="corridor-bay" data-bay="4" data-side="left" data-project-id="kaicloud">
+            <div class="cb-head">
+              <span>BAY 05 // MUR GAUCHE</span>
+              <span>VPS ORACLE ARM · 24/7</span>
+            </div>
+            <div class="cb-grid">
+              <div class="cb-screen">
+                <img src="portfolio_v2_assets/proj_kai.webp?v=9" alt="Kai Study v4 & Cloud 24/7" />
+              </div>
+              <div class="cb-body">
+                <h3>Kai Study v4 &amp; Cloud</h3>
+                <p>1 787 supports, 20 modules BUT 1, 115 chapitres et 14 services systemd auto-réparants pilotés par watchdog 15s.</p>
+                <div class="cb-actions">
+                  <a href="https://mateidslx.github.io/kai-academic/" target="_blank" rel="noopener noreferrer" class="cb-link">Kai Study v4</a>
+                  <a href="https://github.com/Mateidslx" target="_blank" rel="noopener noreferrer" class="cb-link">GitHub</a>
+                  <button type="button" class="cb-room-btn" data-open-room="kaicloud">&gt; OUVRIR LA SALLE_</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="corridor-bay" data-bay="5" data-side="right" data-project-id="securitymcp">
+            <div class="cb-head">
+              <span>BAY 06 // MUR DROIT</span>
+              <span>CYBERSÉCURITÉ · MCP &amp; SSE</span>
+            </div>
+            <div class="cb-grid">
+              <div class="cb-screen">
+                <img src="portfolio_v2_assets/proj_sec.webp?v=9" alt="Security Scanner MCP" />
+              </div>
+              <div class="cb-body">
+                <h3>Security Scanner MCP</h3>
+                <p>Serveur MCP Python auditant 7 en-têtes OWASP (note A+ à F) et RFC 9116 security.txt pour agents IA sur Smithery.</p>
+                <div class="cb-actions">
+                  <a href="https://github.com/Mateidslx/security-scanner-mcp" target="_blank" rel="noopener noreferrer" class="cb-link">Repo GitHub</a>
+                  <button type="button" class="cb-room-btn" data-open-room="securitymcp">&gt; OUVRIR LA SALLE_</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="corridor-bay" data-bay="6" data-side="left" data-project-id="chessbot">
+            <div class="cb-head">
+              <span>BAY 07 // MUR GAUCHE</span>
+              <span>DOM HTML + STOCKFISH</span>
+            </div>
+            <div class="cb-grid">
+              <div class="cb-screen">
+                <img src="portfolio_v2_assets/proj_chess.webp?v=9" alt="V-Bot Chess" />
+              </div>
+              <div class="cb-body">
+                <h3>V-Bot Chess</h3>
+                <p>Automatisation Chess.com par lecture directe du DOM HTML (sans computer vision), couplée au moteur Stockfish.</p>
+                <div class="cb-actions">
+                  <a href="https://github.com/Mateidslx/chessbot" target="_blank" rel="noopener noreferrer" class="cb-link">Repo GitHub</a>
+                  <button type="button" class="cb-room-btn" data-open-room="chessbot">&gt; OUVRIR LA SALLE_</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Distant Exit Door at the end of the corridor -->
+        <div class="corridor-door-stage" id="corridor-door-stage" aria-hidden="true">
+          <div class="door-frame" id="door-frame">
+            <span class="door-sign">SORTIE // ALTERNANCE</span>
+            <div class="door-portal-light" id="door-portal-light"></div>
+            <div class="door-leaf door-leaf-left" id="door-leaf-left"></div>
+            <div class="door-leaf door-leaf-right" id="door-leaf-right"></div>
           </div>
         </div>
+        <div class="door-whiteout" id="door-whiteout" aria-hidden="true"></div>
+
+        <!-- Minimal inside-PC corridor jump rail -->
+        <nav class="corridor-nav" id="corridor-nav" aria-label="Navigation dans le couloir">
+          <div class="cn-btns">
+            <button type="button" class="cn-btn" data-stop="0">01</button>
+            <button type="button" class="cn-btn" data-stop="1">02</button>
+            <button type="button" class="cn-btn" data-stop="2">03</button>
+            <button type="button" class="cn-btn" data-stop="3">04</button>
+            <button type="button" class="cn-btn" data-stop="4">05</button>
+            <button type="button" class="cn-btn" data-stop="5">06</button>
+            <button type="button" class="cn-btn" data-stop="6">07</button>
+            <button type="button" class="cn-btn cn-door" data-stop="7">PORTE</button>
+          </div>
+          <span class="cn-telemetry" id="corridor-telemetry">01 / 07 · MUR GAUCHE</span>
+        </nav>
 
         <div class="pc-progress-track" aria-hidden="true">
-          <div class="pc-progress-fill" id="pc-progress-fill"></div>
+          <div class="pc-progress-fill" id="thinkpad-progress-fill"></div>
         </div>
       </div>
     </section>
+
+    <!-- ====================================================================
+         DEDICATED FULLSCREEN PROJECT ROOM OVERLAY (7 UNIQUE EXPERIENCES)
+         ==================================================================== -->
+    <div class="project-room" id="project-room" aria-hidden="true" role="dialog" aria-label="Interface projet dédiée">
+      <canvas class="room-bg-canvas" id="room-bg-canvas" aria-hidden="true"></canvas>
+
+      <header class="room-topbar">
+        <span class="room-brand">PROJECT // <b id="room-tag"></b></span>
+        <button type="button" class="room-close-btn" id="room-close-btn">&gt; CLOSE &lt;</button>
+        <div class="room-nav-group">
+          <button type="button" class="room-step-btn" id="room-prev-btn">← PRÉC.</button>
+          <span id="room-counter">01 / 07</span>
+          <button type="button" class="room-step-btn" id="room-next-btn">SUIV. →</button>
+        </div>
+      </header>
+
+      <div class="room-stage" id="room-stage">
+        <div class="room-visual">
+          <img id="room-img" src="" alt="" />
+        </div>
+        <div class="room-details">
+          <h2 id="room-title"></h2>
+          <div class="room-meta-grid">
+            <div><span>INFO</span><p id="room-info"></p></div>
+            <div><span>ROLE</span><p id="room-role"></p></div>
+          </div>
+          <div id="room-custom-ui"></div>
+          <div class="room-links" id="room-links"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- ====================================================================
          SWISS EDITORIAL CONTINUATION (Zero AI Tells — Ovra Epoch + 19 Rules)
@@ -295,24 +411,47 @@
       <div class="suite-studio-light" aria-hidden="true"></div>
       <div class="suite-watermark" aria-hidden="true">MATÉI</div>
 
-      <div class="suite-specs-corners" aria-hidden="true">
-        <span>BIARRITZ 43.48°N 1.55°W</span>
-        <span>BUT INFO ANGLET / PARCOURS A</span>
+      <div class="suite-specs-corners">
+        <span>ALTERNANCE // BIARRITZ 43.48°N 1.55°W</span>
+        <span>BUT 2 INFORMATIQUE — IUT BAYONNE–ANGLET</span>
       </div>
 
       <div class="suite-container">
         <div class="suite-kicker-row">
-          <span class="suite-kicker">DOSSIER VÉRIFIÉ — SYSTÈMES &amp; PRODUIT</span>
+          <span class="suite-kicker">ALTERNANCE BUT 2 · PARCOURS A</span>
         </div>
 
         <h2 class="suite-title">
-          L'intro est verrouillée.<br />
-          <span class="crimson-ink">Construisons la suite.</span>
+          Prêt à intégrer votre équipe.<br />
+          <span class="crimson-ink">Parlons alternance.</span>
         </h2>
 
         <p class="suite-lead">
-          La piste audio s'efface au seuil de cette grille suisse. Basculez entre le mode Sombre et le mode Clair pour inverser l'identité affichée par défaut et au survol.
+          Véhiculé sur Biarritz, Anglet, Bayonne et Bidart — ouvert à l'hybride et au remote. Disponible pour un échange technique ou un test de code.
         </p>
+
+        <div class="alt-info-grid">
+          <div class="alt-card">
+            <span class="alt-lbl">FORMATION</span>
+            <strong>BUT 2 Informatique · Parcours A</strong>
+            <small>IUT de Bayonne et du Pays Basque (Anglet)</small>
+          </div>
+          <div class="alt-card">
+            <span class="alt-lbl">MOBILITÉ</span>
+            <strong>Côte Basque &amp; Remote</strong>
+            <small>Véhiculé · Biarritz, Anglet, Bayonne, Bidart</small>
+          </div>
+          <div class="alt-card">
+            <span class="alt-lbl">STACK &amp; SYSTÈMES</span>
+            <strong>TypeScript, Python, C99 &amp; Linux</strong>
+            <small>React / Electron, GraphQL, Docker / systemd, IA</small>
+          </div>
+          <div class="alt-card">
+            <span class="alt-lbl">CONTACT DIRECT</span>
+            <strong>matei64200@gmail.com</strong>
+            <small>Réponse rapide · Test technique bienvenu</small>
+          </div>
+        </div>
 
         <div class="suite-proof-grid">
           <div class="sp-item">
@@ -324,25 +463,30 @@
             <span class="sp-lbl">Suites Vitest ZenWorkspace</span>
           </div>
           <div class="sp-item">
-            <span class="sp-num">1 787</span>
-            <span class="sp-lbl">Supports Kai Study v4</span>
+            <span class="sp-num">14</span>
+            <span class="sp-lbl">Services Linux 24/7</span>
           </div>
           <div class="sp-item">
-            <span class="sp-num">0 fuite</span>
-            <span class="sp-lbl">C99 Valgrind / Cloud 24/7</span>
+            <span class="sp-num">1 787</span>
+            <span class="sp-lbl">Supports Kai Study v4</span>
           </div>
         </div>
 
         <div class="suite-actions">
-          <button type="button" class="suite-btn-primary" id="suite-theme-btn">Passer en Mode Clair</button>
-          <a href="#intro-runway" class="suite-btn-ghost">Revoir l'ouverture</a>
-          <a href="portfolio.html" class="suite-btn-ghost">Comparatif v1</a>
+          <button type="button" class="suite-btn-primary" id="copy-email-btn" data-email="matei64200@gmail.com">Copier matei64200@gmail.com</button>
+          <a href="portfolio_assets/CV_Matei_de_Saint_Leger_FR.pdf" class="suite-btn-ghost" target="_blank" rel="noopener noreferrer">CV Français (PDF)</a>
+          <a href="portfolio_assets/Resume_Matei_de_Saint_Leger_EN.pdf" class="suite-btn-ghost" target="_blank" rel="noopener noreferrer">English Resume (PDF)</a>
+          <a href="https://github.com/Mateidslx" class="suite-btn-ghost" target="_blank" rel="noopener noreferrer">GitHub @Mateidslx</a>
+          <a href="https://www.linkedin.com/in/mat%C3%A9i-de-saint-l%C3%A9ger-24329a32b/" class="suite-btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" class="suite-btn-ghost" id="suite-theme-btn">Passer en Mode Clair</button>
+          <a href="#intro-runway" class="suite-btn-ghost">Revoir depuis le début</a>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="portfolio_v2_assets/portfolio_v2.js?v=8" defer></script>
-  <script src="portfolio_v2_assets/portfolio_v2_pc_portal.js?v=8" defer></script>
+  <script src="portfolio_v2_assets/portfolio_v2.js?v=15" defer></script>
+  <script src="portfolio_v2_assets/portfolio_v2_wheel.js?v=15" defer></script>
+  <script src="portfolio_v2_assets/portfolio_v2_rooms.js?v=15" defer></script>
 </body>
 </html>
